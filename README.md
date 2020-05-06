@@ -1,2 +1,6 @@
-# mathematics_in_lean
-The user home repository for the Mathematics in Lean tutorial.
+# Mathematics in Lean
+
+```
+leanproject get mathematics_in_lean
+code mathematics_in_lean
+```

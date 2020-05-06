@@ -952,11 +952,11 @@ find the library theorems you need constitutes an important
 part of formalization.
 There are a number of strategies you can use:</p>
 <ul class="simple">
-<li><p>You can browse Mathlib in its
+<li><p>You can browse mathlib in its
 <a class="reference external" href="https://github.com/leanprover-community/mathlib">Github repository</a>.</p></li>
-<li><p>You can use the API documentation on the Mathlib
+<li><p>You can use the API documentation on the mathlib
 <a class="reference external" href="https://leanprover-community.github.io/mathlib_docs/">web pages</a>.</p></li>
-<li><p>You can rely on Mathlib naming conventions and tab completion in
+<li><p>You can rely on mathlib naming conventions and tab completion in
 the editor to guess a theorem name.
 In Lean, a theorem named <code class="docutils literal notranslate"><span class="pre">A_of_B_of_C</span></code> establishes
 something of the form <code class="docutils literal notranslate"><span class="pre">A</span></code> from hypotheses of the form <code class="docutils literal notranslate"><span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>,
@@ -1020,7 +1020,7 @@ There are a number of things worth noticing in this example.
 First, an expression <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8805;</span> <span class="pre">t</span></code> is definitionally equivalent to <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&#8804;</span> <span class="pre">s</span></code>.
 In principle, this means one should be able to use them interchangeably.
 But some of Lean&#8217;s automation does not recognize the equivalence,
-so Mathlib tends to favor <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code> over <code class="docutils literal notranslate"><span class="pre">&#8805;</span></code>.
+so mathlib tends to favor <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code> over <code class="docutils literal notranslate"><span class="pre">&#8805;</span></code>.
 Second, we have used the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic extensively.
 It is a real timesaver!
 Finally, notice that in the second line of the

@@ -12,7 +12,7 @@ Maybe you have heard that formalization is the future
 or the talk, `The Future of Mathematics`_),
 and you want in.
 Or maybe you have played the `Natural Number Game`_ and you are hooked.
-Maybe you have heard about `Lean`_ and its library `Mathlib`_
+Maybe you have heard about `Lean`_ and its library `mathlib`_
 through online chatter and you want to know what the fuss is about.
 Or maybe you like mathematics and you like computers,
 are you have some time to spare.
@@ -23,8 +23,8 @@ it designed to be read interactively,
 running Lean from inside the VS Code editor.
 To get started:
 
-#. Install Lean, VS Code, and Mathlib following the instructions
-   in the `Mathlib repository`_.
+#. Install Lean, VS Code, and mathlib following the instructions
+   in the `mathlib repository`_.
 
 #. In a terminal, type ``leanproject get mathematics_in_lean``
    to set up a working directory for this tutorial.
@@ -32,8 +32,11 @@ To get started:
 #. Type ``code mathematics_in_lean`` to open that directory in
    ``VS Code``.
 
-Openning the file ``welcome.lean`` should simultaneously open this
-tutorial in a VS Code window.
+Opening the file ``welcome.lean`` will simultaneously open this
+tutorial in a VS Code window. To update to a newer version of
+the tutorial, type ``git pull && leanproject get-mathlib-cache``
+inside the ``mathematics_in_lean`` folder.
+
 Every once in a while, you will see code snippet like this:
 
 .. code-block:: lean
@@ -257,12 +260,12 @@ prove our theorem automatically.
 Another big difference between the two introductions is that
 *Theorem Proving in Lean* depends only on core Lean and its built-in
 tactics, whereas *Mathematics in Lean* is built on top of Lean's
-powerful and ever-growing library, *Mathlib*.
+powerful and ever-growing library, *mathlib*.
 As a result, we can show you how to use some of the mathematical
 objects and theorems in the library,
 and some of the very useful tactics.
 This book is not meant to be used as an overview of the library;
-the Mathlib_ web pages contain extensive documentation.
+the mathlib_ web pages contain extensive documentation.
 Rather, our goal is to introduce you to the style of thinking that
 underlies that formalization,
 so that you are comfortable browsing the library and
@@ -275,7 +278,7 @@ and people are available on the `Lean Zulip chat group`_ round the clock
 to answer questions.
 We hope to see you there, and have no doubt that
 soon enough you, too, will be able to answer such questions
-and contribute to the development of *Mathlib*.
+and contribute to the development of *mathlib*.
 
 So here is your mission, should you choose to accept it:
 dive in, try the exercises, come to Zulip with questions, and have fun.
@@ -290,8 +293,8 @@ infrastructure for running this tutorial in VS Code.
 .. _`The Mechanization of Mathematics`: https://www.ams.org/journals/notices/201806/rnoti-p681.pdf
 .. _`The Future of Mathematics`: https://www.youtube.com/watch?v=Dp-mQ3HxgDE
 .. _Lean: https://leanprover.github.io/people/
-.. _Mathlib: https://leanprover-community.github.io/
+.. _mathlib: https://leanprover-community.github.io/
 .. _`Natural Number Game`: https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/
-.. _`Mathlib repository`: https://github.com/leanprover-community/mathlib
+.. _`mathlib repository`: https://github.com/leanprover-community/mathlib
 .. _`Theorem Proving in Lean`: https://leanprover.github.io/theorem_proving_in_lean/
 .. _`Lean Zulip chat group`: https://leanprover.zulipchat.com/

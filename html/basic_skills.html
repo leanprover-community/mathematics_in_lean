@@ -1056,6 +1056,478 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 </div><p>If you managed to solve this, congratulations!
 You are well on your way to becoming a master formalizer.</p>
 </div>
+<div class="section" id="more-examples">
+<span id="id5"></span><h2><span class="section-number">2.4. </span>More Examples<a class="headerlink" href="#more-examples" title="Permalink to this headline">&#182;</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">min</span></code> function on the real numbers is uniquely characterized
+by the following three facts:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20c%20d%20:%20%E2%84%9D%0A%0A--%20BEGIN%0A#check%20(min_le_left%20a%20b%20:%20min%20a%20b%20%E2%89%A4%20a)%0A#check%20(min_le_right%20a%20b%20:%20min%20a%20b%20%E2%89%A4%20b)%0A#check%20(le_min%20:%20c%20%E2%89%A4%20a%20%E2%86%92%20c%20%E2%89%A4%20b%20%E2%86%92%20c%20%E2%89%A4%20min%20a%20b)%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1315.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#check</span> <span class="o">(</span><span class="n">min_le_left</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">min_le_right</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">b</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">le_min</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">&#8594;</span> <span class="n">c</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">&#8594;</span> <span class="n">c</span> <span class="bp">&#8804;</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>Can you guess the names of the theorems that characterize
+<code class="docutils literal notranslate"><span class="pre">max</span></code> in a similar way?</p>
+<p>Using the theorem <code class="docutils literal notranslate"><span class="pre">le_antisymm</span></code>, we can show that two
+real numbers are equal if each is less than or equal to the other.
+Using this and the facts above,
+we can show that <code class="docutils literal notranslate"><span class="pre">min</span></code> is commutative:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20:%20%E2%84%9D%0A%0A--%20BEGIN%0Aexample%20:%20min%20a%20b%20=%20min%20b%20a%20:=%0Abegin%0A%20%20apply%20le_antisymm,%0A%20%20%7B%20show%20min%20a%20b%20%E2%89%A4%20min%20b%20a,%0A%20%20%20%20apply%20le_min,%0A%20%20%20%20%7B%20apply%20min_le_right%20%7D,%0A%20%20%20%20apply%20min_le_left%20%7D,%0A%20%20%7B%20show%20min%20b%20a%20%E2%89%A4%20min%20a%20b,%0A%20%20%20%20apply%20le_min,%0A%20%20%20%20%7B%20apply%20min_le_right%20%7D,%0A%20%20%20%20apply%20min_le_left%20%7D%0Aend%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1335.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">min</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+  <span class="o">{</span> <span class="k">show</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">min</span> <span class="n">b</span> <span class="n">a</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">le_min</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">apply</span> <span class="n">min_le_right</span> <span class="o">},</span>
+    <span class="n">apply</span> <span class="n">min_le_left</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="k">show</span> <span class="n">min</span> <span class="n">b</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">le_min</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">apply</span> <span class="n">min_le_right</span> <span class="o">},</span>
+    <span class="n">apply</span> <span class="n">min_le_left</span> <span class="o">}</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>Here we have used curly brackets to separate proofs of
+different goals.
+Our usage is inconsistent:
+at the outer level,
+we use curly brackets and indentation for both goals,
+whereas for the nested proofs,
+we use curly brackets only until a single goal remains.
+Both conventions are reasonable and useful.
+We also use the <code class="docutils literal notranslate"><span class="pre">show</span></code> tactic to structure
+the proof
+and indicate what is being proved in each block.
+The proof still works without the <code class="docutils literal notranslate"><span class="pre">show</span></code> commands,
+but using them makes the proof easier to read and maintain.</p>
+<p>It may bother you that the the proof is repetitive.
+To foreshadow skills you will learn later on,
+we note that one way to avoid the repetition
+is to state a local lemma and then use it:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20:%20%E2%84%9D%0A%0A--%20BEGIN%0Aexample%20:%20min%20a%20b%20=%20min%20b%20a%20:=%0Abegin%0A%20%20have%20h%20:%20%E2%88%80%20x%20y,%20min%20x%20y%20%E2%89%A4%20min%20y%20x,%0A%20%20%7B%20intros%20x%20y,%0A%20%20%20%20apply%20le_min,%0A%20%20%20%20apply%20min_le_right,%0A%20%20%20%20apply%20min_le_left%20%7D,%0A%20%20apply%20le_antisymm,%20apply%20h,%20apply%20h%0Aend%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1375.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">min</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">min</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">min</span> <span class="n">y</span> <span class="n">x</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">le_min</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">min_le_right</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">min_le_left</span> <span class="o">},</span>
+  <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>We will say more about the universal quantifier in
+a later chapter,
+but suffice it to say here that the hypothesis
+<code class="docutils literal notranslate"><span class="pre">h</span></code> says that the desired inequality holds for
+any <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>,
+and the <code class="docutils literal notranslate"><span class="pre">intros</span></code> tactic introduces an arbitrary
+<code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> to establish the conclusion.
+The first <code class="docutils literal notranslate"><span class="pre">apply</span></code> after <code class="docutils literal notranslate"><span class="pre">le_antisymm</span></code> implicitly
+uses <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">a</span> <span class="pre">b</span></code>, whereas the second one uses <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">b</span> <span class="pre">a</span></code>.</p>
+<p>Another solution is to use the <code class="docutils literal notranslate"><span class="pre">repeat</span></code> tactic,
+which applies a tactic (or a block) as many times
+as it can.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20:%20%E2%84%9D%0A%0A--%20BEGIN%0Aexample%20:%20min%20a%20b%20=%20min%20b%20a%20:=%0Abegin%0A%20%20apply%20le_antisymm,%0A%20%20repeat%20%7B%0A%20%20%20%20apply%20le_min,%0A%20%20%20%20apply%20min_le_right,%0A%20%20%20%20apply%20min_le_left%20%7D%0Aend%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1409.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">min</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">apply</span> <span class="n">le_antisymm</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span>
+    <span class="n">apply</span> <span class="n">le_min</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">min_le_right</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">min_le_left</span> <span class="o">}</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>In any case,
+whether or not you use these tricks,
+we encourage you to prove the following:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20c%20:%20%E2%84%9D%0A%0A--%20BEGIN%0Aexample%20:%20max%20a%20b%20=%20max%20b%20a%20:=%0Abegin%0A%20%20sorry%0Aend%0A%0Aexample%20:%20min%20(min%20a%20b)%20c%20=%20min%20a%20(min%20b%20c)%20:=%0Asorry%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1430.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">max</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">max</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">sorry</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">min</span> <span class="o">(</span><span class="n">min</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">min</span> <span class="n">a</span> <span class="o">(</span><span class="n">min</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>Of course, you are welcome to prove the associativity of <code class="docutils literal notranslate"><span class="pre">max</span></code> as well.</p>
+<p>It is an interesting fact that <code class="docutils literal notranslate"><span class="pre">min</span></code> distributes over <code class="docutils literal notranslate"><span class="pre">max</span></code>
+the way that multiplication distributes over addition,
+and vice-versa.
+In other words, on the real numbers, we have the identity
+<code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">a</span> <span class="pre">(max</span> <span class="pre">b</span> <span class="pre">c)</span> <span class="pre">&#8804;</span> <span class="pre">max</span> <span class="pre">(min</span> <span class="pre">a</span> <span class="pre">b)</span> <span class="pre">(min</span> <span class="pre">a</span> <span class="pre">c)</span></code>
+as well as the corresponding version with <code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">min</span></code>
+switched.
+But in the next section we will see that this does <em>not</em> follow
+from the transitivity and reflexivity of <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code> and
+the characterizing properties of <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> enumerated above.
+We need to use the fact that <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code> on the real numbers is a <em>total order</em>,
+which is to say,
+it satisfies <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">x</span> <span class="pre">y,</span> <span class="pre">x</span> <span class="pre">&#8804;</span> <span class="pre">y</span> <span class="pre">&#8744;</span> <span class="pre">y</span> <span class="pre">&#8804;</span> <span class="pre">x</span></code>.
+Here the disjunction symbol, <code class="docutils literal notranslate"><span class="pre">&#8744;</span></code>, represents &#8220;or&#8221;.
+In the first case, we have <code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code>,
+and in the second case, we have <code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">y</span></code>.
+We will learn how to reason by cases in a later chapter,
+so for now we will stick to examples that don&#8217;t require the case split.</p>
+<p>Here is one such example:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20c%20:%20%E2%84%9D%0A%0A--%20BEGIN%0Alemma%20aux%20:%20min%20a%20b%20+%20c%20%E2%89%A4%20min%20(a%20+%20c)%20(b%20+%20c)%20:=%0Abegin%0A%20%20sorry%0Aend%0A%0Aexample%20:%20min%20a%20b%20+%20c%20=%20min%20(a%20+%20c)%20(b%20+%20c)%20:=%0Abegin%0A%20%20sorry%0Aend%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1471.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">lemma</span> <span class="n">aux</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">&#8804;</span> <span class="n">min</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">sorry</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">min</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">sorry</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>It is clear that <code class="docutils literal notranslate"><span class="pre">aux</span></code> provides one of the two inequalities
+needed to prove the equality,
+but applying it to suitable values yields the other direction
+as well.
+As a hint, you can use the theorem <code class="docutils literal notranslate"><span class="pre">add_neg_cancel_right</span></code>
+and the <code class="docutils literal notranslate"><span class="pre">linarith</span></code> tactic.</p>
+<p>For another challenge,
+mathlib&#8217;s manic naming convention is made manifest by the library&#8217;s
+name for the triangle inequality:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0A--%20BEGIN%0A#check%20(abs_add_le_abs_add_abs%20:%20%E2%88%80%20a%20b%20:%20%E2%84%9D,%20abs%20(a%20+%20b)%20%E2%89%A4%20abs%20a%20+%20abs%20b)%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1500.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#check</span> <span class="o">(</span><span class="n">abs_add_le_abs_add_abs</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="n">abs</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="n">abs</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">abs</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>Use it to prove the following variant:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0Avariables%20a%20b%20:%20%E2%84%9D%0A%0A--%20BEGIN%0Aexample%20:%20abs%20a%20-%20abs%20b%20%E2%89%A4%20abs%20(a%20-%20b)%20:=%0Abegin%0A%20%20sorry%0Aend%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1510.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">abs</span> <span class="n">a</span> <span class="bp">-</span> <span class="n">abs</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">abs</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">sorry</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>See if you can do this in three lines or less.
+You can use the theorem <code class="docutils literal notranslate"><span class="pre">sub_add_cancel</span></code>.</p>
+<p>Another important relation that we will make use of
+in the sections to come is the divisibility relation
+on the natural numbers, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8739;</span> <span class="pre">y</span></code>.
+Be careful: the divisibility symbol is <em>not</em> the
+ordinary bar on your keyboard.
+Rather, it is a unicode character obtained by
+typing <code class="docutils literal notranslate"><span class="pre">\|</span></code> in VS Code.
+By convention, mathlib uses <code class="docutils literal notranslate"><span class="pre">dvd</span></code>
+to refer to it in theorem names.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.gcd%0A%0Avariables%20x%20y%20z%20:%20%E2%84%95%0A%0Aexample%20(h%E2%82%80%20:%20x%20%E2%88%A3%20y)%20(h%E2%82%81%20:%20y%20%E2%88%A3%20z)%20:%20x%20%E2%88%A3%20z%20:=%0Advd_trans%20h%E2%82%80%20h%E2%82%81%0A%0Aexample%20:%20x%20%E2%88%A3%20y%20*%20x%20*%20z%20:=%0Abegin%0A%20%20apply%20dvd_mul_of_dvd_left,%0A%20%20apply%20dvd_mul_left%0Aend%0A%0Aexample%20:%20x%20%E2%88%A3%20x%5E2%20:=%0Abegin%0A%20%20rw%20nat.pow_two,%0A%20%20apply%20dvd_mul_left%0Aend" target="_blank" tryitfile="../examples/basic_skills/unnamed_1536.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.nat.gcd</span>
+
+<span class="kd">variables</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#8469;</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h&#8320;</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8739;</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8321;</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8739;</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8739;</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="n">dvd_trans</span> <span class="n">h&#8320;</span> <span class="n">h&#8321;</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8739;</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">apply</span> <span class="n">dvd_mul_of_dvd_left</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">dvd_mul_left</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8739;</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">rw</span> <span class="n">nat.pow_two</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">dvd_mul_left</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>You can also use <code class="docutils literal notranslate"><span class="pre">nat.pow_succ</span></code> instead of
+<code class="docutils literal notranslate"><span class="pre">nat.pow_two</span></code> to expand <code class="docutils literal notranslate"><span class="pre">x^2</span></code> into a product,
+with slightly different effect.
+(In the context of the natural numbers,
+<code class="docutils literal notranslate"><span class="pre">succ</span></code> refers to the successor function;
+in Lean, <code class="docutils literal notranslate"><span class="pre">2</span></code> is definitionally equal to <code class="docutils literal notranslate"><span class="pre">succ</span> <span class="pre">1</span></code>.)
+See if you can guess the names of the theorems
+you need to prove the following:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.gcd%0A%0Avariables%20w%20x%20y%20z%20:%20%E2%84%95%0A%0Aexample%20(h%20:%20x%20%E2%88%A3%20w):%20x%20%E2%88%A3%20y%20*%20(x%20*%20z)%20+%20x%5E2%20+%20w%5E2%20:=%0Abegin%0A%20%20sorry%0Aend" target="_blank" tryitfile="../examples/basic_skills/unnamed_1566.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.nat.gcd</span>
+
+<span class="kd">variables</span> <span class="n">w</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#8469;</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8739;</span> <span class="n">w</span><span class="o">):</span> <span class="n">x</span> <span class="bp">&#8739;</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span> <span class="bp">+</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">w</span><span class="bp">^</span><span class="mi">2</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">sorry</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div><p>With respect to divisibility, the <em>greatest common divisor</em>,
+<code class="docutils literal notranslate"><span class="pre">gcd</span></code>, and least common multiple, <code class="docutils literal notranslate"><span class="pre">lcm</span></code>,
+are analogous to <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code>.
+Since every number divides <code class="docutils literal notranslate"><span class="pre">0</span></code>,
+<code class="docutils literal notranslate"><span class="pre">0</span></code> is really the greatest element with respect to divisibility:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.gcd%0A%0Aopen%20nat%0A%0Avariables%20n%20:%20%E2%84%95%0A%0A#check%20(gcd_zero_right%20n%20:%20gcd%20n%200%20=%20n)%0A#check%20(gcd_zero_left%20n%20%20:%20gcd%200%20n%20=%20n)%0A#check%20(lcm_zero_right%20n%20:%20lcm%20n%200%20=%200)%0A#check%20(lcm_zero_left%20n%20%20:%20lcm%200%20n%20=%200)" target="_blank" tryitfile="../examples/basic_skills/unnamed_1583.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.nat.gcd</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kd">variables</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">gcd_zero_right</span> <span class="n">n</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">n</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">gcd_zero_left</span> <span class="n">n</span>  <span class="o">:</span> <span class="n">gcd</span> <span class="mi">0</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">lcm_zero_right</span> <span class="n">n</span> <span class="o">:</span> <span class="n">lcm</span> <span class="n">n</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">lcm_zero_left</span> <span class="n">n</span>  <span class="o">:</span> <span class="n">lcm</span> <span class="mi">0</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>The functions <code class="docutils literal notranslate"><span class="pre">gcd</span></code> and <code class="docutils literal notranslate"><span class="pre">lcm</span></code> for natural numbers are in the
+<code class="docutils literal notranslate"><span class="pre">nat</span></code> namespace,
+which means that the full identifiers are <code class="docutils literal notranslate"><span class="pre">nat.gcd</span></code> and <code class="docutils literal notranslate"><span class="pre">nat.lcm</span></code>.
+Similarly, the names of the theorems listed are prefixed by <code class="docutils literal notranslate"><span class="pre">nat</span></code>.
+The command <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">nat</span></code> opens the namespace,
+allowing us to use the shorter names.</p>
+<p>See if you can guess the names of the theorems you will need to
+prove the following:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.gcd%0A%0Aopen%20nat%0A%0Avariables%20m%20n%20:%20%E2%84%95%0A%0A--%20BEGIN%0Aexample%20:%20gcd%20m%20n%20=%20gcd%20n%20m%20:=%0Abegin%0A%20%20sorry%0Aend%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1606.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">gcd</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">sorry</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</div></div>
+<div class="section" id="proving-facts-about-algebraic-structures">
+<span id="id6"></span><h2><span class="section-number">2.5. </span>Proving Facts about Algebraic Structures<a class="headerlink" href="#proving-facts-about-algebraic-structures" title="Permalink to this headline">&#182;</a></h2>
+<p>In Section <a class="reference internal" href="#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a>,
+we saw that many common identities governing the real numbers hold
+in more general classes of algebraic structures,
+such as commutative rings.
+We can use any axioms we want to describe an algebraic structure,
+not just equations.
+For example, a <em>partial order</em> consists of a set with a
+binary relation that is reflexive and transitive,
+like <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code> on the real numbers.
+Lean knows about partial orders:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20%7B%CE%B1%20:%20Type*%7D%20%5Bpartial_order%20%CE%B1%5D%0Avariables%20x%20y%20z%20:%20%CE%B1%0A%0A#check%20x%20%E2%89%A4%20y%0A#check%20(le_refl%20x%20:%20x%20%E2%89%A4%20x)%0A#check%20(le_trans%20:%20x%20%E2%89%A4%20y%20%E2%86%92%20y%20%E2%89%A4%20z%20%E2%86%92%20x%20%E2%89%A4%20z)" target="_blank" tryitfile="../examples/basic_skills/unnamed_1638.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">&#945;</span><span class="o">]</span>
+<span class="kd">variables</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#945;</span>
+
+<span class="k">#check</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">le_refl</span> <span class="n">x</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">le_trans</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">z</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>Here we are adopting the mathlib convention of using
+letters like <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#947;</span></code>
+(entered as <code class="docutils literal notranslate"><span class="pre">\a</span></code>, <code class="docutils literal notranslate"><span class="pre">\b</span></code>, and <code class="docutils literal notranslate"><span class="pre">\g</span></code>)
+for arbitrary types.
+The library often uses letters like <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">G</span></code>
+for the carries of algebraic structures likes rings and groups,
+respectively,
+but in general greek letters are used for types,
+especially when there is little or no structure
+associated with them.</p>
+<p>Associated to any partial order, <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code>,
+this is also a <em>strict partial order</em>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>,
+which acts somewhat like <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> on the real numbers.
+Saying the <code class="docutils literal notranslate"><span class="pre">x</span></code> is less than <code class="docutils literal notranslate"><span class="pre">y</span></code> in this order
+is equivalent to saying that it is less-than-or-equal to <code class="docutils literal notranslate"><span class="pre">y</span></code>
+and not equal to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20order.basic%0A%0Avariables%20%7B%CE%B1%20:%20Type*%7D%20%5Bpartial_order%20%CE%B1%5D%0Avariables%20x%20y%20z%20:%20%CE%B1%0A%0A--%20BEGIN%0A#check%20x%20%3C%20y%0A#check%20(lt_irrefl%20x%20:%20%C2%AC%20x%20%3C%20x)%0A#check%20(lt_trans%20:%20x%20%3C%20y%20%E2%86%92%20y%20%3C%20z%20%E2%86%92%20x%20%3C%20z)%0A#check%20(lt_of_le_of_lt%20:%20x%20%E2%89%A4%20y%20%E2%86%92%20y%20%3C%20z%20%E2%86%92%20x%20%3C%20z)%0A#check%20(lt_of_lt_of_le%20:%20x%20%3C%20y%20%E2%86%92%20y%20%E2%89%A4%20z%20%E2%86%92%20x%20%3C%20z)%0A%0Aexample%20:%20x%20%3C%20y%20%E2%86%94%20x%20%E2%89%A4%20y%20%E2%88%A7%20x%20%E2%89%A0%20y%20:=%0Alt_iff_le_and_ne%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1665.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#check</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">lt_irrefl</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">&#172;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">lt_trans</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">lt_of_le_of_lt</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8743;</span> <span class="n">x</span> <span class="bp">&#8800;</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="n">lt_iff_le_and_ne</span>
+</pre></div>
+</div>
+</div><p>In this example, the symbol <code class="docutils literal notranslate"><span class="pre">&#8743;</span></code> stands for &#8220;and,&#8221;
+the symbol <code class="docutils literal notranslate"><span class="pre">&#172;</span></code> stands for &#8220;not,&#8221; and
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8800;</span> <span class="pre">y</span></code> abbreviates <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">(x</span> <span class="pre">=</span> <span class="pre">y)</span></code>.
+In a later chapter, you will learn how to use
+these logical connectives to <em>prove</em> that <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>
+has the properties indicated.</p>
+<p>A <em>lattice</em> is a structure that extends a partial
+order with operations <code class="docutils literal notranslate"><span class="pre">&#8851;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8852;</span></code> that are
+analogous to <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> on the real numbers:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20order.lattice%0A%0Avariables%20%7B%CE%B1%20:%20Type*%7D%20%5Blattice%20%CE%B1%5D%0Avariables%20x%20y%20z%20:%20%CE%B1%0A%0A#check%20x%20%E2%8A%93%20y%0A#check%20(inf_le_left%20:%20x%20%E2%8A%93%20y%20%E2%89%A4%20x)%0A#check%20(inf_le_right%20:%20x%20%E2%8A%93%20y%20%E2%89%A4%20y)%0A#check%20(le_inf%20:%20z%20%E2%89%A4%20x%20%E2%86%92%20z%20%E2%89%A4%20y%20%E2%86%92%20z%20%E2%89%A4%20x%20%E2%8A%93%20y)%0A%0A#check%20x%20%E2%8A%94%20y%0A#check%20(le_sup_left%20:%20x%20%E2%89%A4%20x%20%E2%8A%94%20y)%0A#check%20(le_sup_right:%20y%20%E2%89%A4%20x%20%E2%8A%94%20y)%0A#check%20(sup_le%20:%20x%20%E2%89%A4%20z%20%E2%86%92%20y%20%E2%89%A4%20z%20%E2%86%92%20x%20%E2%8A%94%20y%20%E2%89%A4%20z)" target="_blank" tryitfile="../examples/basic_skills/unnamed_1696.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">order.lattice</span>
+
+<span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">lattice</span> <span class="n">&#945;</span><span class="o">]</span>
+<span class="kd">variables</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#945;</span>
+
+<span class="k">#check</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">inf_le_left</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">inf_le_right</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">y</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">le_inf</span> <span class="o">:</span> <span class="n">z</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="bp">&#8594;</span> <span class="n">z</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">z</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">le_sup_left</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">le_sup_right</span><span class="o">:</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">sup_le</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">z</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>The characterizations of <code class="docutils literal notranslate"><span class="pre">&#8851;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8852;</span></code> justify calling them
+the <em>greatest lower bound</em> and <em>least upper bound</em>, respectively.
+You can type them in VS code using <code class="docutils literal notranslate"><span class="pre">\glb</span></code> and <code class="docutils literal notranslate"><span class="pre">\lub</span></code>.
+The symbols are also often called then <em>infimum</em> and
+the <em>supremum</em>,
+and mathlib refers to them as <code class="docutils literal notranslate"><span class="pre">inf</span></code> and <code class="docutils literal notranslate"><span class="pre">sup</span></code> in
+theorem names.
+To further complicate matters,
+they are also often called <em>meet</em> and <em>join</em>.
+Therefore, if you work with lattices,
+you have to keep the following dictionary in mind:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#8851;</span></code> is the <em>greatest lower bound</em>, <em>infimum</em>, or <em>meet</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#8852;</span></code> is the <em>least upper bound</em>, <em>supremum</em>, or <em>join</em>.</p></li>
+</ul>
+<p>Some instances of lattices include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> on any total order, such as the integers or real numbers with <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#8745;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8746;</span></code> on the collection of subsets of some domain, with the ordering <code class="docutils literal notranslate"><span class="pre">&#8838;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#8743;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8744;</span></code> on boolean truth values, with ordering <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8804;</span> <span class="pre">y</span></code> if either <code class="docutils literal notranslate"><span class="pre">x</span></code> is false or <code class="docutils literal notranslate"><span class="pre">y</span></code> is true</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gcd</span></code> and <code class="docutils literal notranslate"><span class="pre">lcm</span></code> on the natural numbers (or positive natural numbers), with the divisibility ordering, <code class="docutils literal notranslate"><span class="pre">&#8739;</span></code></p></li>
+</ul>
+<p>You can check that, as with <code class="docutils literal notranslate"><span class="pre">min</span></code> / <code class="docutils literal notranslate"><span class="pre">max</span></code> and <code class="docutils literal notranslate"><span class="pre">gcd</span></code> / <code class="docutils literal notranslate"><span class="pre">lcm</span></code>,
+you can prove the commutativity and associativity of the infimum and supremum
+using only their characterizing axioms,
+together with <code class="docutils literal notranslate"><span class="pre">le_refl</span></code> and <code class="docutils literal notranslate"><span class="pre">le_trans</span></code>.</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20order.lattice%0A%0Avariables%20%7B%CE%B1%20:%20Type*%7D%20%5Blattice%20%CE%B1%5D%0Avariables%20x%20y%20z%20:%20%CE%B1%0A%0A--%20BEGIN%0Aexample%20:%20x%20%E2%8A%93%20y%20=%20y%20%E2%8A%93%20x%20:=%20sorry%0Aexample%20:%20x%20%E2%8A%93%20y%20%E2%8A%93%20z%20=%20x%20%E2%8A%93%20(y%20%E2%8A%93%20z)%20:=%20sorry%0Aexample%20:%20x%20%E2%8A%94%20y%20=%20y%20%E2%8A%94%20x%20:=%20sorry%0Aexample%20:%20x%20%E2%8A%94%20y%20%E2%8A%94%20z%20=%20x%20%E2%8A%94%20(y%20%E2%8A%94%20z)%20:=%20sorry%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1744.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>You can find these theorems in the mathlib as <code class="docutils literal notranslate"><span class="pre">inf_comm</span></code>, <code class="docutils literal notranslate"><span class="pre">inf_assoc</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sup_comm</span></code>, and <code class="docutils literal notranslate"><span class="pre">sup_assoc</span></code>, respectively.</p>
+<p>Another good exercise is to prove the <em>absorption laws</em>
+using only those axioms:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20order.lattice%0A%0Avariables%20%7B%CE%B1%20:%20Type*%7D%20%5Blattice%20%CE%B1%5D%0Avariables%20x%20y%20z%20:%20%CE%B1%0A%0A--%20BEGIN%0Aexample%20:%20x%20%E2%8A%93%20(x%20%E2%8A%94%20y)%20=%20x%20:=%20sorry%0Aexample%20:%20x%20%E2%8A%94%20(x%20%E2%8A%94%20y)%20=%20x%20:=%20sorry%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1764.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>These can be found in mathlib with the names <code class="docutils literal notranslate"><span class="pre">inf_sup_self</span></code> and <code class="docutils literal notranslate"><span class="pre">sup_inf_self</span></code>.</p>
+<p>A lattice that satisfies the additional identities
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8851;</span> <span class="pre">(y</span> <span class="pre">&#8852;</span> <span class="pre">z)</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">&#8851;</span> <span class="pre">y)</span> <span class="pre">&#8852;</span> <span class="pre">(x</span> <span class="pre">&#8851;</span> <span class="pre">z)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8852;</span> <span class="pre">(y</span> <span class="pre">&#8851;</span> <span class="pre">z)</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">&#8852;</span> <span class="pre">y)</span> <span class="pre">&#8851;</span> <span class="pre">(x</span> <span class="pre">&#8852;</span> <span class="pre">z)</span></code>
+is called a <em>distributive lattice</em>. Lean knows about these too:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20order.lattice%0A%0Avariables%20%7B%CE%B1%20:%20Type*%7D%20%5Bdistrib_lattice%20%CE%B1%5D%0Avariables%20x%20y%20z%20:%20%CE%B1%0A%0A#check%20(inf_sup_left%20:%20x%20%E2%8A%93%20(y%20%E2%8A%94%20z)%20=%20(x%20%E2%8A%93%20y)%20%E2%8A%94%20(x%20%E2%8A%93%20z))%0A#check%20(inf_sup_right%20:%20(x%20%E2%8A%94%20y)%20%E2%8A%93%20z%20=%20(x%20%E2%8A%93%20z)%20%E2%8A%94%20(y%20%E2%8A%93%20z))%0A#check%20(sup_inf_left%20:%20x%20%E2%8A%94%20(y%20%E2%8A%93%20z)%20=%20(x%20%E2%8A%94%20y)%20%E2%8A%93%20(x%20%E2%8A%94%20z))%0A#check%20(sup_inf_right%20:%20(x%20%E2%8A%93%20y)%20%E2%8A%94%20z%20=%20(x%20%E2%8A%94%20z)%20%E2%8A%93%20(y%20%E2%8A%94%20z))" target="_blank" tryitfile="../examples/basic_skills/unnamed_1783.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">order.lattice</span>
+
+<span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">distrib_lattice</span> <span class="n">&#945;</span><span class="o">]</span>
+<span class="kd">variables</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#945;</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">inf_sup_left</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8852;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">))</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">inf_sup_right</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="n">z</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">&#8852;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">))</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">sup_inf_left</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">))</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">sup_inf_right</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8852;</span> <span class="n">z</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">))</span>
+</pre></div>
+</div>
+</div><p>The left and right versions are easily shown to be
+equivalent, given the commutativity of <code class="docutils literal notranslate"><span class="pre">&#8851;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8852;</span></code>.
+It is a good exercise to show that not every lattice
+is distributive
+by providing an explicit description of a
+nondistributive lattice with finitely many elements.
+It is also a good exercise to show that in any lattice,
+either distributivity law implies the other:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20order.lattice%0A%0Avariables%20%7B%CE%B1%20:%20Type*%7D%20%5Blattice%20%CE%B1%5D%0Avariables%20a%20b%20c%20:%20%CE%B1%0A%0Aexample%20(h%20:%20%E2%88%80%20x%20y%20z%20:%20%CE%B1,%20x%20%E2%8A%93%20(y%20%E2%8A%94%20z)%20=%20(x%20%E2%8A%93%20y)%20%E2%8A%94%20(x%20%E2%8A%93%20z))%20:%0A%20%20(a%20%E2%8A%94%20b)%20%E2%8A%93%20c%20=%20(a%20%E2%8A%93%20c)%20%E2%8A%94%20(b%20%E2%8A%93%20c)%20:=%0Asorry%0A%0Aexample%20(h%20:%20%E2%88%80%20x%20y%20z%20:%20%CE%B1,%20x%20%E2%8A%94%20(y%20%E2%8A%93%20z)%20=%20(x%20%E2%8A%94%20y)%20%E2%8A%93%20(x%20%E2%8A%94%20z))%20:%0A%20%20(a%20%E2%8A%93%20b)%20%E2%8A%94%20c%20=%20(a%20%E2%8A%94%20c)%20%E2%8A%93%20(b%20%E2%8A%94%20c)%20:=%0Asorry" target="_blank" tryitfile="../examples/basic_skills/unnamed_1804.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">order.lattice</span>
+
+<span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">lattice</span> <span class="n">&#945;</span><span class="o">]</span>
+<span class="kd">variables</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8852;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">&#8852;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="n">c</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&#8851;</span> <span class="n">c</span><span class="o">)</span> <span class="bp">&#8852;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8851;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&#8852;</span> <span class="o">(</span><span class="n">y</span> <span class="bp">&#8851;</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&#8852;</span> <span class="n">z</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="bp">&#8851;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&#8852;</span> <span class="n">c</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&#8852;</span> <span class="n">c</span><span class="o">)</span> <span class="bp">&#8851;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8852;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>It is possible to combine axiomatic structures into larger ones.
+For example, an <em>ordered ring</em> consists of a ring together with a
+partial order on the carrier
+satisfying additional axioms that say that the ring operations
+are compatible with the order:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20%7BR%20:%20Type*%7D%20%5Bordered_ring%20R%5D%0Avariables%20a%20b%20c%20:%20R%0A%0A#check%20(add_le_add_left%20:%20a%20%E2%89%A4%20b%20%E2%86%92%20%E2%88%80%20c,%20c%20+%20a%20%E2%89%A4%20c%20+%20b)%0A#check%20(mul_pos%20:%200%20%3C%20a%20%E2%86%92%200%20%3C%20b%20%E2%86%92%200%20%3C%20a%20*%20b)%0A#check%20(zero_ne_one%20:%20(0%20:%20R)%20%E2%89%A0%201)" target="_blank" tryitfile="../examples/basic_skills/unnamed_1825.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kd">variables</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">R</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">add_le_add_left</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">&#8594;</span> <span class="bp">&#8704;</span> <span class="n">c</span><span class="o">,</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">mul_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">zero_ne_one</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">&#8800;</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>In a later chapter, we will see how to derive the following from <code class="docutils literal notranslate"><span class="pre">mul_pos</span></code>
+and the definition of <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20%7BR%20:%20Type*%7D%20%5Bordered_ring%20R%5D%0Avariables%20a%20b%20c%20:%20R%0A%0A--%20BEGIN%0A#check%20(mul_nonneg%20:%200%20%E2%89%A4%20a%20%E2%86%92%200%20%E2%89%A4%20b%20%E2%86%92%200%20%E2%89%A4%20a%20*%20b)%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1839.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#check</span> <span class="o">(</span><span class="n">mul_nonneg</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>It is then an extended exercise to show that many common facts
+used to reason about arithmetic and the ordering on the real
+numbers hold generically for any ordered ring.
+Here are a couple of examples you can try,
+using only properties of rings, partial orders, and the facts
+enumerated in the last two examples:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20%7BR%20:%20Type*%7D%20%5Bordered_ring%20R%5D%0Avariables%20a%20b%20c%20:%20R%0A%0A--%20BEGIN%0Aexample%20:%20a%20%E2%89%A4%20b%20%E2%86%94%200%20%E2%89%A4%20b%20-%20a%20:=%20sorry%0A%0Aexample%20(h%20:%20a%20%E2%89%A4%20b)%20(h'%20:%200%20%E2%89%A4%20c)%20:%20a%20*%20c%20%E2%89%A4%20b%20*%20c%20:=%20sorry%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1855.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">&#8596;</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>Finally, here is one last example.
+A <em>metric space</em> consists of a set equipped with a notion of
+distance, <code class="docutils literal notranslate"><span class="pre">dist</span> <span class="pre">x</span> <span class="pre">y</span></code>,
+mapping any pair of elements to a real number.
+The distance function is assumed to satisfy the following axioms:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20topology.metric_space.basic%0A%0Avariables%20%7BX%20:%20Type*%7D%20%5Bmetric_space%20X%5D%0Avariables%20x%20y%20z%20:%20X%0A%0A#check%20(dist_self%20x%20:%20dist%20x%20x%20=%200)%0A#check%20(dist_comm%20x%20y%20:%20dist%20x%20y%20=%20dist%20y%20x)%0A#check%20(dist_triangle%20x%20y%20z%20:%20dist%20x%20z%20%E2%89%A4%20dist%20x%20y%20+%20dist%20y%20z)" target="_blank" tryitfile="../examples/basic_skills/unnamed_1872.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">topology.metric_space.basic</span>
+
+<span class="kd">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">X</span><span class="o">]</span>
+<span class="kd">variables</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">X</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">dist_self</span> <span class="n">x</span> <span class="o">:</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">dist_comm</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">dist</span> <span class="n">y</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">dist_triangle</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">z</span> <span class="bp">&#8804;</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">dist</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+</pre></div>
+</div>
+</div><p>Having mastered this section,
+you can show that it follows from these axioms that distances are
+always nonnegative:</p>
+<div style="position: relative">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20topology.metric_space.basic%0A%0Avariables%20%7BX%20:%20Type*%7D%20%5Bmetric_space%20X%5D%0A%0A--%20BEGIN%0Aexample%20(x%20y%20:%20X)%20:%200%20%E2%89%A4%20dist%20x%20y%20:=%20sorry%0A--%20END" target="_blank" tryitfile="../examples/basic_skills/unnamed_1887.lean">
+try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+</div>
+</div><p>We recommend making use of the theorem <code class="docutils literal notranslate"><span class="pre">nonneg_of_mul_nonneg_left</span></code>.
+As you may have guessed, this theorem is called <code class="docutils literal notranslate"><span class="pre">dist_nonneg</span></code> in mathlib.</p>
+</div>
 </div>
 
 
@@ -1081,6 +1553,8 @@ You are well on your way to becoming a master formalizer.</p>
 <li class="toctree-l2"><a class="reference internal" href="#calculating">2.1. Calculating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#proving-identities-in-algebraic-structures">2.2. Proving Identities in Algebraic Structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-theorems-and-lemmas">2.3. Using Theorems and Lemmas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#more-examples">2.4. More Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proving-facts-about-algebraic-structures">2.5. Proving Facts about Algebraic Structures</a></li>
 </ul>
 </li>
 </ul>

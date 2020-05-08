@@ -33,9 +33,12 @@ To get started:
    ``VS Code``.
 
 Opening the file ``welcome.lean`` will simultaneously open this
-tutorial in a VS Code window. To update to a newer version of
-the tutorial, type ``git pull && leanproject get-mathlib-cache``
-inside the ``mathematics_in_lean`` folder.
+tutorial in a VS Code window.
+
+.. Update this when we have a procedure.
+   To update to a newer version of
+   the tutorial, type ``git pull && leanproject get-mathlib-cache``
+   inside the ``mathematics_in_lean`` folder.
 
 Every once in a while, you will see code snippet like this:
 
@@ -44,8 +47,8 @@ Every once in a while, you will see code snippet like this:
     #eval "Hello, World!"
 
 Clicking on the ``try it!`` button in the upper right corner will
-open a copy of the snippet in an ``examples`` folder and open it in
-a window so that you can experiment with it.
+open a copy in a window
+so that you can edit it and get feedback from Lean.
 This book provides lots of challenging exercises for you to do that
 way.
 

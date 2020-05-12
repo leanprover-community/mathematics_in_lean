@@ -17,3 +17,8 @@ code mathematics_in_lean
 Once VS Code starts, open the file `welcome.lean`.
 That will load the tutorial in a
 separate window, and you are good to go.
+
+## Contributing
+
+PRs and issues should be opened at the upstream
+[source repository](https://github.com/avigad/mathematics_in_lean_source).

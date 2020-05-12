@@ -40,14 +40,14 @@
 <h2><span class="section-number">1.1. </span>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">&#182;</a></h2>
 <p>So, you are ready to formalize some mathematics.
 Maybe you have heard that formalization is the future
-(say, from the article, <a class="reference external" href="https://www.ams.org/journals/notices/201806/rnoti-p681.pdf">The Mechanization of Mathematics</a>
-or the talk, <a class="reference external" href="https://www.youtube.com/watch?v=Dp-mQ3HxgDE">The Future of Mathematics</a>),
+(say, from the article <a class="reference external" href="https://www.ams.org/journals/notices/201806/rnoti-p681.pdf">The Mechanization of Mathematics</a>,
+or the talk <a class="reference external" href="https://www.youtube.com/watch?v=Dp-mQ3HxgDE">The Future of Mathematics</a>),
 and you want in.
 Or maybe you have played the <a class="reference external" href="https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">Natural Number Game</a> and you are hooked.
 Maybe you have heard about <a class="reference external" href="https://leanprover.github.io/people/">Lean</a> and its library <a class="reference external" href="https://leanprover-community.github.io/">mathlib</a>
 through online chatter and you want to know what the fuss is about.
 Or maybe you like mathematics and you like computers,
-are you have some time to spare.
+or you have some time to spare.
 If you are in any of these situations, this book is for you.</p>
 <p>Although you can read a pdf or html version of this book online,
 it designed to be read interactively,
@@ -65,13 +65,14 @@ to set up a working directory for this tutorial.</p></li>
 tutorial in a VS Code window.</p>
 <p>Every once in a while, you will see code snippet like this:</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=#eval%20%22Hello,%20World!%22" target="_blank" tryitfile="../examples/introduction/unnamed_45.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=%23eval%20%22Hello%2C%20World!%22" target="_blank" tryitfile="../examples/introduction/unnamed_45.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#eval</span> <span class="s2">&quot;Hello, World!&quot;</span>
 </pre></div>
 </div>
 </div><p>Clicking on the <code class="docutils literal notranslate"><span class="pre">try</span> <span class="pre">it!</span></code> button in the upper right corner will
 open a copy in a window
-so that you can edit it and get feedback from Lean.
+so that you can edit it,
+and Lean provides feedback in the <a href="#id2"><span class="problematic" id="id3">``</span></a>Lean Goal&#8217;&#8217; window.
 This book provides lots of challenging exercises for you to do that
 way.</p>
 </div>
@@ -83,7 +84,7 @@ Every expression has a <em>type</em>.
 Some expressions have types like <cite>&#8469;</cite> or <cite>&#8469; &#8594; &#8469;</cite>.
 These are mathematical objects.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=#check%202%20+%202%0A%0Adef%20f%20(x%20:%20%E2%84%95)%20:=%20x%20+%203%0A%0A#check%20f" target="_blank" tryitfile="../examples/introduction/unnamed_99.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=%23check%202%20%2B%202%0A%0Adef%20f%20(x%20%3A%20%E2%84%95)%20%3A%3D%20x%20%2B%203%0A%0A%23check%20f" target="_blank" tryitfile="../examples/introduction/unnamed_100.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#check</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span>
 
 <span class="kd">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">3</span>
@@ -94,7 +95,7 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 </div><p>Some expressions have type <cite>Prop</cite>.
 These are mathematical statements.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=#check%202%20+%202%20=%204%0A%0Adef%20fermat_last_theorem%20:=%0A%20%20%E2%88%80%20x%20y%20z%20n%20:%20%E2%84%95,%20n%20%3E%202%20%E2%86%92%20x%20*%20y%20*%20z%20%E2%89%A0%200%20%E2%86%92%20x%5En%20+%20y%5En%20%E2%89%A0%20z%5En%0A%0A#check%20fermat_last_theorem" target="_blank" tryitfile="../examples/introduction/unnamed_110.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=%23check%202%20%2B%202%20%3D%204%0A%0Adef%20fermat_last_theorem%20%3A%3D%0A%20%20%E2%88%80%20x%20y%20z%20n%20%3A%20%E2%84%95%2C%20n%20%3E%202%20%E2%86%92%20x%20*%20y%20*%20z%20%E2%89%A0%200%20%E2%86%92%20x%5En%20%2B%20y%5En%20%E2%89%A0%20z%5En%0A%0A%23check%20fermat_last_theorem" target="_blank" tryitfile="../examples/introduction/unnamed_111.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="k">#check</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span>
 
 <span class="kd">def</span> <span class="n">fermat_last_theorem</span> <span class="o">:=</span>
@@ -106,7 +107,7 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 </div><p>Some expressions have a type, <cite>P</cite>, where <cite>P</cite> itself has type <cite>Prop</cite>.
 Such an expression is a proof of the proposition <cite>P</cite>.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=def%20fermat_last_theorem%20:=%0A%20%20%E2%88%80%20x%20y%20z%20n%20:%20%E2%84%95,%20n%20%3E%202%20%E2%86%92%20x%20*%20y%20*%20z%20%E2%89%A0%200%20%E2%86%92%20x%5En%20+%20y%5En%20%E2%89%A0%20z%5En%0A%0A--%20BEGIN%0Atheorem%20easy%20:%202%20+%202%20=%204%20:=%20rfl%0A%0A#check%20easy%0A%0Atheorem%20hard%20:%20fermat_last_theorem%20:=%20sorry%0A%0A#check%20hard%0A--%20END" target="_blank" tryitfile="../examples/introduction/unnamed_122.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=def%20fermat_last_theorem%20%3A%3D%0A%20%20%E2%88%80%20x%20y%20z%20n%20%3A%20%E2%84%95%2C%20n%20%3E%202%20%E2%86%92%20x%20*%20y%20*%20z%20%E2%89%A0%200%20%E2%86%92%20x%5En%20%2B%20y%5En%20%E2%89%A0%20z%5En%0A%0A--%20BEGIN%0Atheorem%20easy%20%3A%202%20%2B%202%20%3D%204%20%3A%3D%20rfl%0A%0A%23check%20easy%0A%0Atheorem%20hard%20%3A%20fermat_last_theorem%20%3A%3D%20sorry%0A%0A%23check%20hard%0A--%20END" target="_blank" tryitfile="../examples/introduction/unnamed_123.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">theorem</span> <span class="n">easy</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">rfl</span>
 
 <span class="k">#check</span> <span class="n">easy</span>
@@ -142,7 +143,7 @@ or we can provide Lean with <em>instructions</em> as to how to construct them.
 For example, the following expression represents a proof of the fact that
 if <code class="docutils literal notranslate"><span class="pre">n</span></code> is even then so is <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span></code>:</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%0Aopen%20nat%0A%0Aexample%20:%20%E2%88%80%20m%20n,%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20:=%0Aassume%20m%20n%20%E2%9F%A8k,%20(hk%20:%20n%20=%202%20*%20k)%E2%9F%A9,%0Ahave%20hmn%20:%20m%20*%20n%20=%202%20*%20(m%20*%20k),%0A%20%20by%20rw%20%5Bhk,%20mul_left_comm%5D,%0Ashow%20%E2%88%83%20l,%20m%20*%20n%20=%202%20*%20l,%0A%20%20from%20%E2%9F%A8_,%20hmn%E2%9F%A9" target="_blank" tryitfile="../examples/introduction/unnamed_165.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%0Aopen%20nat%0A%0Aexample%20%3A%20%E2%88%80%20m%20n%2C%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20%3A%3D%0Aassume%20m%20n%20%E2%9F%A8k%2C%20(hk%20%3A%20n%20%3D%202%20*%20k)%E2%9F%A9%2C%0Ahave%20hmn%20%3A%20m%20*%20n%20%3D%202%20*%20(m%20*%20k)%2C%0A%20%20by%20rw%20%5Bhk%2C%20mul_left_comm%5D%2C%0Ashow%20%E2%88%83%20l%2C%20m%20*%20n%20%3D%202%20*%20l%2C%0A%20%20from%20%E2%9F%A8_%2C%20hmn%E2%9F%A9" target="_blank" tryitfile="../examples/introduction/unnamed_166.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.nat.parity</span>
 <span class="kn">open</span> <span class="n">nat</span>
 
@@ -156,14 +157,14 @@ try it!</a></div><div class="highlight-lean notranslate"><div class="highlight">
 </div>
 </div><p>The <em>proof term</em> can be compressed to a single line:</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%0Aopen%20nat%0A%0A--%20BEGIN%0Aexample%20:%20%E2%88%80%20m%20n,%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20:=%0A%CE%BB%20m%20n%20%E2%9F%A8k,%20hk%E2%9F%A9,%20%E2%9F%A8m%20*%20k,%20by%20rw%20%5Bhk,%20mul_left_comm%5D%E2%9F%A9%0A--%20END" target="_blank" tryitfile="../examples/introduction/unnamed_179.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%0Aopen%20nat%0A%0A--%20BEGIN%0Aexample%20%3A%20%E2%88%80%20m%20n%2C%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20%3A%3D%0A%CE%BB%20m%20n%20%E2%9F%A8k%2C%20hk%E2%9F%A9%2C%20%E2%9F%A8m%20*%20k%2C%20by%20rw%20%5Bhk%2C%20mul_left_comm%5D%E2%9F%A9%0A--%20END" target="_blank" tryitfile="../examples/introduction/unnamed_180.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">even</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">even</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
 <span class="bp">&#955;</span> <span class="n">m</span> <span class="n">n</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="o">&#10217;,</span> <span class="o">&#10216;</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hk</span><span class="o">,</span> <span class="n">mul_left_comm</span><span class="o">]&#10217;</span>
 </pre></div>
 </div>
 </div><p>The following is, instead, a <em>tactic-style</em> proof of the same theorem:</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%20tactic%0Aopen%20nat%0A%0Aexample%20:%20%E2%88%80%20m%20n,%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20:=%0Abegin%0A%20%20rintros%20m%20n%20%E2%9F%A8k,%20hk%E2%9F%A9,%0A%20%20use%20m%20*%20k,%0A%20%20rw%20%5Bhk,%20mul_left_comm%5D%0Aend" target="_blank" tryitfile="../examples/introduction/unnamed_191.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%20tactic%0Aopen%20nat%0A%0Aexample%20%3A%20%E2%88%80%20m%20n%2C%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20%3A%3D%0Abegin%0A%20%20rintros%20m%20n%20%E2%9F%A8k%2C%20hk%E2%9F%A9%2C%0A%20%20use%20m%20*%20k%2C%0A%20%20rw%20%5Bhk%2C%20mul_left_comm%5D%0Aend" target="_blank" tryitfile="../examples/introduction/unnamed_192.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kn">import</span> <span class="n">data.nat.parity</span> <span class="n">tactic</span>
 <span class="kn">open</span> <span class="n">nat</span>
 
@@ -206,7 +207,7 @@ it is often useful to insert a short proof term in the middle of a tactic proof.
 That said, in this book, our emphasis will be on the use of tactics.</p>
 <p>In our example, the tactic proof can also be reduced to a one-liner:</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%20tactic%0Aopen%20nat%0A%0A--%20BEGIN%0Aexample%20:%20%E2%88%80%20m%20n,%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20:=%0Aby%20rintros%20m%20n%20%E2%9F%A8k,%20hk%E2%9F%A9;%20use%20m%20*%20k;%20rw%20%5Bhk,%20mul_left_comm%5D%0A--%20END" target="_blank" tryitfile="../examples/introduction/unnamed_236.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%20tactic%0Aopen%20nat%0A%0A--%20BEGIN%0Aexample%20%3A%20%E2%88%80%20m%20n%2C%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20%3A%3D%0Aby%20rintros%20m%20n%20%E2%9F%A8k%2C%20hk%E2%9F%A9%3B%20use%20m%20*%20k%3B%20rw%20%5Bhk%2C%20mul_left_comm%5D%0A--%20END" target="_blank" tryitfile="../examples/introduction/unnamed_237.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">even</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">even</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">by</span> <span class="n">rintros</span> <span class="n">m</span> <span class="n">n</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">use</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hk</span><span class="o">,</span> <span class="n">mul_left_comm</span><span class="o">]</span>
 </pre></div>
@@ -218,7 +219,7 @@ For example, we can invoke Lean&#8217;s simplifier with
 specific rules for simplifying statements about parity to
 prove our theorem automatically.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%20tactic%0Aopen%20nat%0A%0A--%20BEGIN%0Aexample%20:%20%E2%88%80%20m%20n,%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20:=%0Aby%20intros;%20simp%20*%20with%20parity_simps%0A--%20END" target="_blank" tryitfile="../examples/introduction/unnamed_253.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.nat.parity%20tactic%0Aopen%20nat%0A%0A--%20BEGIN%0Aexample%20%3A%20%E2%88%80%20m%20n%2C%20even%20n%20%E2%86%92%20even%20(m%20*%20n)%20%3A%3D%0Aby%20intros%3B%20simp%20*%20with%20parity_simps%0A--%20END" target="_blank" tryitfile="../examples/introduction/unnamed_254.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">even</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">even</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">by</span> <span class="n">intros</span><span class="bp">;</span> <span class="n">simp</span> <span class="bp">*</span> <span class="k">with</span> <span class="n">parity_simps</span>
 </pre></div>
@@ -238,7 +239,7 @@ so that you are comfortable browsing the library and
 finding things on your own.</p>
 <p>Interactive theorem proving can be frustrating,
 and the learning curve is steep.
-But the <em>Lean</em> community is very welcoming to newcomers,
+But the Lean community is very welcoming to newcomers,
 and people are available on the <a class="reference external" href="https://leanprover.zulipchat.com/">Lean Zulip chat group</a> round the clock
 to answer questions.
 We hope to see you there, and have no doubt that
@@ -247,7 +248,7 @@ and contribute to the development of <em>mathlib</em>.</p>
 <p>So here is your mission, should you choose to accept it:
 dive in, try the exercises, come to Zulip with questions, and have fun.
 But be forewarned:
-interactive theorem prover will challenge you to think about
+interactive theorem proving will challenge you to think about
 mathematics and mathematical reasoning in fundamentally new ways.
 Your life may never be the same.</p>
 <p><em>Acknowledgment.</em> We are grateful to Gabriel Ebner for setting up the
@@ -279,6 +280,7 @@ infrastructure for running this tutorial in VS Code.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="basic_skills.html">2. Basic Skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the_natural_numbers.html">3. The Natural Numbers</a></li>
 </ul>
 
 

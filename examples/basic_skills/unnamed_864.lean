@@ -6,10 +6,10 @@ variables {G : Type*} [group G]
 
 namespace my_group
 
-theorem one_mul (a : G) : 1 * a = a :=
+theorem mul_one (a : G) : a * 1 = a :=
 sorry
 
-theorem one_right_inv (a : G) : a * a⁻¹ = 1 :=
+theorem mul_right_inv (a : G) : a * a⁻¹ = 1 :=
 sorry
 
 theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a ⁻¹ :=

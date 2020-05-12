@@ -5,5 +5,5 @@ variables x y z : α
 
 -- BEGIN
 example : x ⊓ (x ⊔ y) = x := sorry
-example : x ⊔ (x ⊔ y) = x := sorry
+example : x ⊔ (x ⊓ y) = x := sorry
 -- END

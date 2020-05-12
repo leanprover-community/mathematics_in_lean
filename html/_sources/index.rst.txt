@@ -9,6 +9,7 @@ Mathematics in Lean
 
    introduction
    basic_skills
+   the_natural_numbers
 
 
 .. Indices and tables

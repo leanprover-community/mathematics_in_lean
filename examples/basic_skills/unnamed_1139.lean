@@ -19,7 +19,7 @@ begin
   { sorry },
   have h₁ : 0 < 1 + exp b,
   { sorry },
-  apply (log_le_log h₀ h₁).2,
+  apply (log_le_log h₀ h₁).mpr,
   sorry
 end
 -- END

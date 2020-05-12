@@ -327,7 +327,7 @@ Notice that there is no more ``begin ... end`` block:
 an expression that begins with ``calc`` is a *proof term*.
 A ``calc`` expression can also be used inside a tactic proof,
 but Lean interprets it as the instruction to use the resulting
-proof term to solve the goal exactly.
+proof term to solve the goal.
 
 The ``calc`` syntax is finicky: the dots and colons and justification
 have to be in the format indicated above.

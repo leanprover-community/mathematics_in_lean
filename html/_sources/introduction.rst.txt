@@ -15,7 +15,7 @@ Or maybe you have played the `Natural Number Game`_ and you are hooked.
 Maybe you have heard about `Lean`_ and its library `mathlib`_
 through online chatter and you want to know what the fuss is about.
 Or maybe you like mathematics and you like computers,
-are you have some time to spare.
+or you have some time to spare.
 If you are in any of these situations, this book is for you.
 
 Although you can read a pdf or html version of this book online,

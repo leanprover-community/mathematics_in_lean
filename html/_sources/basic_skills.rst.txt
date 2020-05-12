@@ -53,7 +53,7 @@ imports the theory of the real numbers from ``mathlib``.
 For the sake of brevity,
 we generally suppress information like this when it
 is repeated from example to example.
-Clicking the ``try me!`` button displays all the
+Clicking the ``try it!`` button displays all the
 example as it is meant to be processed and checked by Lean.
 
 Incidentally, you can type the ``ℝ`` character as ``\R`` or ``\real``
@@ -194,7 +194,7 @@ Try these:
     end
     -- END
 
-For the second one, you can use the the theorem ``sub_self``,
+For the second one, you can use the theorem ``sub_self``,
 where ``sub_self a`` is the identity ``a - a = 0``.
 
 We now introduce some useful features of Lean.
@@ -242,7 +242,7 @@ it includes them automatically.
 
 We can delimit the scope of the declaration by putting it
 in a ``section ... end`` block.
-Finally, Lean provides us with a means of checking and expression
+Finally, Lean provides us with a means of checking an expression
 and determining its type:
 
 .. code-block:: lean
@@ -273,7 +273,7 @@ Lean reports that ``mul_comm a b`` is a proof of the fact ``a + b = b + a``.
 The command ``#check (a : ℝ)`` states our expectation that the
 type of ``a`` is ``ℝ``,
 and Lean will raise an error if that is not the case.
-We will explain the output of the last three ``#check`` command later,
+We will explain the output of the last three ``#check`` commands later,
 but in the meanwhile, you can take a look at them,
 and experiment with some ``#check`` commands of your own.
 
@@ -516,7 +516,7 @@ but that does not hold in general.
 If you have taken a course in linear algebra,
 you will recognize that, for every :math:`n`,
 the :math:`n` by :math:`n` matrices of real numbers
-for a ring in which commutativity fails. If we declare ``R`` to be a
+form a ring in which commutativity fails. If we declare ``R`` to be a
 *commutative* ring, in fact, all the theorems
 in the last section continue to hold when we replace
 ``ℝ`` by ``R``.
@@ -841,8 +841,8 @@ can be axiomatized as follows:
     #check (zero_add : ∀ a : A, 0 + a = a)
     #check (add_left_neg : ∀ a : A, -a + a = 0)
 
-It is conventional to use additive notation when a group the
-operation is commutative,
+It is conventional to use additive notation when
+the group operation is commutative,
 and multiplicative notation otherwise.
 So Lean defines a multiplicative version as well as the
 additive version (and also their abelian variants,
@@ -1120,7 +1120,7 @@ Thus the following proof works:
     begin
       apply add_lt_add_of_lt_of_le,
       { apply add_lt_add_of_le_of_lt h₀,
-        apply exp_lt_exp.2 h₁ },
+        apply exp_lt_exp.mpr h₁ },
       apply le_refl
     end
     -- END
@@ -1184,7 +1184,8 @@ There are a number of strategies you can use:
   Typing ``add_le`` and hitting tab will give you some helpful choices.
 
 * If you right-click on an existing theorem in VS Code,
-  the editor will jump to the file where it is defined,
+  the editor will show a menu with the option to
+  jump to the file where the theorem is defined,
   and you can find similar theorems nearby.
 
 * You can use the ``library_search`` tactic,
@@ -1656,9 +1657,9 @@ especially when there is little or no structure
 associated with them.
 
 Associated to any partial order, ``≤``,
-this is also a *strict partial order*, ``<``,
+is also a *strict partial order*, ``<``,
 which acts somewhat like ``<`` on the real numbers.
-Saying the ``x`` is less than ``y`` in this order
+Saying that ``x`` is less than ``y`` in this order
 is equivalent to saying that it is less-than-or-equal to ``y``
 and not equal to ``y``.
 
@@ -1781,7 +1782,7 @@ using only those axioms:
 
     -- BEGIN
     example : x ⊓ (x ⊔ y) = x := sorry
-    example : x ⊔ (x ⊔ y) = x := sorry
+    example : x ⊔ (x ⊓ y) = x := sorry
     -- END
 
 These can be found in mathlib with the names ``inf_sup_self`` and ``sup_inf_self``.

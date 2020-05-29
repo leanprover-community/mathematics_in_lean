@@ -601,7 +601,7 @@ For example, remember the predicates ``fn_ub f a`` and ``fn_lb f a``
 from the last section,
 which say that ``a`` is an upper bound or lower bound on ``f``,
 respectively.
-We can use the existential quantifier to say that "``f`` if bounded"
+We can use the existential quantifier to say that "``f`` is bounded"
 without specifying the bound:
 
 .. code-block:: lean

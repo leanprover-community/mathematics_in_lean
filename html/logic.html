@@ -519,7 +519,7 @@ For example, remember the predicates <code class="docutils literal notranslate">
 from the last section,
 which say that <code class="docutils literal notranslate"><span class="pre">a</span></code> is an upper bound or lower bound on <code class="docutils literal notranslate"><span class="pre">f</span></code>,
 respectively.
-We can use the existential quantifier to say that &#8220;<code class="docutils literal notranslate"><span class="pre">f</span></code> if bounded&#8221;
+We can use the existential quantifier to say that &#8220;<code class="docutils literal notranslate"><span class="pre">f</span></code> is bounded&#8221;
 without specifying the bound:</p>
 <div style="position: relative">
 <div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=import%20data.real.basic%0A%0A--%20BEGIN%0Adef%20fn_ub%20(f%20%3A%20%E2%84%9D%20%E2%86%92%20%E2%84%9D)%20(a%20%3A%20%E2%84%9D)%20%3A%20Prop%20%3A%3D%20%E2%88%80%20x%2C%20f%20x%20%E2%89%A4%20a%0Adef%20fn_lb%20(f%20%3A%20%E2%84%9D%20%E2%86%92%20%E2%84%9D)%20(a%20%3A%20%E2%84%9D)%20%3A%20Prop%20%3A%3D%20%E2%88%80%20x%2C%20a%20%E2%89%A4%20f%20x%0A%0Adef%20fn_has_ub%20(f%20%3A%20%E2%84%9D%20%E2%86%92%20%E2%84%9D)%20%3A%3D%20%E2%88%83%20a%2C%20fn_ub%20f%20a%0Adef%20fn_has_lb%20(f%20%3A%20%E2%84%9D%20%E2%86%92%20%E2%84%9D)%20%3A%3D%20%E2%88%83%20a%2C%20fn_lb%20f%20a%0A--%20END" target="_blank" tryitfile="../examples/logic/unnamed_607.lean">

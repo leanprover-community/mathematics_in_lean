@@ -498,7 +498,7 @@ constant is also injective.
     example (c : ℝ) : injective (λ x, x + c) :=
     begin
       intros x₁ x₂ h',
-      apply eq_of_add_eq_add_right h',
+      exact (add_left_inj c).mp h',
     end
 
     example {c : ℝ} (h : c ≠ 0) : injective (λ x, c * x) :=

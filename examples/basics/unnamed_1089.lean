@@ -10,7 +10,7 @@ variables  a b c d : ℝ
 #check (log_lt_log : 0 < a → a < b → log a < log b)
 #check (add_le_add : a ≤ b → c ≤ d → a + c ≤ b + d)
 #check (add_lt_add_of_le_of_lt : a ≤ b → c < d → a + c < b + d)
-#check (add_lt_add_of_le_of_lt : a ≤ b → c < d → a + c < b + d)
+#check (add_lt_add_of_lt_of_le : a < b → c ≤ d → a + c < b + d)
 #check (add_nonneg : 0 ≤ a → 0 ≤ b → 0 ≤ a + b)
 #check (add_pos : 0 < a → 0 < b → 0 < a + b)
 #check (add_pos_of_pos_of_nonneg : 0 < a → 0 ≤ b → 0 < a + b)

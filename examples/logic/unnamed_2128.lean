@@ -1,6 +1,11 @@
-import data.real.basic
+import tactic
 
--- BEGIN
-example : (λ x y : ℝ, (x + y)^2) = (λ x y : ℝ, x^2 + 2*x*y + y^2) :=
-by { ext, ring }
--- END
+open_locale classical
+
+example (P : Prop) : ¬ ¬ P → P :=
+begin
+  intro h,
+  by_cases h' : P,
+  { assumption },
+  contradiction
+end

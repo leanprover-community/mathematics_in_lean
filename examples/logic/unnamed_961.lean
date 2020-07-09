@@ -1,12 +1,12 @@
-import tactic
+import data.real.basic
 
 open function
 
-variables {α : Type*} {β : Type*} {γ : Type*}
-variables {g : β → γ} {f : α → β}
-
 -- BEGIN
-example (surjg : surjective g) (surjf : surjective f) :
-  surjective (λ x, g (f x)) :=
-sorry
+example {c : ℝ} : surjective (λ x, x + c) :=
+begin
+  intro x,
+  use x - c,
+  dsimp, ring
+end
 -- END

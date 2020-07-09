@@ -1,14 +1,8 @@
-import data.real.basic tactic
+import data.real.basic
+import tactic
 
-variables a b : ℝ
-
--- BEGIN
-example : 2*a*b ≤ a^2 + b^2 :=
+example (a : ℝ) : 0 ≤ a^2 :=
 begin
-  have h : 0 ≤ a^2 - 2*a*b + b^2,
-  calc
-    a^2 - 2*a*b + b^2 = (a - b)^2 : by ring
-    ... ≥ 0                       : by apply pow_two_nonneg,
-  linarith
+  -- library_search,
+  exact pow_two_nonneg a
 end
--- END

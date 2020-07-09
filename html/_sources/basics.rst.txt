@@ -21,6 +21,8 @@ as Lean requires us to do,
 the net result is a proof that the left-hand side of the calculation
 is equal to the right-hand side.
 
+.. index:: rewrite, rw, tactics ; rw and rewrite
+
 In Lean, stating a theorem is tantamount to stating a goal,
 namely, the goal of proving the theorem.
 Lean provides the ``rewrite`` tactic, abbreviated ``rw``,
@@ -28,6 +30,9 @@ to replace the left-hand side of an identity by the right-hand side
 in the goal. If ``a``, ``b``, and ``c`` are real numbers,
 ``mul_assoc a b c``  is the identity ``a * b * c = a * (b * c)``
 and ``mul_comm a b`` is the identity ``a * b = b * a``.
+Lean provides automation that generally eliminates the need
+to refer the facts like these explicitly,
+but they are useful for the purposes of illustration.
 In Lean, multiplication associates to the left,
 so the left-hand side of ``mul_assoc`` could also be written ``(a * b) * c``.
 However, it is generally good style to be mindful of Lean's
@@ -35,8 +40,9 @@ notational conventions and leave out parentheses when Lean does as well.
 
 Let's try out ``rw``.
 
+.. index:: real numbers
+
 .. code-block:: lean
-  :name: fourtytwo
 
     import data.real.basic
 
@@ -46,24 +52,58 @@ Let's try out ``rw``.
       rw mul_assoc b a c
     end
 
-As you move your cursor past each step of the proof,
-you can see the goal of the proof change.
 The ``import`` line at the beginning of the example
 imports the theory of the real numbers from ``mathlib``.
 For the sake of brevity,
 we generally suppress information like this when it
 is repeated from example to example.
-Clicking the ``try it!`` button displays all the
+Clicking the ``try it!`` button displays the full
 example as it is meant to be processed and checked by Lean.
 
+You are welcome to make changes to see what happens.
 You can type the ``ℝ`` character as ``\R`` or ``\real``
-in the VS Code editor.
+in VS Code.
 The symbol doesn't appear until you hit space or the tab key.
 If you hover over a symbol when reading a Lean file,
 VS Code will show you the syntax that can be used to enter it.
-If your keyboard does not have a backslash,
+If your keyboard does not have an easily accessible backslash,
 you can change the leading character by changing the
-``lean.input.leader`` setting in VS Code.
+``lean.input.leader`` setting.
+
+.. index:: proof state, local context, goal
+
+When a cursor is in the middle of a tactic proof,
+Lean reports on the current *proof state* in the
+*Lean infoview* window.
+As you move your cursor past each step of the proof,
+you can see the state change.
+A typical proof state in Lean might look as follows:
+
+.. code-block::
+
+    1 goal
+    x y : ℕ,
+    h₁ : prime x,
+    h₂ : ¬even x,
+    h₃ : y > x
+    ⊢ y ≥ 4
+
+The lines before the one that begins with ``⊢`` denote the *context*:
+they are the objects and assumptions currently at play.
+In this example, these include two objects, ``x`` and ``y``,
+each a natural number.
+They also include three assumptions,
+labelled ``h₁``, ``h₂``, and ``h₃``.
+In Lean, everything in a context is labelled with an identifier.
+You can type these subscripted labels as ``h\1``, ``h\2``, and ``h\3``,
+but any legal identifiers would do:
+you can use ``h1``, ``h2``, ``h3`` instead,
+or ``foo``, ``bar``, and ``baz``.
+The last line represents the *goal*,
+that is, the fact to be proved.
+Sometimes people use *target* for the fact to be proved,
+and *goal* for the combination of the context and the target.
+In practice, the intended meaning is usually clear.
 
 Try proving these identities,
 in each case replacing ``sorry`` by a tactic proof.
@@ -128,37 +168,6 @@ and the second with only one argument.
     end
     -- END
 
-In the Lean editor mode,
-when a cursor is in the middle of a tactic proof,
-Lean reports on the current *proof state*.
-A typical proof state in Lean might look as follows:
-
-.. code-block::
-
-    1 goal
-    x y : ℕ,
-    h₁ : prime x,
-    h₂ : ¬even x,
-    h₃ : y > x
-    ⊢ y ≥ 4
-
-The lines before the one that begins with ``⊢`` denote the *context*:
-they are the objects and assumptions currently at play.
-In this example, these include two objects, ``x`` and ``y``,
-each a natural number.
-They also include three assumptions,
-labelled ``h₁``, ``h₂``, and ``h₃``.
-In Lean, everything in a context is labelled with an identifier.
-You can type these subscripted labels as ``h\1``, ``h\2``, and ``h\3``,
-but any legal identifiers would do:
-you can use ``h1``, ``h2``, ``h3`` instead,
-or ``foo``, ``bar``, and ``baz``.
-The last line represents the *goal*,
-that is, the fact to be proved.
-Sometimes people use *target* for the fact to be proved,
-and *goal* for the combination of the context and the target.
-In practice, the intended meaning is usually clear.
-
 You an also use ``rw`` with facts from the local context.
 
 .. code-block:: lean
@@ -212,19 +221,13 @@ we can replace the ``begin ... end`` block with a ``by``.
     -- BEGIN
     example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) :
       a * (b * e) = c * (d * f) :=
-    begin
-      rw [h', ←mul_assoc, h, mul_assoc]
-    end
-
-    example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) :
-      a * (b * e) = c * (d * f) :=
     by rw [h', ←mul_assoc, h, mul_assoc]
     -- END
 
 You still see the incremental progress by placing the cursor after
 a comma in any list of rewrites.
 
-Another trick is that we can declare variables once and forall outside
+Another trick is that we can declare variables once and for all outside
 an example or theorem.
 When Lean sees them mentioned in the statement of the theorem,
 it includes them automatically.
@@ -234,17 +237,20 @@ it includes them automatically.
     import data.real.basic
 
     -- BEGIN
-    variables a b c d e f : ℝ
+    variables a b c d e f g : ℝ
 
     example (h : a * b = c * d) (h' : e = f) :
       a * (b * e) = c * (d * f) :=
     by rw [h', ←mul_assoc, h, mul_assoc]
     -- END
 
+Inspection of the tactic state at the beginning of the above proof
+reveals that Lean indeed included the relevant variables, leaving out
+`g` that doesn't feature in the statement.
 We can delimit the scope of the declaration by putting it
 in a ``section ... end`` block.
-Finally, Lean provides us with a command
-to determine the type of an expression:
+Finally, recall from the introduction that Lean provides us with a
+command to determine the type of an expression:
 
 .. code-block:: lean
 
@@ -298,6 +304,8 @@ Use the ``#check`` command to see the precise statements.
       rw [mul_comm b a, ←two_mul]
     end
     -- END
+
+.. index:: calc, tactics ; calc
 
 Whereas it is possible to figure out what it going on in this proof
 by stepping through it in the editor,
@@ -393,8 +401,10 @@ You can use the theorems listed underneath.
     #check add_zero a
     -- END
 
+.. index:: rw, tactics ; rw and rewrite
+
 We can also perform rewriting in an assumption in the context.
-For example, ``rw mul_comm a b at hyp`` replaces ``a*b`` by ``b*a``
+For example, ``rw mul_comm a b at hyp`` replaces ``a * b`` by ``b * a``
 in the assumption ``hyp``.
 
 .. code-block:: lean
@@ -409,18 +419,22 @@ in the assumption ``hyp``.
     begin
       rw hyp' at hyp,
       rw mul_comm d a at hyp,
-      rw ← two_mul (a*d) at hyp,
+      rw ← two_mul (a * d) at hyp,
       rw ← mul_assoc 2 a d at hyp,
       exact hyp
     end
     -- END
 
+.. index:: exact, tactics ; exact
+
 In the last step, the ``exact`` tactic can use ``hyp`` to solve the goal
 because at that point ``hyp`` matches the goal exactly.
 
+.. index:: ring (tactic), tactics ; ring
+
 We close this section by noting that ``mathlib`` provides a
 useful bit of automation with a ``ring`` tactic,
-which is designed to prove identities in any ring.
+which is designed to prove identities in any commutative ring.
 
 .. code-block:: lean
 
@@ -452,6 +466,8 @@ but we will see in the next section that it can be used
 for calculations on structures other than the real numbers.
 It can be imported explicitly with the command
 ``import tactic``.
+We will see there are similar tactics for other common kind of algebraic
+structures.
 
 
 .. _proving_identities_in_algebraic_structures:
@@ -459,8 +475,10 @@ It can be imported explicitly with the command
 Proving Identities in Algebraic Structures
 ------------------------------------------
 
-Mathematically, a ring consists of a set, :math:`R`,
-operations :math:`+` :math:`\times`, and constants :math:`0`
+.. index:: ring (algebraic structure)
+
+Mathematically, a ring consists of a collection of objects,
+:math:`R`, operations :math:`+` :math:`\times`, and constants :math:`0`
 and :math:`1`, and an operation :math:`x \mapsto -x` such that:
 
 * :math:`R` with :math:`+` is an *abelian group*, with :math:`0`
@@ -468,8 +486,8 @@ and :math:`1`, and an operation :math:`x \mapsto -x` such that:
 * Multiplication is associative with identity :math:`1`,
   and multiplication distributes over addition.
 
-In Lean, we base our algebraic structures on *types* rather than sets.
-Modulo this difference, we can take the ring axioms to be as follows:
+In Lean, the collection of objects is represented as a *type*, ``R``.
+The ring axioms are as follows:
 
 .. code-block:: lean
 
@@ -511,6 +529,8 @@ It can also be applied to any instance of an abstract
 structure that extends rings,
 such as any *ordered ring* or any *field*.
 
+.. index:: commutative ring
+
 Not all important properties of the real numbers hold in an
 arbitrary ring, however.
 For example, multiplication on the real numbers
@@ -519,7 +539,7 @@ but that does not hold in general.
 If you have taken a course in linear algebra,
 you will recognize that, for every :math:`n`,
 the :math:`n` by :math:`n` matrices of real numbers
-form a ring in which commutativity fails. If we declare ``R`` to be a
+form a ring in which commutativity usually fails. If we declare ``R`` to be a
 *commutative* ring, in fact, all the theorems
 in the last section continue to hold when we replace
 ``ℝ`` by ``R``.
@@ -558,9 +578,18 @@ Most of the facts we prove are already in ``mathlib``.
 We will give the versions we prove the same names
 to help you learn the contents of the library
 as well as the naming conventions.
-To avoid error messages from Lean,
-we will put our versions in a new *namespace*
-called ``my_ring.``
+
+.. index:: namespace, open, command ; open
+
+Lean provides an organizational mechanism similar
+to those used in programming languages:
+when a definition or theorem ``foo`` is introduced in a *namespace*
+``bar``, its full name is ``bar.foo``.
+The command ``open bar`` later *opens* the namespace,
+which allows us to use the shorter name ``foo``.
+To avoid errors due to name clashes,
+in the next example we put our versions of the library
+theorems in a new namespace called ``my_ring.``
 
 The next example shows that we do not need ``add_zero`` or ``add_right_neg``
 as ring axioms, because they follow from the other axioms.
@@ -625,7 +654,7 @@ Prove the companion version:
     variables {R : Type*} [ring R]
 
     -- BEGIN
-    theorem neg_add_cancel_right (a b : R) : (a + b) + -b = a :=
+    theorem add_neg_cancel_right (a b : R) : (a + b) + -b = a :=
     sorry
     -- END
 
@@ -651,7 +680,9 @@ Use these to prove the following:
 
     end my_ring
 
-If you are clever, you can do each of them with three rewrites.
+With enough planning, you can do each of them with three rewrites.
+
+.. index:: implicit argument
 
 We can now explain the use of the curly braces.
 Imagine you are in a situation where you have ``a``, ``b``, and ``c``
@@ -698,6 +729,8 @@ follows from the ring axioms.
 
     end my_ring
 
+.. index:: have, tactics ; have
+
 We have used a new trick!
 If you step through the proof,
 you can see what is going on.
@@ -715,7 +748,6 @@ having proved it, we are now free to use it.
 At this point, the goal is exactly the result of ``add_left_cancel h``.
 We could equally well have closed the proof with
 ``apply add_left_cancel h`` or ``exact add_left_cancel h``.
-We will discuss ``apply`` and ``exact`` in the next section.
 
 Remember that multiplication is not assumed to be commutative,
 so the following theorem also requires some work.
@@ -769,7 +801,8 @@ established in this section.
 
 We had to use the annotation ``(-0 : R)`` instead of ``0`` in the third theorem
 because without specifying ``R``
-it is impossible for Lean to infer which ``0`` we have in mind.
+it is impossible for Lean to infer which ``0`` we have in mind,
+and by default it would be interpreted as a natural number.
 
 In Lean, subtraction in a ring is defined to be
 addition of the additive inverse.
@@ -791,6 +824,8 @@ addition of the additive inverse.
     -- END
 
     end my_ring
+
+.. index:: rfl, reflexivity, tactics ; refl and reflexivity, definitional equality
 
 The proof term ``rfl`` is short for ``reflexivity``.
 Presenting it as a proof of ``a - b = a + -b`` forces Lean
@@ -827,7 +862,7 @@ and once using either ``apply`` or ``exact``.
 
 For another example of definitional equality,
 Lean knows that ``1 + 1 = 2`` holds in any ring.
-With a bit of cleverness,
+With a bit of effort,
 you can use that to prove the theorem ``two_mul`` from
 the last section:
 
@@ -848,6 +883,8 @@ the last section:
     -- END
 
     end my_ring
+
+.. index:: group (algebraic structure)
 
 We close this section by noting that some of the facts about
 addition and negation that we established above do not
@@ -876,11 +913,13 @@ additive version (and also their abelian variants,
 
     import algebra.group
 
+    -- BEGIN
     variables (G : Type*) [group G]
 
     #check (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))
     #check (one_mul : ∀ a : G, 1 * a = a)
     #check (mul_left_inv : ∀ a : G, a⁻¹ * a = 1)
+    -- END
 
 If you are feeling cocky, try proving the following facts about
 groups, using only these axioms.
@@ -891,6 +930,7 @@ The proofs we have carried out in this section provide some hints.
 
     import algebra.group
 
+    -- BEGIN
     variables {G : Type*} [group G]
 
     #check (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))
@@ -899,22 +939,37 @@ The proofs we have carried out in this section provide some hints.
 
     namespace my_group
 
-    theorem mul_one (a : G) : a * 1 = a :=
+    theorem mul_right_inv (a : G) : a * a⁻¹ = 1 :=
     sorry
 
-    theorem mul_right_inv (a : G) : a * a⁻¹ = 1 :=
+    theorem mul_one (a : G) : a * 1 = a :=
     sorry
 
     theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a ⁻¹ :=
     sorry
 
     end my_group
+    -- END
+
+.. index:: group (tactic), tactics ; group, tactics ; noncomm_ring, tactics ; abel
+
+Explicitly invoking those lemmas is tedious, so mathlib provides
+tactics similar to `ring` in order to cover most uses: `group`
+is for non-commutative multiplicative groups, `abel` for abelian
+additive groups, and `noncomm_ring` for non-commutative groups.
+It may seem odd that the algebraic structures are called
+`ring` and `comm_ring` while the tactics are named
+`noncomm_ring` and `ring`. This is partly for historical reasons,
+but also for the convenience of using a shorter name for the
+tactic that deals with commutative rings, since it is used more often.
 
 
 .. _using_theorems_and_lemmas:
 
 Using Theorems and Lemmas
 -------------------------
+
+.. index:: inequalities
 
 Rewriting is great for proving equations,
 but what about other sorts of theorems?
@@ -935,8 +990,12 @@ Consider the library theorems ``le_refl`` and ``le_trans``:
     #check (le_refl : ∀ a : ℝ, a ≤ a)
     #check (le_trans : a ≤ b → b ≤ c → a ≤ c)
 
+As we explain in more detail in  :numref:`implication_and_the_universal_quantifier`,
+the implicit parentheses in the statement of ``le_trans``
+associate to the right, so it should be interpreted as ``a ≤ b → (b ≤ c → a ≤ c)``.
 The library designers have set the arguments to ``le_trans`` implicit,
-so that Lean will *not* let you provide them explicitly.
+so that Lean will *not* let you provide them explicitly (unless you
+really insist, as we will discuss later).
 Rather, it expects to infer them from the context in which they are used.
 For example, when hypotheses ``h : a ≤ b`` and  ``h' : b ≤ c``
 are in the context,
@@ -957,10 +1016,13 @@ all the following work:
     #check (le_trans h h' : a ≤ c)
     -- END
 
+.. index:: apply, tactics ; apply
+
 The ``apply`` tactic takes a proof of a general statement or implication,
 tries to match the conclusion with the current goal,
 and leaves the hypotheses, if any, as new goals.
-If the given proof matches the goal exactly,
+If the given proof matches the goal exactly
+(modulo *definitional* equality),
 you can use the ``exact`` tactic instead of ``apply``.
 So, all of these work:
 
@@ -1037,6 +1099,8 @@ Use them together with ``apply`` and ``exact`` to prove the following:
     sorry
     -- END
 
+.. index:: linarith, tactics ; linarith
+
 In fact, Lean has a tactic that does this sort of thing automatically:
 
 .. code-block:: lean
@@ -1068,6 +1132,15 @@ The ``linarith`` tactic is designed to handle *linear arithmetic*.
 
 In addition to equations and inequalities in the context,
 ``linarith`` will use additional inequalities that you pass as arguments.
+In the next example, ``exp_le_exp.mpr h'`` is a proof of
+``exp b ≤ exp c``, as we will explain in a moment.
+Notice that, in Lean, we write ``f x`` to denote the application
+of a function ``f`` to the argument ``x``,
+exactly the same way we write ``h x`` to denote the result of
+applying a fact or theorem ``h`` to the argument ``x``.
+Parentheses are only needed for compound arguments,
+as in ``f (x + y)``. Without the parentheses, ``f x + y``
+would be parsed as ``(f x) + y``.
 
 .. code-block:: lean
 
@@ -1082,6 +1155,8 @@ In addition to equations and inequalities in the context,
       2 + a + exp b ≤ 3 * a + exp c :=
     by linarith [exp_le_exp.mpr h']
     -- END
+
+.. index:: exponential, logarithm
 
 Here are some more theorems in the library that can be used to establish
 inequalities on the real numbers.
@@ -1128,7 +1203,7 @@ an equivalent one:
     end
     -- END
 
-In this section, however, we will use that fact that if ``h : A ↔ B``
+In this section, however, we will use the fact that if ``h : A ↔ B``
 is such an equivalence,
 then ``h.mp`` establishes the forward direction, ``A → B``,
 and ``h.mpr`` establishes the reverse direction, ``B → A``.
@@ -1160,6 +1235,8 @@ The first line, ``apply add_lt_add_of_lt_of_le``,
 creates two goals,
 and once again we use the curly brackets to separate the
 proof of the first from the proof of the second.
+
+.. index:: norm_num, tactics ; norm_num
 
 Try the following examples on your own.
 The example in the middle shows you that the ``norm_num``
@@ -1214,7 +1291,7 @@ There are a number of strategies you can use:
   start with ``add_le``.
   Typing ``add_le`` and hitting tab will give you some helpful choices.
 
-* If you right-click on an existing theorem in VS Code,
+* If you right-click on an existing theorem name in VS Code,
   the editor will show a menu with the option to
   jump to the file where the theorem is defined,
   and you can find similar theorems nearby.
@@ -1282,7 +1359,7 @@ Here is another example of an inequality:
 
 Mathlib tends to put spaces around binary operations like ``*`` and ``^``,
 but in this example, the more compressed format increases readability.
-There are a number of things worth noticing in this example.
+There are a number of things worth noticing.
 First, an expression ``s ≥ t`` is definitionally equivalent to ``t ≤ s``.
 In principle, this means one should be able to use them interchangeably.
 But some of Lean's automation does not recognize the equivalence,
@@ -1341,6 +1418,8 @@ You are well on your way to becoming a master formalizer.
 More on Order and Divisibility
 ------------------------------
 
+.. index:: min, max
+
 The ``min`` function on the real numbers is uniquely characterized
 by the following three facts:
 
@@ -1358,6 +1437,24 @@ by the following three facts:
 
 Can you guess the names of the theorems that characterize
 ``max`` in a similar way?
+
+Notice that we have to apply ``min`` to a pair of arguments ``a`` and ``b``
+by writing ``min a b`` rather than ``min (a, b)``.
+Formally, ``min`` is a function of type ``ℝ → ℝ → ℝ``.
+When we write a type like this with multiple arrows,
+the convention is that the implicit parentheses associate
+to the right, so the type is interpreted as ``ℝ → (ℝ → ℝ)``.
+The net effect is that if ``a`` and ``b`` have type ``ℝ``
+then ``min a`` has type ``ℝ → ℝ`` and
+``min a b`` has type ``ℝ``, so ``min`` acts like a function
+of two arguments, as we expect. Handling multiple
+arguments in this way is known as *currying*,
+after the logician Haskell Curry.
+
+The order of operations in Lean can also take some getting used to.
+Function application binds tighter than infix operations, so the
+expression ``min a b + c`` is interpreted as ``(min a b) + c``.
+With time, these conventions will become second nature.
 
 Using the theorem ``le_antisymm``, we can show that two
 real numbers are equal if each is less than or equal to the other.
@@ -1384,6 +1481,8 @@ we can show that ``min`` is commutative:
         apply min_le_left }
     end
     -- END
+
+.. index:: show, tactics ; show
 
 Here we have used curly brackets to separate proofs of
 different goals.
@@ -1422,10 +1521,8 @@ is to state a local lemma and then use it:
     end
     -- END
 
-.. TODO: add reference to the logic chapter
-
 We will say more about the universal quantifier in
-a later chapter,
+:numref:`implication_and_the_universal_quantifier`,
 but suffice it to say here that the hypothesis
 ``h`` says that the desired inequality holds for
 any ``x`` and ``y``,
@@ -1433,6 +1530,8 @@ and the ``intros`` tactic introduces an arbitrary
 ``x`` and ``y`` to establish the conclusion.
 The first ``apply`` after ``le_antisymm`` implicitly
 uses ``h a b``, whereas the second one uses ``h b a``.
+
+.. index:: repeat, tactics ; repeat
 
 Another solution is to use the ``repeat`` tactic,
 which applies a tactic (or a block) as many times
@@ -1477,8 +1576,6 @@ we encourage you to prove the following:
 
 Of course, you are welcome to prove the associativity of ``max`` as well.
 
-.. TODO: add reference to logic chapter
-
 It is an interesting fact that ``min`` distributes over ``max``
 the way that multiplication distributes over addition,
 and vice-versa.
@@ -1495,8 +1592,8 @@ it satisfies ``∀ x y, x ≤ y ∨ y ≤ x``.
 Here the disjunction symbol, ``∨``, represents "or".
 In the first case, we have ``min x y = x``,
 and in the second case, we have ``min x y = y``.
-We will learn how to reason by cases in a later chapter,
-so for now we will stick to examples that don't require the case split.
+We will learn how to reason by cases in :numref:`disjunction`,
+but for now we will stick to examples that don't require the case split.
 
 Here is one such example:
 
@@ -1524,6 +1621,8 @@ but applying it to suitable values yields the other direction
 as well.
 As a hint, you can use the theorem ``add_neg_cancel_right``
 and the ``linarith`` tactic.
+
+.. index:: absolute value
 
 Lean's naming convention is made manifest
 in the library's name for the triangle inequality:
@@ -1553,6 +1652,8 @@ Use it to prove the following variant:
 
 See if you can do this in three lines or less.
 You can use the theorem ``sub_add_cancel``.
+
+.. index:: divisibility
 
 Another important relation that we will make use of
 in the sections to come is the divisibility relation
@@ -1600,10 +1701,12 @@ you need to prove the following:
 
     variables w x y z : ℕ
 
-    example (h : x ∣ w): x ∣ y * (x * z) + x^2 + w^2 :=
+    example (h : x ∣ w) : x ∣ y * (x * z) + x^2 + w^2 :=
     begin
       sorry
     end
+
+.. index:: gcd, lcm
 
 With respect to divisibility, the *greatest common divisor*,
 ``gcd``, and least common multiple, ``lcm``,
@@ -1655,7 +1758,9 @@ prove the following:
 Proving Facts about Algebraic Structures
 ----------------------------------------
 
-In Section :numref:`proving_identities_in_algebraic_structures`,
+.. index:: order relation, partial order
+
+In :numref:`proving_identities_in_algebraic_structures`,
 we saw that many common identities governing the real numbers hold
 in more general classes of algebraic structures,
 such as commutative rings.
@@ -1680,7 +1785,7 @@ letters like ``α``, ``β``, and ``γ``
 (entered as ``\a``, ``\b``, and ``\g``)
 for arbitrary types.
 The library often uses letters like ``R`` and ``G``
-for the carries of algebraic structures likes rings and groups,
+for the carries of algebraic structures like rings and groups,
 respectively,
 but in general Greek letters are used for types,
 especially when there is little or no structure
@@ -1711,14 +1816,14 @@ and not equal to ``y``.
     lt_iff_le_and_ne
     -- END
 
-.. TODO: add reference to logic chapter
-
 In this example, the symbol ``∧`` stands for "and,"
 the symbol ``¬`` stands for "not," and
 ``x ≠ y`` abbreviates ``¬ (x = y)``.
-In a later chapter, you will learn how to use
+In :numref:`Chapter %s <logic>`, you will learn how to use
 these logical connectives to *prove* that ``<``
 has the properties indicated.
+
+.. index:: lattice
 
 A *lattice* is a structure that extends a partial
 order with operations ``⊓`` and ``⊔`` that are
@@ -1875,9 +1980,7 @@ are compatible with the order:
     #check (mul_pos : 0 < a → 0 < b → 0 < a * b)
     #check (zero_ne_one : (0 : R) ≠ 1)
 
-.. TODO: add reference to logic chapter
-
-In a later chapter, we will see how to derive the following from ``mul_pos``
+:numref:`Chapter %s <logic>` will provide the means to derive the following from ``mul_pos``
 and the definition of ``<``:
 
 .. code-block:: lean
@@ -1912,6 +2015,8 @@ enumerated in the last two examples:
 
     example (h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := sorry
     -- END
+
+.. index:: metric space
 
 Finally, here is one last example.
 A *metric space* consists of a set equipped with a notion of

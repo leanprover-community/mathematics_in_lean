@@ -1,11 +1,14 @@
 import data.real.basic
 
+variables {x y : ℝ}
+
 -- BEGIN
-example {x : ℝ} (h : x ≠ 0) : x < 0 ∨ x > 0 :=
+example : x < abs y → x < y ∨ x < -y :=
 begin
-  rcases lt_trichotomy x 0 with xlt | xeq | xgt,
-  { left, exact xlt },
-  { contradiction },
-  right, exact xgt
+  cases le_or_gt 0 y with h h,
+  { rw abs_of_nonneg h,
+    intro h, left, exact h },
+  rw abs_of_neg h,
+  intro h, right, exact h
 end
 -- END

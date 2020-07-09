@@ -26,6 +26,18 @@ Consider the statement after the ``#check``:
     import data.real.basic
 
     -- BEGIN
+    #check ∀ x : ℝ, 0 ≤ x → abs x = x
+    -- END
+
+In words, we would say "for every real number ``x``, if ``0 ≤ x`` then
+the absolute value of ``x`` equals ``x``".
+We can also have more complicated statements like:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
     #check ∀ x y ε : ℝ,
       0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε
     -- END
@@ -98,6 +110,8 @@ to a goal of the form ``abs (a * b) < δ``,
 you are left with new goals that require you to  prove
 each of the hypotheses.
 
+.. index:: intros, tactics ; intros
+
 To prove a statement like this, use the ``intros`` tactic.
 Take a look at what it does in this example:
 
@@ -119,7 +133,7 @@ they do not have to be ``x``, ``y``, and ``ε``.
 Notice that we have to introduce the variables
 even though they are marked implicit:
 making them implicit means that we leave them out when
-we write an expression,
+we write an expression *using* ``my_lemma``,
 but they are still an essential part of the statement
 that we are proving.
 After the ``intros`` command,
@@ -186,8 +200,13 @@ on the values of ``f``.
     def fn_lb (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, a ≤ f x
     -- END
 
-In the next example, remember that ``λ x, f x + g x`` is the
+.. index:: lambda abstraction
+
+In the next example, ``λ x, f x + g x`` is a name for the
 function that maps ``x`` to ``f x + g x``.
+Computer scientists refer to this as "lambda abstraction,"
+whereas a mathematician might describe it as the function
+:math:`x \mapsto f(x) + g(x)`.
 
 .. code-block:: lean
 
@@ -210,7 +229,9 @@ function that maps ``x`` to ``f x + g x``.
     end
     -- END
 
-Applying ``intro`` to the predicate ``fn_ub (λ x, f x + g x) (a + b)``
+.. index:: dsimp, tactics ; dsimp, change, tactics ; change
+
+Applying ``intro`` to the goal ``fn_ub (λ x, f x + g x) (a + b)``
 forces Lean to unfold the definition of ``fn_ub``
 and introduce ``x`` for the universal quantifier.
 The goal is then ``(λ (x : ℝ), f x + g x) x ≤ a + b``.
@@ -293,6 +314,8 @@ for most of our examples,
 but it is worth knowing that mathlib contains definitions and theorems
 that work at a high level of generality.
 
+.. index:: monotone function
+
 For another example of a hidden universal quantifier,
 mathlib defines a predicate ``monotone``,
 which says that a function is nondecreasing in its arguments:
@@ -335,8 +358,17 @@ as new subgoals.
 
 When a proof is this short, it is often convenient
 to give a proof term instead.
-The ``intros`` command corresponds to a lambda,
-and the remaining term consists of applications.
+To describe a proof that temporarily introduces objects
+``a`` and ``b`` and a hypothesis ``aleb``,
+Lean uses the notation ``λ a b aleb, ...``.
+This is analogous to the way that a lambda abstraction
+like ``λ x, x^2`` describes a function
+by temporarily naming an object, ``x``,
+and then using it to describe a value.
+So the ``intros`` command in the previous proof
+corresponds to the lambda abstraction in the next proof term.
+The ``apply`` commands then correspond to building
+the application of the theorem to its arguments.
 
 .. code-block:: lean
 
@@ -416,12 +448,18 @@ You can complete the proofs of the others.
     sorry
     -- END
 
+.. index:: erw, tactics ; erw
+
 The first proof can be shortened using ``dsimp`` or ``change``
 to get rid of the lambda.
 But you can check that the subsequent ``rw`` won't work
 unless we get rid of the lambda explicitly,
 because otherwise it cannot find the patterns ``f x`` and ``g x``
 in the expression.
+Contrary to some other tactics, ``rw`` operates on the syntactic level,
+it won't unfold definitions or apply reductions for you
+(it has a variant called ``erw`` that tries a little harder in this
+direction, but not much harder).
 
 You can find implicit universal quantifiers all over the place,
 once you know how to spot them.
@@ -477,6 +515,8 @@ then ``b`` is a bound on ``s`` as well.
     example (h : set_ub s a) (h' : a ≤ b) : set_ub s b :=
     sorry
 
+.. index:: injective function
+
 We close this section with one last important example.
 A function :math:`f` is said to be *injective* if for
 every :math:`x_1` and :math:`x_2`,
@@ -518,13 +558,15 @@ Finally, show that the composition of two injective functions is injective:
     example (injg : injective g) (injf : injective f) :
       injective (λ x, g (f x)) :=
     begin
-      intros x₁ x₂ h,
-      apply injf,
-      apply injg,
-      apply h
+      sorry
     end
     -- END
 
+.. solution:
+   intros x₁ x₂ h,
+   apply injf,
+   apply injg,
+   apply h
 
 .. _the_existential_quantifier:
 
@@ -545,6 +587,8 @@ or ``(5 : ℝ) / 2`` when Lean cannot infer from context that we have
 the real numbers in mind, has the required property,
 and the ``norm_num`` tactic can prove that it meets the description.
 
+.. index:: use, tactics ; use
+
 There are a few ways we can put the information together.
 Given a goal that begins with an existential quantifier,
 the ``use`` tactic is used to provide the object,
@@ -559,6 +603,8 @@ leaving the goal of proving the property.
       use 5 / 2,
       norm_num
     end
+
+.. index:: anonyomous constructor
 
 Alternatively, we can use Lean's *anonyomous constructor* notation
 to construct the proof.
@@ -581,7 +627,7 @@ which can be entered as ``\<`` and ``\>`` respectively,
 tell Lean to put together the given data using
 whatever construction is appropriate
 for the current goal.
-We can use the notation without going into tactic mode:
+We can use the notation without going first into tactic mode:
 
 .. code-block:: lean
 
@@ -648,6 +694,8 @@ then so does ``λ x, f x + g x``.
     end
     -- END
 
+.. index:: cases, tactics ; cases
+
 The ``cases`` tactic unpacks the information
 in the existential quantifier.
 Given the hypothesis ``ubf`` that there is an upper bound
@@ -694,6 +742,8 @@ into the proofs.
       fn_has_ub (λ x, c * f x) :=
     sorry
     -- END
+
+.. index:: rintros, tactics ; rintros, rcases, tactics ; rcases
 
 The task of unpacking information in a hypothesis is
 so important that Lean and mathlib provide a number of
@@ -835,7 +885,8 @@ comes up often,
 so much so that the ``rcases`` tactic provides
 an abbreviation:
 if you use the keyword ``rfl`` in place of a new identifier,
-``rcases`` does the rewriting automatically.
+``rcases`` does the rewriting automatically (this trick doesn't work
+with pattern-matching lambdas).
 
 .. code-block:: lean
 
@@ -895,6 +946,8 @@ Then try proving the following:
     example (divab : a ∣ b) (divac : a ∣ c) : a ∣ (b + c) :=
     sorry
     -- END
+
+.. index:: surjective function
 
 For another important example, a function :math:`f : \alpha \to \beta`
 is said to be *surjective* if for every :math:`y` in the
@@ -1015,6 +1068,8 @@ from ``lt_irrefl``.
       apply lt_irrefl a this
     end
     -- END
+
+.. index:: this, have, tactics ; have, from, tactics ; from
 
 This example introduces a couple of new tricks.
 First, when you use ``have`` without providing
@@ -1140,6 +1195,8 @@ Complete the proof.
     end
     -- END
 
+.. index:: let, tactics ; let
+
 This example introduces the ``let`` tactic,
 which adds a *local definition* to the context.
 If you put the cursor after the ``let`` command,
@@ -1168,7 +1225,8 @@ property ``P``,
 and saying that not everything has property ``P``
 is equivalent to saying that something fails to have property ``P``.
 In other words, all four of the following implications
-are valid:
+are valid (but one of them cannot be proved with what we explained so
+far):
 
 .. code-block:: lean
 
@@ -1196,10 +1254,6 @@ This is an instance of *classical* mathematical reasoning,
 and, in general, you have to declare your intention
 of using such reasoning by adding the command
 ``open_locale classical`` to your file.
-(Due to an annoying quirk of Lean,
-this cannot appear right after the ``import``
-lines in your file,
-but it can appear later on.)
 With that command, we can use proof by contradiction
 to prove the third implication as follows.
 
@@ -1221,9 +1275,11 @@ to prove the third implication as follows.
       exact h' ⟨x, h''⟩
     end
 
+.. index:: by_contradiction, by_contra, tactics ; by_contra and by_contradiction,
+
 Make sure you understand how this works.
-The ``by_contradiction`` tactic allows us to
-prove a goal ``Q`` by assuming ``¬ Q``
+The ``by_contradiction`` tactic (also abbreviated to ``by_contra``)
+allows us to prove a goal ``Q`` by assuming ``¬ Q``
 and deriving a contradiction.
 In fact, it is equivalent to using the
 equivalence ``not_not : ¬ ¬ Q ↔ Q``.
@@ -1268,6 +1324,8 @@ which is the converse of one of the implications we proved above.
     sorry
     -- END
 
+.. index:: push_neg, tactics ; push_neg
+
 It is often tedious to work with compound statements with
 a negation in front,
 and it is a common mathematical pattern to replace such
@@ -1275,7 +1333,7 @@ statements with equivalent forms in which the negation
 has been pushed inward.
 To facilitate this, mathlib offers a ``push_neg`` tactic,
 which restates the goal in this way.
-The command ``push_neg h`` restates the hypothesis ``h``.
+The command ``push_neg at h`` restates the hypothesis ``h``.
 
 .. code-block:: lean
 
@@ -1331,6 +1389,8 @@ to prove the following:
     example (h : ¬ monotone f) : ∃ x y, x ≤ y ∧ f y < f x :=
     sorry
     -- END
+
+.. index:: contrapose, tactics ; contrapose
 
 Mathlib also has a tactic, ``contrapose``,
 which transforms a goal ``A → B`` to ``¬ B → ¬ A``.
@@ -1390,6 +1450,8 @@ establishes the goal so we can move on to the next one.
 (We will see instances of reasoning by cases in
 :numref:`disjunction`.)
 
+.. index:: exfalso, contradiction, absurd, tactics ; exfalso, tactics ; contradiction
+
 Lean provides a number of ways of closing
 a goal once a contradiction has been reached.
 
@@ -1430,6 +1492,8 @@ Of course, in this example, ``linarith`` also works.
 Conjunction and Bi-implication
 ------------------------------
 
+.. index:: split, tactics ; split
+
 You have already seen that the conjunction symbol, ``∧``,
 is used to express "and."
 The ``split`` tactic allows you to prove a statement of
@@ -1450,6 +1514,8 @@ by proving ``A`` and then proving ``B``.
       rw h
     end
     -- END
+
+.. index:: assumption, tactics ; assumption
 
 In this example, the ``assumption`` tactic
 tells Lean to find an assumption that will solve the goal.
@@ -1703,7 +1769,9 @@ to replace an expression of the form ``m ∣ gcd n k`` by the equivalent express
 
 See if you can use ``rw`` with the theorem below
 to provide a short proof that negation is not a
-nondecreasing function.
+nondecreasing function. (Note that ``push_neg`` won't
+unfold definitions for you, so the ``rw monotone`` in
+the proof of the theorem is needed.)
 
 .. code-block:: lean
 
@@ -1712,7 +1780,7 @@ nondecreasing function.
     -- BEGIN
     theorem not_monotone_iff {f : ℝ → ℝ}:
       ¬ monotone f ↔ ∃ x y, x ≤ y ∧ f x > f y :=
-    by { rw [monotone], push_neg }
+    by { rw monotone, push_neg }
 
     example : ¬ monotone (λ x : ℝ, -x) :=
     sorry
@@ -1746,6 +1814,8 @@ then ``a < b`` is equivalent to ``a ≤ b ∧ a ≠ b``:
     end
     -- END
 
+.. index:: simp, tactics ; simp
+
 Beyond logical operations, you should not need
 anything more than ``le_refl`` and ``le_antisymm``.
 Then show that even in the case where ``≤``
@@ -1755,8 +1825,11 @@ and transitive.
 You do not need anything more than ``le_refl`` and ``le_trans``.
 In the second example,
 for convenience, we use the simplifier rather than ``rw``
-to express ``<`` in terms of ``≤`` and ``¬``
-three times.
+to express ``<`` in terms of ``≤`` and ``¬``.
+We will come back to the simplifier later,
+but here we are only relying on the fact that it will
+use the indicated lemma repeatedly, even if it needs
+to be instantiated to different values.
 
 .. code-block:: lean
 
@@ -1785,6 +1858,8 @@ three times.
 Disjunction
 -----------
 
+.. index:: left, right, tactics ; left, tactics ; right
+
 The canonical way to prove a disjunction ``A ∨ B`` is to prove
 ``A`` or to prove ``B``.
 The ``left`` tactic chooses ``A``,
@@ -1810,8 +1885,8 @@ which disjunct we are trying to prove.
 When we write proof terms we can use
 ``or.inl`` and ``or.inr`` instead
 to make the choice explicitly.
-Here, ``inl`` is short for "insert left" and
-``inr`` is short for "insert right."
+Here, ``inl`` is short for "introduction left" and
+``inr`` is short for "introduction right."
 
 .. code-block:: lean
 
@@ -2023,6 +2098,8 @@ theorem without using commutativity of multiplication.
 In that case, it suffices to assume that ``R`` is
 a ``domain`` instead of an ``integral_domain``.
 
+.. index:: excluded middle
+
 Sometimes in a proof we want to split on cases
 depending on whether some statement is true or not.
 For any proposition ``P``, we can use
@@ -2038,6 +2115,8 @@ The name ``em`` is short for "excluded middle."
       { assumption },
       contradiction
     end
+
+.. index:: by_cases, tactics ; by_cases
 
 You can shorten ``classical.em`` to ``em``
 by opening the ``classical`` namespace with the command
@@ -2112,8 +2191,10 @@ for ``∀ ε, ε > 0 → ...``, and, similarly,
 And remember that ``ε > 0``, in turn, is defined as ``0 < ε``,
 and ``n ≥ N`` is defined as ``N ≤ n``.
 
+.. index:: extentionality, ext, tactics ; ext
+
 In this section, we'll establish some properties of convergence.
-But first, we will discuss three tactics for working equality
+But first, we will discuss three tactics for working with equality
 that will prove useful.
 The first, the ``ext`` tactic,
 gives us a way of proving that two functions are equal.
@@ -2134,6 +2215,12 @@ at all the values of their arguments.
     by { ext, ring }
     -- END
 
+.. index:: congr, tactics ; congr
+
+We'll see later that ``ext`` is actually more general, and also one can
+specify the name of the variables that appear.
+For instance you can try to replace ``ext`` with ``ext u v`` in the
+above proof.
 The second tactic, the ``congr`` tactic,
 allows us to prove an equation between two expressions
 by reconciling the parts that are different:
@@ -2149,6 +2236,8 @@ by reconciling the parts that are different:
 
 Here the ``congr`` tactic peels off the ``abs`` on each side,
 leaving us to prove ``a = a - b + b``.
+
+.. index:: convert, tactics ; convert
 
 Finally, the ``convert`` tactic is used to apply a theorem
 to a goal when the conclusion of the theorem doesn't quite match.

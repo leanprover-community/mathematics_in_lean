@@ -24,7 +24,7 @@ running Lean from inside the VS Code editor.
 To get started:
 
 #. Install Lean, VS Code, and mathlib following the instructions
-   in the `mathlib repository`_.
+   in the `community website`_.
 
 #. In a terminal, type ``leanproject get mathematics_in_lean``
    to set up a working directory for this tutorial.
@@ -93,7 +93,11 @@ Overview
 
 Put simply, Lean is a tool for building complex expressions in a formal language
 known as *dependent type theory*.
-Every expression has a *type*.
+
+.. index:: check, commands ; check
+
+Every expression has a *type*, and you can use the `#check` command to
+print it.
 Some expressions have types like `ℕ` or `ℕ → ℕ`.
 These are mathematical objects.
 
@@ -113,7 +117,7 @@ These are mathematical statements.
     #check 2 + 2 = 4
 
     def fermat_last_theorem :=
-      ∀ x y z n : ℕ, n > 2 → x * y * z ≠ 0 → x^n + y^n ≠ z^n
+      ∀ x y z n : ℕ, n > 2 ∧ x * y * z ≠ 0 → x^n + y^n ≠ z^n
 
     #check fermat_last_theorem
 
@@ -123,7 +127,7 @@ Such an expression is a proof of the proposition `P`.
 .. code-block:: lean
 
     def fermat_last_theorem :=
-      ∀ x y z n : ℕ, n > 2 → x * y * z ≠ 0 → x^n + y^n ≠ z^n
+      ∀ x y z n : ℕ, n > 2 ∧ x * y * z ≠ 0 → x^n + y^n ≠ z^n
 
     -- BEGIN
     theorem easy : 2 + 2 = 4 := rfl
@@ -196,9 +200,14 @@ The following is, instead, a *tactic-style* proof of the same theorem:
 
     example : ∀ m n, even n → even (m * n) :=
     begin
+      -- say m and n are natural numbers, and assume n=2*k
       rintros m n ⟨k, hk⟩,
+      -- We need to prove m*n is twice a natural. Let's show it's twice m*k.
       use m * k,
-      rw [hk, mul_left_comm]
+      -- substitute in for n
+      rw hk,
+      -- and now it's obvious
+      ring
     end
 
 As you enter each line of such a proof in VS Code,
@@ -212,14 +221,13 @@ In this example, you will then see that
 the first line of the proof introduces ``m`` and ``n``
 (we could have renamed them at that point, if we wanted to),
 and also decomposes the hypothesis ``even n`` to
-a ``k`` and the assumption that ``m = 2 * k``.
+a ``k`` and the assumption that ``n = 2 * k``.
 The second line, ``use m * k``,
 declares that we are going to show that ``m * n`` is even by
 showing ``m * n = 2 * (m * k)``.
-The last line uses the ``rewrite`` tactic
-to replace ``n`` by ``2 * k`` in the goal
-and then swap the ``m`` and the ``2`` to show that the two sides
-of the equality are the same.
+The next line uses the ``rewrite`` tactic
+to replace ``n`` by ``2 * k`` in the goal,
+and the `ring` tactic solves the resulting goal ``m * (2 * k) = 2 * (m * k)``.
 
 The ability to build a proof in small steps with incremental feedback
 is extremely powerful. For that reason,
@@ -241,7 +249,7 @@ In our example, the tactic proof can also be reduced to a one-liner:
 
     -- BEGIN
     example : ∀ m n, even n → even (m * n) :=
-    by rintros m n ⟨k, hk⟩; use m * k; rw [hk, mul_left_comm]
+    by { rintros m n ⟨k, hk⟩, use m * k, rw hk, ring }
     -- END
 
 Here were have used tactics to carry out small proof steps.
@@ -269,7 +277,7 @@ As a result, we can show you how to use some of the mathematical
 objects and theorems in the library,
 and some of the very useful tactics.
 This book is not meant to be used as an overview of the library;
-the mathlib_ web pages contain extensive documentation.
+the community_ web pages contain extensive documentation.
 Rather, our goal is to introduce you to the style of thinking that
 underlies that formalization,
 so that you are comfortable browsing the library and
@@ -291,14 +299,17 @@ interactive theorem proving will challenge you to think about
 mathematics and mathematical reasoning in fundamentally new ways.
 Your life may never be the same.
 
-*Acknowledgment.* We are grateful to Gabriel Ebner for setting up the
+*Acknowledgments.* We are grateful to Gabriel Ebner for setting up the
 infrastructure for running this tutorial in VS Code.
+We are also grateful for help from
+Bryan Gin-ge Chen, Johan Commelin, Julian Külshammer, and Guilherme Silva.
 
 .. _`The Mechanization of Mathematics`: https://www.ams.org/journals/notices/201806/rnoti-p681.pdf
 .. _`The Future of Mathematics`: https://www.youtube.com/watch?v=Dp-mQ3HxgDE
 .. _Lean: https://leanprover.github.io/people/
 .. _mathlib: https://leanprover-community.github.io/
+.. _community: https://leanprover-community.github.io/
 .. _`Natural Number Game`: https://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/
-.. _`mathlib repository`: https://github.com/leanprover-community/mathlib
+.. _`community website`: https://leanprover-community.github.io/
 .. _`Theorem Proving in Lean`: https://leanprover.github.io/theorem_proving_in_lean/
 .. _`Lean Zulip chat group`: https://leanprover.zulipchat.com/

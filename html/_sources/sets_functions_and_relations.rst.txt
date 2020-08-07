@@ -121,7 +121,7 @@ entirely:
     -- END
 
 What is going on here is known as *definitional reduction*:
-to make sense of the ``intros`` command and the the anonymous constructors
+to make sense of the ``intros`` command and the anonymous constructors
 Lean is forced to expand the definitions.
 The following examples also illustrate the phenomenon:
 
@@ -207,6 +207,10 @@ As an exercise, try proving the other inclusion:
     sorry
     -- END
 
+It might help to know that when using ``rintros``,
+sometimes we need to use parentheses around a disjunctive pattern
+``h1 | h2`` to get Lean to parse it correctly.
+
 The library also defines set difference, ``s \ t``,
 where the backslash is a special unicode character
 entered as ``\\``.
@@ -247,9 +251,6 @@ show how to avoid using them.
     end
     -- END
 
-Notice that in the second use of ``rintros``,
-we need to use parentheses around the disjunctive pattern
-``xt | xu`` to get Lean to parse it correctly.
 As an exercise, prove the reverse inclusion:
 
 .. code-block:: lean
@@ -274,7 +275,7 @@ As an exercise, prove the reverse inclusion:
 ..   apply xntu (or.inr xu)
 .. end
 
-Two prove that two sets are equal,
+To prove that two sets are equal,
 it suffices to show that every element of one is an element
 of the other.
 This principle is known as "extensionality,"
@@ -1241,7 +1242,7 @@ as follows:
 
 .. code-block:: lean
 
-    import data.set.function
+    import data.set.function tactic
 
     variables {α β : Type*} [inhabited α]
 
@@ -1290,7 +1291,7 @@ try to condense each proof to a single-line proof term.
 
 .. code-block:: lean
 
-    import data.set.function
+    import data.set.function tactic
 
     open set function
 
@@ -1394,7 +1395,7 @@ and then fill in the two lines that are missing.
     begin
       intros f surjf,
       let S := { i | i ∉ f i},
-      rcases surjf S with j,
+      rcases surjf S with ⟨j, h⟩,
       have h₁ : j ∉ f j,
       { intro h',
         have : j ∉ f j,
@@ -1411,3 +1412,4 @@ and then fill in the two lines that are missing.
 .. solutions:
 .. from h₁
 .. by rwa h at h₁  -- well, we haven't introduced ``rwa`` yet.
+.. Julian K points out that we can end after the ``have h₂`` with ``apply h₁, rwa h``

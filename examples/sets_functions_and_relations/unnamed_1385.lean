@@ -9,7 +9,7 @@ theorem Cantor : ∀ f : α → set α, ¬ surjective f :=
 begin
   intros f surjf,
   let S := { i | i ∉ f i},
-  rcases surjf S with j,
+  rcases surjf S with ⟨j, h⟩,
   have h₁ : j ∉ f j,
   { intro h',
     have : j ∉ f j,

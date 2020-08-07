@@ -406,20 +406,20 @@ The following example provides a tactic proof and a proof term
 justifying the reflexivity of the subset relation,
 and asks you to do the same for transitivity.</p>
 <div style="position: relative">
-<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20%7B%CE%B1%20%3A%20Type*%7D%20(r%20s%20t%20%3A%20set%20%CE%B1)%0A%0Aexample%20%3A%20s%20%E2%8A%86%20s%20%3A%3D%0Aby%20%7B%20intros%20x%20xs%2C%20exact%20xs%20%7D%0A%0Aexample%20%3A%20s%20%E2%8A%86%20s%20%3A%3D%20%CE%BB%20x%20xs%2C%20xs%0A%0Aexample%20%3A%20r%20%E2%8A%86%20s%20%E2%86%92%20s%20%E2%8A%86%20t%20%E2%86%92%20r%20%E2%8A%86%20t%20%3A%3D%0Abegin%0A%20%20sorry%0Aend%0A%0Aexample%20%3A%20r%20%E2%8A%86%20s%20%E2%86%92%20s%20%E2%8A%86%20t%20%E2%86%92%20r%20%E2%8A%86%20t%20%3A%3D%0Asorry" target="_blank" tryitfile="../examples/logic/unnamed_482.lean">
+<div style='position: absolute; right: 0; top: 0; padding: 1ex'><a href="https://leanprover-community.github.io/lean-web-editor/#code=variables%20%7B%CE%B1%20%3A%20Type*%7D%20(r%20s%20t%20%3A%20set%20%CE%B1)%0A%0Aexample%20%3A%20s%20%E2%8A%86%20s%20%3A%3D%0Aby%20%7B%20intros%20x%20xs%2C%20exact%20xs%20%7D%0A%0Atheorem%20subset.refl%20%3A%20s%20%E2%8A%86%20s%20%3A%3D%20%CE%BB%20x%20xs%2C%20xs%0A%0Aexample%20%3A%20r%20%E2%8A%86%20s%20%E2%86%92%20s%20%E2%8A%86%20t%20%E2%86%92%20r%20%E2%8A%86%20t%20%3A%3D%0Abegin%0A%20%20sorry%0Aend%0A%0Atheorem%20subset.trans%20%3A%20r%20%E2%8A%86%20s%20%E2%86%92%20s%20%E2%8A%86%20t%20%E2%86%92%20r%20%E2%8A%86%20t%20%3A%3D%0Asorry" target="_blank" tryitfile="../examples/logic/unnamed_482.lean">
 try it!</a></div><div class="highlight-lean notranslate"><div class="highlight"><pre><span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">)</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="o">:=</span>
 <span class="kd">by</span> <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">xs</span><span class="o">,</span> <span class="n">exact</span> <span class="n">xs</span> <span class="o">}</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="o">:=</span> <span class="bp">&#955;</span> <span class="n">x</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xs</span>
+<span class="kd">theorem</span> <span class="n">subset.refl</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="o">:=</span> <span class="bp">&#955;</span> <span class="n">x</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xs</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">&#8594;</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8594;</span> <span class="n">r</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="n">sorry</span>
 <span class="kd">end</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">&#8594;</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8594;</span> <span class="n">r</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">subset.trans</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">&#8594;</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8594;</span> <span class="n">r</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="o">:=</span>
 <span class="n">sorry</span>
 </pre></div>
 </div>
@@ -699,7 +699,7 @@ the most perspicuous one.
 In the chapters to come,
 we will provide you with the means to define the Gaussian
 integers and use them to provide an alternative proof.</p>
-<p>The pattern of unpacking an equation inside a existential quantifier
+<p>The pattern of unpacking an equation inside an existential quantifier
 and then using it to rewrite an expression in the goal
 comes up often,
 so much so that the <code class="docutils literal notranslate"><span class="pre">rcases</span></code> tactic provides

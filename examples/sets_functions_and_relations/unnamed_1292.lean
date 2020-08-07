@@ -1,4 +1,6 @@
-import data.set.function
+import data.set.function tactic
+
+open set function
 
 variables {α β : Type*} [inhabited α]
 
@@ -14,3 +16,13 @@ begin
   rw inverse, dsimp, rw dif_pos h,
   exact classical.some_spec h
 end
+
+-- BEGIN
+variable  f : α → β
+
+example : injective f ↔ left_inverse (inverse f) f  :=
+sorry
+
+example : surjective f ↔ right_inverse (inverse f) f :=
+sorry
+-- END

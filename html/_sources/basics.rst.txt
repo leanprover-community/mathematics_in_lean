@@ -1332,7 +1332,8 @@ next example:
     end
     -- END
 
-Also, confirm that ``linarith`` can do it with a bit of help.
+Using the same tricks, confirm that ``linarith`` instead of ``library_search``
+can also finish the job.
 
 Here is another example of an inequality:
 

@@ -1682,17 +1682,12 @@ to refer to it in theorem names.
     end
 
     example : x ∣ x^2 :=
-    begin
-      rw nat.pow_two,
-      apply dvd_mul_left
-    end
+    by apply dvd_mul_right
 
-You can also use ``nat.pow_succ`` instead of
-``nat.pow_two`` to expand ``x^2`` into a product,
-with slightly different effect.
-(In the context of the natural numbers,
-``succ`` refers to the successor function;
-in Lean, ``2`` is definitionally equal to ``succ 1``.)
+In the last example, the exponent is a natural
+number, and applying ``dvd_mul_right``
+forces Lean to expand the definition of ``x^2`` to 
+``x^1 * x``.
 See if you can guess the names of the theorems
 you need to prove the following:
 

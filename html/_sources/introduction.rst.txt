@@ -114,6 +114,8 @@ These are mathematical statements.
 
 .. code-block:: lean
 
+    import data.nat.basic
+
     #check 2 + 2 = 4
 
     def fermat_last_theorem :=
@@ -125,6 +127,8 @@ Some expressions have a type, `P`, where `P` itself has type `Prop`.
 Such an expression is a proof of the proposition `P`.
 
 .. code-block:: lean
+
+    import data.nat.basic
 
     def fermat_last_theorem :=
       ∀ x y z n : ℕ, n > 2 ∧ x * y * z ≠ 0 → x^n + y^n ≠ z^n

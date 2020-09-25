@@ -5,7 +5,7 @@ open set real
 -- BEGIN
 example : inj_on log { x | x > 0 } :=
 begin
-  intros x y xpos ypos,
+  intros x xpos y ypos,
   intro e,   -- log x = log y
   calc
     x   = exp (log x) : by rw exp_log xpos

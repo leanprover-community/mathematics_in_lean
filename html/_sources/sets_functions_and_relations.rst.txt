@@ -1126,7 +1126,7 @@ It is defined as follows:
 
     -- BEGIN
     example : inj_on f s ↔
-      ∀ {x₁ x₂}, x₁ ∈ s → x₂ ∈ s → f x₁ = f x₂ → x₁ = x₂ :=
+      ∀ x₁ ∈ s, ∀ x₂ ∈ s, f x₁ = f x₂ → x₁ = x₂ :=
     iff.refl _
     -- END
 
@@ -1152,7 +1152,7 @@ Here is are some examples of ``inj_on`` and ``range`` in use:
     -- BEGIN
     example : inj_on log { x | x > 0 } :=
     begin
-      intros x y xpos ypos,
+      intros x xpos y ypos,
       intro e,   -- log x = log y
       calc
         x   = exp (log x) : by rw exp_log xpos

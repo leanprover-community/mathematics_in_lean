@@ -1,3 +1,5 @@
+import data.nat.basic
+
 #check 2 + 2 = 4
 
 def fermat_last_theorem :=

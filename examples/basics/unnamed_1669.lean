@@ -12,7 +12,4 @@ begin
 end
 
 example : x ∣ x^2 :=
-begin
-  rw nat.pow_two,
-  apply dvd_mul_left
-end
+by apply dvd_mul_right

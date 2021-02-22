@@ -804,26 +804,33 @@ because without specifying ``R``
 it is impossible for Lean to infer which ``0`` we have in mind,
 and by default it would be interpreted as a natural number.
 
-In Lean, subtraction in a ring is defined to be
+In Lean, subtraction in a ring is provably equal to
 addition of the additive inverse.
 
 .. code-block:: lean
 
     import algebra.ring
 
-    namespace my_ring
-
     variables {R : Type*} [ring R]
 
     -- BEGIN
-    theorem sub_eq_add_neg (a b : R) : a - b = a + -b :=
-    rfl
-
     example (a b : R) : a - b = a + -b :=
-    by reflexivity
+    sub_eq_add_neg a b 
     -- END
 
-    end my_ring
+On the real numbers, it is *defined* that way:
+
+.. code-block:: lean
+
+    import data.real.basic
+
+    -- BEGIN
+    example (a b : ℝ) : a - b = a + -b :=
+    rfl
+
+    example (a b : ℝ) : a - b = a + -b :=
+    by reflexivity
+    -- END
 
 .. index:: rfl, reflexivity, tactics ; refl and reflexivity, definitional equality
 
@@ -836,8 +843,8 @@ This is an instance of what is known as a *definitional equality*
 in Lean's underlying logic.
 This means that not only can one rewrite with ``sub_eq_add_neg``
 to replace ``a - b = a + -b``,
-but in some contexts you can use the two sides of the equation
-interchangeably.
+but in some contexts, when dealing with the integers, 
+you can use the two sides of the equation interchangeably.
 For example, you now have enough information to prove the theorem
 ``self_sub`` from the last section:
 
@@ -856,9 +863,10 @@ For example, you now have enough information to prove the theorem
 
     end my_ring
 
-Extra points if you do it two different ways:
-once using ``rw``,
-and once using either ``apply`` or ``exact``.
+Show that you can prove this using ``rw``, 
+but if you replace the arbitrary ring ``R`` by
+the real numbers, you can also prove it 
+using either ``apply`` or ``exact``.
 
 For another example of definitional equality,
 Lean knows that ``1 + 1 = 2`` holds in any ring.
@@ -1395,7 +1403,7 @@ linear arithmetic, and ``linarith`` can handle it:
     -- END
 
 How nice! We challenge you to use these ideas to prove the
-following theorem. You can use the theorem ``abs_le_of_le_of_neg_le``.
+following theorem. You can use the theorem ``abs_le'.mpr``.
 
 .. code-block:: lean
 
@@ -1407,7 +1415,7 @@ following theorem. You can use the theorem ``abs_le_of_le_of_neg_le``.
     example : abs (a*b) ≤ (a^2 + b^2) / 2 :=
     sorry
 
-    #check abs_le_of_le_of_neg_le
+    #check abs_le'.mpr
     -- END
 
 If you managed to solve this, congratulations!
@@ -1974,7 +1982,6 @@ are compatible with the order:
 
     #check (add_le_add_left : a ≤ b → ∀ c, c + a ≤ c + b)
     #check (mul_pos : 0 < a → 0 < b → 0 < a * b)
-    #check (zero_ne_one : (0 : R) ≠ 1)
 
 :numref:`Chapter %s <logic>` will provide the means to derive the following from ``mul_pos``
 and the definition of ``<``:

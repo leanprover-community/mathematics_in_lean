@@ -6,5 +6,5 @@ variables a b : ℝ
 example : abs (a*b) ≤ (a^2 + b^2) / 2 :=
 sorry
 
-#check abs_le_of_le_of_neg_le
+#check abs_le'.mpr
 -- END

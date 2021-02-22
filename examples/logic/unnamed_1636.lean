@@ -1,5 +1,5 @@
 import data.real.basic
-import data.nat.gcd
+import data.nat.prime
 
 open nat
 

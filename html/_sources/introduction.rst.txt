@@ -176,7 +176,7 @@ if ``n`` is even then so is ``m * n``:
     import data.nat.parity
     open nat
 
-    example : ∀ m n, even n → even (m * n) :=
+    example : ∀ m n : nat, even n → even (m * n) :=
     assume m n ⟨k, (hk : n = 2 * k)⟩,
     have hmn : m * n = 2 * (m * k),
       by rw [hk, mul_left_comm],
@@ -191,7 +191,7 @@ The *proof term* can be compressed to a single line:
     open nat
 
     -- BEGIN
-    example : ∀ m n, even n → even (m * n) :=
+    example : ∀ m n : nat, even n → even (m * n) :=
     λ m n ⟨k, hk⟩, ⟨m * k, by rw [hk, mul_left_comm]⟩
     -- END
 
@@ -202,7 +202,7 @@ The following is, instead, a *tactic-style* proof of the same theorem:
     import data.nat.parity tactic
     open nat
 
-    example : ∀ m n, even n → even (m * n) :=
+    example : ∀ m n : nat, even n → even (m * n) :=
     begin
       -- say m and n are natural numbers, and assume n=2*k
       rintros m n ⟨k, hk⟩,
@@ -252,7 +252,7 @@ In our example, the tactic proof can also be reduced to a one-liner:
     open nat
 
     -- BEGIN
-    example : ∀ m n, even n → even (m * n) :=
+    example : ∀ m n : nat, even n → even (m * n) :=
     by { rintros m n ⟨k, hk⟩, use m * k, rw hk, ring }
     -- END
 
@@ -269,7 +269,7 @@ prove our theorem automatically.
     open nat
 
     -- BEGIN
-    example : ∀ m n, even n → even (m * n) :=
+    example : ∀ m n : nat, even n → even (m * n) :=
     by intros; simp * with parity_simps
     -- END
 

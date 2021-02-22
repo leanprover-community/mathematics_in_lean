@@ -1,7 +1,7 @@
 import data.nat.parity tactic
 open nat
 
-example : ∀ m n, even n → even (m * n) :=
+example : ∀ m n : nat, even n → even (m * n) :=
 begin
   -- say m and n are natural numbers, and assume n=2*k
   rintros m n ⟨k, hk⟩,

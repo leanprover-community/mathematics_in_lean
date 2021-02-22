@@ -427,10 +427,10 @@ You can complete the proofs of the others.
     variables (f g : ℝ → ℝ)
 
     -- BEGIN
-    def even (f : ℝ → ℝ) : Prop := ∀ x, f x = f (-x)
-    def odd (f : ℝ → ℝ) : Prop := ∀ x, f x = - f (-x)
+    def fn_even (f : ℝ → ℝ) : Prop := ∀ x, f x = f (-x)
+    def fn_odd (f : ℝ → ℝ) : Prop := ∀ x, f x = - f (-x)
 
-    example (ef : even f) (eg : even g) : even (λ x, f x + g x) :=
+    example (ef : fn_even f) (eg : fn_even g) : fn_even (λ x, f x + g x) :=
     begin
       intro x,
       calc
@@ -438,13 +438,13 @@ You can complete the proofs of the others.
                        ... = f (-x) + g (-x) : by rw [ef, eg]
     end
 
-    example (of : odd f) (og : odd g) : even (λ x, f x * g x) :=
+    example (of : fn_odd f) (og : fn_odd g) : fn_even (λ x, f x * g x) :=
     sorry
 
-    example (ef : even f) (og : odd g) : odd (λ x, f x * g x) :=
+    example (ef : fn_even f) (og : fn_odd g) : fn_odd (λ x, f x * g x) :=
     sorry
 
-    example (ef : even f) (og : odd g) : even (λ x, f (g x)) :=
+    example (ef : fn_even f) (og : fn_odd g) : fn_even (λ x, f (g x)) :=
     sorry
     -- END
 
@@ -1600,7 +1600,7 @@ Try using these techniques to come up with various ways of proving of the follow
 
 .. code-block:: lean
 
-    import data.nat.gcd
+    import data.nat.prime
 
     open nat
 
@@ -1636,7 +1636,7 @@ You can also use the ``use`` tactic:
 .. code-block:: lean
 
     import data.real.basic
-    import data.nat.gcd
+    import data.nat.prime
 
     open nat
 
@@ -2384,7 +2384,7 @@ the extra assumption that ``c`` is nonzero.
         { ext, rw [h, zero_mul] },
         rw [h, zero_mul] },
       have acpos : 0 < abs c,
-        from abs_pos_of_ne_zero h,
+        from abs_pos.mpr h,
       sorry
     end
     -- END

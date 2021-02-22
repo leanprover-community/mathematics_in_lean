@@ -18,7 +18,7 @@ begin
     { ext, rw [h, zero_mul] },
     rw [h, zero_mul] },
   have acpos : 0 < abs c,
-    from abs_pos_of_ne_zero h,
+    from abs_pos.mpr h,
   sorry
 end
 -- END

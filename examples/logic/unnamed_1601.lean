@@ -1,4 +1,4 @@
-import data.nat.gcd
+import data.nat.prime
 
 open nat
 

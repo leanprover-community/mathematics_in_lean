@@ -802,7 +802,7 @@ If ``f : α → β`` is a function and  ``p`` is a set of
 elements of type ``β``,
 the library defines ``preimage f p``, written ``f ⁻¹' p``,
 to be ``{x | f x ∈ p}``.
-The expression ``x ∈ f ⁻¹' p`` reduces to ``f x ∈ s``.
+The expression ``x ∈ f ⁻¹' p`` reduces to ``f x ∈ p``.
 This is often convenient, as in the following example:
 
 .. code-block:: lean

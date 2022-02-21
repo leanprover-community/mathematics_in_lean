@@ -59,9 +59,6 @@ The workspace should also stop automatically
 
 To restart a previous workspace, go to [https://gitpod.io/workspaces/](https://gitpod.io/workspaces/).
 If you change the filter from Active to All, you will see all your recent workspaces. You can pin a workspace to keep it on the list of active ones.
-, and compile
-and check all the files in the repository.
-You can then browse them with VS Code in your browser window.
 
 ## Contributing
 

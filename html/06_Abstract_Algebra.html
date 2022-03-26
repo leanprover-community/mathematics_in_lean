@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6. Abstract Algebra &mdash; Mathematics in Lean 0.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" /><link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Index" href="genindex.html" />
+    <link rel="prev" title="5. Number Theory" href="05_Number_Theory.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Basics.html">2. Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Logic.html">3. Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Sets_and_Functions.html">4. Sets and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Abstract Algebra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structures">6.1. Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#algebraic-structures">6.2. Algebraic Structures</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mathematics in Lean</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">6. </span>Abstract Algebra</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/06_Abstract_Algebra.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="abstract-algebra">
+<span id="id1"></span><h1><span class="section-number">6. </span>Abstract Algebra<a class="headerlink" href="#abstract-algebra" title="Permalink to this headline">&#182;</a></h1>
+<p>Modern mathematics makes essential use of algebraic
+structures,
+which encapsulate patterns that can be instantiated in
+multiple settings.
+The subject provides various ways of defining such structures and
+constructing particular instances.</p>
+<p>Lean therefore provides corresponding ways of
+defining structures formally and working with them.
+You have already seen examples of algebraic structures in Lean,
+such as rings and lattices, which were discussed in
+<a class="reference internal" href="02_Basics.html#basics"><span class="std std-numref">Chapter 2</span></a>.
+This chapter will explain the mysterious square bracket annotations
+that you saw there,
+<code class="docutils literal notranslate"><span class="pre">[ring</span> <span class="pre">&#945;]</span></code> and <code class="docutils literal notranslate"><span class="pre">[lattice</span> <span class="pre">&#945;]</span></code>.
+It will also show you how to define and use
+algebraic structures on your own.</p>
+<p>For more technical detail, you can consult <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>,
+and a paper by Anne Baanen, <a class="reference external" href="https://arxiv.org/abs/2202.01629">Use and abuse of instance parameters in the Lean mathematical library</a>.</p>
+<div class="section" id="structures">
+<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this headline">&#182;</a></h2>
+<p>In the broadest sense of the term, a <em>structure</em> is a specification
+of a collection of data, possibly with contraints that the
+data is required to satisfy.
+An <em>instance</em> of the structure is a particular bundle of data satisfying
+the constraints. For example, we can specify that a point is
+a tuple of three real numbers:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span> <span class="kd">structure</span> <span class="n">point</span> <span class="o">:=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">&#64;[ext]</span></code> annotation tells Lean to automatically generate theorems
+that can be used to prove that two instances of a structure are equal
+when their components are equal, a property known as <em>extensionality</em>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">point.ext</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">a.x</span> <span class="bp">=</span> <span class="n">b.x</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">a.y</span> <span class="bp">=</span> <span class="n">b.y</span><span class="o">)</span> <span class="o">(</span><span class="n">hz</span> <span class="o">:</span> <span class="n">a.z</span> <span class="bp">=</span> <span class="n">b.z</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">ext</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">assumption</span> <span class="o">}</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>We can then define particular instances of the <code class="docutils literal notranslate"><span class="pre">point</span></code> structure.
+Lean provides multiple ways of doing that.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">my_point1</span> <span class="o">:</span> <span class="n">point</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="n">y</span> <span class="o">:=</span> <span class="bp">-</span><span class="mi">1</span><span class="o">,</span>
+  <span class="n">z</span> <span class="o">:=</span> <span class="mi">4</span> <span class="o">}</span>
+
+<span class="kd">def</span> <span class="n">my_point2</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">point</span> <span class="bp">.</span>
+  <span class="n">x</span> <span class="o">:=</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="n">y</span> <span class="o">:=</span> <span class="bp">-</span><span class="mi">1</span><span class="o">,</span>
+  <span class="n">z</span> <span class="o">:=</span> <span class="mi">4</span> <span class="o">}</span>
+
+<span class="kd">def</span> <span class="n">my_point3</span> <span class="o">:</span> <span class="n">point</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="mi">2</span><span class="o">,</span> <span class="bp">-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">4</span><span class="o">&#10217;</span>
+
+<span class="kd">def</span> <span class="n">my_point4</span> <span class="o">:=</span> <span class="n">point.mk</span> <span class="mi">2</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>In the first two examples, the fields of the structure are named
+explicitly.
+In the first case, because Lean knows that the expected type of
+<code class="docutils literal notranslate"><span class="pre">my_point1</span></code> is a <code class="docutils literal notranslate"><span class="pre">point</span></code>, you can start the definition by
+writing an underscore, <code class="docutils literal notranslate"><span class="pre">_</span></code>. Clicking on the light bulb
+that appears nearby in VS Code will then
+give you the option of inserting a template definition
+with the field names listed for you.</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">point.mk</span></code> referred to in the definition of <code class="docutils literal notranslate"><span class="pre">my_point4</span></code>
+is known as the <em>constructor</em> for the <code class="docutils literal notranslate"><span class="pre">point</span></code> structure, because
+it serves to construct elements.
+You can specify a different name if you want, like <code class="docutils literal notranslate"><span class="pre">build</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">point&#39;</span> <span class="o">:=</span> <span class="n">build</span> <span class="o">::</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">point&#39;.build</span> <span class="mi">2</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>The next two examples show how to define functions on structures.
+Whereas the second example makes the <code class="docutils literal notranslate"><span class="pre">point.mk</span></code>
+constructor explicit, the first example uses anonymous constructors
+for brevity.
+Lean can infer the relevant constructor from the indicated type of
+<code class="docutils literal notranslate"><span class="pre">add</span></code>.
+It is conventional to put definitions and theorems associated
+with a structure like <code class="docutils literal notranslate"><span class="pre">point</span></code> in a namespace with the same name.
+In the example below, because we have opened the <code class="docutils literal notranslate"><span class="pre">point</span></code>
+namespace, the full name of <code class="docutils literal notranslate"><span class="pre">add</span></code> is <code class="docutils literal notranslate"><span class="pre">point.add</span></code>.
+When the namespace is not open, we have to use the full name.
+But remember that it is often convenient to use
+anonymous projection notation,
+which allows us to write <code class="docutils literal notranslate"><span class="pre">a.add</span> <span class="pre">b</span></code> instead of <code class="docutils literal notranslate"><span class="pre">point.add</span> <span class="pre">a</span> <span class="pre">b</span></code>.
+Lean interprets the former as the latter because <code class="docutils literal notranslate"><span class="pre">a</span></code> has type <code class="docutils literal notranslate"><span class="pre">point</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">namespace</span> <span class="n">point</span>
+
+<span class="kd">def</span> <span class="n">add</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">point</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">a.x</span> <span class="bp">+</span> <span class="n">b.x</span><span class="o">,</span> <span class="n">a.y</span> <span class="bp">+</span> <span class="n">b.y</span><span class="o">,</span> <span class="n">a.z</span> <span class="bp">+</span> <span class="n">b.z</span><span class="o">&#10217;</span>
+
+<span class="kd">def</span> <span class="n">add&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">point</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">a.x</span> <span class="bp">+</span> <span class="n">b.x</span><span class="o">,</span>
+  <span class="n">y</span> <span class="o">:=</span> <span class="n">a.y</span> <span class="bp">+</span> <span class="n">b.y</span><span class="o">,</span>
+  <span class="n">z</span> <span class="o">:=</span> <span class="n">a.z</span> <span class="bp">+</span> <span class="n">b.z</span> <span class="o">}</span>
+
+<span class="k">#check</span> <span class="n">add</span> <span class="n">my_point1</span> <span class="n">my_point2</span>
+<span class="k">#check</span> <span class="n">my_point1.add</span> <span class="n">my_point2</span>
+
+<span class="kd">end</span> <span class="n">point</span>
+
+<span class="k">#check</span> <span class="n">point.add</span> <span class="n">my_point1</span> <span class="n">my_point2</span>
+<span class="k">#check</span> <span class="n">my_point1.add</span> <span class="n">my_point2</span>
+</pre></div>
+</div>
+<p>Below we will continue to put definitions in the relevant
+namespace, but we will leave the namespacing commands out of the quoted
+snippets. To prove properties of the addition function,
+we can use <code class="docutils literal notranslate"><span class="pre">rw</span></code> to expand the definition and <code class="docutils literal notranslate"><span class="pre">ext</span></code> to
+reduce an equation between two elements of the structure to equations
+between the components.
+Below we use the <code class="docutils literal notranslate"><span class="pre">protected</span></code> keyword so that the name of the
+theorem is <code class="docutils literal notranslate"><span class="pre">point.add_comm</span></code>, even when the namespace is open.
+This is helpful when we want to avoid ambiguity with a generic
+theorem like <code class="docutils literal notranslate"><span class="pre">add_comm</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">protected</span> <span class="kd">theorem</span> <span class="n">add_comm</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">add</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">add</span><span class="o">],</span>
+  <span class="n">ext</span><span class="bp">;</span> <span class="n">dsimp</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">apply</span> <span class="n">add_comm</span> <span class="o">}</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">add</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Because Lean can unfold definitions and simplify projections
+internally, sometimes the equations we want hold definitionally.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">add_x</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a.add</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">x</span> <span class="bp">=</span> <span class="n">a.x</span> <span class="bp">+</span> <span class="n">b.x</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>It is also possible to define functions on structures using
+pattern matching,
+in a manner similar to the way we defined recursive functions in
+<a class="reference internal" href="05_Number_Theory.html#section-induction-and-recursion"><span class="std std-numref">Section 5.2</span></a>.
+The definitions <code class="docutils literal notranslate"><span class="pre">add_alt</span></code> and <code class="docutils literal notranslate"><span class="pre">add_alt'</span></code> below are essentially the
+same; the only difference is that we use anonymous constructor notation
+in the second.
+Although it is sometimes convenient to define functions this way,
+the definitional properties are not as convenient.
+For example, the expressions <code class="docutils literal notranslate"><span class="pre">add_alt</span> <span class="pre">a</span> <span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">add_alt'</span> <span class="pre">a</span> <span class="pre">b</span></code>
+cannot be simplified until we decompose <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> into
+components, which we can do with <code class="docutils literal notranslate"><span class="pre">cases</span></code>, <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, etc.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">add_alt</span> <span class="o">:</span> <span class="n">point</span> <span class="bp">&#8594;</span> <span class="n">point</span> <span class="bp">&#8594;</span> <span class="n">point</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">point.mk</span> <span class="n">x&#8321;</span> <span class="n">y&#8321;</span> <span class="n">z&#8321;</span><span class="o">)</span> <span class="o">(</span><span class="n">point.mk</span> <span class="n">x&#8322;</span> <span class="n">y&#8322;</span> <span class="n">z&#8322;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">x&#8321;</span> <span class="bp">+</span> <span class="n">x&#8322;</span><span class="o">,</span> <span class="n">y&#8321;</span> <span class="bp">+</span> <span class="n">y&#8322;</span><span class="o">,</span> <span class="n">z&#8321;</span> <span class="bp">+</span> <span class="n">z&#8322;</span><span class="o">&#10217;</span>
+
+<span class="kd">def</span> <span class="n">add_alt&#39;</span> <span class="o">:</span> <span class="n">point</span> <span class="bp">&#8594;</span> <span class="n">point</span> <span class="bp">&#8594;</span> <span class="n">point</span>
+<span class="bp">|</span> <span class="o">&#10216;</span><span class="n">x&#8321;</span><span class="o">,</span> <span class="n">y&#8321;</span><span class="o">,</span> <span class="n">z&#8321;</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">x&#8322;</span><span class="o">,</span> <span class="n">y&#8322;</span><span class="o">,</span> <span class="n">z&#8322;</span><span class="o">&#10217;</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">x&#8321;</span> <span class="bp">+</span> <span class="n">x&#8322;</span><span class="o">,</span> <span class="n">y&#8321;</span> <span class="bp">+</span> <span class="n">y&#8322;</span><span class="o">,</span> <span class="n">z&#8321;</span> <span class="bp">+</span> <span class="n">z&#8322;</span><span class="o">&#10217;</span>
+
+<span class="kd">theorem</span> <span class="n">add_alt_x</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a.add_alt</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">x</span> <span class="bp">=</span> <span class="n">a.x</span> <span class="bp">+</span> <span class="n">b.x</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="o">{</span> <span class="n">cases</span> <span class="n">a</span><span class="o">,</span> <span class="n">cases</span> <span class="n">b</span><span class="o">,</span> <span class="n">refl</span> <span class="o">}</span>
+
+<span class="kd">theorem</span> <span class="n">add_alt_comm</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">add_alt</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add_alt</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">rcases</span> <span class="n">a</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;,</span>
+  <span class="n">rcases</span> <span class="n">b</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add_alt</span><span class="o">,</span> <span class="n">add_alt</span><span class="o">],</span>
+  <span class="n">ext</span><span class="bp">;</span> <span class="n">dsimp</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">add_comm</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">apply</span> <span class="n">add_comm</span> <span class="o">},</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">add_alt</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add_alt</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">rcases</span> <span class="n">a</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;,</span>
+  <span class="n">rcases</span> <span class="n">b</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">add_alt</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">,</span> <span class="n">add_alt</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add_alt</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="n">rintros</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">add_alt</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">,</span> <span class="n">add</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="bp">&#955;</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;,</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Mathematical constructions often involve taking apart bundled information and
+putting it together again in different ways.
+It therefore makes sense that Lean and mathlib offer so many ways
+of doing this efficiently.
+As an exercise, try proving that <code class="docutils literal notranslate"><span class="pre">point.add</span></code> is associative.
+Then define scalar multiplication for a point and show that it
+distributes over addition.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">protected</span> <span class="kd">theorem</span> <span class="n">add_assoc</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a.add</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">add</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a.add</span> <span class="o">(</span><span class="n">b.add</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="gr">sorry</span>
+
+<span class="kd">def</span> <span class="n">smul</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">point</span> <span class="o">:=</span>
+<span class="gr">sorry</span>
+
+<span class="kd">theorem</span> <span class="n">smul_distrib</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">smul</span> <span class="n">r</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">add</span> <span class="o">(</span><span class="n">smul</span> <span class="n">r</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">smul</span> <span class="n">r</span> <span class="o">(</span><span class="n">a.add</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Using structures is only the first step on the road to
+algebraic abstraction.
+We don&#8217;t yet have a way to link <code class="docutils literal notranslate"><span class="pre">point.add</span></code> to the generic <code class="docutils literal notranslate"><span class="pre">+</span></code> symbol,
+or to connect <code class="docutils literal notranslate"><span class="pre">point.add_comm</span></code> and <code class="docutils literal notranslate"><span class="pre">point.add_assoc</span></code> to
+the generic <code class="docutils literal notranslate"><span class="pre">add_comm</span></code> and <code class="docutils literal notranslate"><span class="pre">add_assoc</span></code> theorems.
+These tasks belong to the <em>algebraic</em> aspect of using structures,
+and we will explain how to do carry them out in the next section.
+For now, just think of a structure as a way of bundling together objects
+and information.</p>
+<p>It is especially useful that a structure can specify not only
+data types but also constraints that the data must satisfy.
+In Lean, the latter are represented as fields of type <code class="docutils literal notranslate"><span class="pre">Prop</span></code>.
+For example, the <em>standard 2-simplex</em> is defined to be the set of
+points <span class="math notranslate nohighlight">\((x, y, z)\)</span> satisfying <span class="math notranslate nohighlight">\(x &#8805; 0\)</span>, <span class="math notranslate nohighlight">\(y &#8805; 0\)</span>, <span class="math notranslate nohighlight">\(z &#8805; 0\)</span>,
+and <span class="math notranslate nohighlight">\(x + y + z = 1\)</span>.
+If you are not familiar with the notion, you should draw a picture,
+and convince yourself that this set is
+the equilateral triangle in three-space with vertices
+<span class="math notranslate nohighlight">\((1, 0, 0)\)</span>, <span class="math notranslate nohighlight">\((0, 1, 0)\)</span>, and <span class="math notranslate nohighlight">\((0, 0, 1)\)</span>,
+together with its interior.
+We can represent it in Lean as follows:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">standard_two_simplex</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">x_nonneg</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">y_nonneg</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">z_nonneg</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">sum_eq</span>   <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">z</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Notice that the last four fields refer to <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, and <code class="docutils literal notranslate"><span class="pre">z</span></code>,
+that is, the first three fields.
+We can define a map from the two-simplex to itself that swaps <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">swap_xy</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">standard_two_simplex</span><span class="o">)</span> <span class="o">:</span> <span class="n">standard_two_simplex</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">a.y</span><span class="o">,</span>
+  <span class="n">y</span> <span class="o">:=</span> <span class="n">a.x</span><span class="o">,</span>
+  <span class="n">z</span> <span class="o">:=</span> <span class="n">a.z</span><span class="o">,</span>
+  <span class="n">x_nonneg</span> <span class="o">:=</span> <span class="n">a.y_nonneg</span><span class="o">,</span>
+  <span class="n">y_nonneg</span> <span class="o">:=</span> <span class="n">a.x_nonneg</span><span class="o">,</span>
+  <span class="n">z_nonneg</span> <span class="o">:=</span> <span class="n">a.z_nonneg</span><span class="o">,</span>
+  <span class="n">sum_eq</span>   <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">add_comm</span> <span class="n">a.y</span> <span class="n">a.x</span><span class="o">,</span> <span class="n">a.sum_eq</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>More interestingly, we can compute the midpoint of two points on
+the simplex. We need to add <code class="docutils literal notranslate"><span class="pre">noncomputable</span> <span class="pre">theory</span></code> in order to
+use division on the real numbers.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable theory</span>
+
+<span class="kd">def</span> <span class="n">midpoint</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">standard_two_simplex</span><span class="o">)</span> <span class="o">:</span> <span class="n">standard_two_simplex</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">x</span>        <span class="o">:=</span> <span class="o">(</span><span class="n">a.x</span> <span class="bp">+</span> <span class="n">b.x</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="n">y</span>        <span class="o">:=</span> <span class="o">(</span><span class="n">a.y</span> <span class="bp">+</span> <span class="n">b.y</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="n">z</span>        <span class="o">:=</span> <span class="o">(</span><span class="n">a.z</span> <span class="bp">+</span> <span class="n">b.z</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="n">x_nonneg</span> <span class="o">:=</span> <span class="n">div_nonneg</span> <span class="o">(</span><span class="n">add_nonneg</span> <span class="n">a.x_nonneg</span> <span class="n">b.x_nonneg</span><span class="o">)</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">y_nonneg</span> <span class="o">:=</span> <span class="n">div_nonneg</span> <span class="o">(</span><span class="n">add_nonneg</span> <span class="n">a.y_nonneg</span> <span class="n">b.y_nonneg</span><span class="o">)</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">z_nonneg</span> <span class="o">:=</span> <span class="n">div_nonneg</span> <span class="o">(</span><span class="n">add_nonneg</span> <span class="n">a.z_nonneg</span> <span class="n">b.z_nonneg</span><span class="o">)</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">sum_eq</span>   <span class="o">:=</span> <span class="kd">by</span> <span class="o">{</span> <span class="n">field_simp</span><span class="o">,</span> <span class="n">linarith</span> <span class="o">[</span><span class="n">a.sum_eq</span><span class="o">,</span> <span class="n">b.sum_eq</span><span class="o">]}</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>Here we have established <code class="docutils literal notranslate"><span class="pre">x_nonneg</span></code>, <code class="docutils literal notranslate"><span class="pre">y_nonneg</span></code>, and <code class="docutils literal notranslate"><span class="pre">z_nonneg</span></code>
+with concise proof terms, but establish <code class="docutils literal notranslate"><span class="pre">sum_eq</span></code> in tactic mode,
+using <code class="docutils literal notranslate"><span class="pre">by</span></code>. You can just as well use a <code class="docutils literal notranslate"><span class="pre">begin</span> <span class="pre">...</span> <span class="pre">end</span></code> block
+for that purpose.</p>
+<p>Given a parameter <span class="math notranslate nohighlight">\(\lambda\)</span> satisfying <span class="math notranslate nohighlight">\(0 \le \lambda \le 1\)</span>,
+we can take the weighted average <span class="math notranslate nohighlight">\(\lambda a + (1 - \lambda) b\)</span>
+of two points <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> in the standard 2-simplex.
+We challenge you to define that function, in analogy to the <code class="docutils literal notranslate"><span class="pre">midpoint</span></code>
+function above.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">weighted_average</span> <span class="o">(</span><span class="n">lambda</span> <span class="o">:</span> <span class="n">real</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">lambda_nonneg</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">lambda</span><span class="o">)</span> <span class="o">(</span><span class="n">lambda_le</span> <span class="o">:</span> <span class="n">lambda</span> <span class="bp">&#8804;</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">standard_two_simplex</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">standard_two_simplex</span> <span class="o">:=</span>
+<span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Structures can depend on parameters.
+For example, we can generalize the standard 2-simplex to the standard
+<span class="math notranslate nohighlight">\(n\)</span>-simplex for any <span class="math notranslate nohighlight">\(n\)</span>.
+At this stage, you don&#8217;t have to know anything about the type <cite>fin n</cite>
+except that it has <span class="math notranslate nohighlight">\(n\)</span> elements, and that Lean knows
+how to sum over it.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">open_locale</span> <span class="n">big_operators</span>
+
+<span class="kd">structure</span> <span class="n">standard_simplex</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">v</span>          <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">nonneg</span>     <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">v</span> <span class="n">i</span><span class="o">)</span>
+<span class="o">(</span><span class="n">sum_eq_one</span> <span class="o">:</span> <span class="bp">&#8721;</span> <span class="n">i</span><span class="o">,</span> <span class="n">v</span> <span class="n">i</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">standard_simplex</span>
+
+<span class="kd">def</span> <span class="n">midpoint</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">standard_simplex</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">standard_simplex</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">v</span> <span class="o">:=</span> <span class="bp">&#955;</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">a.v</span> <span class="n">i</span> <span class="bp">+</span> <span class="n">b.v</span> <span class="n">i</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="n">nonneg</span> <span class="o">:=</span>
+    <span class="kd">begin</span>
+      <span class="n">intro</span> <span class="n">i</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">div_nonneg</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">linarith</span> <span class="o">[</span><span class="n">a.nonneg</span> <span class="n">i</span><span class="o">,</span> <span class="n">b.nonneg</span> <span class="n">i</span><span class="o">]</span> <span class="o">},</span>
+      <span class="n">norm_num</span>
+    <span class="kd">end</span><span class="o">,</span>
+  <span class="n">sum_eq_one</span> <span class="o">:=</span>
+    <span class="kd">begin</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">div_eq_mul_inv</span><span class="o">,</span> <span class="bp">&#8592;</span><span class="n">finset.sum_mul</span><span class="o">,</span> <span class="n">finset.sum_add_distrib</span><span class="o">,</span>
+        <span class="n">a.sum_eq_one</span><span class="o">,</span> <span class="n">b.sum_eq_one</span><span class="o">],</span>
+      <span class="n">field_simp</span>
+    <span class="kd">end</span>  <span class="o">}</span>
+
+<span class="kd">end</span> <span class="n">standard_simplex</span>
+</pre></div>
+</div>
+<p>As an exercise, see if you can define the weighted average of
+two points in the standard <span class="math notranslate nohighlight">\(n\)</span>-simplex.
+You can use <code class="docutils literal notranslate"><span class="pre">finset.sum_add_distrib</span></code>
+and <code class="docutils literal notranslate"><span class="pre">finset.mul_sum</span></code> to manipulate the relevant sums.</p>
+<p>We have seen that structures can be used to bundle together data
+and properties.
+Interestingly, they can also be used to bundle together properties
+without the data.
+For example, the next structure, <code class="docutils literal notranslate"><span class="pre">is_linear</span></code>, bundles together
+the two components of linearity.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">is_linear</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">is_additive</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">preserves_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">c</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">section</span>
+<span class="kd">variables</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">linf</span> <span class="o">:</span> <span class="n">is_linear</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">linf.is_additive</span>
+<span class="k">#check</span> <span class="n">linf.preserves_mul</span>
+
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>It is worth pointing out that structures are not the only way to bundle
+together data.
+The <code class="docutils literal notranslate"><span class="pre">point</span></code> data structure can be defined using the generic type product,
+and <code class="docutils literal notranslate"><span class="pre">is_linear</span></code> can be defined with a simple <code class="docutils literal notranslate"><span class="pre">and</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">point&#39;&#39;</span> <span class="o">:=</span> <span class="n">&#8477;</span> <span class="bp">&#215;</span> <span class="n">&#8477;</span> <span class="bp">&#215;</span> <span class="n">&#8477;</span>
+
+<span class="kd">def</span> <span class="n">is_linear&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8743;</span> <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">c</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Generic type constructions can even be used in place of structures
+with dependencies between their components.
+For example, the <em>subtype</em> construction combines a piece of data with
+a property.
+You can think of of the type <code class="docutils literal notranslate"><span class="pre">preal</span></code> in the next example as being
+the type of positive real numbers.
+Any <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">preal</span></code> has two components: the value, and the property of being
+positive.
+You can access these components as <code class="docutils literal notranslate"><span class="pre">x.val</span></code>, which has type <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">x.property</span></code>, which represents the fact <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">x.val</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">preal</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">//</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="o">}</span>
+
+<span class="kn">section</span>
+<span class="kd">variable</span> <span class="n">x</span> <span class="o">:</span> <span class="n">preal</span>
+
+<span class="k">#check</span> <span class="n">x.val</span>
+<span class="k">#check</span> <span class="n">x.property</span>
+
+<span class="k">#check</span> <span class="n">x.1</span>
+<span class="k">#check</span> <span class="n">x.2</span>
+
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>We could have used subtypes to define the standard 2-simplex,
+as well as the standard <span class="math notranslate nohighlight">\(n\)</span>-simplex for an arbitrary <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">standard_two_simplex&#39;</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">p</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#215;</span> <span class="n">&#8477;</span> <span class="bp">&#215;</span> <span class="n">&#8477;</span> <span class="bp">//</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">p.1</span> <span class="bp">&#8743;</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">p.2.1</span> <span class="bp">&#8743;</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">p.2.2</span> <span class="bp">&#8743;</span> <span class="n">p.1</span> <span class="bp">+</span> <span class="n">p.2.1</span> <span class="bp">+</span> <span class="n">p.2.2</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">}</span>
+
+<span class="kd">def</span> <span class="n">standard_simplex&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">v</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span> <span class="bp">//</span> <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">v</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8743;</span> <span class="o">(</span><span class="bp">&#8721;</span> <span class="n">i</span><span class="o">,</span> <span class="n">v</span> <span class="n">i</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>Similarly, <em>Sigma types</em> are generalizations of ordered pairs,
+whereby the type of the second component depends on the type of
+the first.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">std_simplex</span> <span class="o">:=</span> <span class="bp">&#931;</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="n">standard_simplex</span> <span class="n">n</span>
+
+<span class="kn">section</span>
+<span class="kd">variable</span> <span class="n">s</span> <span class="o">:</span> <span class="n">std_simplex</span>
+
+<span class="k">#check</span> <span class="n">s.fst</span>
+<span class="k">#check</span> <span class="n">s.snd</span>
+
+<span class="k">#check</span> <span class="n">s.1</span>
+<span class="k">#check</span> <span class="n">s.2</span>
+
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>Given <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">:</span> <span class="pre">std_simplex</span></code>, the first component <code class="docutils literal notranslate"><span class="pre">s.fst</span></code> is a natural
+number, and the second component is an element of the corresponding
+simplex <code class="docutils literal notranslate"><span class="pre">standard_simplex</span> <span class="pre">s.fst</span></code>.
+The difference between a Sigma type and a subtype is that
+the second component of a Sigma type is data rather than a proposition.</p>
+<p>But even though we can use products, subtypes, and Sigma types
+instead of structures, using structures has a number of advantages.
+Defining a structure abstracts away the underlying representation
+and provides custom names for the functions that access the components.
+This makes proofs more robust:
+proofs that rely only on the interface to a structure
+will generally continue to work when we change the definition,
+as long as we redefine the old accessors in terms of the new definition.
+Moreover, as we are about to see, Lean provides support for
+weaving structures together into a rich, interconnected hierarchy,
+and for managing the interactions between them.</p>
+</div>
+<div class="section" id="algebraic-structures">
+<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this headline">&#182;</a></h2>
+<p>To clarify what we mean by the phrase <em>algebraic structure</em>,
+it will help to consider some examples.</p>
+<ol class="arabic simple">
+<li><p>A <em>partially ordered set</em> consists of a set <span class="math notranslate nohighlight">\(P\)</span> and
+a binary relation <span class="math notranslate nohighlight">\(\le\)</span> on <span class="math notranslate nohighlight">\(P\)</span> that is transitive
+and antireflexive.</p></li>
+<li><p>A <em>group</em> consists of a set <span class="math notranslate nohighlight">\(G\)</span> with an associative
+binary operation, an identity element
+<span class="math notranslate nohighlight">\(1\)</span>, and a function <span class="math notranslate nohighlight">\(g \mapsto g^{-1}\)</span> that returns
+an inverse for each <span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\(G\)</span>.
+A group is <em>abelian</em> or <em>commutative</em> if the operation is commutative.</p></li>
+<li><p>A <em>lattice</em> is a partially ordered set with meets and joins.</p></li>
+<li><p>A <em>ring</em> consists of an (addively written) abelian group
+<span class="math notranslate nohighlight">\((R, +, 0, x \mapsto -x)\)</span>
+together with an associative multiplication operation
+<span class="math notranslate nohighlight">\(\cdot\)</span> and an identity <span class="math notranslate nohighlight">\(1\)</span>,
+such that multiplication distributes over addition.
+A ring is <em>commutative</em> if the multiplication is commutative.</p></li>
+<li><p>An <em>ordered ring</em> <span class="math notranslate nohighlight">\((R, +, 0, -, \cdot, 1, \le)\)</span> consists of a ring
+together with a partial order on its elements, such that <cite>a le b</cite> implies
+<span class="math notranslate nohighlight">\(a + c \le b + c\)</span> for every <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\(R\)</span>,
+and <span class="math notranslate nohighlight">\(0 \le a\)</span> and <span class="math notranslate nohighlight">\(0 \le b\)</span> implies <span class="math notranslate nohighlight">\(0 \le a b\)</span> for
+every <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> in <span class="math notranslate nohighlight">\(R\)</span>.</p></li>
+<li><p>A <em>metric space</em> consists of a set <span class="math notranslate nohighlight">\(X\)</span> and a function
+<span class="math notranslate nohighlight">\(d : X \times X \to \mathbb{R}\)</span> such that the following hold:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d(x, y) \ge 0\)</span> for every <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x, y) = 0\)</span> if and only if <span class="math notranslate nohighlight">\(x = y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x, y) = d(y, x)\)</span> for every <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x, z) \le d(x, y) + d(y, z)\)</span> for every <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and
+<span class="math notranslate nohighlight">\(z\)</span> in <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ul>
+</li>
+<li><p>A <em>topological space</em> consists of a set <span class="math notranslate nohighlight">\(X\)</span> and a collection <span class="math notranslate nohighlight">\(\mathcal T\)</span>
+of subsets of <span class="math notranslate nohighlight">\(X\)</span>, called the <em>open subsets of</em> <span class="math notranslate nohighlight">\(X\)</span>, such that
+the following hold:</p>
+<ul class="simple">
+<li><p>The empty set is open.</p></li>
+<li><p>The intersection of two open sets is open.</p></li>
+<li><p>An arbitrary union of open sets is open.</p></li>
+</ul>
+</li>
+</ol>
+<p>In each of these examples, the elements of the structure belong to a
+set, the <em>carrier set</em>,
+that sometimes stands proxy for the entire structure.
+For example, when we say &#8220;let <span class="math notranslate nohighlight">\(G\)</span> be a group&#8221; and then
+&#8220;let <span class="math notranslate nohighlight">\(g \in G\)</span>,&#8221; we are using <span class="math notranslate nohighlight">\(G\)</span> to stand for both
+the structure and its carrier.
+Not every algebraic structure is associated with a single carrier set in this way.
+For example, a <em>bipartite graph</em> involves a relation between two sets,
+as does a <em>Galois connection</em>,
+A <em>category</em> also involves two sets of interest, commonly called the <em>objects</em>
+and the <em>morphisms</em>.</p>
+<p>The examples indicate some of the things that a proof assistant has to do
+in order to support algebraic reasoning.
+First, it needs to recognize concrete instances of structures.
+The number systems <span class="math notranslate nohighlight">\(\mathbb{Z}\)</span>, <span class="math notranslate nohighlight">\(\mathbb{Q}\)</span>,
+and <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> are all ordered rings,
+and we should be able to apply a generic theorem about ordered rings
+in any of these instances.
+Sometimes a concrete set may the an instance of a structure in more than one way.
+For example, in addition to the usual topology on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>,
+which forms the basis for real analysis,
+we can also consider the <em>discrete</em> topology on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>,
+in which every set is open.</p>
+<p>Second, a proof assistant needs to support generic notation on structures.
+In Lean, the notation <code class="docutils literal notranslate"><span class="pre">*</span></code>
+is used for multiplication in all the usual number systems,
+as well as for multiplication in generic groups and rings.
+When we use an expression like <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">y</span></code>,
+Lean has to use information about the types of <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span></code>, and <code class="docutils literal notranslate"><span class="pre">y</span></code>
+to determine which multiplication we have in mind.</p>
+<p>Third, it needs to deal with the fact that structures can inherit
+definitions, theorems, and notation from other structures in various ways.
+Some structures extend others by adding more axioms.
+A commutative ring is still a ring, so any definition
+that makes sense in a ring also makes sense in a commutative ring,
+and any theorem that holds in a ring also holds in a commutative ring.
+Some structures extend others by adding more data.
+For example, the additive part of any ring is an additive group.
+The ring structure adds a multiplication and an identity,
+as well as axioms that govern them and relate them to the additive part.
+Sometimes we can define one structure in terms of another.
+Any metric space has a canonical topology associated with it,
+the <em>metric space topology</em>, and there are various topologies that can be
+associated with any linear ordering.</p>
+<p>Finally, it is important to keep in mind that mathematics allows us to
+use functions and operations to define structures in the same way we
+use functions and operations to define numbers.
+Products and powers of groups are again groups.
+For every <span class="math notranslate nohighlight">\(n\)</span>, the integers modulo <span class="math notranslate nohighlight">\(n\)</span> form a ring,
+and for every <span class="math notranslate nohighlight">\(k &gt; 0\)</span>, the <span class="math notranslate nohighlight">\(k \times k\)</span> matrices of polynomials
+with coefficients in that ring again form a ring.
+Thus we can calculate with structures just as easily as we can calculate
+with their elements.
+This means that algebraic structures lead dual lives in mathematics,
+as containers for collections of objects and as objects in their own right.
+A proof assistant has to accommodate this dual role.</p>
+<p>When dealing with elements of a type that has an algebraic structure
+associated with it,
+a proof assistant needs to recognize the structure and find the relevant
+definitions, theorems, and notation.
+All this should sound like a lot of work, and it is.
+But Lean uses a small collection of fundamental mechanisms to
+carry out these tasks.
+The goal of this section is to explain these mechanisms and show you
+how to use them.</p>
+<p>The first ingredient is almost too obvious to mention:
+formally speaking, algebraic structures are structures in the sense
+of the <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>.
+An algebraic structure is a specification of a bundle of data satisfying
+some axiomatic hypotheses, and we saw in the <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a> that
+this is exactly what the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command is designed to accommodate.
+It&#8217;s a marriage made in heaven!</p>
+<p>Given a data type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, we can define the group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>
+as follows.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">group&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul</span><span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one</span><span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv</span><span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="o">(</span><span class="n">mul</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">mul</span> <span class="n">x</span> <span class="o">(</span><span class="n">mul</span> <span class="n">y</span> <span class="n">z</span><span class="o">))</span>
+<span class="o">(</span><span class="n">mul_one</span><span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="n">x</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one_mul</span><span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="n">x</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="o">(</span><span class="n">inv</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">one</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Notice that the type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is a <em>parameter</em> in the definition of <code class="docutils literal notranslate"><span class="pre">group&#8321;</span></code>.
+So you should think of an object <code class="docutils literal notranslate"><span class="pre">struc</span> <span class="pre">:</span> <span class="pre">group&#8321;</span> <span class="pre">&#945;</span></code> as being
+a group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+We saw in <a class="reference internal" href="02_Basics.html#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a>
+that the counterpart <code class="docutils literal notranslate"><span class="pre">mul_right_inv</span></code> to <code class="docutils literal notranslate"><span class="pre">mul_left_inv</span></code>
+follows from the other group axioms, so there is no need
+to add it to the definition.</p>
+<p>This definition of a group is similar to the definition of <code class="docutils literal notranslate"><span class="pre">group</span></code> in
+mathlib,
+and we have chosen the name <code class="docutils literal notranslate"><span class="pre">group&#8321;</span></code> to distinguish our version.
+If you write <code class="docutils literal notranslate"><span class="pre">#check</span> <span class="pre">group</span></code> and ctrl-click on the definition,
+you will see that the mathlib version of <code class="docutils literal notranslate"><span class="pre">group</span></code> is defined to
+extend another structure; we will explain how to do that later.
+If you type <code class="docutils literal notranslate"><span class="pre">#print</span> <span class="pre">group</span></code> you will also see that the mathlib
+version of <code class="docutils literal notranslate"><span class="pre">group</span></code> has a number of extra fields.
+For reasons we will explain later, sometimes it is useful to add
+redundant information to a structure,
+so that there are additional fields for objects and functions
+that can be defined from the core
+data. Don&#8217;t worry about that for now.
+Rest assured that our simplified version <code class="docutils literal notranslate"><span class="pre">group&#8321;</span></code> is
+morally the same as the definition of a group that mathlib uses.</p>
+<p>It is sometimes useful to bundle
+the type together with the structure, and mathlib also
+contains a definition of a <code class="docutils literal notranslate"><span class="pre">Group</span></code> structure that is equivalent to
+the following:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">Group&#8321;</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="o">(</span><span class="n">str</span> <span class="o">:</span> <span class="n">group&#8321;</span> <span class="n">&#945;</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The mathlib version is found in <code class="docutils literal notranslate"><span class="pre">algebra.category.Group.basic</span></code>,
+and you can <code class="docutils literal notranslate"><span class="pre">#check</span></code> it if you add this to the imports at the
+beginning of the examples file.</p>
+<p>For reasons that will become clearer below, it is more often
+useful to keep the type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> separate from the structure <code class="docutils literal notranslate"><span class="pre">group</span> <span class="pre">&#945;</span></code>.
+We refer to the two objects together as a <em>partially bundled structure</em>,
+since the representation combines most, but not all, of the components
+into one structure. It is common in mathlib
+to use capital roman letters like <code class="docutils literal notranslate"><span class="pre">G</span></code> for a type
+when it is used as the carrier type for a group.</p>
+<p>Let&#8217;s construct a group, which is to say, an element of the <code class="docutils literal notranslate"><span class="pre">group&#8321;</span></code> type.
+For any pair of types <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>, Mathlib defines the type <code class="docutils literal notranslate"><span class="pre">equiv</span> <span class="pre">&#945;</span> <span class="pre">&#946;</span></code>
+of <em>equivalences</em> between <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>.
+Mathlib also defines the suggestive notation <code class="docutils literal notranslate"><span class="pre">&#945;</span> <span class="pre">&#8771;</span> <span class="pre">&#946;</span></code> for this type.
+An element <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">&#8771;</span> <span class="pre">&#946;</span></code> is a bijection between <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>
+represented by four components:
+a function <code class="docutils literal notranslate"><span class="pre">f.to_fun</span></code> from <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>,
+the inverse function <code class="docutils literal notranslate"><span class="pre">f.inv</span></code> from <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>,
+and two properties that specify these functions are indeed inverse
+to one another.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="n">&#947;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="kd">variables</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8771;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8771;</span> <span class="n">&#947;</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">equiv</span> <span class="n">&#945;</span> <span class="n">&#946;</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">f.to_fun</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">f.inv_fun</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">f.right_inv</span><span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#946;</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f.inv_fun</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">f.left_inv</span><span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">f.inv_fun</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">equiv.refl</span> <span class="n">&#945;</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8771;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">f.symm</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8771;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">f.trans</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8771;</span> <span class="n">&#947;</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Notice the creative naming of the last three constructions. We think of the
+identity function <code class="docutils literal notranslate"><span class="pre">equiv.refl</span></code>, the inverse operation <code class="docutils literal notranslate"><span class="pre">equiv.symm</span></code>,
+and the composition operation <code class="docutils literal notranslate"><span class="pre">equiv.trans</span></code> as explicit evidence
+that the property of being in bijective correspondence is an equivalence relation.</p>
+<p>Notice also that <code class="docutils literal notranslate"><span class="pre">f.trans</span> <span class="pre">g</span></code> requires composing the forward functions
+in reverse order. Mathlib has declared a <em>coercion</em> from <code class="docutils literal notranslate"><span class="pre">equiv</span> <span class="pre">&#945;</span> <span class="pre">&#946;</span></code>
+to the function type <code class="docutils literal notranslate"><span class="pre">&#945;</span> <span class="pre">&#8594;</span> <span class="pre">&#946;</span></code>, so we can omit writing <code class="docutils literal notranslate"><span class="pre">.to_fun</span></code>
+and have Lean insert it for us.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">f.trans</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">g.to_fun</span> <span class="o">(</span><span class="n">f.to_fun</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">f.trans</span> <span class="n">g</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f.trans</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#947;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="bp">&#8728;</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>Mathlib also defines the type <code class="docutils literal notranslate"><span class="pre">perm</span> <span class="pre">&#945;</span></code> of equivalences between
+<code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and itself.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">equiv.perm</span> <span class="n">&#945;</span> <span class="bp">=</span> <span class="o">(</span><span class="n">&#945;</span> <span class="bp">&#8771;</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>It should be clear that <code class="docutils literal notranslate"><span class="pre">perm</span> <span class="pre">&#945;</span></code> forms a group under composition
+of equivalences. We orient things so that <code class="docutils literal notranslate"><span class="pre">mul</span> <span class="pre">f</span> <span class="pre">g</span></code> is
+equal to <code class="docutils literal notranslate"><span class="pre">g.trans</span> <span class="pre">f</span></code>, whose forward function is <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&#8728;</span> <span class="pre">g</span></code>.
+In other words, multiplication is what we ordinarily think of as
+composition of the bijections. Here we define this group:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">perm_group</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="n">group&#8321;</span> <span class="o">(</span><span class="n">equiv.perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul</span>          <span class="o">:=</span> <span class="bp">&#955;</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">equiv.trans</span> <span class="n">g</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">one</span>          <span class="o">:=</span> <span class="n">equiv.refl</span> <span class="n">&#945;</span><span class="o">,</span>
+  <span class="n">inv</span>          <span class="o">:=</span> <span class="n">equiv.symm</span><span class="o">,</span>
+  <span class="n">mul_assoc</span>    <span class="o">:=</span> <span class="bp">&#955;</span> <span class="n">f</span> <span class="n">g</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">equiv.trans_assoc</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="n">one_mul</span>      <span class="o">:=</span> <span class="n">equiv.trans_refl</span><span class="o">,</span>
+  <span class="n">mul_one</span>      <span class="o">:=</span> <span class="n">equiv.refl_trans</span><span class="o">,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="n">equiv.self_trans_symm</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>In fact, mathlib defines exactly this <code class="docutils literal notranslate"><span class="pre">group</span></code> structure on <code class="docutils literal notranslate"><span class="pre">equiv.perm</span> <span class="pre">&#945;</span></code>
+in the file <code class="docutils literal notranslate"><span class="pre">group_theory.perm.basic</span></code>.
+As always, you can hover over the theorems used in the definition of
+<code class="docutils literal notranslate"><span class="pre">perm_group</span></code> to see their statements,
+and you can jump to their definitions in the original file to learn
+more about how they are implemented.</p>
+<p>In ordinary mathematics, we generally think of notation as
+independent of structure.
+For example, we can consider groups <span class="math notranslate nohighlight">\((G_1, \cdot, 1, \cdot^{-1})\)</span>,
+<span class="math notranslate nohighlight">\((G_2, \circ, e, i(\cdot))\)</span>, and <span class="math notranslate nohighlight">\((G_3, +, 0, -)\)</span>.
+In the first case, we write the binary operation as <span class="math notranslate nohighlight">\(\cdot\)</span>,
+the identity at <span class="math notranslate nohighlight">\(1\)</span>, and the inverse function as <span class="math notranslate nohighlight">\(x \mapsto x^{-1}\)</span>.
+In the second and third cases, we use the notational alternatives shown.
+When we formalize the notion of a group in Lean, however,
+the notation is more tightly linked to the structure.
+In Lean, the components of any <code class="docutils literal notranslate"><span class="pre">group</span></code> are named
+<code class="docutils literal notranslate"><span class="pre">mul</span></code>, <code class="docutils literal notranslate"><span class="pre">one</span></code>, and <code class="docutils literal notranslate"><span class="pre">inv</span></code>,
+and in a moment we will see how multplicative notation is
+set up to refer to them.
+If we want to use additive notation, we instead use an isomorphic structure
+<code class="docutils literal notranslate"><span class="pre">additive_group</span></code>. Its components are named <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">zero</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">neg</span></code>, and the associated notation is what you would expect it to be.</p>
+<p>Recall the type <code class="docutils literal notranslate"><span class="pre">point</span></code> that we defined in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>,
+and the addition function that we defined there.
+These definitions are reproduced in the examples file that accompanies
+this section.
+As an exercise, define an <code class="docutils literal notranslate"><span class="pre">add_group&#8321;</span></code> structure that is similar
+to the <code class="docutils literal notranslate"><span class="pre">group&#8321;</span></code> structure we defined above, except that it uses the
+additive naming scheme just described.
+Define negation and a zero on the <code class="docutils literal notranslate"><span class="pre">point</span></code> data type,
+and define the <code class="docutils literal notranslate"><span class="pre">add_group&#8321;</span></code> structure on <code class="docutils literal notranslate"><span class="pre">point</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">add_group&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">add</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="c1">-- fill in the rest</span>
+
+<span class="kd">@[ext]</span> <span class="kd">structure</span> <span class="n">point</span> <span class="o">:=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">point</span>
+
+<span class="kd">def</span> <span class="n">add</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">point</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">a.x</span> <span class="bp">+</span> <span class="n">b.x</span><span class="o">,</span> <span class="n">a.y</span> <span class="bp">+</span> <span class="n">b.y</span><span class="o">,</span> <span class="n">a.z</span> <span class="bp">+</span> <span class="n">b.z</span><span class="o">&#10217;</span>
+
+<span class="kd">def</span> <span class="n">neg</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span> <span class="o">:</span> <span class="n">point</span> <span class="o">:=</span> <span class="gr">sorry</span>
+
+<span class="kd">def</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">point</span> <span class="o">:=</span> <span class="gr">sorry</span>
+
+<span class="kd">def</span> <span class="n">add_group_point</span> <span class="o">:</span> <span class="n">add_group</span> <span class="n">point</span> <span class="o">:=</span> <span class="gr">sorry</span>
+
+<span class="kd">end</span> <span class="n">point</span>
+</pre></div>
+</div>
+<p>We are making progress.
+Now we know how to define algebraic structures in Lean,
+and we know how to define instances of those structures.
+But we also want to associate notation with structures
+so that we can use it with each instance.
+Moreover, we want to arrange it so that we can define an operation
+on a structure and use it with any particular instance,
+and we want to arrange it so that we can prove a theorem about
+a structure and use it with any instance.</p>
+<p>In fact, mathlib is already set up to use generic group notation,
+definitions, and theorems for <code class="docutils literal notranslate"><span class="pre">equiv.perm</span> <span class="pre">&#945;</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">equiv.perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">g</span>
+<span class="k">#check</span> <span class="n">mul_assoc</span> <span class="n">f</span> <span class="n">g</span> <span class="n">g</span><span class="bp">&#8315;&#185;</span>
+
+<span class="c1">-- group power, defined for any group</span>
+<span class="k">#check</span> <span class="n">g</span><span class="bp">^</span><span class="n">n</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">*</span> <span class="o">(</span><span class="n">g</span><span class="bp">&#8315;&#185;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">,</span> <span class="n">mul_right_inv</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">*</span> <span class="o">(</span><span class="n">g</span><span class="bp">&#8315;&#185;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">mul_inv_cancel_right</span> <span class="n">f</span> <span class="n">g</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">equiv.perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">g.symm.trans</span> <span class="o">(</span><span class="n">g.trans</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="n">mul_inv_cancel_right</span> <span class="n">f</span> <span class="n">g</span>
+</pre></div>
+</div>
+<p>You can check that this is not the case for the additive group structure
+on <code class="docutils literal notranslate"><span class="pre">point</span></code> that we asked you to define above.
+Our task now is to understand that magic that goes on under the hood
+in order to make the examples for <code class="docutils literal notranslate"><span class="pre">equiv.perm</span> <span class="pre">&#945;</span></code> work the way they do.</p>
+<p>The issue is that Lean needs to be able to <em>find</em> the relevant
+notation and the implicit group structure,
+using the information that is found in the expressions that we type.
+Simiarly, when we write <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code> with expressions <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>
+that have type <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>, Lean needs to interpret the <code class="docutils literal notranslate"><span class="pre">+</span></code>
+symbol as the relevant addition function on the reals.
+It also has to recognize the type <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> as an instance of a commutative ring,
+so that all the definitions and theorems for a commutative ring are available.
+For another example,
+continuity is defined in Lean relative to any two topological spaces.
+When we have <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#8477;</span> <span class="pre">&#8594;</span> <span class="pre">&#8450;</span></code> and we write <code class="docutils literal notranslate"><span class="pre">continuous</span> <span class="pre">f</span></code>, Lean has to find the
+relevant topologies on <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code>.</p>
+<p>The magic is achieved with a combination of three things.</p>
+<ol class="arabic simple">
+<li><p><em>Logic.</em> A definition that should be interpreted in any group takes, as
+arguments, the type of the group and the group structure as arguments.
+Similarly, a theorem about the elements of an arbitrary group
+begins with universal quantifiers over
+the type of the group and the group structure.</p></li>
+<li><p><em>Implicit arguments.</em> The arguments for the type and the structure
+are generally left implicit, so that we do not have to write them
+or see them in the Lean information window. Lean fills the
+information in for us silently.</p></li>
+<li><p><em>Type class inference.</em> Also known as <em>class inference</em>,
+this is a simple but powerful mechanism
+that enables us to register information for Lean to use later on.
+When Lean is called on to fill in implicit arguments to a
+definition, theorem, or piece of notation,
+it can make use of information that has been registered.</p></li>
+</ol>
+<p>Whereas an annotation <code class="docutils literal notranslate"><span class="pre">(grp</span> <span class="pre">:</span> <span class="pre">group</span> <span class="pre">G)</span></code> tells Lean that it should
+expect to be given that argument explicitly and the annotation
+<code class="docutils literal notranslate"><span class="pre">{grp</span> <span class="pre">:</span> <span class="pre">group</span> <span class="pre">G}</span></code> tells Lean that it should try to figure it out
+from contextual cues in the expression,
+the annotation <code class="docutils literal notranslate"><span class="pre">[grp</span> <span class="pre">:</span> <span class="pre">group</span> <span class="pre">G]</span></code> tells Lean that the corresponding
+argument should be synthesized using type class inference.
+Since the whole point to the use of such arguments is that
+we generally do not need to refer to them explicitly,
+Lean allows us to write <code class="docutils literal notranslate"><span class="pre">[group</span> <span class="pre">G]</span></code> and leave the name anonymous.
+You have probably already noticed that Lean chooses names like <code class="docutils literal notranslate"><span class="pre">_inst_1</span></code>
+automatically.
+When we use the anonymous square-bracket annotation with the <code class="docutils literal notranslate"><span class="pre">variables</span></code> command,
+then as long as the variables are still in scope,
+Lean automatically adds the argument <code class="docutils literal notranslate"><span class="pre">[group</span> <span class="pre">G]</span></code> to any definition or
+theorem that mentions <code class="docutils literal notranslate"><span class="pre">G</span></code>.</p>
+<p>How do we register the information that Lean needs to use to carry
+out the search?
+Returning to our group example, we need only make two changes.
+First, instead of using the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command to define the group structure,
+we use the keyword <code class="docutils literal notranslate"><span class="pre">class</span></code> to indicate that it is a candidate
+for class inference.
+Second, instead of defining particular instances with <code class="docutils literal notranslate"><span class="pre">def</span></code>,
+we use the keyword <code class="docutils literal notranslate"><span class="pre">instance</span></code> to register the particular instance with
+Lean. As with the names of class variables, we are allowed to leave the
+name of an instance definition anonymous,
+since in general we intend Lean to find it and put it to use
+without troubling us with the details.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">group&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul</span><span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one</span><span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv</span><span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="o">(</span><span class="n">mul</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">mul</span> <span class="n">x</span> <span class="o">(</span><span class="n">mul</span> <span class="n">y</span> <span class="n">z</span><span class="o">))</span>
+<span class="o">(</span><span class="n">mul_one</span><span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="n">x</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one_mul</span><span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="n">x</span> <span class="n">one</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="o">(</span><span class="n">inv</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">one</span><span class="o">)</span>
+
+<span class="kd">instance</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="n">group&#8322;</span> <span class="o">(</span><span class="n">equiv.perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul</span>          <span class="o">:=</span> <span class="bp">&#955;</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">equiv.trans</span> <span class="n">g</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">one</span>          <span class="o">:=</span> <span class="n">equiv.refl</span> <span class="n">&#945;</span><span class="o">,</span>
+  <span class="n">inv</span>          <span class="o">:=</span> <span class="n">equiv.symm</span><span class="o">,</span>
+  <span class="n">mul_assoc</span>    <span class="o">:=</span> <span class="bp">&#955;</span> <span class="n">f</span> <span class="n">g</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">equiv.trans_assoc</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="n">one_mul</span>      <span class="o">:=</span> <span class="n">equiv.trans_refl</span><span class="o">,</span>
+  <span class="n">mul_one</span>      <span class="o">:=</span> <span class="n">equiv.refl_trans</span><span class="o">,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="n">equiv.self_trans_symm</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>The following illustrates their use.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">@</span><span class="n">group&#8322;.mul</span>
+
+<span class="kd">def</span> <span class="n">my_square</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">group&#8322;.mul</span> <span class="n">x</span> <span class="n">x</span>
+
+<span class="k">#check</span> <span class="bp">@</span><span class="n">my_square</span>
+
+<span class="kn">section</span>
+<span class="kd">variables</span> <span class="o">{</span><span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">equiv.perm</span> <span class="n">&#946;</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">group&#8322;.mul</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">g.trans</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">my_square</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">f.trans</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">#check</span></code> command shows that <code class="docutils literal notranslate"><span class="pre">group&#8322;.mul</span></code> has an implicit argument
+<code class="docutils literal notranslate"><span class="pre">[group&#8322;</span> <span class="pre">&#945;]</span></code> that we expect to be found by class inference,
+where <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is the type of the arguments to <code class="docutils literal notranslate"><span class="pre">group&#8322;.mul</span></code>.
+In other words, <code class="docutils literal notranslate"><span class="pre">{&#945;</span> <span class="pre">:</span> <span class="pre">Type*}</span></code> is the implicit argument for the type
+of the group elements and <code class="docutils literal notranslate"><span class="pre">[group&#8322;</span> <span class="pre">&#945;]</span></code> is the implicit argument for the
+group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+Similarly, when we define a generic squaring function <code class="docutils literal notranslate"><span class="pre">my_square</span></code>
+for <code class="docutils literal notranslate"><span class="pre">group&#8322;</span></code>, we use an implicit argument <code class="docutils literal notranslate"><span class="pre">{&#945;</span> <span class="pre">:</span> <span class="pre">Type*}</span></code> for
+the type of the elements and an implicit argument <code class="docutils literal notranslate"><span class="pre">[group&#8322;</span> <span class="pre">&#945;]</span></code> for
+the <code class="docutils literal notranslate"><span class="pre">group&#8322;</span></code> structure.</p>
+<p>In the first example,
+when we write <code class="docutils literal notranslate"><span class="pre">group&#8322;.mul</span> <span class="pre">f</span> <span class="pre">g</span></code>, the type of <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code>
+tells Lean that in the argument <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> to <code class="docutils literal notranslate"><span class="pre">group&#8322;.mul</span></code>
+has to be instantiated to <code class="docutils literal notranslate"><span class="pre">equiv.perm</span> <span class="pre">&#946;</span></code>.
+That means that Lean has to find an element of <code class="docutils literal notranslate"><span class="pre">group&#8322;</span> <span class="pre">(equiv.perm</span> <span class="pre">&#946;)</span></code>.
+The previous <code class="docutils literal notranslate"><span class="pre">instance</span></code> declaration tells Lean exactly how to do that.
+Problem solved!</p>
+<p>This simple mechanism for registering information so that Lean can find it
+when it needs it is remarkably useful.
+Here is one way it comes up.
+In Lean&#8217;s foundation, a data type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> may be empty.
+In a number of applications, however, it is useful to know that a
+type has at least one element.
+For example, the function <code class="docutils literal notranslate"><span class="pre">list.head</span></code>, which returns the first
+element of a list, can return the default value when the list is empty.
+To make that work, the Lean library defines a class <code class="docutils literal notranslate"><span class="pre">inhabited</span> <span class="pre">&#945;</span></code>,
+which does nothing more than store a default value.
+We can show that the <code class="docutils literal notranslate"><span class="pre">point</span></code> type is an instance:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">point</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">default</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;</span> <span class="o">}</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">default</span> <span class="o">:</span> <span class="n">point</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">([]</span> <span class="o">:</span> <span class="n">list</span> <span class="n">point</span><span class="o">)</span><span class="bp">.</span><span class="n">head</span> <span class="bp">=</span> <span class="n">default</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>The class inference mechanism is also used for generic notation.
+The expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code> is an abbreviation for <code class="docutils literal notranslate"><span class="pre">has_add.add</span> <span class="pre">x</span> <span class="pre">y</span></code>
+where&#8212;you guessed it&#8212;<code class="docutils literal notranslate"><span class="pre">has_add</span> <span class="pre">&#945;</span></code> is a class that stores
+a binary function on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+Writing <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code> tells Lean to find a registered instance of <code class="docutils literal notranslate"><span class="pre">[has_add.add</span> <span class="pre">&#945;]</span></code>
+and use the corresponding function.
+Below, we register the addition function for <code class="docutils literal notranslate"><span class="pre">point</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">point</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="n">point.add</span> <span class="o">}</span>
+
+<span class="kn">section</span>
+<span class="kd">variables</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">point</span>
+
+<span class="k">#check</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">point.add</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>In this way, we can assign the notation <code class="docutils literal notranslate"><span class="pre">+</span></code> to binary operations on other
+types as well.</p>
+<p>But we can do even better. We have seen that <code class="docutils literal notranslate"><span class="pre">*</span></code> can be used in any
+group, <code class="docutils literal notranslate"><span class="pre">+</span></code> can be used in any additive group, and both can be used in
+any ring.
+When we define a new instance of a ring in Lean,
+we don&#8217;t have to define <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">*</span></code> for that instance,
+because Lean knows that these are defined for every ring.
+We can use this method to specify notation for our <code class="docutils literal notranslate"><span class="pre">group&#8322;</span></code> class:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">has_mul_group&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">group&#8322;.mul</span><span class="o">&#10217;</span>
+
+<span class="kd">instance</span> <span class="n">has_one_group&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">group&#8322;.one</span><span class="o">&#10217;</span>
+
+<span class="kd">instance</span> <span class="n">has_inv_group&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_inv</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">group&#8322;.inv</span><span class="o">&#10217;</span>
+
+<span class="kn">section</span>
+<span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">equiv.perm</span> <span class="n">&#945;</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">f</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">&#8315;&#185;</span>
+
+<span class="kd">def</span> <span class="n">foo</span><span class="o">:</span> <span class="n">f</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="n">g.symm.trans</span> <span class="o">((</span><span class="n">equiv.refl</span> <span class="n">&#945;</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>In this case, we have to supply names for the instances, because
+Lean has a hard time coming up with good defaults.
+What makes this approach work is that Lean carries out a recursive search.
+According to the instances we have declared, Lean can find an instance of
+<code class="docutils literal notranslate"><span class="pre">has_mul</span> <span class="pre">(equiv.perm</span> <span class="pre">&#945;)</span></code> by finding an
+instance of <code class="docutils literal notranslate"><span class="pre">group&#8322;</span> <span class="pre">(equiv.perm</span> <span class="pre">&#945;)</span></code>, and it can find an instance of
+<code class="docutils literal notranslate"><span class="pre">group&#8322;</span> <span class="pre">(equiv.perm</span> <span class="pre">&#945;)</span></code> because we have provided one.
+Lean is capable of finding these two facts and chaining them together.</p>
+<p>The example we have just given is dangerous, because Lean&#8217;s
+library also has an instance of <code class="docutils literal notranslate"><span class="pre">group</span> <span class="pre">(equiv.perm</span> <span class="pre">&#945;)</span></code>, and
+multiplication is defined on any group.
+So it is ambiguous as to which instance is found.
+In fact, Lean favors more recent declarations unless you explicitly
+specify a different priority.
+Also, there is another way to tell Lean that one structure is an
+instance of another, using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword.
+This is how <code class="docutils literal notranslate"><span class="pre">mathlib</span></code> specifies that, for example,
+every commutative ring is a ring.
+You can find more information in a
+<a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#managing-type-class-inference">section on class inference</a> in <em>Theorem Proving in Lean</em>.</p>
+<p>In general, it is a bad idea to specify a value of
+<code class="docutils literal notranslate"><span class="pre">*</span></code> for an instance of an algebraic structure that already has
+the notation defined.
+Redefining the notion of <code class="docutils literal notranslate"><span class="pre">group</span></code> in Lean is an artificial example.
+In this case, however, both interpretations of the group notation unfold to
+<code class="docutils literal notranslate"><span class="pre">equiv.trans</span></code>, <code class="docutils literal notranslate"><span class="pre">equiv.refl</span></code>, and <code class="docutils literal notranslate"><span class="pre">equiv.symm</span></code>, in the same way.</p>
+<p>As a similarly artificial exercise,
+define a class <code class="docutils literal notranslate"><span class="pre">add_group&#8322;</span></code> in analogy to <code class="docutils literal notranslate"><span class="pre">group&#8322;</span></code>.
+Define the usual notation for addition, negation, and zero
+on any <code class="docutils literal notranslate"><span class="pre">add_group&#8322;</span></code>
+using the classes <code class="docutils literal notranslate"><span class="pre">has_add</span></code>, <code class="docutils literal notranslate"><span class="pre">has_neg</span></code>, and <code class="docutils literal notranslate"><span class="pre">has_zero</span></code>.
+Then show <code class="docutils literal notranslate"><span class="pre">point</span></code> is an instance of <code class="docutils literal notranslate"><span class="pre">add_group&#8322;</span></code>.
+Try it out and make sure that the additive group notation works for
+elements of <code class="docutils literal notranslate"><span class="pre">point</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">add_group&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">add</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="c1">-- fill in the rest</span>
+</pre></div>
+</div>
+<p>It is not a big problem that we have already declared instances
+<code class="docutils literal notranslate"><span class="pre">has_add</span></code>, <code class="docutils literal notranslate"><span class="pre">has_neg</span></code>, and <code class="docutils literal notranslate"><span class="pre">has_zero</span></code> for <code class="docutils literal notranslate"><span class="pre">point</span></code> above.
+Once again, the two ways of synthesizing the notation should come up
+with the same answer.</p>
+<p>Class inference is subtle, and you have to be careful when using it,
+because it configures automation that invisibly governs the interpretation of
+the expressions we type.
+When used wisely, however, class inference is a powerful tool.
+It is what makes algebraic reasoning possible in Lean.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="05_Number_Theory.html" class="btn btn-neutral float-left" title="5. Number Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="genindex.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jeremy Avigad, Kevin Buzzard, Robert Y. Lewis, Patrick Massot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

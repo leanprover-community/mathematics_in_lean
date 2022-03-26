@@ -3,9 +3,9 @@
 This tutorial depends on Lean, VS Code, and mathlib.
 You can find the textbook both online and in this repository
 in
-[html format](https://avigad.github.io/mathematics_in_lean/)
+[html format](https://leanprover-community.github.io/mathematics_in_lean/)
 or as a
-[pdf document](https://avigad.github.io/mathematics_in_lean/mathematics_in_lean.pdf).
+[pdf document](https://leanprover-community.github.io/mathematics_in_lean/mathematics_in_lean.pdf).
 The book is designed to be read as you
 work through examples and exercises,
 using a copy of this repository on your computer.
@@ -44,7 +44,7 @@ This will update the `src` folder, but will not change `my_files`.
 ## To use this repository with Gitpod
 
 If you have a Gitpod account or are willing to sign up for one,
-just point your browser to [https://gitpod.io/#/https://github.com/avigad/mathematics_in_lean](https://gitpod.io/#/https://github.com/avigad/mathematics_in_lean).
+just point your browser to [https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean](https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean).
 This creates a virtual machine in the cloud,
 and installs Lean and mathlib.
 It then presents you with a VS Code window, running in a virtual

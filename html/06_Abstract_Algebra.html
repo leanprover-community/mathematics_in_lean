@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>6. Abstract Algebra &mdash; Mathematics in Lean 0.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" /><link rel="shortcut icon" href="_static/favicon.ico"/>
+  <title>6. Abstract Algebra &mdash; Mathematics in Lean 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Index" href="genindex.html" />
+    <link rel="next" title="7. Topology" href="07_Topology.html" />
     <link rel="prev" title="5. Number Theory" href="05_Number_Theory.html" /> 
 </head>
 
@@ -48,6 +52,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#algebraic-structures">6.2. Algebraic Structures</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="07_Topology.html">7. Topology</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -77,8 +82,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="abstract-algebra">
-<span id="id1"></span><h1><span class="section-number">6. </span>Abstract Algebra<a class="headerlink" href="#abstract-algebra" title="Permalink to this headline">&#182;</a></h1>
+  <section id="abstract-algebra">
+<span id="id1"></span><h1><span class="section-number">6. </span>Abstract Algebra<a class="headerlink" href="#abstract-algebra" title="Permalink to this heading">&#61633;</a></h1>
 <p>Modern mathematics makes essential use of algebraic
 structures,
 which encapsulate patterns that can be instantiated in
@@ -97,8 +102,8 @@ It will also show you how to define and use
 algebraic structures on your own.</p>
 <p>For more technical detail, you can consult <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>,
 and a paper by Anne Baanen, <a class="reference external" href="https://arxiv.org/abs/2202.01629">Use and abuse of instance parameters in the Lean mathematical library</a>.</p>
-<div class="section" id="structures">
-<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this headline">&#182;</a></h2>
+<section id="structures">
+<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this heading">&#61633;</a></h2>
 <p>In the broadest sense of the term, a <em>structure</em> is a specification
 of a collection of data, possibly with contraints that the
 data is required to satisfy.
@@ -490,9 +495,9 @@ as long as we redefine the old accessors in terms of the new definition.
 Moreover, as we are about to see, Lean provides support for
 weaving structures together into a rich, interconnected hierarchy,
 and for managing the interactions between them.</p>
-</div>
-<div class="section" id="algebraic-structures">
-<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this headline">&#182;</a></h2>
+</section>
+<section id="algebraic-structures">
+<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>
 <p>To clarify what we mean by the phrase <em>algebraic structure</em>,
 it will help to consider some examples.</p>
 <ol class="arabic simple">
@@ -1022,15 +1027,15 @@ because it configures automation that invisibly governs the interpretation of
 the expressions we type.
 When used wisely, however, class inference is a powerful tool.
 It is what makes algebraic reasoning possible in Lean.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="05_Number_Theory.html" class="btn btn-neutral float-left" title="5. Number Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="genindex.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="07_Topology.html" class="btn btn-neutral float-right" title="7. Topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

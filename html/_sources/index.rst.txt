@@ -13,6 +13,7 @@ Mathematics in Lean
    04_Sets_and_Functions
    05_Number_Theory
    06_Abstract_Algebra
+   07_Topology
 
 .. toctree::
    :hidden:

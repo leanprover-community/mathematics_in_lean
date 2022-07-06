@@ -114,7 +114,8 @@ so the left-hand side of <code class="docutils literal notranslate"><span class=
 However, it is generally good style to be mindful of Lean&#8217;s
 notational conventions and leave out parentheses when Lean does as well.</p>
 <p>Let&#8217;s try out <code class="docutils literal notranslate"><span class="pre">rw</span></code>.</p>
-<div class="highlight-lean notranslate" id="index-1"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate" id="index-1"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">data.real.basic</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="n">rw</span> <span class="n">mul_comm</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
   <span class="n">rw</span> <span class="n">mul_assoc</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span>
@@ -514,8 +515,7 @@ To avoid errors due to name clashes,
 in the next example we put our versions of the library
 theorems in a new namespace called <code class="docutils literal notranslate"><span class="pre">my_ring.</span></code></p>
 <p>The next example shows that we do not need <code class="docutils literal notranslate"><span class="pre">add_zero</span></code> or <code class="docutils literal notranslate"><span class="pre">add_right_neg</span></code>
-as ring axioms, because they follow from the other axioms.
-import tactic</p>
+as ring axioms, because they follow from the other axioms.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">namespace</span> <span class="n">my_ring</span>
 <span class="kd">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
 

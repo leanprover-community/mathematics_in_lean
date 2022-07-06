@@ -632,7 +632,7 @@ in expressions and proof terms:</p>
 in favoring the use of <code class="docutils literal notranslate"><span class="pre">cases</span></code> until you are more comfortable
 with the existential quantifier.
 But we will come to learn that all of these tools,
-including <code class="docutils literal notranslate"><span class="pre">cases</span></code>, use, and the anonymous constructors,
+including <code class="docutils literal notranslate"><span class="pre">cases</span></code>, <code class="docutils literal notranslate"><span class="pre">use</span></code>, and the anonymous constructors,
 are like Swiss army knives when it comes to theorem proving.
 They can be used for a wide range of purposes,
 not just for unpacking exists statements.</p>
@@ -1117,7 +1117,7 @@ which drops into tactic mode at the keyword <code class="docutils literal notran
 </div>
 <p><em>Using</em> a conjunction instead of proving one involves unpacking the proofs of the
 two parts.
-You can uses the <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic for that,
+You can use the <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic for that,
 as well as <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, <code class="docutils literal notranslate"><span class="pre">rintros</span></code>, or a pattern-matching lambda,
 all in a manner similar to the way they are used with
 the existential quantifier.</p>
@@ -1257,8 +1257,8 @@ an equivalent one.
 In the next example, we use <code class="docutils literal notranslate"><span class="pre">abs_lt</span></code> to
 replace an expression of the form <code class="docutils literal notranslate"><span class="pre">abs</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">y</span></code>
 by the equivalent expression <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">y</span> <span class="pre">&lt;</span> <span class="pre">x</span> <span class="pre">&#8743;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">y</span></code>,
-and in the one after that we use <code class="docutils literal notranslate"><span class="pre">dvd_gcd_iff</span></code>
-to replace an expression of the form <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&#8739;</span> <span class="pre">gcd</span> <span class="pre">n</span> <span class="pre">k</span></code> by the equivalent expression <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&#8739;</span> <span class="pre">n</span> <span class="pre">&#8743;</span> <span class="pre">m</span> <span class="pre">&#8739;</span> <span class="pre">k</span></code>.</p>
+and in the one after that we use <code class="docutils literal notranslate"><span class="pre">nat.dvd_gcd_iff</span></code>
+to replace an expression of the form <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&#8739;</span> <span class="pre">nat.gcd</span> <span class="pre">n</span> <span class="pre">k</span></code> by the equivalent expression <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&#8739;</span> <span class="pre">n</span> <span class="pre">&#8743;</span> <span class="pre">m</span> <span class="pre">&#8739;</span> <span class="pre">k</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">5</span> <span class="bp">&#8594;</span> <span class="bp">-</span><span class="mi">8</span> <span class="bp">&lt;</span> <span class="n">x</span> <span class="bp">&#8743;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">2</span> <span class="o">:=</span>
 <span class="kd">begin</span>
   <span class="n">rw</span> <span class="n">abs_lt</span><span class="o">,</span>
@@ -1266,9 +1266,9 @@ to replace an expression of the form <code class="docutils literal notranslate">
   <span class="n">split</span><span class="bp">;</span> <span class="n">linarith</span>
 <span class="kd">end</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="mi">3</span> <span class="bp">&#8739;</span> <span class="n">gcd</span> <span class="mi">6</span> <span class="mi">15</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="mi">3</span> <span class="bp">&#8739;</span> <span class="n">nat.gcd</span> <span class="mi">6</span> <span class="mi">15</span> <span class="o">:=</span>
 <span class="kd">begin</span>
-  <span class="n">rw</span> <span class="n">dvd_gcd_iff</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">nat.dvd_gcd_iff</span><span class="o">,</span>
   <span class="n">split</span><span class="bp">;</span> <span class="n">norm_num</span>
 <span class="kd">end</span>
 </pre></div>

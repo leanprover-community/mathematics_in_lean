@@ -87,7 +87,7 @@ begin
     ring },
   cases eq_zero_or_eq_zero_of_mul_eq_zero h'' with h1 h1,
   { right,
-    exact eq_neg_of_add_eq_zero h1 },
+    exact eq_neg_iff_add_eq_zero.mpr h1 },
   left,
   exact eq_of_sub_eq_zero h1
 end
@@ -101,7 +101,7 @@ begin
     ring },
   cases eq_zero_or_eq_zero_of_mul_eq_zero h'' with h1 h1,
   { right,
-    exact eq_neg_of_add_eq_zero h1 },
+    exact eq_neg_iff_add_eq_zero.mpr h1 },
   left,
   exact eq_of_sub_eq_zero h1
 end
@@ -119,7 +119,7 @@ begin
     ring },
   cases eq_zero_or_eq_zero_of_mul_eq_zero h'' with h1 h1,
   { right,
-    exact eq_neg_of_add_eq_zero h1 },
+    exact eq_neg_iff_add_eq_zero.mpr h1 },
   left,
   exact eq_of_sub_eq_zero h1
 end
@@ -133,7 +133,7 @@ begin
     ring },
   cases eq_zero_or_eq_zero_of_mul_eq_zero h'' with h1 h1,
   { right,
-    exact eq_neg_of_add_eq_zero h1 },
+    exact eq_neg_iff_add_eq_zero.mpr h1 },
   left,
   exact eq_of_sub_eq_zero h1
 end

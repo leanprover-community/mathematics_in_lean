@@ -237,7 +237,7 @@ by { ext, rw mem_Union₂, refl }
 example : (⋃ p ∈ primes, {x | p^2 ∣ x}) = {x | ∃ p ∈ primes, p^2 ∣ x} :=
 by { ext, simp }
 
-example : (⋂ p ∈ primes, {x | ¬ p ∣ x}) ⊆ {x | x < 2} :=
+example : (⋂ p ∈ primes, {x | ¬ p ∣ x}) ⊆ {x | x = 1} :=
 begin
   intro x,
   contrapose!,

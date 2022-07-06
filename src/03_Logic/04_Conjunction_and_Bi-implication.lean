@@ -109,7 +109,6 @@ example (x y : ℝ) : x^2 + y^2 = 0 ↔ x = 0 ∧ y = 0 :=
 sorry
 
 section
-open nat
 
 example (x y : ℝ) : abs (x + 3) < 5 → -8 < x ∧ x < 2 :=
 begin
@@ -118,9 +117,9 @@ begin
   split; linarith
 end
 
-example : 3 ∣ gcd 6 15 :=
+example : 3 ∣ nat.gcd 6 15 :=
 begin
-  rw dvd_gcd_iff,
+  rw nat.dvd_gcd_iff,
   split; norm_num
 end
 

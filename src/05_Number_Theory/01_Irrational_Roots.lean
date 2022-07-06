@@ -74,51 +74,47 @@ example {m n p : ℕ} (coprime_mn : m.coprime n) (prime_p : p.prime) : m^2 ≠ p
 #check nat.prod_factors
 #check nat.factors_unique
 
-#check @nat.count_factors_mul_of_pos
-#check @nat.factors_count_pow
-#check @nat.factors_prime
 
-example (m n p : ℕ) (mpos : 0 < m) (npos : 0 < n) :
-  (m * n).factors.count p = m.factors.count p + n.factors.count p :=
-nat.count_factors_mul_of_pos mpos npos
+theorem factorization_mul' {m n : ℕ} (mnez : m ≠ 0) (nnez : n ≠ 0) (p : ℕ) :
+  (m * n).factorization p = m.factorization p + n.factorization p :=
+by { rw nat.factorization_mul mnez nnez, refl }
 
-example (n k p : ℕ) : (n^k).factors.count p = k * n.factors.count p :=
-nat.factors_count_pow
+theorem factorization_pow' (n k p : ℕ) :
+  (n^k).factorization p = k * n.factorization p :=
+by { rw nat.factorization_pow, refl }
 
-example (p : ℕ) (prime_p : p.prime) : p.factors.count p = 1 :=
-begin
-  rw nat.factors_prime prime_p,
-  simp
-end
+theorem nat.prime.factorization' {p : ℕ} (prime_p : p.prime) :
+  p.factorization p = 1 :=
+by { rw prime_p.factorization, simp }
+
 
 example {m n p : ℕ} (nnz : n ≠ 0) (prime_p : p.prime) : m^2 ≠ p * n^2 :=
 begin
   intro sqr_eq,
   have nsqr_nez : n^2 ≠ 0,
     by simpa,
-  have eq1 : (m^2).factors.count p = 2 * m.factors.count p,
+  have eq1 : nat.factorization (m^2) p = 2 * m.factorization p,
     sorry,
-  have eq2 : (p * n^2).factors.count p = 2 * n.factors.count p + 1,
+  have eq2 : (p * n^2).factorization p = 2 * n.factorization p + 1,
     sorry,
-  have : (2 * m.factors.count p) % 2 = (2 * n.factors.count p + 1) % 2,
+  have : (2 * m.factorization p) % 2 = (2 * n.factorization p + 1) % 2,
   { rw [←eq1, sqr_eq, eq2] },
   rw [add_comm, nat.add_mul_mod_self_left, nat.mul_mod_right] at this,
   norm_num at this
 end
 
-example {m n k r : ℕ} (nnz : n ≠ 0) (pow_eq : m^k = r * n^k) :
-  ∀ p : ℕ, p.prime → k ∣ r.factors.count p :=
+example {m n k r : ℕ} (nnz : n ≠ 0) (pow_eq : m^k = r * n^k)
+  {p : ℕ} (prime_p : p.prime) : k ∣ r.factorization p :=
 begin
-  intros p prime_p,
   cases r with r,
   { simp },
   have npow_nz : n^k ≠ 0 := λ npowz, nnz (pow_eq_zero npowz),
-  have eq1 : (m^k).factors.count p = k * m.factors.count p,
+  have eq1 : (m^k).factorization p = k * m.factorization p,
     sorry,
-  have eq2 : (r.succ * n^k).factors.count p =
-      k * n.factors.count p + r.succ.factors.count p,
+  have eq2 : (r.succ * n^k).factorization p =
+      k * n.factorization p + r.succ.factorization p,
     sorry,
-  have : r.succ.factors.count p = k * m.factors.count p - k * n.factors.count p,
+  have : r.succ.factorization p = k * m.factorization p - k * n.factorization p,
   { rw [←eq1, pow_eq, eq2, add_comm, nat.add_sub_cancel] },
   rw this,
   sorry

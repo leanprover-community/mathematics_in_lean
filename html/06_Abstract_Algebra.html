@@ -433,7 +433,7 @@ and <code class="docutils literal notranslate"><span class="pre">is_linear</span
 with dependencies between their components.
 For example, the <em>subtype</em> construction combines a piece of data with
 a property.
-You can think of of the type <code class="docutils literal notranslate"><span class="pre">preal</span></code> in the next example as being
+You can think of the type <code class="docutils literal notranslate"><span class="pre">preal</span></code> in the next example as being
 the type of positive real numbers.
 Any <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">preal</span></code> has two components: the value, and the property of being
 positive.
@@ -517,7 +517,7 @@ together with an associative multiplication operation
 such that multiplication distributes over addition.
 A ring is <em>commutative</em> if the multiplication is commutative.</p></li>
 <li><p>An <em>ordered ring</em> <span class="math notranslate nohighlight">\((R, +, 0, -, \cdot, 1, \le)\)</span> consists of a ring
-together with a partial order on its elements, such that <cite>a le b</cite> implies
+together with a partial order on its elements, such that <span class="math notranslate nohighlight">\(a \le b\)</span> implies
 <span class="math notranslate nohighlight">\(a + c \le b + c\)</span> for every <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> in <span class="math notranslate nohighlight">\(R\)</span>,
 and <span class="math notranslate nohighlight">\(0 \le a\)</span> and <span class="math notranslate nohighlight">\(0 \le b\)</span> implies <span class="math notranslate nohighlight">\(0 \le a b\)</span> for
 every <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> in <span class="math notranslate nohighlight">\(R\)</span>.</p></li>
@@ -535,7 +535,7 @@ every <span class="math notranslate nohighlight">\(a\)</span> and <span class="m
 of subsets of <span class="math notranslate nohighlight">\(X\)</span>, called the <em>open subsets of</em> <span class="math notranslate nohighlight">\(X\)</span>, such that
 the following hold:</p>
 <ul class="simple">
-<li><p>The empty set is open.</p></li>
+<li><p>The empty set and <span class="math notranslate nohighlight">\(X\)</span> are open.</p></li>
 <li><p>The intersection of two open sets is open.</p></li>
 <li><p>An arbitrary union of open sets is open.</p></li>
 </ul>
@@ -559,7 +559,7 @@ The number systems <span class="math notranslate nohighlight">\(\mathbb{Z}\)</sp
 and <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> are all ordered rings,
 and we should be able to apply a generic theorem about ordered rings
 in any of these instances.
-Sometimes a concrete set may the an instance of a structure in more than one way.
+Sometimes a concrete set may be an instance of a structure in more than one way.
 For example, in addition to the usual topology on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>,
 which forms the basis for real analysis,
 we can also consider the <em>discrete</em> topology on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>,
@@ -608,9 +608,9 @@ The goal of this section is to explain these mechanisms and show you
 how to use them.</p>
 <p>The first ingredient is almost too obvious to mention:
 formally speaking, algebraic structures are structures in the sense
-of the <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>.
+of <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>.
 An algebraic structure is a specification of a bundle of data satisfying
-some axiomatic hypotheses, and we saw in the <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a> that
+some axiomatic hypotheses, and we saw in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a> that
 this is exactly what the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command is designed to accommodate.
 It&#8217;s a marriage made in heaven!</p>
 <p>Given a data type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, we can define the group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>
@@ -673,7 +673,7 @@ Mathlib also defines the suggestive notation <code class="docutils literal notra
 An element <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">&#8771;</span> <span class="pre">&#946;</span></code> is a bijection between <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>
 represented by four components:
 a function <code class="docutils literal notranslate"><span class="pre">f.to_fun</span></code> from <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>,
-the inverse function <code class="docutils literal notranslate"><span class="pre">f.inv</span></code> from <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>,
+the inverse function <code class="docutils literal notranslate"><span class="pre">f.inv_fun</span></code> from <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>,
 and two properties that specify these functions are indeed inverse
 to one another.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="n">&#947;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
@@ -710,7 +710,7 @@ and have Lean insert it for us.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">equiv.perm</span> <span class="n">&#945;</span> <span class="bp">=</span> <span class="o">(</span><span class="n">&#945;</span> <span class="bp">&#8771;</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
 </pre></div>
 </div>
-<p>It should be clear that <code class="docutils literal notranslate"><span class="pre">perm</span> <span class="pre">&#945;</span></code> forms a group under composition
+<p>It should be clear that <code class="docutils literal notranslate"><span class="pre">equiv.perm</span> <span class="pre">&#945;</span></code> forms a group under composition
 of equivalences. We orient things so that <code class="docutils literal notranslate"><span class="pre">mul</span> <span class="pre">f</span> <span class="pre">g</span></code> is
 equal to <code class="docutils literal notranslate"><span class="pre">g.trans</span> <span class="pre">f</span></code>, whose forward function is <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&#8728;</span> <span class="pre">g</span></code>.
 In other words, multiplication is what we ordinarily think of as

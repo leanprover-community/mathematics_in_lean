@@ -26,3 +26,4 @@ and a paper by Anne Baanen, `Use and abuse of instance parameters in the Lean ma
 
 .. include:: 06_Abstract_Algebra/01_Structures.inc
 .. include:: 06_Abstract_Algebra/02_Algebraic_Structures.inc
+.. include:: 06_Abstract_Algebra/03_Building_the_Gaussian_Integers.inc

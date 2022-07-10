@@ -60,7 +60,7 @@ tendsto f at_top (𝓝 (x₀, y₀)) ↔ map f at_top ≤ 𝓝 (x₀, y₀) : if
         by rw [← map_le_iff_le_comap, ← map_le_iff_le_comap]
 ... ↔ map (prod.fst ∘ f) at_top ≤ 𝓝 x₀ ∧ map (prod.snd ∘ f) at_top ≤ 𝓝 y₀ : by rw [map_map, map_map]
 
--- an alterantive solution
+-- an alternative solution
 example (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
   tendsto f at_top (𝓝 (x₀, y₀)) ↔
   tendsto (prod.fst ∘ f) at_top (𝓝 x₀) ∧ tendsto (prod.snd ∘ f) at_top (𝓝 y₀) :=

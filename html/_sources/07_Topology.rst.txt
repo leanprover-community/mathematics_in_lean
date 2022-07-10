@@ -75,3 +75,5 @@ fully explicit, and that is exactly what Bourbaki's theory of filters
 manages to do.
 
 .. include:: 07_Topology/01_Filters.inc
+
+.. include:: 07_Topology/02_Metric_Spaces.inc

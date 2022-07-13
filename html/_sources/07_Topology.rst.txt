@@ -77,3 +77,5 @@ manages to do.
 .. include:: 07_Topology/01_Filters.inc
 
 .. include:: 07_Topology/02_Metric_Spaces.inc
+
+.. include:: 07_Topology/03_Topological_Spaces.inc

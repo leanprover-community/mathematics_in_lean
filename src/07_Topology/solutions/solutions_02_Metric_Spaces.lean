@@ -8,7 +8,7 @@ example {f : ℝ → X} (hf : continuous f) : continuous (λ x : ℝ, f (x^2 + x
 hf.comp $ (continuous_pow 2).add continuous_id
 
 
-example {u : ℕ → X} (hu : tendsto u at_top (𝓝 a)) {s : set X} (hs : ∀ n, u n ∈ s) :
+example {u : ℕ → X} (hu : tendsto u at_top (𝓝 a)) {s : set X} (hs : ∀ n, u n ∈ s) : 
   a ∈ closure s :=
 begin
   rw metric.tendsto_at_top at hu,
@@ -24,7 +24,7 @@ end
 example {u : ℕ → X} (hu : ∀ (n : ℕ), dist (u n) (u (n + 1)) ≤ (1 / 2) ^ n) :
   cauchy_seq u :=
 begin
-  rw metric.cauchy_seq_iff',
+  rw metric.cauchy_seq_iff',  
   intros ε ε_pos,
   obtain ⟨N, hN⟩ : ∃ N : ℕ, 1 / 2 ^ N * 2 < ε,
   { have : tendsto (λ N : ℕ, (1 / 2 ^ N * 2 : ℝ)) at_top (𝓝 0),
@@ -68,7 +68,7 @@ begin
     show z ∈ closed_ball x δ, from calc
       dist z x ≤ dist z y + dist y x : dist_triangle _ _ _
       ... ≤ (min (min (δ / 2) r) (B (n+1))) + (δ/2) : add_le_add hz xy.le
-      ... ≤ δ/2 + δ/2 : add_le_add_right ((min_le_left _ _).trans (min_le_left _ _)) _
+      ... ≤ δ/2 + δ/2 : add_le_add_right ((min_le_left _ _).trans (min_le_left _ _)) _ 
       ... = δ : add_halves δ,
     show z ∈ f n, from hr (calc
       dist z y ≤ min (min (δ / 2) r) (B (n+1)) : hz
@@ -89,7 +89,7 @@ begin
     induction n with n hn,
     exact lt_min εpos (Bpos 0),
     exact Hpos n (c n) (r n) hn },
-
+  
   have rB : ∀n, r n ≤ B n,
   { assume n,
     induction n with n hn,
@@ -113,7 +113,7 @@ begin
   -- this point `y` will be the desired point. We will check that it belongs to all
   -- `f n` and to `ball x ε`.
   use y,
-
+  
   have I : ∀n, ∀ m ≥ n, closed_ball (c m) (r m) ⊆ closed_ball (c n) (r n),
   { assume n,
     refine nat.le_induction _ (λm hnm h, _),
@@ -125,7 +125,7 @@ begin
     refine (filter.eventually_ge_at_top n).mono (λ m hm, _),
     exact I n m hm (mem_closed_ball_self (rpos _).le) },
   split,
-  { suffices : ∀ n, y ∈ f n, by rwa set.mem_Inter,
+  { suffices : ∀ n, y ∈ f n, by rwa set.mem_Inter,    
     intro n,
     have : closed_ball (c (n+1)) (r (n+1)) ⊆ f n := subset.trans (incl n) (inter_subset_right _ _),
     exact this (yball (n+1)) },

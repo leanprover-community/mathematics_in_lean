@@ -3,8 +3,9 @@ import analysis.normed_space.banach_steinhaus
 
 open set filter
 open_locale topological_space filter
-section
 
+
+section
 
 variables {X : Type*} [topological_space X]
 
@@ -66,6 +67,8 @@ example {α : Type*} (n : α → filter α) (H₀ : ∀ a, pure a ≤ n a)
 sorry
 
 
+end
+-- BOTH.
 
 variables {X Y : Type*}
 

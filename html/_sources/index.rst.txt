@@ -14,6 +14,8 @@ Mathematics in Lean
    05_Number_Theory
    06_Abstract_Algebra
    07_Topology
+   08_Differential_Calculus
+   09_Integration_Measure
 
 .. toctree::
    :hidden:

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8. Differential calculus &mdash; Mathematics in Lean 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Integration and measure theory" href="09_Integration_Measure.html" />
+    <link rel="prev" title="7. Topology" href="07_Topology.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Basics.html">2. Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Logic.html">3. Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Sets_and_Functions.html">4. Sets and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_Abstract_Algebra.html">6. Abstract Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Topology.html">7. Topology</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Differential calculus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#elementary-differential-calculus">8.1. Elementary differential calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#differential-calculus-in-normed-spaces">8.2. Differential calculus in normed spaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">8.2.1. Normed spaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#continuous-linear-maps">8.2.2. Continuous linear maps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asymptotic-comparisons">8.2.3. Asymptotic comparisons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#differentiability">8.2.4. Differentiability</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="09_Integration_Measure.html">9. Integration and measure theory</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mathematics in Lean</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">8. </span>Differential calculus</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/08_Differential_Calculus.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <span class="target" id="differential-calculus"></span><section id="index-0">
+<span id="id1"></span><h1><span class="section-number">8. </span>Differential calculus<a class="headerlink" href="#index-0" title="Permalink to this headline">&#61633;</a></h1>
+<section id="elementary-differential-calculus">
+<span id="elementary-calculus"></span><span id="index-1"></span><h2><span class="section-number">8.1. </span>Elementary differential calculus<a class="headerlink" href="#elementary-differential-calculus" title="Permalink to this headline">&#61633;</a></h2>
+<p>In this section we only consider derivatives of functions from reals to reals. The most important thing to
+understand is the distinction between claiming that a function has a derivative at some point and referring
+to the derivative function.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">real</span>
+
+<span class="sd">/-- The sin function has derivative 1 at 0. -/</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">has_deriv_at</span> <span class="n">sin</span> <span class="mi">1</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">simpa</span> <span class="n">using</span> <span class="n">has_deriv_at_sin</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>One can simply state that <code class="docutils literal notranslate"><span class="pre">f</span></code> is differentiable at some point, without giving its derivative number there.
+This uses <code class="docutils literal notranslate"><span class="pre">differentiable_at</span> <span class="pre">&#8477;</span></code> where <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> is here so that, in a slightly more general context, we can
+distinguish functions from <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code> that are differentiable in the real sense or in the complex sense.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">differentiable_at</span> <span class="n">&#8477;</span> <span class="n">sin</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">has_deriv_at_sin</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">differentiable_at</span>
+</pre></div>
+</div>
+<p>It would be extremely unconvenient to require a proof a differentiability floating around each time we want
+to write a derivative. So there is some <code class="docutils literal notranslate"><span class="pre">deriv</span> <span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#8477;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code> which is defined for any function <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#8477;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code>
+but is defined to take value <code class="docutils literal notranslate"><span class="pre">0</span></code> at any point where <code class="docutils literal notranslate"><span class="pre">f</span></code> is not differentiable.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="n">a</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">has_deriv_at</span> <span class="n">f</span> <span class="n">a</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">deriv</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">h.deriv</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#172;</span> <span class="n">differentiable_at</span> <span class="n">&#8477;</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">deriv</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">deriv_zero_of_not_differentiable_at</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p>Of course there are many lemmas about <code class="docutils literal notranslate"><span class="pre">deriv</span></code> that do require differentiability assumptions.
+For instance you should think about a counter-example to the next lemma without differentiability assumption.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">differentiable_at</span> <span class="n">&#8477;</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">differentiable_at</span> <span class="n">&#8477;</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">deriv</span> <span class="o">(</span><span class="n">f</span> <span class="bp">+</span> <span class="n">g</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">deriv</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">deriv</span> <span class="n">g</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">deriv_add</span> <span class="n">hf</span> <span class="n">hg</span>
+</pre></div>
+</div>
+<p>There are however statement who suprisingly do <em>not</em> involve this assumption but rather take advantage
+of the fact that the value of <cite>deriv</cite> default to zero when there is no derivative.
+As usual, reading statements still require to understand the definitions involved.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_local_min</span> <span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">deriv</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">h.deriv_eq_zero</span>
+</pre></div>
+</div>
+<p>This allows to state Rolle&#8217;s theorem without any differentiability assumption, which
+looks even weirder.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">hab</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hfc</span> <span class="o">:</span> <span class="n">continuous_on</span> <span class="n">f</span> <span class="o">(</span><span class="n">Icc</span> <span class="n">a</span> <span class="n">b</span><span class="o">))</span> <span class="o">(</span><span class="n">hfI</span> <span class="o">:</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8707;</span> <span class="n">c</span> <span class="bp">&#8712;</span> <span class="n">Ioo</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">deriv</span> <span class="n">f</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">exists_deriv_eq_zero</span> <span class="n">f</span> <span class="n">hab</span> <span class="n">hfc</span> <span class="n">hfI</span>
+</pre></div>
+</div>
+<p>Of course this trick does not work for the general mean value theorem.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">hab</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous_on</span> <span class="n">f</span> <span class="o">(</span><span class="n">Icc</span> <span class="n">a</span> <span class="n">b</span><span class="o">))</span>
+ <span class="o">(</span><span class="n">hf&#39;</span> <span class="o">:</span> <span class="n">differentiable_on</span> <span class="n">&#8477;</span> <span class="n">f</span> <span class="o">(</span><span class="n">Ioo</span> <span class="n">a</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+ <span class="bp">&#8707;</span> <span class="n">c</span> <span class="bp">&#8712;</span> <span class="n">Ioo</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">deriv</span> <span class="n">f</span> <span class="n">c</span> <span class="bp">=</span> <span class="o">(</span><span class="n">f</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">exists_deriv_eq_slope</span> <span class="n">f</span> <span class="n">hab</span> <span class="n">hf</span> <span class="n">hf&#39;</span>
+</pre></div>
+</div>
+<p>Lean can automatically compute some simple derivatives using <cite>simp</cite> tactic.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">real</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">deriv</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="n">x</span><span class="bp">^</span><span class="mi">5</span><span class="o">)</span> <span class="mi">6</span> <span class="bp">=</span> <span class="mi">5</span> <span class="bp">*</span> <span class="mi">6</span><span class="bp">^</span><span class="mi">4</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x&#8320;</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8320;</span> <span class="o">:</span> <span class="n">x&#8320;</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">deriv</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">:</span><span class="n">&#8477;</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">/</span> <span class="n">x</span><span class="o">)</span> <span class="n">x&#8320;</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">(</span><span class="n">x&#8320;</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span><span class="bp">&#8315;&#185;</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">deriv</span> <span class="n">sin</span> <span class="n">&#960;</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+<p>Sometimes you need <cite>ring</cite> and/or <cite>field_simp</cite> after <cite>simp</cite></p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x&#8320;</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x&#8320;</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">deriv</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="n">exp</span><span class="o">(</span><span class="n">x</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="n">x</span><span class="bp">^</span><span class="mi">5</span><span class="o">)</span> <span class="n">x&#8320;</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">x&#8320;</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="mi">5</span><span class="o">)</span> <span class="bp">*</span> <span class="n">exp</span> <span class="o">(</span><span class="n">x&#8320;</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="n">x&#8320;</span><span class="bp">^</span><span class="mi">6</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">x&#8320;</span><span class="bp">^</span><span class="mi">5</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">,</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">pow_ne_zero</span> <span class="mi">5</span> <span class="n">h</span><span class="o">,</span> <span class="o">},</span>
+  <span class="n">field_simp</span><span class="o">,</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_deriv_at</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">5</span><span class="o">)</span> <span class="mi">2</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="o">((</span><span class="n">has_deriv_at_id</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">const_mul</span> <span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">add_const</span> <span class="mi">5</span><span class="o">,</span>
+  <span class="n">rwa</span> <span class="o">[</span><span class="n">mul_one</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+<span class="kd">end</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">deriv</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">5</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+</section>
+<section id="differential-calculus-in-normed-spaces">
+<span id="normed-spaces"></span><span id="index-2"></span><h2><span class="section-number">8.2. </span>Differential calculus in normed spaces<a class="headerlink" href="#differential-calculus-in-normed-spaces" title="Permalink to this headline">&#61633;</a></h2>
+<section id="id2">
+<h3><span class="section-number">8.2.1. </span>Normed spaces<a class="headerlink" href="#id2" title="Permalink to this headline">&#61633;</a></h3>
+<p>In order to level-up from calculus on <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>, we need the context of normed vector spaces.
+The first stage is normed groups, ie additive commutative groups equipped with a real-valued
+norm function satisfying the following conditions.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="bp">&#8741;</span><span class="n">x</span><span class="bp">&#8741;</span> <span class="o">:=</span>
+<span class="n">norm_nonneg</span> <span class="n">x</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">E</span><span class="o">}</span> <span class="o">:</span> <span class="bp">&#8741;</span><span class="n">x</span><span class="bp">&#8741;</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">norm_eq_zero</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8741;</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="bp">&#8741;</span><span class="n">x</span><span class="bp">&#8741;</span> <span class="bp">+</span> <span class="bp">&#8741;</span><span class="n">y</span><span class="bp">&#8741;</span> <span class="o">:=</span>
+<span class="n">norm_add_le</span> <span class="n">x</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>This is already connected to the topology library that was discussed in the topology chapter.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">E</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">apply_instance</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="bp">&#8741;</span><span class="n">f</span> <span class="n">x</span><span class="bp">&#8741;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">hf.norm</span>
+</pre></div>
+</div>
+<p>In order to connect normed groups to linear algebra, we add a <code class="docutils literal notranslate"><span class="pre">normed_space</span></code>
+instance assumption on top of the <code class="docutils literal notranslate"><span class="pre">normed_group</span></code> one. In addition to having a vector
+space structure, this puts a condition relating the scalar action with the norm.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">&#8477;</span> <span class="n">E</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8741;</span><span class="n">a</span> <span class="bp">&#8226;</span> <span class="n">x</span><span class="bp">&#8741;</span> <span class="bp">=</span> <span class="bp">|</span><span class="n">a</span><span class="bp">|</span> <span class="bp">*</span> <span class="bp">&#8741;</span><span class="n">x</span><span class="bp">&#8741;</span> <span class="o">:=</span>
+<span class="n">norm_smul</span> <span class="n">a</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>In case of finite dimensional vector spaces, we get completeness for free.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">[</span><span class="n">finite_dimensional</span> <span class="n">&#8477;</span> <span class="n">E</span><span class="o">]:</span> <span class="n">complete_space</span> <span class="n">E</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">apply_instance</span>
+</pre></div>
+</div>
+<p>In all the previous example we used real numbers as the base field, but the general context
+for calculus is vector spaces over non-discrete normed fields. They are fields equipped with a real
+valued norm which is multiplicative and such that not every element has norm zero or one
+(equivalently there is an element whose norm is bigger than one).</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">&#120156;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8741;</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">&#8741;</span> <span class="bp">=</span> <span class="bp">&#8741;</span><span class="n">x</span><span class="bp">&#8741;</span> <span class="bp">*</span> <span class="bp">&#8741;</span><span class="n">y</span><span class="bp">&#8741;</span> <span class="o">:=</span>
+<span class="n">norm_mul</span> <span class="n">x</span> <span class="n">y</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">&#120156;</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="bp">&#8741;</span><span class="n">x</span><span class="bp">&#8741;</span> <span class="o">:=</span>
+<span class="n">normed_field.exists_one_lt_norm</span> <span class="bp">&#120156;</span>
+</pre></div>
+</div>
+<p>Completeness of finite dimensional vector spaces hold in this context as long as the base field is complete.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">complete_space</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">[</span><span class="n">finite_dimensional</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">:</span> <span class="n">complete_space</span> <span class="n">E</span> <span class="o">:=</span>
+<span class="n">finite_dimensional.complete</span> <span class="bp">&#120156;</span> <span class="n">E</span>
+</pre></div>
+</div>
+</section>
+<section id="continuous-linear-maps">
+<h3><span class="section-number">8.2.2. </span>Continuous linear maps<a class="headerlink" href="#continuous-linear-maps" title="Permalink to this headline">&#61633;</a></h3>
+<p>We now turn to morphisms in the category of normed spaces: continuous linear maps.
+These are implemented as bundled maps with notation <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">&#8594;L[&#120156;]</span> <span class="pre">F</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span> <span class="o">{</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="bp">&#120156;</span><span class="o">]</span>
+          <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span>
+          <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">F</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">E</span> <span class="o">:=</span> <span class="n">continuous_linear_map.id</span> <span class="bp">&#120156;</span> <span class="n">E</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="n">f.cont</span>
+</pre></div>
+</div>
+<p>Continuous linear maps have an operator norm characterized by the following properties.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8741;</span><span class="n">f</span> <span class="n">x</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="bp">&#8741;</span><span class="n">f</span><span class="bp">&#8741;</span> <span class="bp">*</span> <span class="bp">&#8741;</span><span class="n">x</span><span class="bp">&#8741;</span> <span class="o">:=</span>
+<span class="n">f.le_op_norm</span> <span class="n">x</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">hMp</span><span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">hM</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span><span class="o">,</span> <span class="bp">&#8741;</span><span class="n">f</span> <span class="n">x</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="n">M</span> <span class="bp">*</span> <span class="bp">&#8741;</span><span class="n">x</span><span class="bp">&#8741;</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8741;</span><span class="n">f</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="n">f.op_norm_le_bound</span> <span class="n">hMp</span> <span class="n">hM</span>
+</pre></div>
+</div>
+<p>There is also a notion of bundled continuous linear <em>isomorphism</em>. Their type is <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">&#8771;L[&#120156;]</span> <span class="pre">F</span></code>.</p>
+<p>As a challenging exercise, you can prove the Banach-Steinhaus theorem, or Uniform Boundedness Principle.
+If a family of continuous linear maps from a Banach space into a normed space is pointwise
+bounded, then the norms of these linear maps are uniformly bounded. The main ingredient is Baire&#8217;s theorem
+<code class="docutils literal notranslate"><span class="pre">nonempty_interior_of_Union_of_closed</span></code> (you proved a version of this in the topology chapter).
+Minor ingredients include <code class="docutils literal notranslate"><span class="pre">continuous_linear_map.op_norm_le_of_shell</span></code>, <code class="docutils literal notranslate"><span class="pre">interior_subset</span></code> and
+<code class="docutils literal notranslate"><span class="pre">interior_Inter_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">is_closed_le</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span>
+<span class="kd">variables</span>
+  <span class="o">{</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="bp">&#120156;</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">F</span><span class="o">]</span>
+
+<span class="kn">open</span> <span class="n">metric</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">C</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="bp">&#8741;</span><span class="n">g</span> <span class="n">i</span> <span class="n">x</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8707;</span> <span class="n">C&#39;</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="bp">&#8741;</span><span class="n">g</span> <span class="n">i</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="n">C&#39;</span> <span class="o">:=</span>
+<span class="kd">begin</span>
+  <span class="c">/-</span><span class="cm"> sequence of subsets consisting of those `x : E` with norms `&#8741;g i x&#8741;` bounded by `n` -/</span>
+  <span class="k">let</span> <span class="n">e</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">set</span> <span class="n">E</span> <span class="o">:=</span> <span class="bp">&#955;</span> <span class="n">n</span><span class="o">,</span> <span class="bp">&#8898;</span> <span class="n">i</span> <span class="o">:</span> <span class="n">&#953;</span><span class="o">,</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">|</span> <span class="bp">&#8741;</span><span class="n">g</span> <span class="n">i</span> <span class="n">x</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="o">},</span>
+  <span class="c">/-</span><span class="cm"> each of these sets is closed -/</span>
+  <span class="k">have</span> <span class="n">hc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">e</span> <span class="n">n</span><span class="o">),</span>
+  <span class="gr">sorry</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"> the union is the entire space; this is where we use `h` -/</span>
+  <span class="k">have</span> <span class="n">hU</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="n">e</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">univ</span><span class="o">,</span>
+  <span class="gr">sorry</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"> apply the Baire category theorem to conclude that for some `m : &#8469;`, `e m` contains some `x` -/</span>
+  <span class="n">obtain</span> <span class="o">&#10216;</span><span class="n">m</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="o">&#10217;</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">m</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">interior</span> <span class="o">(</span><span class="n">e</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span> <span class="gr">sorry</span><span class="o">,</span>
+  <span class="n">obtain</span> <span class="o">&#10216;</span><span class="n">&#949;</span><span class="o">,</span> <span class="n">&#949;_pos</span><span class="o">,</span> <span class="n">h&#949;</span><span class="o">&#10217;</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">&#949;</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">&#949;</span> <span class="bp">&#8838;</span> <span class="n">interior</span> <span class="o">(</span><span class="n">e</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span> <span class="gr">sorry</span><span class="o">,</span>
+  <span class="n">obtain</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="o">&#10217;</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">&#120156;</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="bp">&#8741;</span><span class="n">k</span><span class="bp">&#8741;</span> <span class="o">:=</span> <span class="gr">sorry</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"> show all elements in the ball have norm bounded by `m` after applying any `g i` -/</span>
+  <span class="k">have</span> <span class="n">real_norm_le</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">z</span> <span class="bp">&#8712;</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">&#949;</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">&#953;</span><span class="o">),</span> <span class="bp">&#8741;</span><span class="n">g</span> <span class="n">i</span> <span class="n">z</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="n">m</span><span class="o">,</span>
+  <span class="gr">sorry</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">&#949;k_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">&#949;</span> <span class="bp">/</span> <span class="bp">&#8741;</span><span class="n">k</span><span class="bp">&#8741;</span> <span class="o">:=</span> <span class="gr">sorry</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="o">&#10216;(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">&#949;</span> <span class="bp">/</span> <span class="bp">&#8741;</span><span class="n">k</span><span class="bp">&#8741;</span><span class="o">),</span> <span class="bp">&#955;</span> <span class="n">i</span><span class="o">,</span> <span class="n">continuous_linear_map.op_norm_le_of_shell</span> <span class="n">&#949;_pos</span> <span class="n">_</span> <span class="n">hk</span> <span class="n">_</span><span class="o">&#10217;,</span>
+  <span class="gr">sorry</span><span class="o">,</span>
+  <span class="gr">sorry</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+</section>
+<section id="asymptotic-comparisons">
+<h3><span class="section-number">8.2.3. </span>Asymptotic comparisons<a class="headerlink" href="#asymptotic-comparisons" title="Permalink to this headline">&#61633;</a></h3>
+<p>The remaining missing piece in order to define differentiability is asymptotics comparisons.
+These are the big O, little o, and equivalent relations. The definitions and notations are shown below.
+They all have extensive libraries of lemmas, but here we will only use little o to define differentiability.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">asymptotics</span>
+<span class="n">open_locale</span> <span class="n">asymptotics</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_O_with</span> <span class="n">c</span> <span class="n">l</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">&#8596;</span> <span class="bp">&#8704;&#7584;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">l</span><span class="o">,</span> <span class="bp">&#8741;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="n">c</span> <span class="bp">*</span> <span class="bp">&#8741;</span> <span class="n">g</span> <span class="n">x</span> <span class="bp">&#8741;</span> <span class="o">:=</span>
+<span class="n">is_O_with_iff</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="bp">=</span><span class="n">O</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="n">g</span> <span class="bp">&#8596;</span> <span class="bp">&#8707;</span> <span class="n">C</span><span class="o">,</span> <span class="n">is_O_with</span> <span class="n">C</span> <span class="n">l</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">is_O_iff_is_O_with</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="bp">=</span><span class="n">o</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="n">g</span> <span class="bp">&#8596;</span> <span class="bp">&#8704;</span> <span class="n">C</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">is_O_with</span> <span class="n">C</span> <span class="n">l</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">is_o_iff_forall_is_O_with</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="bp">~</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="n">g</span> <span class="bp">&#8596;</span> <span class="o">(</span><span class="n">f</span> <span class="bp">-</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span><span class="n">o</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">iff.rfl</span>
+</pre></div>
+</div>
+</section>
+<section id="differentiability">
+<h3><span class="section-number">8.2.4. </span>Differentiability<a class="headerlink" href="#differentiability" title="Permalink to this headline">&#61633;</a></h3>
+<p>We are now ready to discuss differentiable functions between normed spaces. As in the elementary
+one-dimensional case, there is a predicate <code class="docutils literal notranslate"><span class="pre">has_fderiv_at</span></code> and a function <code class="docutils literal notranslate"><span class="pre">fderiv</span></code>. Here the letter
+f stands for Fr&#233;chet.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span>
+  <span class="o">{</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="bp">&#120156;</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">F</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">x&#8320;</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">has_fderiv_at</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">x&#8320;</span> <span class="bp">&#8596;</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">f</span> <span class="n">x&#8320;</span> <span class="bp">-</span> <span class="n">f&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">x&#8320;</span><span class="o">))</span> <span class="bp">=</span><span class="n">o</span><span class="o">[</span><span class="bp">&#120029;</span> <span class="n">x&#8320;</span><span class="o">]</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">x&#8320;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">iff.rfl</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">x&#8320;</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">hff&#39;</span> <span class="o">:</span> <span class="n">has_fderiv_at</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">x&#8320;</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">fderiv</span> <span class="bp">&#120156;</span> <span class="n">f</span> <span class="n">x&#8320;</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="o">:=</span>
+<span class="n">hff&#39;.fderiv</span>
+</pre></div>
+</div>
+<p>We also have iterated derivatives that take values in the type of multilinear maps <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">[&#215;n]&#8594;L[&#120156;]</span> <span class="pre">F</span></code>, and
+continuously differential functions. The type <code class="docutils literal notranslate"><span class="pre">with_top</span> <span class="pre">&#8469;</span></code> is <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> with an additional element <code class="docutils literal notranslate"><span class="pre">&#8868;</span></code> that
+is bigger than every natural number. So <span class="math notranslate nohighlight">\(\mathcal{C}^\infty\)</span> functions are functions <code class="docutils literal notranslate"><span class="pre">f</span></code> that satisfy
+<code class="docutils literal notranslate"><span class="pre">cont_diff</span> <span class="pre">&#120156;</span> <span class="pre">&#8868;</span> <span class="pre">f</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="o">(</span><span class="n">E</span> <span class="o">[</span><span class="bp">&#215;</span><span class="n">n</span><span class="o">]</span><span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">iterated_fderiv</span> <span class="bp">&#120156;</span> <span class="n">n</span> <span class="n">f</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">cont_diff</span> <span class="bp">&#120156;</span> <span class="n">n</span> <span class="n">f</span> <span class="bp">&#8596;</span>
+    <span class="o">(</span><span class="bp">&#8704;</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">),</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">with_top</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="n">iterated_fderiv</span> <span class="bp">&#120156;</span> <span class="n">m</span> <span class="n">f</span> <span class="n">x</span><span class="o">))</span>
+  <span class="bp">&#8743;</span> <span class="o">(</span><span class="bp">&#8704;</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">),</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">with_top</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">differentiable</span> <span class="bp">&#120156;</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="n">iterated_fderiv</span> <span class="bp">&#120156;</span> <span class="n">m</span> <span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">cont_diff_iff_continuous_differentiable</span>
+</pre></div>
+</div>
+<p>There is a stricter notion of differentiability called <code class="docutils literal notranslate"><span class="pre">has_strict_fderiv_at</span></code> which enters the statement
+of the inverse function theorem and the implicit function theorem (both those theorems are in mathlib).
+The important thing to know in ordinary contexts is that over <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code>, continuously differentiable
+functions are strictly differentiable.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="bp">&#120130;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">is_R_or_C</span> <span class="bp">&#120130;</span><span class="o">]</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120130;</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120130;</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">E</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">with_top</span> <span class="n">&#8469;</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">cont_diff_at</span> <span class="bp">&#120130;</span> <span class="n">n</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&#8804;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">has_strict_fderiv_at</span> <span class="n">f</span> <span class="o">(</span><span class="n">fderiv</span> <span class="bp">&#120130;</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">hf.has_strict_fderiv_at</span> <span class="n">hn</span>
+</pre></div>
+</div>
+<p>The local inverse theorem is stated using a function that produce an inverse function from a
+function and the assumptions that it is strictly differentiable at a point <code class="docutils literal notranslate"><span class="pre">a</span></code> and its differential is an isomorphism.</p>
+<p>The first example below gets this local inverse, then the next one state that it is indeed a local inverse
+from the left and from the right and is strictly differentiable.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span> <span class="n">local_inverse</span>
+
+<span class="kd">variables</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">}</span> <span class="o">{</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8771;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">E</span><span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">has_strict_fderiv_at</span> <span class="n">f</span> <span class="bp">&#8593;</span><span class="n">f&#39;</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">&#8594;</span> <span class="n">E</span> <span class="o">:=</span>
+<span class="n">has_strict_fderiv_at.local_inverse</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">hf</span>
+
+<span class="kd">example</span>  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">has_strict_fderiv_at</span> <span class="n">f</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8704;&#7584;</span> <span class="n">x</span> <span class="k">in</span> <span class="bp">&#120029;</span> <span class="n">a</span><span class="o">,</span> <span class="n">hf.local_inverse</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">hf.eventually_left_inverse</span>
+
+<span class="kd">example</span>  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">has_strict_fderiv_at</span> <span class="n">f</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8704;&#7584;</span> <span class="n">x</span> <span class="k">in</span> <span class="bp">&#120029;</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span> <span class="n">f</span> <span class="o">(</span><span class="n">hf.local_inverse</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">hf.eventually_right_inverse</span>
+
+<span class="kd">example</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">}</span> <span class="o">{</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8771;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">has_strict_fderiv_at</span> <span class="n">f</span> <span class="bp">&#8593;</span><span class="n">f&#39;</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">has_strict_fderiv_at</span> <span class="o">(</span><span class="n">has_strict_fderiv_at.local_inverse</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">hf</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;.symm</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">has_strict_fderiv_at.to_local_inverse</span> <span class="n">hf</span>
+
+<span class="kd">end</span> <span class="n">local_inverse</span>
+</pre></div>
+</div>
+<p>At the end of this very short tour of calculus in mathlib, we should also point out that there
+are many variations that we haven&#8217;t discuss. For instance you may want to discuss one-sided
+derivatives in the one-dimensional context. This is all in mathlib in a very general context,
+see <code class="docutils literal notranslate"><span class="pre">has_fderiv_within_at</span></code> or the even more general <code class="docutils literal notranslate"><span class="pre">has_fderiv_at_filter</span></code>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="07_Topology.html" class="btn btn-neutral float-left" title="7. Topology" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="09_Integration_Measure.html" class="btn btn-neutral float-right" title="9. Integration and measure theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jeremy Avigad, Kevin Buzzard, Robert Y. Lewis, Patrick Massot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

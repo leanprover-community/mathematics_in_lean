@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9. Integration and measure theory &mdash; Mathematics in Lean 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Index" href="genindex.html" />
+    <link rel="prev" title="8. Differential calculus" href="08_Differential_Calculus.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Basics.html">2. Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Logic.html">3. Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Sets_and_Functions.html">4. Sets and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_Abstract_Algebra.html">6. Abstract Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Topology.html">7. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_Differential_Calculus.html">8. Differential calculus</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Integration and measure theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#elementary-integration">9.1. Elementary integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#measure-theory">9.2. Measure theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">9.3. Integration</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mathematics in Lean</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">9. </span>Integration and measure theory</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/09_Integration_Measure.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <span class="target" id="integration"></span><section id="integration-and-measure-theory">
+<span id="index-0"></span><h1><span class="section-number">9. </span>Integration and measure theory<a class="headerlink" href="#integration-and-measure-theory" title="Permalink to this headline">&#61633;</a></h1>
+<section id="elementary-integration">
+<span id="index-1"></span><span id="id1"></span><h2><span class="section-number">9.1. </span>Elementary integration<a class="headerlink" href="#elementary-integration" title="Permalink to this headline">&#61633;</a></h2>
+<p>We first focus on integration of functions on finite intervals in <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>. We can integrate
+elementary functions.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">measure_theory</span> <span class="n">interval_integral</span>
+<span class="n">open_locale</span> <span class="n">interval</span> <span class="c1">-- this brings the notation [a, b]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">):</span> <span class="bp">&#8747;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">a..b</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="n">integral_id</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span>  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">&#8477;</span><span class="o">)</span> <span class="bp">&#8713;</span> <span class="o">[</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">])</span> <span class="o">:</span> <span class="bp">&#8747;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">a..b</span><span class="o">,</span> <span class="mi">1</span><span class="bp">/</span><span class="n">x</span> <span class="bp">=</span> <span class="n">real.log</span> <span class="o">(</span><span class="n">b</span> <span class="bp">/</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">integral_one_div</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p>The fundamental theorem of calculus relates integration and differentiation.
+Below we give simplified statement of the two parts of this theorem. The first part
+says that integration provides an inverse to differentiation and the second one
+says how to compute integrals of derivatives (those two parts are very much related but
+their optimal versions, not shown here, are not equivalent).</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">deriv</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">u</span><span class="o">,</span> <span class="bp">&#8747;</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="k">in</span> <span class="n">a..u</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">integral_has_strict_deriv_at_right</span> <span class="o">(</span><span class="n">hf.interval_integrable</span> <span class="n">_</span> <span class="n">_</span><span class="o">)</span> <span class="o">(</span><span class="n">hf.strongly_measurable_at_filter</span> <span class="n">_</span> <span class="n">_</span><span class="o">)</span>
+                                    <span class="n">hf.continuous_at</span><span class="o">)</span><span class="bp">.</span><span class="n">has_deriv_at.deriv</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">{</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="o">[</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">],</span> <span class="n">has_deriv_at</span> <span class="n">f</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">interval_integrable</span> <span class="n">f&#39;</span> <span class="n">volume</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8747;</span> <span class="n">y</span> <span class="k">in</span> <span class="n">a..b</span><span class="o">,</span> <span class="n">f&#39;</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">integral_eq_sub_of_has_deriv_at</span> <span class="n">h</span> <span class="n">h&#39;</span>
+</pre></div>
+</div>
+<p>Convolution is also defined and its basic properties are proven.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">open_locale</span> <span class="n">convolution</span>
+
+<span class="kd">example</span>  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="bp">&#8902;</span> <span class="n">g</span> <span class="bp">=</span> <span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="bp">&#8747;</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">t</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">g</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">t</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">rfl</span>
+</pre></div>
+</div>
+</section>
+<section id="measure-theory">
+<span id="index-2"></span><span id="id2"></span><h2><span class="section-number">9.2. </span>Measure theory<a class="headerlink" href="#measure-theory" title="Permalink to this headline">&#61633;</a></h2>
+<p>The general context for integration in mathlib is measure theory. Even the elementary
+integrals of the previous section are secretely Bochner integrals. Bochner integration is
+a generalization of Lebesgue integration where the target space can be any Banach space,
+not necessarily finite dimensional.</p>
+<p>The first layer is the notion of a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of sets that are &#8220;measurable&#8221;.
+Equipping a type with such a structure is the role of the type class <code class="docutils literal notranslate"><span class="pre">measurable_space</span></code>.
+The empty and univ sets are measurable, the complement of a measurable set is measurable,
+and a countable union or intersection of measurable sets is measurable (of course these axioms are
+redundant). In this context the countability assumption is spelled using <code class="docutils literal notranslate"><span class="pre">encodable</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variables</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">&#945;</span><span class="o">]</span>
+
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">measurable_set</span> <span class="o">(</span><span class="bp">&#8709;</span> <span class="o">:</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">measurable_set.empty</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">measurable_set</span> <span class="o">(</span><span class="n">univ</span> <span class="o">:</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">measurable_set.univ</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">measurable_set</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">measurable_set</span> <span class="n">s</span><span class="bp">&#7580;</span> <span class="o">:=</span>
+<span class="n">hs.compl</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">encodable</span> <span class="n">&#8469;</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">apply_instance</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">encodable</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">by</span> <span class="n">apply_instance</span>
+
+<span class="kd">variables</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">encodable</span> <span class="n">&#953;</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">b</span><span class="o">,</span> <span class="n">measurable_set</span> <span class="o">(</span><span class="n">f</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">measurable_set</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">b</span><span class="o">,</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">measurable_set.Union</span> <span class="n">h</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">b</span><span class="o">,</span> <span class="n">measurable_set</span> <span class="o">(</span><span class="n">f</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">measurable_set</span> <span class="o">(</span><span class="bp">&#8898;</span> <span class="n">b</span><span class="o">,</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">measurable_set.Inter</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p>Once a type is measurable we can measure it. On paper, a measure on a type equipped with a
+<span class="math notranslate nohighlight">\(\sigma\)</span>-algebra is a function from measurable sets to extended non-negative reals that is
+additive on countable disjoint unions. In mathlib we don&#8217;t want to carry around measurability assumptions
+each time we write an application of the measure to a set. So we extend the measure to any set <code class="docutils literal notranslate"><span class="pre">s</span></code>
+as the infimum of measures of measurable sets containing <code class="docutils literal notranslate"><span class="pre">s</span></code>. Of course many lemmas still require
+measurability assumptions, but not all.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">measure_theory</span>
+
+<span class="kd">variables</span> <span class="o">{</span><span class="n">&#956;</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">&#945;</span><span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#956;</span> <span class="n">s</span> <span class="bp">=</span> <span class="bp">&#10757;</span> <span class="n">t</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">ht</span> <span class="o">:</span> <span class="n">measurable_set</span> <span class="n">t</span><span class="o">),</span> <span class="n">&#956;</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="n">measure_eq_infi</span> <span class="n">s</span>
+
+<span class="kd">example</span>  <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#956;</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="bp">&#8721;&#39;</span> <span class="n">i</span><span class="o">,</span> <span class="n">&#956;</span> <span class="o">(</span><span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">measure_Union_le</span> <span class="n">s</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">hmeas</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">measurable_set</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span> <span class="o">(</span><span class="n">hdis</span> <span class="o">:</span> <span class="n">pairwise</span> <span class="o">(</span><span class="n">disjoint</span> <span class="n">on</span> <span class="n">f</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">&#956;</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8721;&#39;</span> <span class="n">i</span><span class="o">,</span> <span class="n">&#956;</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">&#956;.m_Union</span> <span class="n">hmeas</span> <span class="n">hdis</span>
+</pre></div>
+</div>
+<p>Measures come with a notion of properties holding almost everywhere. This is of course a special case of what
+filters do, but we have a special notation for this.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8704;&#7504;</span> <span class="n">x</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span><span class="o">)</span> <span class="bp">&#8596;</span> <span class="bp">&#8704;&#7584;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">&#956;.ae</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">iff.rfl</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">9.3. </span>Integration<a class="headerlink" href="#id3" title="Permalink to this headline">&#61633;</a></h2>
+<p>Now that we have measurable spaces and measures we can consider integrals. As explained above, the very general
+integration that we use allow any Banach space as the target. As usual we don&#8217;t want our notation to
+carry around assumptions so we can always write an integral and it will be zero if the function is not integrable.
+And of course most lemmas do have integrability assumptions.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span>
+
+<span class="kd">variables</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">&#8477;</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">integrable</span> <span class="n">f</span> <span class="n">&#956;</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">integrable</span> <span class="n">g</span> <span class="n">&#956;</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="bp">=</span> <span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="bp">+</span> <span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">g</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="o">:=</span>
+<span class="n">integral_add</span> <span class="n">hf</span> <span class="n">hg</span>
+</pre></div>
+</div>
+<p>As an example of a complicated interaction between our various conventions, let us see how to integrate constant functions.
+Recall that <code class="docutils literal notranslate"><span class="pre">&#956;</span></code> takes values in <code class="docutils literal notranslate"><span class="pre">&#8477;&#8805;0&#8734;</span></code>, the type of extended non-negative reals. There is a function
+<code class="docutils literal notranslate"><span class="pre">ennreal.to_real</span> <span class="pre">:</span> <span class="pre">&#8477;&#8805;0&#8734;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code> which sends <code class="docutils literal notranslate"><span class="pre">&#8868;</span></code>, the point at infinity, to zero.
+For any <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">:</span> <span class="pre">set</span> <span class="pre">&#945;</span></code>, if <code class="docutils literal notranslate"><span class="pre">&#956;</span> <span class="pre">s</span> <span class="pre">=</span> <span class="pre">&#8868;</span></code> then constant functions are not integrable so their integral
+is zero by definition, and so is <code class="docutils literal notranslate"><span class="pre">(&#956;</span> <span class="pre">s).to_real</span></code>. So in all cases we have the following lemma.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8747;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">s</span><span class="o">,</span> <span class="n">c</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="bp">=</span> <span class="o">(</span><span class="n">&#956;</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">to_real</span> <span class="bp">&#8226;</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="n">set_integral_const</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p>We now quickly review how to access the most important theorems in integration theory, starting
+with the dominated convergence theorem. There are several versions, we only show the most basic one.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">bound</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hmeas</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span><span class="o">,</span> <span class="n">ae_strongly_measurable</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span><span class="o">)</span> <span class="n">&#956;</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hint</span> <span class="o">:</span> <span class="n">integrable</span> <span class="n">bound</span> <span class="n">&#956;</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hbound</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span><span class="o">,</span> <span class="bp">&#8704;&#7504;</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">,</span> <span class="bp">&#8741;</span><span class="n">F</span> <span class="n">n</span> <span class="n">a</span><span class="bp">&#8741;</span> <span class="bp">&#8804;</span> <span class="n">bound</span> <span class="n">a</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hlim</span> <span class="o">:</span> <span class="bp">&#8704;&#7504;</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">,</span> <span class="n">tendsto</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">),</span> <span class="n">F</span> <span class="n">n</span> <span class="n">a</span><span class="o">)</span> <span class="n">at_top</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)))</span> <span class="o">:</span>
+  <span class="n">tendsto</span> <span class="o">(</span><span class="bp">&#955;</span> <span class="n">n</span><span class="o">,</span> <span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">F</span> <span class="n">n</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">)</span> <span class="n">at_top</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="o">(</span><span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">tendsto_integral_of_dominated_convergence</span> <span class="n">bound</span> <span class="n">hmeas</span> <span class="n">hint</span> <span class="n">hbound</span> <span class="n">hlim</span>
+</pre></div>
+</div>
+<p>Then we have Fubini&#8217;s theorem for integrals on product type.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span>
+  <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">&#945;</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">&#956;</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">[</span><span class="n">sigma_finite</span> <span class="n">&#956;</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">&#946;</span><span class="o">]</span> <span class="o">{</span><span class="n">&#957;</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">&#946;</span><span class="o">}</span> <span class="o">[</span><span class="n">sigma_finite</span> <span class="n">&#957;</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#215;</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">integrable</span> <span class="n">f</span> <span class="o">(</span><span class="n">&#956;.prod</span> <span class="n">&#957;</span><span class="o">))</span> <span class="o">:</span>
+  <span class="bp">&#8747;</span> <span class="n">z</span><span class="o">,</span> <span class="n">f</span> <span class="n">z</span> <span class="bp">&#8706;</span><span class="n">&#956;.prod</span> <span class="n">&#957;</span> <span class="bp">=</span> <span class="bp">&#8747;</span> <span class="n">x</span><span class="o">,</span> <span class="bp">&#8747;</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="bp">&#8706;</span><span class="n">&#957;</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="o">:=</span>
+<span class="n">integral_prod</span> <span class="n">f</span> <span class="n">hf</span>
+</pre></div>
+</div>
+<p>There is a very general version of convolution using any continuous bilinear form.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="n">open_locale</span> <span class="n">convolution</span>
+
+<span class="kd">variables</span> <span class="o">{</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">E&#39;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">normed_group</span> <span class="n">E&#39;</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="bp">&#120156;</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">E&#39;</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="bp">&#120156;</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">measurable_space</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">&#8477;</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">has_sub</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">E&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">E&#39;</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">&#956;</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="bp">&#8902;</span><span class="o">[</span><span class="n">L</span><span class="o">,</span> <span class="n">&#956;</span><span class="o">]</span> <span class="n">g</span> <span class="bp">=</span> <span class="bp">&#955;</span> <span class="n">x</span><span class="o">,</span> <span class="bp">&#8747;</span> <span class="n">t</span><span class="o">,</span> <span class="n">L</span> <span class="o">(</span><span class="n">f</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">t</span><span class="o">))</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="o">:=</span>
+<span class="n">rfl</span>
+</pre></div>
+</div>
+<p>And finally we have a very general version of the change of variables formula. In the statement below,
+<code class="docutils literal notranslate"><span class="pre">borel_space</span> <span class="pre">E</span></code> means the <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <code class="docutils literal notranslate"><span class="pre">E</span></code> is generated by open sets.
+And <code class="docutils literal notranslate"><span class="pre">is_add_haar_measure</span> <span class="pre">&#956;</span></code> means <code class="docutils literal notranslate"><span class="pre">&#956;</span></code> is left-invariant and gives
+finite mass to compact sets and positive mass to open sets.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">&#8477;</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">finite_dimensional</span> <span class="n">&#8477;</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">measurable_space</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">borel_space</span> <span class="n">E</span><span class="o">]</span> <span class="o">(</span><span class="n">&#956;</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">E</span><span class="o">)</span> <span class="o">[</span><span class="n">&#956;.is_add_haar_measure</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">&#8477;</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">E</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">{</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="o">(</span><span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="n">&#8477;</span><span class="o">]</span> <span class="n">E</span><span class="o">)}</span>
+  <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">measurable_set</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">E</span><span class="o">),</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8594;</span> <span class="n">has_fderiv_within_at</span> <span class="n">f</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="n">x</span><span class="o">)</span> <span class="n">s</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h_inj</span> <span class="o">:</span> <span class="n">inj_on</span> <span class="n">f</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">&#8747;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span><span class="o">,</span> <span class="n">g</span> <span class="n">x</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="bp">=</span> <span class="bp">&#8747;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">s</span><span class="o">,</span> <span class="bp">|</span><span class="o">(</span><span class="n">f&#39;</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">det</span><span class="bp">|</span> <span class="bp">&#8226;</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="o">:=</span>
+<span class="n">integral_image_eq_integral_abs_det_fderiv_smul</span> <span class="n">&#956;</span> <span class="n">hs</span> <span class="n">hf</span> <span class="n">h_inj</span> <span class="n">g</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="08_Differential_Calculus.html" class="btn btn-neutral float-left" title="8. Differential calculus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="genindex.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jeremy Avigad, Kevin Buzzard, Robert Y. Lewis, Patrick Massot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

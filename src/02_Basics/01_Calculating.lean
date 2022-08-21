@@ -184,3 +184,9 @@ end
 
 end
 
+example (a b c : ℕ) (h : a + b = c) : (a + b) * (a + b) = a * c + b * c :=
+begin
+  nth_rewrite 1 h,
+  rw add_mul
+end
+

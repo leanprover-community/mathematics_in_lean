@@ -12,12 +12,15 @@ The notion of a *limit* is also fundamental.
 We may say that the limit of a function :math:`f(x)` is a value :math:`b`
 as :math:`x` approaches a value :math:`a`,
 or that :math:`f(x)` *converges to* :math:`b` as :math:`x` approaches :math:`a`.
-Equivalently, we may say that a :math:`f(x)` approaches :math:`a` as :math:`x` approaches a value :math:`b`, or that it *tends to* :math:`b`
+Equivalently, we may say that a :math:`f(x)` approaches :math:`a` as :math:`x`
+approaches a value :math:`b`, or that it *tends to* :math:`b`
 as :math:`x` tends to :math:`a`.
 We have already begun to consider such notions in :numref:`sequences_and_convergence`.
 
 *Topology* is the abstract study of limits and continuity.
-In this chapter, we will see how topological notions are formalized in mathlib.
+Having covered the essentials of formalization in Chapters :numref:`%s <basics>`
+to :numref:`%s <abstract_algebra>`,
+in this chapter, we will explain how topological notions are formalized in mathlib.
 Not only do topological abstractions apply in much greater generality,
 but that also, somewhat paradoxically, make it easier to reason about limits
 and continuity in concrete instances.

@@ -9,16 +9,27 @@ begin
   rw mul_assoc b a c
 end
 
+example (a b c d : ℝ) : (a * b) * (c * d) = b * (a * c * d) :=
+begin
+  rw mul_comm a b,
+  rw mul_assoc b a (c * d),
+  rw mul_assoc a c d
+end
+
 /- Try these.-/
 
 example (a b c : ℝ) : (c * b) * a = b * (a * c) :=
 begin
-  sorry
+  rw mul_comm c b,
+  rw mul_assoc b c a,
+  rw mul_comm c a
 end
 
 example (a b c : ℝ) : a * (b * c) = b * (a * c) :=
 begin
-  sorry
+  rw <-mul_assoc a b c,
+  rw mul_comm a b,
+  rw mul_assoc b a c
 end
 
 /- An example. -/
@@ -26,7 +37,7 @@ end
 example (a b c : ℝ) : a * b * c = b * c * a :=
 begin
   rw mul_assoc,
-  rw mul_comm
+  rw mul_comm,
 end
 
 /- Try doing the first of these without providing any arguments at all,
@@ -34,12 +45,15 @@ end
 
 example (a b c : ℝ) : a * (b * c) = b * (c * a) :=
 begin
-  sorry
+  rw mul_comm, /- b * c * a -/
+  rw mul_assoc,
 end
 
 example (a b c : ℝ) : a * (b * c) = b * (a * c) :=
 begin
-  sorry
+  rw mul_comm a, /- b * c * a -/
+  rw mul_assoc b,
+  rw mul_comm c,
 end
 
 /- Using facts from the local context. -/
@@ -58,12 +72,17 @@ end
 example (a b c d e f : ℝ) (h : b * c = e * f) :
   a * b * c * d = a * e * f * d :=
 begin
-  sorry
+  rw mul_assoc a b c, /- a * (b * c) * d-/
+  rw h,
+  rw ←mul_assoc,
 end
 
 example (a b c d : ℝ) (hyp : c = b * a - d) (hyp' : d = a * b) : c = 0 :=
 begin
-  sorry
+  rw hyp,
+  rw hyp',
+  rw mul_comm b a,
+  rw sub_self,
 end
 
 /- Examples. -/
@@ -131,15 +150,33 @@ end
 
 /- Try these. For the second, use the theorems listed underneath. -/
 
+#check mul_add /- a * (b + c) = a * b + a * c -/
+#check add_mul /- (a + b) * c = a * c + b * c-/
+
 section
 variables a b c d : ℝ
 
 example : (a + b) * (c + d) = a * c + a * d + b * c + b * d :=
-sorry
+calc
+  (a + b) * (c + d) = a * (c + d) + b * (c + d) : by rw add_mul
+  ... = a * c + a * d + (b * (c + d)) : by rw mul_add a c d
+  ... = a * c + a * d + b * c + b * d : begin
+    rw mul_add b c d,
+    rw ←add_assoc,
+  end
 
 example (a b : ℝ) : (a + b) * (a - b) = a^2 - b^2 :=
 begin
-  sorry
+  rw add_mul,
+  rw mul_sub,
+  rw mul_sub,
+  rw ←pow_two,
+  rw add_sub,
+  rw mul_comm,
+  rw sub_add,
+  rw sub_self,
+  rw sub_zero,
+  rw ←pow_two,
 end
 
 #check pow_two a

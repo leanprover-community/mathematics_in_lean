@@ -4,9 +4,31 @@ import data.real.basic
 
 #check ∀ x y ε : ℝ, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε
 
+example : ∀ x y ε : ℝ, 0 < x → x < 1 → 0 < y → x * y ≤ 1:= begin
+intro h,
+intro i,
+intro j,
+intro k,
+intro l,
+intro m,
+suggest,
+  
+  -- ring,
+  sorry,
+end
+
 lemma my_lemma : ∀ x y ε : ℝ,
-  0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
-sorry
+  0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε := begin
+  intro x,
+  intro y,
+  intro ε,
+  intro h,
+  intro i,
+  intro j,
+  intro k,
+  -- assume h : 0 < ε,
+sorry,
+end
 
 section
   variables a b δ : ℝ
@@ -37,15 +59,37 @@ begin
   sorry
 end
 
+#check abs_mul -- abs_mul : ∀ (a b : ?M_1), |a * b| = |a| * |b|
+#check mul_le_mul -- a ≤ c → b ≤ d → 0 ≤ b → 0 ≤ c → a * b ≤ c * d 
+#check abs_nonneg -- (a : α) : 0 ≤ |a| 
+#check mul_lt_mul_right -- (h : 0 < c) : a * c < b * c ↔ a < b 
+#check one_mul --  ∀ a : M, 1 * a = a 
+
 lemma my_lemma4 : ∀ {x y ε : ℝ},
   0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε :=
 begin
   intros x y ε epos ele1 xlt ylt,
   calc
-    abs (x * y) = abs x * abs y : sorry
-    ... ≤ abs x * ε             : sorry
-    ... < 1 * ε                 : sorry
-    ... = ε                     : sorry
+    abs (x * y) = abs x * abs y : by rw abs_mul
+    ... ≤ abs x * ε             : 
+    begin
+      apply mul_le_mul,
+      { show |x| ≤ |x|, refl},
+      { show |y| ≤ ε, exact le_of_lt ylt},
+      { show 0 ≤ |y|, exact abs_nonneg y},
+      { show 0 ≤ |x|, exact abs_nonneg x },
+    end
+    ... < 1 * ε                 : begin
+    have h₀ : abs x < 1, begin
+      apply lt_of_lt_of_le,
+      { show |x| < ε, exact xlt },
+      { show ε ≤ 1, exact ele1 },
+    end,
+    have h₁ : abs x * ε < 1 * ε, by apply ((mul_lt_mul_right epos).mpr h₀),
+    exact h₁,
+    end
+    ... = ε                     : by apply one_mul,
+
 end
 
 def fn_ub (f : ℝ → ℝ) (a : ℝ) : Prop := ∀ x, f x ≤ a

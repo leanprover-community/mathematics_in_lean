@@ -102,24 +102,42 @@ example (hfa : fn_ub f a) (hgb : fn_ub g b) :
   fn_ub (λ x, f x + g x) (a + b) :=
 begin
   intro x,
-  dsimp,
+  -- dsimp,
+  change f x + g x ≤ a + b, 
   apply add_le_add,
   apply hfa,
   apply hgb
 end
 
 example (hfa : fn_lb f a) (hgb : fn_lb g b) :
-  fn_lb (λ x, f x + g x) (a + b) :=
-sorry
+  fn_lb (λ x, f x + g x) (a + b) := begin
+  intro x,
+  change a + b ≤ f x + g x,
+  apply add_le_add,
+  apply hfa,
+  apply hgb,
+end
 
 example (nnf : fn_lb f 0) (nng : fn_lb g 0) :
-  fn_lb (λ x, f x * g x) 0 :=
-sorry
+  fn_lb (λ x, f x * g x) 0 := begin
+  intro x,
+  change 0 ≤ f x * g x,
+  apply mul_nonneg,
+  apply nnf,
+  apply nng,
+end
 
 example (hfa : fn_ub f a) (hfb : fn_ub g b)
     (nng : fn_lb g 0) (nna : 0 ≤ a) :
-  fn_ub (λ x, f x * g x) (a * b) :=
-sorry
+  fn_ub (λ x, f x * g x) (a * b) := begin
+  intro x,
+  change f x * g x ≤ a * b,
+  apply mul_le_mul,
+  apply hfa,
+  apply hfb,
+  apply nng,
+  apply nna,
+end
 
 end
 
@@ -156,12 +174,12 @@ example (mf : monotone f) (mg : monotone g) :
 λ a b aleb, add_le_add (mf aleb) (mg aleb)
 
 example {c : ℝ} (mf : monotone f) (nnc : 0 ≤ c) :
-  monotone (λ x, c * f x) :=
-sorry
+  monotone (λ x, c * f x) := 
+  λ a b aleb, mul_le_mul_of_nonneg_left (mf aleb) nnc
 
 example (mf : monotone f) (mg : monotone g) :
   monotone (λ x, f (g x)) :=
-sorry
+  λ a b aleb, mf (mg aleb)
 
 def fn_even (f : ℝ → ℝ) : Prop := ∀ x, f x = f (-x)
 def fn_odd (f : ℝ → ℝ) : Prop := ∀ x, f x = - f (-x)
@@ -175,13 +193,31 @@ begin
 end
 
 example (of : fn_odd f) (og : fn_odd g) : fn_even (λ x, f x * g x) :=
-sorry
+begin
+  intro x,
+  calc
+    (λ x, f x * g x) x = f x * g x : rfl
+       ... = (-f (-x)) * (-g (-x)) : by rw [of, og]
+       ... = f (-x) * g (-x) : by ring
+end
 
 example (ef : fn_even f) (og : fn_odd g) : fn_odd (λ x, f x * g x) :=
-sorry
+begin
+  intro x,
+  calc
+    (λ x, f x * g x) x = f x * g x : rfl
+      ... = f (-x) * (-g (-x)) : by rw [ef, og]
+      ... = - (f (-x) * g (-x)) : by ring
+end
 
 example (ef : fn_even f) (og : fn_odd g) : fn_even (λ x, f (g x)) :=
-sorry
+begin
+  intro x,
+  calc
+    (λ x, f (g x)) x = f (g x) : rfl 
+    ... = f (- (-g (-x))) : by rw [ef, og]
+    ... = f (g (-x)) : by ring
+end
 
 end
 

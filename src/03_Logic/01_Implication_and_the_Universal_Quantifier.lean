@@ -229,8 +229,18 @@ by { intros x xs, exact xs }
 
 theorem subset.refl : s ⊆ s := λ x xs, xs
 
-theorem subset.trans : r ⊆ s → s ⊆ t → r ⊆ t :=
-sorry
+theorem subset.trans : r ⊆ s → s ⊆ t → r ⊆ t := begin
+  intros rss sst,
+  have h₀ : (∀ x : α, x ∈ r → x ∈ s), by apply rss,
+  have h₁ : (∀ x : α, x ∈ s → x ∈ t), by apply sst,
+  have h₂ : (∀ x : α, x ∈ r → x ∈ t), begin 
+    intros x xinr,
+    apply h₁,
+    apply h₀,
+    apply xinr,
+  end,
+  exact h₂,
+end
 
 end
 
@@ -241,8 +251,12 @@ variables (s : set α) (a b : α)
 
 def set_ub (s : set α) (a : α) := ∀ x, x ∈ s → x ≤ a
 
-example (h : set_ub s a) (h' : a ≤ b) : set_ub s b :=
-sorry
+example (h : set_ub s a) (h' : a ≤ b) : set_ub s b := begin
+  intros x xins,
+  have h₀ : x ≤ a, begin apply h _ xins end,
+  have h₁ : x ≤ b, begin apply le_trans h₀ h' end,
+  exact h₁,
+end
 
 end
 
@@ -255,14 +269,31 @@ begin
   exact (add_left_inj c).mp h',
 end
 
-example {c : ℝ} (h : c ≠ 0) : injective (λ x, c * x) :=
-sorry
+example { c x y : ℝ } (h : c ≠ 0) : c * x = c * y → x = y := begin
+  exact (mul_right_inj' h).mp,
+end 
+
+#check mul_right_inj -- (a : G) {b c : G} : a * b = a * c ↔ b = c  
+#check mul_right_inj' -- (ha : a ≠ 0) : a * b = a * c ↔ b = c
+
+example {c : ℝ} (h : c ≠ 0) : injective (λ x, c * x) := begin
+  intros x₁ x₂ h₁,
+  change c * x₁ = c * x₂ at h₁,
+  apply (mul_right_inj' h).mp h₁,
+end
 
 variables {α : Type*} {β : Type*} {γ : Type*}
 variables {g : β → γ} {f : α → β}
 
+-- injective (f : α → β) := ∀ ⦃a₁ a₂⦄, f a₁ = f a₂ → a₁ = a₂
 example (injg : injective g) (injf : injective f) :
-  injective (λ x, g (f x)) :=
-sorry
+  injective (λ x, g (f x)) := begin
+  intros x y h,
+  change g (f x) = g (f y) at h,
+
+  have h₀ : f x = f y, by exact injg h,
+  have h₁ : x = y, by exact injf h₀,
+  exact h₁,
+end
 
 end

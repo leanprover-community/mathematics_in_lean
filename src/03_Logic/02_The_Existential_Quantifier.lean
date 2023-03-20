@@ -40,9 +40,18 @@ begin
   apply fn_ub_add ubfa ubfb
 end
 
+theorem fn_lb_add {f g : ℝ → ℝ} {a b : ℝ}
+    (hfa : fn_lb f a) (hgb : fn_lb g b) :
+  fn_lb (λ x, f x + g x) (a + b) :=
+λ x, add_le_add (hfa x) (hgb x)
+
 example (lbf : fn_has_lb f) (lbg : fn_has_lb g) :
-  fn_has_lb (λ x, f x + g x) :=
-sorry
+  fn_has_lb (λ x, f x + g x) := begin
+  cases lbf with a lbfa,
+  cases lbg with b lbgb,
+  use a + b,
+  apply fn_lb_add lbfa lbgb,
+end
 
 example {c : ℝ} (ubf : fn_has_ub f) (h : c ≥ 0):
   fn_has_ub (λ x, c * f x) :=

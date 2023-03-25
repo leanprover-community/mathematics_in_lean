@@ -53,9 +53,25 @@ example (lbf : fn_has_lb f) (lbg : fn_has_lb g) :
   apply fn_lb_add lbfa lbgb,
 end
 
+theorem fn_ub_mul {f : ℝ → ℝ} {a c: ℝ}
+    (hfa : fn_ub f a) (cge0 : 0 ≤ c):
+  fn_ub (λ x, c * f x) (c * a) := 
+λ x, mul_le_mul_of_nonneg_left (hfa x) cge0 
+--   begin
+--   intros x,
+--   change  c * f x ≤ c * a,
+--   apply mul_le_mul_of_nonneg_left,
+--   apply hfa x,
+--   apply cge0,
+-- end
+-- λ x, mul_le_mul (le_refl c) (hfa x) fage0 cge0 
+
 example {c : ℝ} (ubf : fn_has_ub f) (h : c ≥ 0):
-  fn_has_ub (λ x, c * f x) :=
-sorry
+  fn_has_ub (λ x, c * f x) := begin
+  cases ubf with a ubfa,
+  use c * a,
+  apply fn_ub_mul ubfa h,
+end
 
 example (ubf : fn_has_ub f) (ubg : fn_has_ub g) :
   fn_has_ub (λ x, f x + g x) :=

@@ -269,6 +269,7 @@ begin
   have alec : a ≤ c, apply le_trans abba.left bccb.left,
   split,
   { show  a ≤ c, exact alec, },
+  -- 다른 사람들은 어떻게 풀었나!
   { show ¬c ≤ a,
     by_contradiction,
     have cleb : c ≤ b, begin

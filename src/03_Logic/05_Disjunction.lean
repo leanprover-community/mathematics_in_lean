@@ -26,14 +26,41 @@ end
 
 namespace my_abs
 
-theorem le_abs_self (x : ℝ) : x ≤ abs x :=
-sorry
+theorem le_abs_self (x : ℝ) : x ≤ abs x := begin
+  cases le_or_gt 0 x with h h,
+  { show x ≤ |x|, -- 0 ≤ x
+    rw abs_of_nonneg h,
+  },
+  { show x ≤ |x|,
+    rw abs_of_neg h,
+    linarith,
+  },
+end
 
-theorem neg_le_abs_self (x : ℝ) : -x ≤ abs x :=
-sorry
+theorem neg_le_abs_self (x : ℝ) : -x ≤ abs x := begin
+  cases le_or_gt 0 x with h h,
+  { show -x ≤ |x|, -- 0 ≤ x
+    rw abs_of_nonneg h,
+    linarith,
+  },
+  { show -x ≤ |x|, -- 0 < x
+    rw abs_of_neg h,
+  },
+end
 
-theorem abs_add (x y : ℝ) : abs (x + y) ≤ abs x + abs y :=
-sorry
+-- 아래 3개에서 lt_abs, abs_lt를 사용하기
+theorem abs_add (x y : ℝ) : abs (x + y) ≤ abs x + abs y := begin
+  apply le_of_lt_or_eq,
+  have h₁ : |x + y| < |x| + |y|, sorry,
+  have h₂ : |x + y| = |x| + |y|, sorry,
+
+  { show |x + y| < |x| + |y| ∨ |x + y| = |x| + |y|,
+    sorry,
+  },
+  -- {
+
+  -- },
+end
 
 theorem lt_abs : x < abs y ↔ x < y ∨ x < -y :=
 sorry

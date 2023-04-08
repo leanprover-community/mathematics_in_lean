@@ -50,16 +50,58 @@ end
 
 -- 아래 3개에서 lt_abs, abs_lt를 사용하기
 theorem abs_add (x y : ℝ) : abs (x + y) ≤ abs x + abs y := begin
+
   apply le_of_lt_or_eq,
-  have h₁ : |x + y| < |x| + |y|, sorry,
-  have h₂ : |x + y| = |x| + |y|, sorry,
-
-  { show |x + y| < |x| + |y| ∨ |x + y| = |x| + |y|,
-    sorry,
+  cases lt_trichotomy x 0 with xlt0 xgeq0,
+  { -- xlt0
+    rw abs_of_neg xlt0,
+    cases le_or_gt y 0 with yle0 ygt0,
+    { -- xlt0 ∧ yle0
+      right,
+      rw abs_of_nonpos yle0,
+      rw abs_of_nonpos,
+      by linarith,
+      by linarith,
+    },
+    { -- xlt0 ∧ ygt0
+      left,
+      rw abs_of_pos ygt0,
+      apply abs_lt.mpr,
+      have h0: -(-x + y) < x + y, linarith,
+      have h1: x + y < -x + y, linarith,
+      exact ⟨ h0, h1 ⟩,
+      exact has_add.to_covariant_class_left ℝ,
+      exact has_add.to_covariant_class_right ℝ,
+    }
   },
-  -- {
-
-  -- },
+  cases xgeq0 with xeq0 xgt0,
+  {  -- xeq0
+    rw xeq0,
+    rw zero_add,
+    rw abs_zero,
+    rw zero_add,
+    right,
+    exact rfl,
+  },
+  { -- xgt0
+    cases le_or_gt 0 y with yge0 ylt0,
+    { -- xgt 0 ∧ yge0
+      right,
+      rw [(abs_of_pos xgt0), (abs_of_nonneg yge0), (abs_of_pos) ],
+      linarith,
+    },
+    { -- xgt 0 ∧ ylt0
+      left,
+      rw [abs_of_pos xgt0, abs_of_neg ylt0],
+      apply abs_lt.mpr,
+      have z0: -(x + -y) < x + y, by linarith,
+      have z1: x + y < x + -y, by linarith,
+      exact ⟨ z0, z1 ⟩,
+      
+      exact has_add.to_covariant_class_left ℝ,
+      exact has_add.to_covariant_class_right ℝ,
+    },
+  },
 end
 
 theorem lt_abs : x < abs y ↔ x < y ∨ x < -y :=

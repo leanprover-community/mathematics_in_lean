@@ -104,8 +104,35 @@ theorem abs_add (x y : ℝ) : abs (x + y) ≤ abs x + abs y := begin
   },
 end
 
-theorem lt_abs : x < abs y ↔ x < y ∨ x < -y :=
-sorry
+theorem lt_abs : x < abs y ↔ x < y ∨ x < -y := begin
+  split,
+  { show x < |y| → x < y ∨ x < -y,
+    intro xltabsy,
+    cases lt_or_ge y 0 with ylt0 yge0,
+    { -- ylt0
+      rw abs_of_neg ylt0 at xltabsy,
+      right,
+      exact xltabsy,
+    },
+    { -- yge0
+      rw abs_of_nonneg yge0 at xltabsy,
+      left,
+      exact xltabsy,
+    }
+  },
+{ show x < y ∨ x < -y → x < |y|,
+  intro xlty_or_xltnegy,
+  cases xlty_or_xltnegy with x_lt_y x_lt_neg_y,
+  { -- x_lt_y
+    apply lt_trans x y |y|,
+sorry,
+  },
+  { -- x_lt_neg_y,
+
+sorry,
+  },
+},
+end
 
 theorem abs_lt : abs x < y ↔ - y < x ∧ x < y :=
 sorry

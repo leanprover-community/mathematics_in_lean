@@ -124,12 +124,12 @@ theorem lt_abs : x < abs y ↔ x < y ∨ x < -y := begin
   intro xlty_or_xltnegy,
   cases xlty_or_xltnegy with x_lt_y x_lt_neg_y,
   { -- x_lt_y
-    apply lt_trans x y |y|,
-sorry,
+    have h0: y ≤ |y|, exact le_abs_self y,
+    linarith,
   },
   { -- x_lt_neg_y,
-
-sorry,
+    have h0: -y ≤ |y|, exact neg_le_abs_self y,
+    linarith,
   },
 },
 end

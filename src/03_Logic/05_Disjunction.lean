@@ -134,8 +134,49 @@ theorem lt_abs : x < abs y ↔ x < y ∨ x < -y := begin
 },
 end
 
-theorem abs_lt : abs x < y ↔ - y < x ∧ x < y :=
-sorry
+theorem abs_lt : abs x < y ↔ - y < x ∧ x < y := begin
+  split,
+  { show |x| < y → -y < x ∧ x < y,
+    intro abs_x_lt_y,
+    split,
+    { show -y < x,
+      cases lt_or_ge x 0 with xlt0 x_ge_0,
+      { -- xlt0
+        rw abs_of_neg xlt0 at abs_x_lt_y,
+        linarith,
+      },
+      { -- x_ge_0
+        rw abs_of_nonneg x_ge_0 at abs_x_lt_y,
+        linarith,
+      },
+    },
+    { show x < y,
+      cases lt_or_ge x 0 with x_lt_0 x_ge_0,
+      {
+        rw abs_of_neg x_lt_0 at abs_x_lt_y,
+        linarith,
+      },
+      {
+        rw abs_of_nonneg x_ge_0 at abs_x_lt_y,
+        linarith,
+      },
+    },
+  },
+  { show -y < x ∧ x < y → |x| < y,
+    intro neg_y_lt_x_and_x_lt_y,
+    have neg_y_lt_x: -y < x, exact neg_y_lt_x_and_x_lt_y.left,
+    have x_lt_y: x < y, exact neg_y_lt_x_and_x_lt_y.right,
+    cases lt_or_ge x 0 with x_lt_0 x_ge_0,
+    {
+        rw abs_of_neg x_lt_0,
+        linarith,
+    },
+    {
+        rw abs_of_nonneg x_ge_0,
+        linarith,
+    }
+  },
+end
 
 end my_abs
 end
@@ -159,23 +200,68 @@ end
 
 example {z : ℝ} (h : ∃ x y, z = x^2 + y^2 ∨ z = x^2 + y^2 + 1) :
   z ≥ 0 :=
-sorry
+begin
+  rcases h with ⟨ x, y, xsq_add_ysq_eq_z | xsq_add_ysq_eq_z_p1  ⟩,
+   { rw xsq_add_ysq_eq_z, apply add_nonneg (sq_nonneg x) (sq_nonneg y), },
+   { rw xsq_add_ysq_eq_z_p1, apply add_nonneg (add_nonneg (sq_nonneg x) (sq_nonneg y)), linarith, },
+end
 
-example {x : ℝ} (h : x^2 = 1) : x = 1 ∨ x = -1 :=
-sorry
+example {x : ℝ} (h : x^2 = 1) : x = 1 ∨ x = -1 := begin
+  have xsq_sub_one: x^2 - 1 = 0, linarith,
+  have x_sub_one_mul_x_plus_one: (x + 1) * (x - 1) = 0, linarith,
+  have k1: x + 1 = 0 ∨ x - 1 = 0, begin
+    apply eq_zero_or_eq_zero_of_mul_eq_zero x_sub_one_mul_x_plus_one,
+  end, 
+  cases k1 with x_plus_one_zero x_minus_one_zero,
+  { right, linarith,},
+  { left, linarith, },
+end
 
-example {x y : ℝ} (h : x^2 = y^2) : x = y ∨ x = -y :=
-sorry
+example {x y : ℝ} (h : x^2 = y^2) : x = y ∨ x = -y := begin
+  have k1: (x - y) * (x + y) = 0, linarith,
+  have k2: x - y = 0 ∨ x + y = 0, begin
+   apply eq_zero_or_eq_zero_of_mul_eq_zero k1,
+  end,
+  cases k2 with x_eq_y x_eq_neg_y,
+  { left, linarith, },
+  { right, linarith, },
+end
 
 section
 variables {R : Type*} [comm_ring R] [is_domain R]
 variables (x y : R)
 
-example (h : x^2 = 1) : x = 1 ∨ x = -1 :=
-sorry
+example (h : x^2 = 1) : x = 1 ∨ x = -1 := begin
+  have k1: x + 1 = 0 ∨ x - 1 = 0, begin
+    apply eq_zero_or_eq_zero_of_mul_eq_zero,
+    ring_nf,
+    rw h,
+    ring,
+  end, 
+  cases k1 with x_plus_one_zero x_minus_one_zero,
+  { right, rw ← add_sub_cancel x (1: R), rw x_plus_one_zero, ring, },
+  { left, rw ← sub_add_cancel x (1: R), rw x_minus_one_zero, ring, },
+end
 
-example (h : x^2 = y^2) : x = y ∨ x = -y :=
-sorry
+example (h : x^2 = y^2) : x = y ∨ x = -y := begin
+  have k1: x - y = 0 ∨ x + y = 0, begin
+    apply eq_zero_or_eq_zero_of_mul_eq_zero,
+    ring_nf,
+    rw h,
+    ring,
+  end,
+  cases k1 with xeqy xeqnegy,
+  { left,
+    rw ← sub_add_cancel x y,
+    rw xeqy,
+    ring,
+   },
+  { right,
+    rw ← add_sub_cancel x y,
+    rw xeqnegy,
+    ring,
+  },
+end
 
 end
 
@@ -198,7 +284,26 @@ begin
   contradiction
 end
 
-example (P Q : Prop) : (P → Q) ↔ ¬ P ∨ Q :=
-sorry
+example (P Q : Prop) : (P → Q) ↔ ¬ P ∨ Q := begin
+  split,
+  { show (P → Q) → ¬P ∨ Q,
+    intro p_to_q,
+    by_cases p_or_not_p : P,
+    { -- P
+      right,
+      apply p_to_q p_or_not_p,
+    },
+    { -- ¬ P
+      left,
+      exact p_or_not_p,
+    },
+  },
+  { show ¬P ∨ Q → P → Q,
+    rintros not_p_or_q p,
+    cases not_p_or_q with not_p q,
+    { contradiction },
+    { exact q },
+  },
+end
 
 end

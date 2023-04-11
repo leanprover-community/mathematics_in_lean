@@ -111,6 +111,7 @@ begin
   linarith,
 end
 
+-- 이건 좀 아닌데...
 lemma aux {s t : ℕ → ℝ} {a : ℝ}
     (cs : converges_to s a) (ct : converges_to t 0) :
   converges_to (λ n, s n * t n) 0 :=
@@ -122,7 +123,57 @@ begin
   have pos₀ : ε / B > 0,
     from div_pos εpos Bpos,
   cases ct _ pos₀ with N₁ h₁,
-  sorry
+  let max_N := max N₀ N₁,
+  use max_N,
+  intros n n_ge_max_N,
+
+  have k1: |t n - 0| < ε / B, begin
+    apply h₁, exact le_of_max_le_right n_ge_max_N,
+  end,
+  have k1_1: |t n| < ε / B, begin
+    have k1_1_1: |t n - 0| = |t n|, {
+      ring_nf,
+    },
+    rw k1_1_1 at k1,
+    exact k1,
+  end,
+  have k2: |s n| < B, begin
+    apply h₀, exact le_of_max_le_left n_ge_max_N,
+  end,
+  -- have k3: |s n | * | t n| < B * (ε / B) , begin
+  have k3: |s n | * | t n| < ε, begin
+    -- cases |t n | = 0 or not
+    cases classical.em (|t n| = 0) with tn_0 tn_nonzero,
+    { rw tn_0, ring_nf, linarith, },
+    have k3_1: |s n | * | t n| < B * |t n|, {
+      apply mul_lt_mul_of_pos_right k2 ,
+      rcases lt_trichotomy 0 (|t n|) with tn_pos | tn_zero | tn_neg,
+      { exact tn_pos },
+      { rw tn_zero at tn_nonzero, contradiction },
+      { have tn_nonneg: 0 ≤ |t n|, {
+          apply abs_nonneg,
+        },
+        linarith,
+      },
+    },
+    have k3_2: B * |t n| < B * (ε / B), {
+      apply mul_lt_mul_of_pos_left k1_1,
+      exact Bpos,
+    },
+    have k3_e: B * (ε / B ) = ε , {
+      rw  ← mul_div_assoc,
+      rw mul_comm,
+      rw mul_div_assoc, rw div_self,
+      ring, linarith,
+    },
+    linarith,
+  end,
+  have k4: |s n * t n - 0| = |s n |* |t n|, {
+    ring_nf,
+    exact abs_mul (t n) (s n),
+  },
+  rw k4,
+  exact k3,
 end
 
 theorem converges_to_mul {s t : ℕ → ℝ} {a b : ℝ}

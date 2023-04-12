@@ -195,7 +195,12 @@ theorem converges_to_unique {s : ℕ → ℝ} {a b : ℝ}
 begin
   by_contradiction abne,
   have : abs (a - b) > 0,
-  { sorry },
+  { apply abs_pos.mpr,
+    by_contradiction aeqb,
+    have k1: a = b, { linarith, },
+    contradiction,
+    exact has_add.to_covariant_class_left ℝ,
+  },
   let ε := abs (a - b) / 2,
   have εpos : ε > 0,
   { change abs (a - b) / 2 > 0, linarith },
@@ -203,12 +208,36 @@ begin
   cases sb ε εpos with Nb hNb,
   let N := max Na Nb,
   have absa : abs (s N - a) < ε,
-  { sorry },
+  { apply hNa, exact le_max_left Na Nb, },
   have absb : abs (s N - b) < ε,
-  { sorry },
-  have : abs (a - b) < abs (a - b),
-  { sorry },
-  exact lt_irrefl _ this
+  { apply hNb, exact le_max_right Na Nb, },
+
+  have k1: s N - a < ε, { exact lt_of_abs_lt absa, },
+  have k2: - ε < s N - a, { exact neg_lt_of_abs_lt absa, },
+  have k3: s N - b < ε , { exact lt_of_abs_lt absb, },
+  have k4: - ε < s N - b, { exact neg_lt_of_abs_lt absb, },
+  have k5: - ε - ε < s N - b - (s N - a), { exact sub_lt_sub k4 k1, },
+  have k6: s N - b - (s N - a) < ε - (-ε) , { exact sub_lt_sub k3 k2,},
+  have k7: -| a - b | < a - b, {
+    have : | a - b | = (|a - b| / 2) + (| a - b | / 2), ring_nf,
+    have : | a - b | = ε + ε , { rw this, },
+    have : -ε -ε = - | a - b|, { linarith, },
+    have : a - b = s N - b - (s N - a), { ring_nf,}, 
+    linarith,
+  },
+  have k8: a - b < | a - b |, {
+    have : | a - b | = (|a - b| / 2) + (| a - b | / 2), ring_nf,
+    have : | a - b | = ε + ε , { rw this, },
+    have : | a - b | = ε - (-ε ), {linarith,},
+    have : a - b = s N - b - (s N - a), { ring_nf, },
+    linarith,
+  },
+  rcases lt_trichotomy (a - b) 0 with abm | abz | abp,
+  { have : |a - b| = - (a - b), exact abs_of_neg abm,
+  linarith, },
+  { have aeqb : a = b, exact sub_eq_zero.mp abz, apply abne aeqb,},
+  { have : | a - b | = a - b, exact abs_of_pos abp, linarith,},
+ 
 end
 
 section

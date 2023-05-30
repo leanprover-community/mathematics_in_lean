@@ -80,8 +80,9 @@ example : (r \ s) \ t = r \ (s ∪ t) := by
 
 end
 
-theorem Nat.Prime.eq_of_dvd_of_prime {p q : ℕ} (prime_p : Nat.Prime p) (prime_q : Nat.Prime q)
-    (h : p ∣ q) : p = q := by
+theorem Nat.Prime.eq_of_dvd_of_prime {p q : ℕ}
+      (prime_p : Nat.Prime p) (prime_q : Nat.Prime q) (h : p ∣ q) :
+    p = q := by
   cases prime_q.eq_one_or_self_of_dvd _ h
   · linarith [prime_p.two_le]
   assumption

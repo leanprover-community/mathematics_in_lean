@@ -283,11 +283,13 @@ factorization of <code class="docutils literal notranslate"><span class="pre">n<
   <span class="n">rw</span> <span class="o">[</span><span class="n">Nat.factorization_mul</span> <span class="n">mnez</span> <span class="n">nnez</span><span class="o">]</span>
   <span class="n">rfl</span>
 
-<span class="kd">theorem</span> <span class="n">factorization_pow&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="n">p</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">n.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">theorem</span> <span class="n">factorization_pow&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="n">p</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span>
+    <span class="o">(</span><span class="n">n</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">n.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">Nat.factorization_pow</span><span class="o">]</span>
   <span class="n">rfl</span>
 
-<span class="kd">theorem</span> <span class="n">Nat.Prime.factorization&#39;</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">prime_p</span> <span class="o">:</span> <span class="n">p.Prime</span><span class="o">)</span> <span class="o">:</span> <span class="n">p.factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">theorem</span> <span class="n">Nat.Prime.factorization&#39;</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">prime_p</span> <span class="o">:</span> <span class="n">p.Prime</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">p.factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">prime_p.factorization</span><span class="o">]</span>
   <span class="n">simp</span>
 </pre></div>
@@ -308,7 +310,8 @@ of the proof.</p>
     <span class="gr">sorry</span>
   <span class="k">have</span> <span class="n">eq2</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n.factorization</span> <span class="n">p</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
-  <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m.factorization</span> <span class="n">p</span> <span class="bp">%</span> <span class="mi">2</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n.factorization</span> <span class="n">p</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">%</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">eq1</span><span class="o">,</span> <span class="n">sqr_eq</span><span class="o">,</span> <span class="n">eq2</span><span class="o">]</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">m.factorization</span> <span class="n">p</span> <span class="bp">%</span> <span class="mi">2</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n.factorization</span> <span class="n">p</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">%</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">eq1</span><span class="o">,</span> <span class="n">sqr_eq</span><span class="o">,</span> <span class="n">eq2</span><span class="o">]</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">Nat.add_mul_mod_self_left</span><span class="o">,</span> <span class="n">Nat.mul_mod_right</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span>
   <span class="n">norm_num</span> <span class="n">at</span> <span class="n">this</span>
 </pre></div>
@@ -342,7 +345,8 @@ to finish it off.</p>
   <span class="k">have</span> <span class="n">npow_nz</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">npowz</span> <span class="bp">=&gt;</span> <span class="n">nnz</span> <span class="o">(</span><span class="n">pow_eq_zero</span> <span class="n">npowz</span><span class="o">)</span>
   <span class="k">have</span> <span class="n">eq1</span> <span class="o">:</span> <span class="o">(</span><span class="n">m</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">m.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
-  <span class="k">have</span> <span class="n">eq2</span> <span class="o">:</span> <span class="o">(</span><span class="n">r.succ</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">n.factorization</span> <span class="n">p</span> <span class="bp">+</span> <span class="n">r.succ.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="n">eq2</span> <span class="o">:</span> <span class="o">(</span><span class="n">r.succ</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span>
+      <span class="n">k</span> <span class="bp">*</span> <span class="n">n.factorization</span> <span class="n">p</span> <span class="bp">+</span> <span class="n">r.succ.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">r.succ.factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">m.factorization</span> <span class="n">p</span> <span class="bp">-</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">n.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">eq1</span><span class="o">,</span> <span class="n">pow_eq</span><span class="o">,</span> <span class="n">eq2</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">Nat.add_sub_cancel</span><span class="o">]</span>
@@ -902,8 +906,9 @@ these methods to prove the two examples below.</p>
 <code class="docutils literal notranslate"><span class="pre">n</span></code> is prime and <code class="docutils literal notranslate"><span class="pre">s</span></code> is a set of primes.
 To show that, we need the following lemma, which you should
 be able to prove using the theorem <code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_one_or_self_of_dvd</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">Nat.Prime.eq_of_dvd_of_prime</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">prime_p</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">prime_q</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">q</span><span class="o">)</span>
-    <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">Nat.Prime.eq_of_dvd_of_prime</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span>
+      <span class="o">(</span><span class="n">prime_p</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">prime_q</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
@@ -931,7 +936,7 @@ and then finish it off.</p>
     <span class="n">linarith</span> <span class="o">[</span><span class="n">prime_p.two_le</span><span class="o">]</span>
   <span class="n">simp</span> <span class="o">[</span><span class="n">Finset.prod_insert</span> <span class="n">ans</span><span class="o">,</span> <span class="n">prime_p.dvd_mul</span><span class="o">]</span> <span class="n">at</span> <span class="n">h&#8320;</span> <span class="n">h&#8321;</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">mem_insert</span><span class="o">]</span>
-    <span class="gr">sorry</span>
+  <span class="gr">sorry</span>
 </pre></div>
 </div>
 <p>We need one last property of finite sets.
@@ -1095,8 +1100,8 @@ same property.</p>
     <span class="n">apply</span> <span class="n">mod_4_eq_3_or_mod_4_eq_3</span>
     <span class="n">rw</span> <span class="o">[</span><span class="n">neq</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span>
   <span class="n">cases&#39;</span> <span class="n">this</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h1</span>
-    <span class="bp">.</span> <span class="gr">sorry</span>
-    <span class="gr">sorry</span>
+  <span class="bp">.</span> <span class="gr">sorry</span>
+  <span class="bp">.</span> <span class="gr">sorry</span>
 </pre></div>
 </div>
 <p>We are in the home stretch. Given a set <code class="docutils literal notranslate"><span class="pre">s</span></code> of prime

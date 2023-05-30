@@ -23,7 +23,8 @@ theorem convergesTo_const (a : ℝ) : ConvergesTo (fun x : ℕ => a) a := by
   rw [sub_self, abs_zero]
   apply εpos
 
-theorem convergesTo_add {s t : ℕ → ℝ} {a b : ℝ} (cs : ConvergesTo s a) (ct : ConvergesTo t b) :
+theorem convergesTo_add {s t : ℕ → ℝ} {a b : ℝ}
+      (cs : ConvergesTo s a) (ct : ConvergesTo t b) :
     ConvergesTo (fun n => s n + t n) (a + b) := by
   intro ε εpos
   dsimp
@@ -58,7 +59,8 @@ theorem aux {s t : ℕ → ℝ} {a : ℝ} (cs : ConvergesTo s a) (ct : Converges
   cases' ct _ pos₀ with N₁ h₁
   sorry
 
-theorem convergesTo_mul {s t : ℕ → ℝ} {a b : ℝ} (cs : ConvergesTo s a) (ct : ConvergesTo t b) :
+theorem convergesTo_mul {s t : ℕ → ℝ} {a b : ℝ}
+      (cs : ConvergesTo s a) (ct : ConvergesTo t b) :
     ConvergesTo (fun n => s n * t n) (a * b) := by
   have h₁ : ConvergesTo (fun n => s n * (t n + -b)) 0 := by
     apply aux cs
@@ -69,7 +71,8 @@ theorem convergesTo_mul {s t : ℕ → ℝ} {a b : ℝ} (cs : ConvergesTo s a) (
   · ext; ring
   ring
 
-theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ} (sa : ConvergesTo s a) (sb : ConvergesTo s b) :
+theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ}
+      (sa : ConvergesTo s a) (sb : ConvergesTo s b) :
     a = b := by
   by_contra abne
   have : abs (a - b) > 0 := by sorry

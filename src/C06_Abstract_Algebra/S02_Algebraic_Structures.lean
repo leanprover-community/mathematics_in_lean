@@ -68,11 +68,11 @@ def neg (a : Point) : Point := sorry
 
 def zero : Point := sorry
 
-def add_group_point : AddGroup₁ Point := sorry
+def add_group_point : AddGroup₁ point := sorry
+
 end Point
 
 section
-
 variable {α : Type _} (f g : Equiv.Perm α) (n : ℕ)
 
 #check f * g

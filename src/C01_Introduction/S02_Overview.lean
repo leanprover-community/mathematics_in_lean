@@ -36,7 +36,8 @@ example : ∀ m n : Nat, Even n → Even (m * n) := fun m n ⟨k, (hk : n = k + 
   have hmn : m * n = m * k + m * k := by rw [hk, mul_add]
   show ∃ l, m * n = l + l from ⟨_, hmn⟩
 
-example : ∀ m n : Nat, Even n → Even (m * n) := fun m n ⟨k, hk⟩ => ⟨m * k, by rw [hk, mul_add]⟩
+example : ∀ m n : Nat, Even n → Even (m * n) :=
+fun m n ⟨k, hk⟩ => ⟨m * k, by rw [hk, mul_add]⟩
 
 example : ∀ m n : Nat, Even n → Even (m * n) := by
   -- say m and n are natural numbers, and assume n=2*k

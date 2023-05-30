@@ -30,11 +30,13 @@ variable (ha : abs a < δ) (hb : abs b < δ)
 
 end
 
-theorem my_lemma3 : ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε := by
+theorem my_lemma3 :
+    ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε := by
   intro x y ε epos ele1 xlt ylt
   sorry
 
-theorem my_lemma4 : ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε := by
+theorem my_lemma4 :
+    ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → abs x < ε → abs y < ε → abs (x * y) < ε := by
   intro x y ε epos ele1 xlt ylt
   calc
     abs (x * y) = abs x * abs y := sorry

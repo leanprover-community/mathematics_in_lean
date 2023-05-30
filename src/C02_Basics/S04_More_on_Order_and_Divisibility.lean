@@ -73,17 +73,12 @@ example (h : x ∣ w) : x ∣ y * (x * z) + x ^ 2 + w ^ 2 := by
 end
 
 section
-
 variable (m n : ℕ)
-
 open Nat
 
 #check (gcd_zero_right n : gcd n 0 = n)
-
 #check (gcd_zero_left n : gcd 0 n = n)
-
 #check (lcm_zero_right n : lcm n 0 = 0)
-
 #check (lcm_zero_left n : lcm 0 n = 0)
 
 example : gcd m n = gcd n m := by

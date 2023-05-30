@@ -94,14 +94,17 @@ example : (r ∪ s) ∩ (r ∪ t) = r ∪ s ∩ t := by
   sorry
 example : (r \ s) \ t = r \ (s ∪ t) := by
   sorry
+
 end
 
 example (s : Finset ℕ) (n : ℕ) (h : n ∈ s) : n ∣ ∏ i in s, i :=
   Finset.dvd_prod_of_mem _ h
 
-theorem Nat.Prime.eq_of_dvd_of_prime {p q : ℕ} (prime_p : Nat.Prime p) (prime_q : Nat.Prime q)
-    (h : p ∣ q) : p = q := by
+theorem Nat.Prime.eq_of_dvd_of_prime {p q : ℕ}
+      (prime_p : Nat.Prime p) (prime_q : Nat.Prime q) (h : p ∣ q) :
+    p = q := by
   sorry
+
 theorem mem_of_dvd_prod_primes {s : Finset ℕ} {p : ℕ} (prime_p : p.Prime) :
     (∀ n ∈ s, Nat.Prime n) → (p ∣ ∏ n in s, n) → p ∈ s := by
   intro h₀ h₁
@@ -193,7 +196,7 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
     rw [neq, h]
   cases' this with h1 h1
   . sorry
-  sorry
+  . sorry
 example (m n : ℕ) (s : Finset ℕ) (h : m ∈ erase s n) : m ≠ n ∧ m ∈ s := by
   rwa [mem_erase] at h
 

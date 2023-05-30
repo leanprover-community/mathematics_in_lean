@@ -7,27 +7,23 @@ open Topology Filter
 variable {X : Type _} [MetricSpace X] (a b c : X)
 
 #check (dist a b : ℝ)
-
 #check (dist_nonneg : 0 ≤ dist a b)
-
 #check (dist_eq_zero : dist a b = 0 ↔ a = b)
-
 #check (dist_comm a b : dist a b = dist b a)
-
 #check (dist_triangle a b c : dist a c ≤ dist a b + dist b c)
 
 -- Note the next three lines are not quoted, their purpose is to make sure those things don't get renamed while we're looking elsewhere.
 #check EMetricSpace
-
 #check PseudoMetricSpace
-
 #check PseudoEMetricSpace
 
-example {u : ℕ → X} {a : X} : Tendsto u atTop (𝓝 a) ↔ ∀ ε > 0, ∃ N, ∀ n ≥ N, dist (u n) a < ε :=
+example {u : ℕ → X} {a : X} :
+    Tendsto u atTop (𝓝 a) ↔ ∀ ε > 0, ∃ N, ∀ n ≥ N, dist (u n) a < ε :=
   Metric.tendsto_atTop
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} :
-    Continuous f ↔ ∀ x : X, ∀ ε > 0, ∃ δ > 0, ∀ x', dist x' x < δ → dist (f x') (f x) < ε :=
+    Continuous f ↔
+      ∀ x : X, ∀ ε > 0, ∃ δ > 0, ∀ x', dist x' x < δ → dist (f x') (f x) < ε :=
   Metric.continuous_iff
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
@@ -88,7 +84,8 @@ example {s : Set X} (hs : IsClosed s) {u : ℕ → X} (hu : Tendsto u atTop (�
 example {s : Set X} : a ∈ closure s ↔ ∀ ε > 0, ∃ b ∈ s, a ∈ Metric.ball b ε :=
   Metric.mem_closure_iff
 
-example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n, u n ∈ s) : a ∈ closure s :=
+example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n, u n ∈ s) :
+    a ∈ closure s :=
   sorry
 
 example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n, u n ∈ s) : a ∈ closure s := by
@@ -113,11 +110,13 @@ example {s : Set X} (hs : IsCompact s) {u : ℕ → X} (hu : ∀ n, u n ∈ s) :
     ∃ a ∈ s, ∃ φ : ℕ → ℕ, StrictMono φ ∧ Tendsto (u ∘ φ) atTop (𝓝 a) :=
   hs.tendsto_subseq hu
 
-example {s : Set X} (hs : IsCompact s) (hs' : s.Nonempty) {f : X → ℝ} (hfs : ContinuousOn f s) :
+example {s : Set X} (hs : IsCompact s) (hs' : s.Nonempty) {f : X → ℝ}
+      (hfs : ContinuousOn f s) :
     ∃ x ∈ s, ∀ y ∈ s, f x ≤ f y :=
   hs.exists_forall_le hs' hfs
 
-example {s : Set X} (hs : IsCompact s) (hs' : s.Nonempty) {f : X → ℝ} (hfs : ContinuousOn f s) :
+example {s : Set X} (hs : IsCompact s) (hs' : s.Nonempty) {f : X → ℝ}
+      (hfs : ContinuousOn f s) :
     ∃ x ∈ s, ∀ y ∈ s, f y ≤ f x :=
   hs.exists_forall_ge hs' hfs
 
@@ -130,10 +129,12 @@ example {X : Type _} [MetricSpace X] [CompactSpace X] : IsCompact (univ : Set X)
 #check IsCompact.isClosed
 
 example {X : Type _} [MetricSpace X] {Y : Type _} [MetricSpace Y] {f : X → Y} :
-    UniformContinuous f ↔ ∀ ε > 0, ∃ δ > 0, ∀ {a b : X}, dist a b < δ → dist (f a) (f b) < ε :=
+    UniformContinuous f ↔
+      ∀ ε > 0, ∃ δ > 0, ∀ {a b : X}, dist a b < δ → dist (f a) (f b) < ε :=
   Metric.uniformContinuous_iff
 
-example {X : Type _} [MetricSpace X] [CompactSpace X] {Y : Type _} [MetricSpace Y] {f : X → Y}
+example {X : Type _} [MetricSpace X] [CompactSpace X]
+      {Y : Type _} [MetricSpace Y] {f : X → Y}
     (hf : Continuous f) : UniformContinuous f :=
   sorry
 
@@ -164,13 +165,16 @@ example {X : Type _} [MetricSpace X] [CompactSpace X] {Y : Type _} [MetricSpace 
       intro hxx'
       exact H (x, x') hxx'
 
-example (u : ℕ → X) : CauchySeq u ↔ ∀ ε > 0, ∃ N : ℕ, ∀ m ≥ N, ∀ n ≥ N, dist (u m) (u n) < ε :=
+example (u : ℕ → X) :
+    CauchySeq u ↔ ∀ ε > 0, ∃ N : ℕ, ∀ m ≥ N, ∀ n ≥ N, dist (u m) (u n) < ε :=
   Metric.cauchySeq_iff
 
-example (u : ℕ → X) : CauchySeq u ↔ ∀ ε > 0, ∃ N : ℕ, ∀ n ≥ N, dist (u n) (u N) < ε :=
+example (u : ℕ → X) :
+    CauchySeq u ↔ ∀ ε > 0, ∃ N : ℕ, ∀ n ≥ N, dist (u n) (u N) < ε :=
   Metric.cauchySeq_iff'
 
-example [CompleteSpace X] (u : ℕ → X) (hu : CauchySeq u) : ∃ x, Tendsto u atTop (𝓝 x) :=
+example [CompleteSpace X] (u : ℕ → X) (hu : CauchySeq u) :
+    ∃ x, Tendsto u atTop (𝓝 x) :=
   cauchySeq_tendsto_of_complete hu
 
 open BigOperators
@@ -240,18 +244,21 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
   intro x
   rw [mem_closure_iff_nhds_basis nhds_basis_closedBall]
   intro ε εpos
-  /- `ε` is positive. We have to find a point in the ball of radius `ε` around `x` belonging to all
-    `f n`. For this, we construct inductively a sequence `F n = (c n, r n)` such that the closed ball
-    `closedBall (c n) (r n)` is included in the previous ball and in `f n`, and such that
-    `r n` is small enough to ensure that `c n` is a Cauchy sequence. Then `c n` converges to a
-    limit which belongs to all the `f n`. -/
+  /- `ε` is positive. We have to find a point in the ball of radius `ε` around `x`
+    belonging to all `f n`. For this, we construct inductively a sequence
+    `F n = (c n, r n)` such that the closed ball `closedBall (c n) (r n)` is included
+    in the previous ball and in `f n`, and such that `r n` is small enough to ensure
+    that `c n` is a Cauchy sequence. Then `c n` converges to a limit which belongs
+    to all the `f n`. -/
   let F : ℕ → X × ℝ := fun n =>
-    Nat.recOn n (Prod.mk x (min ε (B 0))) fun n p => Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
+    Nat.recOn n (Prod.mk x (min ε (B 0)))
+      fun n p => Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
   let c : ℕ → X := fun n => (F n).1
   let r : ℕ → ℝ := fun n => (F n).2
   have rpos : ∀ n, 0 < r n := by sorry
   have rB : ∀ n, r n ≤ B n := by sorry
-  have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := by sorry
+  have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := by
+    sorry
   have cdist : ∀ n, dist (c n) (c (n + 1)) ≤ B n := by sorry
   have : CauchySeq c := cauchySeq_of_le_geometric_two' cdist
   -- as the sequence `c n` is Cauchy in a complete space, it converges to a limit `y`.

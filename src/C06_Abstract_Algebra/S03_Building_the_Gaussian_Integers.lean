@@ -37,7 +37,8 @@ theorem add_def (x y : gaussInt) : x + y = ⟨x.re + y.re, x.im + y.im⟩ :=
 theorem neg_def (x : gaussInt) : -x = ⟨-x.re, -x.im⟩ :=
   rfl
 
-theorem mul_def (x y : gaussInt) : x * y = ⟨x.re * y.re - x.im * y.im, x.re * y.im + x.im * y.re⟩ :=
+theorem mul_def (x y : gaussInt) :
+    x * y = ⟨x.re * y.re - x.im * y.im, x.re * y.im + x.im * y.re⟩ :=
   rfl
 
 @[simp]
@@ -207,9 +208,11 @@ theorem div_def (x y : gaussInt) :
 theorem mod_def (x y : gaussInt) : x % y = x - y * (x / y) :=
   rfl
 
-theorem norm_mod_lt (x : gaussInt) {y : gaussInt} (hy : y ≠ 0) : (x % y).norm < y.norm := by
+theorem norm_mod_lt (x : gaussInt) {y : gaussInt} (hy : y ≠ 0) :
+    (x % y).norm < y.norm := by
   have norm_y_pos : 0 < norm y := by rwa [norm_pos]
-  have : x % y * conj y = ⟨Int.mod' (x * conj y).re (norm y), Int.mod' (x * conj y).im (norm y)⟩ := by
+  have : x % y * conj y =
+      ⟨Int.mod' (x * conj y).re (norm y), Int.mod' (x * conj y).im (norm y)⟩ := by
     rw [mod_def, sub_mul, Int.mod'_eq, Int.mod'_eq, sub_eq_add_neg, div_def, norm]
     ext <;> simp <;> ring
   have : norm (x % y) * norm y ≤ norm y / 2 * norm y := by
@@ -238,7 +241,8 @@ theorem norm_mod_lt (x : gaussInt) {y : gaussInt} (hy : y ≠ 0) : (x % y).norm 
 theorem coe_natAbs_norm (x : gaussInt) : (x.norm.natAbs : ℤ) = x.norm :=
   Int.natAbs_of_nonneg (norm_nonneg _)
 
-theorem natAbs_norm_mod_lt (x y : gaussInt) (hy : y ≠ 0) : (x % y).norm.natAbs < y.norm.natAbs := by
+theorem natAbs_norm_mod_lt (x y : gaussInt) (hy : y ≠ 0) :
+    (x % y).norm.natAbs < y.norm.natAbs := by
   apply Int.ofNat_lt.1
   simp only [Int.coe_natAbs, abs_of_nonneg, norm_nonneg]
   apply norm_mod_lt x hy
@@ -256,7 +260,8 @@ instance : EuclideanDomain gaussInt :=
   { gaussInt.instCommRing with
     quotient := (· / ·)
     remainder := (· % ·)
-    quotient_mul_add_remainder_eq := fun x y => by simp only; rw [mod_def, add_comm, sub_add_cancel]
+    quotient_mul_add_remainder_eq :=
+      fun x y => by simp only; rw [mod_def, add_comm, sub_add_cancel]
     quotient_zero := fun x => by
       simp [div_def, norm, Int.div']
       rfl

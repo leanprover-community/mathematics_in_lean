@@ -80,9 +80,7 @@ example (u v : ℕ → ℝ) (h : u =ᶠ[atTop] v) (x₀ : ℝ) :
   tendsto_congr' h
 
 #check @eventually_of_forall
-
 #check @Eventually.mono
-
 #check @Eventually.and
 
 example (P Q R : ℕ → Prop) (hP : ∀ᶠ n in atTop, P n) (hQ : ∀ᶠ n in atTop, Q n)
@@ -98,9 +96,7 @@ example (P Q R : ℕ → Prop) (hP : ∀ᶠ n in atTop, P n) (hQ : ∀ᶠ n in a
   exact h'' ⟨h, h'⟩
 
 #check mem_closure_iff_clusterPt
-
 #check le_principal_iff
-
 #check neBot_of_le
 
 example (u : ℕ → ℝ) (M : Set ℝ) (x : ℝ) (hux : Tendsto u atTop (𝓝 x))

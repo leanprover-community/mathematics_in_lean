@@ -96,9 +96,12 @@ example : ∀ a b : Point, add a b = add b a := fun ⟨xa, ya, za⟩ ⟨xb, yb, 
 
 protected theorem add_assoc (a b c : Point) : (a.add b).add c = a.add (b.add c) := by
   sorry
+
 def smul (r : ℝ) (a : Point) : Point :=
   sorry
-theorem smul_distrib (r : ℝ) (a b : Point) : (smul r a).add (smul r b) = smul r (a.add b) := by
+
+theorem smul_distrib (r : ℝ) (a b : Point) :
+    (smul r a).add (smul r b) = smul r (a.add b) := by
   sorry
 
 end Point
@@ -162,7 +165,8 @@ def midpoint (n : ℕ) (a b : StandardSimplex n) : StandardSimplex n
     · linarith [a.NonNeg i, b.NonNeg i]
     norm_num
   sum_eq_one := by
-    simp [div_eq_mul_inv, ← Finset.sum_mul, Finset.sum_add_distrib, a.sum_eq_one, b.sum_eq_one]
+    simp [div_eq_mul_inv, ← Finset.sum_mul, Finset.sum_add_distrib,
+      a.sum_eq_one, b.sum_eq_one]
     field_simp
 
 end StandardSimplex

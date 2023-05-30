@@ -3,7 +3,6 @@ import Mathlib.Data.Set.Function
 import Mathlib.Tactic
 
 open Set
-
 open Function
 
 noncomputable section

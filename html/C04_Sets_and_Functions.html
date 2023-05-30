@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. Sets and Functions &mdash; Mathematics in Lean 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. Number Theory" href="C05_Number_Theory.html" />
+    <link rel="prev" title="3. Logic" href="C03_Logic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="C01_Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Sets and Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sets">4.1. Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">4.2. Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-schroder-bernstein-theorem">4.3. The Schr&#246;der-Bernstein Theorem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Abstract_Algebra.html">6. Abstract Algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Topology.html">7. Topology</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mathematics in Lean</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">4. </span>Sets and Functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/C04_Sets_and_Functions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sets-and-functions">
+<span id="id1"></span><h1><span class="section-number">4. </span>Sets and Functions<a class="headerlink" href="#sets-and-functions" title="Permalink to this heading">&#61633;</a></h1>
+<p>The vocabulary of sets, relations, and functions provides a uniform
+language for carrying out constructions in all the branches of
+mathematics.
+Since functions and relations can be defined in terms of sets,
+axiomatic set theory can be used as a foundation for mathematics.</p>
+<p>Lean&#8217;s foundation is based instead on the primitive notion of a <em>type</em>,
+and it includes ways of defining functions between types.
+Every expression in Lean has a type:
+there are natural numbers, real numbers, functions from reals to reals,
+groups, vector spaces, and so on.
+Some expressions <em>are</em> types,
+which is to say,
+their type is <code class="docutils literal notranslate"><span class="pre">Type</span></code>.
+Lean and mathlib provide ways of defining new types,
+and ways of defining objects of those types.</p>
+<p>Conceptually, you can think of a type as just a set of objects.
+Requiring every object to have a type has some advantages.
+For example, it makes it possible to overload notation like <code class="docutils literal notranslate"><span class="pre">+</span></code>,
+and it sometimes makes input less verbose
+because Lean can infer a lot of information from
+an object&#8217;s type.
+The type system also enables Lean to flag errors when you
+apply a function to the wrong number of arguments,
+or apply a function to arguments of the wrong type.</p>
+<p>Lean&#8217;s library does define elementary set-theoretic notions.
+In contrast to set theory,
+in Lean a set is always a set of objects of some type,
+such as a set natural numbers or a set of functions
+from real numbers to real numbers.
+The distinction between types and set takes some getting used to,
+but this chapter will take you through the essentials.</p>
+<section id="sets">
+<span id="id2"></span><h2><span class="section-number">4.1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this heading">&#61633;</a></h2>
+<p id="index-0">If <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is any type, the type <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">&#945;</span></code> consists of sets
+of elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+This type supports the usual set-theoretic operations and relations.
+For example, <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8838;</span> <span class="pre">t</span></code> says that <code class="docutils literal notranslate"><span class="pre">s</span></code> is a subset of <code class="docutils literal notranslate"><span class="pre">t</span></code>,
+<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8745;</span> <span class="pre">t</span></code> denotes the intersection of <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8746;</span> <span class="pre">t</span></code> denotes their union.
+The subset relation can be typed with <code class="docutils literal notranslate"><span class="pre">\ss</span></code> or <code class="docutils literal notranslate"><span class="pre">\sub</span></code>,
+intersection can be typed with <code class="docutils literal notranslate"><span class="pre">\i</span></code> or <code class="docutils literal notranslate"><span class="pre">\cap</span></code>,
+and union can be typed with <code class="docutils literal notranslate"><span class="pre">\un</span></code> or <code class="docutils literal notranslate"><span class="pre">\cup</span></code>.
+The library also defines the set <code class="docutils literal notranslate"><span class="pre">univ</span></code>,
+which consists of all the elements of type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>,
+and the empty set, <code class="docutils literal notranslate"><span class="pre">&#8709;</span></code>, which can be typed as <code class="docutils literal notranslate"><span class="pre">\empty</span></code>.
+Given <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">&#945;</span></code>,
+the expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code> says that <code class="docutils literal notranslate"><span class="pre">x</span></code> is a member of <code class="docutils literal notranslate"><span class="pre">s</span></code>.
+Theorems that mention set membership often include <code class="docutils literal notranslate"><span class="pre">mem</span></code>
+in their name.
+The expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8713;</span> <span class="pre">s</span></code> abbreviates <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code>.
+You can type <code class="docutils literal notranslate"><span class="pre">&#8712;</span></code> as <code class="docutils literal notranslate"><span class="pre">\in</span></code> or <code class="docutils literal notranslate"><span class="pre">\mem</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8713;</span></code> as <code class="docutils literal notranslate"><span class="pre">\notin</span></code>.</p>
+<p id="index-1">One way to prove things about sets is to use <code class="docutils literal notranslate"><span class="pre">rw</span></code>
+or the simplifier to expand the definitions.
+In the second example below, we use <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">only</span></code>
+to tell the simplifier to use only the list
+of identities we give it,
+and not its full database of identities.
+Unlike <code class="docutils literal notranslate"><span class="pre">rw</span></code>, <code class="docutils literal notranslate"><span class="pre">simp</span></code> can perform simplifications
+inside a universal or existential quantifier.
+If you step through the proof,
+you can see the effects of these commands.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="n">u</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">Set</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">subset_def</span><span class="o">,</span> <span class="n">inter_def</span><span class="o">,</span> <span class="n">inter_def</span><span class="o">]</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">subset_def</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span>
+  <span class="n">dsimp</span>
+  <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">_</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">subset_def</span><span class="o">,</span> <span class="n">mem_inter_iff</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span>
+  <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">_</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+<p>In this example, we open the <code class="docutils literal notranslate"><span class="pre">set</span></code> namespace to have
+access to the shorter names for the theorems.
+But, in fact, we can delete the calls to <code class="docutils literal notranslate"><span class="pre">rw</span></code> and <code class="docutils literal notranslate"><span class="pre">simp</span></code>
+entirely:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">x</span> <span class="n">xsu</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">xsu.1</span><span class="o">,</span> <span class="n">xsu.2</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+<p>What is going on here is known as <em>definitional reduction</em>:
+to make sense of the <code class="docutils literal notranslate"><span class="pre">intro</span></code> command and the anonymous constructors
+Lean is forced to expand the definitions.
+The following examples also illustrate the phenomenon:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">foo</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span>
+  <span class="k">fun</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span>
+  <span class="k">fun</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+<p>Due to a quirk of how Lean processes its input,
+the first example fails if we replace <code class="docutils literal notranslate"><span class="pre">theorem</span> <span class="pre">foo</span></code> with <code class="docutils literal notranslate"><span class="pre">example</span></code>.
+This illustrates the pitfalls of relying on definitional reduction
+too heavily.
+It is often convenient,
+but sometimes we have to fall back on unfolding definitions manually.</p>
+<p>To deal with unions, we can use <code class="docutils literal notranslate"><span class="pre">Set.union_def</span></code> and <code class="docutils literal notranslate"><span class="pre">Set.mem_union</span></code>.
+Since <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8746;</span> <span class="pre">t</span></code> unfolds to <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8744;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">t</span></code>,
+we can also use the <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic to force a definitional reduction.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">x</span> <span class="n">hx</span>
+  <span class="k">have</span> <span class="n">xs</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">hx.1</span>
+  <span class="k">have</span> <span class="n">xtu</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">hx.2</span>
+  <span class="n">cases&#39;</span> <span class="n">xtu</span> <span class="k">with</span> <span class="n">xt</span> <span class="n">xu</span>
+  <span class="bp">&#183;</span> <span class="n">left</span>
+    <span class="k">show</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span>
+    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+  <span class="n">right</span>
+  <span class="k">show</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+<p>Since intersection binds tighter than union,
+the use of parentheses in the expression <code class="docutils literal notranslate"><span class="pre">(s</span> <span class="pre">&#8745;</span> <span class="pre">t)</span> <span class="pre">&#8746;</span> <span class="pre">(s</span> <span class="pre">&#8745;</span> <span class="pre">u)</span></code>
+is unnecessary, but they make the meaning of the expression clearer.
+The following is a shorter proof of the same fact:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span> <span class="bp">|</span> <span class="n">xu</span><span class="o">&#10217;</span>
+  <span class="bp">&#183;</span> <span class="n">left</span>
+    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+  <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+<p>As an exercise, try proving the other inclusion:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>It might help to know that when using <code class="docutils literal notranslate"><span class="pre">rintro</span></code>,
+sometimes we need to use parentheses around a disjunctive pattern
+<code class="docutils literal notranslate"><span class="pre">h1</span> <span class="pre">|</span> <span class="pre">h2</span></code> to get Lean to parse it correctly.</p>
+<p>The library also defines set difference, <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">\</span> <span class="pre">t</span></code>,
+where the backslash is a special unicode character
+entered as <code class="docutils literal notranslate"><span class="pre">\\</span></code>.
+The expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">\</span> <span class="pre">t</span></code> expands to <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8743;</span> <span class="pre">x</span> <span class="pre">&#8713;</span> <span class="pre">t</span></code>.
+(The <code class="docutils literal notranslate"><span class="pre">&#8713;</span></code> can be entered as <code class="docutils literal notranslate"><span class="pre">\notin</span></code>.)
+It can be rewritten manually using <code class="docutils literal notranslate"><span class="pre">Set.diff_eq</span></code> and <code class="docutils literal notranslate"><span class="pre">dsimp</span></code>
+or <code class="docutils literal notranslate"><span class="pre">Set.mem_diff</span></code>,
+but the following two proofs of the same inclusion
+show how to avoid using them.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">s</span> <span class="bp">\</span> <span class="n">t</span><span class="o">)</span> <span class="bp">\</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">\</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">x</span> <span class="n">xstu</span>
+  <span class="k">have</span> <span class="n">xs</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">xstu.1.1</span>
+  <span class="k">have</span> <span class="n">xnt</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8713;</span> <span class="n">t</span> <span class="o">:=</span> <span class="n">xstu.1.2</span>
+  <span class="k">have</span> <span class="n">xnu</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8713;</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">xstu.2</span>
+  <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">exact</span> <span class="n">xs</span>
+  <span class="n">intro</span> <span class="n">xtu</span>
+  <span class="c1">-- x &#8712; t &#8744; x &#8712; u</span>
+  <span class="n">cases&#39;</span> <span class="n">xtu</span> <span class="k">with</span> <span class="n">xt</span> <span class="n">xu</span>
+  <span class="bp">&#183;</span> <span class="k">show</span> <span class="n">False</span>
+    <span class="n">exact</span> <span class="n">xnt</span> <span class="n">xt</span>
+  <span class="k">show</span> <span class="n">False</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xnu</span> <span class="n">xu</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">s</span> <span class="bp">\</span> <span class="n">t</span><span class="o">)</span> <span class="bp">\</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">\</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xnt</span><span class="o">&#10217;,</span> <span class="n">xnu</span><span class="o">&#10217;</span>
+  <span class="n">use</span> <span class="n">xs</span>
+  <span class="n">rintro</span> <span class="o">(</span><span class="n">xt</span> <span class="bp">|</span> <span class="n">xu</span><span class="o">)</span> <span class="bp">&lt;;&gt;</span> <span class="n">contradiction</span>
+</pre></div>
+</div>
+<p>As an exercise, prove the reverse inclusion:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">\</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="o">(</span><span class="n">s</span> <span class="bp">\</span> <span class="n">t</span><span class="o">)</span> <span class="bp">\</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>To prove that two sets are equal,
+it suffices to show that every element of one is an element
+of the other.
+This principle is known as &#8220;extensionality,&#8221;
+and, unsurprisingly,
+the <code class="docutils literal notranslate"><span class="pre">ext</span></code> tactic is equipped to handle it.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">x</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_inter_iff</span><span class="o">]</span>
+  <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
+  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+<p>Once again, deleting the line <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">only</span> <span class="pre">[mem_inter_iff]</span></code>
+does not harm the proof.
+In fact, if you like inscrutable proof terms,
+the following one-line proof is for you:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span>
+  <span class="n">Set.ext</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;,</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;&#10217;</span>
+</pre></div>
+</div>
+<p>The dollar sign is a useful syntax:
+writing <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">$</span> <span class="pre">...</span></code>
+is essentially the same as writing <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">(...)</span></code>,
+but it saves us the trouble of having to close
+a set of parentheses at the end of a long expression.
+Here is an even shorter proof,
+using the simplifier:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ext</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">and_comm</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>An alternative to using <code class="docutils literal notranslate"><span class="pre">ext</span></code> is to use
+the theorem <code class="docutils literal notranslate"><span class="pre">Subset.antisymm</span></code>
+which allows us to prove an equation <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">t</span></code>
+between sets by proving <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8838;</span> <span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&#8838;</span> <span class="pre">s</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">apply</span> <span class="n">Subset.antisymm</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
+  <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+<p>Try finishing this proof term:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span>
+    <span class="n">Subset.antisymm</span> <span class="gr">sorry</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Remember that you can replace <cite>sorry</cite> by an underscore,
+and when you hover over it,
+Lean will show you what it expects at that point.</p>
+<p>Here are some set-theoretic identities you might enjoy proving:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">\</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">\</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">t</span> <span class="bp">\</span> <span class="n">s</span> <span class="bp">=</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">\</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>When it comes to representing sets,
+here is what is going on underneath the hood.
+In type theory, a <em>property</em> or <em>predicate</em> on a type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>
+is just a function <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">&#8594;</span> <span class="pre">Prop</span></code>.
+This makes sense:
+given <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">:</span> <span class="pre">&#945;</span></code>, <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">a</span></code> is just the proposition
+that <code class="docutils literal notranslate"><span class="pre">P</span></code> holds of <code class="docutils literal notranslate"><span class="pre">a</span></code>.
+In the library, <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">&#945;</span></code> is defined to be <code class="docutils literal notranslate"><span class="pre">&#945;</span> <span class="pre">&#8594;</span> <span class="pre">Prop</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code> is defined to be <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">x</span></code>.
+In other words, sets are really properties, treated as objects.</p>
+<p>The library also defines set-builder notation.
+The expression <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">y</span> <span class="pre">|</span> <span class="pre">P</span> <span class="pre">y</span> <span class="pre">}</span></code> unfolds to <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">y</span> <span class="pre">&#8614;</span> <span class="pre">P</span> <span class="pre">y)</span></code>,
+so <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">{</span> <span class="pre">y</span> <span class="pre">|</span> <span class="pre">P</span> <span class="pre">y</span> <span class="pre">}</span></code> reduces to <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">x</span></code>.
+So we can turn the property of being even into the set of even numbers:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">evens</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#8469;</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="n">Even</span> <span class="n">n</span> <span class="o">}</span>
+
+<span class="kd">def</span> <span class="n">odds</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#8469;</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">n</span> <span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">evens</span> <span class="bp">&#8746;</span> <span class="n">odds</span> <span class="bp">=</span> <span class="n">univ</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">evens</span><span class="o">,</span> <span class="n">odds</span><span class="o">]</span>
+  <span class="n">ext</span> <span class="n">n</span>
+  <span class="n">simp</span>
+  <span class="n">apply</span> <span class="n">Classical.em</span>
+</pre></div>
+</div>
+<p>You should step through this proof and make sure
+you understand what is going on.
+Try deleting the line <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[evens,</span> <span class="pre">odds]</span></code>
+and confirm that the proof still works.</p>
+<p>In fact, set-builder notation is used to define</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8745;</span> <span class="pre">t</span></code> as <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8743;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">t}</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8746;</span> <span class="pre">t</span></code> as <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8744;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">t}</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#8709;</span></code> as <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">False}</span></code>, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">univ</span></code> as <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">True}</span></code>.</p></li>
+</ul>
+<p>We often need to indicate the type of <code class="docutils literal notranslate"><span class="pre">&#8709;</span></code> and <code class="docutils literal notranslate"><span class="pre">univ</span></code>
+explicitly,
+because Lean has trouble guessing which ones we mean.
+The following examples show how Lean unfolds the last
+two definitions when needed. In the second one,
+<code class="docutils literal notranslate"><span class="pre">trivial</span></code> is the canonical proof of <code class="docutils literal notranslate"><span class="pre">True</span></code> in the library.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="o">(</span><span class="bp">&#8709;</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#8469;</span><span class="o">))</span> <span class="o">:</span> <span class="n">False</span> <span class="o">:=</span>
+  <span class="n">h</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="o">(</span><span class="n">univ</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">trivial</span>
+</pre></div>
+</div>
+<p>As an exercise, prove the following inclusion.
+Use <code class="docutils literal notranslate"><span class="pre">intro</span> <span class="pre">n</span></code> to unfold the definition of subset,
+and use the simplifier to reduce the
+set-theoretic constructions to logic.
+We also recommend using the theorems
+<code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_two_or_odd</span></code> and <code class="docutils literal notranslate"><span class="pre">Nat.even_iff</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="n">Nat.Prime</span> <span class="n">n</span> <span class="o">}</span> <span class="bp">&#8745;</span> <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">2</span> <span class="o">}</span> <span class="bp">&#8838;</span> <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">n</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Be careful: it is somewhat confusing that the library has multiple versions
+of the predicate <code class="docutils literal notranslate"><span class="pre">Prime</span></code>.
+The most general one makes sense in any commutative monoid with a zero element.
+The predicate <code class="docutils literal notranslate"><span class="pre">Nat.Prime</span></code> is specific to the natural numbers.
+Fortunately, there is a theorem that says that in the specific case,
+the two notions agree, so you can always rewrite one to the other.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#print</span> <span class="n">Prime</span>
+
+<span class="k">#print</span> <span class="n">Nat.Prime</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">Prime</span> <span class="n">n</span> <span class="bp">&#8596;</span> <span class="n">Nat.Prime</span> <span class="n">n</span> <span class="o">:=</span>
+  <span class="n">Nat.prime_iff.symm</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Prime</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">Nat.prime_iff</span><span class="o">]</span>
+  <span class="n">exact</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p id="index-2">The <cite>rwa</cite> tactic follows a rewrite with the assumption tactic.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Prime</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rwa</span> <span class="o">[</span><span class="n">Nat.prime_iff</span><span class="o">]</span>
+</pre></div>
+</div>
+<p id="index-3">Lean introduces the notation <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s,</span> <span class="pre">...</span></code>,
+&#8220;for every <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">s</span></code> .,&#8221;
+as an abbreviation for  <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">x,</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8594;</span> <span class="pre">...</span></code>.
+It also introduces the notation <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s,</span> <span class="pre">...,</span></code>
+&#8220;there exists an <code class="docutils literal notranslate"><span class="pre">x</span></code> in <code class="docutils literal notranslate"><span class="pre">s</span></code> such that ..&#8221;
+These are sometimes known as <em>bounded quantifiers</em>,
+because the construction serves to restrict their significance
+to the set <code class="docutils literal notranslate"><span class="pre">s</span></code>.
+As a result, theorems in the library that make use of them
+often contain <code class="docutils literal notranslate"><span class="pre">ball</span></code> or <code class="docutils literal notranslate"><span class="pre">bex</span></code> in the name.
+The theorem <code class="docutils literal notranslate"><span class="pre">bex_def</span></code> asserts that <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s,</span> <span class="pre">...</span></code> is equivalent
+to <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">x,</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8743;</span> <span class="pre">...,</span></code>
+but when they are used with <code class="docutils literal notranslate"><span class="pre">rintro</span></code>, <code class="docutils literal notranslate"><span class="pre">use</span></code>,
+and anonymous constructors,
+these two expressions behave roughly the same.
+As a result, we usually don&#8217;t need to use <code class="docutils literal notranslate"><span class="pre">bex_def</span></code>
+to transform them explicitly.
+Here is are some examples of how they are used:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#8469;</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h&#8320;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8321;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">Prime</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">x</span> <span class="bp">&#8743;</span> <span class="n">Prime</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">x</span> <span class="n">xs</span>
+  <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">apply</span> <span class="n">h&#8320;</span> <span class="n">x</span> <span class="n">xs</span>
+  <span class="n">apply</span> <span class="n">h&#8321;</span> <span class="n">x</span> <span class="n">xs</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">x</span> <span class="bp">&#8743;</span> <span class="n">Prime</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">Prime</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xs</span><span class="o">,</span> <span class="n">_</span><span class="o">,</span> <span class="n">prime_x</span><span class="o">&#10217;</span>
+  <span class="n">use</span> <span class="n">x</span><span class="o">,</span> <span class="n">xs</span>
+  <span class="n">exact</span> <span class="n">prime_x</span>
+</pre></div>
+</div>
+<p>See if you can prove these slight variations:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">ssubt</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h&#8320;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">t</span><span class="o">,</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8321;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">t</span><span class="o">,</span> <span class="n">Prime</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">x</span> <span class="bp">&#8743;</span> <span class="n">Prime</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">x</span> <span class="bp">&#8743;</span> <span class="n">Prime</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">t</span><span class="o">,</span> <span class="n">Prime</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>Indexed unions and intersections are
+another important set-theoretic construction.
+We can model a sequence <span class="math notranslate nohighlight">\(A_0, A_1, A_2, \ldots\)</span> of sets of
+elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>
+as a function <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">:</span> <span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">Set</span> <span class="pre">&#945;</span></code>,
+in which case <code class="docutils literal notranslate"><span class="pre">&#8899;</span> <span class="pre">i,</span> <span class="pre">A</span> <span class="pre">i</span></code> denotes their union,
+and <code class="docutils literal notranslate"><span class="pre">&#8898;</span> <span class="pre">i,</span> <span class="pre">A</span> <span class="pre">i</span></code> denotes their intersection.
+There is nothing special about the natural numbers here,
+so <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> can be replaced by any type <code class="docutils literal notranslate"><span class="pre">I</span></code>
+used to index the sets.
+The following illustrates their use.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">Set</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8745;</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">x</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_inter_iff</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span>
+  <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">&#10217;&#10217;</span>
+    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
+  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">&#10217;&#10217;</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span> <span class="bp">&#8745;</span> <span class="n">B</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8745;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">B</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">x</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_inter_iff</span><span class="o">,</span> <span class="n">mem_iInter</span><span class="o">]</span>
+  <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">intro</span> <span class="n">h</span>
+    <span class="n">constructor</span>
+    <span class="bp">&#183;</span> <span class="n">intro</span> <span class="n">i</span>
+      <span class="n">exact</span> <span class="o">(</span><span class="n">h</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span>
+    <span class="n">intro</span> <span class="n">i</span>
+    <span class="n">exact</span> <span class="o">(</span><span class="n">h</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span>
+  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="o">&#10217;</span> <span class="n">i</span>
+  <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">exact</span> <span class="n">h1</span> <span class="n">i</span>
+  <span class="n">exact</span> <span class="n">h2</span> <span class="n">i</span>
+</pre></div>
+</div>
+<p>Parentheses are often needed with an
+indexed union or intersection because,
+as with the quantifiers,
+the scope of the bound variable extends as far as it can.</p>
+<p>Try proving the following identity.
+One direction requires classical logic!
+We recommend using <code class="docutils literal notranslate"><span class="pre">by_cases</span> <span class="pre">xs</span> <span class="pre">:</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code>
+at an appropriate point in the proof.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8746;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span> <span class="bp">&#8746;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Mathlib also has bounded unions and intersections,
+which are analogous to the bounded quantifiers.
+You can unpack their meaning with <code class="docutils literal notranslate"><span class="pre">mem_Union&#8322;</span></code>
+and <code class="docutils literal notranslate"><span class="pre">mem_Inter&#8322;</span></code>.
+As the following examples show,
+Lean&#8217;s simplifier carries out these replacements as well.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">primes</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#8469;</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">Nat.Prime</span> <span class="n">x</span> <span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">primes</span><span class="o">,</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">p</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">&#8739;</span> <span class="n">x</span> <span class="o">})</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">&#8707;</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">primes</span><span class="o">,</span> <span class="n">p</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">&#8739;</span> <span class="n">x</span> <span class="o">}</span> <span class="o">:=</span><span class="kd">by</span>
+  <span class="n">ext</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mem_iUnion&#8322;</span><span class="o">]</span>
+  <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">primes</span><span class="o">,</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">p</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">&#8739;</span> <span class="n">x</span> <span class="o">})</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">&#8707;</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">primes</span><span class="o">,</span> <span class="n">p</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">&#8739;</span> <span class="n">x</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span>
+  <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8898;</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">primes</span><span class="o">,</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">&#172;</span><span class="n">p</span> <span class="bp">&#8739;</span> <span class="n">x</span> <span class="o">})</span> <span class="bp">&#8838;</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">x</span>
+  <span class="n">contrapose</span><span class="bp">!</span>
+  <span class="n">simp</span>
+  <span class="n">apply</span> <span class="n">Nat.exists_prime_and_dvd</span>
+</pre></div>
+</div>
+<p>Try solving the following example, which is similar.
+If you start typing <code class="docutils literal notranslate"><span class="pre">eq_univ</span></code>,
+tab completion will tell you that <code class="docutils literal notranslate"><span class="pre">apply</span> <span class="pre">eq_univ_of_forall</span></code>
+is a good way to start the proof.
+We also recommend using the theorem <code class="docutils literal notranslate"><span class="pre">Nat.exists_infinite_primes</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">primes</span><span class="o">,</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">p</span> <span class="o">})</span> <span class="bp">=</span> <span class="n">univ</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Give a collection of sets, <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">(Set</span> <span class="pre">&#945;)</span></code>,
+their union, <code class="docutils literal notranslate"><span class="pre">&#8899;&#8320;</span> <span class="pre">s</span></code>, has type <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">&#945;</span></code>
+and is defined as <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">&#8707;</span> <span class="pre">t</span> <span class="pre">&#8712;</span> <span class="pre">s,</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">t}</span></code>.
+Similarly, their intersection, <code class="docutils literal notranslate"><span class="pre">&#8898;&#8320;</span> <span class="pre">s</span></code>, is defined as
+<code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">&#8704;</span> <span class="pre">t</span> <span class="pre">&#8712;</span> <span class="pre">s,</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">t}</span></code>.
+These operations are called <code class="docutils literal notranslate"><span class="pre">sUnion</span></code> and <code class="docutils literal notranslate"><span class="pre">sInter</span></code>, respectively.
+The following examples show their relationship to bounded union
+and intersection.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="o">(</span><span class="n">Set</span> <span class="n">&#945;</span><span class="o">))</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8899;&#8320;</span> <span class="n">s</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">t</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">x</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mem_iUnion&#8322;</span><span class="o">]</span>
+  <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8898;&#8320;</span> <span class="n">s</span> <span class="bp">=</span> <span class="bp">&#8898;</span> <span class="n">t</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">x</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mem_iInter&#8322;</span><span class="o">]</span>
+  <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>In the library, these identities are called
+<code class="docutils literal notranslate"><span class="pre">sUnion_eq_biUnion</span></code> and <code class="docutils literal notranslate"><span class="pre">sInter_eq_biInter</span></code>.</p>
+</section>
+<section id="functions">
+<span id="id3"></span><h2><span class="section-number">4.2. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">&#61633;</a></h2>
+<p>If <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">&#8594;</span> <span class="pre">&#946;</span></code> is a function and  <code class="docutils literal notranslate"><span class="pre">p</span></code> is a set of
+elements of type <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>,
+the library defines <code class="docutils literal notranslate"><span class="pre">preimage</span> <span class="pre">f</span> <span class="pre">p</span></code>, written <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">p</span></code>,
+to be <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">p}</span></code>.
+The expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">p</span></code> reduces to <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">p</span></code>.
+This is often convenient, as in the following example:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">u</span> <span class="n">v</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#946;</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">Function</span>
+<span class="kn">open</span> <span class="n">Set</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="o">(</span><span class="n">u</span> <span class="bp">&#8745;</span> <span class="n">v</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span> <span class="bp">&#8745;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">v</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span>
+  <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">s</span></code> is a set of elements of type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>,
+the library also defines <code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">f</span> <span class="pre">s</span></code>,
+written <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">''</span> <span class="pre">s</span></code>,
+to be <code class="docutils literal notranslate"><span class="pre">{y</span> <span class="pre">|</span> <span class="pre">&#8707;</span> <span class="pre">x,</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">&#8743;</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y}</span></code>.
+So a hypothesis  <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">f</span> <span class="pre">''</span> <span class="pre">s</span></code> decomposes to a triple
+<code class="docutils literal notranslate"><span class="pre">&#10216;x,</span> <span class="pre">xs,</span> <span class="pre">xeq&#10217;</span></code> with <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">&#945;</span></code> satisfying the hypotheses <code class="docutils literal notranslate"><span class="pre">xs</span> <span class="pre">:</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code>
+and <code class="docutils literal notranslate"><span class="pre">xeq</span> <span class="pre">:</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">rfl</span></code> tag in the <code class="docutils literal notranslate"><span class="pre">rintro</span></code> tactic (see <a class="reference internal" href="C03_Logic.html#the-existential-quantifier"><span class="std std-numref">Section 3.2</span></a>) was made precisely
+for this sort of situation.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">y</span><span class="bp">;</span> <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xs</span> <span class="bp">|</span> <span class="n">xt</span><span class="o">,</span> <span class="n">rfl</span><span class="o">&#10217;</span>
+    <span class="bp">&#183;</span> <span class="n">left</span>
+      <span class="n">use</span> <span class="n">x</span><span class="o">,</span> <span class="n">xs</span>
+    <span class="n">right</span>
+    <span class="n">use</span> <span class="n">x</span><span class="o">,</span> <span class="n">xt</span>
+  <span class="n">rintro</span> <span class="o">(&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xs</span><span class="o">,</span> <span class="n">rfl</span><span class="o">&#10217;</span> <span class="bp">|</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xt</span><span class="o">,</span> <span class="n">rfl</span><span class="o">&#10217;)</span>
+  <span class="bp">&#183;</span> <span class="n">use</span> <span class="n">x</span><span class="o">,</span> <span class="n">Or.inl</span> <span class="n">xs</span>
+  <span class="n">use</span> <span class="n">x</span><span class="o">,</span> <span class="n">Or.inr</span> <span class="n">xt</span>
+</pre></div>
+</div>
+<p>Notice also that the <code class="docutils literal notranslate"><span class="pre">use</span></code> tactic applies <code class="docutils literal notranslate"><span class="pre">refl</span></code>
+to close goals when it can.</p>
+<p>Here is another example:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">x</span> <span class="n">xs</span>
+  <span class="k">show</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span>
+  <span class="n">use</span> <span class="n">x</span><span class="o">,</span> <span class="n">xs</span>
+</pre></div>
+</div>
+<p>We can replace the line <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">x,</span> <span class="pre">xs</span></code> by
+<code class="docutils literal notranslate"><span class="pre">apply</span> <span class="pre">mem_image_of_mem</span> <span class="pre">f</span> <span class="pre">xs</span></code> if we want to
+use a theorem specifically designed for that purpose.
+But knowing that the image is defined in terms
+of an existential quantifier is often convenient.</p>
+<p>The following equivalence is a good exercise:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">v</span> <span class="bp">&#8596;</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">v</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>It shows that <code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">preimage</span> <span class="pre">f</span></code> are
+an instance of what is known as a <em>Galois connection</em>
+between <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">&#946;</span></code>,
+each partially ordered by the subset relation.
+In the library, this equivalence is named
+<code class="docutils literal notranslate"><span class="pre">image_subset_iff</span></code>.
+In practice, the right-hand side is often the
+more useful representation,
+because <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">t</span></code> unfolds to <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">t</span></code>
+whereas working with <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">f</span> <span class="pre">''</span> <span class="pre">s</span></code> requires
+decomposing an existential quantifier.</p>
+<p>Here is a long list of set-theoretic identities for
+you to enjoy.
+You don&#8217;t have to do all of them at once;
+do a few of them,
+and set the rest aside for a rainy day.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">v</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="o">(</span><span class="n">u</span> <span class="bp">&#8746;</span> <span class="n">v</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span> <span class="bp">&#8746;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">v</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">t</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">\</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">t</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">s</span> <span class="bp">\</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span> <span class="bp">\</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">v</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="o">(</span><span class="n">u</span> <span class="bp">\</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">v</span> <span class="bp">=</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>You can also try your hand at the next group of exercises,
+which characterize the behavior of images and preimages
+with respect to indexed unions and intersections.
+In the third exercise, the argument <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">:</span> <span class="pre">I</span></code> is needed
+to guarantee that the index set is nonempty.
+To prove any of these, we recommend using <code class="docutils literal notranslate"><span class="pre">ext</span></code> or <code class="docutils literal notranslate"><span class="pre">intro</span></code>
+to unfold the meaning of an equation or inclusion between sets,
+and then calling <code class="docutils literal notranslate"><span class="pre">simp</span></code> to unpack the conditions for membership.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#946;</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">A</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">y</span><span class="bp">;</span> <span class="n">simp</span>
+  <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">&#10217;,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
+    <span class="n">use</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span>
+    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xAi</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
+  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">xAi</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">&#10217;,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">A</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">y</span><span class="bp">;</span> <span class="n">simp</span>
+  <span class="n">intro</span> <span class="n">x</span> <span class="n">h</span> <span class="n">fxeq</span> <span class="n">i</span>
+  <span class="n">use</span> <span class="n">x</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">i</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">)</span> <span class="o">(</span><span class="n">injf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">y</span><span class="bp">;</span> <span class="n">simp</span>
+  <span class="n">intro</span> <span class="n">h</span>
+  <span class="n">rcases</span> <span class="n">h</span> <span class="n">i</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xAi</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
+  <span class="n">use</span> <span class="n">x</span><span class="bp">;</span> <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">intro</span> <span class="n">i&#39;</span>
+    <span class="n">rcases</span> <span class="n">h</span> <span class="n">i&#39;</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">x&#39;</span><span class="o">,</span> <span class="n">x&#39;Ai</span><span class="o">,</span> <span class="n">fx&#39;eq</span><span class="o">&#10217;</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x&#39;</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">fxeq</span><span class="o">,</span> <span class="n">fx&#39;eq</span><span class="o">]</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x&#39;</span> <span class="o">:=</span> <span class="n">injf</span> <span class="n">this</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">this</span><span class="o">]</span>
+    <span class="n">exact</span> <span class="n">x&#39;Ai</span>
+  <span class="n">exact</span> <span class="n">fxeq</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">B</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">B</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">x</span>
+  <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">B</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#8315;&#185;&#39;</span> <span class="n">B</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">x</span>
+  <span class="n">simp</span>
+</pre></div>
+</div>
+<p>The library defines a predicate <code class="docutils literal notranslate"><span class="pre">InjOn</span> <span class="pre">f</span> <span class="pre">s</span></code> to say that
+<code class="docutils literal notranslate"><span class="pre">f</span></code> is injective on <code class="docutils literal notranslate"><span class="pre">s</span></code>.
+It is defined as follows:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">InjOn</span> <span class="n">f</span> <span class="n">s</span> <span class="bp">&#8596;</span> <span class="bp">&#8704;</span> <span class="n">x&#8321;</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">x&#8322;</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">x&#8321;</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x&#8322;</span> <span class="bp">&#8594;</span> <span class="n">x&#8321;</span> <span class="bp">=</span> <span class="n">x&#8322;</span> <span class="o">:=</span>
+  <span class="n">Iff.refl</span> <span class="n">_</span>
+</pre></div>
+</div>
+<p>The statement <code class="docutils literal notranslate"><span class="pre">Injective</span> <span class="pre">f</span></code> is provably equivalent
+to <code class="docutils literal notranslate"><span class="pre">InjOn</span> <span class="pre">f</span> <span class="pre">univ</span></code>.
+Similarly, the library defines <code class="docutils literal notranslate"><span class="pre">range</span> <span class="pre">f</span></code> to be
+<code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">&#8707;y,</span> <span class="pre">f</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x}</span></code>,
+so <code class="docutils literal notranslate"><span class="pre">range</span> <span class="pre">f</span></code> is provably equal to <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">''</span> <span class="pre">univ</span></code>.
+This is a common theme in mathlib:
+although many properties of functions are defined relative
+to their full domain,
+there are often relativized versions that restrict
+the statements to a subset of the domain type.</p>
+<p>Here is are some examples of <code class="docutils literal notranslate"><span class="pre">InjOn</span></code> and <code class="docutils literal notranslate"><span class="pre">range</span></code> in use:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Set</span> <span class="n">Real</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">InjOn</span> <span class="n">log</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">x</span> <span class="n">xpos</span> <span class="n">y</span> <span class="n">ypos</span>
+  <span class="n">intro</span> <span class="n">e</span>
+  <span class="c1">-- log x = log y</span>
+  <span class="k">calc</span>
+    <span class="n">x</span> <span class="bp">=</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">exp_log</span> <span class="n">xpos</span><span class="o">]</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">e</span><span class="o">]</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">exp_log</span> <span class="n">ypos</span><span class="o">]</span>
+
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">range</span> <span class="n">exp</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">y</span><span class="bp">;</span> <span class="n">constructor</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">&#10217;</span>
+    <span class="n">apply</span> <span class="n">exp_pos</span>
+  <span class="n">intro</span> <span class="n">ypos</span>
+  <span class="n">use</span> <span class="n">log</span> <span class="n">y</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">exp_log</span> <span class="n">ypos</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Try proving these:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">InjOn</span> <span class="n">sqrt</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">InjOn</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">sqrt</span> <span class="bp">&#39;&#39;</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="n">y</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">range</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">|</span> <span class="n">y</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>To define the inverse of a function <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">&#8594;</span> <span class="pre">&#946;</span></code>,
+we will use two new ingredients.
+First, we need to deal with the fact that
+an arbitrary type in Lean may be empty.
+To define the inverse to <code class="docutils literal notranslate"><span class="pre">f</span></code> at <code class="docutils literal notranslate"><span class="pre">y</span></code> when there is
+no <code class="docutils literal notranslate"><span class="pre">x</span></code> satisfying <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code>,
+we want to assign a default value in <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+Adding the annotation <code class="docutils literal notranslate"><span class="pre">[Inhabited</span> <span class="pre">&#945;]</span></code> as a variable
+is tantamount to assuming that <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> has a
+preferred element, which is denoted <code class="docutils literal notranslate"><span class="pre">default</span></code>.
+Second, in the case where there is more than one <code class="docutils literal notranslate"><span class="pre">x</span></code>
+such that <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code>,
+the inverse function needs to <em>choose</em> one of them.
+This requires an appeal to the <em>axiom of choice</em>.
+Lean allows various ways of accessing it;
+one convenient method is to use the classical <code class="docutils literal notranslate"><span class="pre">some</span></code>
+operator, illustrated below.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Inhabited</span> <span class="n">&#945;</span><span class="o">]</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">default</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span>
+
+<span class="kd">variable</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">Classical.choose</span> <span class="n">h</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">P</span> <span class="o">(</span><span class="n">Classical.choose</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">Classical.choose_spec</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p>Given <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">&#8707;</span> <span class="pre">x,</span> <span class="pre">P</span> <span class="pre">x</span></code>, the value of <code class="docutils literal notranslate"><span class="pre">Classical.some</span> <span class="pre">h</span></code>
+is some <code class="docutils literal notranslate"><span class="pre">x</span></code> satisfying <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">x</span></code>.
+The theorem <code class="docutils literal notranslate"><span class="pre">Classical.some_spec</span> <span class="pre">h</span></code> says that <code class="docutils literal notranslate"><span class="pre">Classical.some</span> <span class="pre">h</span></code>
+meets this specification.</p>
+<p>With these in hand, we can define the inverse function
+as follows:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable</span> <span class="kn">section</span>
+
+<span class="kn">open</span> <span class="n">Classical</span>
+
+<span class="kd">def</span> <span class="n">inverse</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">=&gt;</span>
+  <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="n">Classical.choose</span> <span class="n">h</span> <span class="k">else</span> <span class="n">default</span>
+
+<span class="kd">theorem</span> <span class="n">inverse_spec</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">}</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">inverse</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">inverse</span><span class="o">]</span><span class="bp">;</span> <span class="n">dsimp</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">dif_pos</span> <span class="n">h</span><span class="o">]</span>
+  <span class="n">exact</span> <span class="n">Classical.choose_spec</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p>The lines <code class="docutils literal notranslate"><span class="pre">noncomputable</span> <span class="pre">theory</span></code> and <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">Classical</span></code>
+are needed because we are using classical logic in an essential way.
+On input <code class="docutils literal notranslate"><span class="pre">y</span></code>, the function <code class="docutils literal notranslate"><span class="pre">inverse</span> <span class="pre">f</span></code>
+returns some value of <code class="docutils literal notranslate"><span class="pre">x</span></code> satisfying <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code> if there is one,
+and a default element of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> otherwise.
+This is an instance of a <em>dependent if</em> construction,
+since in the positive case, the value returned,
+<code class="docutils literal notranslate"><span class="pre">Classical.choose</span> <span class="pre">h</span></code>, depends on the assumption <code class="docutils literal notranslate"><span class="pre">h</span></code>.
+The identity <code class="docutils literal notranslate"><span class="pre">dif_pos</span> <span class="pre">h</span></code> rewrites <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">h</span> <span class="pre">:</span> <span class="pre">e</span> <span class="pre">then</span> <span class="pre">a</span> <span class="pre">else</span> <span class="pre">b</span></code>
+to <code class="docutils literal notranslate"><span class="pre">a</span></code> given <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">e</span></code>,
+and, similarly, <code class="docutils literal notranslate"><span class="pre">dif_neg</span> <span class="pre">h</span></code> rewrites it to <code class="docutils literal notranslate"><span class="pre">b</span></code> given <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">&#172;</span> <span class="pre">e</span></code>.
+The theorem <code class="docutils literal notranslate"><span class="pre">inverse_spec</span></code> says that <code class="docutils literal notranslate"><span class="pre">inverse</span> <span class="pre">f</span></code>
+meets the first part of this specification.</p>
+<p>Don&#8217;t worry if you do not fully understand how these work.
+The theorem <code class="docutils literal notranslate"><span class="pre">inverse_spec</span></code> alone should be enough to show
+that <code class="docutils literal notranslate"><span class="pre">inverse</span> <span class="pre">f</span></code> is a left inverse if and only if <code class="docutils literal notranslate"><span class="pre">f</span></code> is injective
+and a right inverse if and only if <code class="docutils literal notranslate"><span class="pre">f</span></code> is surjective.
+Look up the definition of <code class="docutils literal notranslate"><span class="pre">LeftInverse</span></code> and <code class="docutils literal notranslate"><span class="pre">RightInverse</span></code>
+by double-clicking or right-clicking on them in VS Code,
+or using the commands <code class="docutils literal notranslate"><span class="pre">#print</span> <span class="pre">LeftInverse</span></code> and <code class="docutils literal notranslate"><span class="pre">#print</span> <span class="pre">RightInverse</span></code>.
+Then try to prove the two theorems.
+They are tricky!
+It helps to do the proofs on paper before
+you start hacking through the details.
+You should be able to prove each of them with about a half-dozen
+short lines.
+If you are looking for an extra challenge,
+try to condense each proof to a single-line proof term.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">Function</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span> <span class="bp">&#8596;</span> <span class="n">LeftInverse</span> <span class="o">(</span><span class="n">inverse</span> <span class="n">f</span><span class="o">)</span> <span class="n">f</span> <span class="o">:=</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Surjective</span> <span class="n">f</span> <span class="bp">&#8596;</span> <span class="n">RightInverse</span> <span class="o">(</span><span class="n">inverse</span> <span class="n">f</span><span class="o">)</span> <span class="n">f</span> <span class="o">:=</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>We close this section with a type-theoretic statement of Cantor&#8217;s
+famous theorem that there is no surjective function from a set
+to its power set.
+See if you can understand the proof,
+and then fill in the two lines that are missing.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">Cantor</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">,</span> <span class="bp">&#172;</span><span class="n">Surjective</span> <span class="n">f</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">f</span> <span class="n">surjf</span>
+  <span class="k">let</span> <span class="n">S</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">i</span> <span class="bp">|</span> <span class="n">i</span> <span class="bp">&#8713;</span> <span class="n">f</span> <span class="n">i</span> <span class="o">}</span>
+  <span class="n">rcases</span> <span class="n">surjf</span> <span class="n">S</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">j</span><span class="o">,</span> <span class="n">h</span><span class="o">&#10217;</span>
+  <span class="k">have</span> <span class="n">h&#8321;</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">&#8713;</span> <span class="n">f</span> <span class="n">j</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">intro</span> <span class="n">h&#39;</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">&#8713;</span> <span class="n">f</span> <span class="n">j</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="n">at</span> <span class="n">h&#39;</span>
+    <span class="n">contradiction</span>
+  <span class="k">have</span> <span class="n">h&#8322;</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">&#8712;</span> <span class="n">S</span>
+  <span class="gr">sorry</span>
+  <span class="k">have</span> <span class="n">h&#8323;</span> <span class="o">:</span> <span class="n">j</span> <span class="bp">&#8713;</span> <span class="n">S</span>
+  <span class="gr">sorry</span>
+  <span class="n">contradiction</span>
+</pre></div>
+</div>
+</section>
+<section id="the-schroder-bernstein-theorem">
+<span id="the-schroeder-bernstein-theorem"></span><h2><span class="section-number">4.3. </span>The Schr&#246;der-Bernstein Theorem<a class="headerlink" href="#the-schroder-bernstein-theorem" title="Permalink to this heading">&#61633;</a></h2>
+<p>We close this chapter with an elementary but nontrivial theorem of set theory.
+Let <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> be sets.
+(In our formalization, they will actually be types.)
+Suppose <span class="math notranslate nohighlight">\(f : \alpha &#8594; \beta\)</span> and <span class="math notranslate nohighlight">\(g : \beta &#8594; \alpha\)</span>
+are both injective.
+Intuitively, this means that <span class="math notranslate nohighlight">\(\alpha\)</span> is no bigger than <span class="math notranslate nohighlight">\(\beta\)</span> and vice-versa.
+If <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are finite, this implies that
+they have the same cardinality, which is equivalent to saying that there
+is a bijection between them.
+In the nineteenth century, Cantor stated that same result holds even in the
+case where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are infinite.
+This was eventually established by Dedekind, Schr&#246;der, and Bernstein
+independently.</p>
+<p>Our formalization will introduce some new methods that we will explain
+in greater detail in chapters to come.
+Don&#8217;t worry if they go by too quickly here.
+Our goal is to show you that you already have the skills to contribute
+to the formal proof of a real mathematical result.</p>
+<p>To understand the idea behind the proof, consider the image of the map
+<span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\(\alpha\)</span>.
+On that image, the inverse of <span class="math notranslate nohighlight">\(g\)</span> is defined and is a bijection
+with <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<a class="reference internal image-reference" href="_images/schroeder_bernstein1.png"><img alt="the Schr&#246;der Bernstein theorem" class="align-center" src="_images/schroeder_bernstein1.png" style="height: 150px;" /></a>
+<p>The problem is that the bijection does not include the shaded region
+in the diagram, which is nonempty if <span class="math notranslate nohighlight">\(g\)</span> is not surjective.
+Alternatively, we can use <span class="math notranslate nohighlight">\(f\)</span> to map all of
+<span class="math notranslate nohighlight">\(\alpha\)</span> to <span class="math notranslate nohighlight">\(\beta\)</span>,
+but in that case the problem is that if <span class="math notranslate nohighlight">\(f\)</span> is not surjective,
+it will miss some elements of <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<a class="reference internal image-reference" href="_images/schroeder_bernstein2.png"><img alt="the Schr&#246;der Bernstein theorem" class="align-center" src="_images/schroeder_bernstein2.png" style="height: 150px;" /></a>
+<p>But now consider the composition <span class="math notranslate nohighlight">\(g \circ f\)</span> from <span class="math notranslate nohighlight">\(\alpha\)</span> to
+itself. Because the composition is injective, it forms a bijection between
+<span class="math notranslate nohighlight">\(\alpha\)</span> and its image, yielding a scaled-down copy of <span class="math notranslate nohighlight">\(\alpha\)</span>
+inside itself.</p>
+<a class="reference internal image-reference" href="_images/schroeder_bernstein3.png"><img alt="the Schr&#246;der Bernstein theorem" class="align-center" src="_images/schroeder_bernstein3.png" style="height: 150px;" /></a>
+<p>This composition maps the inner shaded ring to yet another such
+set, which we can think of as an even smaller concentric shaded ring,
+and so on.
+This yields a
+concentric sequence of shaded rings, each of which is in
+bijective correspondence with the next.
+If we map each ring to the next and leave the unshaded
+parts of <span class="math notranslate nohighlight">\(\alpha\)</span> alone,
+we have a bijection of <span class="math notranslate nohighlight">\(\alpha\)</span> with the image of <span class="math notranslate nohighlight">\(g\)</span>.
+Composing with <span class="math notranslate nohighlight">\(g^{-1}\)</span>, this yields the desired
+bijection between <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<p>We can describe this bijection more simply.
+Let <span class="math notranslate nohighlight">\(A\)</span> be the union of the sequence of shaded regions, and
+define <span class="math notranslate nohighlight">\(h : \alpha \to \beta\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}h(x) = \begin{cases}
+  f(x) &amp; \text{if $x \in A$} \\
+  g^{-1}(x) &amp; \text{otherwise.}
+\end{cases}\end{split}\]</div>
+<p>In other words, we use <span class="math notranslate nohighlight">\(f\)</span> on the shaded parts,
+and we use the inverse of <span class="math notranslate nohighlight">\(g\)</span> everywhere else.
+The resulting map <span class="math notranslate nohighlight">\(h\)</span> is injective
+because each component is injective
+and the images of the two components are disjoint.
+To see that it is surjective,
+suppose we are given a <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(\beta\)</span>, and
+consider <span class="math notranslate nohighlight">\(g(y)\)</span>.
+If <span class="math notranslate nohighlight">\(g(y)\)</span> is in one of the shaded regions,
+it cannot be in the first ring, so we have <span class="math notranslate nohighlight">\(g(y) = g(f(x))\)</span>
+for some <span class="math notranslate nohighlight">\(x\)</span> is in the previous ring.
+By the injectivity of <span class="math notranslate nohighlight">\(g\)</span>, we have <span class="math notranslate nohighlight">\(h(x) = f(x) = y\)</span>.
+If <span class="math notranslate nohighlight">\(g(y)\)</span> is not in the shaded region,
+then by the definition of <span class="math notranslate nohighlight">\(h\)</span>, we have <span class="math notranslate nohighlight">\(h(g(y))= y\)</span>.
+Either way, <span class="math notranslate nohighlight">\(y\)</span> is in the image of <span class="math notranslate nohighlight">\(h\)</span>.</p>
+<p>This argument should sound plausible, but the details are delicate.
+Formalizing the proof will not only improve our confidence in the
+result, but also help us understand it better.
+Because the proof uses classical logic, we tell Lean that our definitions
+will generally not be computable.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable</span> <span class="kn">section</span>
+<span class="kn">open</span> <span class="n">Classical</span>
+<span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Nonempty</span> <span class="n">&#946;</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>The annotation <code class="docutils literal notranslate"><span class="pre">[Nonempty</span> <span class="pre">&#946;]</span></code> specifies that <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> is nonempty.
+We use it because the mathlib primitive that we will use to
+construct <span class="math notranslate nohighlight">\(g^{-1}\)</span> requires it.
+The case of the theorem where <span class="math notranslate nohighlight">\(\beta\)</span> is empty is trivial,
+and even though it would not be hard to generalize the formalization to cover
+that case as well, we will not bother.
+Specifically, we need the hypothesis <code class="docutils literal notranslate"><span class="pre">[Nonempty</span> <span class="pre">&#946;]</span></code> for the operation
+<code class="docutils literal notranslate"><span class="pre">invFun</span></code> that is defined in mathlib.
+Given <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">&#945;</span></code>, <code class="docutils literal notranslate"><span class="pre">invFun</span> <span class="pre">g</span> <span class="pre">x</span></code> chooses a preimage of <code class="docutils literal notranslate"><span class="pre">x</span></code>
+in <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> if there is one,
+and returns an arbitrary element of <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> otherwise.
+The function <code class="docutils literal notranslate"><span class="pre">invFun</span> <span class="pre">g</span></code> is always a left inverse if <code class="docutils literal notranslate"><span class="pre">g</span></code> is injective
+and a right inverse if <code class="docutils literal notranslate"><span class="pre">g</span></code> is surjective.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">invFun</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">leftInverse_invFun</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span> <span class="bp">&#8594;</span> <span class="n">LeftInverse</span> <span class="o">(</span><span class="n">invFun</span> <span class="n">g</span><span class="o">)</span> <span class="n">g</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">leftInverse_invFun</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span> <span class="bp">&#8594;</span> <span class="bp">&#8704;</span> <span class="n">y</span><span class="o">,</span> <span class="n">invFun</span> <span class="n">g</span> <span class="o">(</span><span class="n">g</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">invFun_eq</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8707;</span> <span class="n">y</span><span class="o">,</span> <span class="n">g</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="n">g</span> <span class="o">(</span><span class="n">invFun</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>We define the set corresponding to the union of the shaded regions as follows.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
+
+<span class="kd">def</span> <span class="n">sbAux</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#945;</span>
+  <span class="bp">|</span> <span class="mi">0</span> <span class="bp">=&gt;</span> <span class="n">univ</span> <span class="bp">\</span> <span class="n">g</span> <span class="bp">&#39;&#39;</span> <span class="n">univ</span>
+  <span class="bp">|</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=&gt;</span> <span class="n">g</span> <span class="bp">&#39;&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">sbAux</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kd">def</span> <span class="n">sbSet</span> <span class="o">:=</span>
+  <span class="bp">&#8899;</span> <span class="n">n</span><span class="o">,</span> <span class="n">sbAux</span> <span class="n">f</span> <span class="n">g</span> <span class="n">n</span>
+</pre></div>
+</div>
+<p>The definition <code class="docutils literal notranslate"><span class="pre">sb_aux</span></code> is an example of a <em>recursive definition</em>,
+which we will explain in the next chapter.
+It defines a sequence of sets</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}S_0 &amp;= \alpha &#8726; g(\beta) \\
+S_{n+1} &amp;= g(f(S_n)).\end{split}\]</div>
+<p>The definition <code class="docutils literal notranslate"><span class="pre">sb_set</span></code> corresponds to the set
+<span class="math notranslate nohighlight">\(A = \bigcup_{n \in \mathbb{N}} S_n\)</span> in our proof sketch.
+The function <span class="math notranslate nohighlight">\(h\)</span> described above is now defined as follows:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">sbFun</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span> <span class="k">then</span> <span class="n">f</span> <span class="n">x</span> <span class="k">else</span> <span class="n">invFun</span> <span class="n">g</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>We will need the fact that our definition of <span class="math notranslate nohighlight">\(g^{-1}\)</span> is a
+right inverse on the complement of <span class="math notranslate nohighlight">\(A\)</span>,
+which is to say, on the non-shaded regions of <span class="math notranslate nohighlight">\(\alpha\)</span>.
+This is so because the outermost ring, <span class="math notranslate nohighlight">\(S_0\)</span>, is equal to
+<span class="math notranslate nohighlight">\(\alpha \setminus g(\beta)\)</span>, so the complement of <span class="math notranslate nohighlight">\(A\)</span> is
+contained in <span class="math notranslate nohighlight">\(g(\beta)\)</span>.
+As a result, for every <span class="math notranslate nohighlight">\(x\)</span> in the complement of <span class="math notranslate nohighlight">\(A\)</span>,
+there is a <span class="math notranslate nohighlight">\(y\)</span> such that <span class="math notranslate nohighlight">\(g(y) = x\)</span>.
+(By the injectivity of <span class="math notranslate nohighlight">\(g\)</span>, this <span class="math notranslate nohighlight">\(y\)</span> is unique,
+but next theorem says only that <code class="docutils literal notranslate"><span class="pre">inv_fun</span> <span class="pre">g</span> <span class="pre">x</span></code> returns some <code class="docutils literal notranslate"><span class="pre">y</span></code>
+such that <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span></code>.)</p>
+<p>Step through the proof below, make sure you understand what is going on,
+and fill in the remaining parts.
+You will need to use <code class="docutils literal notranslate"><span class="pre">inv_fun_eq</span></code> at the end.
+Notice that rewriting with <code class="docutils literal notranslate"><span class="pre">sb_aux</span></code> here replaces <code class="docutils literal notranslate"><span class="pre">sb_aux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
+with the right-hand side of the corresponding defining equation.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_right_inv</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8713;</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span> <span class="o">(</span><span class="n">invFun</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">g</span> <span class="bp">&#39;&#39;</span> <span class="n">univ</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">contrapose</span><span class="bp">!</span> <span class="n">hx</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">sbSet</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span>
+    <span class="n">use</span> <span class="mi">0</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">sbAux</span><span class="o">,</span> <span class="n">mem_diff</span><span class="o">]</span>
+    <span class="gr">sorry</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">y</span><span class="o">,</span> <span class="n">g</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="gr">sorry</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>We now turn to the proof that <span class="math notranslate nohighlight">\(h\)</span> is injective.
+Informally, the proof goes as follows.
+First, suppose <span class="math notranslate nohighlight">\(h(x_1) = h(x_2)\)</span>.
+If <span class="math notranslate nohighlight">\(x_1\)</span> is in <span class="math notranslate nohighlight">\(A\)</span>, then <span class="math notranslate nohighlight">\(h(x_1) = f(x_1)\)</span>,
+and we can show that <span class="math notranslate nohighlight">\(x_2\)</span> is in <span class="math notranslate nohighlight">\(A\)</span> as follows.
+If it isn&#8217;t, then we have <span class="math notranslate nohighlight">\(h(x_2) = g^{-1}(x_2)\)</span>.
+From <span class="math notranslate nohighlight">\(f(x_1) = h(x_1) = h(x_2)\)</span> we have <span class="math notranslate nohighlight">\(g(f(x_1)) = x_2\)</span>.
+From the definition of <span class="math notranslate nohighlight">\(A\)</span>, since <span class="math notranslate nohighlight">\(x_1\)</span> is in <span class="math notranslate nohighlight">\(A\)</span>,
+<span class="math notranslate nohighlight">\(x_2\)</span> is in <span class="math notranslate nohighlight">\(A\)</span> as well, a contradiction.
+Hence, if <span class="math notranslate nohighlight">\(x_1\)</span> is in <span class="math notranslate nohighlight">\(A\)</span>, so is <span class="math notranslate nohighlight">\(x_2\)</span>,
+in which case we have <span class="math notranslate nohighlight">\(f(x_1) = h(x_1) = h(x_2) = f(x_2)\)</span>.
+The injectivity of <span class="math notranslate nohighlight">\(f\)</span> then implies <span class="math notranslate nohighlight">\(x_1 = x_2\)</span>.
+The symmetric argument shows that if <span class="math notranslate nohighlight">\(x_2\)</span> is in <span class="math notranslate nohighlight">\(A\)</span>,
+then so is <span class="math notranslate nohighlight">\(x_1\)</span>, which again implies <span class="math notranslate nohighlight">\(x_1 = x_2\)</span>.</p>
+<p>The only remaining possibility is that neither <span class="math notranslate nohighlight">\(x_1\)</span> nor <span class="math notranslate nohighlight">\(x_2\)</span>
+is in <span class="math notranslate nohighlight">\(A\)</span>. In that case, we have
+<span class="math notranslate nohighlight">\(g^{-1}(x_1) = h(x_1) = h(x_2) = g^{-1}(x_2)\)</span>.
+Applying <span class="math notranslate nohighlight">\(g\)</span> to both sides yields <span class="math notranslate nohighlight">\(x_1 = x_2\)</span>.</p>
+<p>Once again, we encourage you to step through the following proof
+to see how the argument plays out in Lean.
+See if you can finish off the proof using <code class="docutils literal notranslate"><span class="pre">sb_right_inv</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_injective</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">Injective</span> <span class="o">(</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">set</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">A_def</span>
+  <span class="n">set</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">h_def</span>
+  <span class="n">intro</span> <span class="n">x&#8321;</span> <span class="n">x&#8322;</span>
+  <span class="n">intro</span> <span class="o">(</span><span class="n">hxeq</span> <span class="o">:</span> <span class="n">h</span> <span class="n">x&#8321;</span> <span class="bp">=</span> <span class="n">h</span> <span class="n">x&#8322;</span><span class="o">)</span>
+  <span class="k">show</span> <span class="n">x&#8321;</span> <span class="bp">=</span> <span class="n">x&#8322;</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">h_def</span><span class="o">,</span> <span class="n">sbFun</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">A_def</span><span class="o">]</span> <span class="n">at</span> <span class="n">hxeq</span>
+  <span class="n">by_cases</span> <span class="n">xA</span> <span class="o">:</span> <span class="n">x&#8321;</span> <span class="bp">&#8712;</span> <span class="n">A</span> <span class="bp">&#8744;</span> <span class="n">x&#8322;</span> <span class="bp">&#8712;</span> <span class="n">A</span>
+  <span class="bp">&#183;</span> <span class="n">wlog</span> <span class="n">x&#8321;A</span> <span class="o">:</span> <span class="n">x&#8321;</span> <span class="bp">&#8712;</span> <span class="n">A</span> <span class="n">generalizing</span> <span class="n">x&#8321;</span> <span class="n">x&#8322;</span> <span class="n">hxeq</span> <span class="n">xA</span>
+    <span class="bp">&#183;</span> <span class="n">symm</span>
+      <span class="n">apply</span> <span class="n">this</span> <span class="n">hxeq.symm</span> <span class="n">xA.symm</span> <span class="o">(</span><span class="n">xA.resolve_left</span> <span class="n">x&#8321;A</span><span class="o">)</span>
+    <span class="k">have</span> <span class="n">x&#8322;A</span> <span class="o">:</span> <span class="n">x&#8322;</span> <span class="bp">&#8712;</span> <span class="n">A</span> <span class="o">:=</span> <span class="kd">by</span>
+      <span class="n">apply</span> <span class="n">not_imp_self.mp</span>
+      <span class="n">intro</span> <span class="o">(</span><span class="n">x&#8322;nA</span> <span class="o">:</span> <span class="n">x&#8322;</span> <span class="bp">&#8713;</span> <span class="n">A</span><span class="o">)</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">if_pos</span> <span class="n">x&#8321;A</span><span class="o">,</span> <span class="n">if_neg</span> <span class="n">x&#8322;nA</span><span class="o">]</span> <span class="n">at</span> <span class="n">hxeq</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">A_def</span><span class="o">,</span> <span class="n">sbSet</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span> <span class="n">at</span> <span class="n">x&#8321;A</span>
+      <span class="k">have</span> <span class="n">x&#8322;eq</span> <span class="o">:</span> <span class="n">x&#8322;</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x&#8321;</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+        <span class="gr">sorry</span>
+      <span class="n">rcases</span> <span class="n">x&#8321;A</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="o">&#10217;</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">A_def</span><span class="o">,</span> <span class="n">sbSet</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span>
+      <span class="n">use</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">sbAux</span><span class="o">]</span>
+      <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">x&#8321;</span><span class="o">,</span> <span class="n">hn</span><span class="o">,</span> <span class="n">x&#8322;eq.symm</span><span class="o">&#10217;</span>
+    <span class="gr">sorry</span>
+  <span class="n">push_neg</span>  <span class="n">at</span> <span class="n">xA</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>The proof introduces some new tactics.
+To start with, notice the <code class="docutils literal notranslate"><span class="pre">set</span></code> tactic, which introduces abbreviations
+<code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code> for <code class="docutils literal notranslate"><span class="pre">sb_set</span> <span class="pre">f</span> <span class="pre">g</span></code> and <code class="docutils literal notranslate"><span class="pre">sb_fun</span> <span class="pre">f</span> <span class="pre">g</span></code> respectively.
+We name the corresponding defining equations <code class="docutils literal notranslate"><span class="pre">A_def</span></code> and <code class="docutils literal notranslate"><span class="pre">h_def</span></code>.
+The abbreviations are definitional, which is to say, Lean will sometimes
+unfold them automatically when needed.
+But not always; for example, when using <code class="docutils literal notranslate"><span class="pre">rw</span></code>, we generally need to
+use <code class="docutils literal notranslate"><span class="pre">A_def</span></code> and <code class="docutils literal notranslate"><span class="pre">h_def</span></code> explicitly.
+So the definitions bring a tradeoff: they can make expressions shorter
+and more readable, but they sometimes require us to do more work.</p>
+<p>A more interesting tactic is the <code class="docutils literal notranslate"><span class="pre">wlog</span></code> tactic, which encapsulates
+the symmetry argument in the informal proof above.
+We will not dwell on it now, but notice that it does exactly what we want.
+If you hover over the tactic you can take a look at its documentation.</p>
+<p>The argument for surjectivity is even easier.
+Given <span class="math notranslate nohighlight">\(y\)</span> in <span class="math notranslate nohighlight">\(\beta\)</span>,
+we consider two cases, depending on whether <span class="math notranslate nohighlight">\(g(y)\)</span> is in <span class="math notranslate nohighlight">\(A\)</span>.
+If it is, it can&#8217;t be in <span class="math notranslate nohighlight">\(S_0\)</span>, the outermost ring,
+because by definition that is disjoint from the image of <span class="math notranslate nohighlight">\(g\)</span>.
+Thus it is an element of <span class="math notranslate nohighlight">\(S_{n+1}\)</span> for some <span class="math notranslate nohighlight">\(n\)</span>.
+This means that it is of the form <span class="math notranslate nohighlight">\(g(f(x))\)</span> for some
+<span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(S_n\)</span>.
+By the injectivity of <span class="math notranslate nohighlight">\(g\)</span>, we have <span class="math notranslate nohighlight">\(f(x) = y\)</span>.
+In the case where <span class="math notranslate nohighlight">\(g(y)\)</span> is in the complement of <span class="math notranslate nohighlight">\(A\)</span>,
+we immediately have <span class="math notranslate nohighlight">\(h(g(y))= y\)</span>, and we are done.</p>
+<p>Once again, we encourage you to step through the proof and fill in
+the missing parts.
+The tactic <code class="docutils literal notranslate"><span class="pre">cases</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">n</span></code> splits on the cases <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sb_aux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sb_aux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">n.succ</span></code>.
+In both cases, calling the simplifier with <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">[sb_aux]</span></code>
+applies the corresponding defining equation of <code class="docutils literal notranslate"><span class="pre">sb_aux</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_surjective</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">Surjective</span> <span class="o">(</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">set</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">A_def</span>
+  <span class="n">set</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">h_def</span>
+  <span class="n">intro</span> <span class="n">y</span>
+  <span class="n">by_cases</span> <span class="n">gyA</span> <span class="o">:</span> <span class="n">g</span> <span class="n">y</span> <span class="bp">&#8712;</span> <span class="n">A</span>
+  <span class="bp">&#183;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">A_def</span><span class="o">,</span> <span class="n">sbSet</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span> <span class="n">at</span> <span class="n">gyA</span>
+    <span class="n">rcases</span> <span class="n">gyA</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="o">&#10217;</span>
+    <span class="n">cases&#39;</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span>
+    <span class="bp">&#183;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">sbAux</span><span class="o">]</span> <span class="n">at</span> <span class="n">hn</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">sbAux</span><span class="o">]</span> <span class="n">at</span> <span class="n">hn</span>
+    <span class="n">rcases</span> <span class="n">hn</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xmem</span><span class="o">,</span> <span class="n">hx</span><span class="o">&#10217;</span>
+    <span class="n">use</span> <span class="n">x</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">A</span> <span class="o">:=</span> <span class="kd">by</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">A_def</span><span class="o">,</span> <span class="n">sbSet</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span>
+      <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">n</span><span class="o">,</span> <span class="n">xmem</span><span class="o">&#10217;</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">h_def</span><span class="o">,</span> <span class="n">sbFun</span><span class="o">,</span> <span class="n">if_pos</span> <span class="n">this</span><span class="o">]</span>
+    <span class="n">exact</span> <span class="n">hg</span> <span class="n">hx</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>We can now put it all together. The final statement is short and sweet,
+and the proof uses the fact that <code class="docutils literal notranslate"><span class="pre">Bijective</span> <span class="pre">h</span></code> unfolds to
+<code class="docutils literal notranslate"><span class="pre">Injective</span> <span class="pre">h</span> <span class="pre">&#8743;</span> <span class="pre">Surjective</span> <span class="pre">h</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">schroeder_bernstein</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">}</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">&#8707;</span> <span class="n">h</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">,</span> <span class="n">Bijective</span> <span class="n">h</span> <span class="o">:=</span>
+  <span class="o">&#10216;</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">sb_injective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span><span class="o">,</span> <span class="n">sb_surjective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="C03_Logic.html" class="btn btn-neutral float-left" title="3. Logic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C05_Number_Theory.html" class="btn btn-neutral float-right" title="5. Number Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jeremy Avigad, Kevin Buzzard, Robert Y. Lewis, Patrick Massot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

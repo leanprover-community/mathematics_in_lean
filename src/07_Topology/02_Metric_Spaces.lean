@@ -164,36 +164,6 @@ example {X : Type*} [metric_space X] [compact_space X] {Y : Type*} [metric_space
 sorry
 
 
--- SOLUTIONs:
-example {X : Type*} [metric_space X] [compact_space X] {Y : Type*} [metric_space Y]
-  {f : X → Y} (hf : continuous f) : uniform_continuous f :=
-begin
-  rw metric.uniform_continuous_iff,
-  intros ε ε_pos,
-  let φ : X × X → ℝ := λ p, dist (f p.1) (f p.2),
-  have φ_cont : continuous φ := hf.fst'.dist hf.snd',
-  let K := { p : X × X | ε ≤ φ p },
-  have K_closed : is_closed K := is_closed_le continuous_const φ_cont,
-  have K_cpct : is_compact K := K_closed.is_compact,
-  cases eq_empty_or_nonempty K with hK hK,
-  { use [1, by norm_num],
-    intros x y hxy,
-    have : (x, y) ∉ K, by simp [hK],
-    simpa [K] },
-  { rcases K_cpct.exists_forall_le hK continuous_dist.continuous_on with ⟨⟨x₀, x₁⟩, xx_in, H⟩,
-    use dist x₀ x₁,
-    split,
-    { change _ < _,
-      rw dist_pos,
-      intro h,
-      have : ε ≤ 0, by simpa [*] using xx_in,
-      linarith },
-    { intros x x',
-      contrapose!,
-      intros hxx',
-      exact H (x, x') hxx' } },
-end
-
 
 
 example (u : ℕ → X) : cauchy_seq u ↔ ∀ ε > 0, ∃ N : ℕ, ∀ m ≥ N,  ∀ n ≥ N, dist (u m) (u n) < ε :=

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7. Topology &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>8. Topology &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -13,17 +13,17 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Index" href="genindex.html" />
-    <link rel="prev" title="6. Abstract Algebra" href="C06_Abstract_Algebra.html" /> 
+    <link rel="next" title="9. Differential Calculus" href="C09_Differential_Calculus.html" />
+    <link rel="prev" title="7. Hierarchies" href="C07_Hierarchies.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -47,25 +51,27 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Abstract_Algebra.html">6. Abstract Algebra</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Topology</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#filters">7.1. Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#metric-spaces">7.2. Metric spaces</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#convergence-and-continuity">7.2.1. Convergence and continuity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#balls-open-sets-and-closed-sets">7.2.2. Balls, open sets and closed sets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compactness">7.2.3. Compactness</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#uniformly-continuous-functions">7.2.4. Uniformly continuous functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#completeness">7.2.5. Completeness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Topology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#filters">8.1. Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metric-spaces">8.2. Metric spaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#convergence-and-continuity">8.2.1. Convergence and continuity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#balls-open-sets-and-closed-sets">8.2.2. Balls, open sets and closed sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compactness">8.2.3. Compactness</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uniformly-continuous-functions">8.2.4. Uniformly continuous functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#completeness">8.2.5. Completeness</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#topological-spaces">7.3. Topological spaces</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fundamentals">7.3.1. Fundamentals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#separation-and-countability">7.3.2. Separation and countability</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">7.3.3. Compactness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#topological-spaces">8.3. Topological spaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fundamentals">8.3.1. Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#separation-and-countability">8.3.2. Separation and countability</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">8.3.3. Compactness</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -84,10 +90,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">7. </span>Topology</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8. </span>Topology</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C07_Topology.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C08_Topology.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -96,7 +102,7 @@
            <div itemprop="articleBody">
              
   <span class="target" id="topology"></span><section id="index-0">
-<span id="id1"></span><h1><span class="section-number">7. </span>Topology<a class="headerlink" href="#index-0" title="Permalink to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">8. </span>Topology<a class="headerlink" href="#index-0" title="Permalink to this heading">&#61633;</a></h1>
 <p>Calculus is based on the concept of a function, which is used to model
 quantities that depend on one another.
 For example, it is common to study quantities that change over time.
@@ -110,7 +116,7 @@ as <span class="math notranslate nohighlight">\(x\)</span> tends to <span class=
 We have already begun to consider such notions in <a class="reference internal" href="C03_Logic.html#sequences-and-convergence"><span class="std std-numref">Section 3.6</span></a>.</p>
 <p><em>Topology</em> is the abstract study of limits and continuity.
 Having covered the essentials of formalization in Chapters <a class="reference internal" href="C02_Basics.html#basics"><span class="std std-numref">2</span></a>
-to <a class="reference internal" href="C06_Abstract_Algebra.html#abstract-algebra"><span class="std std-numref">6</span></a>,
+to <a class="reference internal" href="C06_Structures.html#structures"><span class="std std-numref">6</span></a>,
 in this chapter, we will explain how topological notions are formalized in mathlib.
 Not only do topological abstractions apply in much greater generality,
 but that also, somewhat paradoxically, make it easier to reason about limits
@@ -118,7 +124,7 @@ and continuity in concrete instances.</p>
 <p>Topological notions build on quite a few layers of mathematical structure.
 The first layer is naive set theory,
 as described in <a class="reference internal" href="C04_Sets_and_Functions.html#sets-and-functions"><span class="std std-numref">Chapter 4</span></a>.
-The next layer is the theory of <em>filters</em>, which we will describe in <a class="reference internal" href="#filters"><span class="std std-numref">Section 7.1</span></a>.
+The next layer is the theory of <em>filters</em>, which we will describe in <a class="reference internal" href="#filters"><span class="std std-numref">Section 8.1</span></a>.
 On top of that, we layer
 the theories of <em>topological spaces</em>, <em>metric spaces</em>, and a slightly more exotic
 intermediate notion called a <em>uniform space</em>.</p>
@@ -164,7 +170,7 @@ Formalizing mathematics requires making the relevant notion of &#8220;sameness&#
 fully explicit, and that is exactly what Bourbaki&#8217;s theory of filters
 manages to do.</p>
 <section id="filters">
-<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">7.1. </span>Filters<a class="headerlink" href="#filters" title="Permalink to this heading">&#61633;</a></h2>
+<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">8.1. </span>Filters<a class="headerlink" href="#filters" title="Permalink to this heading">&#61633;</a></h2>
 <p>A <em>filter</em> on a type <code class="docutils literal notranslate"><span class="pre">X</span></code> is a collection of sets of <code class="docutils literal notranslate"><span class="pre">X</span></code> that satisfies three
 conditions that we will spell out below. The notion
 supports two related ideas:</p>
@@ -328,7 +334,7 @@ which is to say, it reverses the order of the arguments.</p>
 <p>Let&#8217;s now shift attention to the plane <code class="docutils literal notranslate"><span class="pre">&#8477;</span> <span class="pre">&#215;</span> <span class="pre">&#8477;</span></code> and try to understand how the neighborhoods of a point
 <code class="docutils literal notranslate"><span class="pre">(x&#8320;,</span> <span class="pre">y&#8320;)</span></code> are related to <code class="docutils literal notranslate"><span class="pre">&#120029;</span> <span class="pre">x&#8320;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#120029;</span> <span class="pre">y&#8320;</span></code>. There is a product operation
 <code class="docutils literal notranslate"><span class="pre">Filter.prod</span> <span class="pre">:</span> <span class="pre">Filter</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Filter</span> <span class="pre">Y</span> <span class="pre">&#8594;</span> <span class="pre">Filter</span> <span class="pre">(X</span> <span class="pre">&#215;</span> <span class="pre">Y)</span></code>, denoted by <code class="docutils literal notranslate"><span class="pre">&#215;&#7584;</span></code>, which answers this question:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#120029;</span> <span class="o">(</span><span class="n">x&#8320;</span><span class="o">,</span> <span class="n">y&#8320;</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#120029;</span> <span class="n">x&#8320;</span> <span class="bp">&#215;&#7584;</span> <span class="bp">&#120029;</span> <span class="n">y&#8320;</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#120029;</span> <span class="o">(</span><span class="n">x&#8320;</span><span class="o">,</span> <span class="n">y&#8320;</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#120029;</span> <span class="n">x&#8320;</span> <span class="bp">&#215;&#738;</span> <span class="bp">&#120029;</span> <span class="n">y&#8320;</span> <span class="o">:=</span>
   <span class="n">nhds_prod_eq</span>
 </pre></div>
 </div>
@@ -518,7 +524,7 @@ using the fact that <code class="docutils literal notranslate"><span class="pre"
 </div>
 </section>
 <section id="metric-spaces">
-<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">7.2. </span>Metric spaces<a class="headerlink" href="#metric-spaces" title="Permalink to this heading">&#61633;</a></h2>
+<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">8.2. </span>Metric spaces<a class="headerlink" href="#metric-spaces" title="Permalink to this heading">&#61633;</a></h2>
 <p>Examples in the previous section focus on sequences of real numbers. In this section we will go up a bit in generality and focus on
 metric spaces. A metric space is a type <code class="docutils literal notranslate"><span class="pre">X</span></code> equipped with a distance function <code class="docutils literal notranslate"><span class="pre">dist</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code> which is a generalization of
 the function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">&#8614;</span> <span class="pre">|x</span> <span class="pre">-</span> <span class="pre">y|</span></code> from the case where <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">&#8477;</span></code>.</p>
@@ -537,7 +543,7 @@ They are called <code class="docutils literal notranslate"><span class="pre">EMe
 <p>Note that our journey from <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> to metric spaces jumped over the special case of normed spaces that also require linear algebra and
 will be explained as part of the calculus chapter.</p>
 <section id="convergence-and-continuity">
-<h3><span class="section-number">7.2.1. </span>Convergence and continuity<a class="headerlink" href="#convergence-and-continuity" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.2.1. </span>Convergence and continuity<a class="headerlink" href="#convergence-and-continuity" title="Permalink to this heading">&#61633;</a></h3>
 <p>Using distance functions, we can already define convergent sequences and continuous functions between metric spaces.
 They are actually defined in a more general setting covered in the next section,
 but we have lemmas recasting the definition is terms of distances.</p>
@@ -626,7 +632,7 @@ and get our final proof, now bordering obfuscation.</p>
 </div>
 </section>
 <section id="balls-open-sets-and-closed-sets">
-<h3><span class="section-number">7.2.2. </span>Balls, open sets and closed sets<a class="headerlink" href="#balls-open-sets-and-closed-sets" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.2.2. </span>Balls, open sets and closed sets<a class="headerlink" href="#balls-open-sets-and-closed-sets" title="Permalink to this heading">&#61633;</a></h3>
 <p>Once we have a distance function, the most important geometric definitions are (open) balls and closed balls.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
 
@@ -683,7 +689,7 @@ argument so we can invoke <code class="docutils literal notranslate"><span class
 </div>
 </section>
 <section id="compactness">
-<h3><span class="section-number">7.2.3. </span>Compactness<a class="headerlink" href="#compactness" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.2.3. </span>Compactness<a class="headerlink" href="#compactness" title="Permalink to this heading">&#61633;</a></h3>
 <p>Compactness is an important topological notion. It distinguishes subsets of a metric space
 that enjoy the same kind of properties as segments in reals compared to other intervals:</p>
 <ul class="simple">
@@ -726,7 +732,7 @@ are deduced from more general versions, some of which will be discussed in later
 <p>In a compact metric space any closed set is compact, this is <code class="docutils literal notranslate"><span class="pre">IsCompact.isClosed</span></code>.</p>
 </section>
 <section id="uniformly-continuous-functions">
-<h3><span class="section-number">7.2.4. </span>Uniformly continuous functions<a class="headerlink" href="#uniformly-continuous-functions" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.2.4. </span>Uniformly continuous functions<a class="headerlink" href="#uniformly-continuous-functions" title="Permalink to this heading">&#61633;</a></h3>
 <p>We now turn to uniformity notions on metric spaces : uniformly continuous functions, Cauchy sequences and completeness.
 Again those are defined in a more general context but we have lemmas in the metric name space to access their elementary definitions.
 We start with uniform continuity.</p>
@@ -757,7 +763,7 @@ of the distance function on <code class="docutils literal notranslate"><span cla
 </div>
 </section>
 <section id="completeness">
-<h3><span class="section-number">7.2.5. </span>Completeness<a class="headerlink" href="#completeness" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.2.5. </span>Completeness<a class="headerlink" href="#completeness" title="Permalink to this heading">&#61633;</a></h3>
 <p>A Cauchy sequence in a metric space is a sequence whose terms get closer and closer to each other.
 There are a couple of equivalent ways to state that idea.
 In particular converging sequences are Cauchy. The converse is true only in so-called <em>complete</em>
@@ -849,9 +855,9 @@ define something inductively in the middle of a proof using <code class="docutil
 </section>
 </section>
 <section id="topological-spaces">
-<span id="index-4"></span><span id="id4"></span><h2><span class="section-number">7.3. </span>Topological spaces<a class="headerlink" href="#topological-spaces" title="Permalink to this heading">&#61633;</a></h2>
+<span id="index-4"></span><span id="id4"></span><h2><span class="section-number">8.3. </span>Topological spaces<a class="headerlink" href="#topological-spaces" title="Permalink to this heading">&#61633;</a></h2>
 <section id="fundamentals">
-<h3><span class="section-number">7.3.1. </span>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.3.1. </span>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this heading">&#61633;</a></h3>
 <p>We now go up in generality and introduce topological spaces. We will review the two main ways to define
 topological spaces and then explain how the category of topological spaces is much better behaved than
 the category of metric spaces. Note that we won&#8217;t be using mathlib category theory here, only having
@@ -1040,7 +1046,7 @@ Let us explore that constraint &#8220;on papar&#8221; using notation <span class
 by being a more functorial theory and having a complete lattice structure for any fixed type.</p>
 </section>
 <section id="separation-and-countability">
-<h3><span class="section-number">7.3.2. </span>Separation and countability<a class="headerlink" href="#separation-and-countability" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.3.2. </span>Separation and countability<a class="headerlink" href="#separation-and-countability" title="Permalink to this heading">&#61633;</a></h3>
 <p>We saw that the category of topological spaces have very nice properties. The price to pay for
 this is existence of rather pathological topological spaces.
 There are a number of assumptions you can make on a topological space to ensure its behavior
@@ -1130,7 +1136,7 @@ of sets can be understood using sequences.</p>
 </div>
 </section>
 <section id="id5">
-<h3><span class="section-number">7.3.3. </span>Compactness<a class="headerlink" href="#id5" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">8.3.3. </span>Compactness<a class="headerlink" href="#id5" title="Permalink to this heading">&#61633;</a></h3>
 <p>Let us now discuss how compactness is defined for topological spaces. As usual there are several ways
 to think about it and mathlib goes for the filter version.</p>
 <p>We first need to define cluster points of filters. Given a filter <code class="docutils literal notranslate"><span class="pre">F</span></code> on a topological space <code class="docutils literal notranslate"><span class="pre">X</span></code>,
@@ -1199,8 +1205,8 @@ cover <code class="docutils literal notranslate"><span class="pre">s</span></cod
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C06_Abstract_Algebra.html" class="btn btn-neutral float-left" title="6. Abstract Algebra" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="genindex.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C07_Hierarchies.html" class="btn btn-neutral float-left" title="7. Hierarchies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C09_Differential_Calculus.html" class="btn btn-neutral float-right" title="9. Differential Calculus" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

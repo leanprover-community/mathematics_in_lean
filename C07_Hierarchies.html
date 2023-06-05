@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7. Hierarchies &mdash; Mathematics in Lean 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. Topology" href="C08_Topology.html" />
+    <link rel="prev" title="6. Structures" href="C06_Structures.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="C01_Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Hierarchies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basics">7.1. Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#morphisms">7.2. Morphisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sub-objects">7.3. Sub-objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mathematics in Lean</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7. </span>Hierarchies</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/C07_Hierarchies.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hierarchies">
+<span id="id1"></span><h1><span class="section-number">7. </span>Hierarchies<a class="headerlink" href="#hierarchies" title="Permalink to this heading">&#61633;</a></h1>
+<p>We have seen in <a class="reference internal" href="C06_Structures.html#structures"><span class="std std-numref">Chapter 6</span></a> how to define the class
+of groups and build instances of this class, and then how to build an instance
+of the commutative ring class. But of course there is a hierarchy here: a
+commutative ring is in particular an additive group. In this chapter we
+will study how to build such hierarchies. They appear in all branches
+of mathematics but in this chapter the emphasis will be on algebraic examples.</p>
+<p>It may seem premature to discuss how to build hierarchies before more discussions
+about using existing hierarchies. But some understanding of the technology underlying
+hierarchies is required to use them. So you should probably still read this chapter,
+but without trying too hard to remember everything on your first read, then read
+the following chapters and come back here for a second reading.</p>
+<p>In this chapter, we will redefine (simpler versions of) many things that appear in Mathlib
+so we will used indices to distinguish our version. For instance we will have <code class="docutils literal notranslate"><span class="pre">Ring&#8321;</span></code>
+as our version of <code class="docutils literal notranslate"><span class="pre">Ring</span></code>. Since we will gradually explain more powerful ways of formalizing
+structures, those indices will sometimes grow beyond one.</p>
+<section id="basics">
+<span id="section-hierarchies-basics"></span><h2><span class="section-number">7.1. </span>Basics<a class="headerlink" href="#basics" title="Permalink to this heading">&#61633;</a></h2>
+<p>At the very bottom of all hierarchies in Lean, we find data-carrying
+classes. The following class records that the given type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is endowed with
+a distinguished element called <code class="docutils literal notranslate"><span class="pre">one</span></code>. At this stage, it has no property at all.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">One&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="sd">/-- The element one -/</span>
+  <span class="n">one</span> <span class="o">:</span> <span class="n">&#945;</span>
+</pre></div>
+</div>
+<p>Since we&#8217;ll make a much heavier use of classes in this chapter, we need to understand some
+more details about what the <code class="docutils literal notranslate"><span class="pre">class</span></code> command is doing.
+First, the <code class="docutils literal notranslate"><span class="pre">class</span></code> command above defines a structure <code class="docutils literal notranslate"><span class="pre">One&#8321;</span></code> with parameter <code class="docutils literal notranslate"><span class="pre">&#945;</span> <span class="pre">:</span> <span class="pre">Type</span></code> and
+a single field <code class="docutils literal notranslate"><span class="pre">one</span></code>. It also mark this structure as a class so that arguments of type
+<code class="docutils literal notranslate"><span class="pre">One&#8321;</span> <span class="pre">&#945;</span></code> for some type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> will be inferrable using the instance resolution procedure,
+as long as they are marked as instance-implicit, ie appear between square brackets.
+Those two effects could also have been achieved using the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command with <code class="docutils literal notranslate"><span class="pre">class</span></code>
+attribute, ie writing <code class="docutils literal notranslate"><span class="pre">&#64;[class]</span> <span class="pre">structure</span></code> instance of <code class="docutils literal notranslate"><span class="pre">class</span></code>. But the class command also
+ensures that <code class="docutils literal notranslate"><span class="pre">One&#8321;</span> <span class="pre">&#945;</span></code> appears as an instance-implicit argument in its own fields. Compare:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">One&#8321;.one</span> <span class="c1">-- One&#8321;.one {&#945; : Type} [self : One&#8321; &#945;] : &#945;</span>
+
+<span class="kd">@[class]</span> <span class="kd">structure</span> <span class="n">One&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="sd">/-- The element one -/</span>
+  <span class="n">one</span> <span class="o">:</span> <span class="n">&#945;</span>
+
+<span class="k">#check</span> <span class="n">One&#8322;.one</span>
+</pre></div>
+</div>
+<p>In the second check, we can see that <code class="docutils literal notranslate"><span class="pre">self</span> <span class="pre">:</span> <span class="pre">One&#8322;</span> <span class="pre">&#945;</span></code> is an explicit argument.
+Let us make sure the first version is indeed usable without any explicit argument.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">One&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="n">One&#8321;.one</span>
+</pre></div>
+</div>
+<p>Remark: in the above example, the argument <code class="docutils literal notranslate"><span class="pre">One&#8321;</span> <span class="pre">&#945;</span></code> is marked as instance-implicit,
+which is a bit silly since this affects only <em>uses</em> of the declaration and declaration created by
+the <code class="docutils literal notranslate"><span class="pre">example</span></code> command cannot be used. However it allows to avoid giving a name to that
+argument and, more importantly, it starts installing the good habit of marking <code class="docutils literal notranslate"><span class="pre">One&#8321;</span> <span class="pre">&#945;</span></code>
+arguments as instance-implicit.</p>
+<p>Another remark is that all this will work only when Lean knows what is <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>. In the above
+example, leaving out the type ascription <code class="docutils literal notranslate"><span class="pre">:</span> <span class="pre">&#945;</span></code> would generate an error message like:
+<code class="docutils literal notranslate"><span class="pre">typeclass</span> <span class="pre">instance</span> <span class="pre">problem</span> <span class="pre">is</span> <span class="pre">stuck,</span> <span class="pre">it</span> <span class="pre">is</span> <span class="pre">often</span> <span class="pre">due</span> <span class="pre">to</span> <span class="pre">metavariables</span> <span class="pre">One&#8321;</span> <span class="pre">(?m.263</span> <span class="pre">&#945;)</span></code>
+where <code class="docutils literal notranslate"><span class="pre">?m.263</span> <span class="pre">&#945;</span></code> means &#8220;some type depending on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>&#8221; (and 263 is simply an auto-generated
+index that would be useful to distinguish between several unknown things). Another way
+to avoid this issue would be to use a type annotation, as in:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">One&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:=</span> <span class="o">(</span><span class="n">One&#8321;.one</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>You may have already encountered that issue when playing with limits of sequences
+in <a class="reference internal" href="C03_Logic.html#sequences-and-convergence"><span class="std std-numref">Section 3.6</span></a> if you tried to state for instance that
+<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> without telling Lean whether you meant this inequality to be about natural numbers
+or real numbers.</p>
+<p>Our next task is to assign a notation to <code class="docutils literal notranslate"><span class="pre">One&#8321;.one</span></code>. This we don&#8217;t want collisions
+with the builtin notation for <code class="docutils literal notranslate"><span class="pre">1</span></code>, we will use <code class="docutils literal notranslate"><span class="pre">&#120793;</span></code>. This is achieved by the following
+command where the first line tells Lean to use the documentation
+of <code class="docutils literal notranslate"><span class="pre">One&#8321;.one</span></code> as documentation for the symbol <code class="docutils literal notranslate"><span class="pre">&#120793;</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[inherit_doc]</span>
+<span class="kd">notation</span> <span class="s2">&quot;&#120793;&quot;</span> <span class="bp">=&gt;</span> <span class="n">One&#8321;.one</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">One&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="mi">&#120793;</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">One&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="mi">&#120793;</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">&#120793;</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>We now want a data-carrying class recording a binary operation. We don&#8217;t want to choose
+between addition and multiplication for now so we&#8217;ll use diamond.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Dia&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">dia</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span>
+
+<span class="kd">infixl</span><span class="o">:</span><span class="mi">70</span> <span class="s2">&quot; &#8900; &quot;</span>   <span class="bp">=&gt;</span> <span class="n">Dia&#8321;.dia</span>
+</pre></div>
+</div>
+<p>As in the <code class="docutils literal notranslate"><span class="pre">One&#8321;</span></code> example, the operation has no property at all at this stage. Let us
+now define the class of semigroup structures where the operation is denoted by <code class="docutils literal notranslate"><span class="pre">&#8900;</span></code>.
+For now, we define it by hand as a structure with two fields, a <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span></code> instance and some
+<code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued field <code class="docutils literal notranslate"><span class="pre">dia_assoc</span></code> asserting associativity of <code class="docutils literal notranslate"><span class="pre">&#8900;</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Semigroup&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">toDia&#8321;</span> <span class="o">:</span> <span class="n">Dia&#8321;</span> <span class="n">&#945;</span>
+  <span class="sd">/-- Diamond is associative -/</span>
+  <span class="n">dia_assoc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Note that while stating <cite>dia_assoc</cite>, the previously defined field <cite>toDia&#8321;</cite> is in the local
+context hence can be used when Lean searches for an instance of <cite>Dia&#8321; &#945;</cite> to make sense
+of <cite>a &#8900; b</cite>. However this <cite>toDia&#8321;</cite> field does not become part of the type class instances database.
+Hence doing <code class="docutils literal notranslate"><span class="pre">example</span> <span class="pre">{&#945;</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">[Semigroup&#8321;</span> <span class="pre">&#945;]</span> <span class="pre">(a</span> <span class="pre">b</span> <span class="pre">:</span> <span class="pre">&#945;)</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">:=</span> <span class="pre">a</span> <span class="pre">&#8900;</span> <span class="pre">b</span></code> would fail with
+error message <code class="docutils literal notranslate"><span class="pre">failed</span> <span class="pre">to</span> <span class="pre">synthesize</span> <span class="pre">instance</span> <span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code>.</p>
+<p>We can fix this by adding the <code class="docutils literal notranslate"><span class="pre">instance</span></code> attribute later.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">attribute</span> <span class="o">[</span><span class="kd">instance</span><span class="o">]</span> <span class="n">Semigroup&#8321;.toDia&#8321;</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Semigroup&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>Before building up, we need a more convenient way to extend structures than explicitly
+writing fields like <cite>toDia&#8321;</cite> and adding the instance attribute by hand. The <code class="docutils literal notranslate"><span class="pre">class</span></code>
+supports this using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> syntax as in:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Semigroup&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Dia&#8321;</span> <span class="n">&#945;</span> <span class="n">where</span>
+  <span class="sd">/-- Diamond is associative -/</span>
+  <span class="n">dia_assoc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">c</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Semigroup&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>Note this syntax is also available in the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command, although it that
+case it fixes only the hurdle of writing fields such as <cite>toDia&#8321;</cite> since there
+is no instance to define in that case.</p>
+<p>Let us now try to combine a diamond operation and a distinguished one with axioms saying
+this element is neutral on both sides.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">DiaOneClass&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">One&#8321;</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">Dia&#8321;</span> <span class="n">&#945;</span> <span class="n">where</span>
+  <span class="sd">/-- One is a left neutral element for diamond. -/</span>
+  <span class="n">one_dia</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="mi">&#120793;</span> <span class="bp">&#8900;</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span>
+  <span class="sd">/-- One is a right neutral element for diamond -/</span>
+  <span class="n">dia_one</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="mi">&#120793;</span> <span class="bp">=</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>In the next example, we tell Lean that <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> has a <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span></code> structure and state a
+property that uses both a <cite>Dia&#8321;</cite> instance and a <cite>One&#8321;</cite> instance. In order to see how Lean finds
+those instances we set a tracing option whose result can be seen in the info view. This result
+is rather terse by default but can be expended by clicking one lines ending with black arrows.
+It includes failed attempts where Lean tried to find instances before having enough type
+information to succceed. The successful attempts do involve the instances generated by the
+<code class="docutils literal notranslate"><span class="pre">extends</span></code> syntax.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">set_option</span> <span class="n">trace.Meta.synthInstance</span> <span class="n">true</span> <span class="k">in</span>
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">DiaOneClass&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">&#120793;</span>
+</pre></div>
+</div>
+<p>Note that we don&#8217;t need to include extra fields where combining existing classes. Hence we can
+define monoids as:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Monoid&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Semigroup&#8321;</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">DiaOneClass&#8321;</span> <span class="n">&#945;</span>
+</pre></div>
+</div>
+<p>While the above definition seems straightforward, it hides an important subtlety. Both
+<code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span> <span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span> <span class="pre">&#945;</span></code> extend <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code>, so one could fear that having
+a <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;</span> <span class="pre">&#945;</span></code> instance gives two unrelated diamond operations on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, one coming from
+a field <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;.toSemigroup&#8321;</span></code> and one coming from a field <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;.toDiaOneClass&#8321;</span></code>.</p>
+<p>Indeed if we try to build a monoid class by hand using:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Monoid&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">toSemigroup&#8321;</span> <span class="o">:</span> <span class="n">Semigroup&#8321;</span> <span class="n">&#945;</span>
+  <span class="n">toDiaOneClass&#8321;</span> <span class="o">:</span> <span class="n">DiaOneClass&#8321;</span> <span class="n">&#945;</span>
+</pre></div>
+</div>
+<p>then we get two completely unrelated diamond operations
+<code class="docutils literal notranslate"><span class="pre">Monoid&#8322;.toSemigroup&#8321;.toDia&#8321;.dia</span></code> and <code class="docutils literal notranslate"><span class="pre">Monoid&#8322;.toDiaOneClass&#8321;.toDia&#8321;.dia</span></code>.</p>
+<p>The version generated using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> syntax does not have this defect.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid&#8321;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">Monoid&#8321;.toSemigroup&#8321;.toDia&#8321;.dia</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">Monoid&#8321;.toDiaOneClass&#8321;.toDia&#8321;.dia</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>So the <code class="docutils literal notranslate"><span class="pre">class</span></code> command did some magic for us. An easy way to see what are the fields of
+our classes is to check their constructor. Compare:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="c">/-</span><span class="cm"> Monoid&#8322;.mk {&#945; : Type} (toSemigroup&#8321; : Semigroup&#8321; &#945;) (toDiaOneClass&#8321; : DiaOneClass&#8321; &#945;) : Monoid&#8322; &#945; -/</span>
+<span class="k">#check</span> <span class="n">Monoid&#8322;.mk</span>
+
+<span class="c">/-</span><span class="cm"> Monoid&#8321;.mk {&#945; : Type} [toSemigroup&#8321; : Semigroup&#8321; &#945;] [toOne&#8321; : One&#8321; &#945;] (one_dia : &#8704; (a : &#945;), &#120793; &#8900; a = a) (dia_one : &#8704; (a : &#945;), a &#8900; &#120793; = a) : Monoid&#8321; &#945; -/</span>
+<span class="k">#check</span> <span class="n">Monoid&#8321;.mk</span>
+</pre></div>
+</div>
+<p>So we see that <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;</span></code> takes <code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span> <span class="pre">&#945;</span></code> argument as expected but then it won&#8217;t
+take a would-be overlapping <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span> <span class="pre">&#945;</span></code> argument but instead tears it appart and includes
+only the non-overlapping parts. And it also auto-generated an instance <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;.toDiaOneClass&#8321;</span></code>
+which is <em>not</em> a field but has the expected signature which, from the end-user point of view,
+restores the symmetry between the two extended classes <code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span></code> and <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Monoid&#8321;.toSemigroup&#8321;</span>
+<span class="k">#check</span> <span class="n">Monoid&#8321;.toDiaOneClass&#8321;</span>
+</pre></div>
+</div>
+<p>We are now very close to defining groups. We could add to the monoid structure a field asserting
+the existence of an inverse for every element. But then we would need to work to access these
+inverses. In practice it is more convenient to add it as data. To optimize reusability,
+we define a new data-carrying class, and then give it some notation.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Inv&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="sd">/-- The inversion function -/</span>
+  <span class="n">inv</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span>
+
+<span class="kd">@[inherit_doc]</span>
+<span class="kd">postfix</span><span class="o">:</span><span class="n">max</span> <span class="s2">&quot;&#8315;&#185;&quot;</span> <span class="bp">=&gt;</span> <span class="n">Inv&#8321;.inv</span>
+
+<span class="kd">class</span> <span class="n">Group&#8321;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Monoid&#8321;</span> <span class="n">G</span><span class="o">,</span> <span class="n">Inv</span> <span class="n">G</span> <span class="n">where</span>
+  <span class="n">inv_dia</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">&#8900;</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">&#120793;</span>
+</pre></div>
+</div>
+<p>The above definition may seem too weak, we only ask that <code class="docutils literal notranslate"><span class="pre">a&#8315;&#185;</span></code> is a left-inverse of <code class="docutils literal notranslate"><span class="pre">a</span></code>.
+But the other side is automatic. In order to prove that, we need a preliminary lemma.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">lemma</span> <span class="n">left_inv_eq_right_inv&#8321;</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid&#8321;</span> <span class="n">M</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">hba</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">&#120793;</span><span class="o">)</span> <span class="o">(</span><span class="n">hac</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">&#120793;</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">DiaOneClass&#8321;.one_dia</span> <span class="n">c</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">hba</span><span class="o">,</span> <span class="n">Semigroup&#8321;.dia_assoc</span><span class="o">,</span> <span class="n">hac</span><span class="o">,</span> <span class="n">DiaOneClass&#8321;.dia_one</span> <span class="n">b</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>In this lemma, it is pretty annoying to give full names, especially since it requires knowing
+which part of the hierarchy provides those facts. One way to fix this is to use the <code class="docutils literal notranslate"><span class="pre">export</span></code>
+command to copy those facts as lemmas in the root name space.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">export</span> <span class="n">DiaOneClass&#8321;</span> <span class="o">(</span><span class="n">one_dia</span> <span class="n">dia_one</span><span class="o">)</span>
+<span class="kn">export</span> <span class="n">Semigroup&#8321;</span> <span class="o">(</span><span class="n">dia_assoc</span><span class="o">)</span>
+<span class="kn">export</span> <span class="n">Group&#8321;</span> <span class="o">(</span><span class="n">inv_dia</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>We can then rewrite the above proof as:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid&#8321;</span> <span class="n">M</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">hba</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&#8900;</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">&#120793;</span><span class="o">)</span> <span class="o">(</span><span class="n">hac</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">&#120793;</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">one_dia</span> <span class="n">c</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">hba</span><span class="o">,</span> <span class="n">dia_assoc</span><span class="o">,</span> <span class="n">hac</span><span class="o">,</span> <span class="n">dia_one</span> <span class="n">b</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>It is now your turn to prove things about our algebraic structures.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">lemma</span> <span class="n">inv_eq_of_dia</span> <span class="o">[</span><span class="n">Group&#8321;</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">&#120793;</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">lemma</span> <span class="n">dia_inv</span> <span class="o">[</span><span class="n">Group&#8321;</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8900;</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">&#120793;</span> <span class="o">:=</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>At this stage we would like to move on to define rings, but there is a serious issue.
+A ring structure on a type contains both an additive group structure and a multiplicative
+monoid structure, and some properties about their interaction. But so far we hard-coded
+a notation <code class="docutils literal notranslate"><span class="pre">&#8900;</span></code> for all our operations. More fundamentally, the type class system
+assumes every type has only one instance of each type class. There are various
+ways to solve this issue. Surprisingly mathlib uses the naive idea to duplicate
+everything for additive and multiplicative theories with the help of some code-generating
+attribute. Structures and classes are defined in both additive and multiplicative notation
+with an attibute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code> linking them. In case of multiple inheritance like for
+semi-groups, the auto-generated &#8220;symmetry-restoring&#8221; instances need also to be marked.
+This is a bit technical you don&#8217;t need to understand details. The important point is that
+lemmas are then only stated in multiplicative notation and marked with the attribute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code>
+to generate the additive version as <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code> with it&#8217;s auto-generated additive
+version <code class="docutils literal notranslate"><span class="pre">left_neg_eq_right_neg'</span></code>. In order to check the name of this additive version we
+used that <code class="docutils literal notranslate"><span class="pre">wathsnew</span> <span class="pre">in</span></code> command on top of <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddSemigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Add</span> <span class="n">&#945;</span> <span class="n">where</span>
+<span class="sd">/-- Multiplication is associative -/</span>
+  <span class="n">add_assoc&#8323;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span>
+
+<span class="kd">@[to_additive AddSemigroup&#8323;]</span>
+<span class="kd">class</span> <span class="n">Semigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Mul</span> <span class="n">&#945;</span> <span class="n">where</span>
+<span class="sd">/-- Multiplication is associative -/</span>
+  <span class="n">mul_assoc&#8323;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span>
+
+<span class="kd">class</span> <span class="n">AddMonoid&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddSemigroup&#8323;</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">AddZeroClass</span> <span class="n">&#945;</span>
+
+<span class="kd">@[to_additive AddMonoid&#8323;]</span>
+<span class="kd">class</span> <span class="n">Monoid&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Semigroup&#8323;</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">MulOneClass</span> <span class="n">&#945;</span>
+
+<span class="kn">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">existing</span><span class="o">]</span> <span class="n">Monoid&#8323;.toMulOneClass</span>
+
+<span class="kn">export</span> <span class="n">Semigroup&#8323;</span> <span class="o">(</span><span class="n">mul_assoc&#8323;</span><span class="o">)</span>
+<span class="kn">export</span> <span class="n">AddSemigroup&#8323;</span> <span class="o">(</span><span class="n">add_assoc&#8323;</span><span class="o">)</span>
+
+<span class="n">whatsnew</span> <span class="k">in</span>
+<span class="kd">@[to_additive]</span>
+<span class="kd">lemma</span> <span class="n">left_inv_eq_right_inv&#39;</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid&#8323;</span> <span class="n">M</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">hba</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hac</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">one_mul</span> <span class="n">c</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">hba</span><span class="o">,</span> <span class="n">mul_assoc&#8323;</span><span class="o">,</span> <span class="n">hac</span><span class="o">,</span> <span class="n">mul_one</span> <span class="n">b</span><span class="o">]</span>
+
+<span class="k">#check</span> <span class="n">left_neg_eq_right_neg&#39;</span>
+</pre></div>
+</div>
+<p>Equipped with this technology, we can easily define also commutative semigroups, monoids and
+groups, and then define rings.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddCommSemigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddSemigroup&#8323;</span> <span class="n">&#945;</span> <span class="n">where</span>
+  <span class="n">add_comm</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span>
+
+<span class="kd">@[to_additive AddCommSemigroup&#8323;]</span>
+<span class="kd">class</span> <span class="n">CommSemigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Semigroup&#8323;</span> <span class="n">&#945;</span> <span class="n">where</span>
+  <span class="n">mul_comm</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span>
+
+<span class="kd">class</span> <span class="n">AddCommMonoid&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddMonoid&#8323;</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">AddCommSemigroup&#8323;</span> <span class="n">&#945;</span>
+
+<span class="kd">@[to_additive AddCommMonoid&#8323;]</span>
+<span class="kd">class</span> <span class="n">CommMonoid&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Monoid&#8323;</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">CommSemigroup&#8323;</span> <span class="n">&#945;</span>
+
+<span class="kd">class</span> <span class="n">AddGroup&#8323;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddMonoid&#8323;</span> <span class="n">G</span><span class="o">,</span> <span class="n">Neg</span> <span class="n">G</span> <span class="n">where</span>
+  <span class="n">neg_add</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="bp">-</span><span class="n">a</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span>
+
+<span class="kd">@[to_additive AddGroup&#8323;]</span>
+<span class="kd">class</span> <span class="n">Group&#8323;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Monoid&#8323;</span> <span class="n">G</span><span class="o">,</span> <span class="n">Inv</span> <span class="n">G</span> <span class="n">where</span>
+  <span class="n">inv_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>We should remember to tagged lemmas with <code class="docutils literal notranslate"><span class="pre">simp</span></code> when approriate.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">Group&#8323;.inv_mul</span> <span class="n">AddGroup&#8323;.neg_add</span>
+</pre></div>
+</div>
+<p>Then we need to repeat ourselves a bit since we switch to standard notations, but at least
+<code class="docutils literal notranslate"><span class="pre">to_additive</span></code> does the work of translating from the multiplicative notation to the additive one.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[to_additive]</span>
+<span class="kd">lemma</span> <span class="n">inv_eq_of_mul</span> <span class="o">[</span><span class="n">Group&#8323;</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">to_additive</span></code> can be ask to tag a lemma with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and propagate that attribute
+to the additive version as follows.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[to_additive (attr := simp)]</span>
+<span class="kd">lemma</span> <span class="n">Group&#8323;.mul_inv</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8323;</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">@[to_additive]</span>
+<span class="kd">lemma</span> <span class="n">mul_left_cancel&#8323;</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8323;</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">@[to_additive]</span>
+<span class="kd">lemma</span> <span class="n">mul_right_cancel&#8323;</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8323;</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">b</span><span class="bp">*</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">*</span><span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">class</span> <span class="n">AddCommGroup&#8323;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddGroup&#8323;</span> <span class="n">G</span><span class="o">,</span> <span class="n">AddCommMonoid&#8323;</span> <span class="n">G</span>
+
+<span class="kd">@[to_additive AddCommGroup&#8323;]</span>
+<span class="kd">class</span> <span class="n">CommGroup&#8323;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Group&#8323;</span> <span class="n">G</span><span class="o">,</span> <span class="n">CommMonoid&#8323;</span> <span class="n">G</span>
+</pre></div>
+</div>
+<p>We are now ready for rings. For demonstration puprposes we won&#8217;t assume that addition is
+commutative, and then immediately provide an instance of <code class="docutils literal notranslate"><span class="pre">AddCommGroup&#8323;</span></code>. Mathlib does not
+play this game, first because in practice this does not make any ring instance easier and
+also because Mathlib&#8217;s algebraic hierarchy goes through semi-rings which are like rings but without
+opposites so that the proof below does not work for them. What we gain here, besides a nice exercise
+if you have never seen it, is an example of building an instance using the syntax that allows
+to provide a parent structure and some extra fields.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Ring&#8323;</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddGroup&#8323;</span> <span class="n">R</span><span class="o">,</span> <span class="n">Monoid&#8323;</span> <span class="n">R</span><span class="o">,</span> <span class="n">MulZeroClass</span> <span class="n">R</span> <span class="n">where</span>
+  <span class="sd">/-- Multiplication is left distributive over addition -/</span>
+  <span class="n">left_distrib</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span>
+  <span class="sd">/-- Multiplication is right distributive over addition -/</span>
+  <span class="n">right_distrib</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span>
+
+<span class="kd">instance</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">Ring&#8323;</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span> <span class="n">AddCommGroup&#8323;</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">Ring&#8323;.toAddGroup&#8323;</span> <span class="k">with</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="gr">sorry</span> <span class="o">}</span>
+</pre></div>
+</div>
+<p>Of course we can also build concrete instances, such as a ring structure on integers (of course
+the instance below uses that all the work is already done in Mathlib).</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Ring&#8323;</span> <span class="n">&#8484;</span> <span class="n">where</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">+</span> <span class="bp">&#183;</span><span class="o">)</span>
+  <span class="n">add_assoc&#8323;</span> <span class="o">:=</span> <span class="n">add_assoc</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+  <span class="n">neg</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">-</span> <span class="bp">&#183;</span><span class="o">)</span>
+  <span class="n">neg_add</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">*</span> <span class="bp">&#183;</span><span class="o">)</span>
+  <span class="n">mul_assoc&#8323;</span> <span class="o">:=</span> <span class="n">mul_assoc</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+  <span class="n">zero_mul</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+  <span class="n">mul_zero</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+  <span class="n">left_distrib</span> <span class="o">:=</span> <span class="n">Int.mul_add</span>
+  <span class="n">right_distrib</span> <span class="o">:=</span> <span class="n">Int.add_mul</span>
+</pre></div>
+</div>
+<p>As an exercise you can now set up a simple hierarchy for order relations, including a class
+for ordered commutative monoids, which have both a partial order and a commutative monoid structure
+such that <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">:</span> <span class="pre">&#945;,</span> <span class="pre">a</span> <span class="pre">&#8804;</span> <span class="pre">b</span> <span class="pre">&#8594;</span> <span class="pre">&#8704;</span> <span class="pre">c</span> <span class="pre">:</span> <span class="pre">&#945;,</span> <span class="pre">c</span> <span class="pre">*</span> <span class="pre">a</span> <span class="pre">&#8804;</span> <span class="pre">c</span> <span class="pre">*</span> <span class="pre">b</span></code>. Of course you need to add fields and maybe
+<code class="docutils literal notranslate"><span class="pre">extends</span></code> clauses to the following classes.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">LE&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="sd">/-- The Less-or-Equal relation. -/</span>
+  <span class="n">le</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="kt">Prop</span>
+
+<span class="kd">@[inherit_doc]</span> <span class="kd">infix</span><span class="o">:</span><span class="mi">50</span> <span class="s2">&quot; &#8804;&#8321; &quot;</span> <span class="bp">=&gt;</span> <span class="n">LE&#8321;.le</span>
+
+<span class="kd">class</span> <span class="n">Preorder&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="kd">class</span> <span class="n">PartialOrder&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="kd">class</span> <span class="n">OrderedCommMonoid&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="kd">instance</span> <span class="o">:</span> <span class="n">OrderedCommMonoid&#8321;</span> <span class="n">&#8469;</span> <span class="n">where</span>
+</pre></div>
+</div>
+<p>We now want to discuss algebraic structures involving several types. The prime example
+is modules over rings. If you don&#8217;t know what is a module, you can pretend it means vector space
+and think that all our rings are fields. Those structures are commutative additive groups
+equipped with a scalar multiplication by elements of some ring.</p>
+<p>We first define the data-carrying type class of scalar multiplication by some type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> on some
+type <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>, and give it a right associative notation.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">SMul&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="n">where</span>
+  <span class="sd">/-- Scalar multiplication -/</span>
+  <span class="n">smul</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span>
+
+<span class="kd">infixr</span><span class="o">:</span><span class="mi">73</span> <span class="s2">&quot; &#8226; &quot;</span> <span class="bp">=&gt;</span> <span class="n">SMul&#8323;.smul</span>
+</pre></div>
+</div>
+<p>Then we can define modules (again think about vector spaces if you don&#8217;t know what is a module).</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Module&#8321;</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Ring&#8323;</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">AddCommGroup&#8323;</span> <span class="n">M</span><span class="o">]</span> <span class="kd">extends</span> <span class="n">SMul&#8323;</span> <span class="n">R</span> <span class="n">M</span> <span class="n">where</span>
+  <span class="n">zero_smul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">&#8226;</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span>
+  <span class="n">one_smul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="bp">&#8226;</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span>
+  <span class="n">mul_smul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&#8226;</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">&#8226;</span> <span class="n">b</span> <span class="bp">&#8226;</span> <span class="n">m</span>
+  <span class="n">add_smul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&#8226;</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">&#8226;</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">&#8226;</span> <span class="n">m</span>
+  <span class="n">smul_add</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="n">a</span> <span class="bp">&#8226;</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">&#8226;</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">&#8226;</span> <span class="n">n</span>
+</pre></div>
+</div>
+<p>There is something interesting going on here. While it isn&#8217;t too surprising that the
+ring structure on <code class="docutils literal notranslate"><span class="pre">R</span></code> is a parameter in this definition, you probably expected <code class="docutils literal notranslate"><span class="pre">AddCommGroup3</span> <span class="pre">M</span></code>
+to be part of the <code class="docutils literal notranslate"><span class="pre">extends</span></code> clause just as <code class="docutils literal notranslate"><span class="pre">SMul&#8323;</span> <span class="pre">R</span> <span class="pre">M</span></code> is.  Trying to do that would lead
+to a mysterious sounding error message:
+<code class="docutils literal notranslate"><span class="pre">cannot</span> <span class="pre">find</span> <span class="pre">synthesization</span> <span class="pre">order</span> <span class="pre">for</span> <span class="pre">instance</span> <span class="pre">Module&#8321;.toAddCommGroup&#8323;</span> <span class="pre">with</span> <span class="pre">type</span> <span class="pre">(R</span> <span class="pre">:</span> <span class="pre">Type)</span> <span class="pre">&#8594;</span> <span class="pre">[inst</span> <span class="pre">:</span> <span class="pre">Ring&#8323;</span> <span class="pre">R]</span> <span class="pre">&#8594;</span> <span class="pre">{M</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">&#8594;</span> <span class="pre">[self</span> <span class="pre">:</span> <span class="pre">Module&#8321;</span> <span class="pre">R</span> <span class="pre">M]</span> <span class="pre">&#8594;</span> <span class="pre">AddCommGroup&#8323;</span> <span class="pre">M</span>
+<span class="pre">all</span> <span class="pre">remaining</span> <span class="pre">arguments</span> <span class="pre">have</span> <span class="pre">metavariables:</span> <span class="pre">Ring&#8323;</span> <span class="pre">?R</span> <span class="pre">&#64;Module&#8321;</span> <span class="pre">?R</span> <span class="pre">?inst&#10013;</span> <span class="pre">M</span></code>.
+In order to understand this message, you need to remember that such an <code class="docutils literal notranslate"><span class="pre">extends</span></code> clause would
+lead to a field <code class="docutils literal notranslate"><span class="pre">Module&#8323;.toAddCommGroup&#8323;</span></code> marked as an instance. This instance
+would have the signature appearing in the error message:
+<code class="docutils literal notranslate"><span class="pre">(R</span> <span class="pre">:</span> <span class="pre">Type)</span> <span class="pre">&#8594;</span> <span class="pre">[inst</span> <span class="pre">:</span> <span class="pre">Ring&#8323;</span> <span class="pre">R]</span> <span class="pre">&#8594;</span> <span class="pre">{M</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">&#8594;</span> <span class="pre">[self</span> <span class="pre">:</span> <span class="pre">Module&#8321;</span> <span class="pre">R</span> <span class="pre">M]</span> <span class="pre">&#8594;</span> <span class="pre">AddCommGroup&#8323;</span> <span class="pre">M</span></code>.
+With such an instance in the type class database, each time Lean would look for a
+<code class="docutils literal notranslate"><span class="pre">AddCommGroup&#8323;</span> <span class="pre">M</span></code> instance for some <code class="docutils literal notranslate"><span class="pre">M</span></code>, it would need to go hunting for a completely
+unspecified type <code class="docutils literal notranslate"><span class="pre">R``and</span> <span class="pre">a</span> <span class="pre">``Ring&#8323;</span> <span class="pre">R</span></code> instance before embarking on the main quest of finding a
+<code class="docutils literal notranslate"><span class="pre">Module&#8321;</span> <span class="pre">R</span> <span class="pre">M</span></code> instance. Those two side-quests are represented by the meta-variables mentionned in
+the error message and denoted by <code class="docutils literal notranslate"><span class="pre">?R</span></code> and <code class="docutils literal notranslate"><span class="pre">?inst&#10013;</span></code> there. Such a <code class="docutils literal notranslate"><span class="pre">Module&#8323;.toAddCommGroup&#8323;</span></code>
+instance would then be a huge trap for the instance resolution procedure and then <code class="docutils literal notranslate"><span class="pre">class</span></code> command
+refuses to set it up.</p>
+<p>What about <code class="docutils literal notranslate"><span class="pre">extends</span> <span class="pre">SMul&#8323;</span> <span class="pre">R</span> <span class="pre">M</span></code> then? That one creates a field
+<code class="docutils literal notranslate"><span class="pre">Module&#8321;.toSMul&#8323;</span> <span class="pre">:</span> <span class="pre">{R</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">&#8594;</span>&#160; <span class="pre">[inst</span> <span class="pre">:</span> <span class="pre">Ring&#8323;</span> <span class="pre">R]</span> <span class="pre">&#8594;</span> <span class="pre">{M</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">&#8594;</span> <span class="pre">[inst_1</span> <span class="pre">:</span> <span class="pre">AddCommGroup&#8323;</span> <span class="pre">M]</span> <span class="pre">&#8594;</span> <span class="pre">[self</span> <span class="pre">:</span> <span class="pre">Module&#8321;</span> <span class="pre">R</span> <span class="pre">M]</span> <span class="pre">&#8594;</span> <span class="pre">SMul&#8323;</span> <span class="pre">R</span> <span class="pre">M</span></code>
+whose end result <code class="docutils literal notranslate"><span class="pre">SMul&#8323;</span> <span class="pre">R</span> <span class="pre">M</span></code> mentions both <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code> so this field can
+safely be used as an instance. The rule is easy to remember: each class appearing in the
+<code class="docutils literal notranslate"><span class="pre">extends</span></code> clause should mention every type appearing in the parameters.</p>
+<p>Let us create our first module instance: a ring is a module over itself using its multiplication
+as a scalar multiplication.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">selfModule</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Ring&#8323;</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span> <span class="n">Module&#8321;</span> <span class="n">R</span> <span class="n">R</span> <span class="n">where</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">r</span> <span class="n">s</span> <span class="bp">&#8614;</span> <span class="n">r</span><span class="bp">*</span><span class="n">s</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="n">zero_mul</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="n">one_mul</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="n">mul_assoc&#8323;</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="n">Ring&#8323;.right_distrib</span>
+  <span class="n">smul_add</span> <span class="o">:=</span> <span class="n">Ring&#8323;.left_distrib</span>
+</pre></div>
+</div>
+<p>As a second example, every abelian group is a module over <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> (this is one of the reason to
+generalize the theory of vector spaces by allowing non-invertible scalars). First one can define
+scalar multiplication by a natural number for any type equipped with a zero and an addition:
+<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&#8226;</span> <span class="pre">a</span></code> is defined as <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">&#8943;</span> <span class="pre">+</span> <span class="pre">a</span></code> where <code class="docutils literal notranslate"><span class="pre">a</span></code> appears <code class="docutils literal notranslate"><span class="pre">n</span></code> times. Then this is extended
+to scalar multiplication by an integer by ensuring <code class="docutils literal notranslate"><span class="pre">(-1)</span> <span class="pre">&#8226;</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">-a</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">nsmul&#8321;</span> <span class="o">[</span><span class="n">Zero</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Add</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span>
+  <span class="bp">|</span> <span class="mi">0</span><span class="o">,</span> <span class="n">_</span> <span class="bp">=&gt;</span> <span class="mi">0</span>
+  <span class="bp">|</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=&gt;</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">nsmul&#8321;</span> <span class="n">n</span> <span class="n">a</span>
+
+<span class="kd">def</span> <span class="n">zsmul&#8321;</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Zero</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Add</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Neg</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">&#8484;</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span>
+  <span class="bp">|</span> <span class="n">Int.ofNat</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=&gt;</span> <span class="n">nsmul&#8321;</span> <span class="n">n</span> <span class="n">a</span>
+  <span class="bp">|</span> <span class="n">Int.negSucc</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=&gt;</span> <span class="bp">-</span><span class="n">nsmul&#8321;</span> <span class="n">n.succ</span> <span class="n">a</span>
+</pre></div>
+</div>
+<p>Proving this gives rise to a module structure is a bit tedious and not interesting for the
+current discussion, so we will sorry all axioms. You are <em>not</em> asked to replace those sorries
+with proofs. If you insist on doing it then you will probably want to state and prove several
+intermediate lemmas about <code class="docutils literal notranslate"><span class="pre">nsmul&#8321;</span></code> and <code class="docutils literal notranslate"><span class="pre">zsmul&#8321;</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">abGrpModule</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">AddCommGroup&#8323;</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span> <span class="n">Module&#8321;</span> <span class="n">&#8484;</span> <span class="n">A</span> <span class="n">where</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="n">zsmul&#8321;</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="gr">sorry</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="gr">sorry</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="gr">sorry</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="gr">sorry</span>
+  <span class="n">smul_add</span> <span class="o">:=</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>A much more important issue is that we now have two module structures over the ring <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code>
+for <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> itself: <code class="docutils literal notranslate"><span class="pre">abGrpModule</span> <span class="pre">&#8484;</span></code> since <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> is a abelian group, and <code class="docutils literal notranslate"><span class="pre">selfModule</span> <span class="pre">&#8484;</span></code> since
+<code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> is a ring. Those two module structure correspond to the same abelian group structure,
+but it is not obvious that they have the same scalar multiplication. They actually do, but
+this isn&#8217;t true by definition, it requires a proof. This is very bad news for the type class
+instance resolution procedure and will lead to very frustating failures for users of this
+hierarchy. When directly asked to find an instance, Lean will pick one, and we can see
+which one using:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="bp">#</span><span class="n">synth</span> <span class="n">Module&#8321;</span> <span class="n">&#8484;</span> <span class="n">&#8484;</span> <span class="c1">-- abGrpModule &#8484;</span>
+</pre></div>
+</div>
+<p>But in a more indirect context it can happen that Lean infers the one and then gets confused.
+This situation is known as a bad diamond. This has nothing to do with the diamond operation
+we used above, it refers to the way one can draw the paths from <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> to its <code class="docutils literal notranslate"><span class="pre">Module&#8321;</span> <span class="pre">&#8484;</span></code>
+going through either <code class="docutils literal notranslate"><span class="pre">AddCommGroup&#8323;</span> <span class="pre">&#8484;</span></code> or <code class="docutils literal notranslate"><span class="pre">Ring&#8323;</span> <span class="pre">&#8484;</span></code>.</p>
+<p>It is important to understand that not all diamonds are bad. In fact there are diamonds everywhere
+in mathlib, and also in this chapter. Already at the very beginning we saw one can go
+from <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;</span> <span class="pre">&#945;</span></code> to <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code> through either <code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span> <span class="pre">&#945;</span></code> or <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span> <span class="pre">&#945;</span></code> and
+thanks to the work done by the <code class="docutils literal notranslate"><span class="pre">class</span></code> command, the resulting two <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code> instances
+are definitionnaly equal. In particular a diamond having a <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued class at the bottom
+cannot be bad since any too proofs of the same statement are definitionnaly equal.</p>
+<p>But the diamond we created with modules is definitely bad. The offending piece is the <code class="docutils literal notranslate"><span class="pre">smul</span></code>
+field which is data, not a proof, and we have two constructions that are not definitionnaly equal.
+The robust way of fixing this issue is to make sure that going from a rich structure to a
+poor structure is always done by forgetting data, not by defining data. This well-known pattern
+as been named &#8220;forgetful inheritance&#8221; and extensively discussed in
+<a class="reference external" href="https://inria.hal.science/hal-02463336">https://inria.hal.science/hal-02463336</a>.</p>
+<p>In our concrete case, we can modify the definition of <code class="docutils literal notranslate"><span class="pre">AddMonoid&#8323;</span></code> to include a <code class="docutils literal notranslate"><span class="pre">nsmul</span></code> data
+field and some <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued fields ensuring this operation is provably the one we constructed
+above. Those fields are given default values using <code class="docutils literal notranslate"><span class="pre">:=</span></code> after their type in the definition below.
+Thanks to these default values, most instances would be constructed exactly as with our previous
+definitions. But in the special case of <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> we will be able to provide specific values.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddMonoid&#8324;</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">AddSemigroup&#8323;</span> <span class="n">M</span><span class="o">,</span> <span class="n">AddZeroClass</span> <span class="n">M</span> <span class="n">where</span>
+  <span class="sd">/-- Multiplication by a natural number. -/</span>
+  <span class="n">nsmul</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">nsmul&#8321;</span>
+  <span class="sd">/-- Multiplication by `(0 : &#8469;)` gives `0`. -/</span>
+  <span class="n">nsmul_zero</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span><span class="o">,</span> <span class="n">nsmul</span> <span class="mi">0</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">intros</span><span class="bp">;</span> <span class="n">rfl</span>
+  <span class="sd">/-- Multiplication by `(n + 1 : &#8469;)` behaves as expected. -/</span>
+  <span class="n">nsmul_succ</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">nsmul</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">nsmul</span> <span class="n">n</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">intros</span><span class="bp">;</span> <span class="n">rfl</span>
+
+<span class="kd">instance</span> <span class="n">mySMul</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">AddMonoid&#8324;</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">SMul</span> <span class="n">&#8469;</span> <span class="n">M</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">AddMonoid&#8324;.nsmul</span><span class="o">&#10217;</span>
+</pre></div>
+</div>
+<p>Let us check we can still construct a product monoid instance without providing the <code class="docutils literal notranslate"><span class="pre">nsmul</span></code>
+related fields.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">AddMonoid&#8324;</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">AddMonoid&#8324;</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span> <span class="n">AddMonoid&#8324;</span> <span class="o">(</span><span class="n">M</span> <span class="bp">&#215;</span> <span class="n">N</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">p</span> <span class="n">q</span> <span class="bp">&#8614;</span> <span class="o">(</span><span class="n">p.1</span> <span class="bp">+</span> <span class="n">q.1</span><span class="o">,</span> <span class="n">p.2</span> <span class="bp">+</span> <span class="n">q.2</span><span class="o">)</span>
+  <span class="n">add_assoc&#8323;</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">&#8614;</span> <span class="kd">by</span> <span class="n">ext</span> <span class="bp">&lt;;&gt;</span> <span class="n">apply</span> <span class="n">add_assoc&#8323;</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">a</span> <span class="bp">&#8614;</span> <span class="kd">by</span> <span class="n">ext</span> <span class="bp">&lt;;&gt;</span> <span class="n">apply</span> <span class="n">zero_add</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">a</span> <span class="bp">&#8614;</span> <span class="kd">by</span> <span class="n">ext</span> <span class="bp">&lt;;&gt;</span> <span class="n">apply</span> <span class="n">add_zero</span>
+</pre></div>
+</div>
+<p>And now let us handle the special case of <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> where we want to build <code class="docutils literal notranslate"><span class="pre">nsmul</span></code> using the coercion
+of <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> and the multiplication on <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code>. Note in particular how the proof fields
+contain more work than in the default value above.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">AddMonoid&#8324;</span> <span class="n">&#8484;</span> <span class="n">where</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">+</span> <span class="bp">&#183;</span><span class="o">)</span>
+  <span class="n">add_assoc&#8323;</span> <span class="o">:=</span> <span class="n">Int.add_assoc</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="n">Int.zero_add</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="n">Int.add_zero</span>
+  <span class="n">nsmul</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">n</span> <span class="n">m</span> <span class="bp">&#8614;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="bp">*</span> <span class="n">m</span>
+  <span class="n">nsmul_zero</span> <span class="o">:=</span> <span class="n">Int.zero_mul</span>
+  <span class="n">nsmul_succ</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">n</span> <span class="n">m</span> <span class="bp">&#8614;</span> <span class="k">show</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="bp">*</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">m</span>
+    <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">Int.add_mul</span><span class="o">,</span> <span class="n">Int.add_comm</span><span class="o">,</span> <span class="n">Int.one_mul</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Let us check we solved our issue. Because Lean already has a definition of scalar multiplication
+of a natural number and an integer, and we want to make sure our instance is used, we won&#8217;t use
+the <code class="docutils literal notranslate"><span class="pre">&#8226;</span></code> notation but call <code class="docutils literal notranslate"><span class="pre">SMul.mul</span></code> and explicitly provide our instance defined above.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">:</span> <span class="n">SMul.smul</span> <span class="o">(</span><span class="n">self</span> <span class="o">:=</span> <span class="n">mySMul</span><span class="o">)</span> <span class="n">n</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>This story then continues with incorporating a <code class="docutils literal notranslate"><span class="pre">zsmul</span></code> field into the definition of groups
+and similar tricks. You are now ready to read the definition of monoids, groups, rings and modules
+in mathlib. There are more complicated than what we have seen here, because they are part of a huge
+hierarchy, but all principles have been explained above.</p>
+<p>As an exercise, you can come back to the order relation hierarchy you built above and try
+to incorportate a type class <code class="docutils literal notranslate"><span class="pre">LT&#8321;</span></code> carrying the Less-Than notation <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> and make sure
+that every preorder comes with a <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> which has a default value built from <code class="docutils literal notranslate"><span class="pre">&#8804;&#8321;</span></code> and a
+<code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued field asserting the natural relation between those two comparison operators.
+TEXT.
+-/</p>
+</section>
+<section id="morphisms">
+<span id="section-hierarchies-morphisms"></span><h2><span class="section-number">7.2. </span>Morphisms<a class="headerlink" href="#morphisms" title="Permalink to this heading">&#61633;</a></h2>
+<p>So far in this chapter, we discussed how to create a hierarchy of mathematical structures.
+But defining structures is not really completed until we have morphisms. There are two
+main approaches here. The most obvious one is to define a predicate on functions.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">isMonoidHom&#8321;</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+  <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">&#8743;</span> <span class="bp">&#8704;</span> <span class="n">g</span> <span class="n">g&#39;</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">g&#39;</span>
+</pre></div>
+</div>
+<p>In this definition, it is a bit unpleasant to use a conjunction. In particular users
+will need to remember the ordering we chose when they want to access the two conditions.
+So we could use a structure instead.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">isMonoidHom&#8322;</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="n">where</span>
+  <span class="n">map_one</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span>
+  <span class="n">map_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">g</span> <span class="n">g&#39;</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">g&#39;</span>
+</pre></div>
+</div>
+<p>Once we are here, it is even tempting to make it a class and use the type class instance resolution
+procedure to automatically infer <code class="docutils literal notranslate"><span class="pre">isMonoidHom&#8322;</span></code> for complicated functions out of instances for
+simpler functions. For instance a composition of monoid morphisms is a monoid morphism and this
+seems like a useful instance. However such an instance would be very tricky for the resolution
+procedure since it would need to hunt down <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">&#8728;</span> <span class="pre">f</span></code> everywhere. Sometimes it would not
+succeed, for instance in <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">(f</span> <span class="pre">x)</span></code>. And sometimes it would succeed too much by seeing
+<code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">&#8728;</span> <span class="pre">f</span></code> or <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">&#8728;</span> <span class="pre">id</span></code> everywhere, leading to a diverging instance search. More generally one
+must always keep in mind that recognizing which function is applied in a given expression is
+a very difficult problem, called the &#8220;higher-order unification problem&#8221;.
+So Mathlib does not use this class approach.</p>
+<p>A more fundamental question is whether we use predicates as above (using either a <code class="docutils literal notranslate"><span class="pre">def</span></code> or a
+<code class="docutils literal notranslate"><span class="pre">structure</span></code>) or use structures bundling a function and predicates. This is partly a psychological
+issue. It is extremely rare to consider a function between monoids that is not a morphism.
+It really feels like &#8220;monoid morphism&#8221; is not an adjective you can assign to a bare function,
+it is a noun. On the other hand one can argue that a continuous function between topological spaces
+is really a function that happens to be continuous. This is one reason why Mathlib has a
+<code class="docutils literal notranslate"><span class="pre">Continuous</span></code> predicate. For instance you can write:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">Continuous</span> <span class="o">(</span><span class="n">id</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">continuous_id</span>
+</pre></div>
+</div>
+<p>We still have bundles continuous functions, which are convenient for instance to put a topology
+on a space of continuous functions, but they are not the primary tool to work with continuity.</p>
+<p>By constrast, morphisms between monoids (or other algebraic structures) are bundled as in:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
+<span class="kd">structure</span> <span class="n">MonoidHom&#8321;</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">H</span><span class="o">]</span>  <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">H</span>
+  <span class="n">map_one</span> <span class="o">:</span> <span class="n">toFun</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span>
+  <span class="n">map_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">g</span> <span class="n">g&#39;</span><span class="o">,</span> <span class="n">toFun</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">toFun</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">toFun</span> <span class="n">g&#39;</span>
+</pre></div>
+</div>
+<p>Of course we don&#8217;t want to type <code class="docutils literal notranslate"><span class="pre">toFun</span></code> everywhere so we register a coercion using
+the <code class="docutils literal notranslate"><span class="pre">CoeFun</span></code> type class. Its first argument is the type we want to coerce to a function.
+The second argument describes the target function type. In our case it is always <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">&#8594;</span> <span class="pre">H</span></code>
+for every <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">MonoidHom&#8321;</span> <span class="pre">G</span> <span class="pre">H</span></code>. We also tag <code class="docutils literal notranslate"><span class="pre">MonoidHom&#8321;.toFun</span></code> with the <code class="docutils literal notranslate"><span class="pre">coe</span></code> attribute to
+make sure it is displayed almost invisibly in the tactic state, simply by a <code class="docutils literal notranslate"><span class="pre">&#8593;</span></code> prefix.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">H</span><span class="o">]</span> <span class="o">:</span> <span class="n">CoeFun</span> <span class="o">(</span><span class="n">MonoidHom&#8321;</span> <span class="n">G</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">_</span> <span class="bp">&#8614;</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">H</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">MonoidHom&#8321;.toFun</span>
+
+<span class="kn">attribute</span> <span class="o">[</span><span class="n">coe</span><span class="o">]</span> <span class="n">MonoidHom&#8321;.toFun</span>
+</pre></div>
+</div>
+<p>Let us check we can indeed apply a bundled monoid morphism to an element.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">MonoidHom&#8321;</span> <span class="n">G</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>  <span class="n">f.map_one</span>
+</pre></div>
+</div>
+<p>We can do the same with other kind of morphisms until we reach ring morphisms.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
+<span class="kd">structure</span> <span class="n">AddMonoidHom&#8321;</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">H</span><span class="o">]</span>  <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">H</span>
+  <span class="n">map_zero</span> <span class="o">:</span> <span class="n">toFun</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span>
+  <span class="n">map_add</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">g</span> <span class="n">g&#39;</span><span class="o">,</span> <span class="n">toFun</span> <span class="o">(</span><span class="n">g</span> <span class="bp">+</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">toFun</span> <span class="n">g</span> <span class="bp">+</span> <span class="n">toFun</span> <span class="n">g&#39;</span>
+
+<span class="kd">instance</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">H</span><span class="o">]</span> <span class="o">:</span> <span class="n">CoeFun</span> <span class="o">(</span><span class="n">AddMonoidHom&#8321;</span> <span class="n">G</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="n">_</span> <span class="bp">&#8614;</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">H</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">AddMonoidHom&#8321;.toFun</span>
+
+<span class="kn">attribute</span> <span class="o">[</span><span class="n">coe</span><span class="o">]</span> <span class="n">AddMonoidHom&#8321;.toFun</span>
+
+<span class="kd">@[ext]</span>
+<span class="kd">structure</span> <span class="n">RingHom&#8321;</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">Ring</span> <span class="n">S</span><span class="o">]</span> <span class="kd">extends</span> <span class="n">MonoidHom&#8321;</span> <span class="n">R</span> <span class="n">S</span><span class="o">,</span> <span class="n">AddMonoidHom&#8321;</span> <span class="n">R</span> <span class="n">S</span>
+</pre></div>
+</div>
+<p>There are a couple of issues about this approach. A minor one is we don&#8217;t quite know where to put
+the <code class="docutils literal notranslate"><span class="pre">coe</span></code> attribute since the <code class="docutils literal notranslate"><span class="pre">RingHom&#8321;.toFun</span></code> does not exist, the relevant function is
+<code class="docutils literal notranslate"><span class="pre">MonoidHom&#8321;.toFun</span> <span class="pre">&#8728;</span> <span class="pre">RingHom&#8321;.toMonoidHom&#8321;</span></code> which is not a declaration that can be tagged with an
+attribute (but we could still define a <code class="docutils literal notranslate"><span class="pre">CoeFun</span>&#160; <span class="pre">(RingHom&#8321;</span> <span class="pre">R</span> <span class="pre">S)</span> <span class="pre">(fun</span> <span class="pre">_</span> <span class="pre">&#8614;</span> <span class="pre">R</span> <span class="pre">&#8594;</span> <span class="pre">S)</span></code> instance).
+A much more important one is that lemmas about monoid morphisms won&#8217;t directly apply
+to ring morphisms. This leaves the alternative of either juggling with <code class="docutils literal notranslate"><span class="pre">RingHom&#8321;.toMonoidHom&#8321;</span></code>
+each time we want to apply a monoid morphism lemma or restate every such lemmas for ring morphisms.
+Neither option is appealing so Mathlib uses a new hierarchy trick here. The idea is to define
+a type class for objects that are at least monoid morphisms, instantiate that class with both monoid
+morphisms and ring morphisms and use it to state every lemma. In the definition below,
+<code class="docutils literal notranslate"><span class="pre">F</span></code> could be <code class="docutils literal notranslate"><span class="pre">MonoidHom&#8321;</span> <span class="pre">M</span> <span class="pre">N</span></code>, or <code class="docutils literal notranslate"><span class="pre">RingHom&#8321;</span> <span class="pre">M</span> <span class="pre">N</span></code> if <code class="docutils literal notranslate"><span class="pre">M</span></code> and <code class="docutils literal notranslate"><span class="pre">N</span></code> have a ring structure.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">MonoidHomClass&#8321;</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">N</span>
+  <span class="n">map_one</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">,</span> <span class="n">toFun</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span>
+  <span class="n">map_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">f</span> <span class="n">g</span> <span class="n">g&#39;</span><span class="o">,</span> <span class="n">toFun</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">toFun</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">toFun</span> <span class="n">f</span> <span class="n">g&#39;</span>
+</pre></div>
+</div>
+<p>However there is a problem with the above implementation. We haven&#8217;t registered a coercion to
+function instance yet. Let us try to do it now.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">badInst</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">MonoidHomClass&#8321;</span> <span class="n">F</span> <span class="n">M</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span> <span class="n">CoeFun</span> <span class="n">F</span> <span class="o">(</span><span class="k">fun</span> <span class="n">_</span> <span class="bp">&#8614;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">N</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">MonoidHomClass&#8321;.toFun</span>
+</pre></div>
+</div>
+<p>Making the an instance would be bad. When faced with something like <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span></code> where the type of <code class="docutils literal notranslate"><span class="pre">f</span></code>
+is not a function type, Lean will try to find a <code class="docutils literal notranslate"><span class="pre">CoeFun</span></code> instance to coerce <code class="docutils literal notranslate"><span class="pre">f</span></code> into a function.
+The above function has type:
+<code class="docutils literal notranslate"><span class="pre">{M</span> <span class="pre">N</span> <span class="pre">F</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">&#8594;</span> <span class="pre">[Monoid</span> <span class="pre">M]</span> <span class="pre">&#8594;</span> <span class="pre">[Monoid</span> <span class="pre">N]</span> <span class="pre">&#8594;</span> <span class="pre">[MonoidHomClass&#8321;</span> <span class="pre">F</span> <span class="pre">M</span> <span class="pre">N]</span> <span class="pre">&#8594;</span> <span class="pre">CoeFun</span> <span class="pre">F</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">&#8614;</span> <span class="pre">M</span> <span class="pre">&#8594;</span> <span class="pre">N)</span></code>
+so, when it trying to apply it, it wouldn&#8217;t be a priori clear to Lean in which order the unknown
+types <code class="docutils literal notranslate"><span class="pre">M</span></code>, <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code> should be inferred. This is a kind of bad instance that is slightly
+different from the one we saw already, but it boils down to the same issue: without knowing <code class="docutils literal notranslate"><span class="pre">M</span></code>,
+Lean would have to search for a monoid instance on an unknown type, hence hopelessly try <em>every</em>
+monoid instance in the database. If you are curious to see the effect of such an instance you
+can type <code class="docutils literal notranslate"><span class="pre">set_option</span> <span class="pre">synthInstance.checkSynthOrder</span> <span class="pre">false</span> <span class="pre">in</span></code> on top of the above declaration,
+replace <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">badInst</span></code> with <code class="docutils literal notranslate"><span class="pre">instance</span></code>, and look for random failures in this file.</p>
+<p>Here the solution is easy, we need to tell Lean to first search what is <code class="docutils literal notranslate"><span class="pre">F</span></code> and then deduce <code class="docutils literal notranslate"><span class="pre">M</span></code>
+and <code class="docutils literal notranslate"><span class="pre">N</span></code>. This is done using the <code class="docutils literal notranslate"><span class="pre">outParam</span></code> function. This function is defined as the identity
+function, but is still recognized by the type class machinery and triggers the desired behavior.
+Hence we can retry defining our class, paying attention to the <code class="docutils literal notranslate"><span class="pre">outParam</span></code> function:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">MonoidHomClass&#8322;</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="n">outParam</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">N</span>
+  <span class="n">map_one</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">,</span> <span class="n">toFun</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span>
+  <span class="n">map_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">f</span> <span class="n">g</span> <span class="n">g&#39;</span><span class="o">,</span> <span class="n">toFun</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">toFun</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">toFun</span> <span class="n">f</span> <span class="n">g&#39;</span>
+
+<span class="kd">instance</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">MonoidHomClass&#8322;</span> <span class="n">F</span> <span class="n">M</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span> <span class="n">CoeFun</span> <span class="n">F</span> <span class="o">(</span><span class="k">fun</span> <span class="n">_</span> <span class="bp">&#8614;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">N</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">MonoidHomClass&#8322;.toFun</span>
+
+<span class="kn">attribute</span> <span class="o">[</span><span class="n">coe</span><span class="o">]</span> <span class="n">MonoidHomClass&#8322;.toFun</span>
+</pre></div>
+</div>
+<p>Now we can proceed with our plan to instantiate this class.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span> <span class="n">MonoidHomClass&#8322;</span> <span class="o">(</span><span class="n">MonoidHom&#8321;</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="n">M</span> <span class="n">N</span> <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:=</span> <span class="n">MonoidHom&#8321;.toFun</span>
+  <span class="n">map_one</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">f</span> <span class="bp">&#8614;</span> <span class="n">f.map_one</span>
+  <span class="n">map_mul</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">f</span> <span class="bp">&#8614;</span> <span class="n">f.map_mul</span>
+
+<span class="kd">instance</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">Ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span> <span class="n">MonoidHomClass&#8322;</span> <span class="o">(</span><span class="n">RingHom&#8321;</span> <span class="n">R</span> <span class="n">S</span><span class="o">)</span> <span class="n">R</span> <span class="n">S</span> <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">f</span> <span class="bp">&#8614;</span> <span class="n">f.toMonoidHom&#8321;.toFun</span>
+  <span class="n">map_one</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">f</span> <span class="bp">&#8614;</span> <span class="n">f.toMonoidHom&#8321;.map_one</span>
+  <span class="n">map_mul</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">f</span> <span class="bp">&#8614;</span> <span class="n">f.toMonoidHom&#8321;.map_mul</span>
+</pre></div>
+</div>
+<p>As promised every lemma we prove about <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">F</span></code> assuming an instance of <code class="docutils literal notranslate"><span class="pre">MonoidHomClass&#8321;</span> <span class="pre">F</span></code> will
+apply both to monoid morphims and ring morphisms.
+Let us see an example lemma and check it applies to both situations.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">lemma</span> <span class="n">map_inv_of_inv</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">MonoidHomClass&#8322;</span> <span class="n">F</span> <span class="n">M</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="o">{</span><span class="n">m</span> <span class="n">m&#39;</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span><span class="bp">*</span><span class="n">m&#39;</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">f</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">m&#39;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span> <span class="n">MonoidHomClass&#8322;.map_mul</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">MonoidHomClass&#8322;.map_one</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">MonoidHom&#8321;</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">{</span><span class="n">m</span> <span class="n">m&#39;</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span><span class="bp">*</span><span class="n">m&#39;</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">m&#39;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">map_inv_of_inv</span> <span class="n">f</span> <span class="n">h</span>
+
+<span class="kd">example</span> <span class="o">[</span><span class="n">Ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">Ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">RingHom&#8321;</span> <span class="n">R</span> <span class="n">S</span><span class="o">)</span> <span class="o">{</span><span class="n">r</span> <span class="n">r&#39;</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span><span class="bp">*</span><span class="n">r&#39;</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">r&#39;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">map_inv_of_inv</span> <span class="n">f</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p>At first sight, it may look like we got back to our old bad idea of making <code class="docutils literal notranslate"><span class="pre">MonoidHom&#8321;</span></code> a class.
+But we haven&#8217;t. Everything is shifted one level of abstraction up. The type class resolution
+procedure won&#8217;t be looking for functions, it will be looking for either
+<code class="docutils literal notranslate"><span class="pre">MonoidHom&#8321;</span></code> or <code class="docutils literal notranslate"><span class="pre">RingHom&#8321;</span></code>.</p>
+<p>One remaining issue with our approach is the presence of repeatitive code around the <code class="docutils literal notranslate"><span class="pre">toFun</span></code>
+field and the corresponding <code class="docutils literal notranslate"><span class="pre">CoeFun</span></code> instance and <code class="docutils literal notranslate"><span class="pre">coe</span></code> attribute. It would also be better
+to record that this pattern is used only for function with extra properties, meaning that the
+coercion to functions should be injective. So Mathlib adds one more layer of abstraction with
+the base class <code class="docutils literal notranslate"><span class="pre">FunLike</span></code>. Let us redefine our <code class="docutils literal notranslate"><span class="pre">MonoidHomClass</span></code> on top of this base layer.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">MonoidHomClass&#8323;</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="n">outParam</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="kd">extends</span>
+    <span class="n">FunLike</span> <span class="n">F</span> <span class="n">M</span> <span class="o">(</span><span class="k">fun</span> <span class="n">_</span> <span class="bp">&#8614;</span> <span class="n">N</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">map_one</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">,</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span>
+  <span class="n">map_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="n">g</span> <span class="n">g&#39;</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">g&#39;</span>
+
+<span class="kd">instance</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">:</span> <span class="n">MonoidHomClass&#8323;</span> <span class="o">(</span><span class="n">MonoidHom&#8321;</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="n">M</span> <span class="n">N</span> <span class="n">where</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">MonoidHom&#8321;.toFun</span>
+  <span class="n">coe_injective&#39;</span> <span class="o">:=</span> <span class="n">MonoidHom&#8321;.ext</span>
+  <span class="n">map_one</span> <span class="o">:=</span> <span class="n">MonoidHom&#8321;.map_one</span>
+  <span class="n">map_mul</span> <span class="o">:=</span> <span class="n">MonoidHom&#8321;.map_mul</span>
+</pre></div>
+</div>
+<p>Of course the hierarchy of morphisms does not stop here. We could go on and define a class
+<code class="docutils literal notranslate"><span class="pre">RingHomClass&#8323;</span></code> extending <code class="docutils literal notranslate"><span class="pre">MonoidHomClass&#8323;</span></code> and instantiate it on <code class="docutils literal notranslate"><span class="pre">RingHom</span></code> and
+then later on <code class="docutils literal notranslate"><span class="pre">AlgebraHom</span></code> (algebras are rings with some extra structure). But we&#8217;ve
+covered the main formalization ideas used in Mathlib for morphisms and you should be ready
+to understand how morphisms are defined in Mathlib.</p>
+<p>As an exercise, you should try to define your class of bundled order-preserving function between
+ordered types, and then order preserving monoid morphisms. This is for training purposes only.
+Like continuous functions, order preserving functions are primarily unbundled in Mathlib where
+they are defined by the <code class="docutils literal notranslate"><span class="pre">monontone</span></code> predicate. Of course you need to complete the class
+definitions below.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
+<span class="kd">structure</span> <span class="n">OrderPresHom</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#946;</span><span class="o">]</span> <span class="n">where</span>
+  <span class="n">toFun</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span>
+  <span class="n">le_of_le</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">a&#39;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">a&#39;</span> <span class="bp">&#8594;</span> <span class="n">toFun</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">toFun</span> <span class="n">a&#39;</span>
+
+<span class="kd">@[ext]</span>
+<span class="kd">structure</span> <span class="n">OrderPresMonoidHom</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">LE</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">LE</span> <span class="n">N</span><span class="o">]</span> <span class="kd">extends</span>
+<span class="n">MonoidHom&#8321;</span> <span class="n">M</span> <span class="n">N</span><span class="o">,</span> <span class="n">OrderPresHom</span> <span class="n">M</span> <span class="n">N</span>
+
+<span class="kd">class</span> <span class="n">OrderPresHomClass</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="n">outParam</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#946;</span><span class="o">]</span>
+
+<span class="kd">instance</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#946;</span><span class="o">]</span> <span class="o">:</span> <span class="n">OrderPresHomClass</span> <span class="o">(</span><span class="n">OrderPresHom</span> <span class="n">&#945;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="n">&#945;</span> <span class="n">&#946;</span> <span class="n">where</span>
+
+<span class="kd">instance</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#946;</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">&#946;</span><span class="o">]</span> <span class="o">:</span>
+    <span class="n">OrderPresHomClass</span> <span class="o">(</span><span class="n">OrderPresMonoidHom</span> <span class="n">&#945;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="n">&#945;</span> <span class="n">&#946;</span> <span class="n">where</span>
+
+<span class="kd">instance</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#946;</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">&#946;</span><span class="o">]</span> <span class="o">:</span>
+    <span class="n">MonoidHomClass&#8323;</span> <span class="o">(</span><span class="n">OrderPresMonoidHom</span> <span class="n">&#945;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="n">&#945;</span> <span class="n">&#946;</span>
+  <span class="o">:=</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+</section>
+<section id="sub-objects">
+<span id="section-hierarchies-subobjects"></span><h2><span class="section-number">7.3. </span>Sub-objects<a class="headerlink" href="#sub-objects" title="Permalink to this heading">&#61633;</a></h2>
+<p>After defining some algebraic structure and its morphisms, the next step is to consider sets
+that inherit this algebraic structure, for instance subgroups or subrings.
+This largely overlaps our previous topic. Indeed a set in <code class="docutils literal notranslate"><span class="pre">X</span></code> is implemented as a function from
+<code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Prop</span></code> so sub-objects are function satisfying a certain predicate.
+Hence we can reuse of lot of the ideas that led to the <code class="docutils literal notranslate"><span class="pre">FunLike</span></code> class and its descendants.
+We won&#8217;t reuse <code class="docutils literal notranslate"><span class="pre">FunLike</span></code> itself because this would break the abstraction barrier from <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">X</span></code>
+to <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Prop</span></code>. Instead there is a <code class="docutils literal notranslate"><span class="pre">SetLike</span></code> class. Instead of wrapping an injection into a
+function type, that class wraps an injection into a <code class="docutils literal notranslate"><span class="pre">Set</span></code> type and defines the corresponding
+coercion and <code class="docutils literal notranslate"><span class="pre">Membership</span></code> instance.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
+<span class="kd">structure</span> <span class="n">Submonoid&#8321;</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="n">where</span>
+  <span class="sd">/-- The carrier of a submonoid. -/</span>
+  <span class="n">carrier</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">M</span>
+  <span class="sd">/-- The product of two elements of a submonoid belongs to the submonoid. -/</span>
+  <span class="n">mul_mem</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">carrier</span> <span class="bp">&#8594;</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">carrier</span> <span class="bp">&#8594;</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">carrier</span>
+  <span class="sd">/-- The unit element belongs to the submonoid. -/</span>
+  <span class="n">one_mem</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&#8712;</span> <span class="n">carrier</span>
+
+<span class="sd">/-- Submonoids in `M` can be seen as sets in `M`. -/</span>
+<span class="kd">instance</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">SetLike</span> <span class="o">(</span><span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="n">M</span> <span class="n">where</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">Submonoid&#8321;.carrier</span>
+  <span class="n">coe_injective&#39;</span> <span class="o">:=</span> <span class="n">Submonoid&#8321;.ext</span>
+</pre></div>
+</div>
+<p>Equipped with the above <code class="docutils literal notranslate"><span class="pre">SetLike</span></code> instance, we can already state naturally that
+a submonoid <code class="docutils literal notranslate"><span class="pre">N</span></code> contains <code class="docutils literal notranslate"><span class="pre">1</span></code> without using <code class="docutils literal notranslate"><span class="pre">N.carrier</span></code>.
+We can also silently treat <code class="docutils literal notranslate"><span class="pre">N</span></code> as a set in <code class="docutils literal notranslate"><span class="pre">M</span></code> as take its direct image under a map.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&#8712;</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">N.one_mem</span>
+
+<span class="kd">example</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">N</span>
+</pre></div>
+</div>
+<p>We also have a coercion to <code class="docutils literal notranslate"><span class="pre">Type</span></code> which uses <code class="docutils literal notranslate"><span class="pre">Subtype</span></code> so, given a submonoid <code class="docutils literal notranslate"><span class="pre">N</span></code> we can write
+a parameter <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">:</span> <span class="pre">N)</span></code> which can be coerced to an element of <code class="docutils literal notranslate"><span class="pre">M</span></code> belonging to <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="bp">&#8712;</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">x.property</span>
+</pre></div>
+</div>
+<p>Using this coercion to <code class="docutils literal notranslate"><span class="pre">Type</span></code> we can also tackle the task of equipping a submonoid with a
+monoid structure. We will use the coercion from the type associated to <code class="docutils literal notranslate"><span class="pre">N</span></code> as above, and the
+lemma <code class="docutils literal notranslate"><span class="pre">SetCoe.ext</span></code> asserting this coercion is injective. Both are provided by the <code class="docutils literal notranslate"><span class="pre">SetLike</span></code>
+instance.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">SubMonoid&#8321;Monoid</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">Monoid</span> <span class="n">N</span> <span class="n">where</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span><span class="o">,</span> <span class="n">N.mul_mem</span> <span class="n">x.property</span> <span class="n">y.property</span><span class="o">&#10217;</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="bp">&#8614;</span> <span class="n">SetCoe.ext</span> <span class="o">(</span><span class="n">mul_assoc</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="mi">1</span><span class="o">,</span> <span class="n">N.one_mem</span><span class="o">&#10217;</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">SetCoe.ext</span> <span class="o">(</span><span class="n">one_mul</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">))</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">SetCoe.ext</span> <span class="o">(</span><span class="n">mul_one</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">))</span>
+</pre></div>
+</div>
+<p>Note that, in the above instance, instead of using the coercion to <code class="docutils literal notranslate"><span class="pre">M</span></code> and calling the
+<code class="docutils literal notranslate"><span class="pre">property</span></code> field, we could have used destructuring binders as follows.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">Monoid</span> <span class="n">N</span> <span class="n">where</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span><span class="o">,</span> <span class="n">N.mul_mem</span> <span class="n">hx</span> <span class="n">hy</span><span class="o">&#10217;</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">_</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">y</span><span class="o">,</span> <span class="n">_</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">z</span><span class="o">,</span> <span class="n">_</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="n">SetCoe.ext</span> <span class="o">(</span><span class="n">mul_assoc</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="mi">1</span><span class="o">,</span> <span class="n">N.one_mem</span><span class="o">&#10217;</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">_</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="n">SetCoe.ext</span> <span class="o">(</span><span class="n">one_mul</span> <span class="n">x</span><span class="o">)</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">_</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="n">SetCoe.ext</span> <span class="o">(</span><span class="n">mul_one</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>In order to apply lemmas about submonoids to subgroups or subrings, we need a class, just
+like for morphisms. Note this class take a <code class="docutils literal notranslate"><span class="pre">SetLike</span></code> instance as a parameter so it does not need
+a carrier field and can use the membership notation in its fields.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">SubmonoidClass&#8321;</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">SetLike</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="n">where</span>
+  <span class="n">mul_mem</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">)</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">M</span><span class="o">},</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8594;</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8594;</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">s</span>
+  <span class="n">one_mem</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">&#8712;</span> <span class="n">s</span>
+
+<span class="kd">instance</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">SubmonoidClass&#8321;</span> <span class="o">(</span><span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="n">M</span> <span class="n">where</span>
+  <span class="n">mul_mem</span> <span class="o">:=</span> <span class="n">Submonoid&#8321;.mul_mem</span>
+  <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">Submonoid&#8321;.one_mem</span>
+</pre></div>
+</div>
+<p>As an exercise you should define a <code class="docutils literal notranslate"><span class="pre">Subgroup&#8321;</span></code> structure, endow it with a <code class="docutils literal notranslate"><span class="pre">SetLike</span></code> instance
+and a <code class="docutils literal notranslate"><span class="pre">SubmonoidClass&#8321;</span></code> instance, put a <code class="docutils literal notranslate"><span class="pre">Group</span></code> instance on the subtype associated to a
+<code class="docutils literal notranslate"><span class="pre">Subgroup&#8321;</span></code> and define a <code class="docutils literal notranslate"><span class="pre">SubgroupClass&#8321;</span></code> class.</p>
+<p>Another very important thing to know about subobjects of a given algebraic object in Mathlib
+always form a complete lattice, and this structure is used a lot. For instance you may look for
+the lemma saying that an intersection of submonoids is a submonoid. But this won&#8217;t be a lemma,
+this will be an infimum construction. Let us do the case of two submonoids.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">Inf</span> <span class="o">(</span><span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">S&#8321;</span> <span class="n">S&#8322;</span> <span class="bp">=&gt;</span>
+    <span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="n">S&#8321;</span> <span class="bp">&#8745;</span> <span class="n">S&#8322;</span>
+      <span class="n">one_mem</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="n">S&#8321;.one_mem</span><span class="o">,</span> <span class="n">S&#8322;.one_mem</span><span class="o">&#10217;</span>
+      <span class="n">mul_mem</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">hx</span><span class="o">,</span> <span class="n">hx&#39;</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">hy</span><span class="o">,</span> <span class="n">hy&#39;</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">S&#8321;.mul_mem</span> <span class="n">hx</span> <span class="n">hy</span><span class="o">,</span> <span class="n">S&#8322;.mul_mem</span> <span class="n">hx&#39;</span> <span class="n">hy&#39;</span><span class="o">&#10217;</span> <span class="o">}&#10217;</span>
+</pre></div>
+</div>
+<p>This allows to get the intersections of two submonoids as a submonoid.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="n">P</span> <span class="o">:</span> <span class="n">Submonoid&#8321;</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">Submonoid&#8321;</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">N</span> <span class="bp">&#8851;</span> <span class="n">P</span>
+</pre></div>
+</div>
+<p>You may think it&#8217;s a shame that we had to use the inf symbol <code class="docutils literal notranslate"><span class="pre">&#8851;</span></code> in the above example instead
+of the intersection symbol <code class="docutils literal notranslate"><span class="pre">&#8745;</span></code>. But think about the supremum. The union of two submonoids is not
+a submonoid. However submonoids still form a lattice (even a complete one). Actually <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">&#8852;</span> <span class="pre">P</span></code> is
+the submonoid generated by the union of <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code> and of course it would be very confusing to
+denote it by <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">&#8746;</span> <span class="pre">P</span></code>. So you can see the use of <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">&#8851;</span> <span class="pre">P</span></code> as much more consistent. It is also
+a lot more consistent across various kind of algebraic structures. It may look a bit weird at first
+to see the sum of two vector subspace <code class="docutils literal notranslate"><span class="pre">E</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code> denoted by <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">&#8852;</span> <span class="pre">F</span></code> instead of <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">+</span> <span class="pre">F</span></code>.
+But you will get used to it. And soon you will consider the <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">+</span> <span class="pre">F</span></code> notation as a distraction
+emphasizing the anecdotal fact that elements of <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">&#8852;</span> <span class="pre">F</span></code> can be written as a sum of an element of
+<code class="docutils literal notranslate"><span class="pre">E</span></code> and an element of <code class="docutils literal notranslate"><span class="pre">F</span></code> instead of emphasizing the fundamental fact that <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">&#8852;</span> <span class="pre">F</span></code> is the
+smallest vector subspace containing both <code class="docutils literal notranslate"><span class="pre">E</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code>.</p>
+<p>Our last topic for this chapter is that of quotients. Again we want to explain how
+convenient notation are built and code duplication is avoided in Mathlib. Here the main device
+is the <code class="docutils literal notranslate"><span class="pre">HasQuotient</span></code> class which allows notations like <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">&#10744;</span> <span class="pre">N</span></code>. Beware the quotient symbol
+<code class="docutils literal notranslate"><span class="pre">&#10744;</span></code> is a special unicode character, not a regular ASCII division symbol.</p>
+<p>As an example, we will build the quotient of a commutative monoid by a submonoid, leave proofs
+to you.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">Submonoid.Setoid</span> <span class="o">[</span><span class="n">CommMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">Setoid</span> <span class="n">M</span>  <span class="n">where</span>
+  <span class="n">r</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="bp">&#8707;</span> <span class="n">w</span> <span class="bp">&#8712;</span> <span class="n">N</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">z</span> <span class="bp">&#8712;</span> <span class="n">N</span><span class="o">,</span> <span class="n">x</span><span class="bp">*</span><span class="n">w</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">*</span><span class="n">z</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">refl</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="mi">1</span><span class="o">,</span> <span class="n">N.one_mem</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">N.one_mem</span><span class="o">,</span> <span class="n">rfl</span><span class="o">&#10217;</span>
+    <span class="n">symm</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">w</span><span class="o">,</span> <span class="n">hw</span><span class="o">,</span> <span class="n">z</span><span class="o">,</span> <span class="n">hz</span><span class="o">,</span> <span class="n">h</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">z</span><span class="o">,</span> <span class="n">hz</span><span class="o">,</span> <span class="n">w</span><span class="o">,</span> <span class="n">hw</span><span class="o">,</span> <span class="n">h.symm</span><span class="o">&#10217;</span>
+    <span class="n">trans</span> <span class="o">:=</span> <span class="kd">by</span>
+      <span class="gr">sorry</span>
+  <span class="o">}</span>
+
+<span class="kd">instance</span> <span class="o">[</span><span class="n">CommMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">HasQuotient</span> <span class="n">M</span> <span class="o">(</span><span class="n">Submonoid</span> <span class="n">M</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">quotient&#39;</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">N</span> <span class="bp">&#8614;</span> <span class="n">Quotient</span> <span class="n">N.Setoid</span>
+
+<span class="kd">def</span> <span class="n">QuotientMonoid.mk</span> <span class="o">[</span><span class="n">CommMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#10744;</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">Quotient.mk</span> <span class="n">N.Setoid</span>
+
+<span class="kd">instance</span> <span class="o">[</span><span class="n">CommMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Submonoid</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">Monoid</span> <span class="o">(</span><span class="n">M</span> <span class="bp">&#10744;</span> <span class="n">N</span><span class="o">)</span> <span class="n">where</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="n">Quotient.map&#8322;&#39;</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">*</span> <span class="bp">&#183;</span><span class="o">)</span> <span class="o">(</span><span class="kd">by</span>
+      <span class="gr">sorry</span>
+        <span class="o">)</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="kd">by</span>
+      <span class="gr">sorry</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="n">QuotientMonoid.mk</span> <span class="n">N</span> <span class="mi">1</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="kd">by</span>
+      <span class="gr">sorry</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="kd">by</span>
+      <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>-/</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="C06_Structures.html" class="btn btn-neutral float-left" title="6. Structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C08_Topology.html" class="btn btn-neutral float-right" title="8. Topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Jeremy Avigad, Kevin Buzzard, Robert Y. Lewis, Patrick Massot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

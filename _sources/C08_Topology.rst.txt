@@ -19,7 +19,7 @@ We have already begun to consider such notions in :numref:`sequences_and_converg
 
 *Topology* is the abstract study of limits and continuity.
 Having covered the essentials of formalization in Chapters :numref:`%s <basics>`
-to :numref:`%s <abstract_algebra>`,
+to :numref:`%s <structures>`,
 in this chapter, we will explain how topological notions are formalized in mathlib.
 Not only do topological abstractions apply in much greater generality,
 but that also, somewhat paradoxically, make it easier to reason about limits
@@ -77,8 +77,8 @@ Formalizing mathematics requires making the relevant notion of "sameness"
 fully explicit, and that is exactly what Bourbaki's theory of filters
 manages to do.
 
-.. include:: C07_Topology/S01_Filters.inc
+.. include:: C08_Topology/S01_Filters.inc
 
-.. include:: C07_Topology/S02_Metric_Spaces.inc
+.. include:: C08_Topology/S02_Metric_Spaces.inc
 
-.. include:: C07_Topology/S03_Topological_Spaces.inc
+.. include:: C08_Topology/S03_Topological_Spaces.inc

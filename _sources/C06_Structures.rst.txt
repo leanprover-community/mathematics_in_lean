@@ -1,7 +1,7 @@
-.. _abstract_algebra:
+.. _structures:
 
-Abstract Algebra
-================
+Structures
+==========
 
 Modern mathematics makes essential use of algebraic
 structures,
@@ -24,6 +24,6 @@ algebraic structures on your own.
 For more technical detail, you can consult `Theorem Proving in Lean <https://leanprover.github.io/theorem_proving_in_lean/>`_,
 and a paper by Anne Baanen, `Use and abuse of instance parameters in the Lean mathematical library <https://arxiv.org/abs/2202.01629>`_.
 
-.. include:: C06_Abstract_Algebra/S01_Structures.inc
-.. include:: C06_Abstract_Algebra/S02_Algebraic_Structures.inc
-.. include:: C06_Abstract_Algebra/S03_Building_the_Gaussian_Integers.inc
+.. include:: C06_Structures/S01_Structures.inc
+.. include:: C06_Structures/S02_Algebraic_Structures.inc
+.. include:: C06_Structures/S03_Building_the_Gaussian_Integers.inc

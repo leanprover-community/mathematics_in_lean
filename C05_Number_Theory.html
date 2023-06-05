@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>5. Number Theory &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,16 +13,16 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Abstract Algebra" href="C06_Abstract_Algebra.html" />
+    <link rel="next" title="6. Structures" href="C06_Structures.html" />
     <link rel="prev" title="4. Sets and Functions" href="C04_Sets_and_Functions.html" /> 
 </head>
 
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -53,8 +57,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#infinitely-many-primes">5.4. Infinitely Many Primes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Abstract_Algebra.html">6. Abstract Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Topology.html">7. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -73,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">5. </span>Number Theory</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>Number Theory</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C05_Number_Theory.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -906,7 +912,7 @@ these methods to prove the two examples below.</p>
 <code class="docutils literal notranslate"><span class="pre">n</span></code> is prime and <code class="docutils literal notranslate"><span class="pre">s</span></code> is a set of primes.
 To show that, we need the following lemma, which you should
 be able to prove using the theorem <code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_one_or_self_of_dvd</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">Nat.Prime.eq_of_dvd_of_prime</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">_root_.Nat.Prime.eq_of_dvd_of_prime</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span>
       <span class="o">(</span><span class="n">prime_p</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">prime_q</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&#8739;</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
@@ -1157,7 +1163,7 @@ feat of formalization.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="C04_Sets_and_Functions.html" class="btn btn-neutral float-left" title="4. Sets and Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C06_Abstract_Algebra.html" class="btn btn-neutral float-right" title="6. Abstract Algebra" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C06_Structures.html" class="btn btn-neutral float-right" title="6. Structures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

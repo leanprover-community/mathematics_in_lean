@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2. Basics &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -54,8 +58,10 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Abstract_Algebra.html">6. Abstract Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Topology.html">7. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -74,8 +80,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">2. </span>Basics</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>Basics</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C02_Basics.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -101,7 +107,7 @@ the net result is a proof that the left-hand side of the calculation
 is equal to the right-hand side.</p>
 <p id="index-0">In Lean, stating a theorem is tantamount to stating a goal,
 namely, the goal of proving the theorem.
-Lean provides the <code class="docutils literal notranslate"><span class="pre">rewrite</span></code> tactic, abbreviated <code class="docutils literal notranslate"><span class="pre">rw</span></code>,
+Lean provides the rewriting tactic <code class="docutils literal notranslate"><span class="pre">rw</span></code>,
 to replace the left-hand side of an identity by the right-hand side
 in the goal. If <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> are real numbers,
 <code class="docutils literal notranslate"><span class="pre">mul_assoc</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">c</span></code>  is the identity <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">(b</span> <span class="pre">*</span> <span class="pre">c)</span></code>
@@ -123,15 +129,15 @@ notational conventions and leave out parentheses when Lean does as well.</p>
 imports the theory of the real numbers from <code class="docutils literal notranslate"><span class="pre">mathlib</span></code>.
 For the sake of brevity,
 we generally suppress information like this when it
-is repeated from example to example.
-Clicking the <code class="docutils literal notranslate"><span class="pre">try</span> <span class="pre">it!</span></code> button displays the full
-example as it is meant to be processed and checked by Lean.</p>
+is repeated from example to example.</p>
 <p>You are welcome to make changes to see what happens.
 You can type the <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> character as <code class="docutils literal notranslate"><span class="pre">\R</span></code> or <code class="docutils literal notranslate"><span class="pre">\real</span></code>
 in VS Code.
 The symbol doesn&#8217;t appear until you hit space or the tab key.
 If you hover over a symbol when reading a Lean file,
 VS Code will show you the syntax that can be used to enter it.
+If you are curious to see all available abreviations, you can hit Ctrl-Shift-p
+and then type abbreviations to get access to the <code class="docutils literal notranslate"><span class="pre">Lean</span> <span class="pre">4:</span> <span class="pre">Show</span> <span class="pre">all</span> <span class="pre">abbreviations</span></code> command.
 If your keyboard does not have an easily accessible backslash,
 you can change the leading character by changing the
 <code class="docutils literal notranslate"><span class="pre">lean.input.leader</span></code> setting.</p>
@@ -170,7 +176,9 @@ in each case replacing <code class="docutils literal notranslate"><span class="p
 With the <code class="docutils literal notranslate"><span class="pre">rw</span></code> tactic, you can use a left arrow (<code class="docutils literal notranslate"><span class="pre">\l</span></code>)
 to reverse an identity.
 For example, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">&#8592;</span> <span class="pre">mul_assoc</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">c</span></code>
-replaces <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">(b</span> <span class="pre">*</span> <span class="pre">c)</span></code> by <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code> in the current goal.</p>
+replaces <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">(b</span> <span class="pre">*</span> <span class="pre">c)</span></code> by <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code> in the current goal. Note that
+the left-pointing arrow refers to going from right to left in the identity provided
+by <code class="docutils literal notranslate"><span class="pre">mul_assoc</span></code>, it has nothing to do with the left or right side of the goal.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
@@ -208,7 +216,7 @@ and the second with only one argument.</p>
   <span class="n">rw</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">]</span>
 </pre></div>
 </div>
-<p>Try these:</p>
+<p>Try these, using the theorem <cite>sub_self</cite> for the second one:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">e</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">e</span> <span class="bp">*</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">d</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
@@ -216,12 +224,8 @@ and the second with only one argument.</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p>For the second one, you can use the theorem <code class="docutils literal notranslate"><span class="pre">sub_self</span></code>,
-where <code class="docutils literal notranslate"><span class="pre">sub_self</span> <span class="pre">a</span></code> is the identity <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p>
-<p>We now introduce some useful features of Lean.
-First, multiple rewrite commands can be carried out
-with a single command,
-by listing the relevant identities within square brackets.</p>
+<p>Multiple rewrite commands can be carried out with a single command,
+by listing the relevant identities separated by commas inside the square brackets.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">e</span> <span class="bp">=</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="o">(</span><span class="n">d</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">h&#39;</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">]</span>
 </pre></div>
@@ -229,9 +233,7 @@ by listing the relevant identities within square brackets.</p>
 <p>You still see the incremental progress by placing the cursor after
 a comma in any list of rewrites.</p>
 <p>Another trick is that we can declare variables once and for all outside
-an example or theorem.
-When Lean sees them mentioned in the statement of the theorem,
-it includes them automatically.</p>
+an example or theorem. Lean then includes them automatically.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">e</span> <span class="bp">=</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="o">(</span><span class="n">d</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -239,8 +241,7 @@ it includes them automatically.</p>
 </pre></div>
 </div>
 <p>Inspection of the tactic state at the beginning of the above proof
-reveals that Lean indeed included the relevant variables, leaving out
-<cite>g</cite> that doesn&#8217;t feature in the statement.
+reveals that Lean indeed included all variables.
 We can delimit the scope of the declaration by putting it
 in a <code class="docutils literal notranslate"><span class="pre">section</span> <span class="pre">...</span> <span class="pre">end</span></code> block.
 Finally, recall from the introduction that Lean provides us with a
@@ -355,7 +356,8 @@ in the assumption <code class="docutils literal notranslate"><span class="pre">h
 because at that point <code class="docutils literal notranslate"><span class="pre">hyp</span></code> matches the goal exactly.</p>
 <p id="index-6">We close this section by noting that <code class="docutils literal notranslate"><span class="pre">mathlib</span></code> provides a
 useful bit of automation with a <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic,
-which is designed to prove identities in any commutative ring.</p>
+which is designed to prove identities in any commutative ring as long as they follow
+purely from the ring axioms, without using any local assumption.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">ring</span>
 
@@ -371,11 +373,11 @@ which is designed to prove identities in any commutative ring.</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic is imported indirectly when we
-import <code class="docutils literal notranslate"><span class="pre">Data.Real.Basic</span></code>,
+import <code class="docutils literal notranslate"><span class="pre">Mathlib.Data.Real.Basic</span></code>,
 but we will see in the next section that it can be used
 for calculations on structures other than the real numbers.
 It can be imported explicitly with the command
-<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">tactic</span></code>.
+<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">Mathlib.Tactic</span></code>.
 We will see there are similar tactics for other common kind of algebraic
 structures.</p>
 <p>There is a variation of <code class="docutils literal notranslate"><span class="pre">rw</span></code> called <code class="docutils literal notranslate"><span class="pre">nth_rewrite</span></code> that allows you to replace only particular instances of an expression in the goal.
@@ -387,9 +389,6 @@ occurrence of <code class="docutils literal notranslate"><span class="pre">a</sp
   <span class="n">rw</span> <span class="o">[</span><span class="n">add_mul</span><span class="o">]</span>
 </pre></div>
 </div>
-<p>See also <code class="docutils literal notranslate"><span class="pre">nth_rewrite_lhs</span></code> and <code class="docutils literal notranslate"><span class="pre">nth_rewrite_rhs</span></code>.
-For a more sophisticated means of rewriting particular subexpressions,
-see the <a class="reference external" href="https://leanprover-community.github.io/extras/conv.html">documentation for the conversion tactic</a>.</p>
 </section>
 <section id="proving-identities-in-algebraic-structures">
 <span id="id2"></span><h2><span class="section-number">2.2. </span>Proving Identities in Algebraic Structures<a class="headerlink" href="#proving-identities-in-algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>

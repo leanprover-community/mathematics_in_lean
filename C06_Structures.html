@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>6. Abstract Algebra &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>6. Structures &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -13,16 +13,16 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="7. Topology" href="C07_Topology.html" />
+    <link rel="next" title="7. Hierarchies" href="C07_Hierarchies.html" />
     <link rel="prev" title="5. Number Theory" href="C05_Number_Theory.html" /> 
 </head>
 
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -47,13 +51,15 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Abstract Algebra</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#structures">6.1. Structures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#defining-structures">6.1. Defining structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#algebraic-structures">6.2. Algebraic Structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#building-the-gaussian-integers">6.3. Building the Gaussian Integers</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Topology.html">7. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -72,10 +78,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">6. </span>Abstract Algebra</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>Structures</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C06_Abstract_Algebra.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C06_Structures.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -83,8 +89,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="abstract-algebra">
-<span id="id1"></span><h1><span class="section-number">6. </span>Abstract Algebra<a class="headerlink" href="#abstract-algebra" title="Permalink to this heading">&#61633;</a></h1>
+  <section id="structures">
+<span id="id1"></span><h1><span class="section-number">6. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this heading">&#61633;</a></h1>
 <p>Modern mathematics makes essential use of algebraic
 structures,
 which encapsulate patterns that can be instantiated in
@@ -103,8 +109,8 @@ It will also show you how to define and use
 algebraic structures on your own.</p>
 <p>For more technical detail, you can consult <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>,
 and a paper by Anne Baanen, <a class="reference external" href="https://arxiv.org/abs/2202.01629">Use and abuse of instance parameters in the Lean mathematical library</a>.</p>
-<section id="structures">
-<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this heading">&#61633;</a></h2>
+<section id="defining-structures">
+<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Permalink to this heading">&#61633;</a></h2>
 <p>In the broadest sense of the term, a <em>structure</em> is a specification
 of a collection of data, possibly with constraints that the
 data is required to satisfy.
@@ -1545,7 +1551,7 @@ the notions of being prime and being irreducible coincide.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="C05_Number_Theory.html" class="btn btn-neutral float-left" title="5. Number Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C07_Topology.html" class="btn btn-neutral float-right" title="7. Topology" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C07_Hierarchies.html" class="btn btn-neutral float-right" title="7. Hierarchies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

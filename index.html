@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mathematics in Lean &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -45,8 +49,10 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Abstract_Algebra.html">6. Abstract Algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Topology.html">7. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -65,8 +71,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Mathematics in Lean</li>
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mathematics in Lean</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -115,16 +121,27 @@
 <li class="toctree-l2"><a class="reference internal" href="C05_Number_Theory.html#infinitely-many-primes">5.4. Infinitely Many Primes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Abstract_Algebra.html">6. Abstract Algebra</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C06_Abstract_Algebra.html#structures">6.1. Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C06_Abstract_Algebra.html#algebraic-structures">6.2. Algebraic Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C06_Abstract_Algebra.html#building-the-gaussian-integers">6.3. Building the Gaussian Integers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C06_Structures.html#defining-structures">6.1. Defining structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C06_Structures.html#algebraic-structures">6.2. Algebraic Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C06_Structures.html#building-the-gaussian-integers">6.3. Building the Gaussian Integers</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Topology.html">7. Topology</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C07_Topology.html#filters">7.1. Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C07_Topology.html#metric-spaces">7.2. Metric spaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C07_Topology.html#topological-spaces">7.3. Topological spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C07_Hierarchies.html#basics">7.1. Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C07_Hierarchies.html#morphisms">7.2. Morphisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C07_Hierarchies.html#sub-objects">7.3. Sub-objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C08_Topology.html#filters">8.1. Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C08_Topology.html#metric-spaces">8.2. Metric spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C08_Topology.html#topological-spaces">8.3. Topological spaces</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C09_Differential_Calculus.html#elementary-differential-calculus">9.1. Elementary Differential Calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C09_Differential_Calculus.html#differential-calculus-in-normed-spaces">9.2. Differential Calculus in Normed Spaces</a></li>
 </ul>
 </li>
 </ul>

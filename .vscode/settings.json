@@ -1,0 +1,25 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/*.olean": true,
+        "**/.DS_yml": true,
+        "**/.gitpod.yml": true,
+        "**/.vscode": true,
+    },
+    "editor.minimap.enabled": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.quickSuggestions.comments": true,
+    "scm.diffDecorationsGutterVisibility": "hover",
+    "editor.semanticHighlighting.enabled": true,
+    "editor.semanticTokenColorCustomizations": {
+        "[Default Light+]": {"rules": {"variable": "#1a31da"}}
+    },
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.fontLigatures": true,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "lean4.infoview.emphasizeFirstGoal": true,
+    "lean4.infoview.showExpectedType": false
+}

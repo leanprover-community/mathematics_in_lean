@@ -213,7 +213,7 @@ of an if-and-only-if statement.</p>
 <p>Universal quantifiers are often hidden in definitions,
 and Lean will unfold definitions to expose them when necessary.
 For example, let&#8217;s define two predicates,
-<code class="docutils literal notranslate"><span class="pre">fn_ub</span> <span class="pre">f</span> <span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">fn_lb</span> <span class="pre">f</span> <span class="pre">a</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FnUb</span> <span class="pre">f</span> <span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">FnLb</span> <span class="pre">f</span> <span class="pre">a</span></code>,
 where <code class="docutils literal notranslate"><span class="pre">f</span></code> is a function from the real numbers to the real
 numbers and <code class="docutils literal notranslate"><span class="pre">a</span></code> is a real number.
 The first says that <code class="docutils literal notranslate"><span class="pre">a</span></code> is an upper bound on the
@@ -237,8 +237,8 @@ function that maps <code class="docutils literal notranslate"><span class="pre">
   <span class="n">apply</span> <span class="n">hgb</span>
 </pre></div>
 </div>
-<p id="index-2">Applying <code class="docutils literal notranslate"><span class="pre">intro</span></code> to the goal <code class="docutils literal notranslate"><span class="pre">fn_ub</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">&#8614;</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">g</span> <span class="pre">x)</span> <span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b)</span></code>
-forces Lean to unfold the definition of <code class="docutils literal notranslate"><span class="pre">fn_ub</span></code>
+<p id="index-2">Applying <code class="docutils literal notranslate"><span class="pre">intro</span></code> to the goal <code class="docutils literal notranslate"><span class="pre">FnUb</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">&#8614;</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">g</span> <span class="pre">x)</span> <span class="pre">(a</span> <span class="pre">+</span> <span class="pre">b)</span></code>
+forces Lean to unfold the definition of <code class="docutils literal notranslate"><span class="pre">FnUb</span></code>
 and introduce <code class="docutils literal notranslate"><span class="pre">x</span></code> for the universal quantifier.
 The goal is then <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">(x</span> <span class="pre">:</span> <span class="pre">&#8477;)</span> <span class="pre">&#8614;</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">g</span> <span class="pre">x)</span> <span class="pre">x</span> <span class="pre">&#8804;</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code>.
 But applying <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">&#8614;</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">g</span> <span class="pre">x)</span></code> to <code class="docutils literal notranslate"><span class="pre">x</span></code> should result in <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">g</span> <span class="pre">x</span></code>,
@@ -255,7 +255,7 @@ This helps make the proof more readable,
 and gives you more control over how the goal is transformed.</p>
 <p>The rest of the proof is routine.
 The last two <code class="docutils literal notranslate"><span class="pre">apply</span></code> commands force Lean to unfold the definitions
-of <code class="docutils literal notranslate"><span class="pre">fn_ub</span></code> in the hypotheses.
+of <code class="docutils literal notranslate"><span class="pre">FnUb</span></code> in the hypotheses.
 Try carrying out similar proofs of these:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">hfa</span> <span class="o">:</span> <span class="n">FnLb</span> <span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">hgb</span> <span class="o">:</span> <span class="n">FnLb</span> <span class="n">g</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">FnLb</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
@@ -268,7 +268,7 @@ Try carrying out similar proofs of these:</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p>Even though we have defined <code class="docutils literal notranslate"><span class="pre">fn_ub</span></code> and <code class="docutils literal notranslate"><span class="pre">fn_lb</span></code> for functions
+<p>Even though we have defined <code class="docutils literal notranslate"><span class="pre">FnUb</span></code> and <code class="docutils literal notranslate"><span class="pre">FnLb</span></code> for functions
 from the reals to the reals,
 you should recognize that the definitions and proofs are much
 more general.
@@ -279,7 +279,7 @@ of any structure that is an &#8220;ordered additive commutative monoid&#8221;;
 the details of what that means don&#8217;t matter now,
 but it is worth knowing that the natural numbers, integers, rationals,
 and real numbers are all instances.
-So if we prove the theorem <code class="docutils literal notranslate"><span class="pre">fn_ub_add</span></code> at that level of generality,
+So if we prove the theorem <code class="docutils literal notranslate"><span class="pre">fnUb_add</span></code> at that level of generality,
 it will apply in all these instances.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">OrderedCancelAddCommMonoid</span> <span class="n">R</span><span class="o">]</span>
 
@@ -288,7 +288,7 @@ it will apply in all these instances.</p>
 <span class="kd">def</span> <span class="n">FnUb&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
   <span class="bp">&#8704;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">a</span>
 
-<span class="kd">theorem</span> <span class="n">fn_ub_add</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">R</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">hfa</span> <span class="o">:</span> <span class="n">FnUb&#39;</span> <span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">hgb</span> <span class="o">:</span> <span class="n">FnUb&#39;</span> <span class="n">g</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>
+<span class="kd">theorem</span> <span class="n">fnUb_add</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">R</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">hfa</span> <span class="o">:</span> <span class="n">FnUb&#39;</span> <span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">hgb</span> <span class="o">:</span> <span class="n">FnUb&#39;</span> <span class="n">g</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">FnUb&#39;</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">add_le_add</span> <span class="o">(</span><span class="n">hfa</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">hgb</span> <span class="n">x</span><span class="o">)</span>
 </pre></div>
 </div>
@@ -453,7 +453,7 @@ then <code class="docutils literal notranslate"><span class="pre">b</span></code
 A function <span class="math notranslate nohighlight">\(f\)</span> is said to be <em>injective</em> if for
 every <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>,
 if <span class="math notranslate nohighlight">\(f(x_1) = f(x_2)\)</span> then <span class="math notranslate nohighlight">\(x_1 = x_2\)</span>.
-Mathlib defines <code class="docutils literal notranslate"><span class="pre">function.injective</span> <span class="pre">f</span></code> with
+Mathlib defines <code class="docutils literal notranslate"><span class="pre">Function.Injective</span> <span class="pre">f</span></code> with
 <code class="docutils literal notranslate"><span class="pre">x&#8321;</span></code> and <code class="docutils literal notranslate"><span class="pre">x&#8322;</span></code> implicit.
 The next example shows that, on the real numbers,
 any function that adds a constant is injective.
@@ -543,14 +543,14 @@ without specifying the bound:</p>
 </div>
 <p>We can use the theorem <code class="docutils literal notranslate"><span class="pre">FnUb_add</span></code> from the last section
 to prove that if <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">g</span></code> have upper bounds,
-then so does `` gun x =&gt; f x + g x``.</p>
+then so does <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">=&gt;</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">g</span> <span class="pre">x</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">ubf</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">ubg</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">cases&#39;</span> <span class="n">ubf</span> <span class="k">with</span> <span class="n">a</span> <span class="n">ubfa</span>
-  <span class="n">cases&#39;</span> <span class="n">ubg</span> <span class="k">with</span> <span class="n">b</span> <span class="n">ubfb</span>
+  <span class="n">cases&#39;</span> <span class="n">ubg</span> <span class="k">with</span> <span class="n">b</span> <span class="n">ubgb</span>
   <span class="n">use</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span>
-  <span class="n">apply</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubfb</span>
+  <span class="n">apply</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubgb</span>
 </pre></div>
 </div>
 <p id="index-8">The <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic unpacks the information
@@ -597,18 +597,18 @@ is a combination of <code class="docutils literal notranslate"><span class="pre"
 These examples illustrate their use:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">ubf</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">ubg</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rcases</span> <span class="n">ubf</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">a</span><span class="o">,</span> <span class="n">ubfa</span><span class="o">&#10217;</span>
-  <span class="n">rcases</span> <span class="n">ubg</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">b</span><span class="o">,</span> <span class="n">ubfb</span><span class="o">&#10217;</span>
-  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">,</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubfb</span><span class="o">&#10217;</span>
+  <span class="n">rcases</span> <span class="n">ubg</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">b</span><span class="o">,</span> <span class="n">ubgb</span><span class="o">&#10217;</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">,</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubgb</span><span class="o">&#10217;</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">f</span> <span class="bp">&#8594;</span> <span class="n">FnHasUb</span> <span class="n">g</span> <span class="bp">&#8594;</span> <span class="n">FnHasUb</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">a</span><span class="o">,</span> <span class="n">ubfa</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">b</span><span class="o">,</span> <span class="n">ubfb</span><span class="o">&#10217;</span>
-  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">,</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubfb</span><span class="o">&#10217;</span>
+  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">a</span><span class="o">,</span> <span class="n">ubfa</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">b</span><span class="o">,</span> <span class="n">ubgb</span><span class="o">&#10217;</span>
+  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">,</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubgb</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>In fact, Lean also supports a pattern-matching lambda
 in expressions and proof terms:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">f</span> <span class="bp">&#8594;</span> <span class="n">FnHasUb</span> <span class="n">g</span> <span class="bp">&#8594;</span> <span class="n">FnHasUb</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">x</span> <span class="o">:=</span>
-  <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">a</span><span class="o">,</span> <span class="n">ubfa</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">b</span><span class="o">,</span> <span class="n">ubfb</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">,</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubfb</span><span class="o">&#10217;</span>
+  <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">a</span><span class="o">,</span> <span class="n">ubfa</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">b</span><span class="o">,</span> <span class="n">ubgb</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">,</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubgb</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>These are power-user moves, and there is no harm

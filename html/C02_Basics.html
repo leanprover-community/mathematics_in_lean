@@ -303,7 +303,7 @@ an expression that begins with <code class="docutils literal notranslate"><span 
 A <code class="docutils literal notranslate"><span class="pre">calc</span></code> expression can also be used inside a tactic proof,
 but Lean interprets it as the instruction to use the resulting
 proof term to solve the goal.
-The <code class="docutils literal notranslate"><span class="pre">calc</span></code> syntax is finicky: the dots and underscires and justification
+The <code class="docutils literal notranslate"><span class="pre">calc</span></code> syntax is finicky: the dots and underscores and justification
 have to be in the format indicated above.
 Lean uses indentation to determine things like where a block
 of tactics or a <code class="docutils literal notranslate"><span class="pre">calc</span></code> block begins and ends;
@@ -381,8 +381,8 @@ It can be imported explicitly with the command
 We will see there are similar tactics for other common kind of algebraic
 structures.</p>
 <p>There is a variation of <code class="docutils literal notranslate"><span class="pre">rw</span></code> called <code class="docutils literal notranslate"><span class="pre">nth_rewrite</span></code> that allows you to replace only particular instances of an expression in the goal.
-Possible matches are enumerated starting with zero,
-so in the following example, <code class="docutils literal notranslate"><span class="pre">nth_rewrite</span> <span class="pre">1</span> <span class="pre">h</span></code> replaces the <em>second</em>
+Possible matches are enumerated starting with 1,
+so in the following example, <code class="docutils literal notranslate"><span class="pre">nth_rewrite</span> <span class="pre">2</span> <span class="pre">h</span></code> replaces the second
 occurrence of <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> with <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">nth_rw</span> <span class="mi">2</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
@@ -626,7 +626,7 @@ addition of the additive inverse.</p>
 <p id="index-12">The proof term <code class="docutils literal notranslate"><span class="pre">rfl</span></code> is short for <code class="docutils literal notranslate"><span class="pre">reflexivity</span></code>.
 Presenting it as a proof of <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">-b</span></code> forces Lean
 to unfold the definition and recognize both sides as being the same.
-The <code class="docutils literal notranslate"><span class="pre">reflexivity</span></code> tactic, which can be abbreviated as <code class="docutils literal notranslate"><span class="pre">refl</span></code>,
+The <code class="docutils literal notranslate"><span class="pre">reflexivity</span></code> tactic, which can be abbreviated as <code class="docutils literal notranslate"><span class="pre">rfl</span></code>,
 does the same.
 This is an instance of what is known as a <em>definitional equality</em>
 in Lean&#8217;s underlying logic.
@@ -910,10 +910,6 @@ which tries to find the relevant theorem in the library.</p></li>
 </div>
 <p>To try out <code class="docutils literal notranslate"><span class="pre">library_search</span></code> in this example,
 delete the <code class="docutils literal notranslate"><span class="pre">exact</span></code> command and uncomment the previous line.
-If you replace <code class="docutils literal notranslate"><span class="pre">library_search</span></code> with <code class="docutils literal notranslate"><span class="pre">suggest</span></code>,
-you&#8217;ll see a long list of suggestions.
-In this case, the suggestions are not helpful, but in other cases
-it does better.
 Using these tricks,
 see if you can find what you need to do the
 next example:</p>

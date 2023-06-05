@@ -79,4 +79,3 @@ example (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x => g (f
   use x
 
 end
-

@@ -81,7 +81,7 @@ variable {α : Type _} {R : Type _} [OrderedCancelAddCommMonoid R]
 def FnUb' (f : α → R) (a : R) : Prop :=
   ∀ x, f x ≤ a
 
-theorem fn_ub_add {f g : α → R} {a b : R} (hfa : FnUb' f a) (hgb : FnUb' g b) :
+theorem fnUb_add {f g : α → R} {a b : R} (hfa : FnUb' f a) (hgb : FnUb' g b) :
     FnUb' (fun x => f x + g x) (a + b) := fun x => add_le_add (hfa x) (hgb x)
 
 end

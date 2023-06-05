@@ -34,9 +34,9 @@ variable {f g : ℝ → ℝ}
 
 example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x => f x + g x := by
   cases' ubf with a ubfa
-  cases' ubg with b ubfb
+  cases' ubg with b ubgb
   use a + b
-  apply fnUb_add ubfa ubfb
+  apply fnUb_add ubfa ubgb
 
 example (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x => f x + g x := by
   sorry
@@ -46,15 +46,15 @@ example {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x => c * f x := 
 
 example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x => f x + g x := by
   rcases ubf with ⟨a, ubfa⟩
-  rcases ubg with ⟨b, ubfb⟩
-  exact ⟨a + b, fnUb_add ubfa ubfb⟩
+  rcases ubg with ⟨b, ubgb⟩
+  exact ⟨a + b, fnUb_add ubfa ubgb⟩
 
 example : FnHasUb f → FnHasUb g → FnHasUb fun x => f x + g x := by
-  rintro ⟨a, ubfa⟩ ⟨b, ubfb⟩
-  exact ⟨a + b, fnUb_add ubfa ubfb⟩
+  rintro ⟨a, ubfa⟩ ⟨b, ubgb⟩
+  exact ⟨a + b, fnUb_add ubfa ubgb⟩
 
 example : FnHasUb f → FnHasUb g → FnHasUb fun x => f x + g x :=
-  fun ⟨a, ubfa⟩ ⟨b, ubfb⟩ => ⟨a + b, fnUb_add ubfa ubfb⟩
+  fun ⟨a, ubfa⟩ ⟨b, ubgb⟩ => ⟨a + b, fnUb_add ubfa ubgb⟩
 
 end
 
@@ -129,4 +129,3 @@ example (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x => g (f
   sorry
 
 end
-

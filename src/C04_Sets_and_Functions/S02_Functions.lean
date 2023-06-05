@@ -211,4 +211,3 @@ theorem Cantor : ∀ f : α → Set α, ¬Surjective f := by
 
 -- COMMENTS: TODO: improve this
 end
-

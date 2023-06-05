@@ -250,4 +250,3 @@ theorem Cantor : ∀ f : α → Set α, ¬Surjective f := by
   contradiction
 
 end
-

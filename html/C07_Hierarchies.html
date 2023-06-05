@@ -252,8 +252,8 @@ a field <code class="docutils literal notranslate"><span class="pre">Monoid&#832
   <span class="o">(</span><span class="n">Monoid&#8321;.toSemigroup&#8321;.toDia&#8321;.dia</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">Monoid&#8321;.toDiaOneClass&#8321;.toDia&#8321;.dia</span> <span class="o">:=</span> <span class="n">rfl</span>
 </pre></div>
 </div>
-<p>So the <code class="docutils literal notranslate"><span class="pre">class</span></code> command did some magic for us. An easy way to see what are the fields of
-our classes is to check their constructor. Compare:</p>
+<p>So the <code class="docutils literal notranslate"><span class="pre">class</span></code> command did some magic for us (and the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command would have done it
+too). An easy way to see what are the fields of our classes is to check their constructor. Compare:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="c">/-</span><span class="cm"> Monoid&#8322;.mk {&#945; : Type} (toSemigroup&#8321; : Semigroup&#8321; &#945;) (toDiaOneClass&#8321; : DiaOneClass&#8321; &#945;) : Monoid&#8322; &#945; -/</span>
 <span class="k">#check</span> <span class="n">Monoid&#8322;.mk</span>
 
@@ -326,7 +326,7 @@ This is a bit technical you don&#8217;t need to understand details. The importan
 lemmas are then only stated in multiplicative notation and marked with the attribute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code>
 to generate the additive version as <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code> with it&#8217;s auto-generated additive
 version <code class="docutils literal notranslate"><span class="pre">left_neg_eq_right_neg'</span></code>. In order to check the name of this additive version we
-used that <code class="docutils literal notranslate"><span class="pre">wathsnew</span> <span class="pre">in</span></code> command on top of <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code>.</p>
+used the <code class="docutils literal notranslate"><span class="pre">whatsnew</span> <span class="pre">in</span></code> command on top of <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddSemigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Add</span> <span class="n">&#945;</span> <span class="n">where</span>
 <span class="sd">/-- Multiplication is associative -/</span>
   <span class="n">add_assoc&#8323;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span>
@@ -654,12 +654,10 @@ So we could use a structure instead.</p>
 procedure to automatically infer <code class="docutils literal notranslate"><span class="pre">isMonoidHom&#8322;</span></code> for complicated functions out of instances for
 simpler functions. For instance a composition of monoid morphisms is a monoid morphism and this
 seems like a useful instance. However such an instance would be very tricky for the resolution
-procedure since it would need to hunt down <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">&#8728;</span> <span class="pre">f</span></code> everywhere. Sometimes it would not
-succeed, for instance in <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">(f</span> <span class="pre">x)</span></code>. And sometimes it would succeed too much by seeing
-<code class="docutils literal notranslate"><span class="pre">id</span> <span class="pre">&#8728;</span> <span class="pre">f</span></code> or <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">&#8728;</span> <span class="pre">id</span></code> everywhere, leading to a diverging instance search. More generally one
-must always keep in mind that recognizing which function is applied in a given expression is
-a very difficult problem, called the &#8220;higher-order unification problem&#8221;.
-So Mathlib does not use this class approach.</p>
+procedure since it would need to hunt down <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">&#8728;</span> <span class="pre">f</span></code> everywhere. Seeing it failing in <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">(f</span> <span class="pre">x)</span></code>
+would be very frustrating. More generally one must always keep in mind that recognizing which
+function is applied in a given expression is a very difficult problem, called the &#8220;higher-order
+unification problem&#8221;. So Mathlib does not use this class approach.</p>
 <p>A more fundamental question is whether we use predicates as above (using either a <code class="docutils literal notranslate"><span class="pre">def</span></code> or a
 <code class="docutils literal notranslate"><span class="pre">structure</span></code>) or use structures bundling a function and predicates. This is partly a psychological
 issue. It is extremely rare to consider a function between monoids that is not a morphism.
@@ -815,7 +813,7 @@ to understand how morphisms are defined in Mathlib.</p>
 <p>As an exercise, you should try to define your class of bundled order-preserving function between
 ordered types, and then order preserving monoid morphisms. This is for training purposes only.
 Like continuous functions, order preserving functions are primarily unbundled in Mathlib where
-they are defined by the <code class="docutils literal notranslate"><span class="pre">monontone</span></code> predicate. Of course you need to complete the class
+they are defined by the <code class="docutils literal notranslate"><span class="pre">Monotone</span></code> predicate. Of course you need to complete the class
 definitions below.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
 <span class="kd">structure</span> <span class="n">OrderPresHom</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">LE</span> <span class="n">&#946;</span><span class="o">]</span> <span class="n">where</span>

@@ -5,6 +5,7 @@ import Mathlib.Tactic.IntervalCases
 
 open BigOperators
 
+namespace C05S03
 theorem two_le {m : ℕ} (h0 : m ≠ 0) (h1 : m ≠ 1) : 2 ≤ m := by
   cases m; contradiction
   case succ m =>
@@ -100,7 +101,7 @@ end
 example (s : Finset ℕ) (n : ℕ) (h : n ∈ s) : n ∣ ∏ i in s, i :=
   Finset.dvd_prod_of_mem _ h
 
-theorem Nat.Prime.eq_of_dvd_of_prime {p q : ℕ}
+theorem _root_.Nat.Prime.eq_of_dvd_of_prime {p q : ℕ}
       (prime_p : Nat.Prime p) (prime_q : Nat.Prime q) (h : p ∣ q) :
     p = q := by
   sorry

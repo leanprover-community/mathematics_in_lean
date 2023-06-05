@@ -6,7 +6,7 @@ package mil {
 }
 
 @[default_target]
-lean_lib «MIL» {
+lean_lib MIL {
   -- add library configuration options here
 }
 

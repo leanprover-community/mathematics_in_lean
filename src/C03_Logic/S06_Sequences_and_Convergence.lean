@@ -1,5 +1,6 @@
 import Mathlib.Data.Real.Basic
 
+namespace C03S06
 def ConvergesTo (s : ℕ → ℝ) (a : ℝ) :=
   ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
 

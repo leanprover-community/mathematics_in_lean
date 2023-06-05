@@ -33,7 +33,7 @@ example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) : a * (b * e) = c *
   rw [h]
   rw [mul_assoc]
 
--- Try these. For the second one, use the theorem `sub_self`.
+
 example (a b c d e f : ℝ) (h : b * c = e * f) : a * b * c * d = a * e * f * d := by
   sorry
 
@@ -145,4 +145,3 @@ end
 example (a b c : ℕ) (h : a + b = c) : (a + b) * (a + b) = a * c + b * c := by
   nth_rw 2 [h]
   rw [add_mul]
-

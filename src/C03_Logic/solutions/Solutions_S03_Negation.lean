@@ -1,5 +1,6 @@
 import Mathlib.Data.Real.Basic
 
+namespace C03S03
 section
 variable (a b : ℝ)
 

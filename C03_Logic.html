@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3. Logic &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -300,7 +300,7 @@ for most of our examples,
 but it is worth knowing that mathlib contains definitions and theorems
 that work at a high level of generality.</p>
 <p id="index-3">For another example of a hidden universal quantifier,
-mathlib defines a predicate <code class="docutils literal notranslate"><span class="pre">monotone</span></code>,
+mathlib defines a predicate <code class="docutils literal notranslate"><span class="pre">Monotone</span></code>,
 which says that a function is nondecreasing in its arguments:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Monotone</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span><span class="o">},</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">&#8594;</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">f</span> <span class="n">b</span> <span class="o">:=</span>
   <span class="bp">@</span><span class="n">h</span>
@@ -553,11 +553,11 @@ then so does <code class="docutils literal notranslate"><span class="pre">fun</s
   <span class="n">apply</span> <span class="n">fnUb_add</span> <span class="n">ubfa</span> <span class="n">ubgb</span>
 </pre></div>
 </div>
-<p id="index-8">The <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic unpacks the information
+<p id="index-8">The <code class="docutils literal notranslate"><span class="pre">cases'</span></code> tactic unpacks the information
 in the existential quantifier.
 Given the hypothesis <code class="docutils literal notranslate"><span class="pre">ubf</span></code> that there is an upper bound
 for <code class="docutils literal notranslate"><span class="pre">f</span></code>,
-<code class="docutils literal notranslate"><span class="pre">cases</span></code> adds a new variable for an upper
+<code class="docutils literal notranslate"><span class="pre">cases'</span></code> adds a new variable for an upper
 bound to the context,
 together with the hypothesis that it has the given property.
 The <code class="docutils literal notranslate"><span class="pre">with</span></code> clause allows us to specify the names
@@ -586,13 +586,13 @@ into the proofs.</p>
 <p id="index-9">The task of unpacking information in a hypothesis is
 so important that Lean and mathlib provide a number of
 ways to do it.
-A cousin of the <code class="docutils literal notranslate"><span class="pre">cases</span></code> tactic, <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, is more
+A cousin of the <code class="docutils literal notranslate"><span class="pre">cases'</span></code> tactic, <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, is more
 flexible in that it allows us to unpack nested data.
 (The &#8220;r&#8221; stands for &#8220;recursive.&#8221;)
 In the <code class="docutils literal notranslate"><span class="pre">with</span></code> clause for unpacking an existential quantifier,
 we name the object and the hypothesis by presenting
 them as a pattern <code class="docutils literal notranslate"><span class="pre">&#10216;a,</span> <span class="pre">h&#10217;</span></code> that <code class="docutils literal notranslate"><span class="pre">rcases</span></code> then tries to match.
-The <code class="docutils literal notranslate"><span class="pre">rintro</span></code> tactic (which can also be written <code class="docutils literal notranslate"><span class="pre">rintro</span></code>)
+The <code class="docutils literal notranslate"><span class="pre">rintro</span></code> tactic
 is a combination of <code class="docutils literal notranslate"><span class="pre">intro</span></code> and <code class="docutils literal notranslate"><span class="pre">rcases</span></code>.
 These examples illustrate their use:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">ubf</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">ubg</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">FnHasUb</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">g</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -612,10 +612,10 @@ in expressions and proof terms:</p>
 </pre></div>
 </div>
 <p>These are power-user moves, and there is no harm
-in favoring the use of <code class="docutils literal notranslate"><span class="pre">cases</span></code> until you are more comfortable
+in favoring the use of <code class="docutils literal notranslate"><span class="pre">cases'</span></code> until you are more comfortable
 with the existential quantifier.
 But we will come to learn that all of these tools,
-including <code class="docutils literal notranslate"><span class="pre">cases</span></code>, <code class="docutils literal notranslate"><span class="pre">use</span></code>, and the anonymous constructors,
+including <code class="docutils literal notranslate"><span class="pre">cases'</span></code>, <code class="docutils literal notranslate"><span class="pre">use</span></code>, and the anonymous constructors,
 are like Swiss army knives when it comes to theorem proving.
 They can be used for a wide range of purposes,
 not just for unpacking exists statements.</p>
@@ -730,7 +730,7 @@ It can be used in conjunction with the <code class="docutils literal notranslate
 <p>You can use the theorem <code class="docutils literal notranslate"><span class="pre">div_mul_cancel</span></code>.
 The next example uses a surjectivity hypothesis
 by applying it to a suitable value.
-Note that you can use <code class="docutils literal notranslate"><span class="pre">cases</span></code> with any expression,
+Note that you can use <code class="docutils literal notranslate"><span class="pre">cases'</span></code> with any expression,
 not just a hypothesis.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">cases&#39;</span> <span class="n">h</span> <span class="mi">2</span> <span class="k">with</span> <span class="n">x</span> <span class="n">hx</span>

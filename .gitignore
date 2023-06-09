@@ -1,4 +1,5 @@
 /.vscode
-*.olean
-/_target
-/leanpkg.path
+/build
+/lake-packages
+/.cache
+.DS_Store

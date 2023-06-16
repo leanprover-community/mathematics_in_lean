@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>5. Number Theory &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -53,8 +53,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">5. Number Theory</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#irrational-roots">5.1. Irrational Roots</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#induction-and-recursion">5.2. Induction and Recursion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">5.3. Induction and Recursion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#infinitely-many-primes">5.4. Infinitely Many Primes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#infinitely-many-primes">5.3. Infinitely Many Primes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
@@ -406,17 +405,6 @@ but also a plays a central role in the construction of new mathematical objects.
 Lean&#8217;s foundation allows us to declare <em>inductive types</em>,
 which are types generated inductively by a given list of
 <em>constructors</em>.
-In Lean, the natural numbers are declared as follows.
-.. _section_induction_and_recursion:</p>
-</section>
-<section id="id2">
-<h2><span class="section-number">5.3. </span>Induction and Recursion<a class="headerlink" href="#id2" title="Permalink to this heading">&#61633;</a></h2>
-<p>The set of natural numbers <span class="math notranslate nohighlight">\(\mathbb{N} = \{ 0, 1, 2, \ldots \}\)</span>
-is not only fundamentally important in its own right,
-but also a plays a central role in the construction of new mathematical objects.
-Lean&#8217;s foundation allows us to declare <em>inductive types</em>,
-which are types generated inductively by a given list of
-<em>constructors</em>.
 In Lean, the natural numbers are declared as follows.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">inductive</span> <span class="n">Nat</span>
   <span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">Nat</span>
@@ -715,7 +703,7 @@ The function <code class="docutils literal notranslate"><span class="pre">pred</
 </div>
 </section>
 <section id="infinitely-many-primes">
-<span id="section-infinitely-many-primes"></span><h2><span class="section-number">5.4. </span>Infinitely Many Primes<a class="headerlink" href="#infinitely-many-primes" title="Permalink to this heading">&#61633;</a></h2>
+<span id="section-infinitely-many-primes"></span><h2><span class="section-number">5.3. </span>Infinitely Many Primes<a class="headerlink" href="#infinitely-many-primes" title="Permalink to this heading">&#61633;</a></h2>
 <p>Let us continue our exploration of induction and recursion with another
 mathematical standard: a proof that there are infinitely many primes.
 One way to formulate this is as the statement that

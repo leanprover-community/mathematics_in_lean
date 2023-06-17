@@ -20,14 +20,14 @@ For the Lean 3 version, see [github.com/leanprover-community/mathematics_in_lean
 
 Do the following:
 
-1. Install Lean 4 and VS Code following
-   these [instructions](https://github.com/leanprover/lean4/blob/master/doc/quickstart.md).
-   It isn't enough just to install the Lean 4 extension; make sure you complete the steps so that Lean 4 and elan are installed.
-
-2. Make sure you have [git](https://git-scm.com/) installed.
+1. Make sure you have [git](https://git-scm.com/) installed.
    In a terminal, navigate to the folder where you want to put a copy of the
-   repository, and type `git clone https://github.com/avigad/mathematics_in_lean_source.git`
+   repository, and type `git clone https://github.com/leanprover-community/mathematics_in_lean.git`
    to fetch it from github.
+
+2. If you haven't done it already, install Lean 4 and VS Code following the
+   "regular install" section of these [instructions](https://leanprover-community.github.io/get_started.html#regular-install).
+   It isn't enough just to install the Lean 4 extension for VSCode; make sure you complete the steps so that Lean 4 and elan are installed.
 
 3. Navigate to `mathematics_in_lean`, and execute `lake exe cache get` to fetch a compiled
    version of the library, `Mathlib`.

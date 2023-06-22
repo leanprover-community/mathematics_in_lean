@@ -123,4 +123,3 @@ instance [CommMonoid M] (N : Submonoid M) : Monoid (M ⧸ N) where
     rintro ⟨a⟩ ; apply Quotient.sound ; dsimp only ; rw [one_mul] ; apply @Setoid.refl M N.Setoid
   mul_one := by
     rintro ⟨a⟩ ; apply Quotient.sound ; dsimp only ; rw [mul_one] ; apply @Setoid.refl M N.Setoid
-

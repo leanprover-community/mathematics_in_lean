@@ -120,7 +120,7 @@ lemma dia_inv [Group₁ G] (a : G) : a ⋄ a⁻¹ = 𝟙 :=
 
 
 class AddSemigroup₃ (α : Type) extends Add α where
-/-- Multiplication is associative -/
+/-- Addition is associative -/
   add_assoc₃ : ∀ a b c : α, a + b + c = a + (b + c)
 
 @[to_additive AddSemigroup₃]

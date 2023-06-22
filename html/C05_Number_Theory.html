@@ -60,6 +60,7 @@
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Integration_and_Measure_Theory.html">10. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -411,7 +412,7 @@ In Lean, the natural numbers are declared as follows.</p>
   <span class="bp">|</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">Nat</span>
 </pre></div>
 </div>
-<p>You can find this in the library by writting <code class="docutils literal notranslate"><span class="pre">#check</span> <span class="pre">Nat</span></code> and
+<p>You can find this in the library by writing <code class="docutils literal notranslate"><span class="pre">#check</span> <span class="pre">Nat</span></code> and
 then using <code class="docutils literal notranslate"><span class="pre">ctrl-click</span></code> on the identifier <code class="docutils literal notranslate"><span class="pre">Nat</span></code>.
 The command specifies that <code class="docutils literal notranslate"><span class="pre">Nat</span></code> is the datatype generated
 freely and inductively by the two constructors <code class="docutils literal notranslate"><span class="pre">zero</span> <span class="pre">:</span> <span class="pre">Nat</span></code> and
@@ -845,7 +846,7 @@ and abandoning the computational interpretation.</p>
 <p>We use the command <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">Finset</span></code> to avail ourselves of shorter names
 for the relevant theorems. Unlike the case with sets,
 most equivalences involving finsets do not hold definitionally,
-so they need to be expanded manually using equivalances like
+so they need to be expanded manually using equivalences like
 <code class="docutils literal notranslate"><span class="pre">Finset.subset_iff</span></code>, <code class="docutils literal notranslate"><span class="pre">Finset.mem_union</span></code>, <code class="docutils literal notranslate"><span class="pre">Finset.mem_inter</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">Finset.mem_sdiff</span></code>. The <code class="docutils literal notranslate"><span class="pre">ext</span></code> tactic can still be used
 to reduce show that two finite sets are equal by showing

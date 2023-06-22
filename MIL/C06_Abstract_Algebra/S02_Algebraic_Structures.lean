@@ -1,6 +1,5 @@
 import Mathlib.Data.Real.Basic
 
-namespace C06S02
 structure Group₁ (α : Type _) where
   mul : α → α → α
   one : α
@@ -15,6 +14,7 @@ structure Group₁Cat where
   str : Group₁ α
 
 section
+
 variable (α β γ : Type _)
 variable (f : α ≃ β) (g : β ≃ γ)
 
@@ -65,15 +65,15 @@ namespace Point
 def add (a b : Point) : Point :=
   ⟨a.x + b.x, a.y + b.y, a.z + b.z⟩
 
-def neg (a : Point) : Point := sorry
+def neg (a : point) : point := sorry
 
-def zero : Point := sorry
+def zero : point := sorry
 
-def add_group_point : AddGroup₁ point := sorry
-
+def add_group_point : add_group₁ point := sorry
 end Point
 
 section
+
 variable {α : Type _} (f g : Equiv.Perm α) (n : ℕ)
 
 #check f * g
@@ -157,6 +157,7 @@ instance hasInvGroup₂ {α : Type _} [Group₂ α] : Inv α :=
   ⟨Group₂.inv⟩
 
 section
+
 variable {α : Type _} (f g : Equiv.Perm α)
 
 #check f * 1 * g⁻¹

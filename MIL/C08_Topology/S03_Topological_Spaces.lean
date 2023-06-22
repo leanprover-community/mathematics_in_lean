@@ -152,4 +152,3 @@ example {ι : Type _} {s : Set X} (hs : IsCompact s) (U : ι → Set X) (hUo : �
 
 example [CompactSpace X] : IsCompact (univ : Set X) :=
   isCompact_univ
-

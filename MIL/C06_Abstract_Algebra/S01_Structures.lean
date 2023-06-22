@@ -1,7 +1,6 @@
 import Mathlib.Algebra.BigOperators.Ring
 import Mathlib.Data.Real.Basic
 
-namespace C06S01
 noncomputable section
 
 @[ext]
@@ -45,11 +44,13 @@ def add' (a b : Point) : Point where
   z := a.z + b.z
 
 #check add myPoint1 myPoint2
+
 #check myPoint1.add myPoint2
 
 end Point
 
 #check Point.add myPoint1 myPoint2
+
 #check myPoint1.add myPoint2
 
 namespace Point
@@ -97,14 +98,10 @@ example : ∀ a b : Point, add a b = add b a := fun ⟨xa, ya, za⟩ ⟨xb, yb, 
 
 protected theorem add_assoc (a b c : Point) : (a.add b).add c = a.add (b.add c) := by
   sorry
-
 def smul (r : ℝ) (a : Point) : Point :=
   sorry
-
-theorem smul_distrib (r : ℝ) (a b : Point) :
-    (smul r a).add (smul r b) = smul r (a.add b) := by
+theorem smul_distrib (r : ℝ) (a b : Point) : (smul r a).add (smul r b) = smul r (a.add b) := by
   sorry
-
 end Point
 
 structure StandardTwoSimplex where
@@ -141,9 +138,9 @@ def midpoint (a b : StandardTwoSimplex) : StandardTwoSimplex
   sum_eq := by field_simp; linarith [a.sum_eq, b.sum_eq]
 
 def weightedAverage (lambda : Real) (lambda_nonneg : 0 ≤ lambda) (lambda_le : lambda ≤ 1)
-    (a b : StandardTwoSimplex) : StandardTwoSimplex :=
+    (a b : StandardTwoSimplex) : StandardTwoSimplex
+    where
   sorry
-
 end
 
 end StandardTwoSimplex
@@ -166,8 +163,7 @@ def midpoint (n : ℕ) (a b : StandardSimplex n) : StandardSimplex n
     · linarith [a.NonNeg i, b.NonNeg i]
     norm_num
   sum_eq_one := by
-    simp [div_eq_mul_inv, ← Finset.sum_mul, Finset.sum_add_distrib,
-      a.sum_eq_one, b.sum_eq_one]
+    simp [div_eq_mul_inv, ← Finset.sum_mul, Finset.sum_add_distrib, a.sum_eq_one, b.sum_eq_one]
     field_simp
 
 end StandardSimplex
@@ -177,9 +173,11 @@ structure IsLinear (f : ℝ → ℝ) where
   preserves_mul : ∀ x c, f (c * x) = c * f x
 
 section
+
 variable (f : ℝ → ℝ) (linf : IsLinear f)
 
 #check linf.is_additive
+
 #check linf.preserves_mul
 
 end
@@ -194,11 +192,15 @@ def PReal :=
   { y : ℝ // 0 < y }
 
 section
+
 variable (x : PReal)
 
 #check x.val
+
 #check x.property
+
 #check x.1
+
 #check x.2
 
 end
@@ -212,6 +214,7 @@ def StandardSimplex' (n : ℕ) :=
 def StdSimplex := Σ n : ℕ, StandardSimplex n
 
 section
+
 variable (s : StdSimplex)
 
 #check s.fst

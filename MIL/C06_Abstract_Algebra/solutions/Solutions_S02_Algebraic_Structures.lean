@@ -1,6 +1,5 @@
 import Mathlib.Data.Real.Basic
 
-namespace C06S02
 structure AddGroup₁ (α : Type _) where
   add : α → α → α
   zero : α

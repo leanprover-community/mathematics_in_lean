@@ -5,7 +5,7 @@
 Integration and Measure Theory
 ==============================
 
-..
-  .. include:: C09_Integration_and_Measure_Theory/S01_Elementary_Integration.inc
-  .. include:: C09_Integration_and_Measure_Theory/S02_Measure_Theory.inc
-  .. include:: C09_Integration_and_Measure_Theory/S03_Integration.inc
+
+.. include:: C10_Integration_and_Measure_Theory/S01_Elementary_Integration.inc
+.. include:: C10_Integration_and_Measure_Theory/S02_Measure_Theory.inc
+.. include:: C10_Integration_and_Measure_Theory/S03_Integration.inc

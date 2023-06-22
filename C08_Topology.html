@@ -72,6 +72,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Integration_and_Measure_Theory.html">10. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -1001,7 +1002,7 @@ So the order relation we do use on  <code class="docutils literal notranslate"><
   <span class="n">Iff.rfl</span>
 </pre></div>
 </div>
-<p>Now we can recover continuity by combining the push-foward (or pull-back) operation with the order relation.</p>
+<p>Now we can recover continuity by combining the push-forward (or pull-back) operation with the order relation.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">T_X</span> <span class="o">:</span> <span class="n">TopologicalSpace</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">T_Y</span> <span class="o">:</span> <span class="n">TopologicalSpace</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">&#8594;</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">Continuous</span> <span class="n">f</span> <span class="bp">&#8596;</span> <span class="n">TopologicalSpace.coinduced</span> <span class="n">f</span> <span class="n">T_X</span> <span class="bp">&#8804;</span> <span class="n">T_Y</span> <span class="o">:=</span>
   <span class="n">continuous_iff_coinduced_le</span>
@@ -1028,7 +1029,7 @@ proves the existence of the product topology by abstract non-sense.
 We considered the case of <code class="docutils literal notranslate"><span class="pre">&#8477;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code> above, but let&#8217;s now consider the general case of <code class="docutils literal notranslate"><span class="pre">&#928;</span> <span class="pre">i,</span> <span class="pre">X</span> <span class="pre">i</span></code> for
 some <code class="docutils literal notranslate"><span class="pre">&#953;</span> <span class="pre">:</span> <span class="pre">Type*</span></code> and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">:</span> <span class="pre">&#953;</span> <span class="pre">&#8594;</span> <span class="pre">Type*</span></code>. We want, for any topological space <code class="docutils literal notranslate"><span class="pre">Z</span></code> and any function
 <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">Z</span> <span class="pre">&#8594;</span> <span class="pre">&#928;</span> <span class="pre">i,</span> <span class="pre">X</span> <span class="pre">i</span></code>, that <code class="docutils literal notranslate"><span class="pre">f</span></code> is continuous if and only if <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">&#8614;</span> <span class="pre">x</span> <span class="pre">i)</span> <span class="pre">&#8728;</span> <span class="pre">f</span></code> is continuous.
-Let us explore that constraint &#8220;on papar&#8221; using notation <span class="math notranslate nohighlight">\(p_i\)</span> for the projection
+Let us explore that constraint &#8220;on paper&#8221; using notation <span class="math notranslate nohighlight">\(p_i\)</span> for the projection
 <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">(x</span> <span class="pre">:</span> <span class="pre">&#928;</span> <span class="pre">i,</span> <span class="pre">X</span> <span class="pre">i)</span> <span class="pre">&#8614;</span> <span class="pre">x</span> <span class="pre">i)</span></code>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}(&#8704; i, p_i &#8728; f \text{ continuous}) &amp;&#8660; &#8704; i, (p_i &#8728; f)_* T_Z &#8804; T_{X_i} \\

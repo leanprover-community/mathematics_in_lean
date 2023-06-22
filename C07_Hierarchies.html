@@ -59,6 +59,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Integration_and_Measure_Theory.html">10. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -262,7 +263,7 @@ too). An easy way to see what are the fields of our classes is to check their co
 </pre></div>
 </div>
 <p>So we see that <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;</span></code> takes <code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span> <span class="pre">&#945;</span></code> argument as expected but then it won&#8217;t
-take a would-be overlapping <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span> <span class="pre">&#945;</span></code> argument but instead tears it appart and includes
+take a would-be overlapping <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span> <span class="pre">&#945;</span></code> argument but instead tears it apart and includes
 only the non-overlapping parts. And it also auto-generated an instance <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;.toDiaOneClass&#8321;</span></code>
 which is <em>not</em> a field but has the expected signature which, from the end-user point of view,
 restores the symmetry between the two extended classes <code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span></code> and <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span></code>.</p>
@@ -320,7 +321,7 @@ assumes every type has only one instance of each type class. There are various
 ways to solve this issue. Surprisingly mathlib uses the naive idea to duplicate
 everything for additive and multiplicative theories with the help of some code-generating
 attribute. Structures and classes are defined in both additive and multiplicative notation
-with an attibute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code> linking them. In case of multiple inheritance like for
+with an attribute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code> linking them. In case of multiple inheritance like for
 semi-groups, the auto-generated &#8220;symmetry-restoring&#8221; instances need also to be marked.
 This is a bit technical you don&#8217;t need to understand details. The important point is that
 lemmas are then only stated in multiplicative notation and marked with the attribute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code>
@@ -328,7 +329,7 @@ to generate the additive version as <code class="docutils literal notranslate"><
 version <code class="docutils literal notranslate"><span class="pre">left_neg_eq_right_neg'</span></code>. In order to check the name of this additive version we
 used the <code class="docutils literal notranslate"><span class="pre">whatsnew</span> <span class="pre">in</span></code> command on top of <code class="docutils literal notranslate"><span class="pre">left_inv_eq_right_inv'</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddSemigroup&#8323;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Add</span> <span class="n">&#945;</span> <span class="n">where</span>
-<span class="sd">/-- Multiplication is associative -/</span>
+<span class="sd">/-- Addition is associative -/</span>
   <span class="n">add_assoc&#8323;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span>
 
 <span class="kd">@[to_additive AddSemigroup&#8323;]</span>
@@ -376,7 +377,7 @@ groups, and then define rings.</p>
   <span class="n">inv_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>We should remember to tagged lemmas with <code class="docutils literal notranslate"><span class="pre">simp</span></code> when approriate.</p>
+<p>We should remember to tagged lemmas with <code class="docutils literal notranslate"><span class="pre">simp</span></code> when appropriate.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">Group&#8323;.inv_mul</span> <span class="n">AddGroup&#8323;.neg_add</span>
 </pre></div>
 </div>
@@ -407,7 +408,7 @@ to the additive version as follows.</p>
 <span class="kd">class</span> <span class="n">CommGroup&#8323;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Group&#8323;</span> <span class="n">G</span><span class="o">,</span> <span class="n">CommMonoid&#8323;</span> <span class="n">G</span>
 </pre></div>
 </div>
-<p>We are now ready for rings. For demonstration puprposes we won&#8217;t assume that addition is
+<p>We are now ready for rings. For demonstration purposes we won&#8217;t assume that addition is
 commutative, and then immediately provide an instance of <code class="docutils literal notranslate"><span class="pre">AddCommGroup&#8323;</span></code>. Mathlib does not
 play this game, first because in practice this does not make any ring instance easier and
 also because Mathlib&#8217;s algebraic hierarchy goes through semi-rings which are like rings but without
@@ -500,8 +501,8 @@ would have the signature appearing in the error message:
 <code class="docutils literal notranslate"><span class="pre">(R</span> <span class="pre">:</span> <span class="pre">Type)</span> <span class="pre">&#8594;</span> <span class="pre">[inst</span> <span class="pre">:</span> <span class="pre">Ring&#8323;</span> <span class="pre">R]</span> <span class="pre">&#8594;</span> <span class="pre">{M</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">&#8594;</span> <span class="pre">[self</span> <span class="pre">:</span> <span class="pre">Module&#8321;</span> <span class="pre">R</span> <span class="pre">M]</span> <span class="pre">&#8594;</span> <span class="pre">AddCommGroup&#8323;</span> <span class="pre">M</span></code>.
 With such an instance in the type class database, each time Lean would look for a
 <code class="docutils literal notranslate"><span class="pre">AddCommGroup&#8323;</span> <span class="pre">M</span></code> instance for some <code class="docutils literal notranslate"><span class="pre">M</span></code>, it would need to go hunting for a completely
-unspecified type <code class="docutils literal notranslate"><span class="pre">R``and</span> <span class="pre">a</span> <span class="pre">``Ring&#8323;</span> <span class="pre">R</span></code> instance before embarking on the main quest of finding a
-<code class="docutils literal notranslate"><span class="pre">Module&#8321;</span> <span class="pre">R</span> <span class="pre">M</span></code> instance. Those two side-quests are represented by the meta-variables mentionned in
+unspecified type <code class="docutils literal notranslate"><span class="pre">R</span></code> and a <code class="docutils literal notranslate"><span class="pre">Ring&#8323;</span> <span class="pre">R</span></code> instance before embarking on the main quest of finding a
+<code class="docutils literal notranslate"><span class="pre">Module&#8321;</span> <span class="pre">R</span> <span class="pre">M</span></code> instance. Those two side-quests are represented by the meta-variables mentioned in
 the error message and denoted by <code class="docutils literal notranslate"><span class="pre">?R</span></code> and <code class="docutils literal notranslate"><span class="pre">?inst&#10013;</span></code> there. Such a <code class="docutils literal notranslate"><span class="pre">Module&#8323;.toAddCommGroup&#8323;</span></code>
 instance would then be a huge trap for the instance resolution procedure and then <code class="docutils literal notranslate"><span class="pre">class</span></code> command
 refuses to set it up.</p>
@@ -553,7 +554,7 @@ for <code class="docutils literal notranslate"><span class="pre">&#8484;</span><
 <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> is a ring. Those two module structure correspond to the same abelian group structure,
 but it is not obvious that they have the same scalar multiplication. They actually do, but
 this isn&#8217;t true by definition, it requires a proof. This is very bad news for the type class
-instance resolution procedure and will lead to very frustating failures for users of this
+instance resolution procedure and will lead to very frustrating failures for users of this
 hierarchy. When directly asked to find an instance, Lean will pick one, and we can see
 which one using:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="bp">#</span><span class="n">synth</span> <span class="n">Module&#8321;</span> <span class="n">&#8484;</span> <span class="n">&#8484;</span> <span class="c1">-- abGrpModule &#8484;</span>
@@ -567,10 +568,10 @@ going through either <code class="docutils literal notranslate"><span class="pre
 in mathlib, and also in this chapter. Already at the very beginning we saw one can go
 from <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;</span> <span class="pre">&#945;</span></code> to <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code> through either <code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span> <span class="pre">&#945;</span></code> or <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span> <span class="pre">&#945;</span></code> and
 thanks to the work done by the <code class="docutils literal notranslate"><span class="pre">class</span></code> command, the resulting two <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code> instances
-are definitionnaly equal. In particular a diamond having a <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued class at the bottom
-cannot be bad since any too proofs of the same statement are definitionnaly equal.</p>
+are definitionally equal. In particular a diamond having a <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued class at the bottom
+cannot be bad since any too proofs of the same statement are definitionally equal.</p>
 <p>But the diamond we created with modules is definitely bad. The offending piece is the <code class="docutils literal notranslate"><span class="pre">smul</span></code>
-field which is data, not a proof, and we have two constructions that are not definitionnaly equal.
+field which is data, not a proof, and we have two constructions that are not definitionally equal.
 The robust way of fixing this issue is to make sure that going from a rich structure to a
 poor structure is always done by forgetting data, not by defining data. This well-known pattern
 as been named &#8220;forgetful inheritance&#8221; and extensively discussed in
@@ -627,10 +628,9 @@ and similar tricks. You are now ready to read the definition of monoids, groups,
 in mathlib. There are more complicated than what we have seen here, because they are part of a huge
 hierarchy, but all principles have been explained above.</p>
 <p>As an exercise, you can come back to the order relation hierarchy you built above and try
-to incorportate a type class <code class="docutils literal notranslate"><span class="pre">LT&#8321;</span></code> carrying the Less-Than notation <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> and make sure
+to incorporate a type class <code class="docutils literal notranslate"><span class="pre">LT&#8321;</span></code> carrying the Less-Than notation <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> and make sure
 that every preorder comes with a <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> which has a default value built from <code class="docutils literal notranslate"><span class="pre">&#8804;&#8321;</span></code> and a
 <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued field asserting the natural relation between those two comparison operators.
-TEXT.
 -/</p>
 </section>
 <section id="morphisms">
@@ -670,7 +670,7 @@ is really a function that happens to be continuous. This is one reason why Mathl
 </div>
 <p>We still have bundles continuous functions, which are convenient for instance to put a topology
 on a space of continuous functions, but they are not the primary tool to work with continuity.</p>
-<p>By constrast, morphisms between monoids (or other algebraic structures) are bundled as in:</p>
+<p>By contrast, morphisms between monoids (or other algebraic structures) are bundled as in:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
 <span class="kd">structure</span> <span class="n">MonoidHom&#8321;</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">H</span><span class="o">]</span>  <span class="n">where</span>
   <span class="n">toFun</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">H</span>
@@ -771,7 +771,7 @@ Hence we can retry defining our class, paying attention to the <code class="docu
 </pre></div>
 </div>
 <p>As promised every lemma we prove about <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">F</span></code> assuming an instance of <code class="docutils literal notranslate"><span class="pre">MonoidHomClass&#8321;</span> <span class="pre">F</span></code> will
-apply both to monoid morphims and ring morphisms.
+apply both to monoid morphisms and ring morphisms.
 Let us see an example lemma and check it applies to both situations.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">lemma</span> <span class="n">map_inv_of_inv</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">MonoidHomClass&#8322;</span> <span class="n">F</span> <span class="n">M</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="o">{</span><span class="n">m</span> <span class="n">m&#39;</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span><span class="bp">*</span><span class="n">m&#39;</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">f</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">m&#39;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -788,7 +788,7 @@ Let us see an example lemma and check it applies to both situations.</p>
 But we haven&#8217;t. Everything is shifted one level of abstraction up. The type class resolution
 procedure won&#8217;t be looking for functions, it will be looking for either
 <code class="docutils literal notranslate"><span class="pre">MonoidHom&#8321;</span></code> or <code class="docutils literal notranslate"><span class="pre">RingHom&#8321;</span></code>.</p>
-<p>One remaining issue with our approach is the presence of repeatitive code around the <code class="docutils literal notranslate"><span class="pre">toFun</span></code>
+<p>One remaining issue with our approach is the presence of repetitive code around the <code class="docutils literal notranslate"><span class="pre">toFun</span></code>
 field and the corresponding <code class="docutils literal notranslate"><span class="pre">CoeFun</span></code> instance and <code class="docutils literal notranslate"><span class="pre">coe</span></code> attribute. It would also be better
 to record that this pattern is used only for function with extra properties, meaning that the
 coercion to functions should be injective. So Mathlib adds one more layer of abstraction with
@@ -972,7 +972,6 @@ to you.</p>
       <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p>-/</p>
 </section>
 </section>
 

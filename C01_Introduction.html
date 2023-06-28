@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1. Introduction &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -49,7 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Elementary Number Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
@@ -73,8 +77,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">1. </span>Introduction</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>Introduction</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C01_Introduction.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -130,9 +134,7 @@ version of the library, <code class="docutils literal notranslate"><span class="
 choose <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">Folder</span></code> from the <code class="docutils literal notranslate"><span class="pre">File</span></code> menu. Be sure to open the folder <code class="docutils literal notranslate"><span class="pre">mathematics_in_lean</span></code>,
 not any other folder.</p></li>
 </ol>
-<p>Opening any Lean file will simultaneously open this
-book in a VS Code window. You can update to a newer version by tying
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> followed by <code class="docutils literal notranslate"><span class="pre">lake</span> <span class="pre">exe</span> <span class="pre">cache</span> <span class="pre">get</span></code> inside
+<p>You can update to a newer version by tying <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> followed by <code class="docutils literal notranslate"><span class="pre">lake</span> <span class="pre">exe</span> <span class="pre">cache</span> <span class="pre">get</span></code> inside
 the <code class="docutils literal notranslate"><span class="pre">mathematics_in_lean</span></code> folder.</p>
 <p>Alternatively, you can run Lean and VS Code in the cloud,
 using <a class="reference external" href="https://gitpod.io/">Gitpod</a>.
@@ -227,17 +229,18 @@ we can write down the expressions themselves
 or we can provide Lean with <em>instructions</em> as to how to construct them.
 For example, the following expression represents a proof of the fact that
 if <code class="docutils literal notranslate"><span class="pre">n</span></code> is even then so is <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span></code>:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">,</span> <span class="n">Even</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Even</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">m</span> <span class="n">n</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">hk</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)&#10217;</span> <span class="bp">=&gt;</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">,</span> <span class="n">Even</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Even</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">m</span> <span class="n">n</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="n">hk</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)&#10217;</span> <span class="bp">&#8614;</span>
   <span class="k">have</span> <span class="n">hmn</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hk</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">]</span>
   <span class="k">show</span> <span class="bp">&#8707;</span> <span class="n">l</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">l</span> <span class="bp">+</span> <span class="n">l</span> <span class="k">from</span> <span class="o">&#10216;</span><span class="n">_</span><span class="o">,</span> <span class="n">hmn</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>The <em>proof term</em> can be compressed to a single line:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">,</span> <span class="n">Even</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Even</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
-<span class="k">fun</span> <span class="n">m</span> <span class="n">n</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hk</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">]&#10217;</span>
+<span class="k">fun</span> <span class="n">m</span> <span class="n">n</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">m</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hk</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">]&#10217;</span>
 </pre></div>
 </div>
-<p>The following is, instead, a <em>tactic-style</em> proof of the same theorem:</p>
+<p>The following is, instead, a <em>tactic-style</em> proof of the same theorem, where lines
+starting with <code class="docutils literal notranslate"><span class="pre">--</span></code> are comments, hence ignored by Lean:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">,</span> <span class="n">Even</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Even</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="c1">-- say m and n are natural numbers, and assume n=2*k</span>
   <span class="n">rintro</span> <span class="n">m</span> <span class="n">n</span> <span class="o">&#10216;</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="o">&#10217;</span>
@@ -299,11 +302,11 @@ powerful and ever-growing library, <em>mathlib</em>.
 As a result, we can show you how to use some of the mathematical
 objects and theorems in the library,
 and some of the very useful tactics.
-This book is not meant to be used as an overview of the library;
+This book is not meant to be used as an complete overview of the library;
 the <a class="reference external" href="https://leanprover-community.github.io/">community</a>
 web pages contain extensive documentation.
 Rather, our goal is to introduce you to the style of thinking that
-underlies that formalization,
+underlies that formalization, and point out basic entry points
 so that you are comfortable browsing the library and
 finding things on your own.</p>
 <p>Interactive theorem proving can be frustrating,

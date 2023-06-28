@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>10. Integration and Measure Theory &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Elementary Number Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
@@ -75,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">10. </span>Integration and Measure Theory</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">10. </span>Integration and Measure Theory</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C10_Integration_and_Measure_Theory.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -110,7 +114,7 @@ says that integration provides an inverse to differentiation and the second one
 specifies how to compute integrals of derivatives.
 (These two parts are very closely related, but their optimal versions,
 which are not shown here, are not equivalent.)</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">deriv</span> <span class="o">(</span><span class="k">fun</span> <span class="n">u</span> <span class="bp">=&gt;</span> <span class="bp">&#8747;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="k">in</span> <span class="n">a..u</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">b</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">deriv</span> <span class="o">(</span><span class="k">fun</span> <span class="n">u</span> <span class="bp">&#8614;</span> <span class="bp">&#8747;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="k">in</span> <span class="n">a..u</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">b</span> <span class="o">:=</span>
   <span class="o">(</span><span class="n">integral_hasStrictDerivAt_right</span> <span class="o">(</span><span class="n">hf.intervalIntegrable</span> <span class="n">_</span> <span class="n">_</span><span class="o">)</span> <span class="o">(</span><span class="n">hf.stronglyMeasurableAtFilter</span> <span class="n">_</span> <span class="n">_</span><span class="o">)</span>
         <span class="n">hf.continuousAt</span><span class="o">)</span><span class="bp">.</span><span class="n">hasDerivAt.deriv</span>
 
@@ -122,7 +126,7 @@ which are not shown here, are not equivalent.)</p>
 <p>Convolution is also defined in mathlib and its basic properties are proved.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Convolution</span>
 
-<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#8902;</span> <span class="n">g</span> <span class="bp">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="bp">&#8747;</span> <span class="n">t</span><span class="o">,</span> <span class="n">f</span> <span class="n">t</span> <span class="bp">*</span> <span class="n">g</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">&#8902;</span> <span class="n">g</span> <span class="bp">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="bp">&#8747;</span> <span class="n">t</span><span class="o">,</span> <span class="n">f</span> <span class="n">t</span> <span class="bp">*</span> <span class="n">g</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 </pre></div>
 </div>
@@ -238,8 +242,8 @@ with the dominated convergence theorem. There are several versions in mathlib,
 and here we only show the most basic one.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">bound</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">hmeas</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span><span class="o">,</span> <span class="n">AEStronglyMeasurable</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span><span class="o">)</span> <span class="n">&#956;</span><span class="o">)</span>
     <span class="o">(</span><span class="n">hint</span> <span class="o">:</span> <span class="n">Integrable</span> <span class="n">bound</span> <span class="n">&#956;</span><span class="o">)</span> <span class="o">(</span><span class="n">hbound</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span><span class="o">,</span> <span class="bp">&#8704;&#7504;</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">,</span> <span class="bp">&#8214;</span><span class="n">F</span> <span class="n">n</span> <span class="n">a</span><span class="bp">&#8214;</span> <span class="bp">&#8804;</span> <span class="n">bound</span> <span class="n">a</span><span class="o">)</span>
-    <span class="o">(</span><span class="n">hlim</span> <span class="o">:</span> <span class="bp">&#8704;&#7504;</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">,</span> <span class="n">Tendsto</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">=&gt;</span> <span class="n">F</span> <span class="n">n</span> <span class="n">a</span><span class="o">)</span> <span class="n">atTop</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)))</span> <span class="o">:</span>
-    <span class="n">Tendsto</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="bp">=&gt;</span> <span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">F</span> <span class="n">n</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">)</span> <span class="n">atTop</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="o">(</span><span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">hlim</span> <span class="o">:</span> <span class="bp">&#8704;&#7504;</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">,</span> <span class="n">Tendsto</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8614;</span> <span class="n">F</span> <span class="n">n</span> <span class="n">a</span><span class="o">)</span> <span class="n">atTop</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)))</span> <span class="o">:</span>
+    <span class="n">Tendsto</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="bp">&#8614;</span> <span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">F</span> <span class="n">n</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">)</span> <span class="n">atTop</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="o">(</span><span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">))</span> <span class="o">:=</span>
   <span class="n">tendsto_integral_of_dominated_convergence</span> <span class="n">bound</span> <span class="n">hmeas</span> <span class="n">hint</span> <span class="n">hbound</span> <span class="n">hlim</span>
 </pre></div>
 </div>
@@ -260,7 +264,7 @@ continuous bilinear form.</p>
   <span class="o">[</span><span class="n">Sub</span> <span class="n">G</span><span class="o">]</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">E&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">E&#39;</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">&#956;</span> <span class="o">:</span> <span class="n">Measure</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span>
-    <span class="n">f</span> <span class="bp">&#8902;</span><span class="o">[</span><span class="n">L</span><span class="o">,</span> <span class="n">&#956;</span><span class="o">]</span> <span class="n">g</span> <span class="bp">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="bp">&#8747;</span> <span class="n">t</span><span class="o">,</span> <span class="n">L</span> <span class="o">(</span><span class="n">f</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">t</span><span class="o">))</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="o">:=</span>
+    <span class="n">f</span> <span class="bp">&#8902;</span><span class="o">[</span><span class="n">L</span><span class="o">,</span> <span class="n">&#956;</span><span class="o">]</span> <span class="n">g</span> <span class="bp">=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="bp">&#8747;</span> <span class="n">t</span><span class="o">,</span> <span class="n">L</span> <span class="o">(</span><span class="n">f</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">t</span><span class="o">))</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 </pre></div>
 </div>

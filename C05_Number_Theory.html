@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5. Number Theory &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>5. Elementary Number Theory &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Number Theory</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Elementary Number Theory</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#irrational-roots">5.1. Irrational Roots</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#induction-and-recursion">5.2. Induction and Recursion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#infinitely-many-primes">5.3. Infinitely Many Primes</a></li>
@@ -75,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">5. </span>Number Theory</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>Elementary Number Theory</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C05_Number_Theory.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -86,8 +90,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="number-theory">
-<span id="id1"></span><h1><span class="section-number">5. </span>Number Theory<a class="headerlink" href="#number-theory" title="Permalink to this heading">&#61633;</a></h1>
+  <section id="elementary-number-theory">
+<span id="number-theory"></span><h1><span class="section-number">5. </span>Elementary Number Theory<a class="headerlink" href="#elementary-number-theory" title="Permalink to this heading">&#61633;</a></h1>
 <p>In this chapter, we show you how to formalize some elementary
 results in number theory.
 As we deal with more substantive mathematical content,
@@ -209,7 +213,7 @@ and if all else fails,
 don&#8217;t hesitate to ask on
 <a class="reference external" href="https://leanprover.zulipchat.com/">Zulip</a>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
-  <span class="c1">-- library_search suggests the following:</span>
+  <span class="c1">-- apply? suggests the following:</span>
   <span class="o">(</span><span class="n">mul_right_inj&#39;</span> <span class="n">h&#39;</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span> <span class="n">h</span>
 </pre></div>
 </div>
@@ -344,7 +348,7 @@ to finish it off.</p>
     <span class="n">k</span> <span class="bp">&#8739;</span> <span class="n">r.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">cases&#39;</span> <span class="n">r</span> <span class="k">with</span> <span class="n">r</span>
   <span class="bp">&#183;</span> <span class="n">simp</span>
-  <span class="k">have</span> <span class="n">npow_nz</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">npowz</span> <span class="bp">=&gt;</span> <span class="n">nnz</span> <span class="o">(</span><span class="n">pow_eq_zero</span> <span class="n">npowz</span><span class="o">)</span>
+  <span class="k">have</span> <span class="n">npow_nz</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">npowz</span> <span class="bp">&#8614;</span> <span class="n">nnz</span> <span class="o">(</span><span class="n">pow_eq_zero</span> <span class="n">npowz</span><span class="o">)</span>
   <span class="k">have</span> <span class="n">eq1</span> <span class="o">:</span> <span class="o">(</span><span class="n">m</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">m.factorization</span> <span class="n">p</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="gr">sorry</span>
   <span class="k">have</span> <span class="n">eq2</span> <span class="o">:</span> <span class="o">(</span><span class="n">r.succ</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">^</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">factorization</span> <span class="n">p</span> <span class="bp">=</span>

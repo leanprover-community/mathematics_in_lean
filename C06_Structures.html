@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>6. Structures &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,17 +13,17 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="7. Hierarchies" href="C07_Hierarchies.html" />
-    <link rel="prev" title="5. Number Theory" href="C05_Number_Theory.html" /> 
+    <link rel="prev" title="5. Elementary Number Theory" href="C05_Number_Theory.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Elementary Number Theory</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6. Structures</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#defining-structures">6.1. Defining structures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#algebraic-structures">6.2. Algebraic Structures</a></li>
@@ -75,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">6. </span>Structures</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>Structures</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C06_Structures.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -257,7 +261,7 @@ components, which we can do with <code class="docutils literal notranslate"><spa
   <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;</span>
   <span class="n">simp</span> <span class="o">[</span><span class="n">addAlt</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Point</span><span class="o">,</span> <span class="n">add</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="kd">by</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Point</span><span class="o">,</span> <span class="n">add</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="kd">by</span>
   <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
 </pre></div>
 </div>
@@ -923,7 +927,7 @@ Here is one way it comes up.
 In Lean&#8217;s foundation, a data type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> may be empty.
 In a number of applications, however, it is useful to know that a
 type has at least one element.
-For example, the function <code class="docutils literal notranslate"><span class="pre">List.head</span></code>, which returns the first
+For example, the function <code class="docutils literal notranslate"><span class="pre">List.headI</span></code>, which returns the first
 element of a list, can return the default value when the list is empty.
 To make that work, the Lean library defines a class <code class="docutils literal notranslate"><span class="pre">Inhabited</span> <span class="pre">&#945;</span></code>,
 which does nothing more than store a default value.
@@ -1069,13 +1073,13 @@ be a square root of <span class="math notranslate nohighlight">\(-1\)</span>. Th
   <span class="o">&#10216;&#10216;</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;&#10217;</span>
 
 <span class="kd">instance</span> <span class="o">:</span> <span class="n">Add</span> <span class="n">gaussInt</span> <span class="o">:=</span>
-  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">+</span> <span class="n">y.re</span><span class="o">,</span> <span class="n">x.im</span> <span class="bp">+</span> <span class="n">y.im</span><span class="o">&#10217;&#10217;</span>
+  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">+</span> <span class="n">y.re</span><span class="o">,</span> <span class="n">x.im</span> <span class="bp">+</span> <span class="n">y.im</span><span class="o">&#10217;&#10217;</span>
 
 <span class="kd">instance</span> <span class="o">:</span> <span class="n">Neg</span> <span class="n">gaussInt</span> <span class="o">:=</span>
-  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="bp">-</span><span class="n">x.re</span><span class="o">,</span> <span class="bp">-</span><span class="n">x.im</span><span class="o">&#10217;&#10217;</span>
+  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="bp">-</span><span class="n">x.re</span><span class="o">,</span> <span class="bp">-</span><span class="n">x.im</span><span class="o">&#10217;&#10217;</span>
 
 <span class="kd">instance</span> <span class="o">:</span> <span class="n">Mul</span> <span class="n">gaussInt</span> <span class="o">:=</span>
-  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">-</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">,</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span><span class="o">&#10217;&#10217;</span>
+  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">-</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">,</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span><span class="o">&#10217;&#10217;</span>
 </pre></div>
 </div>
 <p>As noted in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>, it is a good idea to put all the definitions
@@ -1238,7 +1242,7 @@ satisfy the following:</p>
 <span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span> <span class="bp">%</span> <span class="n">b</span> <span class="o">:=</span>
   <span class="n">Int.emod_nonneg</span> <span class="n">a</span>
 
-<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="bp">&#8594;</span> <span class="n">a</span> <span class="bp">%</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">abs</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="bp">&#8594;</span> <span class="n">a</span> <span class="bp">%</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="bp">|</span><span class="n">b</span><span class="bp">|</span> <span class="o">:=</span>
   <span class="n">Int.emod_lt</span> <span class="n">a</span>
 </pre></div>
 </div>
@@ -1337,7 +1341,7 @@ from the remainder.</p>
   <span class="n">rw</span> <span class="o">[</span><span class="n">div&#39;</span><span class="o">,</span> <span class="n">mod&#39;</span><span class="o">]</span>
   <span class="n">linarith</span> <span class="o">[</span><span class="n">Int.ediv_add_emod</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="n">b</span><span class="o">]</span>
 
-<span class="kd">theorem</span> <span class="n">abs_mod&#39;_le</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="n">mod&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">theorem</span> <span class="n">abs_mod&#39;_le</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="bp">|</span><span class="n">mod&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="bp">|</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">mod&#39;</span><span class="o">,</span> <span class="n">abs_le</span><span class="o">]</span>
   <span class="n">constructor</span>
   <span class="bp">&#183;</span> <span class="n">linarith</span> <span class="o">[</span><span class="n">Int.emod_nonneg</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="n">h.ne&#39;</span><span class="o">]</span>
@@ -1406,7 +1410,7 @@ then the real and imaginary parts of <code class="docutils literal notranslate">
 <span class="math notranslate nohighlight">\((a + bi) (c - di)\)</span>, and the denominators are both equal to the norm
 of <span class="math notranslate nohighlight">\(c + di\)</span>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Div</span> <span class="n">gaussInt</span> <span class="o">:=</span>
-  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">),</span> <span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">)&#10217;&#10217;</span>
+  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">),</span> <span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">)&#10217;&#10217;</span>
 </pre></div>
 </div>
 <p>Having defined <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span></code>, We define <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span></code> to be the remainder,
@@ -1414,7 +1418,7 @@ of <span class="math notranslate nohighlight">\(c + di\)</span>.</p>
 theorems <code class="docutils literal notranslate"><span class="pre">div_def</span></code> and
 <code class="docutils literal notranslate"><span class="pre">mod_def</span></code> so that we can use them with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and <code class="docutils literal notranslate"><span class="pre">rewrite</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Mod</span> <span class="n">gaussInt</span> <span class="o">:=</span>
-  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)&#10217;</span>
+  <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)&#10217;</span>
 
 <span class="kd">theorem</span> <span class="n">div_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">x</span> <span class="bp">/</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">),</span> <span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">)&#10217;</span> <span class="o">:=</span>
@@ -1457,8 +1461,8 @@ to step through the details and see if you can find a nicer argument.</p>
   <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="bp">%</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="n">norm</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">norm</span> <span class="n">y</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">norm</span> <span class="n">y</span>
   <span class="bp">&#183;</span> <span class="k">calc</span>
       <span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="bp">%</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="n">norm</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="bp">%</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">norm_mul</span><span class="o">,</span> <span class="n">norm_conj</span><span class="o">]</span>
-      <span class="n">_</span> <span class="bp">=</span> <span class="n">abs</span> <span class="o">(</span><span class="n">Int.mod&#39;</span> <span class="o">(</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">)</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">))</span> <span class="bp">^</span> <span class="mi">2</span>
-          <span class="bp">+</span> <span class="n">abs</span> <span class="o">(</span><span class="n">Int.mod&#39;</span> <span class="o">(</span><span class="bp">-</span><span class="o">(</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">)</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span><span class="o">)</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">))</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">H1</span><span class="o">,</span> <span class="n">norm</span><span class="o">,</span> <span class="n">sq_abs</span><span class="o">]</span>
+      <span class="n">_</span> <span class="bp">=</span> <span class="bp">|</span><span class="n">Int.mod&#39;</span> <span class="o">(</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">)</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">)</span><span class="bp">|</span> <span class="bp">^</span> <span class="mi">2</span>
+          <span class="bp">+</span> <span class="bp">|</span><span class="n">Int.mod&#39;</span> <span class="o">(</span><span class="bp">-</span><span class="o">(</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">)</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span><span class="o">)</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">)</span><span class="bp">|</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">H1</span><span class="o">,</span> <span class="n">norm</span><span class="o">,</span> <span class="n">sq_abs</span><span class="o">]</span>
       <span class="n">_</span> <span class="bp">&#8804;</span> <span class="o">(</span><span class="n">y.norm</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="o">(</span><span class="n">y.norm</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">gcongr</span> <span class="bp">&lt;;&gt;</span> <span class="n">apply</span> <span class="n">Int.abs_mod&#39;_le</span> <span class="n">_</span> <span class="n">_</span> <span class="n">norm_y_pos</span>
       <span class="n">_</span> <span class="bp">=</span> <span class="n">norm</span> <span class="n">y</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
       <span class="n">_</span> <span class="bp">&#8804;</span> <span class="n">norm</span> <span class="n">y</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">norm</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">gcongr</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">Int.ediv_mul_le</span><span class="bp">;</span> <span class="n">norm_num</span>
@@ -1513,8 +1517,8 @@ and in that case, the required properties are the theorems
     <span class="n">quotient</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">/</span> <span class="bp">&#183;</span><span class="o">)</span>
     <span class="n">remainder</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">%</span> <span class="bp">&#183;</span><span class="o">)</span>
     <span class="n">quotient_mul_add_remainder_eq</span> <span class="o">:=</span>
-      <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=&gt;</span> <span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mod_def</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">sub_add_cancel</span><span class="o">]</span>
-    <span class="n">quotient_zero</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="kd">by</span>
+      <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mod_def</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">sub_add_cancel</span><span class="o">]</span>
+    <span class="n">quotient_zero</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="kd">by</span>
       <span class="n">simp</span> <span class="o">[</span><span class="n">div_def</span><span class="o">,</span> <span class="n">norm</span><span class="o">,</span> <span class="n">Int.div&#39;</span><span class="o">]</span>
       <span class="n">rfl</span>
     <span class="n">r</span> <span class="o">:=</span> <span class="n">Measure</span> <span class="o">(</span><span class="n">Int.natAbs</span> <span class="bp">&#8728;</span> <span class="n">norm</span><span class="o">)</span>
@@ -1536,7 +1540,7 @@ the notions of being prime and being irreducible coincide.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C05_Number_Theory.html" class="btn btn-neutral float-left" title="5. Number Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C05_Number_Theory.html" class="btn btn-neutral float-left" title="5. Elementary Number Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="C07_Hierarchies.html" class="btn btn-neutral float-right" title="7. Hierarchies" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

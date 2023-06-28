@@ -97,7 +97,7 @@ example (h : a ≤ b) : log (1 + exp a) ≤ log (1 + exp b) := by
   sorry
 
 example : 0 ≤ a ^ 2 := by
-  -- library_search
+  -- apply?
   exact sq_nonneg a
 
 example (h : a ≤ b) : c - exp b ≤ c - exp a := by
@@ -123,7 +123,7 @@ example : 2 * a * b ≤ a ^ 2 + b ^ 2 := by
     _ ≥ 0 := by apply pow_two_nonneg
   linarith
 
-example : abs (a * b) ≤ (a ^ 2 + b ^ 2) / 2 := by
+example : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
   sorry
 
 #check abs_le'.mpr

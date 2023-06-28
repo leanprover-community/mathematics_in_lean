@@ -344,5 +344,5 @@ class LT₁ (α : Type) where
 class PreOrder₂ (α : Type) extends LE₁ α, LT₁ α where
   le_refl : ∀ a : α, a ≤₁ a
   le_trans : ∀ a b c : α, a ≤₁ b → b ≤₁ c → a ≤₁ c
-  lt := fun a b => a ≤₁ b ∧ ¬b ≤₁ a
+  lt := fun a b ↦ a ≤₁ b ∧ ¬b ≤₁ a
   lt_iff_le_not_le : ∀ a b : α, a <₁ b ↔ a ≤₁ b ∧ ¬b ≤₁ a := by intros; rfl

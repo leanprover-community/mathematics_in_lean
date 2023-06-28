@@ -1,7 +1,7 @@
 .. _number_theory:
 
-Number Theory
-=============
+Elementary Number Theory
+========================
 
 In this chapter, we show you how to formalize some elementary
 results in number theory.

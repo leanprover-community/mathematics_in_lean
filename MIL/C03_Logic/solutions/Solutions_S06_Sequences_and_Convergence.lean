@@ -2,18 +2,18 @@ import Mathlib.Data.Real.Basic
 
 namespace C03S06
 def ConvergesTo (s : ℕ → ℝ) (a : ℝ) :=
-  ∀ ε > 0, ∃ N, ∀ n ≥ N, abs (s n - a) < ε
+  ∀ ε > 0, ∃ N, ∀ n ≥ N, |s n - a| < ε
 
-theorem convergesTo_const (a : ℝ) : ConvergesTo (fun x : ℕ => a) a := by
+theorem convergesTo_const (a : ℝ) : ConvergesTo (fun x : ℕ ↦ a) a := by
   intro ε εpos
   use 0
-  intro n nge; dsimp
+  intro n nge
   rw [sub_self, abs_zero]
   apply εpos
 
 theorem convergesTo_add {s t : ℕ → ℝ} {a b : ℝ}
       (cs : ConvergesTo s a) (ct : ConvergesTo t b) :
-    ConvergesTo (fun n => s n + t n) (a + b) := by
+    ConvergesTo (fun n ↦ s n + t n) (a + b) := by
   intro ε εpos
   dsimp
   have ε2pos : 0 < ε / 2 := by linarith
@@ -32,16 +32,18 @@ theorem convergesTo_add {s t : ℕ → ℝ} {a b : ℝ}
     _ = ε := by norm_num
 
 theorem convergesTo_mul_const {s : ℕ → ℝ} {a : ℝ} (c : ℝ) (cs : ConvergesTo s a) :
-    ConvergesTo (fun n => c * s n) (c * a) := by
+    ConvergesTo (fun n ↦ c * s n) (c * a) := by
   by_cases h : c = 0
   · convert convergesTo_const 0
-    · rw [h, MulZeroClass.zero_mul]
-    rw [h, MulZeroClass.zero_mul]
-  have acpos : 0 < abs c := abs_pos.mpr h
+    · rw [h]
+      ring
+    rw [h]
+    ring
+  have acpos : 0 < |c| := abs_pos.mpr h
   intro ε εpos
   dsimp
-  have εcpos : 0 < ε / abs c := by apply div_pos εpos acpos
-  cases' cs (ε / abs c) εcpos with Ns hs
+  have εcpos : 0 < ε / |c| := by apply div_pos εpos acpos
+  cases' cs (ε / |c|) εcpos with Ns hs
   use Ns
   intro n ngt
   calc
@@ -50,9 +52,9 @@ theorem convergesTo_mul_const {s : ℕ → ℝ} {a : ℝ} (c : ℝ) (cs : Conver
     _ = ε := mul_div_cancel' _ (ne_of_lt acpos).symm
 
 theorem exists_abs_le_of_convergesTo {s : ℕ → ℝ} {a : ℝ} (cs : ConvergesTo s a) :
-    ∃ N b, ∀ n, N ≤ n → abs (s n) < b := by
+    ∃ N b, ∀ n, N ≤ n → |s n| < b := by
   cases' cs 1 zero_lt_one with N h
-  use N, abs a + 1
+  use N, |a| + 1
   intro n ngt
   calc
     |s n| = |s n - a + a| := by
@@ -62,7 +64,7 @@ theorem exists_abs_le_of_convergesTo {s : ℕ → ℝ} {a : ℝ} (cs : Converges
     _ < |a| + 1 := by linarith [h n ngt]
 
 theorem aux {s t : ℕ → ℝ} {a : ℝ} (cs : ConvergesTo s a) (ct : ConvergesTo t 0) :
-    ConvergesTo (fun n => s n * t n) 0 := by
+    ConvergesTo (fun n ↦ s n * t n) 0 := by
   intro ε εpos
   dsimp
   rcases exists_abs_le_of_convergesTo cs with ⟨N₀, B, h₀⟩
@@ -80,8 +82,8 @@ theorem aux {s t : ℕ → ℝ} {a : ℝ} (cs : ConvergesTo s a) (ct : Converges
 
 theorem convergesTo_mul {s t : ℕ → ℝ} {a b : ℝ}
       (cs : ConvergesTo s a) (ct : ConvergesTo t b) :
-    ConvergesTo (fun n => s n * t n) (a * b) := by
-  have h₁ : ConvergesTo (fun n => s n * (t n + -b)) 0 := by
+    ConvergesTo (fun n ↦ s n * t n) (a * b) := by
+  have h₁ : ConvergesTo (fun n ↦ s n * (t n + -b)) 0 := by
     apply aux cs
     convert convergesTo_add ct (convergesTo_const (-b))
     ring
@@ -94,34 +96,34 @@ theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ}
       (sa : ConvergesTo s a) (sb : ConvergesTo s b) :
     a = b := by
   by_contra abne
-  have : abs (a - b) > 0 := by
+  have : |a - b| > 0 := by
     apply lt_of_le_of_ne
     · apply abs_nonneg
     intro h''
     apply abne
     apply eq_of_abs_sub_eq_zero h''.symm
-  let ε := abs (a - b) / 2
+  let ε := |a - b| / 2
   have εpos : ε > 0 := by
-    change abs (a - b) / 2 > 0
+    change |a - b| / 2 > 0
     linarith
   cases' sa ε εpos with Na hNa
   cases' sb ε εpos with Nb hNb
   let N := max Na Nb
-  have absa : abs (s N - a) < ε := by
+  have absa : |s N - a| < ε := by
     apply hNa
     apply le_max_left
-  have absb : abs (s N - b) < ε := by
+  have absb : |s N - b| < ε := by
     apply hNb
     apply le_max_right
-  have : abs (a - b) < abs (a - b)
+  have : |a - b| < |a - b|
   calc
-    abs (a - b) = abs (-(s N - a) + (s N - b)) := by
+    |a - b| = |(-(s N - a)) + (s N - b)| := by
       congr
       ring
-    _ ≤ abs (-(s N - a)) + abs (s N - b) := (abs_add _ _)
-    _ = abs (s N - a) + abs (s N - b) := by rw [abs_neg]
+    _ ≤ |(-(s N - a))| + |s N - b| := (abs_add _ _)
+    _ = |s N - a| + |s N - b| := by rw [abs_neg]
     _ < ε + ε := (add_lt_add absa absb)
-    _ = abs (a - b) := by norm_num
+    _ = |a - b| := by norm_num
 
   exact lt_irrefl _ this
 

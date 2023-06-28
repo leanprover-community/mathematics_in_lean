@@ -54,17 +54,17 @@ example : min a b + c = min (a + c) (b + c) := by
   apply aux
   rw [add_neg_cancel_right, add_neg_cancel_right]
 
-example : abs a - abs b ≤ abs (a - b) :=
+example : |a| - |b| ≤ |a - b| :=
   calc
-    abs a - abs b = abs (a - b + b) - abs b := by rw [sub_add_cancel]
-    _ ≤ abs (a - b) + abs b - abs b := by
+    |a| - |b| = |a - b + b| - |b| := by rw [sub_add_cancel]
+    _ ≤ |a - b| + |b| - |b| := by
       apply sub_le_sub_right
       apply abs_add
-    _ ≤ abs (a - b) := by rw [add_sub_cancel]
+    _ ≤ |a - b| := by rw [add_sub_cancel]
 
 
 -- alternatively
-example : abs a - abs b ≤ abs (a - b) := by
+example : |a| - |b| ≤ |a - b| := by
   have h := abs_add (a - b) b
   rw [sub_add_cancel] at h
   linarith

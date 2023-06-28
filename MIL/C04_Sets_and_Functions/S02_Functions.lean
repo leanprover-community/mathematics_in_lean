@@ -145,13 +145,13 @@ example : range exp = { y | y > 0 } := by
 example : InjOn sqrt { x | x ≥ 0 } := by
   sorry
 
-example : InjOn (fun x => x ^ 2) { x : ℝ | x ≥ 0 } := by
+example : InjOn (fun x ↦ x ^ 2) { x : ℝ | x ≥ 0 } := by
   sorry
 
 example : sqrt '' { x | x ≥ 0 } = { y | y ≥ 0 } := by
   sorry
 
-example : (range fun x => x ^ 2) = { y : ℝ | y ≥ 0 } := by
+example : (range fun x ↦ x ^ 2) = { y : ℝ | y ≥ 0 } := by
   sorry
 
 end
@@ -172,7 +172,7 @@ noncomputable section
 
 open Classical
 
-def inverse (f : α → β) : β → α := fun y : β =>
+def inverse (f : α → β) : β → α := fun y : β ↦
   if h : ∃ x, f x = y then Classical.choose h else default
 
 theorem inverse_spec {f : α → β} (y : β) (h : ∃ x, f x = y) : f (inverse f y) = y := by

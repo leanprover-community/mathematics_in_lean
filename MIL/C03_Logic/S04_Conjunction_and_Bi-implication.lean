@@ -11,7 +11,7 @@ example {x y : ℝ} (h₀ : x ≤ y) (h₁ : ¬y ≤ x) : x ≤ y ∧ x ≠ y :=
   rw [h]
 
 example {x y : ℝ} (h₀ : x ≤ y) (h₁ : ¬y ≤ x) : x ≤ y ∧ x ≠ y :=
-  ⟨h₀, fun h => h₁ (by rw [h])⟩
+  ⟨h₀, fun h ↦ h₁ (by rw [h])⟩
 
 example {x y : ℝ} (h₀ : x ≤ y) (h₁ : ¬y ≤ x) : x ≤ y ∧ x ≠ y :=
   have h : x ≠ y := by
@@ -29,7 +29,7 @@ example {x y : ℝ} : x ≤ y ∧ x ≠ y → ¬y ≤ x := by
   exact h₁ (le_antisymm h₀ h')
 
 example {x y : ℝ} : x ≤ y ∧ x ≠ y → ¬y ≤ x :=
-  fun ⟨h₀, h₁⟩ h' => h₁ (le_antisymm h₀ h')
+  fun ⟨h₀, h₁⟩ h' ↦ h₁ (le_antisymm h₀ h')
 
 example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
   intro h'
@@ -37,7 +37,7 @@ example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
   exact le_antisymm h.left h'
 
 example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x :=
-  fun h' => h.right (le_antisymm h.left h')
+  fun h' ↦ h.right (le_antisymm h.left h')
 
 example {m n : ℕ} (h : m ∣ n ∧ m ≠ n) : m ∣ n ∧ ¬n ∣ m :=
   sorry
@@ -50,7 +50,7 @@ example (x y : ℝ) : (∃ z : ℝ, x < z ∧ z < y) → x < y := by
   exact lt_trans xltz zlty
 
 example (x y : ℝ) : (∃ z : ℝ, x < z ∧ z < y) → x < y :=
-  fun ⟨z, xltz, zlty⟩ => lt_trans xltz zlty
+  fun ⟨z, xltz, zlty⟩ ↦ lt_trans xltz zlty
 
 example : ∃ x : ℝ, 2 < x ∧ x < 4 := by
   use 5 / 2
@@ -65,7 +65,7 @@ example : ∃ m n : ℕ, 4 < m ∧ m < n ∧ n < 10 ∧ Nat.Prime m ∧ Nat.Prim
 example {x y : ℝ} : x ≤ y ∧ x ≠ y → x ≤ y ∧ ¬y ≤ x := by
   rintro ⟨h₀, h₁⟩
   use h₀
-  exact fun h' => h₁ (le_antisymm h₀ h')
+  exact fun h' ↦ h₁ (le_antisymm h₀ h')
 
 example {x y : ℝ} (h : x ≤ y) : ¬y ≤ x ↔ x ≠ y := by
   constructor
@@ -76,7 +76,7 @@ example {x y : ℝ} (h : x ≤ y) : ¬y ≤ x ↔ x ≠ y := by
   exact le_antisymm h
 
 example {x y : ℝ} (h : x ≤ y) : ¬y ≤ x ↔ x ≠ y :=
-  ⟨fun h₀ h₁ => h₀ (by rw [h₁]), fun h₀ h₁ => h₀ (le_antisymm h h₁)⟩
+  ⟨fun h₀ h₁ ↦ h₀ (by rw [h₁]), fun h₀ h₁ ↦ h₀ (le_antisymm h h₁)⟩
 
 example {x y : ℝ} : x ≤ y ∧ ¬y ≤ x ↔ x ≤ y ∧ x ≠ y :=
   sorry
@@ -90,7 +90,7 @@ example (x y : ℝ) : x ^ 2 + y ^ 2 = 0 ↔ x = 0 ∧ y = 0 :=
 
 section
 
-example (x : ℝ) : abs (x + 3) < 5 → -8 < x ∧ x < 2 := by
+example (x : ℝ) : |x + 3| < 5 → -8 < x ∧ x < 2 := by
   rw [abs_lt]
   intro h
   constructor <;> linarith
@@ -106,7 +106,7 @@ theorem not_monotone_iff {f : ℝ → ℝ} : ¬Monotone f ↔ ∃ x y, x ≤ y �
   push_neg
   rfl
 
-example : ¬Monotone fun x : ℝ => -x := by
+example : ¬Monotone fun x : ℝ ↦ -x := by
   sorry
 
 section
@@ -132,4 +132,3 @@ example : a < b → b < c → a < c := by
   sorry
 
 end
-

@@ -11,7 +11,7 @@ open Set
 example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u := by
   rw [subset_def, inter_def, inter_def]
   rw [subset_def] at h
-  dsimp
+  simp only [mem_setOf]
   rintro x ⟨xs, xu⟩
   exact ⟨h _ xs, xu⟩
 
@@ -25,10 +25,10 @@ example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u := by
   exact ⟨h xsu.1, xsu.2⟩
 
 theorem foo (h : s ⊆ t) : s ∩ u ⊆ t ∩ u :=
-  fun x ⟨xs, xu⟩ => ⟨h xs, xu⟩
+  fun x ⟨xs, xu⟩ ↦ ⟨h xs, xu⟩
 
 example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u :=
-  fun x ⟨xs, xu⟩ => ⟨h xs, xu⟩
+  fun x ⟨xs, xu⟩ ↦ ⟨h xs, xu⟩
 
 example : s ∩ (t ∪ u) ⊆ s ∩ t ∪ s ∩ u := by
   intro x hx
@@ -80,7 +80,7 @@ example : s ∩ t = t ∩ s := by
   rintro ⟨xt, xs⟩; exact ⟨xs, xt⟩
 
 example : s ∩ t = t ∩ s :=
-  Set.ext fun x => ⟨fun ⟨xs, xt⟩ => ⟨xt, xs⟩, fun ⟨xt, xs⟩ => ⟨xs, xt⟩⟩
+  Set.ext fun x ↦ ⟨fun ⟨xs, xt⟩ ↦ ⟨xt, xs⟩, fun ⟨xt, xs⟩ ↦ ⟨xs, xt⟩⟩
 
 example : s ∩ t = t ∩ s := by ext x; simp [and_comm]
 

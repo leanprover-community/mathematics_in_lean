@@ -92,7 +92,7 @@ example : ∀ a b : Point, addAlt a b = addAlt b a := by
   rintro ⟨xa, ya, za⟩ ⟨xb, yb, zb⟩
   simp [addAlt, add_comm]
 
-example : ∀ a b : Point, add a b = add b a := fun ⟨xa, ya, za⟩ ⟨xb, yb, zb⟩ => by
+example : ∀ a b : Point, add a b = add b a := fun ⟨xa, ya, za⟩ ⟨xb, yb, zb⟩ ↦ by
   simp [add, add_comm]
 
 protected theorem add_assoc (a b c : Point) : (a.add b).add c = a.add (b.add c) := by

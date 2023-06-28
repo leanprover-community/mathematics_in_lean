@@ -10,20 +10,20 @@ def FnLb (f : ℝ → ℝ) (a : ℝ) : Prop :=
 section
 variable (f g : ℝ → ℝ) (a b : ℝ)
 
-example (hfa : FnLb f a) (hgb : FnLb g b) : FnLb (fun x => f x + g x) (a + b) := by
+example (hfa : FnLb f a) (hgb : FnLb g b) : FnLb (fun x ↦ f x + g x) (a + b) := by
   intro x
   apply add_le_add
   apply hfa
   apply hgb
 
-example (nnf : FnLb f 0) (nng : FnLb g 0) : FnLb (fun x => f x * g x) 0 := by
+example (nnf : FnLb f 0) (nng : FnLb g 0) : FnLb (fun x ↦ f x * g x) 0 := by
   intro x
   apply mul_nonneg
   apply nnf
   apply nng
 
 example (hfa : FnUb f a) (hfb : FnUb g b) (nng : FnLb g 0) (nna : 0 ≤ a) :
-    FnUb (fun x => f x * g x) (a * b) := by
+    FnUb (fun x ↦ f x * g x) (a * b) := by
   intro x
   apply mul_le_mul
   apply hfa
@@ -36,22 +36,22 @@ end
 section
 variable (f g : ℝ → ℝ)
 
-example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x => c * f x := by
+example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x ↦ c * f x := by
   intro a b aleb
   apply mul_le_mul_of_nonneg_left _ nnc
   apply mf aleb
 
-example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x => c * f x :=
-  fun a b aleb => mul_le_mul_of_nonneg_left (mf aleb) nnc
+example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x ↦ c * f x :=
+  fun a b aleb ↦ mul_le_mul_of_nonneg_left (mf aleb) nnc
 
-example (mf : Monotone f) (mg : Monotone g) : Monotone fun x => f (g x) := by
+example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) := by
   intro a b aleb
   apply mf
   apply mg
   apply aleb
 
-example (mf : Monotone f) (mg : Monotone g) : Monotone fun x => f (g x) :=
-  fun a b aleb => mf (mg aleb)
+example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) :=
+  fun a b aleb ↦ mf (mg aleb)
 
 def FnEven (f : ℝ → ℝ) : Prop :=
   ∀ x, f x = f (-x)
@@ -59,19 +59,19 @@ def FnEven (f : ℝ → ℝ) : Prop :=
 def FnOdd (f : ℝ → ℝ) : Prop :=
   ∀ x, f x = -f (-x)
 
-example (of : FnOdd f) (og : FnOdd g) : FnEven fun x => f x * g x := by
+example (of : FnOdd f) (og : FnOdd g) : FnEven fun x ↦ f x * g x := by
   intro x
   calc
-    (fun x => f x * g x) x = f x * g x := rfl
+    (fun x ↦ f x * g x) x = f x * g x := rfl
     _ = f (-x) * g (-x) := by rw [of, og, neg_mul_neg]
 
 
-example (ef : FnEven f) (og : FnOdd g) : FnOdd fun x => f x * g x := by
+example (ef : FnEven f) (og : FnOdd g) : FnOdd fun x ↦ f x * g x := by
   intro x
   dsimp
   rw [ef, og, neg_mul_eq_mul_neg]
 
-example (ef : FnEven f) (og : FnOdd g) : FnEven fun x => f (g x) := by
+example (ef : FnEven f) (og : FnOdd g) : FnEven fun x ↦ f (g x) := by
   intro x
   dsimp
   rw [og, ← ef]
@@ -89,7 +89,7 @@ example : r ⊆ s → s ⊆ t → r ⊆ t := by
   apply xr
 
 theorem Subset.trans : r ⊆ s → s ⊆ t → r ⊆ t :=
-  fun rsubs ssubt x xr => ssubt (rsubs xr)
+  fun rsubs ssubt x xr ↦ ssubt (rsubs xr)
 
 end
 
@@ -105,7 +105,7 @@ example (h : SetUb s a) (h' : a ≤ b) : SetUb s b := by
   apply le_trans (h x xs) h'
 
 example (h : SetUb s a) (h' : a ≤ b) : SetUb s b :=
-  fun x xs => le_trans (h x xs) h'
+  fun x xs ↦ le_trans (h x xs) h'
 
 end
 
@@ -113,14 +113,14 @@ section
 
 open Function
 
-example {c : ℝ} (h : c ≠ 0) : Injective fun x => c * x := by
+example {c : ℝ} (h : c ≠ 0) : Injective fun x ↦ c * x := by
   intro x₁ x₂ h'
   apply (mul_right_inj' h).mp h'
 
 variable {α : Type _} {β : Type _} {γ : Type _}
 variable {g : β → γ} {f : α → β}
 
-example (injg : Injective g) (injf : Injective f) : Injective fun x => g (f x) := by
+example (injg : Injective g) (injf : Injective f) : Injective fun x ↦ g (f x) := by
   intro x₁ x₂ h
   apply injf
   apply injg

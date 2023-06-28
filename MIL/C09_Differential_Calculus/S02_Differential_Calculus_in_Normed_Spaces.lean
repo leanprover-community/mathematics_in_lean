@@ -27,7 +27,7 @@ example (x y : E) : ‖x + y‖ ≤ ‖x‖ + ‖y‖ :=
 example : MetricSpace E := by infer_instance
 
 example {X : Type _} [TopologicalSpace X] {f : X → E} (hf : Continuous f) :
-    Continuous fun x => ‖f x‖ :=
+    Continuous fun x ↦ ‖f x‖ :=
   hf.norm
 
 variable [NormedSpace ℝ E]
@@ -89,7 +89,7 @@ open Metric
 example {ι : Type _} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, ∃ C, ∀ i, ‖g i x‖ ≤ C) :
     ∃ C', ∀ i, ‖g i‖ ≤ C' := by
   -- sequence of subsets consisting of those `x : E` with norms `‖g i x‖` bounded by `n`
-  let e : ℕ → Set E := fun n => ⋂ i : ι, { x : E | ‖g i x‖ ≤ n }
+  let e : ℕ → Set E := fun n ↦ ⋂ i : ι, { x : E | ‖g i x‖ ≤ n }
   -- each of these sets is closed
   have hc : ∀ n : ℕ, IsClosed (e n)
   sorry
@@ -105,7 +105,7 @@ example {ι : Type _} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, 
   have real_norm_le : ∀ z ∈ ball x ε, ∀ (i : ι), ‖g i z‖ ≤ m
   sorry
   have εk_pos : 0 < ε / ‖k‖ := sorry
-  refine' ⟨(m + m : ℕ) / (ε / ‖k‖), fun i => ContinuousLinearMap.op_norm_le_of_shell ε_pos _ hk _⟩
+  refine' ⟨(m + m : ℕ) / (ε / ‖k‖), fun i ↦ ContinuousLinearMap.op_norm_le_of_shell ε_pos _ hk _⟩
   sorry
   sorry
 
@@ -137,7 +137,7 @@ variable {𝕜 : Type _} [NontriviallyNormedField 𝕜] {E : Type _} [NormedAddC
   [NormedSpace 𝕜 E] {F : Type _} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
 
 example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) :
-    HasFDerivAt f f' x₀ ↔ (fun x => f x - f x₀ - f' (x - x₀)) =o[𝓝 x₀] fun x => x - x₀ :=
+    HasFDerivAt f f' x₀ ↔ (fun x ↦ f x - f x₀ - f' (x - x₀)) =o[𝓝 x₀] fun x ↦ x - x₀ :=
   Iff.rfl
 
 example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) (hff' : HasFDerivAt f f' x₀) : fderiv 𝕜 f x₀ = f' :=
@@ -148,8 +148,8 @@ example (n : ℕ) (f : E → F) : E → E[×n]→L[𝕜] F :=
 
 example (n : WithTop ℕ) {f : E → F} :
     ContDiff 𝕜 n f ↔
-      (∀ m : ℕ, (m : WithTop ℕ) ≤ n → Continuous fun x => iteratedFDeriv 𝕜 m f x) ∧
-        ∀ m : ℕ, (m : WithTop ℕ) < n → Differentiable 𝕜 fun x => iteratedFDeriv 𝕜 m f x :=
+      (∀ m : ℕ, (m : WithTop ℕ) ≤ n → Continuous fun x ↦ iteratedFDeriv 𝕜 m f x) ∧
+        ∀ m : ℕ, (m : WithTop ℕ) < n → Differentiable 𝕜 fun x ↦ iteratedFDeriv 𝕜 m f x :=
   contDiff_iff_continuous_differentiable
 
 example {𝕂 : Type _} [IsROrC 𝕂] {E : Type _} [NormedAddCommGroup E] [NormedSpace 𝕂 E] {F : Type _}

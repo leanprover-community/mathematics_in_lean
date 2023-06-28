@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4. Sets and Functions &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,16 +13,16 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5. Number Theory" href="C05_Number_Theory.html" />
+    <link rel="next" title="5. Elementary Number Theory" href="C05_Number_Theory.html" />
     <link rel="prev" title="3. Logic" href="C03_Logic.html" /> 
 </head>
 
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,7 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#the-schroder-bernstein-theorem">4.3. The Schr&#246;der-Bernstein Theorem</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Elementary Number Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
@@ -75,8 +79,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">4. </span>Sets and Functions</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>Sets and Functions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C04_Sets_and_Functions.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -156,7 +160,7 @@ you can see the effects of these commands.</p>
 <span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">subset_def</span><span class="o">,</span> <span class="n">inter_def</span><span class="o">,</span> <span class="n">inter_def</span><span class="o">]</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">subset_def</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span>
-  <span class="n">dsimp</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_setOf</span><span class="o">]</span>
   <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
   <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">_</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
 
@@ -180,10 +184,10 @@ to make sense of the <code class="docutils literal notranslate"><span class="pre
 Lean is forced to expand the definitions.
 The following examples also illustrate the phenomenon:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">foo</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span>
-  <span class="k">fun</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+  <span class="k">fun</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8838;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span>
-  <span class="k">fun</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+  <span class="k">fun</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">h</span> <span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>Due to a quirk of how Lean processes its input,
@@ -281,15 +285,10 @@ does not harm the proof.
 In fact, if you like inscrutable proof terms,
 the following one-line proof is for you:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span>
-  <span class="n">Set.ext</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;,</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;&#10217;</span>
+  <span class="n">Set.ext</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;,</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;&#10217;</span>
 </pre></div>
 </div>
-<p>The dollar sign is a useful syntax:
-writing <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">$</span> <span class="pre">...</span></code>
-is essentially the same as writing <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">(...)</span></code>,
-but it saves us the trouble of having to close
-a set of parentheses at the end of a long expression.
-Here is an even shorter proof,
+<p>Here is an even shorter proof,
 using the simplifier:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ext</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">and_comm</span><span class="o">]</span>
 </pre></div>
@@ -511,8 +510,8 @@ at an appropriate point in the proof.</p>
 </div>
 <p>Mathlib also has bounded unions and intersections,
 which are analogous to the bounded quantifiers.
-You can unpack their meaning with <code class="docutils literal notranslate"><span class="pre">mem_Union&#8322;</span></code>
-and <code class="docutils literal notranslate"><span class="pre">mem_Inter&#8322;</span></code>.
+You can unpack their meaning with <code class="docutils literal notranslate"><span class="pre">mem_iUnion&#8322;</span></code>
+and <code class="docutils literal notranslate"><span class="pre">mem_iInter&#8322;</span></code>.
 As the following examples show,
 Lean&#8217;s simplifier carries out these replacements as well.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">primes</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#8469;</span> <span class="o">:=</span>
@@ -777,13 +776,13 @@ the statements to a subset of the domain type.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">InjOn</span> <span class="n">sqrt</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="n">InjOn</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">InjOn</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">sqrt</span> <span class="bp">&#39;&#39;</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="n">y</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">range</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">|</span> <span class="n">y</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">range</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">|</span> <span class="n">y</span> <span class="bp">&#8805;</span> <span class="mi">0</span> <span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
@@ -826,7 +825,7 @@ as follows:</p>
 
 <span class="kn">open</span> <span class="n">Classical</span>
 
-<span class="kd">def</span> <span class="n">inverse</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">=&gt;</span>
+<span class="kd">def</span> <span class="n">inverse</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8614;</span>
   <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="n">Classical.choose</span> <span class="n">h</span> <span class="k">else</span> <span class="n">default</span>
 
 <span class="kd">theorem</span> <span class="n">inverse_spec</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">}</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">inverse</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -1162,7 +1161,7 @@ and the proof uses the fact that <code class="docutils literal notranslate"><spa
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="C03_Logic.html" class="btn btn-neutral float-left" title="3. Logic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="C05_Number_Theory.html" class="btn btn-neutral float-right" title="5. Number Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="C05_Number_Theory.html" class="btn btn-neutral float-right" title="5. Elementary Number Theory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

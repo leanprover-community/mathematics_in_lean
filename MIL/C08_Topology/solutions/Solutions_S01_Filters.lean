@@ -6,8 +6,8 @@ open Set Filter Topology
 example {α : Type _} (s : Set α) : Filter α :=
   { sets := { t | s ⊆ t }
     univ_sets := subset_univ s
-    sets_of_superset := fun hU hUV => Subset.trans hU hUV
-    inter_sets := fun hU hV => subset_inter hU hV }
+    sets_of_superset := fun hU hUV ↦ Subset.trans hU hUV
+    inter_sets := fun hU hV ↦ subset_inter hU hV }
 
 example : Filter ℕ :=
   { sets := { s | ∃ a, ∀ b, a ≤ b → b ∈ s }

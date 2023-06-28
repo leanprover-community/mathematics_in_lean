@@ -69,3 +69,4 @@ example (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
 example (u : ℕ → ℝ) (M : Set ℝ) (x : ℝ) (hux : Tendsto u atTop (𝓝 x))
     (huM : ∀ᶠ n in atTop, u n ∈ M) : x ∈ closure M :=
   mem_closure_iff_clusterPt.mpr (neBot_of_le <| le_inf hux <| le_principal_iff.mpr huM)
+

@@ -25,36 +25,36 @@ def FnHasLb (f : ℝ → ℝ) :=
   ∃ a, FnLb f a
 
 theorem fnUb_add {f g : ℝ → ℝ} {a b : ℝ} (hfa : FnUb f a) (hgb : FnUb g b) :
-    FnUb (fun x => f x + g x) (a + b) :=
-  fun x => add_le_add (hfa x) (hgb x)
+    FnUb (fun x ↦ f x + g x) (a + b) :=
+  fun x ↦ add_le_add (hfa x) (hgb x)
 
 section
 
 variable {f g : ℝ → ℝ}
 
-example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x => f x + g x := by
+example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
   cases' ubf with a ubfa
   cases' ubg with b ubgb
   use a + b
   apply fnUb_add ubfa ubgb
 
-example (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x => f x + g x := by
+example (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x ↦ f x + g x := by
   sorry
 
-example {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x => c * f x := by
+example {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x ↦ c * f x := by
   sorry
 
-example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x => f x + g x := by
+example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
   rcases ubf with ⟨a, ubfa⟩
   rcases ubg with ⟨b, ubgb⟩
   exact ⟨a + b, fnUb_add ubfa ubgb⟩
 
-example : FnHasUb f → FnHasUb g → FnHasUb fun x => f x + g x := by
+example : FnHasUb f → FnHasUb g → FnHasUb fun x ↦ f x + g x := by
   rintro ⟨a, ubfa⟩ ⟨b, ubgb⟩
   exact ⟨a + b, fnUb_add ubfa ubgb⟩
 
-example : FnHasUb f → FnHasUb g → FnHasUb fun x => f x + g x :=
-  fun ⟨a, ubfa⟩ ⟨b, ubgb⟩ => ⟨a + b, fnUb_add ubfa ubgb⟩
+example : FnHasUb f → FnHasUb g → FnHasUb fun x ↦ f x + g x :=
+  fun ⟨a, ubfa⟩ ⟨b, ubgb⟩ ↦ ⟨a + b, fnUb_add ubfa ubgb⟩
 
 end
 
@@ -100,12 +100,12 @@ section
 
 open Function
 
-example {c : ℝ} : Surjective fun x => x + c := by
+example {c : ℝ} : Surjective fun x ↦ x + c := by
   intro x
   use x - c
   dsimp; ring
 
-example {c : ℝ} (h : c ≠ 0) : Surjective fun x => c * x := by
+example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
   sorry
 
 example (x y : ℝ) (h : x - y ≠ 0) : (x ^ 2 - y ^ 2) / (x - y) = x + y := by
@@ -125,7 +125,7 @@ open Function
 variable {α : Type _} {β : Type _} {γ : Type _}
 variable {g : β → γ} {f : α → β}
 
-example (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x => g (f x) := by
+example (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x ↦ g (f x) := by
   sorry
 
 end

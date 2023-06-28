@@ -7,26 +7,26 @@ variable {x y : ℝ}
 
 namespace MyAbs
 
-theorem le_abs_self (x : ℝ) : x ≤ abs x := by
+theorem le_abs_self (x : ℝ) : x ≤ |x| := by
   cases' le_or_gt 0 x with h h
   · rw [abs_of_nonneg h]
   rw [abs_of_neg h]
   linarith
 
-theorem neg_le_abs_self (x : ℝ) : -x ≤ abs x := by
+theorem neg_le_abs_self (x : ℝ) : -x ≤ |x| := by
   cases' le_or_gt 0 x with h h
   · rw [abs_of_nonneg h]
     linarith
   rw [abs_of_neg h]
 
-theorem abs_add (x y : ℝ) : abs (x + y) ≤ abs x + abs y := by
+theorem abs_add (x y : ℝ) : |x + y| ≤ |x| + |y| := by
   cases' le_or_gt 0 (x + y) with h h
   · rw [abs_of_nonneg h]
     linarith [le_abs_self x, le_abs_self y]
   rw [abs_of_neg h]
   linarith [neg_le_abs_self x, neg_le_abs_self y]
 
-theorem lt_abs : x < abs y ↔ x < y ∨ x < -y := by
+theorem lt_abs : x < |y| ↔ x < y ∨ x < -y := by
   cases' le_or_gt 0 y with h h
   · rw [abs_of_nonneg h]
     constructor
@@ -47,7 +47,7 @@ theorem lt_abs : x < abs y ↔ x < y ∨ x < -y := by
   · linarith
   exact h'
 
-theorem abs_lt : abs x < y ↔ -y < x ∧ x < y := by
+theorem abs_lt : |x| < y ↔ -y < x ∧ x < y := by
   cases' le_or_gt 0 x with h h
   · rw [abs_of_nonneg h]
     constructor
@@ -137,5 +137,3 @@ example (P Q : Prop) : P → Q ↔ ¬P ∨ Q := by
     exact absurd h' h
   intro
   exact h
-
-

@@ -27,30 +27,30 @@ example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} :
   Metric.continuous_iff
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) := by continuity
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) := by continuity
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) :=
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   continuous_dist.comp ((hf.comp continuous_fst).prod_mk (hf.comp continuous_snd))
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) := by
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) := by
   apply Continuous.dist
   exact hf.comp continuous_fst
   exact hf.comp continuous_snd
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) :=
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   (hf.comp continuous_fst).dist (hf.comp continuous_snd)
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) :=
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   hf.fst'.dist hf.snd'
 
-example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ => f (x ^ 2 + x) :=
+example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 2 + x) :=
   sorry
 
-example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ => f (x ^ 2 + x) :=
+example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 2 + x) :=
   hf.comp <| (continuous_pow 2).add continuous_id
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] (f : X → Y) (a : X) :
@@ -142,7 +142,7 @@ example {X : Type _} [MetricSpace X] [CompactSpace X] {Y : Type _} [MetricSpace 
     (hf : Continuous f) : UniformContinuous f := by
   rw [Metric.uniformContinuous_iff]
   intro ε ε_pos
-  let φ : X × X → ℝ := fun p => dist (f p.1) (f p.2)
+  let φ : X × X → ℝ := fun p ↦ dist (f p.1) (f p.2)
   have φ_cont : Continuous φ := hf.fst'.dist hf.snd'
   let K := { p : X × X | ε ≤ φ p }
   have K_closed : IsClosed K := isClosed_le continuous_const φ_cont
@@ -202,8 +202,8 @@ example {u : ℕ → X} (hu : ∀ n : ℕ, dist (u n) (u (n + 1)) ≤ (1 / 2) ^ 
   rw [Metric.cauchySeq_iff']
   intro ε ε_pos
   obtain ⟨N, hN⟩ : ∃ N : ℕ, 1 / 2 ^ N * 2 < ε := by
-    have : Tendsto (fun N : ℕ => (1 / 2 ^ N * 2 : ℝ)) atTop (𝓝 0) := by
-      rw [← MulZeroClass.zero_mul (2 : ℝ)]
+    have : Tendsto (fun N : ℕ ↦ (1 / 2 ^ N * 2 : ℝ)) atTop (𝓝 0) := by
+      rw [← zero_mul (2 : ℝ)]
       apply Tendsto.mul
       simp_rw [← one_div_pow (2 : ℝ)]
       apply tendsto_pow_atTop_nhds_0_of_lt_1 <;> linarith
@@ -216,8 +216,8 @@ example {u : ℕ → X} (hu : ∀ n : ℕ, dist (u n) (u (n + 1)) ≤ (1 / 2) ^ 
   calc
     dist (u (N + k)) (u N) = dist (u (N + 0)) (u (N + k)) := by rw [dist_comm, add_zero]
     _ ≤ ∑ i in range k, dist (u (N + i)) (u (N + (i + 1))) :=
-      (dist_le_range_sum_dist (fun i => u (N + i)) k)
-    _ ≤ ∑ i in range k, (1 / 2 : ℝ) ^ (N + i) := (sum_le_sum fun i _ => hu <| N + i)
+      (dist_le_range_sum_dist (fun i ↦ u (N + i)) k)
+    _ ≤ ∑ i in range k, (1 / 2 : ℝ) ^ (N + i) := (sum_le_sum fun i _ ↦ hu <| N + i)
     _ = 1 / 2 ^ N * ∑ i in range k, (1 / 2 : ℝ) ^ i := by simp_rw [← one_div_pow, pow_add, ← mul_sum]
     _ ≤ 1 / 2 ^ N * 2 :=
       (mul_le_mul_of_nonneg_left (sum_geometric_two_le _)
@@ -229,7 +229,7 @@ open Metric
 
 example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : ∀ n, Dense (f n)) :
     Dense (⋂ n, f n) := by
-  let B : ℕ → ℝ := fun n => (1 / 2) ^ n
+  let B : ℕ → ℝ := fun n ↦ (1 / 2) ^ n
   have Bpos : ∀ n, 0 < B n
   sorry
   /- Translate the density assumption into two functions `center` and `radius` associating
@@ -250,11 +250,11 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
     in the previous ball and in `f n`, and such that `r n` is small enough to ensure
     that `c n` is a Cauchy sequence. Then `c n` converges to a limit which belongs
     to all the `f n`. -/
-  let F : ℕ → X × ℝ := fun n =>
+  let F : ℕ → X × ℝ := fun n ↦
     Nat.recOn n (Prod.mk x (min ε (B 0)))
-      fun n p => Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
-  let c : ℕ → X := fun n => (F n).1
-  let r : ℕ → ℝ := fun n => (F n).2
+      fun n p ↦ Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
+  let c : ℕ → X := fun n ↦ (F n).1
+  let r : ℕ → ℝ := fun n ↦ (F n).2
   have rpos : ∀ n, 0 < r n := by sorry
   have rB : ∀ n, r n ≤ B n := by sorry
   have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := by
@@ -272,8 +272,8 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
 
 example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : ∀ n, Dense (f n)) :
     Dense (⋂ n, f n) := by
-  let B : ℕ → ℝ := fun n => (1 / 2) ^ n
-  have Bpos : ∀ n, 0 < B n := fun n => pow_pos sorry n
+  let B : ℕ → ℝ := fun n ↦ (1 / 2) ^ n
+  have Bpos : ∀ n, 0 < B n := fun n ↦ pow_pos sorry n
   /- Translate the density assumption into two functions `center` and `radius` associating
     to any n, x, δ, δpos a center and a positive radius such that
     `closedBall center radius` is included both in `f n` and in `closedBall x δ`.
@@ -287,7 +287,7 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
     rw [dist_comm] at xy
     obtain ⟨r, rpos, hr⟩ : ∃ r > 0, closedBall y r ⊆ f n :=
       nhds_basis_closedBall.mem_iff.1 (isOpen_iff_mem_nhds.1 (ho n) y ys)
-    refine' ⟨y, min (min (δ / 2) r) (B (n + 1)), _, _, fun z hz => ⟨_, _⟩⟩
+    refine' ⟨y, min (min (δ / 2) r) (B (n + 1)), _, _, fun z hz ↦ ⟨_, _⟩⟩
     show 0 < min (min (δ / 2) r) (B (n + 1))
     exact lt_min (lt_min (half_pos δpos) rpos) (Bpos (n + 1))
     show min (min (δ / 2) r) (B (n + 1)) ≤ B (n + 1)
@@ -308,16 +308,16 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
           _ ≤ r := (min_le_left _ _).trans (min_le_right _ _)
           )
   choose! center radius Hpos HB Hball using this
-  refine' fun x => (mem_closure_iff_nhds_basis nhds_basis_closedBall).2 fun ε εpos => _
+  refine' fun x ↦ (mem_closure_iff_nhds_basis nhds_basis_closedBall).2 fun ε εpos ↦ _
   /- `ε` is positive. We have to find a point in the ball of radius `ε` around `x` belonging to all
     `f n`. For this, we construct inductively a sequence `F n = (c n, r n)` such that the closed ball
     `closedBall (c n) (r n)` is included in the previous ball and in `f n`, and such that
     `r n` is small enough to ensure that `c n` is a Cauchy sequence. Then `c n` converges to a
     limit which belongs to all the `f n`. -/
-  let F : ℕ → X × ℝ := fun n =>
-    Nat.recOn n (Prod.mk x (min ε (B 0))) fun n p => Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
-  let c : ℕ → X := fun n => (F n).1
-  let r : ℕ → ℝ := fun n => (F n).2
+  let F : ℕ → X × ℝ := fun n ↦
+    Nat.recOn n (Prod.mk x (min ε (B 0))) fun n p ↦ Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
+  let c : ℕ → X := fun n ↦ (F n).1
+  let r : ℕ → ℝ := fun n ↦ (F n).2
   have rpos : ∀ n, 0 < r n := by
     intro n
     induction' n with n hn
@@ -328,7 +328,7 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
     induction' n with n hn
     exact min_le_right _ _
     exact HB n (c n) (r n) (rpos n)
-  have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := fun n =>
+  have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := fun n ↦
     Hball n (c n) (r n) (rpos n)
   have cdist : ∀ n, dist (c n) (c (n + 1)) ≤ B n := by
     intro n
@@ -350,13 +350,13 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
   use y
   have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by
     intro n
-    refine' Nat.le_induction _ fun m hnm h => _
+    refine' Nat.le_induction _ fun m hnm h ↦ _
     · exact Subset.rfl
     · exact (incl m).trans ((Set.inter_subset_left _ _).trans h)
   have yball : ∀ n, y ∈ closedBall (c n) (r n) := by
     intro n
     refine' isClosed_ball.mem_of_tendsto ylim _
-    refine' (Filter.eventually_ge_atTop n).mono fun m hm => _
+    refine' (Filter.eventually_ge_atTop n).mono fun m hm ↦ _
     exact I n m hm (mem_closedBall_self (rpos _).le)
   constructor
   · suffices ∀ n, y ∈ f n by rwa [Set.mem_iInter]

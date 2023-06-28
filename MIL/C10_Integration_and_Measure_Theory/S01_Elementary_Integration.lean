@@ -21,7 +21,7 @@ example (a b : ℝ) : (∫ x in a..b, x) = (b ^ 2 - a ^ 2) / 2 :=
 example {a b : ℝ} (h : (0 : ℝ) ∉ [[a, b]]) : (∫ x in a..b, 1 / x) = Real.log (b / a) :=
   integral_one_div h
 
-example (f : ℝ → ℝ) (hf : Continuous f) (a b : ℝ) : deriv (fun u => ∫ x : ℝ in a..u, f x) b = f b :=
+example (f : ℝ → ℝ) (hf : Continuous f) (a b : ℝ) : deriv (fun u ↦ ∫ x : ℝ in a..u, f x) b = f b :=
   (integral_hasStrictDerivAt_right (hf.intervalIntegrable _ _) (hf.stronglyMeasurableAtFilter _ _)
         hf.continuousAt).hasDerivAt.deriv
 
@@ -31,5 +31,5 @@ example {f : ℝ → ℝ} {a b : ℝ} {f' : ℝ → ℝ} (h : ∀ x ∈ [[a, b]]
 
 open Convolution
 
-example (f : ℝ → ℝ) (g : ℝ → ℝ) : f ⋆ g = fun x => ∫ t, f t * g (x - t) :=
+example (f : ℝ → ℝ) (g : ℝ → ℝ) : f ⋆ g = fun x ↦ ∫ t, f t * g (x - t) :=
   rfl

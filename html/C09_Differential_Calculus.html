@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>9. Differential Calculus &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Number Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C05_Number_Theory.html">5. Elementary Number Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
@@ -80,8 +84,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">9. </span>Differential Calculus</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>Differential Calculus</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C09_Differential_Calculus.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -201,7 +205,7 @@ Lean and mathlib know this.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">MetricSpace</span> <span class="n">E</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">infer_instance</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">TopologicalSpace</span> <span class="n">X</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Continuous</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
-    <span class="n">Continuous</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="bp">&#8214;</span><span class="n">f</span> <span class="n">x</span><span class="bp">&#8214;</span> <span class="o">:=</span>
+    <span class="n">Continuous</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="bp">&#8214;</span><span class="n">f</span> <span class="n">x</span><span class="bp">&#8214;</span> <span class="o">:=</span>
   <span class="n">hf.norm</span>
 </pre></div>
 </div>
@@ -301,7 +305,7 @@ Minor ingredients include <code class="docutils literal notranslate"><span class
 <span class="kd">example</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">CompleteSpace</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">C</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="bp">&#8214;</span><span class="n">g</span> <span class="n">i</span> <span class="n">x</span><span class="bp">&#8214;</span> <span class="bp">&#8804;</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span>
     <span class="bp">&#8707;</span> <span class="n">C&#39;</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="bp">&#8214;</span><span class="n">g</span> <span class="n">i</span><span class="bp">&#8214;</span> <span class="bp">&#8804;</span> <span class="n">C&#39;</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="c1">-- sequence of subsets consisting of those `x : E` with norms `&#8214;g i x&#8214;` bounded by `n`</span>
-  <span class="k">let</span> <span class="n">e</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">E</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">n</span> <span class="bp">=&gt;</span> <span class="bp">&#8898;</span> <span class="n">i</span> <span class="o">:</span> <span class="n">&#953;</span><span class="o">,</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">|</span> <span class="bp">&#8214;</span><span class="n">g</span> <span class="n">i</span> <span class="n">x</span><span class="bp">&#8214;</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="o">}</span>
+  <span class="k">let</span> <span class="n">e</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">E</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">n</span> <span class="bp">&#8614;</span> <span class="bp">&#8898;</span> <span class="n">i</span> <span class="o">:</span> <span class="n">&#953;</span><span class="o">,</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">|</span> <span class="bp">&#8214;</span><span class="n">g</span> <span class="n">i</span> <span class="n">x</span><span class="bp">&#8214;</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="o">}</span>
   <span class="c1">-- each of these sets is closed</span>
   <span class="k">have</span> <span class="n">hc</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="n">IsClosed</span> <span class="o">(</span><span class="n">e</span> <span class="n">n</span><span class="o">)</span>
   <span class="gr">sorry</span>
@@ -317,7 +321,7 @@ Minor ingredients include <code class="docutils literal notranslate"><span class
   <span class="k">have</span> <span class="n">real_norm_le</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">z</span> <span class="bp">&#8712;</span> <span class="n">ball</span> <span class="n">x</span> <span class="n">&#949;</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">&#953;</span><span class="o">),</span> <span class="bp">&#8214;</span><span class="n">g</span> <span class="n">i</span> <span class="n">z</span><span class="bp">&#8214;</span> <span class="bp">&#8804;</span> <span class="n">m</span>
   <span class="gr">sorry</span>
   <span class="k">have</span> <span class="n">&#949;k_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">&#949;</span> <span class="bp">/</span> <span class="bp">&#8214;</span><span class="n">k</span><span class="bp">&#8214;</span> <span class="o">:=</span> <span class="gr">sorry</span>
-  <span class="n">refine&#39;</span> <span class="o">&#10216;(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">&#949;</span> <span class="bp">/</span> <span class="bp">&#8214;</span><span class="n">k</span><span class="bp">&#8214;</span><span class="o">),</span> <span class="k">fun</span> <span class="n">i</span> <span class="bp">=&gt;</span> <span class="n">ContinuousLinearMap.op_norm_le_of_shell</span> <span class="n">&#949;_pos</span> <span class="n">_</span> <span class="n">hk</span> <span class="n">_</span><span class="o">&#10217;</span>
+  <span class="n">refine&#39;</span> <span class="o">&#10216;(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">&#949;</span> <span class="bp">/</span> <span class="bp">&#8214;</span><span class="n">k</span><span class="bp">&#8214;</span><span class="o">),</span> <span class="k">fun</span> <span class="n">i</span> <span class="bp">&#8614;</span> <span class="n">ContinuousLinearMap.op_norm_le_of_shell</span> <span class="n">&#949;_pos</span> <span class="n">_</span> <span class="n">hk</span> <span class="n">_</span><span class="o">&#10217;</span>
   <span class="gr">sorry</span>
   <span class="gr">sorry</span>
 </pre></div>
@@ -364,7 +368,7 @@ Here the letter
   <span class="o">[</span><span class="n">NormedSpace</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">NormedAddCommGroup</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">NormedSpace</span> <span class="bp">&#120156;</span> <span class="n">F</span><span class="o">]</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">x&#8320;</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span>
-    <span class="n">HasFDerivAt</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">x&#8320;</span> <span class="bp">&#8596;</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">f</span> <span class="n">x&#8320;</span> <span class="bp">-</span> <span class="n">f&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">x&#8320;</span><span class="o">))</span> <span class="bp">=</span><span class="n">o</span><span class="o">[</span><span class="bp">&#120029;</span> <span class="n">x&#8320;</span><span class="o">]</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">x&#8320;</span> <span class="o">:=</span>
+    <span class="n">HasFDerivAt</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">x&#8320;</span> <span class="bp">&#8596;</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">f</span> <span class="n">x&#8320;</span> <span class="bp">-</span> <span class="n">f&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">x&#8320;</span><span class="o">))</span> <span class="bp">=</span><span class="n">o</span><span class="o">[</span><span class="bp">&#120029;</span> <span class="n">x&#8320;</span><span class="o">]</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">x&#8320;</span> <span class="o">:=</span>
   <span class="n">Iff.rfl</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">x&#8320;</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">hff&#39;</span> <span class="o">:</span> <span class="n">HasFDerivAt</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">x&#8320;</span><span class="o">)</span> <span class="o">:</span> <span class="n">fderiv</span> <span class="bp">&#120156;</span> <span class="n">f</span> <span class="n">x&#8320;</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="o">:=</span>
@@ -383,8 +387,8 @@ So <span class="math notranslate nohighlight">\(\mathcal{C}^\infty\)</span> func
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">WithTop</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">}</span> <span class="o">:</span>
     <span class="n">ContDiff</span> <span class="bp">&#120156;</span> <span class="n">n</span> <span class="n">f</span> <span class="bp">&#8596;</span>
-      <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">WithTop</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Continuous</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">iteratedFDeriv</span> <span class="bp">&#120156;</span> <span class="n">m</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">&#8743;</span>
-        <span class="bp">&#8704;</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">WithTop</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Differentiable</span> <span class="bp">&#120156;</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">=&gt;</span> <span class="n">iteratedFDeriv</span> <span class="bp">&#120156;</span> <span class="n">m</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
+      <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">WithTop</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Continuous</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">iteratedFDeriv</span> <span class="bp">&#120156;</span> <span class="n">m</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">&#8743;</span>
+        <span class="bp">&#8704;</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">WithTop</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">Differentiable</span> <span class="bp">&#120156;</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">iteratedFDeriv</span> <span class="bp">&#120156;</span> <span class="n">m</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span>
   <span class="n">contDiff_iff_continuous_differentiable</span>
 </pre></div>
 </div>

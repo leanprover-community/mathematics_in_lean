@@ -27,27 +27,27 @@ example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} :
   Metric.continuous_iff
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) := by continuity
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) := by continuity
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) :=
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   continuous_dist.comp ((hf.comp continuous_fst).prod_mk (hf.comp continuous_snd))
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) := by
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) := by
   apply Continuous.dist
   exact hf.comp continuous_fst
   exact hf.comp continuous_snd
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) :=
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   (hf.comp continuous_fst).dist (hf.comp continuous_snd)
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
-    Continuous fun p : X × X => dist (f p.1) (f p.2) :=
+    Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   hf.fst'.dist hf.snd'
 
-example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ => f (x ^ 2 + x) :=
+example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 2 + x) :=
   sorry
 
 example {X Y : Type _} [MetricSpace X] [MetricSpace Y] (f : X → Y) (a : X) :
@@ -163,7 +163,7 @@ open Metric
 
 example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : ∀ n, Dense (f n)) :
     Dense (⋂ n, f n) := by
-  let B : ℕ → ℝ := fun n => (1 / 2) ^ n
+  let B : ℕ → ℝ := fun n ↦ (1 / 2) ^ n
   have Bpos : ∀ n, 0 < B n
   sorry
   /- Translate the density assumption into two functions `center` and `radius` associating
@@ -184,11 +184,11 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
     in the previous ball and in `f n`, and such that `r n` is small enough to ensure
     that `c n` is a Cauchy sequence. Then `c n` converges to a limit which belongs
     to all the `f n`. -/
-  let F : ℕ → X × ℝ := fun n =>
+  let F : ℕ → X × ℝ := fun n ↦
     Nat.recOn n (Prod.mk x (min ε (B 0)))
-      fun n p => Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
-  let c : ℕ → X := fun n => (F n).1
-  let r : ℕ → ℝ := fun n => (F n).2
+      fun n p ↦ Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
+  let c : ℕ → X := fun n ↦ (F n).1
+  let r : ℕ → ℝ := fun n ↦ (F n).2
   have rpos : ∀ n, 0 < r n := by sorry
   have rB : ∀ n, r n ≤ B n := by sorry
   have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := by

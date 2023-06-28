@@ -24,7 +24,7 @@ example (h : ∀ a, ∃ x, f x < a) : ¬FnHasLb f := by
   have := ha x
   linarith
 
-example : ¬FnHasUb fun x => x := by
+example : ¬FnHasUb fun x ↦ x := by
   rintro ⟨a, ha⟩
   have : a + 1 ≤ a := ha (a + 1)
   linarith
@@ -43,7 +43,7 @@ example (h : a ≤ b) (h' : f b < f a) : ¬Monotone f := by
 
 example : ¬∀ {f : ℝ → ℝ}, Monotone f → ∀ {a b}, f a ≤ f b → a ≤ b := by
   intro h
-  let f := fun x : ℝ => (0 : ℝ)
+  let f := fun x : ℝ ↦ (0 : ℝ)
   have monof : Monotone f := by
     intro a b leab
     rfl

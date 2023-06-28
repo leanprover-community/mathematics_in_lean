@@ -21,16 +21,16 @@ open Metric
 example {ι : Type _} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, ∃ C, ∀ i, ‖g i x‖ ≤ C) :
     ∃ C', ∀ i, ‖g i‖ ≤ C' := by
   -- sequence of subsets consisting of those `x : E` with norms `‖g i x‖` bounded by `n`
-  let e : ℕ → Set E := fun n => ⋂ i : ι, { x : E | ‖g i x‖ ≤ n }
+  let e : ℕ → Set E := fun n ↦ ⋂ i : ι, { x : E | ‖g i x‖ ≤ n }
   -- each of these sets is closed
-  have hc : ∀ n : ℕ, IsClosed (e n) := fun i =>
-    isClosed_iInter fun i => isClosed_le (g i).cont.norm continuous_const
+  have hc : ∀ n : ℕ, IsClosed (e n) := fun i ↦
+    isClosed_iInter fun i ↦ isClosed_le (g i).cont.norm continuous_const
   -- the union is the entire space; this is where we use `h`
   have hU : (⋃ n : ℕ, e n) = univ := by
-    refine' eq_univ_of_forall fun x => _
+    refine' eq_univ_of_forall fun x ↦ _
     cases' h x with C hC
     obtain ⟨m, hm⟩ := exists_nat_ge C
-    exact ⟨e m, mem_range_self m, mem_iInter.mpr fun i => le_trans (hC i) hm⟩
+    exact ⟨e m, mem_range_self m, mem_iInter.mpr fun i ↦ le_trans (hC i) hm⟩
   /- apply the Baire category theorem to conclude that for some `m : ℕ`,
        `e m` contains some `x` -/
   obtain ⟨m : ℕ, x : E, hx : x ∈ interior (e m)⟩ := nonempty_interior_of_iUnion_of_closed hc hU
@@ -42,7 +42,7 @@ example {ι : Type _} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, 
     replace hz := mem_iInter.mp (interior_iInter_subset _ (hε hz)) i
     apply interior_subset hz
   have εk_pos : 0 < ε / ‖k‖ := div_pos ε_pos (zero_lt_one.trans hk)
-  refine' ⟨(m + m : ℕ) / (ε / ‖k‖), fun i => ContinuousLinearMap.op_norm_le_of_shell ε_pos _ hk _⟩
+  refine' ⟨(m + m : ℕ) / (ε / ‖k‖), fun i ↦ ContinuousLinearMap.op_norm_le_of_shell ε_pos _ hk _⟩
   · exact div_nonneg (Nat.cast_nonneg _) εk_pos.le
   intro y le_y y_lt
   calc

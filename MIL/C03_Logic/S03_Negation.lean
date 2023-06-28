@@ -33,7 +33,7 @@ example (h : ∀ a, ∃ x, f x > a) : ¬FnHasUb f := by
 example (h : ∀ a, ∃ x, f x < a) : ¬FnHasLb f :=
   sorry
 
-example : ¬FnHasUb fun x => x :=
+example : ¬FnHasUb fun x ↦ x :=
   sorry
 
 #check (not_le_of_gt : a > b → ¬a ≤ b)
@@ -49,7 +49,7 @@ example (h : a ≤ b) (h' : f b < f a) : ¬Monotone f := by
 
 example : ¬∀ {f : ℝ → ℝ}, Monotone f → ∀ {a b}, f a ≤ f b → a ≤ b := by
   intro h
-  let f := fun x : ℝ => (0 : ℝ)
+  let f := fun x : ℝ ↦ (0 : ℝ)
   have monof : Monotone f := by sorry
   have h' : f 1 ≤ f 0 := le_refl _
   sorry

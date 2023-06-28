@@ -14,21 +14,21 @@ def FnHasLb (f : ℝ → ℝ) :=
   ∃ a, FnLb f a
 
 theorem fnUb_add {f g : ℝ → ℝ} {a b : ℝ} (hfa : FnUb f a) (hgb : FnUb g b) :
-    FnUb (fun x => f x + g x) (a + b) :=
-  fun x => add_le_add (hfa x) (hgb x)
+    FnUb (fun x ↦ f x + g x) (a + b) :=
+  fun x ↦ add_le_add (hfa x) (hgb x)
 
 section
 
 variable {f g : ℝ → ℝ}
 
-example (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x => f x + g x := by
+example (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x ↦ f x + g x := by
   cases' lbf with a lbfa
   cases' lbg with b lbgb
   use a + b
   intro x
   exact add_le_add (lbfa x) (lbgb x)
 
-example {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x => c * f x := by
+example {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x ↦ c * f x := by
   cases' ubf with a lbfa
   use c * a
   intro x
@@ -55,12 +55,12 @@ section
 
 open Function
 
-example {c : ℝ} (h : c ≠ 0) : Surjective fun x => c * x := by
+example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
   intro x
   use x / c
   dsimp; rw [mul_div_cancel' _ h]
 
-example {c : ℝ} (h : c ≠ 0) : Surjective fun x => c * x := by
+example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
   intro x
   use x / c
   field_simp [h] ; ring
@@ -72,7 +72,7 @@ open Function
 variable {α : Type _} {β : Type _} {γ : Type _}
 variable {g : β → γ} {f : α → β}
 
-example (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x => g (f x) := by
+example (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x ↦ g (f x) := by
   intro z
   rcases surjg z with ⟨y, rfl⟩
   rcases surjf y with ⟨x, rfl⟩

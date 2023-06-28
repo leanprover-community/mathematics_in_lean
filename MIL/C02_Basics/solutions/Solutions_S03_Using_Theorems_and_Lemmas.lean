@@ -50,7 +50,7 @@ theorem fact2 : -(a * b) * 2 ≤ a ^ 2 + b ^ 2 := by
     _ ≥ 0 := by apply pow_two_nonneg
   linarith
 
-example : abs (a * b) ≤ (a ^ 2 + b ^ 2) / 2 := by
+example : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
   have h : (0 : ℝ) < 2 := by norm_num
   apply abs_le'.mpr
   constructor

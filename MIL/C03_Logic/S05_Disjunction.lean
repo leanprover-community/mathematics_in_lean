@@ -19,7 +19,7 @@ example (h : y > 0) : y > 0 ∨ y < -1 :=
 example (h : y < -1) : y > 0 ∨ y < -1 :=
   Or.inr h
 
-example : x < abs y → x < y ∨ x < -y := by
+example : x < |y| → x < y ∨ x < -y := by
   cases' le_or_gt 0 y with h h
   · rw [abs_of_nonneg h]
     intro h
@@ -30,19 +30,19 @@ example : x < abs y → x < y ∨ x < -y := by
 
 namespace MyAbs
 
-theorem le_abs_self (x : ℝ) : x ≤ abs x := by
+theorem le_abs_self (x : ℝ) : x ≤ |x| := by
   sorry
 
-theorem neg_le_abs_self (x : ℝ) : -x ≤ abs x := by
+theorem neg_le_abs_self (x : ℝ) : -x ≤ |x| := by
   sorry
 
-theorem abs_add (x y : ℝ) : abs (x + y) ≤ abs x + abs y := by
+theorem abs_add (x y : ℝ) : |x + y| ≤ |x| + |y| := by
   sorry
 
-theorem lt_abs : x < abs y ↔ x < y ∨ x < -y := by
+theorem lt_abs : x < |y| ↔ x < y ∨ x < -y := by
   sorry
 
-theorem abs_lt : abs x < y ↔ -y < x ∧ x < y := by
+theorem abs_lt : |x| < y ↔ -y < x ∧ x < y := by
   sorry
 
 end MyAbs

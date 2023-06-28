@@ -58,12 +58,12 @@ example (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
       Tendsto (Prod.fst ∘ f) atTop (𝓝 x₀) ∧ Tendsto (Prod.snd ∘ f) atTop (𝓝 y₀) :=
   sorry
 
-example (x₀ : ℝ) : HasBasis (𝓝 x₀) (fun ε : ℝ => 0 < ε) fun ε => Ioo (x₀ - ε) (x₀ + ε) :=
+example (x₀ : ℝ) : HasBasis (𝓝 x₀) (fun ε : ℝ ↦ 0 < ε) fun ε ↦ Ioo (x₀ - ε) (x₀ + ε) :=
   nhds_basis_Ioo_pos x₀
 
 example (u : ℕ → ℝ) (x₀ : ℝ) :
     Tendsto u atTop (𝓝 x₀) ↔ ∀ ε > 0, ∃ N, ∀ n ≥ N, u n ∈ Ioo (x₀ - ε) (x₀ + ε) := by
-  have : atTop.HasBasis (fun _ : ℕ => True) Ici := atTop_basis
+  have : atTop.HasBasis (fun _ : ℕ ↦ True) Ici := atTop_basis
   rw [this.tendsto_iff (nhds_basis_Ioo_pos x₀)]
   simp
 

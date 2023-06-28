@@ -17,13 +17,13 @@ instance : One gaussInt :=
   ⟨⟨1, 0⟩⟩
 
 instance : Add gaussInt :=
-  ⟨fun x y => ⟨x.re + y.re, x.im + y.im⟩⟩
+  ⟨fun x y ↦ ⟨x.re + y.re, x.im + y.im⟩⟩
 
 instance : Neg gaussInt :=
-  ⟨fun x => ⟨-x.re, -x.im⟩⟩
+  ⟨fun x ↦ ⟨-x.re, -x.im⟩⟩
 
 instance : Mul gaussInt :=
-  ⟨fun x y => ⟨x.re * y.re - x.im * y.im, x.re * y.im + x.im * y.re⟩⟩
+  ⟨fun x y ↦ ⟨x.re * y.re - x.im * y.im, x.re * y.im + x.im * y.re⟩⟩
 
 theorem zero_def : (0 : gaussInt) = ⟨0, 0⟩ :=
   rfl
@@ -144,7 +144,7 @@ example (a b : ℤ) : a = b * (a / b) + a % b :=
 example (a b : ℤ) : b ≠ 0 → 0 ≤ a % b :=
   Int.emod_nonneg a
 
-example (a b : ℤ) : b ≠ 0 → a % b < abs b :=
+example (a b : ℤ) : b ≠ 0 → a % b < |b| :=
   Int.emod_lt a
 
 namespace Int
@@ -159,7 +159,7 @@ theorem div'_add_mod' (a b : ℤ) : b * div' a b + mod' a b = a := by
   rw [div', mod']
   linarith [Int.ediv_add_emod (a + b / 2) b]
 
-theorem abs_mod'_le (a b : ℤ) (h : 0 < b) : abs (mod' a b) ≤ b / 2 := by
+theorem abs_mod'_le (a b : ℤ) (h : 0 < b) : |mod' a b| ≤ b / 2 := by
   rw [mod', abs_le]
   constructor
   · linarith [Int.emod_nonneg (a + b / 2) h.ne']
@@ -204,10 +204,10 @@ theorem conj_im (x : gaussInt) : (conj x).im = -x.im :=
 theorem norm_conj (x : gaussInt) : norm (conj x) = norm x := by simp [norm]
 
 instance : Div gaussInt :=
-  ⟨fun x y => ⟨Int.div' (x * conj y).re (norm y), Int.div' (x * conj y).im (norm y)⟩⟩
+  ⟨fun x y ↦ ⟨Int.div' (x * conj y).re (norm y), Int.div' (x * conj y).im (norm y)⟩⟩
 
 instance : Mod gaussInt :=
-  ⟨fun x y => x - y * (x / y)⟩
+  ⟨fun x y ↦ x - y * (x / y)⟩
 
 theorem div_def (x y : gaussInt) :
     x / y = ⟨Int.div' (x * conj y).re (norm y), Int.div' (x * conj y).im (norm y)⟩ :=
@@ -224,8 +224,8 @@ theorem norm_mod_lt (x : gaussInt) {y : gaussInt} (hy : y ≠ 0) :
   have H2 : norm (x % y) * norm y ≤ norm y / 2 * norm y
   · calc
       norm (x % y) * norm y = norm (x % y * conj y) := by simp only [norm_mul, norm_conj]
-      _ = abs (Int.mod' (x.re * y.re + x.im * y.im) (norm y)) ^ 2 
-          + abs (Int.mod' (-(x.re * y.im) + x.im * y.re) (norm y)) ^ 2 := by simp [H1, norm, sq_abs]
+      _ = |Int.mod' (x.re * y.re + x.im * y.im) (norm y)| ^ 2
+          + |Int.mod' (-(x.re * y.im) + x.im * y.re) (norm y)| ^ 2 := by simp [H1, norm, sq_abs]
       _ ≤ (y.norm / 2) ^ 2 + (y.norm / 2) ^ 2 := by gcongr <;> apply Int.abs_mod'_le _ _ norm_y_pos
       _ = norm y / 2 * (norm y / 2 * 2) := by ring
       _ ≤ norm y / 2 * norm y := by gcongr; apply Int.ediv_mul_le; norm_num
@@ -258,8 +258,8 @@ instance : EuclideanDomain gaussInt :=
     quotient := (· / ·)
     remainder := (· % ·)
     quotient_mul_add_remainder_eq :=
-      fun x y => by simp only; rw [mod_def, add_comm, sub_add_cancel]
-    quotient_zero := fun x => by
+      fun x y ↦ by simp only; rw [mod_def, add_comm, sub_add_cancel]
+    quotient_zero := fun x ↦ by
       simp [div_def, norm, Int.div']
       rfl
     r := Measure (Int.natAbs ∘ norm)

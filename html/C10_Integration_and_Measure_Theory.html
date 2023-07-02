@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>10. Integration and Measure Theory &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -13,11 +12,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,15 +29,11 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="index.html" class="icon icon-home">
-            Mathematics in Lean
+            <a href="index.html" class="icon icon-home"> Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -79,8 +73,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">10. </span>Integration and Measure Theory</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">10. </span>Integration and Measure Theory</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C10_Integration_and_Measure_Theory.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -90,10 +84,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="integration-and-measure-theory"></span><section id="index-0">
-<span id="id1"></span><h1><span class="section-number">10. </span>Integration and Measure Theory<a class="headerlink" href="#index-0" title="Permalink to this heading">&#61633;</a></h1>
-<section id="elementary-integration">
-<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">10.1. </span>Elementary Integration<a class="headerlink" href="#elementary-integration" title="Permalink to this heading">&#61633;</a></h2>
+  <span class="target" id="integration-and-measure-theory"></span><div class="section" id="index-0">
+<span id="id1"></span><h1><span class="section-number">10. </span>Integration and Measure Theory<a class="headerlink" href="#index-0" title="Permalink to this headline">&#61633;</a></h1>
+<div class="section" id="elementary-integration">
+<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">10.1. </span>Elementary Integration<a class="headerlink" href="#elementary-integration" title="Permalink to this headline">&#61633;</a></h2>
 <p>We first focus on integration of functions on finite intervals in <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>. We can integrate
 elementary functions.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">MeasureTheory</span> <span class="n">intervalIntegral</span>
@@ -130,9 +124,9 @@ which are not shown here, are not equivalent.)</p>
   <span class="n">rfl</span>
 </pre></div>
 </div>
-</section>
-<section id="measure-theory">
-<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">10.2. </span>Measure Theory<a class="headerlink" href="#measure-theory" title="Permalink to this heading">&#61633;</a></h2>
+</div>
+<div class="section" id="measure-theory">
+<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">10.2. </span>Measure Theory<a class="headerlink" href="#measure-theory" title="Permalink to this headline">&#61633;</a></h2>
 <p>The general context for integration in mathlib is measure theory. Even the elementary
 integrals of the previous section are in fact Bochner integrals. Bochner integration is
 a generalization of Lebesgue integration where the target space can be any Banach space,
@@ -140,14 +134,14 @@ not necessarily finite dimensional.</p>
 <p>The first component in the development of measure theory
 is the notion of a <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra of sets, which are called the
 <em>measurable</em> sets.
-The type class <code class="docutils literal notranslate"><span class="pre">measurable_space</span></code> serves to equip a type with such a structure.
+The type class <code class="docutils literal notranslate"><span class="pre">MeasurableSpace</span></code> serves to equip a type with such a structure.
 The sets <code class="docutils literal notranslate"><span class="pre">empty</span></code> and <code class="docutils literal notranslate"><span class="pre">univ</span></code> are measurable,
 the complement of a measurable set is measurable,
 and a countable union or intersection of measurable sets is measurable.
-Note that these axioms are redundant; if you <code class="docutils literal notranslate"><span class="pre">#print</span> <span class="pre">measurable_space</span></code>,
+Note that these axioms are redundant; if you <code class="docutils literal notranslate"><span class="pre">#print</span> <span class="pre">MeasurableSpace</span></code>,
 you will see the ones that mathlib uses.
 As the examples below show, countability assumptions can be expressed using the
-<code class="docutils literal notranslate"><span class="pre">encodable</span></code> type class.</p>
+<code class="docutils literal notranslate"><span class="pre">Encodable</span></code> type class.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">MeasurableSpace</span> <span class="n">&#945;</span><span class="o">]</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">MeasurableSet</span> <span class="o">(</span><span class="bp">&#8709;</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span>
@@ -207,9 +201,9 @@ almost everywhere.</p>
   <span class="n">Iff.rfl</span>
 </pre></div>
 </div>
-</section>
-<section id="integration">
-<span id="id4"></span><h2><span class="section-number">10.3. </span>Integration<a class="headerlink" href="#integration" title="Permalink to this heading">&#61633;</a></h2>
+</div>
+<div class="section" id="integration">
+<span id="id4"></span><h2><span class="section-number">10.3. </span>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">&#61633;</a></h2>
 <p>Now that we have measurable spaces and measures we can consider integrals.
 As explained above, mathlib uses a very general notion of
 integration that allows any Banach space as the target.
@@ -240,7 +234,9 @@ So in all cases we have the following lemma.</p>
 <p>We now quickly explain how to access the most important theorems in integration theory, starting
 with the dominated convergence theorem. There are several versions in mathlib,
 and here we only show the most basic one.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">bound</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">hmeas</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span><span class="o">,</span> <span class="n">AEStronglyMeasurable</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span><span class="o">)</span> <span class="n">&#956;</span><span class="o">)</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Filter</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">}</span> <span class="o">(</span><span class="n">bound</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">hmeas</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span><span class="o">,</span> <span class="n">AEStronglyMeasurable</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span><span class="o">)</span> <span class="n">&#956;</span><span class="o">)</span>
     <span class="o">(</span><span class="n">hint</span> <span class="o">:</span> <span class="n">Integrable</span> <span class="n">bound</span> <span class="n">&#956;</span><span class="o">)</span> <span class="o">(</span><span class="n">hbound</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span><span class="o">,</span> <span class="bp">&#8704;&#7504;</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">,</span> <span class="bp">&#8214;</span><span class="n">F</span> <span class="n">n</span> <span class="n">a</span><span class="bp">&#8214;</span> <span class="bp">&#8804;</span> <span class="n">bound</span> <span class="n">a</span><span class="o">)</span>
     <span class="o">(</span><span class="n">hlim</span> <span class="o">:</span> <span class="bp">&#8704;&#7504;</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">,</span> <span class="n">Tendsto</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8614;</span> <span class="n">F</span> <span class="n">n</span> <span class="n">a</span><span class="o">)</span> <span class="n">atTop</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)))</span> <span class="o">:</span>
     <span class="n">Tendsto</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="bp">&#8614;</span> <span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">F</span> <span class="n">n</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">)</span> <span class="n">atTop</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="o">(</span><span class="bp">&#8747;</span> <span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">&#8706;</span><span class="n">&#956;</span><span class="o">))</span> <span class="o">:=</span>
@@ -282,8 +278,8 @@ gives finite mass to compact sets, and give positive mass to open sets.</p>
   <span class="n">integral_image_eq_integral_abs_det_fderiv_smul</span> <span class="n">&#956;</span> <span class="n">hs</span> <span class="n">hf</span> <span class="n">h_inj</span> <span class="n">g</span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

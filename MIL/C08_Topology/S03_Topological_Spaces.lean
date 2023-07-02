@@ -1,3 +1,4 @@
+import Mathlib.Tactic
 import Mathlib.Topology.Instances.Real
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 
@@ -112,7 +113,7 @@ example [TopologicalSpace X] [TopologicalSpace Y] [RegularSpace Y] {A : Set X}
     ∃ φ : X → Y, Continuous φ ∧ ∀ a : A, φ a = f a :=
   sorry
 
-#check @HasBasis.tendsto_right_iff
+#check HasBasis.tendsto_right_iff
 
 example [TopologicalSpace X] [TopologicalSpace.FirstCountableTopology X]
       {s : Set X} {a : X} :

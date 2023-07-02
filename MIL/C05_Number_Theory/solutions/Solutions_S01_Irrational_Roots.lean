@@ -1,7 +1,6 @@
+import Mathlib.Tactic
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.Prime
-import Mathlib.Tactic.NormNum.GCD
-import Mathlib.Tactic.NormNum.Prime
 
 theorem even_of_even_sqr {m : ℕ} (h : 2 ∣ m ^ 2) : 2 ∣ m := by
   rw [pow_two, Nat.prime_two.dvd_mul] at h

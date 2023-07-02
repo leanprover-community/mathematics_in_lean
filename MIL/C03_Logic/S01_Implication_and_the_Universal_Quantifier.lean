@@ -1,3 +1,4 @@
+import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
 namespace C03S01
@@ -76,7 +77,7 @@ end
 section
 variable {α : Type _} {R : Type _} [OrderedCancelAddCommMonoid R]
 
-#check @add_le_add
+#check add_le_add
 
 def FnUb' (f : α → R) (a : R) : Prop :=
   ∀ x, f x ≤ a

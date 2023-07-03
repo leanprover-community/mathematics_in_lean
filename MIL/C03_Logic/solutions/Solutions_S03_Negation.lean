@@ -1,4 +1,3 @@
-import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
 namespace C03S03

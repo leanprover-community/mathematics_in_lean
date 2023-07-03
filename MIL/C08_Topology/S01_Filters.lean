@@ -1,4 +1,3 @@
-import Mathlib.Tactic
 import Mathlib.Topology.Instances.Real
 
 open Set Filter Topology
@@ -80,9 +79,9 @@ example (u v : ℕ → ℝ) (h : u =ᶠ[atTop] v) (x₀ : ℝ) :
     Tendsto u atTop (𝓝 x₀) ↔ Tendsto v atTop (𝓝 x₀) :=
   tendsto_congr' h
 
-#check eventually_of_forall
-#check Eventually.mono
-#check Eventually.and
+#check @eventually_of_forall
+#check @Eventually.mono
+#check @Eventually.and
 
 example (P Q R : ℕ → Prop) (hP : ∀ᶠ n in atTop, P n) (hQ : ∀ᶠ n in atTop, Q n)
     (hR : ∀ᶠ n in atTop, P n ∧ Q n → R n) : ∀ᶠ n in atTop, R n := by

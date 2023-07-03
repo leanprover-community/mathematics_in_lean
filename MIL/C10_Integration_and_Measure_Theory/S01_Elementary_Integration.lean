@@ -1,4 +1,3 @@
-import Mathlib.Tactic
 import Mathlib.MeasureTheory.Integral.IntervalIntegral
 import Mathlib.Analysis.SpecialFunctions.Integrals
 import Mathlib.Analysis.Convolution

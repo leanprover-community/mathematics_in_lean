@@ -1,4 +1,3 @@
-import Mathlib.Tactic
 import Mathlib.Analysis.NormedSpace.FiniteDimension
 import Mathlib.Analysis.Convolution
 import Mathlib.MeasureTheory.Function.Jacobian
@@ -24,8 +23,6 @@ example {f g : α → E} (hf : Integrable f μ) (hg : Integrable g μ) :
 
 example {s : Set α} (c : E) : (∫ x in s, c ∂μ) = (μ s).toReal • c :=
   set_integral_const c
-
-open Filter
 
 example {F : ℕ → α → E} {f : α → E} (bound : α → ℝ) (hmeas : ∀ n, AEStronglyMeasurable (F n) μ)
     (hint : Integrable bound μ) (hbound : ∀ n, ∀ᵐ a ∂μ, ‖F n a‖ ≤ bound a)

@@ -1,4 +1,3 @@
-import Mathlib.Tactic
 import Mathlib.Topology.Instances.Real
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 

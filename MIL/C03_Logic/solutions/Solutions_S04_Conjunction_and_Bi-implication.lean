@@ -1,6 +1,6 @@
-import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Prime
+import Mathlib.Tactic.NormNum
 
 namespace C03S04
 example {m n : ℕ} (h : m ∣ n ∧ m ≠ n) : m ∣ n ∧ ¬n ∣ m := by

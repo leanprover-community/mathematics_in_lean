@@ -1,3 +1,4 @@
+import Mathlib.Tactic.LibrarySearch
 import Mathlib.Algebra.BigOperators.Ring
 import Mathlib.Data.Real.Basic
 

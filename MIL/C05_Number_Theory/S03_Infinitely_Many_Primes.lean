@@ -1,7 +1,6 @@
 import Mathlib.Data.Nat.Prime
 import Mathlib.Algebra.BigOperators.Order
 import Mathlib.Tactic
-import Mathlib.Tactic.IntervalCases
 
 open BigOperators
 

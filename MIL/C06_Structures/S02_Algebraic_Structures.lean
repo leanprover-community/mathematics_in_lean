@@ -1,3 +1,4 @@
+import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
 namespace C06S02
@@ -110,12 +111,12 @@ instance {α : Type _} : Group₂ (Equiv.Perm α) where
   mul_one := Equiv.refl_trans
   mul_left_inv := Equiv.self_trans_symm
 
-#check @Group₂.mul
+#check Group₂.mul
 
 def mySquare {α : Type _} [Group₂ α] (x : α) :=
   Group₂.mul x x
 
-#check @mySquare
+#check mySquare
 
 section
 variable {β : Type _} (f g : Equiv.Perm β)

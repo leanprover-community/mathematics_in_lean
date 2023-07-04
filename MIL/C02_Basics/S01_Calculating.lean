@@ -1,7 +1,7 @@
-import Mathlib.Data.Real.Basic
+-- An example.
+import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
--- An example.
 example (a b c : ℝ) : a * b * c = b * (a * c) := by
   rw [mul_comm a b]
   rw [mul_assoc b a c]
@@ -46,7 +46,7 @@ example (a b c d e f : ℝ) (h : a * b = c * d) (h' : e = f) : a * (b * e) = c *
 
 section
 
-variable (a b c d e f g : ℝ)
+variable (a b c d e f : ℝ)
 
 example (h : a * b = c * d) (h' : e = f) : a * (b * e) = c * (d * f) := by
   rw [h', ← mul_assoc, h, mul_assoc]
@@ -64,7 +64,6 @@ variable (a b c : ℝ)
 #check mul_assoc c a b
 #check mul_comm a
 #check mul_comm
-#check @mul_comm
 
 end
 

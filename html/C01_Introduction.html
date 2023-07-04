@@ -203,7 +203,7 @@ Such an expression is a proof of the proposition <cite>P</cite>.</p>
 <span class="k">#check</span> <span class="n">hard</span>
 </pre></div>
 </div>
-<p>If you manage to construct an expression of type <cite>fermat_last_theorem</cite> and
+<p>If you manage to construct an expression of type <code class="docutils literal notranslate"><span class="pre">FermatLastTheorem</span></code> and
 Lean accepts it as a term of that type,
 you have done something very impressive.
 (Using <code class="docutils literal notranslate"><span class="pre">sorry</span></code> is cheating, and Lean knows it.)
@@ -269,7 +269,7 @@ declares that we are going to show that <code class="docutils literal notranslat
 showing <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">(m</span> <span class="pre">*</span> <span class="pre">k)</span></code>.
 The next line uses the <code class="docutils literal notranslate"><span class="pre">rewrite</span></code> tactic
 to replace <code class="docutils literal notranslate"><span class="pre">n</span></code> by <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">k</span></code> in the goal,
-and the <cite>ring</cite> tactic solves the resulting goal <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">(2</span> <span class="pre">*</span> <span class="pre">k)</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">(m</span> <span class="pre">*</span> <span class="pre">k)</span></code>.</p>
+and the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic solves the resulting goal <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">(2</span> <span class="pre">*</span> <span class="pre">k)</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">(m</span> <span class="pre">*</span> <span class="pre">k)</span></code>.</p>
 <p>The ability to build a proof in small steps with incremental feedback
 is extremely powerful. For that reason,
 tactic proofs are often easier and quicker to write than

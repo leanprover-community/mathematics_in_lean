@@ -1,6 +1,6 @@
+import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Prime
-import Mathlib.Tactic.NormNum
 
 namespace C03S04
 example {x y : ℝ} (h₀ : x ≤ y) (h₁ : ¬y ≤ x) : x ≤ y ∧ x ≠ y := by
@@ -60,7 +60,6 @@ example : ∃ m n : ℕ, 4 < m ∧ m < n ∧ n < 10 ∧ Nat.Prime m ∧ Nat.Prim
   use 5
   use 7
   norm_num
-  sorry
 
 example {x y : ℝ} : x ≤ y ∧ x ≠ y → x ≤ y ∧ ¬y ≤ x := by
   rintro ⟨h₀, h₁⟩

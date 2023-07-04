@@ -1,3 +1,4 @@
+import Mathlib.Tactic
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 import Mathlib.Analysis.NormedSpace.FiniteDimension
 import Mathlib.Analysis.Calculus.Inverse
@@ -113,8 +114,6 @@ end
 
 open Asymptotics
 
-open Asymptotics
-
 example {α : Type _} {E : Type _} [NormedGroup E] {F : Type _} [NormedGroup F] (c : ℝ)
     (l : Filter α) (f : α → E) (g : α → F) : IsBigOWith c l f g ↔ ∀ᶠ x in l, ‖f x‖ ≤ c * ‖g x‖ :=
   isBigOWith_iff
@@ -132,6 +131,8 @@ example {α : Type _} {E : Type _} [NormedAddCommGroup E] (l : Filter α) (f g :
   Iff.rfl
 
 section
+
+open Topology
 
 variable {𝕜 : Type _} [NontriviallyNormedField 𝕜] {E : Type _} [NormedAddCommGroup E]
   [NormedSpace 𝕜 E] {F : Type _} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
@@ -171,7 +172,7 @@ example (hf : HasStrictFDerivAt f (f' : E →L[𝕜] F) a) :
     ∀ᶠ x in 𝓝 (f a), f (hf.localInverse f f' a x) = x :=
   hf.eventually_right_inverse
 
-example [CompleteSpace E] {f : E → F} {f' : E ≃L[𝕜] F} {a : E}
+example {f : E → F} {f' : E ≃L[𝕜] F} {a : E}
   (hf : HasStrictFDerivAt f (f' : E →L[𝕜] F) a) :
     HasStrictFDerivAt (HasStrictFDerivAt.localInverse f f' a hf) (f'.symm : F →L[𝕜] E) (f a) :=
   HasStrictFDerivAt.to_localInverse hf

@@ -1,7 +1,6 @@
+import Mathlib.Tactic
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.Prime
-import Mathlib.Tactic.NormNum.GCD
-import Mathlib.Tactic.NormNum.Prime
 
 #print Nat.coprime
 
@@ -16,7 +15,7 @@ example : Nat.coprime 12 7 := by norm_num
 
 example : Nat.gcd 12 8 = 4 := by norm_num
 
-#check @Nat.prime_def_lt
+#check Nat.prime_def_lt
 
 example (p : ℕ) (prime_p : Nat.Prime p) : 2 ≤ p ∧ ∀ m : ℕ, m < p → m ∣ p → m = 1 := by
   rwa [Nat.prime_def_lt] at prime_p
@@ -35,7 +34,7 @@ example : Nat.Prime 2 :=
 example : Nat.Prime 3 :=
   Nat.prime_three
 
-#check @Nat.Prime.dvd_mul
+#check Nat.Prime.dvd_mul
 #check Nat.Prime.dvd_mul Nat.prime_two
 #check Nat.prime_two.dvd_mul
 

@@ -151,7 +151,7 @@ to the natural numbers.</p>
 <p>We also need the notion of a prime number, <code class="docutils literal notranslate"><span class="pre">Nat.Prime</span></code>.
 The theorem <code class="docutils literal notranslate"><span class="pre">Nat.prime_def_lt</span></code> provides one familiar characterization,
 and <code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_one_or_self_of_dvd</span></code> provides another.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">@</span><span class="n">Nat.prime_def_lt</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Nat.prime_def_lt</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">prime_p</span> <span class="o">:</span> <span class="n">Nat.Prime</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="n">p</span> <span class="bp">&#8743;</span> <span class="bp">&#8704;</span> <span class="n">m</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">,</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="bp">&#8594;</span> <span class="n">m</span> <span class="bp">&#8739;</span> <span class="n">p</span> <span class="bp">&#8594;</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rwa</span> <span class="o">[</span><span class="n">Nat.prime_def_lt</span><span class="o">]</span> <span class="n">at</span> <span class="n">prime_p</span>
@@ -186,7 +186,7 @@ if the square of a number is even, then that number is even as well.
 Mathlib defines the predicate <code class="docutils literal notranslate"><span class="pre">Even</span></code> in <code class="docutils literal notranslate"><span class="pre">Data.Nat.Parity</span></code>,
 but for reasons that will become clear below,
 we will simply use <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&#8739;</span> <span class="pre">m</span></code> to express that <code class="docutils literal notranslate"><span class="pre">m</span></code> is even.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">@</span><span class="n">Nat.Prime.dvd_mul</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Nat.Prime.dvd_mul</span>
 <span class="k">#check</span> <span class="n">Nat.Prime.dvd_mul</span> <span class="n">Nat.prime_two</span>
 <span class="k">#check</span> <span class="n">Nat.prime_two.dvd_mul</span>
 
@@ -478,7 +478,7 @@ that the simplifier uses by default.</p>
 about the natural numbers by proving that the statement holds of 0
 and that whenever it holds of a natural number <span class="math notranslate nohighlight">\(n\)</span>,
 it also holds of <span class="math notranslate nohighlight">\(n + 1\)</span>.
-The line <code class="docutils literal notranslate"><span class="pre">induction</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">n</span> <span class="pre">ih</span></code> in the proof
+The line <code class="docutils literal notranslate"><span class="pre">induction'</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">n</span> <span class="pre">ih</span></code> in the proof
 below therefore results in two goals:
 in the first we need to prove <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">fac</span> <span class="pre">0</span></code>,
 and in the second we have the added assumption <code class="docutils literal notranslate"><span class="pre">ih</span> <span class="pre">:</span> <span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">fac</span> <span class="pre">n</span></code>

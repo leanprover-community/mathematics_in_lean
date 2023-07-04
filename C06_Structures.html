@@ -360,7 +360,7 @@ function above.</p>
 <p>Structures can depend on parameters.
 For example, we can generalize the standard 2-simplex to the standard
 <span class="math notranslate nohighlight">\(n\)</span>-simplex for any <span class="math notranslate nohighlight">\(n\)</span>.
-At this stage, you don&#8217;t have to know anything about the type <cite>Fin n</cite>
+At this stage, you don&#8217;t have to know anything about the type <code class="docutils literal notranslate"><span class="pre">Fin</span> <span class="pre">n</span></code>
 except that it has <span class="math notranslate nohighlight">\(n\)</span> elements, and that Lean knows
 how to sum over it.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">BigOperators</span>
@@ -742,7 +742,7 @@ In Lean, the components of any <code class="docutils literal notranslate"><span 
 and in a moment we will see how multiplicative notation is
 set up to refer to them.
 If we want to use additive notation, we instead use an isomorphic structure
-<code class="docutils literal notranslate"><span class="pre">AdditiveGroup</span></code>. Its components are named <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">zero</span></code>,
+<code class="docutils literal notranslate"><span class="pre">AddGroup</span></code> (the structure underlying additive groups). Its components are named <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">zero</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">neg</span></code>, and the associated notation is what you would expect it to be.</p>
 <p>Recall the type <code class="docutils literal notranslate"><span class="pre">Point</span></code> that we defined in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 6.1</span></a>,
 and the addition function that we defined there.
@@ -885,12 +885,12 @@ without troubling us with the details.</p>
 </pre></div>
 </div>
 <p>The following illustrates their use.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">@</span><span class="n">Group&#8322;.mul</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Group&#8322;.mul</span>
 
 <span class="kd">def</span> <span class="n">mySquare</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">Group&#8322;.mul</span> <span class="n">x</span> <span class="n">x</span>
 
-<span class="k">#check</span> <span class="bp">@</span><span class="n">mySquare</span>
+<span class="k">#check</span> <span class="n">mySquare</span>
 
 <span class="kn">section</span>
 <span class="kd">variable</span> <span class="o">{</span><span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#946;</span><span class="o">)</span>
@@ -1213,7 +1213,7 @@ the integers.</p>
 </div>
 <p>Lean&#8217;s library defines the class of <em>nontrivial</em> types to be types with at
 least two distinct elements. In the context of a ring, this is equivalent
-to saying the the zero is not equal to the one. Since some common theorems
+to saying that the zero is not equal to the one. Since some common theorems
 depend on that fact, we may as well establish it now.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Nontrivial</span> <span class="n">gaussInt</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">use</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span>
@@ -1307,7 +1307,7 @@ between these number systems appropriately.
 In fact, this is exactly the approach that is followed in mathlib,
 where the Gaussian integers themselves are constructed as a special case
 of a ring of <em>quadratic integers</em>.
-See the file <a class="reference external" href="https://github.com/leanprover-community/mathlib/blob/master/src/number_theory/zsqrtd/gaussian_int.lean">gaussian_int.lean</a>.</p>
+See the file <a class="reference external" href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/Zsqrtd/GaussianInt.lean">GaussianInt.lean</a>.</p>
 <p>Here we will instead carry out an argument that stays in the integers.
 This illustrates an choice one commonly faces when formalizing mathematics.
 Given an argument that requires concepts or machinery that is not already

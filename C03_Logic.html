@@ -287,7 +287,7 @@ So if we prove the theorem <code class="docutils literal notranslate"><span clas
 it will apply in all these instances.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">OrderedCancelAddCommMonoid</span> <span class="n">R</span><span class="o">]</span>
 
-<span class="k">#check</span> <span class="bp">@</span><span class="n">add_le_add</span>
+<span class="k">#check</span> <span class="n">add_le_add</span>
 
 <span class="kd">def</span> <span class="n">FnUb&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
   <span class="bp">&#8704;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">a</span>
@@ -410,7 +410,7 @@ direction, but not much harder).</p>
 once you know how to spot them.</p>
 <p>Mathlib includes a good library for manipulating sets. Recall that Lean does not
 use foundations based on set theory, so here the word set has its mundane meaning
-of a collection of mathematical objets of some given type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+of a collection of mathematical objects of some given type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
 If <code class="docutils literal notranslate"><span class="pre">x</span></code> has type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">s</span></code> has type <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">&#945;</span></code>, then <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code> is a proposition
 that asserts that <code class="docutils literal notranslate"><span class="pre">x</span></code> is an element of <code class="docutils literal notranslate"><span class="pre">s</span></code>. If <code class="docutils literal notranslate"><span class="pre">y</span></code> has some different type <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> then the
 expression <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code> makes no sense. Here &#8220;makes no sense&#8221; means &#8220;has no type hence Lean does not
@@ -735,7 +735,7 @@ why the next example makes use of both <code class="docutils literal notranslate
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p id="index-11">At this point, it is worth mentioning that there is a tactic, <cite>field_simp</cite>,
+<p id="index-11">At this point, it is worth mentioning that there is a tactic, <code class="docutils literal notranslate"><span class="pre">field_simp</span></code>,
 that will often clear denominators in a useful way.
 It can be used in conjunction with the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -1126,7 +1126,6 @@ with anonymous constructors, <code class="docutils literal notranslate"><span cl
   <span class="n">use</span> <span class="mi">5</span>
   <span class="n">use</span> <span class="mi">7</span>
   <span class="n">norm_num</span>
-  <span class="gr">sorry</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8743;</span> <span class="n">x</span> <span class="bp">&#8800;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8743;</span> <span class="bp">&#172;</span><span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">h&#8320;</span><span class="o">,</span> <span class="n">h&#8321;</span><span class="o">&#10217;</span>
@@ -1205,7 +1204,7 @@ to replace an expression of the form <code class="docutils literal notranslate">
 <p>See if you can use <code class="docutils literal notranslate"><span class="pre">rw</span></code> with the theorem below
 to provide a short proof that negation is not a
 nondecreasing function. (Note that <code class="docutils literal notranslate"><span class="pre">push_neg</span></code> won&#8217;t
-unfold definitions for you, so the <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">monotone</span></code> in
+unfold definitions for you, so the <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[Monotone]</span></code> in
 the proof of the theorem is needed.)</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">not_monotone_iff</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">:</span> <span class="bp">&#172;</span><span class="n">Monotone</span> <span class="n">f</span> <span class="bp">&#8596;</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8743;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">Monotone</span><span class="o">]</span>
@@ -1521,7 +1520,7 @@ as it is,
 and leaves us with the task of proving the equations that
 are needed to make the goal match.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">convert</span><span class="o">(</span><span class="n">mul_lt_mul_right</span> <span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span>
+  <span class="n">convert</span> <span class="o">(</span><span class="n">mul_lt_mul_right</span> <span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span>
   <span class="bp">&#183;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">one_mul</span><span class="o">]</span>
   <span class="n">exact</span> <span class="n">lt_trans</span> <span class="n">zero_lt_one</span> <span class="n">h</span>
 </pre></div>

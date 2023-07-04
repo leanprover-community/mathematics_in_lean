@@ -121,7 +121,10 @@ so the left-hand side of <code class="docutils literal notranslate"><span class=
 However, it is generally good style to be mindful of Lean&#8217;s
 notational conventions and leave out parentheses when Lean does as well.</p>
 <p>Let&#8217;s try out <code class="docutils literal notranslate"><span class="pre">rw</span></code>.</p>
-<div class="highlight-lean notranslate" id="index-1"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate" id="index-1"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="n">Mathlib.Tactic</span>
+<span class="kn">import</span> <span class="n">Mathlib.Data.Real.Basic</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">mul_comm</span> <span class="n">a</span> <span class="n">b</span><span class="o">]</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">mul_assoc</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="o">]</span>
 </pre></div>
@@ -141,7 +144,7 @@ If you are curious to see all available abbreviations, you can hit Ctrl-Shift-p
 and then type abbreviations to get access to the <code class="docutils literal notranslate"><span class="pre">Lean</span> <span class="pre">4:</span> <span class="pre">Show</span> <span class="pre">all</span> <span class="pre">abbreviations</span></code> command.
 If your keyboard does not have an easily accessible backslash,
 you can change the leading character by changing the
-<code class="docutils literal notranslate"><span class="pre">lean.input.leader</span></code> setting.</p>
+<code class="docutils literal notranslate"><span class="pre">lean4.input.leader</span></code> setting.</p>
 <p id="index-2">When a cursor is in the middle of a tactic proof,
 Lean reports on the current <em>proof state</em> in the
 <em>Lean infoview</em> window.
@@ -176,7 +179,7 @@ In practice, the intended meaning is usually clear.</p>
 in each case replacing <code class="docutils literal notranslate"><span class="pre">sorry</span></code> by a tactic proof.
 With the <code class="docutils literal notranslate"><span class="pre">rw</span></code> tactic, you can use a left arrow (<code class="docutils literal notranslate"><span class="pre">\l</span></code>)
 to reverse an identity.
-For example, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">&#8592;</span> <span class="pre">mul_assoc</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">c</span></code>
+For example, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[&#8592;</span> <span class="pre">mul_assoc</span> <span class="pre">a</span> <span class="pre">b</span> <span class="pre">c]</span></code>
 replaces <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">(b</span> <span class="pre">*</span> <span class="pre">c)</span></code> by <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre">*</span> <span class="pre">c</span></code> in the current goal. Note that
 the left-pointing arrow refers to going from right to left in the identity provided
 by <code class="docutils literal notranslate"><span class="pre">mul_assoc</span></code>, it has nothing to do with the left or right side of the goal.</p>
@@ -217,7 +220,7 @@ and the second with only one argument.</p>
   <span class="n">rw</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">]</span>
 </pre></div>
 </div>
-<p>Try these, using the theorem <cite>sub_self</cite> for the second one:</p>
+<p>Try these, using the theorem <code class="docutils literal notranslate"><span class="pre">sub_self</span></code> for the second one:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">e</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">e</span> <span class="bp">*</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">d</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
@@ -235,7 +238,7 @@ by listing the relevant identities separated by commas inside the square bracket
 a comma in any list of rewrites.</p>
 <p>Another trick is that we can declare variables once and for all outside
 an example or theorem. Lean then includes them automatically.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">e</span> <span class="bp">=</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="o">(</span><span class="n">d</span> <span class="bp">*</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">h&#39;</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">]</span>
@@ -258,7 +261,6 @@ command to determine the type of an expression:</p>
 <span class="k">#check</span> <span class="n">mul_assoc</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span>
 <span class="k">#check</span> <span class="n">mul_comm</span> <span class="n">a</span>
 <span class="k">#check</span> <span class="n">mul_comm</span>
-<span class="k">#check</span> <span class="bp">@</span><span class="n">mul_comm</span>
 
 <span class="kd">end</span>
 </pre></div>
@@ -304,7 +306,7 @@ an expression that begins with <code class="docutils literal notranslate"><span 
 A <code class="docutils literal notranslate"><span class="pre">calc</span></code> expression can also be used inside a tactic proof,
 but Lean interprets it as the instruction to use the resulting
 proof term to solve the goal.
-The <code class="docutils literal notranslate"><span class="pre">calc</span></code> syntax is finicky: the dots and underscores and justification
+The <code class="docutils literal notranslate"><span class="pre">calc</span></code> syntax is finicky: the underscores and justification
 have to be in the format indicated above.
 Lean uses indentation to determine things like where a block
 of tactics or a <code class="docutils literal notranslate"><span class="pre">calc</span></code> block begins and ends;
@@ -498,8 +500,8 @@ as ring axioms, because they follow from the other axioms.</p>
 
 <span class="kd">theorem</span> <span class="n">add_right_neg</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="bp">-</span><span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">add_left_neg</span><span class="o">]</span>
 
-<span class="k">#check</span> <span class="bp">@</span><span class="n">MyRing.add_zero</span>
-<span class="k">#check</span> <span class="bp">@</span><span class="n">add_zero</span>
+<span class="k">#check</span> <span class="n">MyRing.add_zero</span>
+<span class="k">#check</span> <span class="n">add_zero</span>
 
 <span class="kd">end</span> <span class="n">MyRing</span>
 </pre></div>
@@ -579,16 +581,15 @@ that was introduced by the <code class="docutils literal notranslate"><span clas
 After that, we are back to proving the original goal,
 except a new hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code> has been added:
 having proved it, we are now free to use it.
-At this point, the goal is exactly the result of <code class="docutils literal notranslate"><span class="pre">add_left_cancel</span> <span class="pre">h</span></code>.
-.. index:: apply, tactics ; apply, exact, tactics ; exact
-We could equally well have closed the proof with
+At this point, the goal is exactly the result of <code class="docutils literal notranslate"><span class="pre">add_left_cancel</span> <span class="pre">h</span></code>.</p>
+<p id="index-12">We could equally well have closed the proof with
 <code class="docutils literal notranslate"><span class="pre">apply</span> <span class="pre">add_left_cancel</span> <span class="pre">h</span></code> or <code class="docutils literal notranslate"><span class="pre">exact</span> <span class="pre">add_left_cancel</span> <span class="pre">h</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">exact</span></code> tactic takes as argument a proof term which completely proves the
 current goal, without creating any new goal. The <code class="docutils literal notranslate"><span class="pre">apply</span></code> tactic is a variant
 whose argument is not necessarily a complete proof. The missing pieces are either
 inferred automatically by Lean or become new goals to prove.
 While the <code class="docutils literal notranslate"><span class="pre">exact</span></code> tactic is technically redundant since it is strictly less powerful
-than <code class="docutils literal notranslate"><span class="pre">apply</span></code>, it makes proof scripts slightly clearer tho
+than <code class="docutils literal notranslate"><span class="pre">apply</span></code>, it makes proof scripts slightly clearer to
 human readers and easier to maintain when the library evolves.</p>
 <p>Remember that multiplication is not assumed to be commutative,
 so the following theorem also requires some work.</p>
@@ -632,7 +633,7 @@ addition of the additive inverse.</p>
   <span class="n">rfl</span>
 </pre></div>
 </div>
-<p id="index-12">The proof term <code class="docutils literal notranslate"><span class="pre">rfl</span></code> is short for &#8220;reflexivity&#8221;.
+<p id="index-13">The proof term <code class="docutils literal notranslate"><span class="pre">rfl</span></code> is short for &#8220;reflexivity&#8221;.
 Presenting it as a proof of <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">-</span> <span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">-b</span></code> forces Lean
 to unfold the definition and recognize both sides as being the same.
 The <code class="docutils literal notranslate"><span class="pre">rfl</span></code> tactic does the same.
@@ -663,7 +664,7 @@ the last section:</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p id="index-13">We close this section by noting that some of the facts about
+<p id="index-14">We close this section by noting that some of the facts about
 addition and negation that we established above do not
 need the full strength of the ring axioms, or even
 commutativity of addition. The weaker notion of a <em>group</em>
@@ -702,10 +703,10 @@ The proofs we have carried out in this section provide some hints.</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p id="index-14">Explicitly invoking those lemmas is tedious, so mathlib provides
+<p id="index-15">Explicitly invoking those lemmas is tedious, so mathlib provides
 tactics similar to <cite>ring</cite> in order to cover most uses: <cite>group</cite>
 is for non-commutative multiplicative groups, <cite>abel</cite> for abelian
-additive groups, and <cite>noncomm_ring</cite> for non-commutative groups.
+additive groups, and <cite>noncomm_ring</cite> for non-commutative rings.
 It may seem odd that the algebraic structures are called
 <cite>Ring</cite> and <cite>CommRing</cite> while the tactics are named
 <cite>noncomm_ring</cite> and <cite>ring</cite>. This is partly for historical reasons,
@@ -714,7 +715,7 @@ tactic that deals with commutative rings, since it is used more often.</p>
 </section>
 <section id="using-theorems-and-lemmas">
 <span id="id3"></span><h2><span class="section-number">2.3. </span>Using Theorems and Lemmas<a class="headerlink" href="#using-theorems-and-lemmas" title="Permalink to this heading">&#61633;</a></h2>
-<p id="index-15">Rewriting is great for proving equations,
+<p id="index-16">Rewriting is great for proving equations,
 but what about other sorts of theorems?
 For example, how can we prove an inequality,
 like the fact that <span class="math notranslate nohighlight">\(a + e^b \le a + e^c\)</span> holds whenever <span class="math notranslate nohighlight">\(b \le c\)</span>?
@@ -745,7 +746,7 @@ all the following work:</p>
 <span class="k">#check</span> <span class="o">(</span><span class="n">le_trans</span> <span class="n">h</span> <span class="n">h&#39;</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">c</span><span class="o">)</span>
 </pre></div>
 </div>
-<p id="index-16">The <code class="docutils literal notranslate"><span class="pre">apply</span></code> tactic takes a proof of a general statement or implication,
+<p id="index-17">The <code class="docutils literal notranslate"><span class="pre">apply</span></code> tactic takes a proof of a general statement or implication,
 tries to match the conclusion with the current goal,
 and leaves the hypotheses, if any, as new goals.
 If the given proof matches the goal exactly
@@ -795,7 +796,7 @@ we avoid going into tactic mode entirely:
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p id="index-17">In fact, Lean has a tactic that does this sort of thing automatically:</p>
+<p id="index-18">In fact, Lean has a tactic that does this sort of thing automatically:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">h&#8320;</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8321;</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8322;</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">&#8804;</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#8323;</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">&lt;</span> <span class="n">e</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">e</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">linarith</span>
 </pre></div>
@@ -820,7 +821,7 @@ would be parsed as <code class="docutils literal notranslate"><span class="pre">
   <span class="n">linarith</span> <span class="o">[</span><span class="n">exp_le_exp.mpr</span> <span class="n">h&#39;</span><span class="o">]</span>
 </pre></div>
 </div>
-<p id="index-18">Here are some more theorems in the library that can be used to establish
+<p id="index-19">Here are some more theorems in the library that can be used to establish
 inequalities on the real numbers.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">exp_le_exp</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">exp</span> <span class="n">b</span> <span class="bp">&#8596;</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">b</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">exp_lt_exp</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">exp</span> <span class="n">b</span> <span class="bp">&#8596;</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span>
@@ -837,7 +838,7 @@ inequalities on the real numbers.</p>
 <span class="k">#check</span> <span class="o">(</span><span class="n">add_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">add_pos_of_pos_of_nonneg</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">b</span> <span class="bp">&#8594;</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">exp_pos</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">exp</span> <span class="n">a</span><span class="o">)</span>
-<span class="k">#check</span> <span class="bp">@</span><span class="n">add_le_add_left</span>
+<span class="k">#check</span> <span class="n">add_le_add_left</span>
 </pre></div>
 </div>
 <p>Some of the theorems, <code class="docutils literal notranslate"><span class="pre">exp_le_exp</span></code>, <code class="docutils literal notranslate"><span class="pre">exp_lt_exp</span></code>, and <code class="docutils literal notranslate"><span class="pre">log_le_log</span></code>
@@ -872,7 +873,7 @@ Thus the following proof works:</p>
 creates two goals,
 and once again we use a dot to separate the
 proof of the first from the proof of the second.</p>
-<p id="index-19">Try the following examples on your own.
+<p id="index-20">Try the following examples on your own.
 The example in the middle shows you that the <code class="docutils literal notranslate"><span class="pre">norm_num</span></code>
 tactic can be used to solve concrete numeric goals.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">h&#8320;</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">&#8804;</span> <span class="n">e</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">exp</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">d</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">exp</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="gr">sorry</span>
@@ -981,7 +982,7 @@ You are well on your way to becoming a master formalizer.</p>
 </section>
 <section id="more-examples-using-apply-and-rw">
 <span id="more-on-order-and-divisibility"></span><h2><span class="section-number">2.4. </span>More examples using apply and rw<a class="headerlink" href="#more-examples-using-apply-and-rw" title="Permalink to this heading">&#61633;</a></h2>
-<p id="index-20">The <code class="docutils literal notranslate"><span class="pre">min</span></code> function on the real numbers is uniquely characterized
+<p id="index-21">The <code class="docutils literal notranslate"><span class="pre">min</span></code> function on the real numbers is uniquely characterized
 by the following three facts:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">min_le_left</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">min_le_right</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">b</span><span class="o">)</span>
@@ -1022,7 +1023,7 @@ we can show that <code class="docutils literal notranslate"><span class="pre">mi
     <span class="n">apply</span> <span class="n">min_le_left</span>
 </pre></div>
 </div>
-<p id="index-21">Here we have used dots to separate proofs of
+<p id="index-22">Here we have used dots to separate proofs of
 different goals.
 Our usage is inconsistent:
 at the outer level,
@@ -1035,7 +1036,7 @@ the proof
 and indicate what is being proved in each block.
 The proof still works without the <code class="docutils literal notranslate"><span class="pre">show</span></code> commands,
 but using them makes the proof easier to read and maintain.</p>
-<p>It may bother you that the the proof is repetitive.
+<p>It may bother you that the proof is repetitive.
 To foreshadow skills you will learn later on,
 we note that one way to avoid the repetition
 is to state a local lemma and then use it:</p>
@@ -1059,7 +1060,7 @@ and the <code class="docutils literal notranslate"><span class="pre">intro</span
 <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> to establish the conclusion.
 The first <code class="docutils literal notranslate"><span class="pre">apply</span></code> after <code class="docutils literal notranslate"><span class="pre">le_antisymm</span></code> implicitly
 uses <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">a</span> <span class="pre">b</span></code>, whereas the second one uses <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">b</span> <span class="pre">a</span></code>.</p>
-<p id="index-22">Another solution is to use the <code class="docutils literal notranslate"><span class="pre">repeat</span></code> tactic,
+<p id="index-23">Another solution is to use the <code class="docutils literal notranslate"><span class="pre">repeat</span></code> tactic,
 which applies a tactic (or a block) as many times
 as it can.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">min</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -1113,7 +1114,7 @@ but applying it to suitable values yields the other direction
 as well.
 As a hint, you can use the theorem <code class="docutils literal notranslate"><span class="pre">add_neg_cancel_right</span></code>
 and the <code class="docutils literal notranslate"><span class="pre">linarith</span></code> tactic.</p>
-<p id="index-23">Lean&#8217;s naming convention is made manifest
+<p id="index-24">Lean&#8217;s naming convention is made manifest
 in the library&#8217;s name for the triangle inequality:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">abs_add</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="bp">|</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">|</span> <span class="bp">&#8804;</span> <span class="bp">|</span><span class="n">a</span><span class="bp">|</span> <span class="bp">+</span> <span class="bp">|</span><span class="n">b</span><span class="bp">|</span><span class="o">)</span>
 </pre></div>
@@ -1125,7 +1126,7 @@ in the library&#8217;s name for the triangle inequality:</p>
 </div>
 <p>See if you can do this in three lines or less.
 You can use the theorem <code class="docutils literal notranslate"><span class="pre">sub_add_cancel</span></code>.</p>
-<p id="index-24">Another important relation that we will make use of
+<p id="index-25">Another important relation that we will make use of
 in the sections to come is the divisibility relation
 on the natural numbers, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8739;</span> <span class="pre">y</span></code>.
 Be careful: the divisibility symbol is <em>not</em> the
@@ -1155,7 +1156,7 @@ you need to prove the following:</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p id="index-25">With respect to divisibility, the <em>greatest common divisor</em>,
+<p id="index-26">With respect to divisibility, the <em>greatest common divisor</em>,
 <code class="docutils literal notranslate"><span class="pre">gcd</span></code>, and least common multiple, <code class="docutils literal notranslate"><span class="pre">lcm</span></code>,
 are analogous to <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code>.
 Since every number divides <code class="docutils literal notranslate"><span class="pre">0</span></code>,
@@ -1190,7 +1191,7 @@ either one will work.</p>
 </section>
 <section id="proving-facts-about-algebraic-structures">
 <span id="id4"></span><h2><span class="section-number">2.5. </span>Proving Facts about Algebraic Structures<a class="headerlink" href="#proving-facts-about-algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>
-<p id="index-26">In <a class="reference internal" href="#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a>,
+<p id="index-27">In <a class="reference internal" href="#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a>,
 we saw that many common identities governing the real numbers hold
 in more general classes of algebraic structures,
 such as commutative rings.
@@ -1240,7 +1241,7 @@ the symbol <code class="docutils literal notranslate"><span class="pre">&#172;</
 In <a class="reference internal" href="C03_Logic.html#logic"><span class="std std-numref">Chapter 3</span></a>, you will learn how to use
 these logical connectives to <em>prove</em> that <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>
 has the properties indicated.</p>
-<p id="index-27">A <em>lattice</em> is a structure that extends a partial
+<p id="index-28">A <em>lattice</em> is a structure that extends a partial
 order with operations <code class="docutils literal notranslate"><span class="pre">&#8851;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#8852;</span></code> that are
 analogous to <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> on the real numbers:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Lattice</span> <span class="n">&#945;</span><span class="o">]</span>
@@ -1380,7 +1381,7 @@ enumerated in the last two examples:</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p id="index-28">Finally, here is one last example.
+<p id="index-29">Finally, here is one last example.
 A <em>metric space</em> consists of a set equipped with a notion of
 distance, <code class="docutils literal notranslate"><span class="pre">dist</span> <span class="pre">x</span> <span class="pre">y</span></code>,
 mapping any pair of elements to a real number.

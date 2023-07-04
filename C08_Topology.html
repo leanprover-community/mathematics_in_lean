@@ -343,7 +343,7 @@ which is to say, it reverses the order of the arguments.</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">F</span> <span class="pre">&#215;&#738;</span> <span class="pre">G</span> <span class="pre">=</span> <span class="pre">(comap</span> <span class="pre">Prod.fst</span> <span class="pre">F)</span> <span class="pre">&#8851;</span> <span class="pre">(comap</span> <span class="pre">Prod.snd</span> <span class="pre">G)</span></code>.</p>
 </div></blockquote>
-<p>Here the <code class="docutils literal notranslate"><span class="pre">inf</span></code> operation refers to the lattice structure on <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">X</span></code> for any type <code class="docutils literal notranslate"><span class="pre">X</span></code>, whereby
+<p>Here the <code class="docutils literal notranslate"><span class="pre">inf</span></code> operation refers to the lattice structure on <code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">X</span></code> for any type <code class="docutils literal notranslate"><span class="pre">X</span></code>, whereby
 <code class="docutils literal notranslate"><span class="pre">F</span> <span class="pre">&#8851;</span> <span class="pre">G</span></code> is the greatest filter that is smaller than both <code class="docutils literal notranslate"><span class="pre">F</span></code> and <code class="docutils literal notranslate"><span class="pre">G</span></code>.
 Thus the <code class="docutils literal notranslate"><span class="pre">inf</span></code> operation generalizes the notion of the intersection of sets.</p>
 <p>A lot of proofs in mathlib use all of the aforementioned structure (<code class="docutils literal notranslate"><span class="pre">map</span></code>, <code class="docutils literal notranslate"><span class="pre">comap</span></code>, <code class="docutils literal notranslate"><span class="pre">inf</span></code>, <code class="docutils literal notranslate"><span class="pre">sup</span></code>, and <code class="docutils literal notranslate"><span class="pre">prod</span></code>)
@@ -400,7 +400,7 @@ this for the standard neighborhoods <code class="docutils literal notranslate"><
 The key is that, by definition, every neighborhood contains such a standard one.
 This observation leads to the notion of a <em>filter basis</em>.</p>
 <p>Given <code class="docutils literal notranslate"><span class="pre">F</span> <span class="pre">:</span> <span class="pre">Filter</span> <span class="pre">X</span></code>,
-a family of sets <cite>s : &#953; &#8594; Set X</cite> is a basis for <code class="docutils literal notranslate"><span class="pre">F</span></code> if for every set <code class="docutils literal notranslate"><span class="pre">U</span></code>,
+a family of sets <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">:</span> <span class="pre">&#953;</span> <span class="pre">&#8594;</span> <span class="pre">Set</span> <span class="pre">X</span></code> is a basis for <code class="docutils literal notranslate"><span class="pre">F</span></code> if for every set <code class="docutils literal notranslate"><span class="pre">U</span></code>,
 we have <code class="docutils literal notranslate"><span class="pre">U</span> <span class="pre">&#8712;</span> <span class="pre">F</span></code> if and only if it contains some <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">i</span></code>. In other words, formally speaking,
 <code class="docutils literal notranslate"><span class="pre">s</span></code> is a basis if it satisfies
 <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">U</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">X,</span> <span class="pre">U</span> <span class="pre">&#8712;</span> <span class="pre">F</span> <span class="pre">&#8596;</span> <span class="pre">&#8707;</span> <span class="pre">i,</span> <span class="pre">s</span> <span class="pre">i</span> <span class="pre">&#8838;</span> <span class="pre">U</span></code>. It is even more flexible to consider
@@ -471,9 +471,9 @@ Given <code class="docutils literal notranslate"><span class="pre">F</span> <spa
 <li><p>the condition <code class="docutils literal notranslate"><span class="pre">U</span> <span class="pre">&#8712;</span> <span class="pre">F</span> <span class="pre">&#8594;</span> <span class="pre">U</span> <span class="pre">&#8838;</span> <span class="pre">V</span> <span class="pre">&#8594;</span> <span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">F</span></code> ensures <code class="docutils literal notranslate"><span class="pre">(&#8704;&#7584;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">F,</span> <span class="pre">P</span> <span class="pre">x)</span> <span class="pre">&#8594;</span> <span class="pre">(&#8704;</span> <span class="pre">x,</span> <span class="pre">P</span> <span class="pre">x</span> <span class="pre">&#8594;</span> <span class="pre">Q</span> <span class="pre">x)</span> <span class="pre">&#8594;</span> <span class="pre">&#8704;&#7584;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">F,</span> <span class="pre">Q</span> <span class="pre">x</span></code>, and</p></li>
 <li><p>the condition <code class="docutils literal notranslate"><span class="pre">U</span> <span class="pre">&#8712;</span> <span class="pre">F</span> <span class="pre">&#8594;</span> <span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">F</span> <span class="pre">&#8594;</span> <span class="pre">U</span> <span class="pre">&#8745;</span> <span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">F</span></code> ensures <code class="docutils literal notranslate"><span class="pre">(&#8704;&#7584;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">F,</span> <span class="pre">P</span> <span class="pre">x)</span> <span class="pre">&#8594;</span> <span class="pre">(&#8704;&#7584;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">F,</span> <span class="pre">Q</span> <span class="pre">x)</span> <span class="pre">&#8594;</span> <span class="pre">&#8704;&#7584;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">F,</span> <span class="pre">P</span> <span class="pre">x</span> <span class="pre">&#8743;</span> <span class="pre">Q</span> <span class="pre">x</span></code>.</p></li>
 </ul>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">@</span><span class="n">eventually_of_forall</span>
-<span class="k">#check</span> <span class="bp">@</span><span class="n">Eventually.mono</span>
-<span class="k">#check</span> <span class="bp">@</span><span class="n">Eventually.and</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">eventually_of_forall</span>
+<span class="k">#check</span> <span class="n">Eventually.mono</span>
+<span class="k">#check</span> <span class="n">Eventually.and</span>
 </pre></div>
 </div>
 <p>The second item, corresponding to <code class="docutils literal notranslate"><span class="pre">eventually.mono</span></code>, supports nice ways
@@ -961,9 +961,9 @@ precise sense the neighborhood filters is all there is in a topological space st
 of formal properties of <code class="docutils literal notranslate"><span class="pre">topological_space</span> <span class="pre">:</span> <span class="pre">Type</span> <span class="pre">u</span> <span class="pre">&#8594;</span> <span class="pre">Type</span> <span class="pre">u</span></code>. From a purely mathematical point of view,
 those formal properties are a very clean way to explain how topological spaces solve issues that metric spaces
 have. From this point of view, the issues solved by topological spaces is that metric spaces enjoy very
-little fonctoriality, and have very bad categorical properties in general. This comes on top of the fact
+little functoriality, and have very bad categorical properties in general. This comes on top of the fact
 already discussed that metric spaces contain a lot of geometrical information that is not topologically relevant.</p>
-<p>Let us focus on fonctoriality first. A metric space structure can be induced on a subset or,
+<p>Let us focus on functoriality first. A metric space structure can be induced on a subset or,
 equivalently, it can be pulled back by an injective map. But that&#8217;s pretty much everything.
 They cannot be pulled back by general map or pushed forward, even by surjective maps.</p>
 <p>In particular there is no sensible distance to put on a quotient of a metric space or on an uncountable
@@ -1123,7 +1123,7 @@ together with the fact that <code class="docutils literal notranslate"><span cla
     <span class="bp">&#8707;</span> <span class="n">&#966;</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">&#8594;</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Continuous</span> <span class="n">&#966;</span> <span class="bp">&#8743;</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="n">&#966;</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
 
-<span class="k">#check</span> <span class="bp">@</span><span class="n">HasBasis.tendsto_right_iff</span>
+<span class="k">#check</span> <span class="n">HasBasis.tendsto_right_iff</span>
 </pre></div>
 </div>
 <p>In addition to separation property, the main kind of assumption you can make on a topological

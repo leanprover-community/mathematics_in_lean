@@ -3,8 +3,9 @@ import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Prime
 
 namespace C03S04
+
 example {m n : ℕ} (h : m ∣ n ∧ m ≠ n) : m ∣ n ∧ ¬n ∣ m := by
-  cases' h with h0 h1
+  rcases h with ⟨h0, h1⟩
   constructor
   · exact h0
   intro h2

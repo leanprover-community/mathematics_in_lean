@@ -148,7 +148,7 @@ example {X : Type _} [MetricSpace X] [CompactSpace X] {Y : Type _} [MetricSpace 
   let K := { p : X × X | ε ≤ φ p }
   have K_closed : IsClosed K := isClosed_le continuous_const φ_cont
   have K_cpct : IsCompact K := K_closed.isCompact
-  cases' eq_empty_or_nonempty K with hK hK
+  rcases eq_empty_or_nonempty K with hK | hK
   · use 1, by norm_num
     intro x y _
     have : (x, y) ∉ K := by simp [hK]

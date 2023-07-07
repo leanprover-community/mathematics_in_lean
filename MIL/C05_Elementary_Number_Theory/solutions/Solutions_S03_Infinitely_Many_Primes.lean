@@ -5,6 +5,7 @@ import Mathlib.Tactic
 open BigOperators
 
 namespace C05S03
+
 theorem two_le {m : ℕ} (h0 : m ≠ 0) (h1 : m ≠ 1) : 2 ≤ m := by
   cases m; contradiction
   case succ m =>
@@ -95,7 +96,7 @@ theorem mem_of_dvd_prod_primes {s : Finset ℕ} {p : ℕ} (prime_p : p.Prime) :
     linarith [prime_p.two_le]
   simp [Finset.prod_insert ans, prime_p.dvd_mul] at h₀ h₁
   rw [mem_insert]
-  cases' h₁ with h₁ h₁
+  rcases h₁ with h₁ | h₁
   · left
     exact prime_p.eq_of_dvd_of_prime h₀.1 h₁
   right
@@ -183,7 +184,7 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
   have : m % 4 = 3 ∨ n / m % 4 = 3 := by
     apply mod_4_eq_3_or_mod_4_eq_3
     rw [neq, h]
-  cases' this with h1 h1
+  rcases this with h1 | h1
   · by_cases mp : m.Prime
     · use m
       exact ⟨mp, mdvdn, h1⟩
@@ -201,14 +202,14 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
 theorem primes_mod_4_eq_3_infinite : ∀ n, ∃ p > n, Nat.Prime p ∧ p % 4 = 3 := by
   by_contra h
   push_neg  at h
-  cases' h with n hn
+  rcases h with ⟨n, hn⟩
   have : ∃ s : Finset Nat, ∀ p : ℕ, p.Prime ∧ p % 4 = 3 ↔ p ∈ s := by
     apply ex_finset_of_bounded
     use n
     contrapose! hn
     rcases hn with ⟨p, ⟨pp, p4⟩, pltn⟩
     exact ⟨p, pltn, pp, p4⟩
-  cases' this with s hs
+  rcases this with ⟨s, hs⟩
   have h₁ : ((4 * ∏ i in erase s 3, i) + 3) % 4 = 3 := by
     rw [add_comm, Nat.add_mul_mod_self_left]
     norm_num

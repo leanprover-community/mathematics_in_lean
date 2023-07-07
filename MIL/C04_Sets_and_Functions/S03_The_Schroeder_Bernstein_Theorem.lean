@@ -67,7 +67,7 @@ theorem sb_surjective (hf : Injective f) (hg : Injective g) : Surjective (sbFun 
   by_cases gyA : g y ∈ A
   · rw [A_def, sbSet, mem_iUnion] at gyA
     rcases gyA with ⟨n, hn⟩
-    cases' n with n
+    rcases n with _ | n
     · simp [sbAux] at hn
     simp [sbAux] at hn
     rcases hn with ⟨x, xmem, hx⟩
@@ -95,4 +95,3 @@ variable (g : β → α) (x : α)
 #check (invFun_eq : (∃ y, g y = x) → g (invFun g x) = x)
 
 end
-

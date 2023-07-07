@@ -7,7 +7,7 @@ def fac : ℕ → ℕ
   | n + 1 => (n + 1) * fac n
 
 theorem pow_two_le_fac (n : ℕ) : 2 ^ (n - 1) ≤ fac n := by
-  cases' n with n
+  rcases n with _ | n
   · simp [fac]
   induction' n with n ih
   · simp [fac]

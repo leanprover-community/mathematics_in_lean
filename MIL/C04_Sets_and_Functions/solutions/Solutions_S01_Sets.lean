@@ -10,10 +10,8 @@ open Set
 
 example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
   rintro x (⟨xs, xt⟩ | ⟨xs, xu⟩)
-  · use xs
-    left
-    exact xt
-  use xs; right; exact xu
+  · use xs; left; exact xt
+  . use xs; right; exact xu
 
 example : s \ (t ∪ u) ⊆ (s \ t) \ u := by
   rintro x ⟨xs, xntu⟩
@@ -32,21 +30,21 @@ example : s ∩ (s ∪ t) = s := by
   ext x; constructor
   · rintro ⟨xs, _⟩
     exact xs
-  intro xs
-  use xs; left; exact xs
+  . intro xs
+    use xs; left; exact xs
 
 example : s ∪ s ∩ t = s := by
   ext x; constructor
   · rintro (xs | ⟨xs, xt⟩) <;> exact xs
-  intro xs; left; exact xs
+  . intro xs; left; exact xs
 
 example : s \ t ∪ t = s ∪ t := by
   ext x; constructor
   · rintro (⟨xs, nxt⟩ | xt)
     · left
       exact xs
-    right
-    exact xt
+    . right
+      exact xt
   by_cases h : x ∈ t
   · intro
     right
@@ -65,26 +63,26 @@ example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
       exact xs
       rintro ⟨_, xt⟩
       contradiction
-    constructor
-    right
-    exact xt
-    rintro ⟨xs, _⟩
-    contradiction
+    . constructor
+      right
+      exact xt
+      rintro ⟨xs, _⟩
+      contradiction
   rintro ⟨xs | xt, nxst⟩
   · left
     use xs
     intro xt
     apply nxst
     constructor <;> assumption
-  right; use xt; intro xs
-  apply nxst
-  constructor <;> assumption
+  . right; use xt; intro xs
+    apply nxst
+    constructor <;> assumption
 
 example : { n | Nat.Prime n } ∩ { n | n > 2 } ⊆ { n | ¬Even n } := by
   intro n
   simp
   intro nprime
-  cases' Nat.Prime.eq_two_or_odd nprime with h h
+  rcases Nat.Prime.eq_two_or_odd nprime with h | h
   · rw [h]
     intro
     linarith

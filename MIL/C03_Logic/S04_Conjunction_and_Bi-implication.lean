@@ -3,6 +3,7 @@ import Mathlib.Data.Real.Basic
 import Mathlib.Data.Nat.Prime
 
 namespace C03S04
+
 example {x y : ℝ} (h₀ : x ≤ y) (h₁ : ¬y ≤ x) : x ≤ y ∧ x ≠ y := by
   constructor
   · assumption
@@ -20,7 +21,7 @@ example {x y : ℝ} (h₀ : x ≤ y) (h₁ : ¬y ≤ x) : x ≤ y ∧ x ≠ y :=
   ⟨h₀, h⟩
 
 example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
-  cases' h with h₀ h₁
+  rcases h with ⟨h₀, h₁⟩
   contrapose! h₁
   exact le_antisymm h₀ h₁
 
@@ -30,6 +31,29 @@ example {x y : ℝ} : x ≤ y ∧ x ≠ y → ¬y ≤ x := by
 
 example {x y : ℝ} : x ≤ y ∧ x ≠ y → ¬y ≤ x :=
   fun ⟨h₀, h₁⟩ h' ↦ h₁ (le_antisymm h₀ h')
+
+example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
+  have ⟨h₀, h₁⟩ := h
+  contrapose! h₁
+  exact le_antisymm h₀ h₁
+
+example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
+  cases h
+  case intro h₀ h₁ =>
+    contrapose! h₁
+    exact le_antisymm h₀ h₁
+
+example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
+  cases h
+  next h₀ h₁ =>
+    contrapose! h₁
+    exact le_antisymm h₀ h₁
+
+example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
+  match h with
+    | ⟨h₀, h₁⟩ =>
+        contrapose! h₁
+        exact le_antisymm h₀ h₁
 
 example {x y : ℝ} (h : x ≤ y ∧ x ≠ y) : ¬y ≤ x := by
   intro h'

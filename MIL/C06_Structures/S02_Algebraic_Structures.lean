@@ -2,6 +2,7 @@ import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
 namespace C06S02
+
 structure Group₁ (α : Type _) where
   mul : α → α → α
   one : α

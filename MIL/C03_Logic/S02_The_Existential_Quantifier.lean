@@ -2,6 +2,7 @@ import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
 namespace C03S02
+
 example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
   use 5 / 2
   norm_num
@@ -34,8 +35,8 @@ section
 variable {f g : ℝ → ℝ}
 
 example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
-  cases' ubf with a ubfa
-  cases' ubg with b ubgb
+  rcases ubf with ⟨a, ubfa⟩
+  rcases ubg with ⟨b, ubgb⟩
   use a + b
   apply fnUb_add ubfa ubgb
 
@@ -45,11 +46,6 @@ example (lbf : FnHasLb f) (lbg : FnHasLb g) : FnHasLb fun x ↦ f x + g x := by
 example {c : ℝ} (ubf : FnHasUb f) (h : c ≥ 0) : FnHasUb fun x ↦ c * f x := by
   sorry
 
-example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
-  rcases ubf with ⟨a, ubfa⟩
-  rcases ubg with ⟨b, ubgb⟩
-  exact ⟨a + b, fnUb_add ubfa ubgb⟩
-
 example : FnHasUb f → FnHasUb g → FnHasUb fun x ↦ f x + g x := by
   rintro ⟨a, ubfa⟩ ⟨b, ubgb⟩
   exact ⟨a + b, fnUb_add ubfa ubgb⟩
@@ -58,6 +54,35 @@ example : FnHasUb f → FnHasUb g → FnHasUb fun x ↦ f x + g x :=
   fun ⟨a, ubfa⟩ ⟨b, ubgb⟩ ↦ ⟨a + b, fnUb_add ubfa ubgb⟩
 
 end
+
+example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
+  obtain ⟨a, ubfa⟩ := ubf
+  obtain ⟨b, ubgb⟩ := ubg
+  exact ⟨a + b, fnUb_add ubfa ubgb⟩
+
+example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
+  cases ubf
+  case intro a ubfa =>
+    cases ubg
+    case intro b ubgb =>
+      exact ⟨a + b, fnUb_add ubfa ubgb⟩
+
+example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
+  cases ubf
+  next a ubfa =>
+    cases ubg
+    next b ubgb =>
+      exact ⟨a + b, fnUb_add ubfa ubgb⟩
+
+example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x := by
+  match ubf, ubg with
+    | ⟨a, ubfa⟩, ⟨b, ubgb⟩ =>
+      exact ⟨a + b, fnUb_add ubfa ubgb⟩
+
+example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x :=
+  match ubf, ubg with
+    | ⟨a, ubfa⟩, ⟨b, ubgb⟩ =>
+      ⟨a + b, fnUb_add ubfa ubgb⟩
 
 section
 
@@ -87,8 +112,8 @@ section
 variable {a b c : ℕ}
 
 example (divab : a ∣ b) (divbc : b ∣ c) : a ∣ c := by
-  cases' divab with d beq
-  cases' divbc with e ceq
+  rcases divab with ⟨d, beq⟩
+  rcases divbc with ⟨e, ceq⟩
   rw [ceq, beq]
   use d * e; ring
 
@@ -114,7 +139,7 @@ example (x y : ℝ) (h : x - y ≠ 0) : (x ^ 2 - y ^ 2) / (x - y) = x + y := by
   ring
 
 example {f : ℝ → ℝ} (h : Surjective f) : ∃ x, f x ^ 2 = 4 := by
-  cases' h 2 with x hx
+  rcases h 2 with ⟨x, hx⟩
   use x
   rw [hx]
   norm_num

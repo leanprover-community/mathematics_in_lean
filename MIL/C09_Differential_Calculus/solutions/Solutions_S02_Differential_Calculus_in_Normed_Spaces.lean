@@ -29,7 +29,7 @@ example {ι : Type _} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, 
   -- the union is the entire space; this is where we use `h`
   have hU : (⋃ n : ℕ, e n) = univ := by
     refine' eq_univ_of_forall fun x ↦ _
-    cases' h x with C hC
+    rcases h x with ⟨C, hC⟩
     obtain ⟨m, hm⟩ := exists_nat_ge C
     exact ⟨e m, mem_range_self m, mem_iInter.mpr fun i ↦ le_trans (hC i) hm⟩
   /- apply the Baire category theorem to conclude that for some `m : ℕ`,

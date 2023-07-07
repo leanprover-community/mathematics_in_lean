@@ -34,19 +34,18 @@ example : s ∩ (t ∪ u) ⊆ s ∩ t ∪ s ∩ u := by
   intro x hx
   have xs : x ∈ s := hx.1
   have xtu : x ∈ t ∪ u := hx.2
-  cases' xtu with xt xu
+  rcases xtu with xt | xu
   · left
     show x ∈ s ∩ t
     exact ⟨xs, xt⟩
-  right
-  show x ∈ s ∩ u
-  exact ⟨xs, xu⟩
+  . right
+    show x ∈ s ∩ u
+    exact ⟨xs, xu⟩
 
 example : s ∩ (t ∪ u) ⊆ s ∩ t ∪ s ∩ u := by
   rintro x ⟨xs, xt | xu⟩
-  · left
-    exact ⟨xs, xt⟩
-  right; exact ⟨xs, xu⟩
+  · left; exact ⟨xs, xt⟩
+  . right; exact ⟨xs, xu⟩
 
 example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
   sorry
@@ -59,10 +58,9 @@ example : (s \ t) \ u ⊆ s \ (t ∪ u) := by
   · exact xs
   intro xtu
   -- x ∈ t ∨ x ∈ u
-  cases' xtu with xt xu
-  · show False
-    exact xnt xt
-  show False; exact xnu xu
+  rcases xtu with xt | xu
+  · show False; exact xnt xt
+  . show False; exact xnu xu
 
 example : (s \ t) \ u ⊆ s \ (t ∪ u) := by
   rintro x ⟨⟨xs, xnt⟩, xnu⟩
@@ -75,9 +73,8 @@ example : s ∩ t = t ∩ s := by
   ext x
   simp only [mem_inter_iff]
   constructor
-  · rintro ⟨xs, xt⟩
-    exact ⟨xt, xs⟩
-  rintro ⟨xt, xs⟩; exact ⟨xs, xt⟩
+  · rintro ⟨xs, xt⟩; exact ⟨xt, xs⟩
+  . rintro ⟨xt, xs⟩; exact ⟨xs, xt⟩
 
 example : s ∩ t = t ∩ s :=
   Set.ext fun x ↦ ⟨fun ⟨xs, xt⟩ ↦ ⟨xt, xs⟩, fun ⟨xt, xs⟩ ↦ ⟨xs, xt⟩⟩
@@ -86,9 +83,8 @@ example : s ∩ t = t ∩ s := by ext x; simp [and_comm]
 
 example : s ∩ t = t ∩ s := by
   apply Subset.antisymm
-  · rintro x ⟨xs, xt⟩
-    exact ⟨xt, xs⟩
-  rintro x ⟨xt, xs⟩; exact ⟨xs, xt⟩
+  · rintro x ⟨xs, xt⟩; exact ⟨xt, xs⟩
+  . rintro x ⟨xt, xs⟩; exact ⟨xs, xt⟩
 
 example : s ∩ t = t ∩ s :=
     Subset.antisymm sorry sorry

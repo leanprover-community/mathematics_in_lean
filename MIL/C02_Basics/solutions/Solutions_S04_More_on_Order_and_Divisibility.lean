@@ -2,6 +2,7 @@ import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
 namespace C02S04
+
 section
 variable (a b c d : ℝ)
 

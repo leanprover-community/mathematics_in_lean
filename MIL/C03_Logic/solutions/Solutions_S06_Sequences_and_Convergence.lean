@@ -2,6 +2,7 @@ import Mathlib.Tactic
 import Mathlib.Data.Real.Basic
 
 namespace C03S06
+
 def ConvergesTo (s : ℕ → ℝ) (a : ℝ) :=
   ∀ ε > 0, ∃ N, ∀ n ≥ N, |s n - a| < ε
 
@@ -18,8 +19,8 @@ theorem convergesTo_add {s t : ℕ → ℝ} {a b : ℝ}
   intro ε εpos
   dsimp
   have ε2pos : 0 < ε / 2 := by linarith
-  cases' cs (ε / 2) ε2pos with Ns hs
-  cases' ct (ε / 2) ε2pos with Nt ht
+  rcases cs (ε / 2) ε2pos with ⟨Ns, hs⟩
+  rcases ct (ε / 2) ε2pos with ⟨Nt, ht⟩
   use max Ns Nt
   intro n hn
   have ngeNs : n ≥ Ns := le_of_max_le_left hn
@@ -44,7 +45,7 @@ theorem convergesTo_mul_const {s : ℕ → ℝ} {a : ℝ} (c : ℝ) (cs : Conver
   intro ε εpos
   dsimp
   have εcpos : 0 < ε / |c| := by apply div_pos εpos acpos
-  cases' cs (ε / |c|) εcpos with Ns hs
+  rcases cs (ε / |c|) εcpos with ⟨Ns, hs⟩
   use Ns
   intro n ngt
   calc
@@ -54,7 +55,7 @@ theorem convergesTo_mul_const {s : ℕ → ℝ} {a : ℝ} (c : ℝ) (cs : Conver
 
 theorem exists_abs_le_of_convergesTo {s : ℕ → ℝ} {a : ℝ} (cs : ConvergesTo s a) :
     ∃ N b, ∀ n, N ≤ n → |s n| < b := by
-  cases' cs 1 zero_lt_one with N h
+  rcases cs 1 zero_lt_one with ⟨N, h⟩
   use N, |a| + 1
   intro n ngt
   calc
@@ -71,7 +72,7 @@ theorem aux {s t : ℕ → ℝ} {a : ℝ} (cs : ConvergesTo s a) (ct : Converges
   rcases exists_abs_le_of_convergesTo cs with ⟨N₀, B, h₀⟩
   have Bpos : 0 < B := lt_of_le_of_lt (abs_nonneg _) (h₀ N₀ (le_refl _))
   have pos₀ : ε / B > 0 := div_pos εpos Bpos
-  cases' ct _ pos₀ with N₁ h₁
+  rcases ct _ pos₀ with ⟨N₁, h₁⟩
   use max N₀ N₁
   intro n ngt
   have ngeN₀ : n ≥ N₀ := le_of_max_le_left ngt
@@ -107,8 +108,8 @@ theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ}
   have εpos : ε > 0 := by
     change |a - b| / 2 > 0
     linarith
-  cases' sa ε εpos with Na hNa
-  cases' sb ε εpos with Nb hNb
+  rcases sa ε εpos with ⟨Na, hNa⟩
+  rcases sb ε εpos with ⟨Nb, hNb⟩
   let N := max Na Nb
   have absa : |s N - a| < ε := by
     apply hNa

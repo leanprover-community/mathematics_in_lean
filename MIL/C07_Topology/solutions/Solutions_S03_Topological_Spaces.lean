@@ -1,12 +1,9 @@
 import Mathlib.Topology.Instances.Real
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 
-open Set Filter
-
-open Topology Filter
+open Set Filter Topology
 
 section
-
 variable {X : Type _} [TopologicalSpace X]
 
 example : IsOpen (univ : Set X) :=
@@ -18,7 +15,8 @@ example : IsOpen (∅ : Set X) :=
 example {ι : Type _} {s : ι → Set X} (hs : ∀ i, IsOpen <| s i) : IsOpen (⋃ i, s i) :=
   isOpen_iUnion hs
 
-example {ι : Type _} [Fintype ι] {s : ι → Set X} (hs : ∀ i, IsOpen <| s i) : IsOpen (⋂ i, s i) :=
+example {ι : Type _} [Fintype ι] {s : ι → Set X} (hs : ∀ i, IsOpen <| s i) :
+    IsOpen (⋂ i, s i) :=
   isOpen_iInter hs
 
 variable {Y : Type _} [TopologicalSpace Y]
@@ -87,8 +85,10 @@ example (T_X : TopologicalSpace X) (T_Y : TopologicalSpace Y) (f : X → Y) :
     Continuous f ↔ TopologicalSpace.coinduced f T_X ≤ T_Y :=
   continuous_iff_coinduced_le
 
-example {Z : Type _} (f : X → Y) (T_X : TopologicalSpace X) (T_Z : TopologicalSpace Z) (g : Y → Z) :
-    @Continuous Y Z (TopologicalSpace.coinduced f T_X) T_Z g ↔ @Continuous X Z T_X T_Z (g ∘ f) := by
+example {Z : Type _} (f : X → Y) (T_X : TopologicalSpace X) (T_Z : TopologicalSpace Z)
+      (g : Y → Z) :
+    @Continuous Y Z (TopologicalSpace.coinduced f T_X) T_Z g ↔
+      @Continuous X Z T_X T_Z (g ∘ f) := by
   rw [continuous_iff_coinduced_le, coinduced_compose, continuous_iff_coinduced_le]
 
 example (ι : Type _) (X : ι → Type _) (T_X : ∀ i, TopologicalSpace <| X i) :
@@ -104,16 +104,19 @@ example [TopologicalSpace X] [RegularSpace X] (a : X) :
     (𝓝 a).HasBasis (fun s : Set X => s ∈ 𝓝 a ∧ IsClosed s) id :=
   closed_nhds_basis a
 
-example [TopologicalSpace X] {x : X} : (𝓝 x).HasBasis (fun t : Set X => t ∈ 𝓝 x ∧ IsOpen t) id :=
+example [TopologicalSpace X] {x : X} :
+    (𝓝 x).HasBasis (fun t : Set X => t ∈ 𝓝 x ∧ IsOpen t) id :=
   nhds_basis_opens' x
 
-theorem aux {X Y A : Type _} [TopologicalSpace X] {c : A → X} {f : A → Y} {x : X} {F : Filter Y}
-    (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
+theorem aux {X Y A : Type _} [TopologicalSpace X] {c : A → X}
+      {f : A → Y} {x : X} {F : Filter Y}
+      (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
     ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' :=
   sorry
 
-example {X Y A : Type _} [TopologicalSpace X] {c : A → X} {f : A → Y} {x : X} {F : Filter Y}
-    (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
+example {X Y A : Type _} [TopologicalSpace X] {c : A → X}
+      {f : A → Y} {x : X} {F : Filter Y}
+      (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
     ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' := by
   simpa [and_assoc] using ((nhds_basis_opens' x).comap c).tendsto_left_iff.mp h V' V'_in
 
@@ -135,7 +138,7 @@ example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X} (hA : 
   · rw [continuous_iff_continuousAt]
     intro x
     suffices ∀ V' ∈ 𝓝 (φ x), IsClosed V' → φ ⁻¹' V' ∈ 𝓝 x by
-      simp [ContinuousAt, (closed_nhds_basis _).tendsto_right_iff]
+      simpa [ContinuousAt, (closed_nhds_basis (φ x)).tendsto_right_iff]
     intro V' V'_in V'_closed
     obtain ⟨V, V_in, V_op, hV⟩ : ∃ V ∈ 𝓝 x, IsOpen V ∧ (↑) ⁻¹' V ⊆ f ⁻¹' V' := aux (hφ x) V'_in
     suffices : ∀ y ∈ V, φ y ∈ V'
@@ -147,9 +150,10 @@ example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X} (hA : 
     exact mem_of_superset (preimage_mem_comap hVx) hV
   · intro a
     have lim : Tendsto f (𝓝 a) (𝓝 <| φ a) := by simpa [nhds_induced] using hφ a
-    exact tendsto_nhds_unique limUnder f_cont.continuousAt
+    exact tendsto_nhds_unique lim f_cont.continuousAt
 
-example [TopologicalSpace X] [TopologicalSpace.FirstCountableTopology X] {s : Set X} {a : X} :
+example [TopologicalSpace X] [TopologicalSpace.FirstCountableTopology X]
+      {s : Set X} {a : X} :
     a ∈ closure s ↔ ∃ u : ℕ → X, (∀ n, u n ∈ s) ∧ Tendsto u atTop (𝓝 a) :=
   mem_closure_iff_seq_limit
 
@@ -158,7 +162,8 @@ variable [TopologicalSpace X]
 example {F : Filter X} {x : X} : ClusterPt x F ↔ NeBot (𝓝 x ⊓ F) :=
   Iff.rfl
 
-example {s : Set X} : IsCompact s ↔ ∀ (F : Filter X) [NeBot F], F ≤ 𝓟 s → ∃ a ∈ s, ClusterPt a F :=
+example {s : Set X} :
+    IsCompact s ↔ ∀ (F : Filter X) [NeBot F], F ≤ 𝓟 s → ∃ a ∈ s, ClusterPt a F :=
   Iff.rfl
 
 example [TopologicalSpace.FirstCountableTopology X] {s : Set X} {u : ℕ → X} (hs : IsCompact s)

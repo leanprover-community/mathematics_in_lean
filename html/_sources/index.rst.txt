@@ -11,7 +11,7 @@ Mathematics in Lean
    C02_Basics
    C03_Logic
    C04_Sets_and_Functions
-   C05_Number_Theory
+   C05_Elementary_Number_Theory
    C06_Structures
    C07_Hierarchies
    C08_Topology

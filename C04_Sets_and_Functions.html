@@ -199,13 +199,13 @@ we can also use the <code class="docutils literal notranslate"><span class="pre"
   <span class="n">intro</span> <span class="n">x</span> <span class="n">hx</span>
   <span class="k">have</span> <span class="n">xs</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">hx.1</span>
   <span class="k">have</span> <span class="n">xtu</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">hx.2</span>
-  <span class="n">cases&#39;</span> <span class="n">xtu</span> <span class="k">with</span> <span class="n">xt</span> <span class="n">xu</span>
+  <span class="n">rcases</span> <span class="n">xtu</span> <span class="k">with</span> <span class="n">xt</span> <span class="bp">|</span> <span class="n">xu</span>
   <span class="bp">&#183;</span> <span class="n">left</span>
     <span class="k">show</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span>
     <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
-  <span class="n">right</span>
-  <span class="k">show</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span>
-  <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+  <span class="bp">.</span> <span class="n">right</span>
+    <span class="k">show</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span>
+    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>Since intersection binds tighter than union,
@@ -214,9 +214,8 @@ is unnecessary, but they make the meaning of the expression clearer.
 The following is a shorter proof of the same fact:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">u</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span> <span class="bp">|</span> <span class="n">xu</span><span class="o">&#10217;</span>
-  <span class="bp">&#183;</span> <span class="n">left</span>
-    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
-  <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
+  <span class="bp">&#183;</span> <span class="n">left</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+  <span class="bp">.</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xu</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>As an exercise, try proving the other inclusion:</p>
@@ -245,10 +244,9 @@ show how to avoid using them.</p>
   <span class="bp">&#183;</span> <span class="n">exact</span> <span class="n">xs</span>
   <span class="n">intro</span> <span class="n">xtu</span>
   <span class="c1">-- x &#8712; t &#8744; x &#8712; u</span>
-  <span class="n">cases&#39;</span> <span class="n">xtu</span> <span class="k">with</span> <span class="n">xt</span> <span class="n">xu</span>
-  <span class="bp">&#183;</span> <span class="k">show</span> <span class="n">False</span>
-    <span class="n">exact</span> <span class="n">xnt</span> <span class="n">xt</span>
-  <span class="k">show</span> <span class="n">False</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xnu</span> <span class="n">xu</span>
+  <span class="n">rcases</span> <span class="n">xtu</span> <span class="k">with</span> <span class="n">xt</span> <span class="bp">|</span> <span class="n">xu</span>
+  <span class="bp">&#183;</span> <span class="k">show</span> <span class="n">False</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xnt</span> <span class="n">xt</span>
+  <span class="bp">.</span> <span class="k">show</span> <span class="n">False</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">xnu</span> <span class="n">xu</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">s</span> <span class="bp">\</span> <span class="n">t</span><span class="o">)</span> <span class="bp">\</span> <span class="n">u</span> <span class="bp">&#8838;</span> <span class="n">s</span> <span class="bp">\</span> <span class="o">(</span><span class="n">t</span> <span class="bp">&#8746;</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xnt</span><span class="o">&#10217;,</span> <span class="n">xnu</span><span class="o">&#10217;</span>
@@ -271,9 +269,8 @@ the <code class="docutils literal notranslate"><span class="pre">ext</span></cod
   <span class="n">ext</span> <span class="n">x</span>
   <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_inter_iff</span><span class="o">]</span>
   <span class="n">constructor</span>
-  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
-    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
-  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
+  <span class="bp">.</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>Once again, deleting the line <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">only</span> <span class="pre">[mem_inter_iff]</span></code>
@@ -295,9 +292,8 @@ which allows us to prove an equation <code class="docutils literal notranslate">
 between sets by proving <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8838;</span> <span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&#8838;</span> <span class="pre">s</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">&#8745;</span> <span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">Subset.antisymm</span>
-  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
-    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
-  <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
+  <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span>
+  <span class="bp">.</span> <span class="n">rintro</span> <span class="n">x</span> <span class="o">&#10216;</span><span class="n">xt</span><span class="o">,</span> <span class="n">xs</span><span class="o">&#10217;</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xs</span><span class="o">,</span> <span class="n">xt</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>Try finishing this proof term:</p>
@@ -1128,7 +1124,7 @@ applies the corresponding defining equation of <code class="docutils literal not
   <span class="n">by_cases</span> <span class="n">gyA</span> <span class="o">:</span> <span class="n">g</span> <span class="n">y</span> <span class="bp">&#8712;</span> <span class="n">A</span>
   <span class="bp">&#183;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">A_def</span><span class="o">,</span> <span class="n">sbSet</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span> <span class="n">at</span> <span class="n">gyA</span>
     <span class="n">rcases</span> <span class="n">gyA</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="o">&#10217;</span>
-    <span class="n">cases&#39;</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span>
+    <span class="n">rcases</span> <span class="n">n</span> <span class="k">with</span> <span class="n">_</span> <span class="bp">|</span> <span class="n">n</span>
     <span class="bp">&#183;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">sbAux</span><span class="o">]</span> <span class="n">at</span> <span class="n">hn</span>
     <span class="n">simp</span> <span class="o">[</span><span class="n">sbAux</span><span class="o">]</span> <span class="n">at</span> <span class="n">hn</span>
     <span class="n">rcases</span> <span class="n">hn</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xmem</span><span class="o">,</span> <span class="n">hx</span><span class="o">&#10217;</span>

@@ -1072,7 +1072,6 @@ whether or not you use these tricks,
 we encourage you to prove the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">max</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">max</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
-
 <span class="kd">example</span> <span class="o">:</span> <span class="n">min</span> <span class="o">(</span><span class="n">min</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">min</span> <span class="n">a</span> <span class="o">(</span><span class="n">min</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
@@ -1099,7 +1098,6 @@ but for now we will stick to examples that don&#8217;t require the case split.</
 <p>Here is one such example:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">aux</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">&#8804;</span> <span class="n">min</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
-
 <span class="kd">example</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">min</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
@@ -1118,6 +1116,7 @@ in the library&#8217;s name for the triangle inequality:</p>
 <p>Use it to prove the following variant:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="bp">|</span><span class="n">a</span><span class="bp">|</span> <span class="bp">-</span> <span class="bp">|</span><span class="n">b</span><span class="bp">|</span> <span class="bp">&#8804;</span> <span class="bp">|</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="bp">|</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
+<span class="kd">end</span>
 </pre></div>
 </div>
 <p>See if you can do this in three lines or less.
@@ -1150,6 +1149,7 @@ See if you can guess the names of the theorems
 you need to prove the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8739;</span> <span class="n">w</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8739;</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">w</span> <span class="bp">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
+<span class="kd">end</span>
 </pre></div>
 </div>
 <p id="index-26">With respect to divisibility, the <em>greatest common divisor</em>,
@@ -1158,32 +1158,34 @@ are analogous to <code class="docutils literal notranslate"><span class="pre">mi
 Since every number divides <code class="docutils literal notranslate"><span class="pre">0</span></code>,
 <code class="docutils literal notranslate"><span class="pre">0</span></code> is really the greatest element with respect to divisibility:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span>
-<span class="kn">open</span> <span class="n">Nat</span>
 
-<span class="k">#check</span> <span class="o">(</span><span class="n">gcd_zero_right</span> <span class="n">n</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">n</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span>
-<span class="k">#check</span> <span class="o">(</span><span class="n">gcd_zero_left</span> <span class="n">n</span> <span class="o">:</span> <span class="n">gcd</span> <span class="mi">0</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span>
-<span class="k">#check</span> <span class="o">(</span><span class="n">lcm_zero_right</span> <span class="n">n</span> <span class="o">:</span> <span class="n">lcm</span> <span class="n">n</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
-<span class="k">#check</span> <span class="o">(</span><span class="n">lcm_zero_left</span> <span class="n">n</span> <span class="o">:</span> <span class="n">lcm</span> <span class="mi">0</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">Nat.gcd_zero_right</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat.gcd</span> <span class="n">n</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">Nat.gcd_zero_left</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat.gcd</span> <span class="mi">0</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">Nat.lcm_zero_right</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat.lcm</span> <span class="n">n</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">Nat.lcm_zero_left</span> <span class="n">n</span> <span class="o">:</span> <span class="n">Nat.lcm</span> <span class="mi">0</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>The functions <code class="docutils literal notranslate"><span class="pre">gcd</span></code> and <code class="docutils literal notranslate"><span class="pre">lcm</span></code> for natural numbers are in the
-<code class="docutils literal notranslate"><span class="pre">Nat</span></code> namespace,
-which means that the full identifiers are <code class="docutils literal notranslate"><span class="pre">Nat.gcd</span></code> and <code class="docutils literal notranslate"><span class="pre">Nat.lcm</span></code>.
-Similarly, the names of the theorems listed are prefixed by <code class="docutils literal notranslate"><span class="pre">Nat</span></code>.
-The command <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">Nat</span></code> opens the namespace,
-allowing us to use the shorter names.</p>
 <p>See if you can guess the names of the theorems you will need to
 prove the following:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">gcd</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">Nat.gcd</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">Nat.gcd</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
+<span class="kd">end</span>
 </pre></div>
 </div>
-<p>Hint: you can use <code class="docutils literal notranslate"><span class="pre">dvd_antisymm</span></code>, but if you do, Lean will
-complain that the expression is ambiguous between the generic
-theorem and the version <code class="docutils literal notranslate"><span class="pre">Nat.dvd_antisymm</span></code>,
-the one specifically for the natural numbers.
-You can use <code class="docutils literal notranslate"><span class="pre">_root_.dvd_antisymm</span></code> to specify the generic one;
-either one will work.</p>
+<dl class="simple">
+<dt>Hint: you can use <code class="docutils literal notranslate"><span class="pre">dvd_antisymm</span></code>, but if you do, Lean will</dt><dd><p>Hint: you can use <code class="docutils literal notranslate"><span class="pre">dvd_antisymm</span></code>, but if you do, Lean will</p>
+</dd>
+<dt>complain that the expression is ambiguous between the generic</dt><dd><p>complain that the expression is ambiguous between the generic</p>
+</dd>
+<dt>theorem and the version <code class="docutils literal notranslate"><span class="pre">Nat.dvd_antisymm</span></code>,</dt><dd><p>theorem and the version <code class="docutils literal notranslate"><span class="pre">Nat.dvd_antisymm</span></code>,</p>
+</dd>
+<dt>the one specifically for the natural numbers.</dt><dd><p>the one specifically for the natural numbers.</p>
+</dd>
+<dt>You can use <code class="docutils literal notranslate"><span class="pre">_root_.dvd_antisymm</span></code> to specify the generic one;</dt><dd><p>You can use <code class="docutils literal notranslate"><span class="pre">_root_.dvd_antisymm</span></code> to specify the generic one;</p>
+</dd>
+<dt>either one will work.</dt><dd><p>either one will work.</p>
+</dd>
+</dl>
 </section>
 <section id="proving-facts-about-algebraic-structures">
 <span id="id4"></span><h2><span class="section-number">2.5. </span>Proving Facts about Algebraic Structures<a class="headerlink" href="#proving-facts-about-algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>

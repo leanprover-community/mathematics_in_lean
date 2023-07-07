@@ -99,19 +99,18 @@ end
 
 section
 variable (m n : ℕ)
-open Nat
 
-#check (gcd_zero_right n : gcd n 0 = n)
-#check (gcd_zero_left n : gcd 0 n = n)
-#check (lcm_zero_right n : lcm n 0 = 0)
-#check (lcm_zero_left n : lcm 0 n = 0)
+#check (Nat.gcd_zero_right n : Nat.gcd n 0 = n)
+#check (Nat.gcd_zero_left n : Nat.gcd 0 n = n)
+#check (Nat.lcm_zero_right n : Nat.lcm n 0 = 0)
+#check (Nat.lcm_zero_left n : Nat.lcm 0 n = 0)
 
-example : gcd m n = gcd n m := by
-  apply _root_.dvd_antisymm
+example : Nat.gcd m n = Nat.gcd n m := by
+  apply Nat.dvd_antisymm
   repeat'
-    apply dvd_gcd
-    apply gcd_dvd_right
-    apply gcd_dvd_left
+    apply Nat.dvd_gcd
+    apply Nat.gcd_dvd_right
+    apply Nat.gcd_dvd_left
 
 end
 

@@ -39,21 +39,16 @@ example : min a b = min b a := by
 
 example : max a b = max b a := by
   sorry
-
 example : min (min a b) c = min a (min b c) := by
   sorry
-
 theorem aux : min a b + c ≤ min (a + c) (b + c) := by
   sorry
-
 example : min a b + c = min (a + c) (b + c) := by
   sorry
-
 #check (abs_add : ∀ a b : ℝ, |a + b| ≤ |a| + |b|)
 
 example : |a| - |b| ≤ |a - b| :=
   sorry
-
 end
 
 section
@@ -71,21 +66,18 @@ example : x ∣ x ^ 2 := by
 
 example (h : x ∣ w) : x ∣ y * (x * z) + x ^ 2 + w ^ 2 := by
   sorry
-
 end
 
 section
 variable (m n : ℕ)
-open Nat
 
-#check (gcd_zero_right n : gcd n 0 = n)
-#check (gcd_zero_left n : gcd 0 n = n)
-#check (lcm_zero_right n : lcm n 0 = 0)
-#check (lcm_zero_left n : lcm 0 n = 0)
+#check (Nat.gcd_zero_right n : Nat.gcd n 0 = n)
+#check (Nat.gcd_zero_left n : Nat.gcd 0 n = n)
+#check (Nat.lcm_zero_right n : Nat.lcm n 0 = 0)
+#check (Nat.lcm_zero_left n : Nat.lcm 0 n = 0)
 
-example : gcd m n = gcd n m := by
+example : Nat.gcd m n = Nat.gcd n m := by
   sorry
-
 end
 
 

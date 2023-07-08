@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>6. Structures &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +15,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -86,8 +84,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="structures">
-<span id="id1"></span><h1><span class="section-number">6. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this heading">&#61633;</a></h1>
+  <div class="section" id="structures">
+<span id="id1"></span><h1><span class="section-number">6. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this headline">&#61633;</a></h1>
 <p>Modern mathematics makes essential use of algebraic
 structures,
 which encapsulate patterns that can be instantiated in
@@ -106,8 +104,8 @@ It will also show you how to define and use
 algebraic structures on your own.</p>
 <p>For more technical detail, you can consult <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>,
 and a paper by Anne Baanen, <a class="reference external" href="https://arxiv.org/abs/2202.01629">Use and abuse of instance parameters in the Lean mathematical library</a>.</p>
-<section id="defining-structures">
-<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Permalink to this heading">&#61633;</a></h2>
+<div class="section" id="defining-structures">
+<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Permalink to this headline">&#61633;</a></h2>
 <p>In the broadest sense of the term, a <em>structure</em> is a specification
 of a collection of data, possibly with constraints that the
 data is required to satisfy.
@@ -484,9 +482,9 @@ as long as we redefine the old accessors in terms of the new definition.
 Moreover, as we are about to see, Lean provides support for
 weaving structures together into a rich, interconnected hierarchy,
 and for managing the interactions between them.</p>
-</section>
-<section id="algebraic-structures">
-<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>
+</div>
+<div class="section" id="algebraic-structures">
+<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this headline">&#61633;</a></h2>
 <p>To clarify what we mean by the phrase <em>algebraic structure</em>,
 it will help to consider some examples.</p>
 <ol class="arabic simple">
@@ -1033,9 +1031,9 @@ because it configures automation that invisibly governs the interpretation of
 the expressions we type.
 When used wisely, however, class inference is a powerful tool.
 It is what makes algebraic reasoning possible in Lean.</p>
-</section>
-<section id="building-the-gaussian-integers">
-<span id="section-building-the-gaussian-integers"></span><h2><span class="section-number">6.3. </span>Building the Gaussian Integers<a class="headerlink" href="#building-the-gaussian-integers" title="Permalink to this heading">&#61633;</a></h2>
+</div>
+<div class="section" id="building-the-gaussian-integers">
+<span id="section-building-the-gaussian-integers"></span><h2><span class="section-number">6.3. </span>Building the Gaussian Integers<a class="headerlink" href="#building-the-gaussian-integers" title="Permalink to this headline">&#61633;</a></h2>
 <p>We will now illustrate the use of the algebraic hierarchy in Lean by
 building an important mathematical object, the <em>Gaussian integers</em>,
 and showing that it is a Euclidean domain. In other words, according to
@@ -1529,8 +1527,8 @@ the notions of being prime and being irreducible coincide.</p>
   <span class="n">PrincipalIdealRing.irreducible_iff_prime</span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

@@ -13,10 +13,10 @@ example : IsOpen (univ : Set X) :=
 example : IsOpen (∅ : Set X) :=
   isOpen_empty
 
-example {ι : Type _} {s : ι → Set X} (hs : ∀ i, IsOpen <| s i) : IsOpen (⋃ i, s i) :=
+example {ι : Type _} {s : ι → Set X} (hs : ∀ i, IsOpen (s i)) : IsOpen (⋃ i, s i) :=
   isOpen_iUnion hs
 
-example {ι : Type _} [Fintype ι] {s : ι → Set X} (hs : ∀ i, IsOpen <| s i) :
+example {ι : Type _} [Fintype ι] {s : ι → Set X} (hs : ∀ i, IsOpen (s i)) :
     IsOpen (⋂ i, s i) :=
   isOpen_iInter hs
 
@@ -38,7 +38,7 @@ example (x : X) : pure x ≤ 𝓝 x :=
   pure_le_nhds x
 
 example (x : X) (P : X → Prop) (h : ∀ᶠ y in 𝓝 x, P y) : P x :=
-  pure_le_nhds x h
+  h.self_of_nhds
 
 example {P : X → Prop} {x : X} (h : ∀ᶠ y in 𝓝 x, P y) : ∀ᶠ y in 𝓝 x, ∀ᶠ z in 𝓝 y, P z :=
   eventually_eventually_nhds.mpr h
@@ -84,7 +84,7 @@ example {Z : Type _} (f : X → Y) (T_X : TopologicalSpace X) (T_Z : Topological
       @Continuous X Z T_X T_Z (g ∘ f) := by
   rw [continuous_iff_coinduced_le, coinduced_compose, continuous_iff_coinduced_le]
 
-example (ι : Type _) (X : ι → Type _) (T_X : ∀ i, TopologicalSpace <| X i) :
+example (ι : Type _) (X : ι → Type _) (T_X : ∀ i, TopologicalSpace (X i)) :
     (Pi.topologicalSpace : TopologicalSpace (∀ i, X i)) =
       ⨅ i, TopologicalSpace.induced (fun x ↦ x i) (T_X i) :=
   rfl
@@ -109,7 +109,7 @@ theorem aux {X Y A : Type _} [TopologicalSpace X] {c : A → X}
 
 example [TopologicalSpace X] [TopologicalSpace Y] [RegularSpace Y] {A : Set X}
     (hA : ∀ x, x ∈ closure A) {f : A → Y} (f_cont : Continuous f)
-    (hf : ∀ x : X, ∃ c : Y, Tendsto f (comap (↑) <| 𝓝 x) <| 𝓝 c) :
+    (hf : ∀ x : X, ∃ c : Y, Tendsto f (comap (↑) (𝓝 x)) (𝓝 c)) :
     ∃ φ : X → Y, Continuous φ ∧ ∀ a : A, φ a = f a :=
   sorry
 
@@ -150,6 +150,3 @@ example [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {s : Set X} (hs :
 example {ι : Type _} {s : Set X} (hs : IsCompact s) (U : ι → Set X) (hUo : ∀ i, IsOpen (U i))
     (hsU : s ⊆ ⋃ i, U i) : ∃ t : Finset ι, s ⊆ ⋃ i ∈ t, U i :=
   hs.elim_finite_subcover U hUo hsU
-
-example [CompactSpace X] : IsCompact (univ : Set X) :=
-  isCompact_univ

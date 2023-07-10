@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8. Topology &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -96,8 +98,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="topology"></span><div class="section" id="index-0">
-<span id="id1"></span><h1><span class="section-number">8. </span>Topology<a class="headerlink" href="#index-0" title="Permalink to this headline">&#61633;</a></h1>
+  <span class="target" id="topology"></span><section id="index-0">
+<span id="id1"></span><h1><span class="section-number">8. </span>Topology<a class="headerlink" href="#index-0" title="Permalink to this heading">&#61633;</a></h1>
 <p>Calculus is based on the concept of a function, which is used to model
 quantities that depend on one another.
 For example, it is common to study quantities that change over time.
@@ -164,8 +166,8 @@ and simply note that the rest can be proved &#8220;in the same way.&#8221;
 Formalizing mathematics requires making the relevant notion of &#8220;sameness&#8221;
 fully explicit, and that is exactly what Bourbaki&#8217;s theory of filters
 manages to do.</p>
-<div class="section" id="filters">
-<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">8.1. </span>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">&#61633;</a></h2>
+<section id="filters">
+<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">8.1. </span>Filters<a class="headerlink" href="#filters" title="Permalink to this heading">&#61633;</a></h2>
 <p>A <em>filter</em> on a type <code class="docutils literal notranslate"><span class="pre">X</span></code> is a collection of sets of <code class="docutils literal notranslate"><span class="pre">X</span></code> that satisfies three
 conditions that we will spell out below. The notion
 supports two related ideas:</p>
@@ -178,7 +180,7 @@ supports two related ideas:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">(atTop</span> <span class="pre">:</span> <span class="pre">Filter</span> <span class="pre">&#8469;)</span></code>, made of sets of <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> containing <code class="docutils literal notranslate"><span class="pre">{n</span> <span class="pre">|</span> <span class="pre">n</span> <span class="pre">&#8805;</span> <span class="pre">N}</span></code> for some <code class="docutils literal notranslate"><span class="pre">N</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#120029;</span> <span class="pre">x</span></code>, made of neighborhoods of <code class="docutils literal notranslate"><span class="pre">x</span></code> in a topological space</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&#120036;</span> <span class="pre">X</span></code>, made of entourages of a uniform space (uniform spaces generalize metric spaces and topological groups)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#956;.a_e</span></code> , made of sets whose complement has zero measure with respect to a measure <code class="docutils literal notranslate"><span class="pre">&#956;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#956;.ae</span></code> , made of sets whose complement has zero measure with respect to a measure <code class="docutils literal notranslate"><span class="pre">&#956;</span></code>.</p></li>
 </ul>
 <p>The general definition is as follows: a filter <code class="docutils literal notranslate"><span class="pre">F</span> <span class="pre">:</span> <span class="pre">Filter</span> <span class="pre">X</span></code> is a
 collection of sets <code class="docutils literal notranslate"><span class="pre">F.sets</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">(Set</span> <span class="pre">X)</span></code> satisfying the following:</p>
@@ -352,7 +354,7 @@ and <code class="docutils literal notranslate"><span class="pre">Filter.prod</sp
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p>The ordered type <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">X</span></code> is actually a <em>complete</em> lattice,
+<p>The ordered type <code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">X</span></code> is actually a <em>complete</em> lattice,
 which is to say, there is a bottom element, there is a top element, and
 every set of filters on <code class="docutils literal notranslate"><span class="pre">X</span></code> has an <code class="docutils literal notranslate"><span class="pre">Inf</span></code> and a <code class="docutils literal notranslate"><span class="pre">Sup</span></code>.</p>
 <p>Note that given the second property in the definition of a filter
@@ -366,7 +368,7 @@ definition of a filter does not prohibit <code class="docutils literal notransla
 but if the empty set is in <code class="docutils literal notranslate"><span class="pre">F</span></code> then
 every set is in <code class="docutils literal notranslate"><span class="pre">F</span></code>, which is to say, <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">U</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">X,</span> <span class="pre">U</span> <span class="pre">&#8712;</span> <span class="pre">F</span></code>.
 In this case, <code class="docutils literal notranslate"><span class="pre">F</span></code> is a rather trivial filter, which is precisely the
-bottom element of the complete lattice <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">X</span></code>.
+bottom element of the complete lattice <code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">X</span></code>.
 This contrasts with the definition of filters in
 Bourbaki, which doesn&#8217;t allow filters containing the empty set.</p>
 <p>Because we include the trivial filter in our definition, we sometimes need to explicitly assume
@@ -470,9 +472,9 @@ Given <code class="docutils literal notranslate"><span class="pre">F</span> <spa
 <span class="k">#check</span> <span class="n">Eventually.and</span>
 </pre></div>
 </div>
-<p>The second item, corresponding to <code class="docutils literal notranslate"><span class="pre">eventually.mono</span></code>, supports nice ways
+<p>The second item, corresponding to <code class="docutils literal notranslate"><span class="pre">Eventually.mono</span></code>, supports nice ways
 of using filters, especially when combined
-with <code class="docutils literal notranslate"><span class="pre">eventually.and</span></code>. The <code class="docutils literal notranslate"><span class="pre">filter_upwards</span></code> tactic allows us to combine them.
+with <code class="docutils literal notranslate"><span class="pre">Eventually.and</span></code>. The <code class="docutils literal notranslate"><span class="pre">filter_upwards</span></code> tactic allows us to combine them.
 Compare:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">hP</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">atTop</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">hQ</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">atTop</span><span class="o">,</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span>
     <span class="o">(</span><span class="n">hR</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">atTop</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">&#8743;</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">R</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">atTop</span><span class="o">,</span> <span class="n">R</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -482,18 +484,17 @@ Compare:</p>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">hP</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">atTop</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">hQ</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">atTop</span><span class="o">,</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span>
     <span class="o">(</span><span class="n">hR</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">atTop</span><span class="o">,</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">&#8743;</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">R</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">n</span> <span class="k">in</span> <span class="n">atTop</span><span class="o">,</span> <span class="n">R</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">filter_upwards</span> <span class="o">[</span><span class="n">hP</span><span class="o">,</span> <span class="n">hQ</span><span class="o">,</span> <span class="n">hR</span><span class="o">]</span>
-  <span class="n">intro</span> <span class="n">n</span> <span class="n">h</span> <span class="n">h&#39;</span> <span class="n">h&#39;&#39;</span>
+  <span class="n">filter_upwards</span> <span class="o">[</span><span class="n">hP</span><span class="o">,</span> <span class="n">hQ</span><span class="o">,</span> <span class="n">hR</span><span class="o">]</span> <span class="k">with</span> <span class="n">n</span> <span class="n">h</span> <span class="n">h&#39;</span> <span class="n">h&#39;&#39;</span>
   <span class="n">exact</span> <span class="n">h&#39;&#39;</span> <span class="o">&#10216;</span><span class="n">h</span><span class="o">,</span> <span class="n">h&#39;</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
 <p>Readers who know about measure theory will note that the filter <code class="docutils literal notranslate"><span class="pre">&#956;.ae</span></code> of sets whose complement has measure zero
 (aka &#8220;the set consisting of almost every point&#8221;) is not very useful as the source or target of <code class="docutils literal notranslate"><span class="pre">Tendsto</span></code>, but it can be conveniently
-used with <code class="docutils literal notranslate"><span class="pre">eventually</span></code> to say that a property holds for almost every point.</p>
+used with <code class="docutils literal notranslate"><span class="pre">Eventually</span></code> to say that a property holds for almost every point.</p>
 <p>There is a dual version of <code class="docutils literal notranslate"><span class="pre">&#8704;&#7584;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">F,</span> <span class="pre">P</span> <span class="pre">x</span></code>, which is occasionally useful:
 <code class="docutils literal notranslate"><span class="pre">&#8707;&#7584;</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">F,</span> <span class="pre">P</span> <span class="pre">x</span></code> means
 <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">&#172;P</span> <span class="pre">x}</span> <span class="pre">&#8713;</span> <span class="pre">F</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">&#8707;&#7584;</span> <span class="pre">n</span> <span class="pre">in</span> <span class="pre">atTop,</span> <span class="pre">P</span> <span class="pre">n</span></code> means there are arbitrarily large <code class="docutils literal notranslate"><span class="pre">n</span></code> such that <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">n</span></code> holds.
-The <code class="docutils literal notranslate"><span class="pre">&#8707;&#7584;</span></code> notation stands for <code class="docutils literal notranslate"><span class="pre">Filter.frequently</span></code>.</p>
+The <code class="docutils literal notranslate"><span class="pre">&#8707;&#7584;</span></code> notation stands for <code class="docutils literal notranslate"><span class="pre">Filter.Frequently</span></code>.</p>
 <p>For a more sophisticated example, consider the following statement about a sequence
 <code class="docutils literal notranslate"><span class="pre">u</span></code>, a set <code class="docutils literal notranslate"><span class="pre">M</span></code>, and a value <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
 <blockquote>
@@ -518,9 +519,9 @@ by definition, the assumption <code class="docutils literal notranslate"><span c
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="metric-spaces">
-<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">8.2. </span>Metric spaces<a class="headerlink" href="#metric-spaces" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="metric-spaces">
+<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">8.2. </span>Metric spaces<a class="headerlink" href="#metric-spaces" title="Permalink to this heading">&#61633;</a></h2>
 <p>Examples in the previous section focus on sequences of real numbers. In this section we will go up a bit in generality and focus on
 metric spaces. A metric space is a type <code class="docutils literal notranslate"><span class="pre">X</span></code> equipped with a distance function <code class="docutils literal notranslate"><span class="pre">dist</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code> which is a generalization of
 the function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">&#8614;</span> <span class="pre">|x</span> <span class="pre">-</span> <span class="pre">y|</span></code> from the case where <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">&#8477;</span></code>.</p>
@@ -538,8 +539,8 @@ the function <code class="docutils literal notranslate"><span class="pre">fun</s
 They are called <code class="docutils literal notranslate"><span class="pre">EMetricSpace</span></code>, <code class="docutils literal notranslate"><span class="pre">PseudoMetricSpace</span></code> and <code class="docutils literal notranslate"><span class="pre">PseudoEMetricSpace</span></code> respectively (here &#8220;e&#8221; stands for &#8220;extended&#8221;).</p>
 <p>Note that our journey from <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> to metric spaces jumped over the special case of normed spaces that also require linear algebra and
 will be explained as part of the calculus chapter.</p>
-<div class="section" id="convergence-and-continuity">
-<h3><span class="section-number">8.2.1. </span>Convergence and continuity<a class="headerlink" href="#convergence-and-continuity" title="Permalink to this headline">&#61633;</a></h3>
+<section id="convergence-and-continuity">
+<h3><span class="section-number">8.2.1. </span>Convergence and continuity<a class="headerlink" href="#convergence-and-continuity" title="Permalink to this heading">&#61633;</a></h3>
 <p>Using distance functions, we can already define convergent sequences and continuous functions between metric spaces.
 They are actually defined in a more general setting covered in the next section,
 but we have lemmas recasting the definition is terms of distances.</p>
@@ -553,7 +554,7 @@ but we have lemmas recasting the definition is terms of distances.</p>
   <span class="n">Metric.continuous_iff</span>
 </pre></div>
 </div>
-<p id="index-3">A <em>lot</em> of lemmas have some continuity assumptions, no we end up proving a lot of continuity results and there
+<p id="index-3">A <em>lot</em> of lemmas have some continuity assumptions, so we end up proving a lot of continuity results and there
 is a <code class="docutils literal notranslate"><span class="pre">continuity</span></code> tactic devoted to this task. Let&#8217;s prove a continuity statement that will be needed
 in an exercise below. Notice that Lean knows how to treat a product of two metric spaces as a metric space, so
 it makes sense to consider continuous functions from <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">&#215;</span> <span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>.
@@ -626,9 +627,9 @@ and get our final proof, now bordering obfuscation.</p>
   <span class="n">Metric.continuousAt_iff</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="balls-open-sets-and-closed-sets">
-<h3><span class="section-number">8.2.2. </span>Balls, open sets and closed sets<a class="headerlink" href="#balls-open-sets-and-closed-sets" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="balls-open-sets-and-closed-sets">
+<h3><span class="section-number">8.2.2. </span>Balls, open sets and closed sets<a class="headerlink" href="#balls-open-sets-and-closed-sets" title="Permalink to this heading">&#61633;</a></h3>
 <p>Once we have a distance function, the most important geometric definitions are (open) balls and closed balls.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
 
@@ -653,7 +654,7 @@ but we have lemmas recasting the definition is terms of balls.</p>
   <span class="n">Metric.isOpen_iff</span>
 </pre></div>
 </div>
-<p>Then closed sets are sets whose complement is open. Their important property is they are closed under limits. The closure of a set is the smallest subset containing it.</p>
+<p>Then closed sets are sets whose complement is open. Their important property is they are closed under limits. The closure of a set is the smallest closed set containing it.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">IsClosed</span> <span class="n">s</span> <span class="bp">&#8596;</span> <span class="n">IsOpen</span> <span class="o">(</span><span class="n">s</span><span class="bp">&#7580;</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">isOpen_compl_iff.symm</span>
 
@@ -683,9 +684,9 @@ argument so we can invoke <code class="docutils literal notranslate"><span class
   <span class="n">Metric.nhds_basis_closedBall.mem_iff</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="compactness">
-<h3><span class="section-number">8.2.3. </span>Compactness<a class="headerlink" href="#compactness" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="compactness">
+<h3><span class="section-number">8.2.3. </span>Compactness<a class="headerlink" href="#compactness" title="Permalink to this heading">&#61633;</a></h3>
 <p>Compactness is an important topological notion. It distinguishes subsets of a metric space
 that enjoy the same kind of properties as segments in reals compared to other intervals:</p>
 <ul class="simple">
@@ -720,15 +721,15 @@ are deduced from more general versions, some of which will be discussed in later
   <span class="n">hs.isClosed</span>
 </pre></div>
 </div>
-<p>We can also metric spaces which are globally compact, using an extra <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued type class:</p>
+<p>We can also specify that a metric spaces is globally compact, using an extra <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued type class:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">MetricSpace</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">CompactSpace</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">IsCompact</span> <span class="o">(</span><span class="n">univ</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">isCompact_univ</span>
 </pre></div>
 </div>
-<p>In a compact metric space any closed set is compact, this is <code class="docutils literal notranslate"><span class="pre">IsCompact.isClosed</span></code>.</p>
-</div>
-<div class="section" id="uniformly-continuous-functions">
-<h3><span class="section-number">8.2.4. </span>Uniformly continuous functions<a class="headerlink" href="#uniformly-continuous-functions" title="Permalink to this headline">&#61633;</a></h3>
+<p>In a compact metric space any closed set is compact, this is <code class="docutils literal notranslate"><span class="pre">IsClosed.isCompact</span></code>.</p>
+</section>
+<section id="uniformly-continuous-functions">
+<h3><span class="section-number">8.2.4. </span>Uniformly continuous functions<a class="headerlink" href="#uniformly-continuous-functions" title="Permalink to this heading">&#61633;</a></h3>
 <p>We now turn to uniformity notions on metric spaces : uniformly continuous functions, Cauchy sequences and completeness.
 Again those are defined in a more general context but we have lemmas in the metric name space to access their elementary definitions.
 We start with uniform continuity.</p>
@@ -757,9 +758,9 @@ of the distance function on <code class="docutils literal notranslate"><span cla
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="completeness">
-<h3><span class="section-number">8.2.5. </span>Completeness<a class="headerlink" href="#completeness" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="completeness">
+<h3><span class="section-number">8.2.5. </span>Completeness<a class="headerlink" href="#completeness" title="Permalink to this heading">&#61633;</a></h3>
 <p>A Cauchy sequence in a metric space is a sequence whose terms get closer and closer to each other.
 There are a couple of equivalent ways to state that idea.
 In particular converging sequences are Cauchy. The converse is true only in so-called <em>complete</em>
@@ -848,12 +849,12 @@ define something inductively in the middle of a proof using <code class="docutil
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="topological-spaces">
-<span id="index-4"></span><span id="id4"></span><h2><span class="section-number">8.3. </span>Topological spaces<a class="headerlink" href="#topological-spaces" title="Permalink to this headline">&#61633;</a></h2>
-<div class="section" id="fundamentals">
-<h3><span class="section-number">8.3.1. </span>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+</section>
+<section id="topological-spaces">
+<span id="index-4"></span><span id="id4"></span><h2><span class="section-number">8.3. </span>Topological spaces<a class="headerlink" href="#topological-spaces" title="Permalink to this heading">&#61633;</a></h2>
+<section id="fundamentals">
+<h3><span class="section-number">8.3.1. </span>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this heading">&#61633;</a></h3>
 <p>We now go up in generality and introduce topological spaces. We will review the two main ways to define
 topological spaces and then explain how the category of topological spaces is much better behaved than
 the category of metric spaces. Note that we won&#8217;t be using mathlib category theory here, only having
@@ -871,10 +872,10 @@ has to satisfy a number of axioms presented below (this collection is slightly r
 <span class="kd">example</span> <span class="o">:</span> <span class="n">IsOpen</span> <span class="o">(</span><span class="bp">&#8709;</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">isOpen_empty</span>
 
-<span class="kd">example</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">IsOpen</span> <span class="bp">&lt;|</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">IsOpen</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">IsOpen</span> <span class="o">(</span><span class="n">s</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span> <span class="n">IsOpen</span> <span class="o">(</span><span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">isOpen_iUnion</span> <span class="n">hs</span>
 
-<span class="kd">example</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">&#953;</span><span class="o">]</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">IsOpen</span> <span class="bp">&lt;|</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">&#953;</span><span class="o">]</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">IsOpen</span> <span class="o">(</span><span class="n">s</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span>
     <span class="n">IsOpen</span> <span class="o">(</span><span class="bp">&#8898;</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">isOpen_iInter</span> <span class="n">hs</span>
 </pre></div>
@@ -892,7 +893,7 @@ enough information to talk about continuous functions: two topological structure
 the same if and only if they have the same continuous functions (indeed the identity function will
 be continuous in both direction if and only if the two structures have the same open sets).</p>
 <p>However as soon as we move on to continuity at a point we see the limitations of the approach based
-on open sets. In mathlib it is much more frequent to think of topological spaces as types equipped
+on open sets. In mathlib we frequently think of topological spaces as types equipped
 with a neighborhood filter <code class="docutils literal notranslate"><span class="pre">&#120029;</span> <span class="pre">x</span></code> attached to each point <code class="docutils literal notranslate"><span class="pre">x</span></code> (the corresponding function
 <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Filter</span> <span class="pre">X</span></code> satisfies certain conditions explained further down). Remember from the filters section that
 these gadget play two related roles. First <code class="docutils literal notranslate"><span class="pre">&#120029;</span> <span class="pre">x</span></code> is seen as the generalized set of points of <code class="docutils literal notranslate"><span class="pre">X</span></code>
@@ -929,7 +930,7 @@ Another way to say it is that if a predicate holds for points close to <code cla
   <span class="n">pure_le_nhds</span> <span class="n">x</span>
 
 <span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">&#8594;</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;&#7584;</span> <span class="n">y</span> <span class="k">in</span> <span class="bp">&#120029;</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">x</span> <span class="o">:=</span>
-  <span class="n">pure_le_nhds</span> <span class="n">x</span> <span class="n">h</span>
+  <span class="n">h.self_of_nhds</span>
 </pre></div>
 </div>
 <p>Then a more subtle requirement is that, for any predicate <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Prop</span></code> and any <code class="docutils literal notranslate"><span class="pre">x</span></code>, if <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">y</span></code> holds for <code class="docutils literal notranslate"><span class="pre">y</span></code> close
@@ -939,9 +940,9 @@ to <code class="docutils literal notranslate"><span class="pre">x</span></code> 
 </pre></div>
 </div>
 <p>Those two results characterize the functions <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Filter</span> <span class="pre">X</span></code> that are neighborhood functions for a topological space
-structure on <code class="docutils literal notranslate"><span class="pre">X</span></code>. There is a still a function <code class="docutils literal notranslate"><span class="pre">topological_space.mk_of_nhds</span> <span class="pre">:</span> <span class="pre">(X</span> <span class="pre">&#8594;</span> <span class="pre">Filter</span> <span class="pre">X)</span> <span class="pre">&#8594;</span> <span class="pre">topological_space</span> <span class="pre">X</span></code>
+structure on <code class="docutils literal notranslate"><span class="pre">X</span></code>. There is a still a function <code class="docutils literal notranslate"><span class="pre">TopologicalSpace.mkOfNhds</span> <span class="pre">:</span> <span class="pre">(X</span> <span class="pre">&#8594;</span> <span class="pre">Filter</span> <span class="pre">X)</span> <span class="pre">&#8594;</span> <span class="pre">TopologicalSpace</span> <span class="pre">X</span></code>
 but it will give back its input as a neighborhood function only if it satisfies the above two constraints.
-More precisely we have a lemma <code class="docutils literal notranslate"><span class="pre">topological_space.nhds_mk_of_nhds</span></code> saying that in a different way and our
+More precisely we have a lemma <code class="docutils literal notranslate"><span class="pre">TopologicalSpace.nhds_mkOfNhds</span></code> saying that in a different way and our
 next exercise deduces this different way from how we stated it above.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">Filter</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">H&#8320;</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span><span class="o">,</span> <span class="n">pure</span> <span class="n">a</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="n">a</span><span class="o">)</span>
     <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">p</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="kt">Prop</span><span class="o">,</span> <span class="o">(</span><span class="bp">&#8704;&#7584;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">n</span> <span class="n">a</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="bp">&#8704;&#7584;</span> <span class="n">y</span> <span class="k">in</span> <span class="n">n</span> <span class="n">a</span><span class="o">,</span> <span class="bp">&#8704;&#7584;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">n</span> <span class="n">y</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
@@ -949,10 +950,10 @@ next exercise deduces this different way from how we stated it above.</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">topological_space.mk_of_nhds</span></code> is not so frequently used, but it still good to know in what
+<p>Note that <code class="docutils literal notranslate"><span class="pre">TopologicalSpace.mkOfNhds</span></code> is not so frequently used, but it still good to know in what
 precise sense the neighborhood filters is all there is in a topological space structure.</p>
 <p>The next thing to know in order to efficiently use topological spaces in mathlib is that we use a lot
-of formal properties of <code class="docutils literal notranslate"><span class="pre">topological_space</span> <span class="pre">:</span> <span class="pre">Type</span> <span class="pre">u</span> <span class="pre">&#8594;</span> <span class="pre">Type</span> <span class="pre">u</span></code>. From a purely mathematical point of view,
+of formal properties of <code class="docutils literal notranslate"><span class="pre">TopologicalSpace</span> <span class="pre">:</span> <span class="pre">Type</span> <span class="pre">u</span> <span class="pre">&#8594;</span> <span class="pre">Type</span> <span class="pre">u</span></code>. From a purely mathematical point of view,
 those formal properties are a very clean way to explain how topological spaces solve issues that metric spaces
 have. From this point of view, the issues solved by topological spaces is that metric spaces enjoy very
 little functoriality, and have very bad categorical properties in general. This comes on top of the fact
@@ -983,14 +984,15 @@ push or pull topologies from one side to the other. Those two operations form a 
 </div>
 <p>Those operations are compactible with composition of functions.
 As usual, pushing forward is covariant and pulling back is contravariant, see <code class="docutils literal notranslate"><span class="pre">coinduced_compose</span></code> and <code class="docutils literal notranslate"><span class="pre">induced_compose</span></code>.
-On paper we will use notations <span class="math notranslate nohighlight">\(f_*T\)</span> for <code class="docutils literal notranslate"><span class="pre">topological_space.coinduced</span> <span class="pre">f</span> <span class="pre">T</span></code> and
-<span class="math notranslate nohighlight">\(f^*T\)</span> for <code class="docutils literal notranslate"><span class="pre">topological_space.induced</span> <span class="pre">f</span> <span class="pre">T</span></code>.</p>
-<p>Then the next big piece is a complete lattice structure on <code class="docutils literal notranslate"><span class="pre">topological_structure</span> <span class="pre">X</span></code>
+On paper we will use notations <span class="math notranslate nohighlight">\(f_*T\)</span> for <code class="docutils literal notranslate"><span class="pre">TopologicalSpace.coinduced</span> <span class="pre">f</span> <span class="pre">T</span></code> and
+<span class="math notranslate nohighlight">\(f^*T\)</span> for <code class="docutils literal notranslate"><span class="pre">TopologicalSpace.induced</span> <span class="pre">f</span> <span class="pre">T</span></code>.</p>
+<p>Then the next big piece is a complete lattice structure on <code class="docutils literal notranslate"><span class="pre">TopologicalSpace</span> <span class="pre">X</span></code>
 for any given structure. If you think of topologies are being primarily the data of open sets then you expect
-the order relation on <code class="docutils literal notranslate"><span class="pre">topological_structure</span> <span class="pre">X</span></code> to come from <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">(Set</span> <span class="pre">X)</span></code>, ie you expect <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&#8804;</span> <span class="pre">t'</span></code>
+the order relation on <code class="docutils literal notranslate"><span class="pre">TopologicalSpace</span> <span class="pre">X</span></code> to come from <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">(Set</span> <span class="pre">X)</span></code>, ie you expect <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&#8804;</span> <span class="pre">t'</span></code>
 if a set <code class="docutils literal notranslate"><span class="pre">u</span></code> is open for <code class="docutils literal notranslate"><span class="pre">t'</span></code> as soon as it is open for <code class="docutils literal notranslate"><span class="pre">t</span></code>. However we already know that mathlib focuses
-on neighborhoods more than open sets so, for any <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">X</span></code> we want <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">T</span> <span class="pre">:</span> <span class="pre">topological_space</span> <span class="pre">X</span> <span class="pre">&#8614;</span> <span class="pre">&#64;nhds</span> <span class="pre">X</span> <span class="pre">T</span> <span class="pre">x</span></code>
-to be order preserving. And we know the order relation on <code class="docutils literal notranslate"><span class="pre">filter</span> <span class="pre">X</span></code> is designed to ensure an order
+on neighborhoods more than open sets so, for any <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">X</span></code> we want the map from topological spaces to neighborhoods
+<code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">T</span> <span class="pre">:</span> <span class="pre">TopologicalSpace</span> <span class="pre">X</span> <span class="pre">&#8614;</span> <span class="pre">&#64;nhds</span> <span class="pre">X</span> <span class="pre">T</span> <span class="pre">x</span></code> to be order preserving.
+And we know the order relation on <code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">X</span></code> is designed to ensure an order
 preserving <code class="docutils literal notranslate"><span class="pre">principal</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Filter</span> <span class="pre">X</span></code>, allowing to see filters as generalized sets.
 So the order relation we do use on  <code class="docutils literal notranslate"><span class="pre">topological_structure</span> <span class="pre">X</span></code> is opposite to the one coming from <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">(Set</span> <span class="pre">X)</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">T</span> <span class="n">T&#39;</span> <span class="o">:</span> <span class="n">TopologicalSpace</span> <span class="n">X</span><span class="o">}</span> <span class="o">:</span> <span class="n">T</span> <span class="bp">&#8804;</span> <span class="n">T&#39;</span> <span class="bp">&#8596;</span> <span class="bp">&#8704;</span> <span class="n">s</span><span class="o">,</span> <span class="n">T&#39;.IsOpen</span> <span class="n">s</span> <span class="bp">&#8594;</span> <span class="n">T.IsOpen</span> <span class="n">s</span> <span class="o">:=</span>
@@ -1019,11 +1021,11 @@ a function <span class="math notranslate nohighlight">\(g : Y &#8594; Z\)</span>
 </pre></div>
 </div>
 <p>So we already get quotient topologies (using the projection map as <code class="docutils literal notranslate"><span class="pre">f</span></code>). This wasn&#8217;t using that
-<code class="docutils literal notranslate"><span class="pre">topological_space</span> <span class="pre">X</span></code> is a complete lattice for all <code class="docutils literal notranslate"><span class="pre">X</span></code>. Let&#8217;s now see how all this structure
+<code class="docutils literal notranslate"><span class="pre">TopologicalSpace</span> <span class="pre">X</span></code> is a complete lattice for all <code class="docutils literal notranslate"><span class="pre">X</span></code>. Let&#8217;s now see how all this structure
 proves the existence of the product topology by abstract non-sense.
 We considered the case of <code class="docutils literal notranslate"><span class="pre">&#8477;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code> above, but let&#8217;s now consider the general case of <code class="docutils literal notranslate"><span class="pre">&#928;</span> <span class="pre">i,</span> <span class="pre">X</span> <span class="pre">i</span></code> for
 some <code class="docutils literal notranslate"><span class="pre">&#953;</span> <span class="pre">:</span> <span class="pre">Type*</span></code> and <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">:</span> <span class="pre">&#953;</span> <span class="pre">&#8594;</span> <span class="pre">Type*</span></code>. We want, for any topological space <code class="docutils literal notranslate"><span class="pre">Z</span></code> and any function
-<code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">Z</span> <span class="pre">&#8594;</span> <span class="pre">&#928;</span> <span class="pre">i,</span> <span class="pre">X</span> <span class="pre">i</span></code>, that <code class="docutils literal notranslate"><span class="pre">f</span></code> is continuous if and only if <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">&#8614;</span> <span class="pre">x</span> <span class="pre">i)</span> <span class="pre">&#8728;</span> <span class="pre">f</span></code> is continuous.
+<code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">Z</span> <span class="pre">&#8594;</span> <span class="pre">&#928;</span> <span class="pre">i,</span> <span class="pre">X</span> <span class="pre">i</span></code>, that <code class="docutils literal notranslate"><span class="pre">f</span></code> is continuous if and only if <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">&#8614;</span> <span class="pre">x</span> <span class="pre">i)</span> <span class="pre">&#8728;</span> <span class="pre">f</span></code> is continuous for all <code class="docutils literal notranslate"><span class="pre">i</span></code>.
 Let us explore that constraint &#8220;on paper&#8221; using notation <span class="math notranslate nohighlight">\(p_i\)</span> for the projection
 <code class="docutils literal notranslate"><span class="pre">(fun</span> <span class="pre">(x</span> <span class="pre">:</span> <span class="pre">&#928;</span> <span class="pre">i,</span> <span class="pre">X</span> <span class="pre">i)</span> <span class="pre">&#8614;</span> <span class="pre">x</span> <span class="pre">i)</span></code>:</p>
 <div class="math notranslate nohighlight">
@@ -1032,7 +1034,7 @@ Let us explore that constraint &#8220;on paper&#8221; using notation <span class
 &amp;&#8660; &#8704; i, f_* T_Z &#8804; (p_i)^*T_{X_i}\\
 &amp;&#8660;  f_* T_Z &#8804; \inf \left[(p_i)^*T_{X_i}\right]\end{split}\]</div>
 <p>So we see that what is the topology we want on <code class="docutils literal notranslate"><span class="pre">&#928;</span> <span class="pre">i,</span> <span class="pre">X</span> <span class="pre">i</span></code>:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">(</span><span class="n">T_X</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">TopologicalSpace</span> <span class="bp">&lt;|</span> <span class="n">X</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">(</span><span class="n">T_X</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">TopologicalSpace</span> <span class="o">(</span><span class="n">X</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span>
     <span class="o">(</span><span class="k">Pi</span><span class="bp">.</span><span class="n">topologicalSpace</span> <span class="o">:</span> <span class="n">TopologicalSpace</span> <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">X</span> <span class="n">i</span><span class="o">))</span> <span class="bp">=</span>
       <span class="bp">&#10757;</span> <span class="n">i</span><span class="o">,</span> <span class="n">TopologicalSpace.induced</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">T_X</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">rfl</span>
@@ -1040,9 +1042,9 @@ Let us explore that constraint &#8220;on paper&#8221; using notation <span class
 </div>
 <p>This ends our tour of how mathlib thinks that topological spaces fix defects of the theory of metric spaces
 by being a more functorial theory and having a complete lattice structure for any fixed type.</p>
-</div>
-<div class="section" id="separation-and-countability">
-<h3><span class="section-number">8.3.2. </span>Separation and countability<a class="headerlink" href="#separation-and-countability" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="separation-and-countability">
+<h3><span class="section-number">8.3.2. </span>Separation and countability<a class="headerlink" href="#separation-and-countability" title="Permalink to this heading">&#61633;</a></h3>
 <p>We saw that the category of topological spaces have very nice properties. The price to pay for
 this is existence of rather pathological topological spaces.
 There are a number of assumptions you can make on a topological space to ensure its behavior
@@ -1088,32 +1090,31 @@ The assumption &#8220;tends to <span class="math notranslate nohighlight">\(x\)<
 </pre></div>
 </div>
 <p>Let&#8217;s now turn to the main proof of the extension by continuity theorem.</p>
-<p>When Lean needs a topology on <code class="docutils literal notranslate"><span class="pre">&#8613;A</span></code> it will use the induced topology, thanks to the instance
-<code class="docutils literal notranslate"><span class="pre">subtype.topological_space</span></code>.
-This all happens automatically. The only relevant lemma is
+<p>When Lean needs a topology on <code class="docutils literal notranslate"><span class="pre">&#8613;A</span></code> it will automatically use the induced topology.
+The only relevant lemma is
 <code class="docutils literal notranslate"><span class="pre">nhds_induced</span> <span class="pre">(&#8593;)</span> <span class="pre">:</span> <span class="pre">&#8704;</span> <span class="pre">a</span> <span class="pre">:</span> <span class="pre">&#8613;A,</span> <span class="pre">&#120029;</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">comap</span> <span class="pre">(&#8593;)</span> <span class="pre">(&#120029;</span> <span class="pre">&#8593;a)</span></code>
 (this is actually a general lemma about induced topologies).</p>
 <p>The proof outline is:</p>
 <p>The main assumption and the axiom of choice give a function <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> such that
-<code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">x,</span> <span class="pre">Tendsto</span> <span class="pre">f</span> <span class="pre">(comap</span> <span class="pre">(&#8593;)</span> <span class="pre">$</span> <span class="pre">&#120029;</span> <span class="pre">x)</span> <span class="pre">(&#120029;</span> <span class="pre">(&#966;</span> <span class="pre">x))</span></code>
+<code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">x,</span> <span class="pre">Tendsto</span> <span class="pre">f</span> <span class="pre">(comap</span> <span class="pre">(&#8593;)</span> <span class="pre">(&#120029;</span> <span class="pre">x))</span> <span class="pre">(&#120029;</span> <span class="pre">(&#966;</span> <span class="pre">x))</span></code>
 (because <code class="docutils literal notranslate"><span class="pre">Y</span></code> is Hausdorff, <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> is entirely determined, but we won&#8217;t need that until we try to
 prove that <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> indeed extends <code class="docutils literal notranslate"><span class="pre">f</span></code>).</p>
 <p>Let&#8217;s first prove <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> is continuous. Fix any <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">X</span></code>.
 Since <code class="docutils literal notranslate"><span class="pre">Y</span></code> is regular, it suffices to check that for every <em>closed</em> neighborhood
 <code class="docutils literal notranslate"><span class="pre">V'</span></code> of <code class="docutils literal notranslate"><span class="pre">&#966;</span> <span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">&#966;</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V'</span> <span class="pre">&#8712;</span> <span class="pre">&#120029;</span> <span class="pre">x</span></code>.
 The limit assumption gives (through the auxiliary lemma above)
-some <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">&#120029;</span> <span class="pre">x</span></code> such <code class="docutils literal notranslate"><span class="pre">is_open</span> <span class="pre">V</span> <span class="pre">&#8743;</span> <span class="pre">(&#8593;)</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V</span> <span class="pre">&#8838;</span> <span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V'</span></code>.
+some <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">&#120029;</span> <span class="pre">x</span></code> such <code class="docutils literal notranslate"><span class="pre">IsOpen</span> <span class="pre">V</span> <span class="pre">&#8743;</span> <span class="pre">(&#8593;)</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V</span> <span class="pre">&#8838;</span> <span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V'</span></code>.
 Since <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">&#120029;</span> <span class="pre">x</span></code>, it suffices to prove <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">&#8838;</span> <span class="pre">&#966;</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V'</span></code>, ie  <code class="docutils literal notranslate"><span class="pre">&#8704;</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">V,</span> <span class="pre">&#966;</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">V'</span></code>.
 Let&#8217;s fix <code class="docutils literal notranslate"><span class="pre">y</span></code> in <code class="docutils literal notranslate"><span class="pre">V</span></code>. Because <code class="docutils literal notranslate"><span class="pre">V</span></code> is <em>open</em>, it is a neighborhood of <code class="docutils literal notranslate"><span class="pre">y</span></code>.
 In particular <code class="docutils literal notranslate"><span class="pre">(&#8593;)</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">comap</span> <span class="pre">(&#8593;)</span> <span class="pre">(&#120029;</span> <span class="pre">y)</span></code> and a fortiori <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V'</span> <span class="pre">&#8712;</span> <span class="pre">comap</span> <span class="pre">(&#8593;)</span> <span class="pre">(&#120029;</span> <span class="pre">y)</span></code>.
-In addition <code class="docutils literal notranslate"><span class="pre">comap</span> <span class="pre">(&#8593;)$</span> <span class="pre">&#120029;</span> <span class="pre">y</span> <span class="pre">&#8800;</span> <span class="pre">&#8869;</span></code> because <code class="docutils literal notranslate"><span class="pre">A</span></code> is dense.
-Because we know <code class="docutils literal notranslate"><span class="pre">Tendsto</span> <span class="pre">f</span> <span class="pre">(comap</span> <span class="pre">(&#8593;)</span> <span class="pre">$</span> <span class="pre">&#120029;</span> <span class="pre">y)</span> <span class="pre">(&#120029;</span> <span class="pre">(&#966;</span> <span class="pre">y))</span></code> this implies
+In addition <code class="docutils literal notranslate"><span class="pre">comap</span> <span class="pre">(&#8593;)</span> <span class="pre">(&#120029;</span> <span class="pre">y)</span> <span class="pre">&#8800;</span> <span class="pre">&#8869;</span></code> because <code class="docutils literal notranslate"><span class="pre">A</span></code> is dense.
+Because we know <code class="docutils literal notranslate"><span class="pre">Tendsto</span> <span class="pre">f</span> <span class="pre">(comap</span> <span class="pre">(&#8593;)</span> <span class="pre">(&#120029;</span> <span class="pre">y))</span> <span class="pre">(&#120029;</span> <span class="pre">(&#966;</span> <span class="pre">y))</span></code> this implies
 <code class="docutils literal notranslate"><span class="pre">&#966;</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">closure</span> <span class="pre">V'</span></code> and, since <code class="docutils literal notranslate"><span class="pre">V'</span></code> is closed, we have proved <code class="docutils literal notranslate"><span class="pre">&#966;</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">V'</span></code>.</p>
 <p>It remains to prove that <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> extends <code class="docutils literal notranslate"><span class="pre">f</span></code>. This is were continuity of <code class="docutils literal notranslate"><span class="pre">f</span></code> enters the discussion,
 together with the fact that <code class="docutils literal notranslate"><span class="pre">Y</span></code> is Hausdorff.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">[</span><span class="n">TopologicalSpace</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">TopologicalSpace</span> <span class="n">Y</span><span class="o">]</span> <span class="o">[</span><span class="n">RegularSpace</span> <span class="n">Y</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">X</span><span class="o">}</span>
     <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">closure</span> <span class="n">A</span><span class="o">)</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">&#8594;</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f_cont</span> <span class="o">:</span> <span class="n">Continuous</span> <span class="n">f</span><span class="o">)</span>
-    <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">c</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Tendsto</span> <span class="n">f</span> <span class="o">(</span><span class="n">comap</span> <span class="o">(</span><span class="bp">&#8593;</span><span class="o">)</span> <span class="bp">&lt;|</span> <span class="bp">&#120029;</span> <span class="n">x</span><span class="o">)</span> <span class="bp">&lt;|</span> <span class="bp">&#120029;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span>
+    <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">c</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Tendsto</span> <span class="n">f</span> <span class="o">(</span><span class="n">comap</span> <span class="o">(</span><span class="bp">&#8593;</span><span class="o">)</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="n">x</span><span class="o">))</span> <span class="o">(</span><span class="bp">&#120029;</span> <span class="n">c</span><span class="o">))</span> <span class="o">:</span>
     <span class="bp">&#8707;</span> <span class="n">&#966;</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">&#8594;</span> <span class="n">Y</span><span class="o">,</span> <span class="n">Continuous</span> <span class="n">&#966;</span> <span class="bp">&#8743;</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="n">&#966;</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
 
@@ -1130,9 +1131,9 @@ of sets can be understood using sequences.</p>
   <span class="n">mem_closure_iff_seq_limit</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id5">
-<h3><span class="section-number">8.3.3. </span>Compactness<a class="headerlink" href="#id5" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="id5">
+<h3><span class="section-number">8.3.3. </span>Compactness<a class="headerlink" href="#id5" title="Permalink to this heading">&#61633;</a></h3>
 <p>Let us now discuss how compactness is defined for topological spaces. As usual there are several ways
 to think about it and mathlib goes for the filter version.</p>
 <p>We first need to define cluster points of filters. Given a filter <code class="docutils literal notranslate"><span class="pre">F</span></code> on a topological space <code class="docutils literal notranslate"><span class="pre">X</span></code>,
@@ -1150,9 +1151,9 @@ ie such that <code class="docutils literal notranslate"><span class="pre">F</spa
   <span class="n">Iff.rfl</span>
 </pre></div>
 </div>
-<p>For instance if <code class="docutils literal notranslate"><span class="pre">F</span></code> is <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">u</span> <span class="pre">at_top</span></code>, the image under <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">:</span> <span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">X</span></code> of <code class="docutils literal notranslate"><span class="pre">at_top</span></code>, the generalized set
+<p>For instance if <code class="docutils literal notranslate"><span class="pre">F</span></code> is <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">u</span> <span class="pre">atTop</span></code>, the image under <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">:</span> <span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">X</span></code> of <code class="docutils literal notranslate"><span class="pre">atTop</span></code>, the generalized set
 of very large natural numbers, then the assumption <code class="docutils literal notranslate"><span class="pre">F</span> <span class="pre">&#8804;</span> <span class="pre">&#120031;</span> <span class="pre">s</span></code> means that <code class="docutils literal notranslate"><span class="pre">u</span> <span class="pre">n</span></code> belongs to <code class="docutils literal notranslate"><span class="pre">s</span></code> for <code class="docutils literal notranslate"><span class="pre">n</span></code>
-large enough. Saying that <code class="docutils literal notranslate"><span class="pre">x</span></code> is a cluster point of <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">u</span> <span class="pre">at_top</span></code> says the image of very large numbers
+large enough. Saying that <code class="docutils literal notranslate"><span class="pre">x</span></code> is a cluster point of <code class="docutils literal notranslate"><span class="pre">map</span> <span class="pre">u</span> <span class="pre">atTop</span></code> says the image of very large numbers
 intersects the set of points that are close to <code class="docutils literal notranslate"><span class="pre">x</span></code>. In case <code class="docutils literal notranslate"><span class="pre">&#120029;</span> <span class="pre">x</span></code> has a countable basis, we can
 interpret this as saying that <code class="docutils literal notranslate"><span class="pre">u</span></code> has a subsequence converging to <code class="docutils literal notranslate"><span class="pre">x</span></code>, and we get back what compactness
 looks like in metric spaces.</p>
@@ -1188,14 +1189,9 @@ cover <code class="docutils literal notranslate"><span class="pre">s</span></cod
   <span class="n">hs.elim_finite_subcover</span> <span class="n">U</span> <span class="n">hUo</span> <span class="n">hsU</span>
 </pre></div>
 </div>
-<p>A topological space <code class="docutils literal notranslate"><span class="pre">X</span></code> is compact if <code class="docutils literal notranslate"><span class="pre">(univ</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">X)</span></code> is compact.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">[</span><span class="n">CompactSpace</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">IsCompact</span> <span class="o">(</span><span class="n">univ</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
-  <span class="n">isCompact_univ</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

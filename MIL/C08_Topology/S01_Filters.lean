@@ -92,8 +92,7 @@ example (P Q R : ℕ → Prop) (hP : ∀ᶠ n in atTop, P n) (hQ : ∀ᶠ n in a
 
 example (P Q R : ℕ → Prop) (hP : ∀ᶠ n in atTop, P n) (hQ : ∀ᶠ n in atTop, Q n)
     (hR : ∀ᶠ n in atTop, P n ∧ Q n → R n) : ∀ᶠ n in atTop, R n := by
-  filter_upwards [hP, hQ, hR]
-  intro n h h' h''
+  filter_upwards [hP, hQ, hR] with n h h' h''
   exact h'' ⟨h, h'⟩
 
 #check mem_closure_iff_clusterPt

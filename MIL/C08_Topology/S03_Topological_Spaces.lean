@@ -107,7 +107,7 @@ theorem aux {X Y A : Type _} [TopologicalSpace X] {c : A → X}
     ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' :=
   sorry
 
-example [TopologicalSpace X] [TopologicalSpace Y] [RegularSpace Y] {A : Set X}
+example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X}
     (hA : ∀ x, x ∈ closure A) {f : A → Y} (f_cont : Continuous f)
     (hf : ∀ x : X, ∃ c : Y, Tendsto f (comap (↑) (𝓝 x)) (𝓝 c)) :
     ∃ φ : X → Y, Continuous φ ∧ ∀ a : A, φ a = f a :=

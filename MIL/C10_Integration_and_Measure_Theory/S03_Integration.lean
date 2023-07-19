@@ -19,10 +19,10 @@ section
 variable {E : Type _} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E] {f : α → E}
 
 example {f g : α → E} (hf : Integrable f μ) (hg : Integrable g μ) :
-    (∫ a, f a + g a ∂μ) = (∫ a, f a ∂μ) + ∫ a, g a ∂μ :=
+    ∫ a, f a + g a ∂μ = ∫ a, f a ∂μ + ∫ a, g a ∂μ :=
   integral_add hf hg
 
-example {s : Set α} (c : E) : (∫ x in s, c ∂μ) = (μ s).toReal • c :=
+example {s : Set α} (c : E) : ∫ x in s, c ∂μ = (μ s).toReal • c :=
   set_integral_const c
 
 open Filter
@@ -35,7 +35,7 @@ example {F : ℕ → α → E} {f : α → E} (bound : α → ℝ) (hmeas : ∀ 
 
 example {α : Type _} [MeasurableSpace α] {μ : Measure α} [SigmaFinite μ] {β : Type _}
     [MeasurableSpace β] {ν : Measure β} [SigmaFinite ν] (f : α × β → E)
-    (hf : Integrable f (μ.prod ν)) : (∫ z, f z ∂ μ.prod ν) = ∫ x, ∫ y, f (x, y) ∂ν ∂μ :=
+    (hf : Integrable f (μ.prod ν)) : ∫ z, f z ∂ μ.prod ν = ∫ x, ∫ y, f (x, y) ∂ν ∂μ :=
   integral_prod f hf
 
 end
@@ -60,5 +60,5 @@ example {E : Type _} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimension
     [NormedAddCommGroup F] [NormedSpace ℝ F] [CompleteSpace F] {s : Set E} {f : E → E}
     {f' : E → E →L[ℝ] E} (hs : MeasurableSet s)
     (hf : ∀ x : E, x ∈ s → HasFDerivWithinAt f (f' x) s x) (h_inj : InjOn f s) (g : E → F) :
-    (∫ x in f '' s, g x ∂μ) = ∫ x in s, |(f' x).det| • g (f x) ∂μ :=
+    ∫ x in f '' s, g x ∂μ = ∫ x in s, |(f' x).det| • g (f x) ∂μ :=
   integral_image_eq_integral_abs_det_fderiv_smul μ hs hf h_inj g

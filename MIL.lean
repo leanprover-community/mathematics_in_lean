@@ -8,7 +8,7 @@ import MIL.C02_Basics.S05_Proving_Facts_about_Algebraic_Structures
 import MIL.C03_Logic.S01_Implication_and_the_Universal_Quantifier
 import MIL.C03_Logic.S02_The_Existential_Quantifier
 import MIL.C03_Logic.S03_Negation
-import MIL.C03_Logic.«S04_Conjunction_and_Bi-implication»
+import MIL.C03_Logic.S04_Conjunction_and_Iff
 import MIL.C03_Logic.S05_Disjunction
 import MIL.C03_Logic.S06_Sequences_and_Convergence
 import MIL.C04_Sets_and_Functions.S01_Sets

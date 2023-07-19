@@ -20,23 +20,15 @@ For the Lean 3 version, see [github.com/leanprover-community/mathematics_in_lean
 
 Do the following:
 
-1. Install Lean 4 and VS Code following the
-   "regular install" section of these [instructions](https://leanprover-community.github.io/get_started.html#regular-install).
-   It isn't enough just to install the Lean 4 extension for VSCode; make sure you complete the steps so that Lean 4 and elan are installed.
+1. Install Lean 4 and VS Code following
+   these [instructions](https://leanprover-community.github.io/get_started.html).
 
 2. Make sure you have [git](https://git-scm.com/) installed.
-   In a terminal, navigate to the folder where you want to put a copy of the
-   repository, and type `git clone https://github.com/leanprover-community/mathematics_in_lean.git`
-   to fetch it from github.
 
-3. Navigate to `mathematics_in_lean`, and execute `lake exe cache get` to fetch a compiled
-   version of the library, `Mathlib`.
+3. Follow these [instructions](https://leanprover-community.github.io/install/project.html#working-on-an-existing-project)
+   to fetch the `mathematics_in_lean` repository and open it up in VS Code.
 
-4. Type `code .` to open the folder in `VS Code`, or you can run `VS Code` and
-   choose `Open Folder` from the `File` menu. Be sure to open the folder `mathematics_in_lean`,
-   not any other folder.
-
-5. Each section in the textbook has an associated Lean file with examples and exercises.
+4. Each section in the textbook has an associated Lean file with examples and exercises.
    You can find them in the folder `MIL`, organized by chapter.
    We strongly recommend making a copy of that folder and experimenting and doing the
    exercises in that copy.
@@ -46,7 +38,7 @@ Do the following:
 
 At that point, you can open the textbook in a side panel in VS Code as follows:
 
-1. Type `ctrl-shift-P`.
+1. Type `ctrl-shift-P` (`command-shift-P` in macOS).
 
 2. Type `Lean 4: Open Documentation View` in the bar that appears, and then
   press return. (You can press return to select it as soon as it is highlighted

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>9. Differential Calculus &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,6 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -89,8 +91,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="differential-calculus"></span><div class="section" id="index-0">
-<span id="id1"></span><h1><span class="section-number">9. </span>Differential Calculus<a class="headerlink" href="#index-0" title="Permalink to this headline">&#61633;</a></h1>
+  <span class="target" id="differential-calculus"></span><section id="index-0">
+<span id="id1"></span><h1><span class="section-number">9. </span>Differential Calculus<a class="headerlink" href="#index-0" title="Permalink to this heading">&#61633;</a></h1>
 <p>We now consider the formalization of notions from <em>analysis</em>,
 starting with differentiation in this chapter
 and turning integration and measure theory in the next.
@@ -99,8 +101,8 @@ setting of functions from the real numbers to the real numbers,
 which is familiar from any introductory calculus class.
 In <a class="reference internal" href="#normed-spaces"><span class="std std-numref">Section 9.2</span></a>, we then consider the notion of a derivative in
 a much broader setting.</p>
-<div class="section" id="elementary-differential-calculus">
-<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">9.1. </span>Elementary Differential Calculus<a class="headerlink" href="#elementary-differential-calculus" title="Permalink to this headline">&#61633;</a></h2>
+<section id="elementary-differential-calculus">
+<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">9.1. </span>Elementary Differential Calculus<a class="headerlink" href="#elementary-differential-calculus" title="Permalink to this heading">&#61633;</a></h2>
 <p>Let <code class="docutils literal notranslate"><span class="pre">f</span></code> be a function from the reals to the reals. There is a difference
 between talking about the derivative of <code class="docutils literal notranslate"><span class="pre">f</span></code> at a single point and
 talking about the derivative function.
@@ -113,7 +115,7 @@ In mathlib, the first notion is represented as follows.</p>
 </div>
 <p>We can also express that <code class="docutils literal notranslate"><span class="pre">f</span></code> is differentiable at a point without
 specifying its derivative there
-by writing <code class="docutils literal notranslate"><span class="pre">differentiable_at</span> <span class="pre">&#8477;</span></code>.
+by writing <code class="docutils literal notranslate"><span class="pre">DifferentiableAt</span> <span class="pre">&#8477;</span></code>.
 We specify <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> explicitly because in a slightly more general context,
 when talking about functions from <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code>,
 we want to be able to distinguish between being differentiable in the real sense
@@ -152,7 +154,7 @@ definition of <code class="docutils literal notranslate"><span class="pre">deriv
   <span class="n">h.deriv_eq_zero</span>
 </pre></div>
 </div>
-<p>We can eve state Rolle&#8217;s theorem without any differentiability assumptions, which
+<p>We can even state Rolle&#8217;s theorem without any differentiability assumptions, which
 seems even weirder.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Set</span>
 
@@ -173,11 +175,11 @@ seems even weirder.</p>
 <span class="kd">example</span> <span class="o">:</span> <span class="n">deriv</span> <span class="n">sin</span> <span class="n">&#960;</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="differential-calculus-in-normed-spaces">
-<span id="normed-spaces"></span><span id="index-2"></span><h2><span class="section-number">9.2. </span>Differential Calculus in Normed Spaces<a class="headerlink" href="#differential-calculus-in-normed-spaces" title="Permalink to this headline">&#61633;</a></h2>
-<div class="section" id="id3">
-<h3><span class="section-number">9.2.1. </span>Normed spaces<a class="headerlink" href="#id3" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="differential-calculus-in-normed-spaces">
+<span id="normed-spaces"></span><span id="index-2"></span><h2><span class="section-number">9.2. </span>Differential Calculus in Normed Spaces<a class="headerlink" href="#differential-calculus-in-normed-spaces" title="Permalink to this heading">&#61633;</a></h2>
+<section id="id3">
+<h3><span class="section-number">9.2.1. </span>Normed spaces<a class="headerlink" href="#id3" title="Permalink to this heading">&#61633;</a></h3>
 <p>Differentiation can be generalized beyond <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> using the notion of a
 <em>normed vector space</em>, which encapsulates both direction and distance.
 We start with the notion of a <em>normed group</em>, which as an additive commutative
@@ -206,7 +208,7 @@ Lean and mathlib know this.</p>
 </pre></div>
 </div>
 <p>In order to use the notion of a norm with concepts from linear algebra,
-we add the assumption <code class="docutils literal notranslate"><span class="pre">normed_space</span> <span class="pre">&#8477;</span> <span class="pre">E</span></code> on top of <code class="docutils literal notranslate"><span class="pre">normed_add_group</span> <span class="pre">E</span></code>.
+we add the assumption <code class="docutils literal notranslate"><span class="pre">NormedSpace</span> <span class="pre">&#8477;</span> <span class="pre">E</span></code> on top of <code class="docutils literal notranslate"><span class="pre">NormedAddGroup</span> <span class="pre">E</span></code>.
 This stipulates that <code class="docutils literal notranslate"><span class="pre">E</span></code> is a vector space over <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> and that
 scalar multiplication satisfies the following condition.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">[</span><span class="n">NormedSpace</span> <span class="n">&#8477;</span> <span class="n">E</span><span class="o">]</span>
@@ -222,7 +224,7 @@ Every finite-dimensional vector space is complete.</p>
 </div>
 <p>In all the previous examples, we used the real numbers as the base field.
 More generally, we can make sense of calculus with a vector space over any
-<em>non-discrete normed field</em>. These are fields that are equipped with a
+<em>nontrivially normed field</em>. These are fields that are equipped with a
 real-valued norm that is multiplicative and has the property that
 not every element has norm zero or one
 (equivalently, there is an element whose norm is bigger than one).</p>
@@ -233,16 +235,16 @@ not every element has norm zero or one
   <span class="n">NormedField.exists_one_lt_norm</span> <span class="bp">&#120156;</span>
 </pre></div>
 </div>
-<p>A finite-dimensional vector space over a nondiscrete normed field is
+<p>A finite-dimensional vector space over a nontrivially normed field is
 complete as long as the field itself is complete.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">[</span><span class="n">NontriviallyNormedField</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">[</span><span class="n">NormedAddCommGroup</span> <span class="n">E</span><span class="o">]</span>
     <span class="o">[</span><span class="n">NormedSpace</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">CompleteSpace</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">[</span><span class="n">FiniteDimensional</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">:</span> <span class="n">CompleteSpace</span> <span class="n">E</span> <span class="o">:=</span>
   <span class="n">FiniteDimensional.complete</span> <span class="bp">&#120156;</span> <span class="n">E</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="continuous-linear-maps">
-<h3><span class="section-number">9.2.2. </span>Continuous linear maps<a class="headerlink" href="#continuous-linear-maps" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="continuous-linear-maps">
+<h3><span class="section-number">9.2.2. </span>Continuous linear maps<a class="headerlink" href="#continuous-linear-maps" title="Permalink to this heading">&#61633;</a></h3>
 <p>We now turn to the morphisms in the category of normed spaces, namely,
 continuous linear maps.
 In mathlib, the type of <code class="docutils literal notranslate"><span class="pre">&#120156;</span></code>-linear continuous maps between normed spaces
@@ -290,9 +292,9 @@ The principle states that a family of continuous linear maps from a Banach space
 into a normed space is pointwise
 bounded, then the norms of these linear maps are uniformly bounded.
 The main ingredient is Baire&#8217;s theorem
-<code class="docutils literal notranslate"><span class="pre">nonempty_interior_of_Union_of_closed.</span></code> (You proved a version of this in the topology chapter.)
+<code class="docutils literal notranslate"><span class="pre">nonempty_interior_of_iUnion_of_closed</span></code>. (You proved a version of this in the topology chapter.)
 Minor ingredients include <code class="docutils literal notranslate"><span class="pre">continuous_linear_map.op_norm_le_of_shell</span></code>,
-<code class="docutils literal notranslate"><span class="pre">interior_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">interior_Inter_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">is_closed_le</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">interior_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">interior_iInter_subset</span></code> and <code class="docutils literal notranslate"><span class="pre">is_closed_le</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="bp">&#120156;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">NontriviallyNormedField</span> <span class="bp">&#120156;</span><span class="o">]</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">NormedAddCommGroup</span> <span class="n">E</span><span class="o">]</span>
   <span class="o">[</span><span class="n">NormedSpace</span> <span class="bp">&#120156;</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">NormedAddCommGroup</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">NormedSpace</span> <span class="bp">&#120156;</span> <span class="n">F</span><span class="o">]</span>
 
@@ -322,9 +324,9 @@ Minor ingredients include <code class="docutils literal notranslate"><span class
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="asymptotic-comparisons">
-<h3><span class="section-number">9.2.3. </span>Asymptotic comparisons<a class="headerlink" href="#asymptotic-comparisons" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="asymptotic-comparisons">
+<h3><span class="section-number">9.2.3. </span>Asymptotic comparisons<a class="headerlink" href="#asymptotic-comparisons" title="Permalink to this heading">&#61633;</a></h3>
 <p>Defining differentiability also requires asymptotic comparisons.
 Mathlib has an extensive library covering the big O and little o relations,
 whose definitions are shown below.
@@ -350,9 +352,9 @@ Here we will only use little o to define differentiability.</p>
   <span class="n">Iff.rfl</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="differentiability">
-<h3><span class="section-number">9.2.4. </span>Differentiability<a class="headerlink" href="#differentiability" title="Permalink to this headline">&#61633;</a></h3>
+</section>
+<section id="differentiability">
+<h3><span class="section-number">9.2.4. </span>Differentiability<a class="headerlink" href="#differentiability" title="Permalink to this heading">&#61633;</a></h3>
 <p>We are now ready to discuss differentiable functions between normed spaces.
 In analogy the elementary one-dimensional,
 mathlib defines a predicate <code class="docutils literal notranslate"><span class="pre">HasFDerivAt</span></code> and a function <code class="docutils literal notranslate"><span class="pre">fderiv</span></code>.
@@ -374,10 +376,10 @@ Here the letter
 <p>We also have iterated derivatives that take values in the type of multilinear maps
 <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">[&#215;n]&#8594;L[&#120156;]</span> <span class="pre">F</span></code>,
 and we have continuously differential functions.
-The type <code class="docutils literal notranslate"><span class="pre">with_top</span> <span class="pre">&#8469;</span></code> is <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> with an additional element <code class="docutils literal notranslate"><span class="pre">&#8868;</span></code> that
+The type <code class="docutils literal notranslate"><span class="pre">WithTop</span> <span class="pre">&#8469;</span></code> is <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> with an additional element <code class="docutils literal notranslate"><span class="pre">&#8868;</span></code> that
 is bigger than every natural number.
 So <span class="math notranslate nohighlight">\(\mathcal{C}^\infty\)</span> functions are functions <code class="docutils literal notranslate"><span class="pre">f</span></code> that satisfy
-<code class="docutils literal notranslate"><span class="pre">cont_diff</span> <span class="pre">&#120156;</span> <span class="pre">&#8868;</span> <span class="pre">f</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">ContDiff</span> <span class="pre">&#120156;</span> <span class="pre">&#8868;</span> <span class="pre">f</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">&#8594;</span> <span class="n">E</span><span class="o">[</span><span class="bp">&#215;</span><span class="n">n</span><span class="o">]</span><span class="bp">&#8594;</span><span class="n">L</span><span class="o">[</span><span class="bp">&#120156;</span><span class="o">]</span> <span class="n">F</span> <span class="o">:=</span>
   <span class="n">iteratedFDeriv</span> <span class="bp">&#120156;</span> <span class="n">n</span> <span class="n">f</span>
 
@@ -435,9 +437,9 @@ For example, you may want to use one-sided derivatives in the
 one-dimensional setting. The means to do so are found in mathlib in a more
 general context;
 see <code class="docutils literal notranslate"><span class="pre">HasFDerivWithinAt</span></code> or the even more general <code class="docutils literal notranslate"><span class="pre">HasFDerivAtFilter</span></code>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

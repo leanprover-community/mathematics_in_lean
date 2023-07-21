@@ -3,6 +3,15 @@ import Mathlib.Data.Real.Basic
 
 namespace C03S01
 
+theorem my_lemma4 :
+    ∀ {x y ε : ℝ}, 0 < ε → ε ≤ 1 → |x| < ε → |y| < ε → |x * y| < ε := by
+  intro x y ε epos ele1 xlt ylt
+  calc
+    |x * y| = |x| * |y| := by apply abs_mul
+    _ ≤ |x| * ε := by apply mul_le_mul; linarith; linarith; apply abs_nonneg; apply abs_nonneg;
+    _ < 1 * ε := by rw [mul_lt_mul_right epos]; linarith
+    _ = ε := by apply one_mul
+
 def FnUb (f : ℝ → ℝ) (a : ℝ) : Prop :=
   ∀ x, f x ≤ a
 

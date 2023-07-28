@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2. Basics &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,15 +31,11 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="index.html" class="icon icon-home">
-            Mathematics in Lean
+            <a href="index.html" class="icon icon-home"> Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -81,8 +77,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">2. </span>Basics</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">2. </span>Basics</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C02_Basics.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -1170,23 +1166,14 @@ Since every number divides <code class="docutils literal notranslate"><span clas
 prove the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">Nat.gcd</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">Nat.gcd</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
-<span class="kd">end</span>
 </pre></div>
 </div>
-<dl class="simple">
-<dt>Hint: you can use <code class="docutils literal notranslate"><span class="pre">dvd_antisymm</span></code>, but if you do, Lean will</dt><dd><p>Hint: you can use <code class="docutils literal notranslate"><span class="pre">dvd_antisymm</span></code>, but if you do, Lean will</p>
-</dd>
-<dt>complain that the expression is ambiguous between the generic</dt><dd><p>complain that the expression is ambiguous between the generic</p>
-</dd>
-<dt>theorem and the version <code class="docutils literal notranslate"><span class="pre">Nat.dvd_antisymm</span></code>,</dt><dd><p>theorem and the version <code class="docutils literal notranslate"><span class="pre">Nat.dvd_antisymm</span></code>,</p>
-</dd>
-<dt>the one specifically for the natural numbers.</dt><dd><p>the one specifically for the natural numbers.</p>
-</dd>
-<dt>You can use <code class="docutils literal notranslate"><span class="pre">_root_.dvd_antisymm</span></code> to specify the generic one;</dt><dd><p>You can use <code class="docutils literal notranslate"><span class="pre">_root_.dvd_antisymm</span></code> to specify the generic one;</p>
-</dd>
-<dt>either one will work.</dt><dd><p>either one will work.</p>
-</dd>
-</dl>
+<p>Hint: you can use <code class="docutils literal notranslate"><span class="pre">dvd_antisymm</span></code>, but if you do, Lean will
+complain that the expression is ambiguous between the generic
+theorem and the version <code class="docutils literal notranslate"><span class="pre">Nat.dvd_antisymm</span></code>,
+the one specifically for the natural numbers.
+You can use <code class="docutils literal notranslate"><span class="pre">_root_.dvd_antisymm</span></code> to specify the generic one;
+either one will work.</p>
 </section>
 <section id="proving-facts-about-algebraic-structures">
 <span id="id4"></span><h2><span class="section-number">2.5. </span>Proving Facts about Algebraic Structures<a class="headerlink" href="#proving-facts-about-algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>

@@ -262,7 +262,7 @@ instance : EuclideanDomain gaussInt :=
     quotient_zero := fun x ↦ by
       simp [div_def, norm, Int.div']
       rfl
-    r := Measure (Int.natAbs ∘ norm)
+    r := (measure (Int.natAbs ∘ norm)).1
     r_wellFounded := (measure (Int.natAbs ∘ norm)).2
     remainder_lt := natAbs_norm_mod_lt
     mul_left_not_lt := not_norm_mul_left_lt_norm }

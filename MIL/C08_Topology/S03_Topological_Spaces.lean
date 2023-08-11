@@ -5,7 +5,7 @@ import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 open Set Filter Topology
 
 section
-variable {X : Type _} [TopologicalSpace X]
+variable {X : Type*} [TopologicalSpace X]
 
 example : IsOpen (univ : Set X) :=
   isOpen_univ
@@ -13,14 +13,14 @@ example : IsOpen (univ : Set X) :=
 example : IsOpen (∅ : Set X) :=
   isOpen_empty
 
-example {ι : Type _} {s : ι → Set X} (hs : ∀ i, IsOpen (s i)) : IsOpen (⋃ i, s i) :=
+example {ι : Type*} {s : ι → Set X} (hs : ∀ i, IsOpen (s i)) : IsOpen (⋃ i, s i) :=
   isOpen_iUnion hs
 
-example {ι : Type _} [Fintype ι] {s : ι → Set X} (hs : ∀ i, IsOpen (s i)) :
+example {ι : Type*} [Fintype ι] {s : ι → Set X} (hs : ∀ i, IsOpen (s i)) :
     IsOpen (⋂ i, s i) :=
   isOpen_iInter hs
 
-variable {Y : Type _} [TopologicalSpace Y]
+variable {Y : Type*} [TopologicalSpace Y]
 
 example {f : X → Y} : Continuous f ↔ ∀ s, IsOpen s → IsOpen (f ⁻¹' s) :=
   continuous_def
@@ -47,7 +47,7 @@ example {P : X → Prop} {x : X} (h : ∀ᶠ y in 𝓝 x, P y) : ∀ᶠ y in �
 
 #check TopologicalSpace.nhds_mkOfNhds
 
-example {α : Type _} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
+example {α : Type*} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
     (H : ∀ a : α, ∀ p : α → Prop, (∀ᶠ x in n a, p x) → ∀ᶠ y in n a, ∀ᶠ x in n y, p x) :
     ∀ a, ∀ s ∈ n a, ∃ t ∈ n a, t ⊆ s ∧ ∀ a' ∈ t, s ∈ n a' :=
   sorry
@@ -55,7 +55,7 @@ example {α : Type _} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
 end
 
 -- BOTH.
-variable {X Y : Type _}
+variable {X Y : Type*}
 
 example (f : X → Y) : TopologicalSpace X → TopologicalSpace Y :=
   TopologicalSpace.coinduced f
@@ -78,13 +78,13 @@ example (T_X : TopologicalSpace X) (T_Y : TopologicalSpace Y) (f : X → Y) :
     Continuous f ↔ TopologicalSpace.coinduced f T_X ≤ T_Y :=
   continuous_iff_coinduced_le
 
-example {Z : Type _} (f : X → Y) (T_X : TopologicalSpace X) (T_Z : TopologicalSpace Z)
+example {Z : Type*} (f : X → Y) (T_X : TopologicalSpace X) (T_Z : TopologicalSpace Z)
       (g : Y → Z) :
     @Continuous Y Z (TopologicalSpace.coinduced f T_X) T_Z g ↔
       @Continuous X Z T_X T_Z (g ∘ f) := by
   rw [continuous_iff_coinduced_le, coinduced_compose, continuous_iff_coinduced_le]
 
-example (ι : Type _) (X : ι → Type _) (T_X : ∀ i, TopologicalSpace (X i)) :
+example (ι : Type*) (X : ι → Type*) (T_X : ∀ i, TopologicalSpace (X i)) :
     (Pi.topologicalSpace : TopologicalSpace (∀ i, X i)) =
       ⨅ i, TopologicalSpace.induced (fun x ↦ x i) (T_X i) :=
   rfl
@@ -101,7 +101,7 @@ example [TopologicalSpace X] {x : X} :
     (𝓝 x).HasBasis (fun t : Set X ↦ t ∈ 𝓝 x ∧ IsOpen t) id :=
   nhds_basis_opens' x
 
-theorem aux {X Y A : Type _} [TopologicalSpace X] {c : A → X}
+theorem aux {X Y A : Type*} [TopologicalSpace X] {c : A → X}
       {f : A → Y} {x : X} {F : Filter Y}
       (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
     ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' :=
@@ -147,6 +147,6 @@ example [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {s : Set X} (hs :
   have Hle : 𝓟 s ⊓ comap f F ≤ 𝓟 s := inf_le_left
   sorry
 
-example {ι : Type _} {s : Set X} (hs : IsCompact s) (U : ι → Set X) (hUo : ∀ i, IsOpen (U i))
+example {ι : Type*} {s : Set X} (hs : IsCompact s) (U : ι → Set X) (hUo : ∀ i, IsOpen (U i))
     (hsU : s ⊆ ⋃ i, U i) : ∃ t : Finset ι, s ⊆ ⋃ i ∈ t, U i :=
   hs.elim_finite_subcover U hUo hsU

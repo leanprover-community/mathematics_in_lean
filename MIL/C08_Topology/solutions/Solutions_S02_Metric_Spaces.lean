@@ -5,7 +5,7 @@ import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 open Set Filter
 open Topology Filter
 
-variable {X : Type _} [MetricSpace X] (a b c : X)
+variable {X : Type*} [MetricSpace X] (a b c : X)
 
 #check (dist a b : ℝ)
 #check (dist_nonneg : 0 ≤ dist a b)
@@ -22,29 +22,29 @@ example {u : ℕ → X} {a : X} :
     Tendsto u atTop (𝓝 a) ↔ ∀ ε > 0, ∃ N, ∀ n ≥ N, dist (u n) a < ε :=
   Metric.tendsto_atTop
 
-example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} :
+example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} :
     Continuous f ↔
       ∀ x : X, ∀ ε > 0, ∃ δ > 0, ∀ x', dist x' x < δ → dist (f x') (f x) < ε :=
   Metric.continuous_iff
 
-example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
+example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
     Continuous fun p : X × X ↦ dist (f p.1) (f p.2) := by continuity
 
-example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
+example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
     Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   continuous_dist.comp ((hf.comp continuous_fst).prod_mk (hf.comp continuous_snd))
 
-example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
+example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
     Continuous fun p : X × X ↦ dist (f p.1) (f p.2) := by
   apply Continuous.dist
   exact hf.comp continuous_fst
   exact hf.comp continuous_snd
 
-example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
+example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
     Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   (hf.comp continuous_fst).dist (hf.comp continuous_snd)
 
-example {X Y : Type _} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
+example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
     Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   hf.fst'.dist hf.snd'
 
@@ -54,7 +54,7 @@ example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 
 example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 2 + x) :=
   hf.comp <| (continuous_pow 2).add continuous_id
 
-example {X Y : Type _} [MetricSpace X] [MetricSpace Y] (f : X → Y) (a : X) :
+example {X Y : Type*} [MetricSpace X] [MetricSpace Y] (f : X → Y) (a : X) :
     ContinuousAt f a ↔ ∀ ε > 0, ∃ δ > 0, ∀ {x}, dist x a < δ → dist (f x) (f a) < ε :=
   Metric.continuousAt_iff
 
@@ -124,22 +124,22 @@ example {s : Set X} (hs : IsCompact s) (hs' : s.Nonempty) {f : X → ℝ}
 example {s : Set X} (hs : IsCompact s) : IsClosed s :=
   hs.isClosed
 
-example {X : Type _} [MetricSpace X] [CompactSpace X] : IsCompact (univ : Set X) :=
+example {X : Type*} [MetricSpace X] [CompactSpace X] : IsCompact (univ : Set X) :=
   isCompact_univ
 
 #check IsCompact.isClosed
 
-example {X : Type _} [MetricSpace X] {Y : Type _} [MetricSpace Y] {f : X → Y} :
+example {X : Type*} [MetricSpace X] {Y : Type*} [MetricSpace Y] {f : X → Y} :
     UniformContinuous f ↔
       ∀ ε > 0, ∃ δ > 0, ∀ {a b : X}, dist a b < δ → dist (f a) (f b) < ε :=
   Metric.uniformContinuous_iff
 
-example {X : Type _} [MetricSpace X] [CompactSpace X]
-      {Y : Type _} [MetricSpace Y] {f : X → Y}
+example {X : Type*} [MetricSpace X] [CompactSpace X]
+      {Y : Type*} [MetricSpace Y] {f : X → Y}
     (hf : Continuous f) : UniformContinuous f :=
   sorry
 
-example {X : Type _} [MetricSpace X] [CompactSpace X] {Y : Type _} [MetricSpace Y] {f : X → Y}
+example {X : Type*} [MetricSpace X] [CompactSpace X] {Y : Type*} [MetricSpace Y] {f : X → Y}
     (hf : Continuous f) : UniformContinuous f := by
   rw [Metric.uniformContinuous_iff]
   intro ε ε_pos

@@ -2,7 +2,7 @@ import Mathlib.Tactic
 import Mathlib.Topology.MetricSpace.Basic
 
 section
-variable {α : Type _} [Lattice α]
+variable {α : Type*} [Lattice α]
 variable (x y z : α)
 
 example : x ⊓ y = y ⊓ x := by
@@ -78,7 +78,7 @@ theorem absorb2 : x ⊔ x ⊓ y = x := by
 end
 
 section
-variable {α : Type _} [DistribLattice α]
+variable {α : Type*} [DistribLattice α]
 variable (x y z : α)
 
 #check (inf_sup_left : x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z)
@@ -88,7 +88,7 @@ variable (x y z : α)
 end
 
 section
-variable {α : Type _} [Lattice α]
+variable {α : Type*} [Lattice α]
 variable (a b c : α)
 
 example (h : ∀ x y z : α, x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z) : a ⊔ b ⊓ c = (a ⊔ b) ⊓ (a ⊔ c) := by
@@ -102,7 +102,7 @@ example (h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b
 end
 
 section
-variable {R : Type _} [StrictOrderedRing R]
+variable {R : Type*} [StrictOrderedRing R]
 variable (a b c : R)
 
 theorem aux1 : a ≤ b → 0 ≤ b - a := by
@@ -123,7 +123,7 @@ example (h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := by
 end
 
 section
-variable {X : Type _} [MetricSpace X]
+variable {X : Type*} [MetricSpace X]
 variable (x y z : X)
 
 example (x y : X) : 0 ≤ dist x y :=by

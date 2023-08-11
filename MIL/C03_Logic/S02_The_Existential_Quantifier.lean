@@ -7,6 +7,15 @@ example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
   use 5 / 2
   norm_num
 
+example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
+  have h1 : 2 < (5 : ℝ) / 2 := by norm_num
+  have h2 : (5 : ℝ) / 2 < 3 := by norm_num
+  use 5 / 2, h1, h2
+
+example : ∃ x : ℝ, 2 < x ∧ x < 3 := by
+  have h : 2 < (5 : ℝ) / 2 ∧ (5 : ℝ) / 2 < 3 := by norm_num
+  use 5 / 2
+
 example : ∃ x : ℝ, 2 < x ∧ x < 3 :=
   have h : 2 < (5 : ℝ) / 2 ∧ (5 : ℝ) / 2 < 3 := by norm_num
   ⟨5 / 2, h⟩
@@ -86,7 +95,7 @@ example (ubf : FnHasUb f) (ubg : FnHasUb g) : FnHasUb fun x ↦ f x + g x :=
 
 section
 
-variable {α : Type _} [CommRing α]
+variable {α : Type*} [CommRing α]
 
 def SumOfSquares (x : α) :=
   ∃ a b, x = a ^ 2 + b ^ 2
@@ -148,7 +157,7 @@ end
 
 section
 open Function
-variable {α : Type _} {β : Type _} {γ : Type _}
+variable {α : Type*} {β : Type*} {γ : Type*}
 variable {g : β → γ} {f : α → β}
 
 example (surjg : Surjective g) (surjf : Surjective f) : Surjective fun x ↦ g (f x) := by

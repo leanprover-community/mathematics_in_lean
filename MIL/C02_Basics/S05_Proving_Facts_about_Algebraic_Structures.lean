@@ -2,7 +2,7 @@ import Mathlib.Tactic
 import Mathlib.Topology.MetricSpace.Basic
 
 section
-variable {α : Type _} [PartialOrder α]
+variable {α : Type*} [PartialOrder α]
 variable (x y z : α)
 
 #check x ≤ y
@@ -21,7 +21,7 @@ example : x < y ↔ x ≤ y ∧ x ≠ y :=
 end
 
 section
-variable {α : Type _} [Lattice α]
+variable {α : Type*} [Lattice α]
 variable (x y z : α)
 
 #check x ⊓ y
@@ -54,7 +54,7 @@ theorem absorb2 : x ⊔ x ⊓ y = x := by
 end
 
 section
-variable {α : Type _} [DistribLattice α]
+variable {α : Type*} [DistribLattice α]
 variable (x y z : α)
 
 #check (inf_sup_left : x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z)
@@ -64,7 +64,7 @@ variable (x y z : α)
 end
 
 section
-variable {α : Type _} [Lattice α]
+variable {α : Type*} [Lattice α]
 variable (a b c : α)
 
 example (h : ∀ x y z : α, x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z) : a ⊔ b ⊓ c = (a ⊔ b) ⊓ (a ⊔ c) := by
@@ -76,7 +76,7 @@ example (h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b
 end
 
 section
-variable {R : Type _} [StrictOrderedRing R]
+variable {R : Type*} [StrictOrderedRing R]
 variable (a b c : R)
 
 #check (add_le_add_left : a ≤ b → ∀ c, c + a ≤ c + b)
@@ -96,7 +96,7 @@ example (h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := by
 end
 
 section
-variable {X : Type _} [MetricSpace X]
+variable {X : Type*} [MetricSpace X]
 variable (x y z : X)
 
 #check (dist_self x : dist x x = 0)

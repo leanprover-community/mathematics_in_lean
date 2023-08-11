@@ -99,7 +99,7 @@ example {x y : ℝ} (h : x ^ 2 = y ^ 2) : x = y ∨ x = -y := by
     exact eq_of_sub_eq_zero h1
 
 section
-variable {R : Type _} [CommRing R] [IsDomain R]
+variable {R : Type*} [CommRing R] [IsDomain R]
 variable (x y : R)
 
 example (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by

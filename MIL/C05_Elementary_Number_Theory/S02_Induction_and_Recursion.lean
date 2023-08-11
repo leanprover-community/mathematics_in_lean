@@ -52,7 +52,7 @@ theorem pow_two_le_fac (n : ℕ) : 2 ^ (n - 1) ≤ fac n := by
   sorry
 section
 
-variable {α : Type _} (s : Finset ℕ) (f : ℕ → ℕ) (n : ℕ)
+variable {α : Type*} (s : Finset ℕ) (f : ℕ → ℕ) (n : ℕ)
 
 #check Finset.sum s f
 #check Finset.prod s f

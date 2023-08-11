@@ -62,7 +62,7 @@ example (x : ℝ) (h : ∀ ε > 0, x < ε) : x ≤ 0 := by
 end
 
 section
-variable {α : Type _} (P : α → Prop) (Q : Prop)
+variable {α : Type*} (P : α → Prop) (Q : Prop)
 
 example (h : ¬∃ x, P x) : ∀ x, ¬P x := by
   sorry

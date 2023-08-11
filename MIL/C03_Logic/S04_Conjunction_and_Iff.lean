@@ -133,7 +133,7 @@ example : ¬Monotone fun x : ℝ ↦ -x := by
   sorry
 
 section
-variable {α : Type _} [PartialOrder α]
+variable {α : Type*} [PartialOrder α]
 variable (a b : α)
 
 example : a < b ↔ a ≤ b ∧ a ≠ b := by
@@ -143,7 +143,7 @@ example : a < b ↔ a ≤ b ∧ a ≠ b := by
 end
 
 section
-variable {α : Type _} [Preorder α]
+variable {α : Type*} [Preorder α]
 variable (a b c : α)
 
 example : ¬a < a := by

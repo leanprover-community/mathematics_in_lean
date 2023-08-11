@@ -91,7 +91,7 @@ end
 
 section
 
-variable {α : Type _} (r s t : Set α)
+variable {α : Type*} (r s t : Set α)
 
 example : r ⊆ s → s ⊆ t → r ⊆ t := by
   intro rsubs ssubt x xr
@@ -105,7 +105,7 @@ theorem Subset.trans : r ⊆ s → s ⊆ t → r ⊆ t :=
 end
 
 section
-variable {α : Type _} [PartialOrder α]
+variable {α : Type*} [PartialOrder α]
 variable (s : Set α) (a b : α)
 
 def SetUb (s : Set α) (a : α) :=
@@ -128,7 +128,7 @@ example {c : ℝ} (h : c ≠ 0) : Injective fun x ↦ c * x := by
   intro x₁ x₂ h'
   apply (mul_right_inj' h).mp h'
 
-variable {α : Type _} {β : Type _} {γ : Type _}
+variable {α : Type*} {β : Type*} {γ : Type*}
 variable {g : β → γ} {f : α → β}
 
 example (injg : Injective g) (injf : Injective f) : Injective fun x ↦ g (f x) := by

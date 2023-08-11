@@ -94,7 +94,7 @@ theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ}
   exact lt_irrefl _ this
 
 section
-variable {α : Type _} [LinearOrder α]
+variable {α : Type*} [LinearOrder α]
 
 def ConvergesTo' (s : α → ℝ) (a : ℝ) :=
   ∀ ε > 0, ∃ N, ∀ n ≥ N, |s n - a| < ε

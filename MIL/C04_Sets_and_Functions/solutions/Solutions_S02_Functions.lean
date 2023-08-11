@@ -5,7 +5,7 @@ import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 section
 
-variable {α β : Type _}
+variable {α β : Type*}
 variable (f : α → β)
 variable (s t : Set α)
 variable (u v : Set β)
@@ -45,7 +45,6 @@ example (h : Surjective f) : u ⊆ f '' (f ⁻¹' u) := by
 example (h : s ⊆ t) : f '' s ⊆ f '' t := by
   rintro y ⟨x, xs, fxeq⟩
   use x, h xs
-  exact fxeq
 
 example (h : u ⊆ v) : f ⁻¹' u ⊆ f ⁻¹' v := by
   intro x; apply h
@@ -103,14 +102,13 @@ example : s ∪ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∪ u) := by
     exact ⟨x, xs, rfl⟩
   right; exact fxu
 
-variable {I : Type _} (A : I → Set α) (B : I → Set β)
+variable {I : Type*} (A : I → Set α) (B : I → Set β)
 
 example : (f '' ⋃ i, A i) = ⋃ i, f '' A i := by
   ext y; simp
   constructor
   · rintro ⟨x, ⟨i, xAi⟩, fxeq⟩
     use i, x
-    exact ⟨xAi, fxeq⟩
   rintro ⟨i, x, xAi, fxeq⟩
   exact ⟨x, ⟨i, xAi⟩, fxeq⟩
 
@@ -191,7 +189,7 @@ example : (range fun x ↦ x ^ 2) = { y : ℝ | y ≥ 0 } := by
 end
 
 section
-variable {α β : Type _} [Inhabited α]
+variable {α β : Type*} [Inhabited α]
 
 noncomputable section
 
@@ -235,7 +233,7 @@ example : Surjective f ↔ RightInverse (inverse f) f :=
 end
 
 section
-variable {α : Type _}
+variable {α : Type*}
 open Function
 
 theorem Cantor : ∀ f : α → Set α, ¬Surjective f := by

@@ -3,7 +3,7 @@ import Mathlib.Data.Real.Basic
 
 namespace C06S02
 
-structure Group₁ (α : Type _) where
+structure Group₁ (α : Type*) where
   mul : α → α → α
   one : α
   inv : α → α
@@ -13,11 +13,11 @@ structure Group₁ (α : Type _) where
   mul_left_inv : ∀ x : α, mul (inv x) x = one
 
 structure Group₁Cat where
-  α : Type _
+  α : Type*
   str : Group₁ α
 
 section
-variable (α β γ : Type _)
+variable (α β γ : Type*)
 variable (f : α ≃ β) (g : β ≃ γ)
 
 #check Equiv α β
@@ -40,10 +40,10 @@ example : (f.trans g : α → γ) = g ∘ f :=
 
 end
 
-example (α : Type _) : Equiv.Perm α = (α ≃ α) :=
+example (α : Type*) : Equiv.Perm α = (α ≃ α) :=
   rfl
 
-def permGroup {α : Type _} : Group₁ (Equiv.Perm α)
+def permGroup {α : Type*} : Group₁ (Equiv.Perm α)
     where
   mul f g := Equiv.trans g f
   one := Equiv.refl α
@@ -53,7 +53,7 @@ def permGroup {α : Type _} : Group₁ (Equiv.Perm α)
   mul_one := Equiv.refl_trans
   mul_left_inv := Equiv.self_trans_symm
 
-structure AddGroup₁ (α : Type _) where
+structure AddGroup₁ (α : Type*) where
   (add : α → α → α)
   -- fill in the rest
 @[ext]
@@ -76,7 +76,7 @@ def addGroupPoint : AddGroup₁ Point := sorry
 end Point
 
 section
-variable {α : Type _} (f g : Equiv.Perm α) (n : ℕ)
+variable {α : Type*} (f g : Equiv.Perm α) (n : ℕ)
 
 #check f * g
 #check mul_assoc f g g⁻¹
@@ -89,12 +89,12 @@ example : f * g * g⁻¹ = f := by rw [mul_assoc, mul_right_inv, mul_one]
 example : f * g * g⁻¹ = f :=
   mul_inv_cancel_right f g
 
-example {α : Type _} (f g : Equiv.Perm α) : g.symm.trans (g.trans f) = f :=
+example {α : Type*} (f g : Equiv.Perm α) : g.symm.trans (g.trans f) = f :=
   mul_inv_cancel_right f g
 
 end
 
-class Group₂ (α : Type _) where
+class Group₂ (α : Type*) where
   mul : α → α → α
   one : α
   inv : α → α
@@ -103,7 +103,7 @@ class Group₂ (α : Type _) where
   one_mul : ∀ x : α, mul one x = x
   mul_left_inv : ∀ x : α, mul (inv x) x = one
 
-instance {α : Type _} : Group₂ (Equiv.Perm α) where
+instance {α : Type*} : Group₂ (Equiv.Perm α) where
   mul f g := Equiv.trans g f
   one := Equiv.refl α
   inv := Equiv.symm
@@ -114,13 +114,13 @@ instance {α : Type _} : Group₂ (Equiv.Perm α) where
 
 #check Group₂.mul
 
-def mySquare {α : Type _} [Group₂ α] (x : α) :=
+def mySquare {α : Type*} [Group₂ α] (x : α) :=
   Group₂.mul x x
 
 #check mySquare
 
 section
-variable {β : Type _} (f g : Equiv.Perm β)
+variable {β : Type*} (f g : Equiv.Perm β)
 
 example : Group₂.mul f g = g.trans f :=
   rfl
@@ -149,17 +149,17 @@ example : x + y = Point.add x y :=
 
 end
 
-instance hasMulGroup₂ {α : Type _} [Group₂ α] : Mul α :=
+instance hasMulGroup₂ {α : Type*} [Group₂ α] : Mul α :=
   ⟨Group₂.mul⟩
 
-instance hasOneGroup₂ {α : Type _} [Group₂ α] : One α :=
+instance hasOneGroup₂ {α : Type*} [Group₂ α] : One α :=
   ⟨Group₂.one⟩
 
-instance hasInvGroup₂ {α : Type _} [Group₂ α] : Inv α :=
+instance hasInvGroup₂ {α : Type*} [Group₂ α] : Inv α :=
   ⟨Group₂.inv⟩
 
 section
-variable {α : Type _} (f g : Equiv.Perm α)
+variable {α : Type*} (f g : Equiv.Perm α)
 
 #check f * 1 * g⁻¹
 
@@ -168,6 +168,6 @@ def foo : f * 1 * g⁻¹ = g.symm.trans ((Equiv.refl α).trans f) :=
 
 end
 
-class AddGroup₂ (α : Type _) where
+class AddGroup₂ (α : Type*) where
   add : α → α → α
   -- fill in the rest

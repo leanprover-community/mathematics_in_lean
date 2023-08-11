@@ -76,7 +76,7 @@ example (hfa : FnUb f a) (hfb : FnUb g b) (nng : FnLb g 0) (nna : 0 ≤ a) :
 end
 
 section
-variable {α : Type _} {R : Type _} [OrderedCancelAddCommMonoid R]
+variable {α : Type*} {R : Type*} [OrderedCancelAddCommMonoid R]
 
 #check add_le_add
 
@@ -135,7 +135,7 @@ end
 
 section
 
-variable {α : Type _} (r s t : Set α)
+variable {α : Type*} (r s t : Set α)
 
 example : s ⊆ s := by
   intro x xs
@@ -149,7 +149,7 @@ theorem Subset.trans : r ⊆ s → s ⊆ t → r ⊆ t := by
 end
 
 section
-variable {α : Type _} [PartialOrder α]
+variable {α : Type*} [PartialOrder α]
 variable (s : Set α) (a b : α)
 
 def SetUb (s : Set α) (a : α) :=
@@ -171,7 +171,7 @@ example (c : ℝ) : Injective fun x ↦ x + c := by
 example {c : ℝ} (h : c ≠ 0) : Injective fun x ↦ c * x := by
   sorry
 
-variable {α : Type _} {β : Type _} {γ : Type _}
+variable {α : Type*} {β : Type*} {γ : Type*}
 variable {g : β → γ} {f : α → β}
 
 example (injg : Injective g) (injf : Injective f) : Injective fun x ↦ g (f x) := by

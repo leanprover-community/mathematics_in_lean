@@ -61,13 +61,12 @@ example (x : ℝ) (h : ∀ ε > 0, x < ε) : x ≤ 0 := by
 end
 
 section
-variable {α : Type _} (P : α → Prop) (Q : Prop)
+variable {α : Type*} (P : α → Prop) (Q : Prop)
 
 example (h : ¬∃ x, P x) : ∀ x, ¬P x := by
   intro x Px
   apply h
   use x
-  exact Px
 
 example (h : ∀ x, ¬P x) : ¬∃ x, P x := by
   rintro ⟨x, Px⟩
@@ -102,7 +101,6 @@ example (h : ¬FnHasUb f) : ∀ a, ∃ x, f x > a := by
   intro h''
   apply h'
   use x
-  exact h''
 
 example (h : ¬Monotone f) : ∃ x y, x ≤ y ∧ f y < f x := by
   rw [Monotone] at h

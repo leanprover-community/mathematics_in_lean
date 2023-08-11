@@ -9,9 +9,9 @@ open Set Filter
 
 noncomputable section
 
-variable {α : Type _} [MeasurableSpace α]
+variable {α : Type*} [MeasurableSpace α]
 
-variable {ι : Type _} [Encodable ι]
+variable {ι : Type*} [Encodable ι]
 
 open MeasureTheory
 variable {μ : Measure α}

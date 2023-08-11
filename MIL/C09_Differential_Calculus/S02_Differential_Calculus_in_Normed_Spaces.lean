@@ -14,7 +14,7 @@ noncomputable section
 
 section
 
-variable {E : Type _} [NormedAddCommGroup E]
+variable {E : Type*} [NormedAddCommGroup E]
 
 example (x : E) : 0 ≤ ‖x‖ :=
   norm_nonneg x
@@ -27,7 +27,7 @@ example (x y : E) : ‖x + y‖ ≤ ‖x‖ + ‖y‖ :=
 
 example : MetricSpace E := by infer_instance
 
-example {X : Type _} [TopologicalSpace X] {f : X → E} (hf : Continuous f) :
+example {X : Type*} [TopologicalSpace X] {f : X → E} (hf : Continuous f) :
     Continuous fun x ↦ ‖f x‖ :=
   hf.norm
 
@@ -38,13 +38,13 @@ example (a : ℝ) (x : E) : ‖a • x‖ = |a| * ‖x‖ :=
 
 example [FiniteDimensional ℝ E] : CompleteSpace E := by infer_instance
 
-example (𝕜 : Type _) [NontriviallyNormedField 𝕜] (x y : 𝕜) : ‖x * y‖ = ‖x‖ * ‖y‖ :=
+example (𝕜 : Type*) [NontriviallyNormedField 𝕜] (x y : 𝕜) : ‖x * y‖ = ‖x‖ * ‖y‖ :=
   norm_mul x y
 
-example (𝕜 : Type _) [NontriviallyNormedField 𝕜] : ∃ x : 𝕜, 1 < ‖x‖ :=
+example (𝕜 : Type*) [NontriviallyNormedField 𝕜] : ∃ x : 𝕜, 1 < ‖x‖ :=
   NormedField.exists_one_lt_norm 𝕜
 
-example (𝕜 : Type _) [NontriviallyNormedField 𝕜] (E : Type _) [NormedAddCommGroup E]
+example (𝕜 : Type*) [NontriviallyNormedField 𝕜] (E : Type*) [NormedAddCommGroup E]
     [NormedSpace 𝕜 E] [CompleteSpace 𝕜] [FiniteDimensional 𝕜 E] : CompleteSpace E :=
   FiniteDimensional.complete 𝕜 E
 
@@ -52,8 +52,8 @@ end
 
 section
 
-variable {𝕜 : Type _} [NontriviallyNormedField 𝕜] {E : Type _} [NormedAddCommGroup E]
-  [NormedSpace 𝕜 E] {F : Type _} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
+variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type*} [NormedAddCommGroup E]
+  [NormedSpace 𝕜 E] {F : Type*} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
 
 example : E →L[𝕜] E :=
   ContinuousLinearMap.id 𝕜 E
@@ -82,12 +82,12 @@ end
 
 section
 
-variable {𝕜 : Type _} [NontriviallyNormedField 𝕜] {E : Type _} [NormedAddCommGroup E]
-  [NormedSpace 𝕜 E] {F : Type _} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
+variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type*} [NormedAddCommGroup E]
+  [NormedSpace 𝕜 E] {F : Type*} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
 
 open Metric
 
-example {ι : Type _} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, ∃ C, ∀ i, ‖g i x‖ ≤ C) :
+example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, ∃ C, ∀ i, ‖g i x‖ ≤ C) :
     ∃ C', ∀ i, ‖g i‖ ≤ C' := by
   -- sequence of subsets consisting of those `x : E` with norms `‖g i x‖` bounded by `n`
   let e : ℕ → Set E := fun n ↦ ⋂ i : ι, { x : E | ‖g i x‖ ≤ n }
@@ -114,19 +114,19 @@ end
 
 open Asymptotics
 
-example {α : Type _} {E : Type _} [NormedGroup E] {F : Type _} [NormedGroup F] (c : ℝ)
+example {α : Type*} {E : Type*} [NormedGroup E] {F : Type*} [NormedGroup F] (c : ℝ)
     (l : Filter α) (f : α → E) (g : α → F) : IsBigOWith c l f g ↔ ∀ᶠ x in l, ‖f x‖ ≤ c * ‖g x‖ :=
   isBigOWith_iff
 
-example {α : Type _} {E : Type _} [NormedGroup E] {F : Type _} [NormedGroup F]
+example {α : Type*} {E : Type*} [NormedGroup E] {F : Type*} [NormedGroup F]
     (l : Filter α) (f : α → E) (g : α → F) : f =O[l] g ↔ ∃ C, IsBigOWith C l f g :=
   isBigO_iff_isBigOWith
 
-example {α : Type _} {E : Type _} [NormedGroup E] {F : Type _} [NormedGroup F]
+example {α : Type*} {E : Type*} [NormedGroup E] {F : Type*} [NormedGroup F]
     (l : Filter α) (f : α → E) (g : α → F) : f =o[l] g ↔ ∀ C > 0, IsBigOWith C l f g :=
   isLittleO_iff_forall_isBigOWith
 
-example {α : Type _} {E : Type _} [NormedAddCommGroup E] (l : Filter α) (f g : α → E) :
+example {α : Type*} {E : Type*} [NormedAddCommGroup E] (l : Filter α) (f g : α → E) :
     f ~[l] g ↔ (f - g) =o[l] g :=
   Iff.rfl
 
@@ -134,8 +134,8 @@ section
 
 open Topology
 
-variable {𝕜 : Type _} [NontriviallyNormedField 𝕜] {E : Type _} [NormedAddCommGroup E]
-  [NormedSpace 𝕜 E] {F : Type _} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
+variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type*} [NormedAddCommGroup E]
+  [NormedSpace 𝕜 E] {F : Type*} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
 
 example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) :
     HasFDerivAt f f' x₀ ↔ (fun x ↦ f x - f x₀ - f' (x - x₀)) =o[𝓝 x₀] fun x ↦ x - x₀ :=
@@ -153,7 +153,7 @@ example (n : WithTop ℕ) {f : E → F} :
         ∀ m : ℕ, (m : WithTop ℕ) < n → Differentiable 𝕜 fun x ↦ iteratedFDeriv 𝕜 m f x :=
   contDiff_iff_continuous_differentiable
 
-example {𝕂 : Type _} [IsROrC 𝕂] {E : Type _} [NormedAddCommGroup E] [NormedSpace 𝕂 E] {F : Type _}
+example {𝕂 : Type*} [IsROrC 𝕂] {E : Type*} [NormedAddCommGroup E] [NormedSpace 𝕂 E] {F : Type*}
     [NormedAddCommGroup F] [NormedSpace 𝕂 F] {f : E → F} {x : E} {n : WithTop ℕ}
     (hf : ContDiffAt 𝕂 n f x) (hn : 1 ≤ n) : HasStrictFDerivAt f (fderiv 𝕂 f x) x :=
   hf.hasStrictFDerivAt hn

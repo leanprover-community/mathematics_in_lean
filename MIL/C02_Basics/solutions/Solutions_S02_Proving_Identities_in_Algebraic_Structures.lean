@@ -3,7 +3,7 @@ import Mathlib.Data.Real.Basic
 import Mathlib.Tactic
 
 namespace MyRing
-variable {R : Type _} [Ring R]
+variable {R : Type*} [Ring R]
 
 theorem add_neg_cancel_right (a b : R) : a + b + -b = a := by
   rw [add_assoc, add_right_neg, add_zero]
@@ -37,7 +37,7 @@ theorem neg_neg (a : R) : - -a = a := by
 end MyRing
 
 namespace MyRing
-variable {R : Type _} [Ring R]
+variable {R : Type*} [Ring R]
 
 theorem self_sub (a : R) : a - a = 0 := by
   rw [sub_eq_add_neg, add_right_neg]
@@ -51,7 +51,7 @@ theorem two_mul (a : R) : 2 * a = a + a := by
 end MyRing
 
 section
-variable {G : Type _} [Group G]
+variable {G : Type*} [Group G]
 
 namespace MyGroup
 

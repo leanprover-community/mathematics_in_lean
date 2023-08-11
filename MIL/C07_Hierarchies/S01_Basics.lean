@@ -263,7 +263,7 @@ def nsmul₁ [Zero M] [Add M] : ℕ → M → M
   | 0, _ => 0
   | n + 1, a => a + nsmul₁ n a
 
-def zsmul₁ {M : Type _} [Zero M] [Add M] [Neg M] : ℤ → M → M
+def zsmul₁ {M : Type*} [Zero M] [Add M] [Neg M] : ℤ → M → M
   | Int.ofNat n, a => nsmul₁ n a
   | Int.negSucc n, a => -nsmul₁ n.succ a
 

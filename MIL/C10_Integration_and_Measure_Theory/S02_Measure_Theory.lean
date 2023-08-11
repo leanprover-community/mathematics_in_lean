@@ -9,7 +9,7 @@ open Set Filter
 
 noncomputable section
 
-variable {α : Type _} [MeasurableSpace α]
+variable {α : Type*} [MeasurableSpace α]
 
 example : MeasurableSet (∅ : Set α) :=
   MeasurableSet.empty
@@ -24,7 +24,7 @@ example : Encodable ℕ := by infer_instance
 
 example (n : ℕ) : Encodable (Fin n) := by infer_instance
 
-variable {ι : Type _} [Encodable ι]
+variable {ι : Type*} [Encodable ι]
 
 example {f : ι → Set α} (h : ∀ b, MeasurableSet (f b)) : MeasurableSet (⋃ b, f b) :=
   MeasurableSet.iUnion h

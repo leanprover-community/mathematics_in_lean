@@ -3,7 +3,7 @@ import Mathlib.Data.Real.Basic
 
 namespace C06S02
 
-structure AddGroup₁ (α : Type _) where
+structure AddGroup₁ (α : Type*) where
   add : α → α → α
   zero : α
   neg : α → α
@@ -40,7 +40,7 @@ def addGroupPoint : AddGroup₁ Point where
 
 end Point
 
-class AddGroup₂ (α : Type _) where
+class AddGroup₂ (α : Type*) where
   add : α → α → α
   zero : α
   neg : α → α
@@ -49,13 +49,13 @@ class AddGroup₂ (α : Type _) where
   zero_add : ∀ x : α, add x zero = x
   add_left_neg : ∀ x : α, add (neg x) x = zero
 
-instance hasAddAddGroup₂ {α : Type _} [AddGroup₂ α] : Add α :=
+instance hasAddAddGroup₂ {α : Type*} [AddGroup₂ α] : Add α :=
   ⟨AddGroup₂.add⟩
 
-instance hasZeroAddGroup₂ {α : Type _} [AddGroup₂ α] : Zero α :=
+instance hasZeroAddGroup₂ {α : Type*} [AddGroup₂ α] : Zero α :=
   ⟨AddGroup₂.zero⟩
 
-instance hasNegAddGroup₂ {α : Type _} [AddGroup₂ α] : Neg α :=
+instance hasNegAddGroup₂ {α : Type*} [AddGroup₂ α] : Neg α :=
   ⟨AddGroup₂.neg⟩
 
 instance : AddGroup₂ Point where

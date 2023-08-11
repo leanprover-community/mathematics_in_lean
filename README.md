@@ -58,7 +58,7 @@ which is why we suggested making a copy.)
 If you have a Gitpod account or are willing to sign up for one,
 just point your browser to [https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean](https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean).
 This creates a virtual machine in the cloud,
-and installs Lean and mathlib.
+and installs Lean and Mathlib.
 It then presents you with a VS Code window, running in a virtual
 copy of the repository.
 We still suggest making a copy of the `MIL` directory, as described

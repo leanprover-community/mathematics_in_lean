@@ -12,6 +12,6 @@ open Topology Filter ENNReal
 open MeasureTheory
 
 noncomputable section
-variable {α : Type _} [MeasurableSpace α]
+variable {α : Type*} [MeasurableSpace α]
 variable {μ : Measure α}
 

@@ -4,7 +4,7 @@ import Mathlib.Data.Nat.Parity
 import Mathlib.Tactic
 
 section
-variable {α : Type _}
+variable {α : Type*}
 variable (s t u : Set α)
 open Set
 
@@ -150,7 +150,6 @@ example (h₀ : ∀ x ∈ s, ¬Even x) (h₁ : ∀ x ∈ s, Prime x) : ∀ x ∈
 example (h : ∃ x ∈ s, ¬Even x ∧ Prime x) : ∃ x ∈ s, Prime x := by
   rcases h with ⟨x, xs, _, prime_x⟩
   use x, xs
-  exact prime_x
 
 section
 variable (ssubt : s ⊆ t)
@@ -166,7 +165,7 @@ end
 end
 
 section
-variable {α I : Type _}
+variable {α I : Type*}
 variable (A B : I → Set α)
 variable (s : Set α)
 
@@ -227,7 +226,7 @@ section
 
 open Set
 
-variable {α : Type _} (s : Set (Set α))
+variable {α : Type*} (s : Set (Set α))
 
 example : ⋃₀ s = ⋃ t ∈ s, t := by
   ext x

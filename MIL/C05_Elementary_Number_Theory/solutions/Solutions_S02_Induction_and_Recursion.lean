@@ -19,7 +19,7 @@ theorem pow_two_le_fac (n : ℕ) : 2 ^ (n - 1) ≤ fac n := by
 
 section
 
-variable {α : Type _} (s : Finset ℕ) (f : ℕ → ℕ) (n : ℕ)
+variable {α : Type*} (s : Finset ℕ) (f : ℕ → ℕ) (n : ℕ)
 
 open BigOperators
 open Finset

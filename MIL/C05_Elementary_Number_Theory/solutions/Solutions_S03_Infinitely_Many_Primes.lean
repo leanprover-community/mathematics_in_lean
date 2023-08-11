@@ -28,7 +28,6 @@ theorem exists_prime_factor {n : Nat} (h : 2 ≤ n) : ∃ p : Nat, p.Prime ∧ p
   have mgt2 : 2 ≤ m := two_le this mne1
   by_cases mp : m.Prime
   · use m, mp
-    exact mdvdn
   . rcases ih m mltn mgt2 mp with ⟨p, pp, pdvd⟩
     use p, pp
     apply pdvd.trans mdvdn
@@ -57,7 +56,7 @@ theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
 open Finset
 
 section
-variable {α : Type _} [DecidableEq α] (r s t : Finset α)
+variable {α : Type*} [DecidableEq α] (r s t : Finset α)
 
 example : (r ∪ s) ∩ (r ∪ t) = r ∪ s ∩ t := by
   ext x
@@ -169,7 +168,6 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
     ∃ p : Nat, p.Prime ∧ p ∣ n ∧ p % 4 = 3 := by
   by_cases np : n.Prime
   · use n
-    exact ⟨np, dvd_rfl, h⟩
   induction' n using Nat.strong_induction_on with n ih
   dsimp at ih
   rw [Nat.prime_def_lt] at np
@@ -187,14 +185,12 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
   rcases this with h1 | h1
   · by_cases mp : m.Prime
     · use m
-      exact ⟨mp, mdvdn, h1⟩
     rcases ih m mltn h1 mp with ⟨p, pp, pdvd, p4eq⟩
     use p
     exact ⟨pp, pdvd.trans mdvdn, p4eq⟩
   obtain ⟨nmdvdn, nmltn⟩ := aux mdvdn mge2 mltn
   by_cases nmp : (n / m).Prime
   · use n / m
-    exact ⟨nmp, nmdvdn, h1⟩
   rcases ih (n / m) nmltn h1 nmp with ⟨p, pp, pdvd, p4eq⟩
   use p
   exact ⟨pp, pdvd.trans nmdvdn, p4eq⟩

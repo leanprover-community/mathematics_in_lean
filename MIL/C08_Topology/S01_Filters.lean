@@ -3,7 +3,7 @@ import Mathlib.Topology.Instances.Real
 
 open Set Filter Topology
 
-def principal {α : Type _} (s : Set α) : Filter α
+def principal {α : Type*} (s : Set α) : Filter α
     where
   sets := { t | s ⊆ t }
   univ_sets := sorry
@@ -16,13 +16,13 @@ example : Filter ℕ :=
     sets_of_superset := sorry
     inter_sets := sorry }
 
-def Tendsto₁ {X Y : Type _} (f : X → Y) (F : Filter X) (G : Filter Y) :=
+def Tendsto₁ {X Y : Type*} (f : X → Y) (F : Filter X) (G : Filter Y) :=
   ∀ V ∈ G, f ⁻¹' V ∈ F
 
-def Tendsto₂ {X Y : Type _} (f : X → Y) (F : Filter X) (G : Filter Y) :=
+def Tendsto₂ {X Y : Type*} (f : X → Y) (F : Filter X) (G : Filter Y) :=
   map f F ≤ G
 
-example {X Y : Type _} (f : X → Y) (F : Filter X) (G : Filter Y) :
+example {X Y : Type*} (f : X → Y) (F : Filter X) (G : Filter Y) :
     Tendsto₂ f F G ↔ Tendsto₁ f F G :=
   Iff.rfl
 
@@ -32,7 +32,7 @@ example {X Y : Type _} (f : X → Y) (F : Filter X) (G : Filter Y) :
   (@Filter.map_map :
     ∀ {α β γ} {f : Filter α} {m : α → β} {m' : β → γ}, map m' (map m f) = map (m' ∘ m) f)
 
-example {X Y Z : Type _} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → Y} {g : Y → Z}
+example {X Y Z : Type*} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → Y} {g : Y → Z}
     (hf : Tendsto₁ f F G) (hg : Tendsto₁ g G H) : Tendsto₁ (g ∘ f) F H :=
   sorry
 
@@ -43,7 +43,7 @@ variable (f : ℝ → ℝ) (x₀ y₀ : ℝ)
 #check Tendsto (f ∘ (↑)) (comap ((↑) : ℚ → ℝ) (𝓝 x₀)) (𝓝 y₀)
 
 section
-variable {α β γ : Type _} (F : Filter α) {m : γ → β} {n : β → α}
+variable {α β γ : Type*} (F : Filter α) {m : γ → β} {n : β → α}
 
 #check (comap_comap : comap m (comap n F) = comap (n ∘ m) F)
 

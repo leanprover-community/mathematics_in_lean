@@ -173,7 +173,7 @@ theorem mod'_eq (a b : ℤ) : mod' a b = a - b * div' a b := by linarith [div'_a
 
 end Int
 
-theorem sq_add_sq_eq_zero {α : Type _} [LinearOrderedRing α] (x y : α) :
+theorem sq_add_sq_eq_zero {α : Type*} [LinearOrderedRing α] (x y : α) :
     x ^ 2 + y ^ 2 = 0 ↔ x = 0 ∧ y = 0 := by
   sorry
 namespace gaussInt

@@ -4,7 +4,7 @@ import Mathlib.Data.Nat.Parity
 import Mathlib.Tactic
 
 section
-variable {α : Type _}
+variable {α : Type*}
 variable (s t u : Set α)
 open Set
 
@@ -52,7 +52,6 @@ example : s \ t ∪ t = s ∪ t := by
   rintro (xs | xt)
   · left
     use xs
-    exact h
   right; exact xt
 
 example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
@@ -107,14 +106,13 @@ example (h₀ : ∀ x ∈ t, ¬Even x) (h₁ : ∀ x ∈ t, Prime x) : ∀ x ∈
 example (h : ∃ x ∈ s, ¬Even x ∧ Prime x) : ∃ x ∈ t, Prime x := by
   rcases h with ⟨x, xs, _, px⟩
   use x, ssubt xs
-  exact px
 
 end
 
 end
 
 section
-variable {α I : Type _}
+variable {α I : Type*}
 variable (A B : I → Set α)
 variable (s : Set α)
 
@@ -150,7 +148,6 @@ example : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
   simp
   rcases Nat.exists_infinite_primes x with ⟨p, primep, pge⟩
   use p, pge
-  exact primep
 
 end
 

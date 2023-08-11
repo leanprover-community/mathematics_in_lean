@@ -7,7 +7,7 @@ open Function
 
 noncomputable section
 open Classical
-variable {α β : Type _} [Nonempty β]
+variable {α β : Type*} [Nonempty β]
 
 section
 variable (f : α → β) (g : β → α)

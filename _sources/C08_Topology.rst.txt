@@ -20,7 +20,7 @@ We have already begun to consider such notions in :numref:`sequences_and_converg
 *Topology* is the abstract study of limits and continuity.
 Having covered the essentials of formalization in Chapters :numref:`%s <basics>`
 to :numref:`%s <structures>`,
-in this chapter, we will explain how topological notions are formalized in mathlib.
+in this chapter, we will explain how topological notions are formalized in Mathlib.
 Not only do topological abstractions apply in much greater generality,
 but that also, somewhat paradoxically, make it easier to reason about limits
 and continuity in concrete instances.

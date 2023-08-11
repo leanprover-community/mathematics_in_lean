@@ -153,7 +153,7 @@ to avoid this issue would be to use a type annotation, as in:</p>
 in <a class="reference internal" href="C03_Logic.html#sequences-and-convergence"><span class="std std-numref">Section 3.6</span></a> if you tried to state for instance that
 <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> without telling Lean whether you meant this inequality to be about natural numbers
 or real numbers.</p>
-<p>Our next task is to assign a notation to <code class="docutils literal notranslate"><span class="pre">One&#8321;.one</span></code>. This we don&#8217;t want collisions
+<p>Our next task is to assign a notation to <code class="docutils literal notranslate"><span class="pre">One&#8321;.one</span></code>. Since we don&#8217;t want collisions
 with the builtin notation for <code class="docutils literal notranslate"><span class="pre">1</span></code>, we will use <code class="docutils literal notranslate"><span class="pre">&#120793;</span></code>. This is achieved by the following
 command where the first line tells Lean to use the documentation
 of <code class="docutils literal notranslate"><span class="pre">One&#8321;.one</span></code> as documentation for the symbol <code class="docutils literal notranslate"><span class="pre">&#120793;</span></code>.</p>
@@ -314,7 +314,7 @@ A ring structure on a type contains both an additive group structure and a multi
 monoid structure, and some properties about their interaction. But so far we hard-coded
 a notation <code class="docutils literal notranslate"><span class="pre">&#8900;</span></code> for all our operations. More fundamentally, the type class system
 assumes every type has only one instance of each type class. There are various
-ways to solve this issue. Surprisingly mathlib uses the naive idea to duplicate
+ways to solve this issue. Surprisingly Mathlib uses the naive idea to duplicate
 everything for additive and multiplicative theories with the help of some code-generating
 attribute. Structures and classes are defined in both additive and multiplicative notation
 with an attribute <code class="docutils literal notranslate"><span class="pre">to_additive</span></code> linking them. In case of multiple inheritance like for
@@ -527,7 +527,7 @@ to scalar multiplication by an integer by ensuring <code class="docutils literal
   <span class="bp">|</span> <span class="mi">0</span><span class="o">,</span> <span class="n">_</span> <span class="bp">=&gt;</span> <span class="mi">0</span>
   <span class="bp">|</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=&gt;</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">nsmul&#8321;</span> <span class="n">n</span> <span class="n">a</span>
 
-<span class="kd">def</span> <span class="n">zsmul&#8321;</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Zero</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Add</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Neg</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">&#8484;</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span>
+<span class="kd">def</span> <span class="n">zsmul&#8321;</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Zero</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Add</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Neg</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">&#8484;</span> <span class="bp">&#8594;</span> <span class="n">M</span> <span class="bp">&#8594;</span> <span class="n">M</span>
   <span class="bp">|</span> <span class="n">Int.ofNat</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=&gt;</span> <span class="n">nsmul&#8321;</span> <span class="n">n</span> <span class="n">a</span>
   <span class="bp">|</span> <span class="n">Int.negSucc</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=&gt;</span> <span class="bp">-</span><span class="n">nsmul&#8321;</span> <span class="n">n.succ</span> <span class="n">a</span>
 </pre></div>
@@ -561,7 +561,7 @@ This situation is known as a bad diamond. This has nothing to do with the diamon
 we used above, it refers to the way one can draw the paths from <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> to its <code class="docutils literal notranslate"><span class="pre">Module&#8321;</span> <span class="pre">&#8484;</span></code>
 going through either <code class="docutils literal notranslate"><span class="pre">AddCommGroup&#8323;</span> <span class="pre">&#8484;</span></code> or <code class="docutils literal notranslate"><span class="pre">Ring&#8323;</span> <span class="pre">&#8484;</span></code>.</p>
 <p>It is important to understand that not all diamonds are bad. In fact there are diamonds everywhere
-in mathlib, and also in this chapter. Already at the very beginning we saw one can go
+in Mathlib, and also in this chapter. Already at the very beginning we saw one can go
 from <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;</span> <span class="pre">&#945;</span></code> to <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code> through either <code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span> <span class="pre">&#945;</span></code> or <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span> <span class="pre">&#945;</span></code> and
 thanks to the work done by the <code class="docutils literal notranslate"><span class="pre">class</span></code> command, the resulting two <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code> instances
 are definitionally equal. In particular a diamond having a <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued class at the bottom
@@ -621,7 +621,7 @@ the <code class="docutils literal notranslate"><span class="pre">&#8226;</span><
 </div>
 <p>This story then continues with incorporating a <code class="docutils literal notranslate"><span class="pre">zsmul</span></code> field into the definition of groups
 and similar tricks. You are now ready to read the definition of monoids, groups, rings and modules
-in mathlib. There are more complicated than what we have seen here, because they are part of a huge
+in Mathlib. There are more complicated than what we have seen here, because they are part of a huge
 hierarchy, but all principles have been explained above.</p>
 <p>As an exercise, you can come back to the order relation hierarchy you built above and try
 to incorporate a type class <code class="docutils literal notranslate"><span class="pre">LT&#8321;</span></code> carrying the Less-Than notation <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> and make sure

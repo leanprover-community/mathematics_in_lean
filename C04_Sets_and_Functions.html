@@ -101,7 +101,7 @@ groups, vector spaces, and so on.
 Some expressions <em>are</em> types,
 which is to say,
 their type is <code class="docutils literal notranslate"><span class="pre">Type</span></code>.
-Lean and mathlib provide ways of defining new types,
+Lean and Mathlib provide ways of defining new types,
 and ways of defining objects of those types.</p>
 <p>Conceptually, you can think of a type as just a set of objects.
 Requiring every object to have a type has some advantages.
@@ -149,7 +149,7 @@ Unlike <code class="docutils literal notranslate"><span class="pre">rw</span></c
 inside a universal or existential quantifier.
 If you step through the proof,
 you can see the effects of these commands.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
 <span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="n">u</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span>
 <span class="kn">open</span> <span class="n">Set</span>
 
@@ -430,7 +430,6 @@ Here is are some examples of how they are used:</p>
 <span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">&#172;</span><span class="n">Even</span> <span class="n">x</span> <span class="bp">&#8743;</span> <span class="n">Prime</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">Prime</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="n">xs</span><span class="o">,</span> <span class="n">_</span><span class="o">,</span> <span class="n">prime_x</span><span class="o">&#10217;</span>
   <span class="n">use</span> <span class="n">x</span><span class="o">,</span> <span class="n">xs</span>
-  <span class="n">exact</span> <span class="n">prime_x</span>
 </pre></div>
 </div>
 <p>See if you can prove these slight variations:</p>
@@ -457,7 +456,7 @@ There is nothing special about the natural numbers here,
 so <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> can be replaced by any type <code class="docutils literal notranslate"><span class="pre">I</span></code>
 used to index the sets.
 The following illustrates their use.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
 <span class="kd">variable</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span>
 <span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span>
 
@@ -542,7 +541,7 @@ Similarly, their intersection, <code class="docutils literal notranslate"><span 
 These operations are called <code class="docutils literal notranslate"><span class="pre">sUnion</span></code> and <code class="docutils literal notranslate"><span class="pre">sInter</span></code>, respectively.
 The following examples show their relationship to bounded union
 and intersection.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="o">(</span><span class="n">Set</span> <span class="n">&#945;</span><span class="o">))</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="o">(</span><span class="n">Set</span> <span class="n">&#945;</span><span class="o">))</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8899;&#8320;</span> <span class="n">s</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">t</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">ext</span> <span class="n">x</span>
@@ -566,7 +565,7 @@ the library defines <code class="docutils literal notranslate"><span class="pre"
 to be <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">f</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">p}</span></code>.
 The expression <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">p</span></code> reduces to <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">p</span></code>.
 This is often convenient, as in the following example:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
 <span class="kd">variable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span>
 <span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span>
 <span class="kd">variable</span> <span class="o">(</span><span class="n">u</span> <span class="n">v</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#946;</span><span class="o">)</span>
@@ -686,14 +685,13 @@ to guarantee that the index set is nonempty.
 To prove any of these, we recommend using <code class="docutils literal notranslate"><span class="pre">ext</span></code> or <code class="docutils literal notranslate"><span class="pre">intro</span></code>
 to unfold the meaning of an equation or inclusion between sets,
 and then calling <code class="docutils literal notranslate"><span class="pre">simp</span></code> to unpack the conditions for membership.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#946;</span><span class="o">)</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">&#8594;</span> <span class="n">Set</span> <span class="n">&#946;</span><span class="o">)</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">A</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8899;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="bp">&#39;&#39;</span> <span class="n">A</span> <span class="n">i</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">ext</span> <span class="n">y</span><span class="bp">;</span> <span class="n">simp</span>
   <span class="n">constructor</span>
   <span class="bp">&#183;</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">&#10217;,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
     <span class="n">use</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span>
-    <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">xAi</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
   <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">xAi</span><span class="o">,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
   <span class="n">exact</span> <span class="o">&#10216;</span><span class="n">x</span><span class="o">,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">xAi</span><span class="o">&#10217;,</span> <span class="n">fxeq</span><span class="o">&#10217;</span>
 
@@ -737,7 +735,7 @@ to <code class="docutils literal notranslate"><span class="pre">InjOn</span> <sp
 Similarly, the library defines <code class="docutils literal notranslate"><span class="pre">range</span> <span class="pre">f</span></code> to be
 <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">|</span> <span class="pre">&#8707;y,</span> <span class="pre">f</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x}</span></code>,
 so <code class="docutils literal notranslate"><span class="pre">range</span> <span class="pre">f</span></code> is provably equal to <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">''</span> <span class="pre">univ</span></code>.
-This is a common theme in mathlib:
+This is a common theme in Mathlib:
 although many properties of functions are defined relative
 to their full domain,
 there are often relativized versions that restrict
@@ -795,7 +793,7 @@ This requires an appeal to the <em>axiom of choice</em>.
 Lean allows various ways of accessing it;
 one convenient method is to use the classical <code class="docutils literal notranslate"><span class="pre">choose</span></code>
 operator, illustrated below.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Inhabited</span> <span class="n">&#945;</span><span class="o">]</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Inhabited</span> <span class="n">&#945;</span><span class="o">]</span>
 
 <span class="k">#check</span> <span class="o">(</span><span class="n">default</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span>
 
@@ -963,17 +961,17 @@ Because the proof uses classical logic, we tell Lean that our definitions
 will generally not be computable.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable</span> <span class="kn">section</span>
 <span class="kn">open</span> <span class="n">Classical</span>
-<span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Nonempty</span> <span class="n">&#946;</span><span class="o">]</span>
+<span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Nonempty</span> <span class="n">&#946;</span><span class="o">]</span>
 </pre></div>
 </div>
 <p>The annotation <code class="docutils literal notranslate"><span class="pre">[Nonempty</span> <span class="pre">&#946;]</span></code> specifies that <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> is nonempty.
-We use it because the mathlib primitive that we will use to
+We use it because the Mathlib primitive that we will use to
 construct <span class="math notranslate nohighlight">\(g^{-1}\)</span> requires it.
 The case of the theorem where <span class="math notranslate nohighlight">\(\beta\)</span> is empty is trivial,
 and even though it would not be hard to generalize the formalization to cover
 that case as well, we will not bother.
 Specifically, we need the hypothesis <code class="docutils literal notranslate"><span class="pre">[Nonempty</span> <span class="pre">&#946;]</span></code> for the operation
-<code class="docutils literal notranslate"><span class="pre">invFun</span></code> that is defined in mathlib.
+<code class="docutils literal notranslate"><span class="pre">invFun</span></code> that is defined in Mathlib.
 Given <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">&#945;</span></code>, <code class="docutils literal notranslate"><span class="pre">invFun</span> <span class="pre">g</span> <span class="pre">x</span></code> chooses a preimage of <code class="docutils literal notranslate"><span class="pre">x</span></code>
 in <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> if there is one,
 and returns an arbitrary element of <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> otherwise.

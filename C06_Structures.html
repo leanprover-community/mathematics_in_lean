@@ -263,7 +263,7 @@ components, which we can do with <code class="docutils literal notranslate"><spa
 </div>
 <p>Mathematical constructions often involve taking apart bundled information and
 putting it together again in different ways.
-It therefore makes sense that Lean and mathlib offer so many ways
+It therefore makes sense that Lean and Mathlib offer so many ways
 of doing this efficiently.
 As an exercise, try proving that <code class="docutils literal notranslate"><span class="pre">Point.add</span></code> is associative.
 Then define scalar multiplication for a point and show that it
@@ -604,7 +604,7 @@ this is exactly what the <code class="docutils literal notranslate"><span class=
 It&#8217;s a marriage made in heaven!</p>
 <p>Given a data type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, we can define the group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>
 as follows.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">Group&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="n">where</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">Group&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="n">where</span>
   <span class="n">mul</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span>
   <span class="n">one</span> <span class="o">:</span> <span class="n">&#945;</span>
   <span class="n">inv</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span>
@@ -622,12 +622,12 @@ that the counterpart <code class="docutils literal notranslate"><span class="pre
 follows from the other group axioms, so there is no need
 to add it to the definition.</p>
 <p>This definition of a group is similar to the definition of <code class="docutils literal notranslate"><span class="pre">Group</span></code> in
-mathlib,
+Mathlib,
 and we have chosen the name <code class="docutils literal notranslate"><span class="pre">Group&#8321;</span></code> to distinguish our version.
 If you write <code class="docutils literal notranslate"><span class="pre">#check</span> <span class="pre">Group</span></code> and ctrl-click on the definition,
-you will see that the mathlib version of <code class="docutils literal notranslate"><span class="pre">Group</span></code> is defined to
+you will see that the Mathlib version of <code class="docutils literal notranslate"><span class="pre">Group</span></code> is defined to
 extend another structure; we will explain how to do that later.
-If you type <code class="docutils literal notranslate"><span class="pre">#print</span> <span class="pre">Group</span></code> you will also see that the mathlib
+If you type <code class="docutils literal notranslate"><span class="pre">#print</span> <span class="pre">Group</span></code> you will also see that the Mathlib
 version of <code class="docutils literal notranslate"><span class="pre">Group</span></code> has a number of extra fields.
 For reasons we will explain later, sometimes it is useful to add
 redundant information to a structure,
@@ -635,24 +635,24 @@ so that there are additional fields for objects and functions
 that can be defined from the core
 data. Don&#8217;t worry about that for now.
 Rest assured that our simplified version <code class="docutils literal notranslate"><span class="pre">Group&#8321;</span></code> is
-morally the same as the definition of a group that mathlib uses.</p>
+morally the same as the definition of a group that Mathlib uses.</p>
 <p>It is sometimes useful to bundle
-the type together with the structure, and mathlib also
+the type together with the structure, and Mathlib also
 contains a definition of a <code class="docutils literal notranslate"><span class="pre">GroupCat</span></code> structure that is equivalent to
 the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">Group&#8321;Cat</span> <span class="n">where</span>
-  <span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span>
+  <span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span>
   <span class="n">str</span> <span class="o">:</span> <span class="n">Group&#8321;</span> <span class="n">&#945;</span>
 </pre></div>
 </div>
-<p>The mathlib version is found in <code class="docutils literal notranslate"><span class="pre">Algebra.Category.Group.Basic</span></code>,
+<p>The Mathlib version is found in <code class="docutils literal notranslate"><span class="pre">Algebra.Category.Group.Basic</span></code>,
 and you can <code class="docutils literal notranslate"><span class="pre">#check</span></code> it if you add this to the imports at the
 beginning of the examples file.</p>
 <p>For reasons that will become clearer below, it is more often
 useful to keep the type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> separate from the structure <code class="docutils literal notranslate"><span class="pre">Group</span> <span class="pre">&#945;</span></code>.
 We refer to the two objects together as a <em>partially bundled structure</em>,
 since the representation combines most, but not all, of the components
-into one structure. It is common in mathlib
+into one structure. It is common in Mathlib
 to use capital roman letters like <code class="docutils literal notranslate"><span class="pre">G</span></code> for a type
 when it is used as the carrier type for a group.</p>
 <p>Let&#8217;s construct a group, which is to say, an element of the <code class="docutils literal notranslate"><span class="pre">Group&#8321;</span></code> type.
@@ -665,7 +665,7 @@ a function <code class="docutils literal notranslate"><span class="pre">f.toFun<
 the inverse function <code class="docutils literal notranslate"><span class="pre">f.invFun</span></code> from <code class="docutils literal notranslate"><span class="pre">&#946;</span></code> to <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>,
 and two properties that specify these functions are indeed inverse
 to one another.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="n">&#947;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="n">&#947;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
 <span class="kd">variable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8771;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8771;</span> <span class="n">&#947;</span><span class="o">)</span>
 
 <span class="k">#check</span> <span class="n">Equiv</span> <span class="n">&#945;</span> <span class="n">&#946;</span>
@@ -698,7 +698,7 @@ and have Lean insert it for us.</p>
 </div>
 <p>Mathlib also defines the type <code class="docutils literal notranslate"><span class="pre">perm</span> <span class="pre">&#945;</span></code> of equivalences between
 <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and itself.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#945;</span> <span class="bp">=</span> <span class="o">(</span><span class="n">&#945;</span> <span class="bp">&#8771;</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#945;</span> <span class="bp">=</span> <span class="o">(</span><span class="n">&#945;</span> <span class="bp">&#8771;</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 </pre></div>
 </div>
@@ -707,7 +707,7 @@ of equivalences. We orient things so that <code class="docutils literal notransl
 equal to <code class="docutils literal notranslate"><span class="pre">g.trans</span> <span class="pre">f</span></code>, whose forward function is <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&#8728;</span> <span class="pre">g</span></code>.
 In other words, multiplication is what we ordinarily think of as
 composition of the bijections. Here we define this group:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">permGroup</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">:</span> <span class="n">Group&#8321;</span> <span class="o">(</span><span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">permGroup</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="n">Group&#8321;</span> <span class="o">(</span><span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span>
     <span class="n">where</span>
   <span class="n">mul</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">Equiv.trans</span> <span class="n">g</span> <span class="n">f</span>
   <span class="n">one</span> <span class="o">:=</span> <span class="n">Equiv.refl</span> <span class="n">&#945;</span>
@@ -718,7 +718,7 @@ composition of the bijections. Here we define this group:</p>
   <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="n">Equiv.self_trans_symm</span>
 </pre></div>
 </div>
-<p>In fact, mathlib defines exactly this <code class="docutils literal notranslate"><span class="pre">Group</span></code> structure on <code class="docutils literal notranslate"><span class="pre">Equiv.Perm</span> <span class="pre">&#945;</span></code>
+<p>In fact, Mathlib defines exactly this <code class="docutils literal notranslate"><span class="pre">Group</span></code> structure on <code class="docutils literal notranslate"><span class="pre">Equiv.Perm</span> <span class="pre">&#945;</span></code>
 in the file <code class="docutils literal notranslate"><span class="pre">GroupTheory.Perm.Basic</span></code>.
 As always, you can hover over the theorems used in the definition of
 <code class="docutils literal notranslate"><span class="pre">permGroup</span></code> to see their statements,
@@ -749,7 +749,7 @@ to the <code class="docutils literal notranslate"><span class="pre">Group&#8321;
 additive naming scheme just described.
 Define negation and a zero on the <code class="docutils literal notranslate"><span class="pre">Point</span></code> data type,
 and define the <code class="docutils literal notranslate"><span class="pre">AddGroup&#8321;</span></code> structure on <code class="docutils literal notranslate"><span class="pre">Point</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">AddGroup&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="n">where</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">AddGroup&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="n">where</span>
   <span class="o">(</span><span class="n">add</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
   <span class="c1">-- fill in the rest</span>
 <span class="kd">@[ext]</span>
@@ -781,9 +781,9 @@ Moreover, we want to arrange it so that we can define an operation
 on a structure and use it with any particular instance,
 and we want to arrange it so that we can prove a theorem about
 a structure and use it with any instance.</p>
-<p>In fact, mathlib is already set up to use generic group notation,
+<p>In fact, Mathlib is already set up to use generic group notation,
 definitions, and theorems for <code class="docutils literal notranslate"><span class="pre">Equiv.Perm</span> <span class="pre">&#945;</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span>
 
 <span class="k">#check</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">g</span>
 <span class="k">#check</span> <span class="n">mul_assoc</span> <span class="n">f</span> <span class="n">g</span> <span class="n">g</span><span class="bp">&#8315;&#185;</span>
@@ -796,7 +796,7 @@ definitions, and theorems for <code class="docutils literal notranslate"><span c
 <span class="kd">example</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
   <span class="n">mul_inv_cancel_right</span> <span class="n">f</span> <span class="n">g</span>
 
-<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">g.symm.trans</span> <span class="o">(</span><span class="n">g.trans</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">g.symm.trans</span> <span class="o">(</span><span class="n">g.trans</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
   <span class="n">mul_inv_cancel_right</span> <span class="n">f</span> <span class="n">g</span>
 </pre></div>
 </div>
@@ -861,7 +861,7 @@ Lean. As with the names of class variables, we are allowed to leave the
 name of an instance definition anonymous,
 since in general we intend Lean to find it and put it to use
 without troubling us with the details.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Group&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="n">where</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">Group&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="n">where</span>
   <span class="n">mul</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span>
   <span class="n">one</span> <span class="o">:</span> <span class="n">&#945;</span>
   <span class="n">inv</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span>
@@ -870,7 +870,7 @@ without troubling us with the details.</p>
   <span class="n">one_mul</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="n">one</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span>
   <span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">mul</span> <span class="o">(</span><span class="n">inv</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">one</span>
 
-<span class="kd">instance</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">:</span> <span class="n">Group&#8322;</span> <span class="o">(</span><span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="n">where</span>
+<span class="kd">instance</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="n">Group&#8322;</span> <span class="o">(</span><span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span> <span class="n">where</span>
   <span class="n">mul</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">Equiv.trans</span> <span class="n">g</span> <span class="n">f</span>
   <span class="n">one</span> <span class="o">:=</span> <span class="n">Equiv.refl</span> <span class="n">&#945;</span>
   <span class="n">inv</span> <span class="o">:=</span> <span class="n">Equiv.symm</span>
@@ -883,13 +883,13 @@ without troubling us with the details.</p>
 <p>The following illustrates their use.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Group&#8322;.mul</span>
 
-<span class="kd">def</span> <span class="n">mySquare</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">def</span> <span class="n">mySquare</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">Group&#8322;.mul</span> <span class="n">x</span> <span class="n">x</span>
 
 <span class="k">#check</span> <span class="n">mySquare</span>
 
 <span class="kn">section</span>
-<span class="kd">variable</span> <span class="o">{</span><span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#946;</span><span class="o">)</span>
+<span class="kd">variable</span> <span class="o">{</span><span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#946;</span><span class="o">)</span>
 
 <span class="kd">example</span> <span class="o">:</span> <span class="n">Group&#8322;.mul</span> <span class="n">f</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">g.trans</span> <span class="n">f</span> <span class="o">:=</span>
   <span class="n">rfl</span>
@@ -965,17 +965,17 @@ When we define a new instance of a ring in Lean,
 we don&#8217;t have to define <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">*</span></code> for that instance,
 because Lean knows that these are defined for every ring.
 We can use this method to specify notation for our <code class="docutils literal notranslate"><span class="pre">Group&#8322;</span></code> class:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">hasMulGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">Mul</span> <span class="n">&#945;</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">hasMulGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">Mul</span> <span class="n">&#945;</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="n">Group&#8322;.mul</span><span class="o">&#10217;</span>
 
-<span class="kd">instance</span> <span class="n">hasOneGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">One</span> <span class="n">&#945;</span> <span class="o">:=</span>
+<span class="kd">instance</span> <span class="n">hasOneGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">One</span> <span class="n">&#945;</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="n">Group&#8322;.one</span><span class="o">&#10217;</span>
 
-<span class="kd">instance</span> <span class="n">hasInvGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">Inv</span> <span class="n">&#945;</span> <span class="o">:=</span>
+<span class="kd">instance</span> <span class="n">hasInvGroup&#8322;</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group&#8322;</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">:</span> <span class="n">Inv</span> <span class="n">&#945;</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="n">Group&#8322;.inv</span><span class="o">&#10217;</span>
 
 <span class="kn">section</span>
-<span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Equiv.Perm</span> <span class="n">&#945;</span><span class="o">)</span>
 
 <span class="k">#check</span> <span class="n">f</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">&#8315;&#185;</span>
 
@@ -1001,7 +1001,7 @@ In fact, Lean favors more recent declarations unless you explicitly
 specify a different priority.
 Also, there is another way to tell Lean that one structure is an
 instance of another, using the <code class="docutils literal notranslate"><span class="pre">extends</span></code> keyword.
-This is how <code class="docutils literal notranslate"><span class="pre">mathlib</span></code> specifies that, for example,
+This is how Mathlib specifies that, for example,
 every commutative ring is a ring.
 You can find more information in a
 <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean4/type_classes.html#managing-type-class-inference">section on class inference</a> in <em>Theorem Proving in Lean</em>.</p>
@@ -1019,7 +1019,7 @@ using the classes <code class="docutils literal notranslate"><span class="pre">A
 Then show <code class="docutils literal notranslate"><span class="pre">Point</span></code> is an instance of <code class="docutils literal notranslate"><span class="pre">AddGroup&#8322;</span></code>.
 Try it out and make sure that the additive group notation works for
 elements of <code class="docutils literal notranslate"><span class="pre">Point</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddGroup&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">)</span> <span class="n">where</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">AddGroup&#8322;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="n">where</span>
   <span class="n">add</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span>
   <span class="c1">-- fill in the rest</span>
 </pre></div>
@@ -1300,7 +1300,7 @@ is therefore to embed the Gaussian integers in the complex numbers, embed
 the integers in the Gaussian integers, define the rounding function from the
 real numbers to the integers, and take great care to pass back and forth
 between these number systems appropriately.
-In fact, this is exactly the approach that is followed in mathlib,
+In fact, this is exactly the approach that is followed in Mathlib,
 where the Gaussian integers themselves are constructed as a special case
 of a ring of <em>quadratic integers</em>.
 See the file <a class="reference external" href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/Zsqrtd/GaussianInt.lean">GaussianInt.lean</a>.</p>
@@ -1356,7 +1356,7 @@ from the remainder.</p>
 <p>We will use the fact that <span class="math notranslate nohighlight">\(x^2 + y^2\)</span> is equal to zero if and only if
 <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are both zero. As an exercise, we ask you to prove
 that this holds in any ordered ring.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sq_add_sq_eq_zero</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">_</span><span class="o">}</span> <span class="o">[</span><span class="n">LinearOrderedRing</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sq_add_sq_eq_zero</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">LinearOrderedRing</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8743;</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
@@ -1501,7 +1501,7 @@ on a Euclidean domain.</p>
 <p>We can now put it together to show that the Gaussian integers are an
 instance of a Euclidean domain. We use the quotient and remainder function we
 have defined.
-The mathlib definition of a Euclidean domain is more general than the one
+The Mathlib definition of a Euclidean domain is more general than the one
 above in that it allows us to show that remainder decreases with respect
 to any well-founded measure.
 Comparing the values of a norm function that returns natural numbers is

@@ -17,7 +17,7 @@ groups, vector spaces, and so on.
 Some expressions *are* types,
 which is to say,
 their type is ``Type``.
-Lean and mathlib provide ways of defining new types,
+Lean and Mathlib provide ways of defining new types,
 and ways of defining objects of those types.
 
 Conceptually, you can think of a type as just a set of objects.

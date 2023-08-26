@@ -67,7 +67,7 @@ instance [Group G] (H : Subgroup₁ G) : Group H :=
   inv := fun x ↦ ⟨x⁻¹, H.inv_mem x.property⟩
   mul_left_inv := fun x ↦ SetCoe.ext (mul_left_inv (x : G)) }
 
-class SubgroupClass₁ (S : Type*) (G : Type) [Group G] [SetLike S G]
+class SubgroupClass₁ (S : Type) (G : Type) [Group G] [SetLike S G]
     extends SubmonoidClass₁ S G  : Prop where
   inv_mem : ∀ (s : S) {a : G}, a ∈ s → a⁻¹ ∈ s
 

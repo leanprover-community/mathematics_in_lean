@@ -29,7 +29,6 @@ theorem exists_prime_factor {n : Nat} (h : 2 ≤ n) : ∃ p : Nat, p.Prime ∧ p
   by_cases np : n.Prime
   · use n, np
   induction' n using Nat.strong_induction_on with n ih
-  dsimp at ih
   rw [Nat.prime_def_lt] at np
   push_neg at np
   rcases np h with ⟨m, mltn, mdvdn, mne1⟩
@@ -180,7 +179,6 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
   by_cases np : n.Prime
   · use n
   induction' n using Nat.strong_induction_on with n ih
-  dsimp at ih
   rw [Nat.prime_def_lt] at np
   push_neg  at np
   rcases np (two_le_of_mod_4_eq_3 h) with ⟨m, mltn, mdvdn, mne1⟩

@@ -84,10 +84,10 @@ variable (a b c : R)
 
 #check (mul_nonneg : 0 ≤ a → 0 ≤ b → 0 ≤ a * b)
 
-example : a ≤ b → 0 ≤ b - a := by
+example (h : a ≤ b) : 0 ≤ b - a := by
   sorry
 
-example : 0 ≤ b - a → a ≤ b := by
+example (h: 0 ≤ b - a) : a ≤ b := by
   sorry
 
 example (h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := by

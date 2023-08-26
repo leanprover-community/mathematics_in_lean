@@ -263,7 +263,7 @@ Try carrying out similar proofs of these:</p>
 <span class="kd">example</span> <span class="o">(</span><span class="n">nnf</span> <span class="o">:</span> <span class="n">FnLb</span> <span class="n">f</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">nng</span> <span class="o">:</span> <span class="n">FnLb</span> <span class="n">g</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">FnLb</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="mi">0</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
 
-<span class="kd">example</span> <span class="o">(</span><span class="n">hfa</span> <span class="o">:</span> <span class="n">FnUb</span> <span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">hfb</span> <span class="o">:</span> <span class="n">FnUb</span> <span class="n">g</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">nng</span> <span class="o">:</span> <span class="n">FnLb</span> <span class="n">g</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">nna</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">hfa</span> <span class="o">:</span> <span class="n">FnUb</span> <span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">hgb</span> <span class="o">:</span> <span class="n">FnUb</span> <span class="n">g</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">nng</span> <span class="o">:</span> <span class="n">FnLb</span> <span class="n">g</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">nna</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">FnUb</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
 </pre></div>
@@ -1310,13 +1310,12 @@ then <code class="docutils literal notranslate"><span class="pre">a</span> <span
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-<p id="index-20">Beyond logical operations, you should not need
-anything more than <code class="docutils literal notranslate"><span class="pre">le_refl</span></code> and <code class="docutils literal notranslate"><span class="pre">le_antisymm</span></code>.
-Then show that even in the case where <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code>
+<p id="index-20">Beyond logical operations, you do not need
+anything more than <code class="docutils literal notranslate"><span class="pre">le_refl</span></code> and <code class="docutils literal notranslate"><span class="pre">le_trans</span></code>.
+Show that even in the case where <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code>
 is only assumed to be a preorder,
 we can prove that the strict order is irreflexive
 and transitive.
-You do not need anything more than <code class="docutils literal notranslate"><span class="pre">le_refl</span></code> and <code class="docutils literal notranslate"><span class="pre">le_trans</span></code>.
 In the second example,
 for convenience, we use the simplifier rather than <code class="docutils literal notranslate"><span class="pre">rw</span></code>
 to express <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#172;</span></code>.

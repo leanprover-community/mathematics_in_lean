@@ -33,12 +33,12 @@ example (nnf : FnLb f 0) (nng : FnLb g 0) : FnLb (fun x ↦ f x * g x) 0 := by
   apply nnf
   apply nng
 
-example (hfa : FnUb f a) (hfb : FnUb g b) (nng : FnLb g 0) (nna : 0 ≤ a) :
+example (hfa : FnUb f a) (hgb : FnUb g b) (nng : FnLb g 0) (nna : 0 ≤ a) :
     FnUb (fun x ↦ f x * g x) (a * b) := by
   intro x
   apply mul_le_mul
   apply hfa
-  apply hfb
+  apply hgb
   apply nng
   apply nna
 

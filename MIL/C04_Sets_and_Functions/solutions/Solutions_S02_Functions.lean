@@ -199,7 +199,7 @@ def inverse (f : α → β) : β → α := fun y : β ↦
   if h : ∃ x, f x = y then Classical.choose h else default
 
 theorem inverse_spec {f : α → β} (y : β) (h : ∃ x, f x = y) : f (inverse f y) = y := by
-  rw [inverse]; dsimp; rw [dif_pos h]
+  rw [inverse, dif_pos h]
   exact Classical.choose_spec h
 
 variable (f : α → β)

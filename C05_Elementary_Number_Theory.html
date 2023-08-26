@@ -783,7 +783,6 @@ The proof still works if you delete that line.</p>
   <span class="n">by_cases</span> <span class="n">np</span> <span class="o">:</span> <span class="n">n.Prime</span>
   <span class="bp">&#183;</span> <span class="n">use</span> <span class="n">n</span><span class="o">,</span> <span class="n">np</span>
   <span class="n">induction&#39;</span> <span class="n">n</span> <span class="n">using</span> <span class="n">Nat.strong_induction_on</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span>
-  <span class="n">dsimp</span> <span class="n">at</span> <span class="n">ih</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">Nat.prime_def_lt</span><span class="o">]</span> <span class="n">at</span> <span class="n">np</span>
   <span class="n">push_neg</span> <span class="n">at</span> <span class="n">np</span>
   <span class="n">rcases</span> <span class="n">np</span> <span class="n">h</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">m</span><span class="o">,</span> <span class="n">mltn</span><span class="o">,</span> <span class="n">mdvdn</span><span class="o">,</span> <span class="n">mne1</span><span class="o">&#10217;</span>
@@ -1075,7 +1074,6 @@ same property.</p>
   <span class="n">by_cases</span> <span class="n">np</span> <span class="o">:</span> <span class="n">n.Prime</span>
   <span class="bp">&#183;</span> <span class="n">use</span> <span class="n">n</span>
   <span class="n">induction&#39;</span> <span class="n">n</span> <span class="n">using</span> <span class="n">Nat.strong_induction_on</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span>
-  <span class="n">dsimp</span> <span class="n">at</span> <span class="n">ih</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">Nat.prime_def_lt</span><span class="o">]</span> <span class="n">at</span> <span class="n">np</span>
   <span class="n">push_neg</span>  <span class="n">at</span> <span class="n">np</span>
   <span class="n">rcases</span> <span class="n">np</span> <span class="o">(</span><span class="n">two_le_of_mod_4_eq_3</span> <span class="n">h</span><span class="o">)</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">m</span><span class="o">,</span> <span class="n">mltn</span><span class="o">,</span> <span class="n">mdvdn</span><span class="o">,</span> <span class="n">mne1</span><span class="o">&#10217;</span>

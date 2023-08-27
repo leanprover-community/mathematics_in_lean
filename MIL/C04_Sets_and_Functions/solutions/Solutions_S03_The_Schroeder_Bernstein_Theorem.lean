@@ -1,6 +1,6 @@
 import Mathlib.Data.Set.Lattice
 import Mathlib.Data.Set.Function
-import Mathlib.Tactic
+import MIL.Common
 
 open Set
 open Function

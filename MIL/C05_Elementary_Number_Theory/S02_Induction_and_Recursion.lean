@@ -1,6 +1,6 @@
 import Mathlib.Data.Nat.GCD.Basic
 import Mathlib.Algebra.BigOperators.Basic
-import Mathlib.Tactic
+import MIL.Common
 
 example (n : Nat) : n.succ ≠ Nat.zero :=
   Nat.succ_ne_zero n

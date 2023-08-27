@@ -1,4 +1,4 @@
-import Mathlib.Tactic
+import MIL.Common
 import Mathlib.Data.Real.Basic
 example (a b c : ℝ) : c * b * a = b * (a * c) := by
   rw [mul_comm c b]

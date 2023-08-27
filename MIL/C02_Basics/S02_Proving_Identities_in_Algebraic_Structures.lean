@@ -1,6 +1,6 @@
 import Mathlib.Algebra.Ring.Defs
 import Mathlib.Data.Real.Basic
-import Mathlib.Tactic
+import MIL.Common
 
 section
 variable (R : Type*) [Ring R]

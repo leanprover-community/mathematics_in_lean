@@ -1,7 +1,7 @@
 import Mathlib.Data.Int.Basic
 import Mathlib.Algebra.EuclideanDomain.Basic
 import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.Tactic
+import MIL.Common
 
 @[ext]
 structure gaussInt where

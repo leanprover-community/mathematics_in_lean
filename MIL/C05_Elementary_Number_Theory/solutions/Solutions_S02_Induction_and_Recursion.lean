@@ -1,6 +1,6 @@
 import Mathlib.Data.Nat.GCD.Basic
 import Mathlib.Algebra.BigOperators.Basic
-import Mathlib.Tactic
+import MIL.Common
 
 def fac : ℕ → ℕ
   | 0 => 1

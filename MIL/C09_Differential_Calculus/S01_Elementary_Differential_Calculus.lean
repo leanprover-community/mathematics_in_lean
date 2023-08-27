@@ -1,4 +1,4 @@
-import Mathlib.Tactic
+import MIL.Common
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 import Mathlib.Analysis.Calculus.Deriv.Pow
 import Mathlib.Analysis.Calculus.MeanValue

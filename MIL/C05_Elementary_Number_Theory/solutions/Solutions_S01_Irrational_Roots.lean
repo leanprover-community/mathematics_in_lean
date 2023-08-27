@@ -1,4 +1,4 @@
-import Mathlib.Tactic
+import MIL.Common
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.Prime
 

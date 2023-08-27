@@ -1,5 +1,5 @@
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import Mathlib.Tactic
+import MIL.Common
 
 variable (a b c d e : ℝ)
 open Real

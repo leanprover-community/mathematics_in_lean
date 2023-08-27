@@ -1,6 +1,6 @@
 import Mathlib.Data.Nat.Prime
 import Mathlib.Algebra.BigOperators.Order
-import Mathlib.Tactic
+import MIL.Common
 
 open BigOperators
 

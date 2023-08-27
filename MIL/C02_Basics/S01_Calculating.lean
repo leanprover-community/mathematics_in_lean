@@ -1,4 +1,4 @@
-import Mathlib.Tactic
+import MIL.Common
 import Mathlib.Data.Real.Basic
 -- An example.
 example (a b c : ℝ) : a * b * c = b * (a * c) := by

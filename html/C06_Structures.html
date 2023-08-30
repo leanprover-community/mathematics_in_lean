@@ -222,11 +222,9 @@ in a manner similar to the way we defined recursive functions in
 The definitions <code class="docutils literal notranslate"><span class="pre">addAlt</span></code> and <code class="docutils literal notranslate"><span class="pre">addAlt'</span></code> below are essentially the
 same; the only difference is that we use anonymous constructor notation
 in the second.
-Although it is sometimes convenient to define functions this way,
-the definitional properties are not as convenient.
-For example, the expressions <code class="docutils literal notranslate"><span class="pre">addAlt</span> <span class="pre">a</span> <span class="pre">b</span></code> and <code class="docutils literal notranslate"><span class="pre">addAlt'</span> <span class="pre">a</span> <span class="pre">b</span></code>
-cannot be simplified until we decompose <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> into
-components, which we can do with <code class="docutils literal notranslate"><span class="pre">cases</span></code>, <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, etc.</p>
+Although it is sometimes convenient to define functions this way, and structural eta-reduction makes
+this alternative definitionally equivalent, it can make things less convenient in later proofs.
+In particular, <cite>rw [addAlt]</cite> leaves us with a messier goal view containing a <cite>match</cite> statement.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">addAlt</span> <span class="o">:</span> <span class="n">Point</span> <span class="bp">&#8594;</span> <span class="n">Point</span> <span class="bp">&#8594;</span> <span class="n">Point</span>
   <span class="bp">|</span> <span class="n">Point.mk</span> <span class="n">x&#8321;</span> <span class="n">y&#8321;</span> <span class="n">z&#8321;</span><span class="o">,</span> <span class="n">Point.mk</span> <span class="n">x&#8322;</span> <span class="n">y&#8322;</span> <span class="n">z&#8322;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">x&#8321;</span> <span class="bp">+</span> <span class="n">x&#8322;</span><span class="o">,</span> <span class="n">y&#8321;</span> <span class="bp">+</span> <span class="n">y&#8322;</span><span class="o">,</span> <span class="n">z&#8321;</span> <span class="bp">+</span> <span class="n">z&#8322;</span><span class="o">&#10217;</span>
 
@@ -234,29 +232,13 @@ components, which we can do with <code class="docutils literal notranslate"><spa
   <span class="bp">|</span> <span class="o">&#10216;</span><span class="n">x&#8321;</span><span class="o">,</span> <span class="n">y&#8321;</span><span class="o">,</span> <span class="n">z&#8321;</span><span class="o">&#10217;,</span> <span class="o">&#10216;</span><span class="n">x&#8322;</span><span class="o">,</span> <span class="n">y&#8322;</span><span class="o">,</span> <span class="n">z&#8322;</span><span class="o">&#10217;</span> <span class="bp">=&gt;</span> <span class="o">&#10216;</span><span class="n">x&#8321;</span> <span class="bp">+</span> <span class="n">x&#8322;</span><span class="o">,</span> <span class="n">y&#8321;</span> <span class="bp">+</span> <span class="n">y&#8322;</span><span class="o">,</span> <span class="n">z&#8321;</span> <span class="bp">+</span> <span class="n">z&#8322;</span><span class="o">&#10217;</span>
 
 <span class="kd">theorem</span> <span class="n">addAlt_x</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a.addAlt</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">x</span> <span class="bp">=</span> <span class="n">a.x</span> <span class="bp">+</span> <span class="n">b.x</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">cases</span> <span class="n">a</span>
-  <span class="n">cases</span> <span class="n">b</span>
   <span class="n">rfl</span>
 
 <span class="kd">theorem</span> <span class="n">addAlt_comm</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="n">addAlt</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">addAlt</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">rcases</span> <span class="n">a</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span>
-  <span class="n">rcases</span> <span class="n">b</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">addAlt</span><span class="o">,</span> <span class="n">addAlt</span><span class="o">]</span>
+  <span class="c1">-- the same proof still works, but the goal view here is harder to read</span>
   <span class="n">ext</span> <span class="bp">&lt;;&gt;</span> <span class="n">dsimp</span>
-  <span class="n">apply</span> <span class="n">add_comm</span>
   <span class="n">repeat&#39;</span> <span class="n">apply</span> <span class="n">add_comm</span>
-
-<span class="kd">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Point</span><span class="o">)</span> <span class="o">:</span> <span class="n">addAlt</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">addAlt</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">rcases</span> <span class="n">a</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span>
-  <span class="n">rcases</span> <span class="n">b</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;</span>
-  <span class="n">simp</span> <span class="o">[</span><span class="n">addAlt</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
-
-<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Point</span><span class="o">,</span> <span class="n">addAlt</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">addAlt</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="kd">by</span>
-  <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;</span>
-  <span class="n">simp</span> <span class="o">[</span><span class="n">addAlt</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
-
-<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Point</span><span class="o">,</span> <span class="n">add</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">fun</span> <span class="o">&#10216;</span><span class="n">xa</span><span class="o">,</span> <span class="n">ya</span><span class="o">,</span> <span class="n">za</span><span class="o">&#10217;</span> <span class="o">&#10216;</span><span class="n">xb</span><span class="o">,</span> <span class="n">yb</span><span class="o">,</span> <span class="n">zb</span><span class="o">&#10217;</span> <span class="bp">&#8614;</span> <span class="kd">by</span>
-  <span class="n">simp</span> <span class="o">[</span><span class="n">add</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span>
 </pre></div>
 </div>
 <p>Mathematical constructions often involve taking apart bundled information and

@@ -105,14 +105,14 @@ example (a b : ℝ) : a - b = a + -b := by
 namespace MyRing
 variable {R : Type*} [Ring R]
 
-theorem self_sub (a : R) : a - a = 0 :=
-  sorry
+theorem self_sub (a : R) : a - a = 0 := by
+  rw [sub_eq_add_neg, add_right_neg]
 
 theorem one_add_one_eq_two : 1 + 1 = (2 : R) := by
   norm_num
 
-theorem two_mul (a : R) : 2 * a = a + a :=
-  sorry
+theorem two_mul (a : R) : 2 * a = a + a := by
+  rw [← one_add_one_eq_two, add_mul, one_mul]
 
 end MyRing
 
@@ -135,13 +135,16 @@ variable {G : Type*} [Group G]
 namespace MyGroup
 
 theorem mul_right_inv (a : G) : a * a⁻¹ = 1 := by
-  sorry
+  have h : (a * a⁻¹)⁻¹ * (a * a⁻¹ * (a * a⁻¹)) = 1 := by
+    rw [mul_assoc, ← mul_assoc a⁻¹, mul_left_inv, one_mul, mul_left_inv]
+  rw [← h, ← mul_assoc, mul_left_inv, one_mul]
 
 theorem mul_one (a : G) : a * 1 = a := by
-  sorry
+  rw [← mul_left_inv a, ← mul_assoc, mul_right_inv, one_mul]
 
 theorem mul_inv_rev (a b : G) : (a * b)⁻¹ = b⁻¹ * a⁻¹ := by
-  sorry
+  rw [← one_mul (b⁻¹ * a⁻¹), ← mul_left_inv (a * b), mul_assoc, mul_assoc, ← mul_assoc b, mul_right_inv,
+    one_mul, mul_right_inv, mul_one]
 
 end MyGroup
 

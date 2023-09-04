@@ -72,29 +72,13 @@ def addAlt' : Point → Point → Point
   | ⟨x₁, y₁, z₁⟩, ⟨x₂, y₂, z₂⟩ => ⟨x₁ + x₂, y₁ + y₂, z₁ + z₂⟩
 
 theorem addAlt_x (a b : Point) : (a.addAlt b).x = a.x + b.x := by
-  cases a
-  cases b
   rfl
 
 theorem addAlt_comm (a b : Point) : addAlt a b = addAlt b a := by
-  rcases a with ⟨xa, ya, za⟩
-  rcases b with ⟨xb, yb, zb⟩
   rw [addAlt, addAlt]
+  -- the same proof still works, but the goal view here is harder to read
   ext <;> dsimp
-  apply add_comm
   repeat' apply add_comm
-
-example (a b : Point) : addAlt a b = addAlt b a := by
-  rcases a with ⟨xa, ya, za⟩
-  rcases b with ⟨xb, yb, zb⟩
-  simp [addAlt, add_comm]
-
-example : ∀ a b : Point, addAlt a b = addAlt b a := by
-  rintro ⟨xa, ya, za⟩ ⟨xb, yb, zb⟩
-  simp [addAlt, add_comm]
-
-example : ∀ a b : Point, add a b = add b a := fun ⟨xa, ya, za⟩ ⟨xb, yb, zb⟩ ↦ by
-  simp [add, add_comm]
 
 protected theorem add_assoc (a b c : Point) : (a.add b).add c = a.add (b.add c) := by
   sorry

@@ -102,7 +102,7 @@ example (a b : ℝ) : a - b = a + -b := by
 namespace MyRing
 variable {R : Type*} [Ring R]
 
-theorem self_sub (a : R) : a - a = 0 :=
+theorem self_sub (a : R) : a - a = 0 := by
   sorry
 
 theorem one_add_one_eq_two : 1 + 1 = (2 : R) := by

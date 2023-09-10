@@ -3,8 +3,7 @@ open Lake DSL
 
 def moreServerArgs := #[
   "-Dpp.unicode.fun=true", -- pretty-prints `fun a ↦ b`
-  -- this is set in mathlib, but the exercises are nicer to read without it
-  -- "-DautoImplicit=false",
+  "-DautoImplicit=false",
   "-DrelaxedAutoImplicit=false"
 ]
 

@@ -1,6 +1,8 @@
 import MIL.Common
 import Mathlib.Topology.Instances.Real
 
+set_option autoImplicit true
+
 
 def isMonoidHom₁ [Monoid G] [Monoid H] (f : G → H) : Prop :=
   f 1 = 1 ∧ ∀ g g', f (g * g') = f g * f g'

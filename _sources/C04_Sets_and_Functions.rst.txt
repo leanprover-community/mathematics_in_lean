@@ -33,9 +33,9 @@ or apply a function to arguments of the wrong type.
 Lean's library does define elementary set-theoretic notions.
 In contrast to set theory,
 in Lean a set is always a set of objects of some type,
-such as a set natural numbers or a set of functions
+such as a set of natural numbers or a set of functions
 from real numbers to real numbers.
-The distinction between types and set takes some getting used to,
+The distinction between types and sets takes some getting used to,
 but this chapter will take you through the essentials.
 
 .. include:: C04_Sets_and_Functions/S01_Sets.inc

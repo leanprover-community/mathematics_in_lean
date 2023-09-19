@@ -104,13 +104,13 @@ example [TopologicalSpace X] {x : X} :
 theorem aux {X Y A : Type*} [TopologicalSpace X] {c : A → X}
       {f : A → Y} {x : X} {F : Filter Y}
       (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
-    ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' :=
+    ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' := by
   sorry
 
-example [TopologicalSpace X] [TopologicalSpace Y] [RegularSpace Y] {A : Set X}
+example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X}
     (hA : ∀ x, x ∈ closure A) {f : A → Y} (f_cont : Continuous f)
     (hf : ∀ x : X, ∃ c : Y, Tendsto f (comap (↑) (𝓝 x)) (𝓝 c)) :
-    ∃ φ : X → Y, Continuous φ ∧ ∀ a : A, φ a = f a :=
+    ∃ φ : X → Y, Continuous φ ∧ ∀ a : A, φ a = f a := by
   sorry
 
 #check HasBasis.tendsto_right_iff

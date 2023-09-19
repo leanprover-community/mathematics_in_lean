@@ -112,25 +112,11 @@ example [TopologicalSpace X] {x : X} :
 theorem aux {X Y A : Type*} [TopologicalSpace X] {c : A → X}
       {f : A → Y} {x : X} {F : Filter Y}
       (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
-    ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' :=
-  sorry
-
-example {X Y A : Type*} [TopologicalSpace X] {c : A → X}
-      {f : A → Y} {x : X} {F : Filter Y}
-      (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
     ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' := by
   simpa [and_assoc] using ((nhds_basis_opens' x).comap c).tendsto_left_iff.mp h V' V'_in
 
-example [TopologicalSpace X] [TopologicalSpace Y] [RegularSpace Y] {A : Set X}
+example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X}
     (hA : ∀ x, x ∈ closure A) {f : A → Y} (f_cont : Continuous f)
-    (hf : ∀ x : X, ∃ c : Y, Tendsto f (comap (↑) (𝓝 x)) (𝓝 c)) :
-    ∃ φ : X → Y, Continuous φ ∧ ∀ a : A, φ a = f a :=
-  sorry
-
-#check HasBasis.tendsto_right_iff
-
-example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X} (hA : ∀ x, x ∈ closure A)
-    {f : A → Y} (f_cont : Continuous f)
     (hf : ∀ x : X, ∃ c : Y, Tendsto f (comap (↑) (𝓝 x)) (𝓝 c)) :
     ∃ φ : X → Y, Continuous φ ∧ ∀ a : A, φ a = f a := by
   choose φ hφ using hf
@@ -176,14 +162,6 @@ variable [TopologicalSpace Y]
 example {x : X} {F : Filter X} {G : Filter Y} (H : ClusterPt x F) {f : X → Y}
     (hfx : ContinuousAt f x) (hf : Tendsto f F G) : ClusterPt (f x) G :=
   ClusterPt.map H hfx hf
-
-example [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
-    IsCompact (f '' s) := by
-  intro F F_ne F_le
-  have map_eq : map f (𝓟 s ⊓ comap f F) = 𝓟 (f '' s) ⊓ F := by sorry
-  have Hne : (𝓟 s ⊓ comap f F).NeBot := by sorry
-  have Hle : 𝓟 s ⊓ comap f F ≤ 𝓟 s := inf_le_left
-  sorry
 
 example [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
     IsCompact (f '' s) := by

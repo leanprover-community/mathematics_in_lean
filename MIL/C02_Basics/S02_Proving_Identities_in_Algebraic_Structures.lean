@@ -108,7 +108,7 @@ theorem self_sub (a : R) : a - a = 0 := by
 theorem one_add_one_eq_two : 1 + 1 = (2 : R) := by
   norm_num
 
-theorem two_mul (a : R) : 2 * a = a + a :=
+theorem two_mul (a : R) : 2 * a = a + a := by
   sorry
 
 end MyRing

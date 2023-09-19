@@ -194,7 +194,7 @@ theorem cauchySeq_of_le_geometric_two' {u : ℕ → X}
     dist (u (N + k)) (u N) = dist (u (N + 0)) (u (N + k)) := sorry
     _ ≤ ∑ i in range k, dist (u (N + i)) (u (N + (i + 1))) := sorry
     _ ≤ ∑ i in range k, (1 / 2 : ℝ) ^ (N + i) := sorry
-    _ = 1 / 2 ^ N * ∑ i in range k, (1 / 2) ^ i := sorry
+    _ = 1 / 2 ^ N * ∑ i in range k, (1 / 2 : ℝ) ^ i := sorry
     _ ≤ 1 / 2 ^ N * 2 := sorry
     _ < ε := sorry
 

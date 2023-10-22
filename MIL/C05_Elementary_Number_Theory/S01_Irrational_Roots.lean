@@ -2,16 +2,16 @@ import MIL.Common
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.Nat.Prime
 
-#print Nat.coprime
+#print Nat.Coprime
 
-example (m n : Nat) (h : m.coprime n) : m.gcd n = 1 :=
+example (m n : Nat) (h : m.Coprime n) : m.gcd n = 1 :=
   h
 
-example (m n : Nat) (h : m.coprime n) : m.gcd n = 1 := by
-  rw [Nat.coprime] at h
+example (m n : Nat) (h : m.Coprime n) : m.gcd n = 1 := by
+  rw [Nat.Coprime] at h
   exact h
 
-example : Nat.coprime 12 7 := by norm_num
+example : Nat.Coprime 12 7 := by norm_num
 
 example : Nat.gcd 12 8 = 4 := by norm_num
 
@@ -49,7 +49,7 @@ example (a b c : Nat) (h : a * b = a * c) (h' : a ≠ 0) : b = c :=
   -- apply? suggests the following:
   (mul_right_inj' h').mp h
 
-example {m n : ℕ} (coprime_mn : m.coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
+example {m n : ℕ} (coprime_mn : m.Coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
   intro sqr_eq
   have : 2 ∣ m := by
     sorry
@@ -67,7 +67,7 @@ example {m n : ℕ} (coprime_mn : m.coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
     sorry
   norm_num at this
 
-example {m n p : ℕ} (coprime_mn : m.coprime n) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
+example {m n p : ℕ} (coprime_mn : m.Coprime n) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
   sorry
 #check Nat.factors
 #check Nat.prime_of_mem_factors

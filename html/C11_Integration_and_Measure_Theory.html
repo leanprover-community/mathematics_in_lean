@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10. Integration and Measure Theory &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>11. Integration and Measure Theory &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -15,13 +16,14 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Index" href="genindex.html" />
-    <link rel="prev" title="9. Differential Calculus" href="C09_Differential_Calculus.html" /> 
+    <link rel="prev" title="10. Differential Calculus" href="C10_Differential_Calculus.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,12 +49,13 @@
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Topology.html">8. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Differential_Calculus.html">9. Differential Calculus</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Integration and Measure Theory</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#elementary-integration">10.1. Elementary Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#measure-theory">10.2. Measure Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#integration">10.3. Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Topology.html">9. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Differential_Calculus.html">10. Differential Calculus</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">11. Integration and Measure Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#elementary-integration">11.1. Elementary Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#measure-theory">11.2. Measure Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#integration">11.3. Integration</a></li>
 </ul>
 </li>
 </ul>
@@ -74,9 +77,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">10. </span>Integration and Measure Theory</li>
+      <li><span class="section-number">11. </span>Integration and Measure Theory</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/C10_Integration_and_Measure_Theory.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/C11_Integration_and_Measure_Theory.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -84,10 +87,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="integration-and-measure-theory"></span><div class="section" id="index-0">
-<span id="id1"></span><h1><span class="section-number">10. </span>Integration and Measure Theory<a class="headerlink" href="#index-0" title="Permalink to this headline">&#61633;</a></h1>
-<div class="section" id="elementary-integration">
-<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">10.1. </span>Elementary Integration<a class="headerlink" href="#elementary-integration" title="Permalink to this headline">&#61633;</a></h2>
+  <span class="target" id="integration-and-measure-theory"></span><section id="index-0">
+<span id="id1"></span><h1><span class="section-number">11. </span>Integration and Measure Theory<a class="headerlink" href="#index-0" title="Permalink to this heading">&#61633;</a></h1>
+<section id="elementary-integration">
+<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">11.1. </span>Elementary Integration<a class="headerlink" href="#elementary-integration" title="Permalink to this heading">&#61633;</a></h2>
 <p>We first focus on integration of functions on finite intervals in <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>. We can integrate
 elementary functions.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">MeasureTheory</span> <span class="n">intervalIntegral</span>
@@ -124,9 +127,9 @@ which are not shown here, are not equivalent.)</p>
   <span class="n">rfl</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="measure-theory">
-<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">10.2. </span>Measure Theory<a class="headerlink" href="#measure-theory" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="measure-theory">
+<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">11.2. </span>Measure Theory<a class="headerlink" href="#measure-theory" title="Permalink to this heading">&#61633;</a></h2>
 <p>The general context for integration in Mathlib is measure theory. Even the elementary
 integrals of the previous section are in fact Bochner integrals. Bochner integration is
 a generalization of Lebesgue integration where the target space can be any Banach space,
@@ -201,9 +204,9 @@ almost everywhere.</p>
   <span class="n">Iff.rfl</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="integration">
-<span id="id4"></span><h2><span class="section-number">10.3. </span>Integration<a class="headerlink" href="#integration" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="integration">
+<span id="id4"></span><h2><span class="section-number">11.3. </span>Integration<a class="headerlink" href="#integration" title="Permalink to this heading">&#61633;</a></h2>
 <p>Now that we have measurable spaces and measures we can consider integrals.
 As explained above, Mathlib uses a very general notion of
 integration that allows any Banach space as the target.
@@ -278,14 +281,14 @@ gives finite mass to compact sets, and give positive mass to open sets.</p>
   <span class="n">integral_image_eq_integral_abs_det_fderiv_smul</span> <span class="n">&#956;</span> <span class="n">hs</span> <span class="n">hf</span> <span class="n">h_inj</span> <span class="n">g</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="C09_Differential_Calculus.html" class="btn btn-neutral float-left" title="9. Differential Calculus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C10_Differential_Calculus.html" class="btn btn-neutral float-left" title="10. Differential Calculus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="genindex.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

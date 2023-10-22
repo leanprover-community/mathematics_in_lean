@@ -18,7 +18,7 @@ example {ι : Type*} {s : ι → Set X} (hs : ∀ i, IsOpen (s i)) : IsOpen (⋃
 
 example {ι : Type*} [Fintype ι] {s : ι → Set X} (hs : ∀ i, IsOpen (s i)) :
     IsOpen (⋂ i, s i) :=
-  isOpen_iInter hs
+  isOpen_iInter_of_finite hs
 
 variable {Y : Type*} [TopologicalSpace Y]
 

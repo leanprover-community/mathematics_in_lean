@@ -127,6 +127,7 @@ variable (m n : ℕ)
 #check (Nat.lcm_zero_left n : Nat.lcm 0 n = 0)
 
 example : Nat.gcd m n = Nat.gcd n m := by
+  -- _root_.dvd_antisymm
   apply Nat.dvd_antisymm
   repeat'
     apply Nat.dvd_gcd

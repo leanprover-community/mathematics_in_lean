@@ -99,16 +99,28 @@ example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, �
   sorry
   /- apply the Baire category theorem to conclude that for some `m : ℕ`,
        `e m` contains some `x` -/
-  obtain ⟨m, x, hx⟩ : ∃ m, ∃ x, x ∈ interior (e m) := sorry
-  obtain ⟨ε, ε_pos, hε⟩ : ∃ ε > 0, ball x ε ⊆ interior (e m) := sorry
-  obtain ⟨k, hk⟩ : ∃ k : 𝕜, 1 < ‖k‖ := sorry
+  obtain ⟨m, x, hx⟩ : ∃ m, ∃ x, x ∈ interior (e m) := by sorry
+  obtain ⟨ε, ε_pos, hε⟩ : ∃ ε > 0, ball x ε ⊆ interior (e m) := by sorry
+  obtain ⟨k, hk⟩ : ∃ k : 𝕜, 1 < ‖k‖ := by
+    -- aesop?
+    rename_i inst inst_1 inst_2 inst_3 inst_4 inst_5
+    simp_all only [gt_iff_lt]
+    rcases NormedField.exists_one_lt_norm 𝕜 with ⟨n, hn⟩
+    exact ⟨n, by linarith⟩
   -- show all elements in the ball have norm bounded by `m` after applying any `g i`
   have real_norm_le : ∀ z ∈ ball x ε, ∀ (i : ι), ‖g i z‖ ≤ m
   sorry
-  have εk_pos : 0 < ε / ‖k‖ := sorry
+  have εk_pos : 0 < ε / ‖k‖ := by
+    -- aesop?
+    rename_i inst inst_1 inst_2 inst_3 inst_4 inst_5
+    simp_all only [mem_ball, gt_iff_lt]
+    positivity
   refine' ⟨(m + m : ℕ) / (ε / ‖k‖), fun i ↦ ContinuousLinearMap.op_norm_le_of_shell ε_pos _ hk _⟩
-  sorry
-  sorry
+  · -- aesop?
+    rename_i inst inst_1 inst_2 inst_3 inst_4 inst_5
+    simp_all only [mem_ball, gt_iff_lt, Nat.cast_add]
+    positivity
+  · sorry
 
 end
 

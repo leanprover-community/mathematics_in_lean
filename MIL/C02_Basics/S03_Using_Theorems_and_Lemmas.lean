@@ -44,7 +44,9 @@ example (x : ℝ) : x ≤ x :=
 
 -- Try this.
 example (h₀ : a ≤ b) (h₁ : b < c) (h₂ : c ≤ d) (h₃ : d < e) : a < e := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  linarith
 
 example (h₀ : a ≤ b) (h₁ : b < c) (h₂ : c ≤ d) (h₃ : d < e) : a < e := by
   linarith
@@ -86,15 +88,25 @@ example (h₀ : a ≤ b) (h₁ : c < d) : a + exp c + e < b + exp d + e := by
     apply exp_lt_exp.mpr h₁
   apply le_refl
 
-example (h₀ : d ≤ e) : c + exp (a + d) ≤ c + exp (a + e) := by sorry
+example (h₀ : d ≤ e) : c + exp (a + d) ≤ c + exp (a + e) := by
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [add_le_add_iff_left, exp_le_exp]
 
 example : (0 : ℝ) < 1 := by norm_num
 
 example (h : a ≤ b) : log (1 + exp a) ≤ log (1 + exp b) := by
-  have h₀ : 0 < 1 + exp a := by sorry
-  have h₁ : 0 < 1 + exp b := by sorry
+  have h₀ : 0 < 1 + exp a := by
+    -- aesop?
+    positivity
+  have h₁ : 0 < 1 + exp b := by
+    -- aesop?
+    refine' h₀.trans_le _
+    simp_all only [add_le_add_iff_left, exp_le_exp]
   apply (log_le_log h₀ h₁).mpr
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [add_le_add_iff_left, exp_le_exp]
 
 example : 0 ≤ a ^ 2 := by
   -- apply?
@@ -127,4 +139,3 @@ example : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
   sorry
 
 #check abs_le'.mpr
-

@@ -34,22 +34,40 @@ variable (x y z : α)
 #check (sup_le : x ≤ z → y ≤ z → x ⊔ y ≤ z)
 
 example : x ⊓ y = y ⊓ x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  rw [inf_comm]
 
 example : x ⊓ y ⊓ z = x ⊓ (y ⊓ z) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  rw [inf_assoc]
 
 example : x ⊔ y = y ⊔ x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  rw [sup_comm]
 
 example : x ⊔ y ⊔ z = x ⊔ (y ⊔ z) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  rw [sup_assoc]
 
 theorem absorb1 : x ⊓ (x ⊔ y) = x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  simp_all only [ge_iff_le, le_sup_left, inf_of_le_left]
 
 theorem absorb2 : x ⊔ x ⊓ y = x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  simp_all only [ge_iff_le, inf_le_left, sup_of_le_left]
 
 end
 
@@ -68,7 +86,7 @@ variable {α : Type*} [Lattice α]
 variable (a b c : α)
 
 example (h : ∀ x y z : α, x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z) : a ⊔ b ⊓ c = (a ⊔ b) ⊓ (a ⊔ c) := by
-  sorry
+  sorry -- Why does it hang here?
 
 example (h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b ⊔ c) = a ⊓ b ⊔ a ⊓ c := by
   sorry
@@ -107,4 +125,3 @@ example (x y : X) : 0 ≤ dist x y := by
   sorry
 
 end
-

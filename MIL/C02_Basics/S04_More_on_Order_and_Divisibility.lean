@@ -39,17 +39,51 @@ example : min a b = min b a := by
     apply min_le_left
 
 example : max a b = max b a := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rw [max_comm]
+
 example : min (min a b) c = min a (min b c) := by
-  sorry
+  -- aesop?
+  simp [min_def]
+  split
+  · split
+    · split
+      · simp_all only
+      · simp_all only [not_le]
+    · simp_all only [not_le]
+      split
+      · nlinarith
+      · simp_all only [not_le]
+        split
+        · linarith
+        · simp_all only [not_le]
+  · simp_all only [not_le]
+    split
+    · split
+      · linarith
+      · simp_all only [not_le]
+    · simp_all only [not_le]
+      split
+      · linarith
+      · simp_all only [not_le]
+
 theorem aux : min a b + c ≤ min (a + c) (b + c) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [ge_iff_le, add_le_add_iff_right, le_min_iff, min_le_iff, le_refl, true_or, or_true, and_self]
+
 example : min a b + c = min (a + c) (b + c) := by
-  sorry
+  -- aesop?
+  cases' le_total a b with h h
+  · simp_all only [ge_iff_le, min_eq_left, add_le_add_iff_right]
+  · simp_all only [ge_iff_le, min_eq_right, add_le_add_iff_right]
+
 #check (abs_add : ∀ a b : ℝ, |a + b| ≤ |a| + |b|)
 
-example : |a| - |b| ≤ |a - b| :=
+example : |a| - |b| ≤ |a - b| := by
   sorry
+
 end
 
 section
@@ -78,7 +112,7 @@ variable (m n : ℕ)
 #check (Nat.lcm_zero_left n : Nat.lcm 0 n = 0)
 
 example : Nat.gcd m n = Nat.gcd n m := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rw [Nat.gcd_comm]
 end
-
-

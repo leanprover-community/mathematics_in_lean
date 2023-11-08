@@ -86,7 +86,9 @@ variable {α : Type*} [Lattice α]
 variable (a b c : α)
 
 example (h : ∀ x y z : α, x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z) : a ⊔ b ⊓ c = (a ⊔ b) ⊓ (a ⊔ c) := by
-  sorry -- Why does it hang here?
+  -- suggest_tactics
+  -- TODO: Why does it hang here?
+  sorry
 
 example (h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b ⊔ c) = a ⊓ b ⊔ a ⊓ c := by
   sorry

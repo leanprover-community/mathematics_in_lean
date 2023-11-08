@@ -48,8 +48,11 @@ example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Contin
     Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
   hf.fst'.dist hf.snd'
 
-example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 2 + x) :=
-  sorry
+example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 2 + x) := by
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  continuity
 
 example {X Y : Type*} [MetricSpace X] [MetricSpace Y] (f : X → Y) (a : X) :
     ContinuousAt f a ↔ ∀ ε > 0, ∃ δ > 0, ∀ {x}, dist x a < δ → dist (f x) (f a) < ε :=
@@ -83,7 +86,7 @@ example {s : Set X} : a ∈ closure s ↔ ∀ ε > 0, ∃ b ∈ s, a ∈ Metric.
   Metric.mem_closure_iff
 
 example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n, u n ∈ s) :
-    a ∈ closure s :=
+    a ∈ closure s := by
   sorry
 
 example {x : X} {s : Set X} : s ∈ 𝓝 x ↔ ∃ ε > 0, Metric.ball x ε ⊆ s :=
@@ -124,7 +127,9 @@ example {X : Type*} [MetricSpace X] {Y : Type*} [MetricSpace Y] {f : X → Y} :
 
 example {X : Type*} [MetricSpace X] [CompactSpace X]
       {Y : Type*} [MetricSpace Y] {f : X → Y}
-    (hf : Continuous f) : UniformContinuous f :=
+    (hf : Continuous f) : UniformContinuous f := by
+  -- suggest_tactics
+  -- TODO: Why does it hang here?
   sorry
 
 example (u : ℕ → X) :
@@ -152,12 +157,32 @@ theorem cauchySeq_of_le_geometric_two' {u : ℕ → X}
   intro n hn
   obtain ⟨k, rfl : n = N + k⟩ := le_iff_exists_add.mp hn
   calc
-    dist (u (N + k)) (u N) = dist (u (N + 0)) (u (N + k)) := sorry
-    _ ≤ ∑ i in range k, dist (u (N + i)) (u (N + (i + 1))) := sorry
-    _ ≤ ∑ i in range k, (1 / 2 : ℝ) ^ (N + i) := sorry
-    _ = 1 / 2 ^ N * ∑ i in range k, (1 / 2 : ℝ) ^ i := sorry
-    _ ≤ 1 / 2 ^ N * 2 := sorry
-    _ < ε := sorry
+    dist (u (N + k)) (u N) = dist (u (N + 0)) (u (N + k)) := by
+      -- suggest_tactics
+      -- aesop?
+      rename_i inst
+      simp_all only [one_div, inv_pow, gt_iff_lt, ge_iff_le, le_add_iff_nonneg_right, zero_le, add_zero]
+      rw [dist_comm]
+    _ ≤ ∑ i in range k, dist (u (N + i)) (u (N + (i + 1))) := by sorry
+    _ ≤ ∑ i in range k, (1 / 2 : ℝ) ^ (N + i) := by
+      -- suggest_tactics
+      -- aesop?
+      rename_i inst
+      simp_all only [one_div, inv_pow, gt_iff_lt, ge_iff_le, le_add_iff_nonneg_right, zero_le]
+      exact Finset.sum_le_sum fun i _ => hu _
+    _ = 1 / 2 ^ N * ∑ i in range k, (1 / 2 : ℝ) ^ i := by
+      -- aesop?
+      rename_i inst
+      simp_all only [one_div, inv_pow, gt_iff_lt, ge_iff_le, le_add_iff_nonneg_right, zero_le]
+      ring
+      simp_all only [Int.ofNat_eq_coe, Nat.cast_one, Int.cast_one, Nat.cast_ofNat, one_div, inv_pow]
+      rw [mul_sum]
+    _ ≤ 1 / 2 ^ N * 2 := by sorry
+    _ < ε := by
+      -- suggest_tactics
+      -- aesop?
+      rename_i inst
+      simp_all only [one_div, inv_pow, gt_iff_lt, ge_iff_le, le_add_iff_nonneg_right, zero_le]
 
 
 open Metric
@@ -166,15 +191,16 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
     Dense (⋂ n, f n) := by
   let B : ℕ → ℝ := fun n ↦ (1 / 2) ^ n
   have Bpos : ∀ n, 0 < B n
-  sorry
+  · -- suggest_tactics
+    aesop?
   /- Translate the density assumption into two functions `center` and `radius` associating
     to any n, x, δ, δpos a center and a positive radius such that
     `closedBall center radius` is included both in `f n` and in `closedBall x δ`.
     We can also require `radius ≤ (1/2)^(n+1)`, to ensure we get a Cauchy sequence later. -/
   have :
     ∀ (n : ℕ) (x : X),
-      ∀ δ > 0, ∃ y : X, ∃ r > 0, r ≤ B (n + 1) ∧ closedBall y r ⊆ closedBall x δ ∩ f n :=
-    by sorry
+      ∀ δ > 0, ∃ y : X, ∃ r > 0, r ≤ B (n + 1) ∧ closedBall y r ⊆ closedBall x δ ∩ f n := by
+      aesop?
   choose! center radius Hpos HB Hball using this
   intro x
   rw [mem_closure_iff_nhds_basis nhds_basis_closedBall]
@@ -190,18 +216,22 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
       fun n p ↦ Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
   let c : ℕ → X := fun n ↦ (F n).1
   let r : ℕ → ℝ := fun n ↦ (F n).2
-  have rpos : ∀ n, 0 < r n := by sorry
-  have rB : ∀ n, r n ≤ B n := by sorry
+  have rpos : ∀ n, 0 < r n := by
+    aesop?
+  have rB : ∀ n, r n ≤ B n := by
+    aesop?
   have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := by
-    sorry
-  have cdist : ∀ n, dist (c n) (c (n + 1)) ≤ B n := by sorry
+    aesop?
+  have cdist : ∀ n, dist (c n) (c (n + 1)) ≤ B n := by
+    aesop?
   have : CauchySeq c := cauchySeq_of_le_geometric_two' cdist
   -- as the sequence `c n` is Cauchy in a complete space, it converges to a limit `y`.
   rcases cauchySeq_tendsto_of_complete this with ⟨y, ylim⟩
   -- this point `y` will be the desired point. We will check that it belongs to all
   -- `f n` and to `ball x ε`.
   use y
-  have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by sorry
-  have yball : ∀ n, y ∈ closedBall (c n) (r n) := by sorry
-  sorry
-
+  have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by
+    aesop?
+  have yball : ∀ n, y ∈ closedBall (c n) (r n) := by
+    aesop?
+  aesop?

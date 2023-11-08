@@ -33,8 +33,10 @@ example {X Y : Type*} (f : X → Y) (F : Filter X) (G : Filter Y) :
     ∀ {α β γ} {f : Filter α} {m : α → β} {m' : β → γ}, map m' (map m f) = map (m' ∘ m) f)
 
 example {X Y Z : Type*} {F : Filter X} {G : Filter Y} {H : Filter Z} {f : X → Y} {g : Y → Z}
-    (hf : Tendsto₁ f F G) (hg : Tendsto₁ g G H) : Tendsto₁ (g ∘ f) F H :=
-  sorry
+    (hf : Tendsto₁ f F G) (hg : Tendsto₁ g G H) : Tendsto₁ (g ∘ f) F H := by
+  -- aesop?
+  intro U hU
+  exact hf _ (hg _ hU)
 
 variable (f : ℝ → ℝ) (x₀ y₀ : ℝ)
 
@@ -56,7 +58,7 @@ example : 𝓝 (x₀, y₀) = 𝓝 x₀ ×ˢ 𝓝 y₀ :=
 
 example (f : ℕ → ℝ × ℝ) (x₀ y₀ : ℝ) :
     Tendsto f atTop (𝓝 (x₀, y₀)) ↔
-      Tendsto (Prod.fst ∘ f) atTop (𝓝 x₀) ∧ Tendsto (Prod.snd ∘ f) atTop (𝓝 y₀) :=
+      Tendsto (Prod.fst ∘ f) atTop (𝓝 x₀) ∧ Tendsto (Prod.snd ∘ f) atTop (𝓝 y₀) := by
   sorry
 
 example (x₀ : ℝ) : HasBasis (𝓝 x₀) (fun ε : ℝ ↦ 0 < ε) fun ε ↦ Ioo (x₀ - ε) (x₀ + ε) :=
@@ -100,6 +102,10 @@ example (P Q R : ℕ → Prop) (hP : ∀ᶠ n in atTop, P n) (hQ : ∀ᶠ n in a
 #check neBot_of_le
 
 example (u : ℕ → ℝ) (M : Set ℝ) (x : ℝ) (hux : Tendsto u atTop (𝓝 x))
-    (huM : ∀ᶠ n in atTop, u n ∈ M) : x ∈ closure M :=
-  sorry
-
+    (huM : ∀ᶠ n in atTop, u n ∈ M) : x ∈ closure M := by
+  -- aesop?
+  simp_all only [eventually_atTop, ge_iff_le]
+  unhygienic with_reducible aesop_destruct_products
+  apply mem_closure_of_tendsto hux
+  simp_all only [eventually_atTop, ge_iff_le]
+  exact ⟨w, h⟩

@@ -192,15 +192,17 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
   let B : ℕ → ℝ := fun n ↦ (1 / 2) ^ n
   have Bpos : ∀ n, 0 < B n
   · -- suggest_tactics
-    aesop?
+    -- aesop?
+    rename_i inst inst_1
+    intro n
+    simp_all only [one_div, inv_pow, inv_pos, gt_iff_lt, zero_lt_two, pow_pos]
   /- Translate the density assumption into two functions `center` and `radius` associating
     to any n, x, δ, δpos a center and a positive radius such that
     `closedBall center radius` is included both in `f n` and in `closedBall x δ`.
     We can also require `radius ≤ (1/2)^(n+1)`, to ensure we get a Cauchy sequence later. -/
   have :
     ∀ (n : ℕ) (x : X),
-      ∀ δ > 0, ∃ y : X, ∃ r > 0, r ≤ B (n + 1) ∧ closedBall y r ⊆ closedBall x δ ∩ f n := by
-      aesop?
+      ∀ δ > 0, ∃ y : X, ∃ r > 0, r ≤ B (n + 1) ∧ closedBall y r ⊆ closedBall x δ ∩ f n := by sorry
   choose! center radius Hpos HB Hball using this
   intro x
   rw [mem_closure_iff_nhds_basis nhds_basis_closedBall]
@@ -216,22 +218,21 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
       fun n p ↦ Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
   let c : ℕ → X := fun n ↦ (F n).1
   let r : ℕ → ℝ := fun n ↦ (F n).2
-  have rpos : ∀ n, 0 < r n := by
-    aesop?
-  have rB : ∀ n, r n ≤ B n := by
-    aesop?
+  have rpos : ∀ n, 0 < r n := by sorry
+  have rB : ∀ n, r n ≤ B n := by sorry
   have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := by
-    aesop?
-  have cdist : ∀ n, dist (c n) (c (n + 1)) ≤ B n := by
-    aesop?
+    -- aesop?
+    rename_i inst c_1 r_1 inst_1
+    intro n
+    simp_all only [one_div, inv_pow, inv_pos, gt_iff_lt, zero_lt_two, pow_pos, forall_const, Set.subset_inter_iff,
+      pow_zero, inv_one, ge_iff_le, Nat.rec_add_one, and_self]
+  have cdist : ∀ n, dist (c n) (c (n + 1)) ≤ B n := by sorry
   have : CauchySeq c := cauchySeq_of_le_geometric_two' cdist
   -- as the sequence `c n` is Cauchy in a complete space, it converges to a limit `y`.
   rcases cauchySeq_tendsto_of_complete this with ⟨y, ylim⟩
   -- this point `y` will be the desired point. We will check that it belongs to all
   -- `f n` and to `ball x ε`.
   use y
-  have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by
-    aesop?
-  have yball : ∀ n, y ∈ closedBall (c n) (r n) := by
-    aesop?
-  aesop?
+  have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by sorry
+  have yball : ∀ n, y ∈ closedBall (c n) (r n) := by sorry
+  sorry

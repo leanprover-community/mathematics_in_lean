@@ -85,9 +85,15 @@ section
 variable {α : Type*} [Lattice α]
 variable (a b c : α)
 
+set_option LeanInfer.verbose true
+set_option LeanInfer.suggest_tactics.check false
+
 example (h : ∀ x y z : α, x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z) : a ⊔ b ⊓ c = (a ⊔ b) ⊓ (a ⊔ c) := by
-  -- suggest_tactics
   -- TODO: Why does it hang here?
+  suggest_tactics
+  -- pp_state
+  -- trace_generate "α : Type u_1\ninst✝ : Lattice α\na b c : α\nh : ∀ (x y z : α), x ⊓ (y ⊔ z) = x ⊓ y ⊔ x ⊓ z\n⊢ a ⊔ b ⊓ c = (a ⊔ b) ⊓ (a ⊔ c)"
+  -- suggest_tactics
   sorry
 
 example (h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b ⊔ c) = a ⊓ b ⊔ a ⊓ c := by

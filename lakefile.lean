@@ -19,4 +19,4 @@ lean_lib MIL where
   moreLeanArgs := moreLeanArgs
 
 require mathlib from git "https://github.com/leanprover-community/mathlib4" @ "master"
-require LeanInfer from git "https://github.com/lean-dojo/LeanInfer.git" @ "main"
+require LeanInfer from git "https://github.com/lean-dojo/LeanInfer.git" @ "dev"

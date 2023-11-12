@@ -34,28 +34,59 @@ example : s ⊆ f ⁻¹' (f '' s) := by
   use x, xs
 
 example : f '' s ⊆ v ↔ s ⊆ f ⁻¹' v := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [image_subset_iff]
 
 example (h : Injective f) : f ⁻¹' (f '' s) ⊆ s := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [preimage_image_eq]
+  rfl
 
 example : f '' (f ⁻¹' u) ⊆ u := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [image_subset_iff]
+  rfl
 
 example (h : Surjective f) : u ⊆ f '' (f ⁻¹' u) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [image_preimage_eq]
+  rfl
 
 example (h : s ⊆ t) : f '' s ⊆ f '' t := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [image_subset_iff]
+  intro u hu
+  simp_all only [mem_preimage, mem_image]
+  exact ⟨u, h hu, rfl⟩
 
 example (h : u ⊆ v) : f ⁻¹' u ⊆ f ⁻¹' v := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  apply preimage_mono h
 
 example : f ⁻¹' (u ∪ v) = f ⁻¹' u ∪ f ⁻¹' v := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [preimage_union]
 
 example : f '' (s ∩ t) ⊆ f '' s ∩ f '' t := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [subset_inter_iff, image_subset_iff]
+  apply And.intro
+  · intro y hy
+    simp_all only [mem_inter_iff, mem_preimage, mem_image]
+    unhygienic with_reducible aesop_destruct_products
+    exact ⟨y, left, rfl⟩
+  · intro x hx
+    simp_all only [mem_inter_iff, mem_preimage, mem_image]
+    unhygienic with_reducible aesop_destruct_products
+    exact ⟨x, right, rfl⟩
 
 example (h : Injective f) : f '' s ∩ f '' t ⊆ f '' (s ∩ t) := by
   sorry
@@ -64,19 +95,39 @@ example : f '' s \ f '' t ⊆ f '' (s \ t) := by
   sorry
 
 example : f ⁻¹' u \ f ⁻¹' v ⊆ f ⁻¹' (u \ v) := by
-  sorry
+  -- aesop?
+  simp_all only [preimage_diff]
+  rfl
+  -- suggest_tactics
 
 example : f '' s ∩ v = f '' (s ∩ f ⁻¹' v) := by
-  sorry
+  -- aesop?
+  rw [image_inter_preimage]
+  -- suggest_tactics
 
 example : f '' (s ∩ f ⁻¹' u) ⊆ f '' s ∩ u := by
-  sorry
+  -- aesop?
+  simp_all only [subset_inter_iff, image_subset_iff, inter_subset_right, and_true]
+  intro x hx
+  simp_all only [mem_inter_iff, mem_preimage, mem_image]
+  unhygienic with_reducible aesop_destruct_products
+  exact ⟨x, left, rfl⟩
+  -- suggest_tactics
 
 example : s ∩ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∩ u) := by
-  sorry
+  -- aesop?
+  simp_all only [preimage_inter, subset_inter_iff, inter_subset_right, and_true]
+  intro x hx
+  simp_all only [mem_inter_iff, mem_preimage, mem_image]
+  unhygienic with_reducible aesop_destruct_products
+  exact ⟨x, left, rfl⟩
 
 example : s ∪ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∪ u) := by
-  sorry
+  -- aesop?
+  simp_all only [preimage_union, union_subset_iff, subset_union_right, and_true]
+  intro x hx
+  simp_all only [mem_union, mem_preimage, mem_image]
+  exact Or.inl ⟨x, hx, rfl⟩
 
 variable {I : Type*} (A : I → Set α) (B : I → Set β)
 
@@ -143,10 +194,16 @@ example : range exp = { y | y > 0 } := by
   rw [exp_log ypos]
 
 example : InjOn sqrt { x | x ≥ 0 } := by
-  sorry
+  -- aesop?
+  simp_all only [ge_iff_le]
+  intro x hx y hy hxy
+  simp_all only [mem_setOf_eq, sqrt_inj]
 
 example : InjOn (fun x ↦ x ^ 2) { x : ℝ | x ≥ 0 } := by
-  sorry
+  -- aesop?
+  simp_all only [ge_iff_le]
+  rintro a ha b hb hab
+  simp_all only [mem_setOf_eq, ge_iff_le, zero_lt_two, pow_left_inj]
 
 example : sqrt '' { x | x ≥ 0 } = { y | y ≥ 0 } := by
   sorry
@@ -203,10 +260,11 @@ theorem Cantor : ∀ f : α → Set α, ¬Surjective f := by
     intro h'
     have : j ∉ f j := by rwa [h] at h'
     contradiction
-  have h₂ : j ∈ S
-  sorry
-  have h₃ : j ∉ S
-  sorry
+  have h₂ : j ∈ S := by
+    -- suggest_tactics
+    sorry
+  have h₃ : j ∉ S := by
+    sorry
   contradiction
 
 -- COMMENTS: TODO: improve this

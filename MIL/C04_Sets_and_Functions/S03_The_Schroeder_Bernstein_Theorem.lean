@@ -28,10 +28,23 @@ theorem sb_right_inv {x : α} (hx : x ∉ sbSet f g) : g (invFun g x) = x := by
     rw [sbSet, mem_iUnion]
     use 0
     rw [sbAux, mem_diff]
-    sorry
+    -- suggest_tactics
+    -- aesop?
+    rename_i inst
+    simp_all only [image_univ, mem_range, not_exists, mem_univ, exists_const, not_false_eq_true, and_self]
   have : ∃ y, g y = x := by
-    sorry
-  sorry
+    -- suggest_tactics
+    -- aesop?
+    rename_i inst
+    simp_all only [image_univ, mem_range]
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst this_1
+  simp_all only [image_univ, mem_range]
+  unhygienic with_reducible aesop_destruct_products
+  aesop_subst h
+  apply invFun_eq
+  simp_all only [exists_apply_eq_apply]
 
 theorem sb_injective (hf : Injective f) (hg : Injective g) : Injective (sbFun f g) := by
   set A := sbSet f g with A_def
@@ -56,7 +69,10 @@ theorem sb_injective (hf : Injective f) (hg : Injective g) : Injective (sbFun f 
       use n + 1
       simp [sbAux]
       exact ⟨x₁, hn, x₂eq.symm⟩
-    sorry
+    -- aesop?
+    rename_i inst
+    simp_all only [ite_true, or_self]
+    exact hf.eq_iff.1 hxeq
   push_neg  at xA
   sorry
 

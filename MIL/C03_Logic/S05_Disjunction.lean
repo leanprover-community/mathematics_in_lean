@@ -92,10 +92,19 @@ example {m n k : ℕ} (h : m ∣ n ∨ m ∣ k) : m ∣ n * k := by
     apply dvd_mul_right
 
 example {z : ℝ} (h : ∃ x y, z = x ^ 2 + y ^ 2 ∨ z = x ^ 2 + y ^ 2 + 1) : z ≥ 0 := by
-  sorry
+  -- aesop?
+  simp_all only [ge_iff_le]
+  unhygienic with_reducible aesop_destruct_products
+  unhygienic aesop_cases h
+  · aesop_subst h
+    nlinarith
+  · aesop_subst h
+    nlinarith
 
 example {x : ℝ} (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [sq_eq_one_iff]
 
 example {x y : ℝ} (h : x ^ 2 = y ^ 2) : x = y ∨ x = -y := by
   sorry
@@ -105,7 +114,10 @@ variable {R : Type*} [CommRing R] [IsDomain R]
 variable (x y : R)
 
 example (h : x ^ 2 = 1) : x = 1 ∨ x = -1 := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst inst_1
+  simp_all only [sq_eq_one_iff]
 
 example (h : x ^ 2 = y ^ 2) : x = y ∨ x = -y := by
   sorry
@@ -125,5 +137,10 @@ example (P : Prop) : ¬¬P → P := by
   contradiction
 
 example (P Q : Prop) : P → Q ↔ ¬P ∨ Q := by
-  sorry
-
+  -- suggest_tactics
+  -- aesop?
+  apply Iff.intro
+  · intro a
+    tauto
+  · intro a a_1
+    simp_all only [not_true, false_or]

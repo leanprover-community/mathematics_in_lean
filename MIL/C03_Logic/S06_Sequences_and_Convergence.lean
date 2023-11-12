@@ -80,7 +80,11 @@ theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ}
       (sa : ConvergesTo s a) (sb : ConvergesTo s b) :
     a = b := by
   by_contra abne
-  have : |a - b| > 0 := by sorry
+  have : |a - b| > 0 := -- by aesop
+                        by simp_all only [gt_iff_lt, abs_pos, ne_eq]
+                           apply Aesop.BuiltinRules.not_intro
+                           intro a_1
+                           exact abne (sub_eq_zero.1 a_1)
   let ε := |a - b| / 2
   have εpos : ε > 0 := by
     change |a - b| / 2 > 0
@@ -88,9 +92,12 @@ theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ}
   rcases sa ε εpos with ⟨Na, hNa⟩
   rcases sb ε εpos with ⟨Nb, hNb⟩
   let N := max Na Nb
-  have absa : |s N - a| < ε := by sorry
-  have absb : |s N - b| < ε := by sorry
-  have : |a - b| < |a - b| := by sorry
+  have absa : |s N - a| < ε := -- by aesop
+                                  by simp_all only [gt_iff_lt, abs_pos, ne_eq, ge_iff_le, le_max_iff, le_refl, true_or]
+  have absb : |s N - b| < ε := -- by aesop
+                                  by simp_all only [gt_iff_lt, abs_pos, ne_eq, ge_iff_le, le_max_iff, le_refl, true_or,
+                                                    or_true]
+  have : |a - b| < |a - b| := sorry
   exact lt_irrefl _ this
 
 section
@@ -100,4 +107,3 @@ def ConvergesTo' (s : α → ℝ) (a : ℝ) :=
   ∀ ε > 0, ∃ N, ∀ n ≥ N, |s n - a| < ε
 
 end
-

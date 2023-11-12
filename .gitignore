@@ -3,3 +3,4 @@
 /lake-packages
 /.cache
 .DS_Store
+*.olean

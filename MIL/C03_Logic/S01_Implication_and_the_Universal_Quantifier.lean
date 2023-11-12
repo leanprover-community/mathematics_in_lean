@@ -43,9 +43,15 @@ theorem my_lemma4 :
   intro x y ε epos ele1 xlt ylt
   calc
     |x * y| = |x| * |y| := sorry
-    _ ≤ |x| * ε := by gcongr -- by aesop? -- by suggest_tactics
-    _ < 1 * ε := by simp_all only [one_mul, gt_iff_lt, mul_lt_iff_lt_one_left]; linarith -- by aesop? -- by suggest_tactics
-    _ = ε := by simp_all only [one_mul] -- by aesop? -- by suggest_tactics
+    _ ≤ |x| * ε := -- by suggest_tactics
+                   -- by aesop?
+                   by gcongr
+    _ < 1 * ε := -- by suggest_tactics
+                 -- by aesop?
+                 by simp_all only [one_mul, gt_iff_lt, mul_lt_iff_lt_one_left]; linarith
+    _ = ε := -- by suggest_tactics
+             -- by aesop?
+             by simp_all only [one_mul]
 
 def FnUb (f : ℝ → ℝ) (a : ℝ) : Prop :=
   ∀ x, f x ≤ a

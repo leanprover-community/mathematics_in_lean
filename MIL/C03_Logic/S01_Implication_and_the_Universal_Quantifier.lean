@@ -43,9 +43,9 @@ theorem my_lemma4 :
   intro x y ε epos ele1 xlt ylt
   calc
     |x * y| = |x| * |y| := sorry
-    _ ≤ |x| * ε := sorry
-    _ < 1 * ε := sorry
-    _ = ε := sorry
+    _ ≤ |x| * ε := by gcongr -- by aesop? -- by suggest_tactics
+    _ < 1 * ε := by simp_all only [one_mul, gt_iff_lt, mul_lt_iff_lt_one_left]; linarith -- by aesop? -- by suggest_tactics
+    _ = ε := by simp_all only [one_mul] -- by aesop? -- by suggest_tactics
 
 def FnUb (f : ℝ → ℝ) (a : ℝ) : Prop :=
   ∀ x, f x ≤ a
@@ -104,10 +104,17 @@ example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f x + g x :=
   fun a b aleb ↦ add_le_add (mf aleb) (mg aleb)
 
 example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x ↦ c * f x :=
-  sorry
+  -- by aesop?
+  by intro x y hxy
+     simp_all only [gt_iff_lt]
+     gcongr
+     exact mf hxy
 
 example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) :=
-  sorry
+  -- by aesop?
+  by intro x y h
+     simp_all only
+     exact mf (mg h)
 
 def FnEven (f : ℝ → ℝ) : Prop :=
   ∀ x, f x = f (-x)
@@ -144,7 +151,10 @@ example : s ⊆ s := by
 theorem Subset.refl : s ⊆ s := fun x xs ↦ xs
 
 theorem Subset.trans : r ⊆ s → s ⊆ t → r ⊆ t := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  intro a a_1
+  tauto
 
 end
 
@@ -169,12 +179,19 @@ example (c : ℝ) : Injective fun x ↦ x + c := by
   exact (add_left_inj c).mp h'
 
 example {c : ℝ} (h : c ≠ 0) : Injective fun x ↦ c * x := by
-  sorry
+  -- aesop?
+  simp_all only [ne_eq]
+  intro x y hxy
+  simp_all only [mul_eq_mul_left_iff, or_false]
 
 variable {α : Type*} {β : Type*} {γ : Type*}
 variable {g : β → γ} {f : α → β}
 
 example (injg : Injective g) (injf : Injective f) : Injective fun x ↦ g (f x) := by
-  sorry
+  -- aesop?
+  intro x y h
+  simp_all only
+  apply injf
+  exact injg h
 
 end

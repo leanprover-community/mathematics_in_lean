@@ -102,14 +102,38 @@ example {x y : ℝ} (h : x ≤ y) : ¬y ≤ x ↔ x ≠ y :=
   ⟨fun h₀ h₁ ↦ h₀ (by rw [h₁]), fun h₀ h₁ ↦ h₀ (le_antisymm h h₁)⟩
 
 example {x y : ℝ} : x ≤ y ∧ ¬y ≤ x ↔ x ≤ y ∧ x ≠ y :=
-  sorry
+  -- by aesop?
+  by simp_all only [not_le, ne_eq, and_congr_right_iff]
+     intro a
+     apply Iff.intro
+     · intro a_1
+       apply Aesop.BuiltinRules.not_intro
+       intro a_2
+       aesop_subst a_2
+       simp_all only [le_refl, lt_self_iff_false]
+     · intro a_1
+       apply lt_of_le_of_ne a
+       simp_all only [ne_eq, not_false_eq_true]
 
 theorem aux {x y : ℝ} (h : x ^ 2 + y ^ 2 = 0) : x = 0 :=
-  have h' : x ^ 2 = 0 := by sorry
+  have h' : x ^ 2 = 0 := -- by suggest_tactics
+                         -- by aesop?
+                         by simp_all only [zero_lt_two, pow_eq_zero_iff]
+                            nlinarith
+
   pow_eq_zero h'
 
 example (x y : ℝ) : x ^ 2 + y ^ 2 = 0 ↔ x = 0 ∧ y = 0 :=
-  sorry
+  -- by aesop?
+  by apply Iff.intro
+     · intro a
+       apply And.intro
+       · rw [← sub_eq_zero] at a
+         simp_all only [sub_zero]
+         nlinarith
+       · nlinarith
+     · intro a
+       simp_all only [ne_eq, zero_pow', add_zero]
 
 section
 
@@ -148,7 +172,10 @@ variable (a b c : α)
 
 example : ¬a < a := by
   rw [lt_iff_le_not_le]
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  simp_all only [le_refl, not_true, and_false, not_false_eq_true]
 
 example : a < b → b < c → a < c := by
   simp only [lt_iff_le_not_le]

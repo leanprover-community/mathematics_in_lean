@@ -129,7 +129,9 @@ example (divab : a ∣ b) (divbc : b ∣ c) : a ∣ c := by
   use d * e; ring
 
 example (divab : a ∣ b) (divac : a ∣ c) : a ∣ b + c := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  exact dvd_add divab divac
 
 end
 
@@ -143,7 +145,11 @@ example {c : ℝ} : Surjective fun x ↦ x + c := by
   dsimp; ring
 
 example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
-  sorry
+  -- aesop?
+  simp_all only [ne_eq]
+  intro x
+  simp_all only
+  exact ⟨x / c, mul_div_cancel' _ h⟩
 
 example (x y : ℝ) (h : x - y ≠ 0) : (x ^ 2 - y ^ 2) / (x - y) = x + y := by
   field_simp [h]

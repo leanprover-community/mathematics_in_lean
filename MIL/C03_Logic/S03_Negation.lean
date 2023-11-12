@@ -44,20 +44,32 @@ example : ¬FnHasUb fun x ↦ x :=
 #check (le_of_not_gt : ¬a > b → a ≤ b)
 
 example (h : Monotone f) (h' : f a < f b) : a < b := by
-  sorry
+  -- aesop?
+  contrapose! h'
+  exact h h'
 
 example (h : a ≤ b) (h' : f b < f a) : ¬Monotone f := by
-  sorry
+  -- aesop?
+  apply Aesop.BuiltinRules.not_intro
+  intro a_1
+  apply not_lt_of_ge _ h'
+  simp_all only [ge_iff_le]
+  exact a_1 h
 
 example : ¬∀ {f : ℝ → ℝ}, Monotone f → ∀ {a b}, f a ≤ f b → a ≤ b := by
   intro h
   let f := fun x : ℝ ↦ (0 : ℝ)
-  have monof : Monotone f := by sorry
+  have monof : Monotone f := by rename_i f_1
+                                simp_all only
+                                exact monotone_const -- by aesop? -- by suggest_tactics
   have h' : f 1 ≤ f 0 := le_refl _
   sorry
 
 example (x : ℝ) (h : ∀ ε > 0, x < ε) : x ≤ 0 := by
-  sorry
+  -- aesop?
+  simp_all only [gt_iff_lt]
+  contrapose! h
+  exact ⟨x, h, le_refl _⟩
 
 end
 
@@ -65,16 +77,25 @@ section
 variable {α : Type*} (P : α → Prop) (Q : Prop)
 
 example (h : ¬∃ x, P x) : ∀ x, ¬P x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  intro x
+  simp_all only [not_exists, not_false_eq_true]
 
 example (h : ∀ x, ¬P x) : ¬∃ x, P x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [exists_false, not_false_eq_true]
 
 example (h : ¬∀ x, P x) : ∃ x, ¬P x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [not_forall]
 
 example (h : ∃ x, ¬P x) : ¬∀ x, P x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [not_forall]
 
 example (h : ¬∀ x, P x) : ∃ x, ¬P x := by
   by_contra h'
@@ -85,10 +106,14 @@ example (h : ¬∀ x, P x) : ∃ x, ¬P x := by
   exact h' ⟨x, h''⟩
 
 example (h : ¬¬Q) : Q := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [not_not]
 
 example (h : Q) : ¬¬Q := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp_all only [not_true, not_false_eq_true]
 
 end
 
@@ -96,7 +121,11 @@ section
 variable (f : ℝ → ℝ)
 
 example (h : ¬FnHasUb f) : ∀ a, ∃ x, f x > a := by
-  sorry
+  -- aesop?
+  intro a
+  simp_all only [gt_iff_lt]
+  by_contra' H
+  exact h ⟨a, H⟩
 
 example (h : ¬∀ a, ∃ x, f x > a) : FnHasUb f := by
   push_neg at h
@@ -108,7 +137,9 @@ example (h : ¬FnHasUb f) : ∀ a, ∃ x, f x > a := by
   exact h
 
 example (h : ¬Monotone f) : ∃ x y, x ≤ y ∧ f y < f x := by
-  sorry
+  -- aesop?
+  contrapose! h
+  exact h
 
 example (h : ¬FnHasUb f) : ∀ a, ∃ x, f x > a := by
   contrapose! h
@@ -136,4 +167,3 @@ example (h : 0 < 0) : a > 37 := by
   contradiction
 
 end
-

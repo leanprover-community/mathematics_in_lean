@@ -112,6 +112,9 @@ instance (α β : Type) [LE α] [LE β] : OrderPresHomClass (OrderPresHom α β)
 instance (α β : Type) [LE α] [Monoid α] [LE β] [Monoid β] :
     OrderPresHomClass (OrderPresMonoidHom α β) α β where
 
+-- [NOTE]: Although both `suggest_tactics` and `aesop?` fail here,
+-- this is probably not a good example to evaluate on, as the proof
+-- is merely type-based instead of a tactic-style proof.  (Peiyang)
 instance (α β : Type) [LE α] [Monoid α] [LE β] [Monoid β] :
     MonoidHomClass₃ (OrderPresMonoidHom α β) α β
   := sorry

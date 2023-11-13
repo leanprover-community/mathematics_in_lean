@@ -271,8 +271,19 @@ def zsmul₁ {M : Type*} [Zero M] [Add M] [Neg M] : ℤ → M → M
 
 instance abGrpModule (A : Type) [AddCommGroup₃ A] : Module₁ ℤ A where
   smul := zsmul₁
-  zero_smul := sorry
-  one_smul := sorry
+  zero_smul := -- by suggest_tactics
+               -- by aesop?
+               by rename_i inst
+                  intro m
+                  simp_all only
+                  apply Eq.refl
+  one_smul := -- by suggest_tactics
+              -- by aesop?
+              by rename_i inst
+                 intro m
+                 simp_all only
+                 simp [zsmul₁]
+                 simp [nsmul₁]
   mul_smul := sorry
   add_smul := sorry
   smul_add := sorry

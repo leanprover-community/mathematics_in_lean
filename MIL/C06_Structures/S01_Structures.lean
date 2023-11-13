@@ -81,14 +81,19 @@ theorem addAlt_comm (a b : Point) : addAlt a b = addAlt b a := by
   repeat' apply add_comm
 
 protected theorem add_assoc (a b c : Point) : (a.add b).add c = a.add (b.add c) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  simp [add, add_comm, add_left_comm]
 
 def smul (r : ℝ) (a : Point) : Point :=
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  by exact a
 
 theorem smul_distrib (r : ℝ) (a b : Point) :
     (smul r a).add (smul r b) = smul r (a.add b) := by
-  sorry
+  -- aesop?
+  apply Eq.refl
 
 end Point
 
@@ -127,7 +132,9 @@ def midpoint (a b : StandardTwoSimplex) : StandardTwoSimplex
 
 def weightedAverage (lambda : Real) (lambda_nonneg : 0 ≤ lambda) (lambda_le : lambda ≤ 1)
     (a b : StandardTwoSimplex) : StandardTwoSimplex :=
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  by exact a
 
 end
 
@@ -206,4 +213,3 @@ variable (s : StdSimplex)
 #check s.2
 
 end
-

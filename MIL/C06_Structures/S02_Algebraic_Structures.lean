@@ -67,6 +67,9 @@ namespace Point
 def add (a b : Point) : Point :=
   ⟨a.x + b.x, a.y + b.y, a.z + b.z⟩
 
+-- [NOTE]: The three definitions below are not good candidates
+-- to evaluate on, because they just require filling in the
+-- correct type rather than being a tactic-style proof.  (Peiyang)
 def neg (a : Point) : Point := sorry
 
 def zero : Point := sorry

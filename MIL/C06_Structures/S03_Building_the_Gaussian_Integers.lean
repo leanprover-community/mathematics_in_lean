@@ -120,8 +120,16 @@ instance instCommRing : CommRing gaussInt where
   mul_comm := by
     intros
     ext <;> simp <;> ring
-  zero_mul := sorry
-  mul_zero := sorry
+  zero_mul := -- by aesop?
+              by intro a
+                 unhygienic ext
+                 · simp_all only [mul_re, zero_re, zero_mul, zero_im, sub_self]
+                 · simp_all only [mul_im, zero_re, zero_mul, zero_im, add_zero]
+  mul_zero := -- by aesop?
+              by intro a
+                 unhygienic ext
+                 · simp_all only [mul_re, zero_re, mul_zero, zero_im, sub_self]
+                 · simp_all only [mul_im, zero_im, mul_zero, zero_re, add_zero]
 
 @[simp]
 theorem sub_re (x y : gaussInt) : (x - y).re = x.re - y.re :=
@@ -183,13 +191,28 @@ def norm (x : gaussInt) :=
 
 @[simp]
 theorem norm_nonneg (x : gaussInt) : 0 ≤ norm x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  apply norm_nonneg
+
 theorem norm_eq_zero (x : gaussInt) : norm x = 0 ↔ x = 0 := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  apply Iff.intro
+  · intro a
+    rwa [norm_eq_zero] at a
+  · intro a
+    aesop_subst a
+    simp_all only
+
 theorem norm_pos (x : gaussInt) : 0 < norm x ↔ x ≠ 0 := by
   sorry
+
 theorem norm_mul (x y : gaussInt) : norm (x * y) = norm x * norm y := by
-  sorry
+  -- aesop?
+  simp [norm]
+  ring
+
 def conj (x : gaussInt) : gaussInt :=
   ⟨x.re, -x.im⟩
 

@@ -118,10 +118,17 @@ theorem isCoprime_Inf {I : Ideal R} {J : ι → Ideal R} {s : Finset ι}
       rw [Finset.iInf_insert, inf_comm, one_eq_top, eq_top_iff, ← one_eq_top]
       set K := ⨅ j ∈ s, J j
       calc
-        1 = I + K            := sorry
-        _ = I + K*(I + J i)  := sorry
+        1 = I + K            := -- by aesop?
+                                by rename_i inst a
+                                   simp_all only [Finset.mem_insert, Submodule.add_eq_sup, ge_iff_le, one_eq_top,
+                                     forall_eq_or_imp, implies_true, le_iInf_iff, forall_true_left]
+        _ = I + K*(I + J i)  := -- by aesop?
+                                by rename_i inst a
+                                   simp_all only [Finset.mem_insert, Submodule.add_eq_sup, ge_iff_le, one_eq_top,
+                                     forall_eq_or_imp, implies_true, le_iInf_iff, forall_true_left, mul_top]
         _ = (1+K)*I + K*J i  := sorry
         _ ≤ I + K ⊓ J i      := sorry
+
 lemma chineseMap_surj [Fintype ι] {I : ι → Ideal R}
     (hI : ∀ i j, i ≠ j → IsCoprime (I i) (I j)) : Surjective (chineseMap I) := by
   classical

@@ -86,13 +86,23 @@ def conjugate {G : Type*} [Group G] (x : G) (H : Subgroup G) : Subgroup G where
   carrier := {a : G | ∃ h, h ∈ H ∧ a = x * h * x⁻¹}
   one_mem' := by
     dsimp
-    sorry
+    -- aesop?
+    rename_i inst
+    exact ⟨1, one_mem H, by simp⟩
   inv_mem' := by
     dsimp
     sorry
   mul_mem' := by
     dsimp
-    sorry
+    -- aesop?
+    rename_i inst
+    intro a b a_1 a_2
+    unhygienic with_reducible aesop_destruct_products
+    aesop_subst [right_1, right]
+    simp_all only [conj_mul, mul_left_inj, mul_right_inj, exists_eq_right']
+    apply MulMemClass.mul_mem
+    · simp_all only
+    · simp_all only
 
 example {G H : Type*} [Group G] [Group H] (G' : Subgroup G) (f : G →* H) : Subgroup H :=
   Subgroup.map f G'
@@ -116,24 +126,35 @@ variable {G H : Type*} [Group G] [Group H]
 
 open Subgroup
 
-example (φ : G →* H) (S T : Subgroup H) (hST : S ≤ T) : comap φ S ≤ comap φ T :=by
-  sorry
+example (φ : G →* H) (S T : Subgroup H) (hST : S ≤ T) : comap φ S ≤ comap φ T := by
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst inst_1
+  exact comap_mono hST
 
-example (φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : map φ S ≤ map φ T :=by
-  sorry
+example (φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : map φ S ≤ map φ T := by
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst inst_1
+  convert map_mono hST
 
 variable {K : Type*} [Group K]
 
 -- Remember you can use the `ext` tactic to prove an equality of subgroups.
 example (φ : G →* H) (ψ : H →* K) (U : Subgroup K) :
   comap (ψ.comp φ) U = comap φ (comap ψ U) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst inst_1 inst_2
+  apply Eq.refl
 
 -- Pushing a subgroup along one homomorphism and then another is equal to
 --  pushing it forward along the composite of the homomorphisms.
 example (φ : G →* H) (ψ : H →* K) (S : Subgroup G) :
   map (ψ.comp φ) S = map ψ (S.map φ) := by
-  sorry
+  -- aesop?
+  rename_i inst inst_1 inst_2
+  ext <;> simp
 
 end exercises
 
@@ -150,11 +171,27 @@ example {G : Type*} [Group G] [Fintype G] (p : ℕ) {n : ℕ} [Fact p.Prime]
     (hdvd : p ^ n ∣ card G) : ∃ K : Subgroup G, card K = p ^ n :=
   Sylow.exists_subgroup_card_pow_prime p hdvd
 
+-- [EXCEPTION] aesop generates a buggy proof.  (Peiyang)
 lemma eq_bot_iff_card {G : Type*} [Group G] {H : Subgroup G} [Fintype H] :
     H = ⊥ ↔ card H = 1 := by
   suffices (∀ x ∈ H, x = 1) ↔ ∃ x ∈ H, ∀ a ∈ H, a = x by
     simpa [eq_bot_iff_forall, card_eq_one_iff]
-  sorry
+  -- aesop?
+  rename_i inst inst_1
+  apply Iff.intro
+  · intro a
+    simp_all only
+    apply Exists.intro
+    apply And.intro
+    on_goal 2 => intro a_1 a_2
+    on_goal 2 => apply Eq.refl
+    apply OneMemClass.one_mem
+  · intro a x a_1
+    unhygienic with_reducible aesop_destruct_products
+    simp_all only
+    symm
+    apply right
+    apply OneMemClass.one_mem
 
 #check card_dvd_of_le
 
@@ -228,7 +265,10 @@ example {G : Type*} [Group G] (H : Subgroup G) : G ≃ (G ⧸ H) × H :=
 variable {G : Type*} [Group G]
 
 lemma conjugate_one (H : Subgroup G) : conjugate 1 H = H := by
-    sorry
+    -- suggest_tactics
+    -- aesop?
+    rename_i inst
+    rw [conjugate_one]
 
 instance : MulAction G (Subgroup G) where
   smul := conjugate

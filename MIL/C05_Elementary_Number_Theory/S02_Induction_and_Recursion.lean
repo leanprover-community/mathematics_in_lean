@@ -136,12 +136,27 @@ theorem add_comm (m n : MyNat) : add m n = add n m := by
 
 theorem add_assoc (m n k : MyNat) : add (add m n) k = add m (add n k) := by
   sorry
+
 theorem mul_add (m n k : MyNat) : mul m (add n k) = add (mul m n) (mul m k) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  induction k
+  · apply Eq.refl
+  · apply mul_add
+  -- All goals are closed, but there is a recursion termination error.
+
 theorem zero_mul (n : MyNat) : mul zero n = zero := by
-  sorry
+  -- aesop?
+  cases n
+  · apply Eq.refl
+  · simp [zero_mul]
+  -- All goals are closed, but there is a recursion termination error.
+
 theorem succ_mul (m n : MyNat) : mul (succ m) n = add (mul m n) n := by
   sorry
+
 theorem mul_comm (m n : MyNat) : mul m n = mul n m := by
+  -- suggest_tactics
   sorry
+
 end MyNat

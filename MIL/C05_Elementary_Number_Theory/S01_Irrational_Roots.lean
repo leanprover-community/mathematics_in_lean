@@ -58,13 +58,19 @@ example {m n : ℕ} (coprime_mn : m.Coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
     rw [← sqr_eq, meq]
     ring
   have : 2 * k ^ 2 = n ^ 2 :=
-    sorry
+    -- by aesop?
+    by rename_i this_1
+       aesop_subst meq
+       simp_all only [mul_eq_mul_left_iff, or_false, Nat.isUnit_iff, dvd_mul_left]
   have : 2 ∣ n := by
     sorry
   have : 2 ∣ m.gcd n := by
     sorry
   have : 2 ∣ 1 := by
-    sorry
+    -- aesop?
+    rename_i this_1 this_2 this_3 this_4
+    aesop_subst meq
+    simp_all only [Nat.isUnit_iff, dvd_mul_left, Nat.dvd_one]
   norm_num at this
 
 example {m n p : ℕ} (coprime_mn : m.Coprime n) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
@@ -93,7 +99,11 @@ example {m n p : ℕ} (nnz : n ≠ 0) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 
   intro sqr_eq
   have nsqr_nez : n ^ 2 ≠ 0 := by simpa
   have eq1 : Nat.factorization (m ^ 2) p = 2 * m.factorization p := by
-    sorry
+    -- aesop?
+    simp_all only [ne_eq, zero_lt_two, pow_eq_zero_iff, not_false_eq_true, not_true]
+    rw [← sqr_eq]
+    simp_all only [ne_eq, not_true]
+    simp [← sqr_eq]
   have eq2 : (p * n ^ 2).factorization p = 2 * n.factorization p + 1 := by
     sorry
   have : 2 * m.factorization p % 2 = (2 * n.factorization p + 1) % 2 := by
@@ -110,11 +120,13 @@ example {m n k r : ℕ} (nnz : n ≠ 0) (pow_eq : m ^ k = r * n ^ k) {p : ℕ} (
     sorry
   have eq2 : (r.succ * n ^ k).factorization p =
       k * n.factorization p + r.succ.factorization p := by
-    sorry
+        -- aesop?
+        simp_all only [ne_eq, Nat.succ_ne_zero, not_false_eq_true, Nat.factorization_mul, Nat.factorization_pow,
+                       Finsupp.coe_add, Finsupp.coe_smul, nsmul_eq_mul, Pi.coe_nat, Nat.cast_id, Pi.add_apply, not_true, Pi.mul_apply]
+        rw [add_comm, eq1]
   have : r.succ.factorization p = k * m.factorization p - k * n.factorization p := by
     rw [← eq1, pow_eq, eq2, add_comm, Nat.add_sub_cancel]
   rw [this]
   sorry
 
 #check multiplicity
-

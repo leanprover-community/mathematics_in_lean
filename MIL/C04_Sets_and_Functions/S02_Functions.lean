@@ -81,39 +81,19 @@ example : s ∪ f ⁻¹' u ⊆ f ⁻¹' (f '' s ∪ u) := by
 variable {I : Type*} (A : I → Set α) (B : I → Set β)
 
 example : (f '' ⋃ i, A i) = ⋃ i, f '' A i := by
-  ext y; simp
-  constructor
-  · rintro ⟨x, ⟨i, xAi⟩, fxeq⟩
-    use i, x
-  rintro ⟨i, x, xAi, fxeq⟩
-  exact ⟨x, ⟨i, xAi⟩, fxeq⟩
+  sorry
 
 example : (f '' ⋂ i, A i) ⊆ ⋂ i, f '' A i := by
-  intro y; simp
-  intro x h fxeq i
-  use x
-  exact ⟨h i, fxeq⟩
+  sorry
 
 example (i : I) (injf : Injective f) : (⋂ i, f '' A i) ⊆ f '' ⋂ i, A i := by
-  intro y; simp
-  intro h
-  rcases h i with ⟨x, xAi, fxeq⟩
-  use x; constructor
-  · intro i'
-    rcases h i' with ⟨x', x'Ai, fx'eq⟩
-    have : f x = f x' := by rw [fxeq, fx'eq]
-    have : x = x' := injf this
-    rw [this]
-    exact x'Ai
-  exact fxeq
+  sorry
 
 example : (f ⁻¹' ⋃ i, B i) = ⋃ i, f ⁻¹' B i := by
-  ext x
-  simp
+  sorry
 
 example : (f ⁻¹' ⋂ i, B i) = ⋂ i, f ⁻¹' B i := by
-  ext x
-  simp
+  sorry
 
 example : InjOn f s ↔ ∀ x₁ ∈ s, ∀ x₂ ∈ s, f x₁ = f x₂ → x₁ = x₂ :=
   Iff.refl _

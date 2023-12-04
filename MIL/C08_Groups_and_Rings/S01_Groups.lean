@@ -5,53 +5,53 @@ import Mathlib.GroupTheory.PresentedGroup
 
 import MIL.Common
 
-example {M : Type*} [Monoid M] (x : M) : x*1 = x := mul_one x
+example {M : Type*} [Monoid M] (x : M) : x * 1 = x := mul_one x
 
 example {M : Type*} [AddCommMonoid M] (x y : M) : x + y = y + x := add_comm x y
 
 example {M N : Type*} [Monoid M] [Monoid N] (x y : M) (f : M →* N) : f (x * y) = f x * f y :=
-f.map_mul x y
+  f.map_mul x y
 
 example {M N : Type*} [AddMonoid M] [AddMonoid N] (f : M →+ N) : f 0 = 0 :=
-f.map_zero
+  f.map_zero
 
 example {M N P : Type*} [AddMonoid M] [AddMonoid N] [AddMonoid P]
-  (f : M →+ N) (g : N →+ P) : M →+ P := g.comp f
+    (f : M →+ N) (g : N →+ P) : M →+ P := g.comp f
 
 example {G : Type*} [Group G] (x : G) : x * x⁻¹ = 1 := mul_inv_self x
 
-example {G : Type*} [Group G] (x y z : G) : x * (y * z) * (x*z)⁻¹ * (x * y * x⁻¹)⁻¹ = 1 := by
+example {G : Type*} [Group G] (x y z : G) : x * (y * z) * (x * z)⁻¹ * (x * y * x⁻¹)⁻¹ = 1 := by
   group
 
 example {G : Type*} [AddCommGroup G] (x y z : G) : z + x + (y - z - x) = y := by
   abel
 
 example {G H : Type*} [Group G] [Group H] (x y : G) (f : G →* H) : f (x * y) = f x * f y :=
-f.map_mul x y
+  f.map_mul x y
 
 example {G H : Type*} [Group G] [Group H] (x : G) (f : G →* H) : f (x⁻¹) = (f x)⁻¹ :=
-f.map_inv x
+  f.map_inv x
 
 example {G H : Type*} [Group G] [Group H] (f : G → H) (h : ∀ x y, f (x * y) = f x * f y) :
-  G →* H :=
-MonoidHom.mk' f h
+    G →* H :=
+  MonoidHom.mk' f h
 
 example {G H : Type*} [Group G] [Group H] (f : G ≃* H) :
-  f.trans f.symm = MulEquiv.refl G :=
-f.self_trans_symm
+    f.trans f.symm = MulEquiv.refl G :=
+  f.self_trans_symm
 
 noncomputable example {G H : Type*} [Group G] [Group H]
-      (f : G →* H) (h : Function.Bijective f) :
+    (f : G →* H) (h : Function.Bijective f) :
     G ≃* H :=
   MulEquiv.ofBijective f h
 
 example {G : Type*} [Group G] (H : Subgroup G) {x y : G} (hx : x ∈ H) (hy : y ∈ H) :
-  x * y ∈ H :=
-H.mul_mem hx hy
+    x * y ∈ H :=
+  H.mul_mem hx hy
 
 example {G : Type*} [Group G] (H : Subgroup G) {x : G} (hx : x ∈ H) :
-  x⁻¹ ∈ H :=
-H.inv_mem hx
+    x⁻¹ ∈ H :=
+  H.inv_mem hx
 
 example : AddSubgroup ℚ where
   carrier := Set.range ((↑) : ℤ → ℚ)
@@ -72,7 +72,7 @@ example {G : Type*} [Group G] (H : Subgroup G) : Group H := inferInstance
 example {G : Type*} [Group G] (H : Subgroup G) : Group {x : G // x ∈ H} := inferInstance
 
 example {G : Type*} [Group G] (H H' : Subgroup G) :
-  ((H ⊓ H' : Subgroup G) : Set G) = (H : Set G) ∩ (H' : Set G) := rfl
+    ((H ⊓ H' : Subgroup G) : Set G) = (H : Set G) ∩ (H' : Set G) := rfl
 
 example {G : Type*} [Group G] (H H' : Subgroup G) :
     ((H ⊔ H' : Subgroup G) : Set G) = Subgroup.closure ((H : Set G) ∪ (H' : Set G)) := by
@@ -116,28 +116,28 @@ variable {G H : Type*} [Group G] [Group H]
 
 open Subgroup
 
-example (φ : G →* H) (S T : Subgroup H) (hST : S ≤ T) : comap φ S ≤ comap φ T :=by
+example (φ : G →* H) (S T : Subgroup H) (hST : S ≤ T) : comap φ S ≤ comap φ T := by
   sorry
 
-example (φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : map φ S ≤ map φ T :=by
+example (φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : map φ S ≤ map φ T := by
   sorry
 
 variable {K : Type*} [Group K]
 
 -- Remember you can use the `ext` tactic to prove an equality of subgroups.
 example (φ : G →* H) (ψ : H →* K) (U : Subgroup K) :
-  comap (ψ.comp φ) U = comap φ (comap ψ U) := by
+    comap (ψ.comp φ) U = comap φ (comap ψ U) := by
   sorry
 
 -- Pushing a subgroup along one homomorphism and then another is equal to
---  pushing it forward along the composite of the homomorphisms.
+-- pushing it forward along the composite of the homomorphisms.
 example (φ : G →* H) (ψ : H →* K) (S : Subgroup G) :
-  map (ψ.comp φ) S = map ψ (S.map φ) := by
+    map (ψ.comp φ) S = map ψ (S.map φ) := by
   sorry
 
 end exercises
 
-attribute [local instance 10] setFintype Classical.propDecidable
+open scoped Classical
 
 open Fintype
 
@@ -159,12 +159,12 @@ lemma eq_bot_iff_card {G : Type*} [Group G] {H : Subgroup G} [Fintype H] :
 #check card_dvd_of_le
 
 lemma inf_bot_of_coprime {G : Type*} [Group G] (H K : Subgroup G) [Fintype H] [Fintype K]
-    (h : (card H).Coprime (card K))  : H ⊓ K = ⊥ := by
-    sorry
+    (h : (card H).Coprime (card K)) : H ⊓ K = ⊥ := by
+  sorry
 open Equiv
 
 example {X : Type*} [Finite X] : Subgroup.closure {σ : Perm X | Perm.IsCycle σ} = ⊤ :=
-Perm.closure_isCycle
+  Perm.closure_isCycle
 
 #simp [mul_assoc] c[1, 2, 3] * c[2, 3, 4]
 
@@ -199,20 +199,20 @@ end FreeGroup
 noncomputable section GroupActions
 
 example {G X : Type*} [Group G] [MulAction G X] (g g': G) (x : X) :
-  g • (g' • x) = (g * g') • x :=
-(mul_smul g g' x).symm
+    g • (g' • x) = (g * g') • x :=
+  (mul_smul g g' x).symm
 
 example {G X : Type*} [AddGroup G] [AddAction G X] (g g' : G) (x : X) :
-  g +ᵥ (g' +ᵥ x) = (g + g') +ᵥ x :=
-(add_vadd g g' x).symm
+    g +ᵥ (g' +ᵥ x) = (g + g') +ᵥ x :=
+  (add_vadd g g' x).symm
 
 open MulAction
 
 example {G X : Type*} [Group G] [MulAction G X] : G →* Equiv.Perm X :=
-toPermHom G X
+  toPermHom G X
 
 def CayleyIsoMorphism (G : Type*) [Group G] : G ≃* (toPermHom G G).range :=
-Equiv.Perm.subgroupOfMulAction G G
+  Equiv.Perm.subgroupOfMulAction G G
 
 example {G X : Type*} [Group G] [MulAction G X] :
     X ≃ (ω : orbitRel.Quotient G X) × (orbit G (Quotient.out' ω)) :=
@@ -228,7 +228,7 @@ example {G : Type*} [Group G] (H : Subgroup G) : G ≃ (G ⧸ H) × H :=
 variable {G : Type*} [Group G]
 
 lemma conjugate_one (H : Subgroup G) : conjugate 1 H = H := by
-    sorry
+  sorry
 
 instance : MulAction G (Subgroup G) where
   smul := conjugate
@@ -244,11 +244,11 @@ noncomputable section QuotientGroup
 example {G : Type*} [Group G] (H : Subgroup G) [H.Normal] : Group (G ⧸ H) := inferInstance
 
 example {G : Type*} [Group G] (H : Subgroup G) [H.Normal] : G →* G ⧸ H :=
-QuotientGroup.mk' H
+  QuotientGroup.mk' H
 
 example {G : Type*} [Group G] (N : Subgroup G) [N.Normal] {M : Type*}
-  [Group M] (φ : G →* M) (h : N ≤ MonoidHom.ker φ) : G ⧸ N →* M :=
-QuotientGroup.lift N φ h
+    [Group M] (φ : G →* M) (h : N ≤ MonoidHom.ker φ) : G ⧸ N →* M :=
+  QuotientGroup.lift N φ h
 
 example {G : Type*} [Group G] {M : Type*} [Group M] (φ : G →* M) :
     G ⧸ MonoidHom.ker φ →* MonoidHom.range φ :=
@@ -260,10 +260,10 @@ example {G G': Type*} [Group G] [Group G']
   QuotientGroup.map N N' φ h
 
 example {G : Type*} [Group G] {M N : Subgroup G} [M.Normal]
-  [N.Normal] (h : M = N) : G ⧸ M ≃* G ⧸ N := QuotientGroup.quotientMulEquivOfEq  h
+    [N.Normal] (h : M = N) : G ⧸ M ≃* G ⧸ N := QuotientGroup.quotientMulEquivOfEq h
 
 section
-variable  {G : Type*} [Group G] {H K : Subgroup G}
+variable {G : Type*} [Group G] {H K : Subgroup G}
 
 open MonoidHom
 
@@ -272,7 +272,7 @@ open MonoidHom
 #check Subgroup.index_mul_card
 #check Nat.eq_of_mul_eq_mul_right
 
-lemma aux_card_eq [Fintype G] (h' : card G = card H * card K) : card (G⧸H) = card K := by
+lemma aux_card_eq [Fintype G] (h' : card G = card H * card K) : card (G ⧸ H) = card K := by
   sorry
 variable [H.Normal] [K.Normal] [Fintype G] (h : Disjoint H K) (h' : card G = card H * card K)
 
@@ -281,9 +281,9 @@ variable [H.Normal] [K.Normal] [Fintype G] (h : Disjoint H K) (h' : card G = car
 #check restrict
 #check ker_restrict
 
-def iso₁ [Fintype G] (h : Disjoint H K) (h' : card G = card H * card K) : K ≃* G⧸H := by
+def iso₁ [Fintype G] (h : Disjoint H K) (h' : card G = card H * card K) : K ≃* G ⧸ H := by
   sorry
-def iso₂ : G ≃* (G⧸K) × (G⧸H) := by
+def iso₂ : G ≃* (G ⧸ K) × (G ⧸ H) := by
   sorry
 #check MulEquiv.prodCongr
 

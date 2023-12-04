@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8. Groups and Rings &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +15,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -99,8 +97,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="groups-and-rings">
-<span id="groups-and-ring"></span><h1><span class="section-number">8. </span>Groups and Rings<a class="headerlink" href="#groups-and-rings" title="Permalink to this heading">&#61633;</a></h1>
+  <div class="section" id="groups-and-rings">
+<span id="groups-and-ring"></span><h1><span class="section-number">8. </span>Groups and Rings<a class="headerlink" href="#groups-and-rings" title="Permalink to this headline">&#61633;</a></h1>
 <p>We saw in <a class="reference internal" href="C02_Basics.html#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a> how to reason about
 operations in groups and rings. Later, in <a class="reference internal" href="C06_Structures.html#section-algebraic-structures"><span class="std std-numref">Section 6.2</span></a>, we saw how
 to define abstract algebraic structures, such as group structures, as well as concrete instances
@@ -114,10 +112,10 @@ There is some overlap with the discussion of
 decisions behind the way the topics are treated.
 So making sense of some of the examples may require reviewing the background from
 <a class="reference internal" href="C07_Hierarchies.html#hierarchies"><span class="std std-numref">Chapter 7</span></a>.</p>
-<section id="monoids-and-groups">
-<span id="groups"></span><h2><span class="section-number">8.1. </span>Monoids and Groups<a class="headerlink" href="#monoids-and-groups" title="Permalink to this heading">&#61633;</a></h2>
-<span class="target" id="index-0"></span><section id="monoids-and-their-morphisms">
-<span id="index-1"></span><h3><span class="section-number">8.1.1. </span>Monoids and their morphisms<a class="headerlink" href="#monoids-and-their-morphisms" title="Permalink to this heading">&#61633;</a></h3>
+<div class="section" id="monoids-and-groups">
+<span id="groups"></span><h2><span class="section-number">8.1. </span>Monoids and Groups<a class="headerlink" href="#monoids-and-groups" title="Permalink to this headline">&#61633;</a></h2>
+<span class="target" id="index-0"></span><div class="section" id="monoids-and-their-morphisms">
+<span id="index-1"></span><h3><span class="section-number">8.1.1. </span>Monoids and their morphisms<a class="headerlink" href="#monoids-and-their-morphisms" title="Permalink to this headline">&#61633;</a></h3>
 <p>Courses in abstract algebra often start with groups and
 then progress to rings, fields, and vector spaces. This involves some contortions when discussing
 multiplication on rings since the multiplication operation does not come from a group structure
@@ -126,7 +124,7 @@ The most common fix, when doing mathematics with pen and paper,
 is to leave those proofs as exercises. A less efficient but safer and
 more formalization-friendly way of proceeding is to use monoids. A <em>monoid</em> structure on a type <cite>M</cite>
 is an internal composition law that is associative and has a neutral element.
-Monoids are used primarily to accommodate both groups and the multiplicative structure
+Monoids are used primarily to accommodate both groups and the multiplicative structure of
 rings. But there are also a number of natural examples; for instance, the set of natural numbers
 equipped with addition forms a monoid.</p>
 <p>From a practical point of view, you can mostly ignore monoids when using Mathlib. But you need
@@ -139,7 +137,7 @@ argument (in other words, in square brackets).
 By default, <code class="docutils literal notranslate"><span class="pre">Monoid</span></code> uses multiplicative notation for the operation; for additive notation
 use <code class="docutils literal notranslate"><span class="pre">AddMonoid</span></code> instead.
 The commutative versions of these structures add the prefix <code class="docutils literal notranslate"><span class="pre">Comm</span></code> before <code class="docutils literal notranslate"><span class="pre">Monoid</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">*</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">mul_one</span> <span class="n">x</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">mul_one</span> <span class="n">x</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">AddCommMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="n">x</span> <span class="n">y</span>
 </pre></div>
@@ -151,10 +149,10 @@ it is generally confusing to use additive notation with a non-commutative operat
 we apply it to elements of <code class="docutils literal notranslate"><span class="pre">M</span></code>. The additive version is called <code class="docutils literal notranslate"><span class="pre">AddMonoidHom</span></code> and written
 <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">&#8594;+</span> <span class="pre">N</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;*</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span>
-<span class="n">f.map_mul</span> <span class="n">x</span> <span class="n">y</span>
+  <span class="n">f.map_mul</span> <span class="n">x</span> <span class="n">y</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;+</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
-<span class="n">f.map_zero</span>
+  <span class="n">f.map_zero</span>
 </pre></div>
 </div>
 <p>These morphisms are bundled maps, i.e. they package together a map and some of its properties.
@@ -162,12 +160,12 @@ Remember that <a class="reference internal" href="C07_Hierarchies.html#section-h
 here we simply note the slightly unfortunate consequence that we cannot use ordinary function
 composition to compose maps. Instead, we need to use <code class="docutils literal notranslate"><span class="pre">MonoidHom.comp</span></code> and <code class="docutils literal notranslate"><span class="pre">AddMonoidHom.comp</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">AddMonoid</span> <span class="n">P</span><span class="o">]</span>
-  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;+</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">&#8594;+</span> <span class="n">P</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;+</span> <span class="n">P</span> <span class="o">:=</span> <span class="n">g.comp</span> <span class="n">f</span>
+    <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;+</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">&#8594;+</span> <span class="n">P</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">&#8594;+</span> <span class="n">P</span> <span class="o">:=</span> <span class="n">g.comp</span> <span class="n">f</span>
 </pre></div>
 </div>
-</section>
-<section id="groups-and-their-morphisms">
-<h3><span class="section-number">8.1.2. </span>Groups and their morphisms<a class="headerlink" href="#groups-and-their-morphisms" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="groups-and-their-morphisms">
+<h3><span class="section-number">8.1.2. </span>Groups and their morphisms<a class="headerlink" href="#groups-and-their-morphisms" title="Permalink to this headline">&#61633;</a></h3>
 <p>We will have much more to say about groups, which are monoids with the extra
 property that every element has an inverse.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">mul_inv_self</span> <span class="n">x</span>
@@ -176,7 +174,7 @@ property that every element has an inverse.</p>
 <p id="index-2">Similar to the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic that we saw earlier, there is a <code class="docutils literal notranslate"><span class="pre">group</span></code> tactic that proves
 any identity that holds in any group. (Equivalently, it proves the identities that hold in
 free groups.)</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">y</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">z</span><span class="o">)</span><span class="bp">&#8315;&#185;</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">&#8315;&#185;</span><span class="o">)</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">y</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">z</span><span class="o">)</span><span class="bp">&#8315;&#185;</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">&#8315;&#185;</span><span class="o">)</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">group</span>
 </pre></div>
 </div>
@@ -189,12 +187,12 @@ free groups.)</p>
 morphism is nothing more than a monoid morphism between groups. So we can copy and paste one of our
 earlier examples, replacing <code class="docutils literal notranslate"><span class="pre">Monoid</span></code> with <code class="docutils literal notranslate"><span class="pre">Group</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span>
-<span class="n">f.map_mul</span> <span class="n">x</span> <span class="n">y</span>
+  <span class="n">f.map_mul</span> <span class="n">x</span> <span class="n">y</span>
 </pre></div>
 </div>
 <p>Of course we do get some new properties, such as this one:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span><span class="bp">&#8315;&#185;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span><span class="bp">&#8315;&#185;</span> <span class="o">:=</span>
-<span class="n">f.map_inv</span> <span class="n">x</span>
+  <span class="n">f.map_inv</span> <span class="n">x</span>
 </pre></div>
 </div>
 <p>You may be worried that constructing group morphisms will require us to do unnecessary work since
@@ -203,8 +201,8 @@ while this is automatic in the case of group morphisms. In practice the extra wo
 but, to avoid it, there is a function building a group morphism from a function
 between groups that is compatible with the composition laws.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
-  <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span> <span class="o">:=</span>
-<span class="n">MonoidHom.mk&#39;</span> <span class="n">f</span> <span class="n">h</span>
+    <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span> <span class="o">:=</span>
+  <span class="n">MonoidHom.mk&#39;</span> <span class="n">f</span> <span class="n">h</span>
 </pre></div>
 </div>
 <p>There is also a type <code class="docutils literal notranslate"><span class="pre">MulEquiv</span></code> of group (or monoid) isomorphisms denoted by <code class="docutils literal notranslate"><span class="pre">&#8771;*</span></code> (and
@@ -216,30 +214,30 @@ Using anonymous projector notation, the first two can be written <code class="do
 <code class="docutils literal notranslate"><span class="pre">f.trans</span> <span class="pre">g</span></code> respectively.
 Elements of this type are automatically coerced to morphisms and functions when necessary.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8771;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span>
-  <span class="n">f.trans</span> <span class="n">f.symm</span> <span class="bp">=</span> <span class="n">MulEquiv.refl</span> <span class="n">G</span> <span class="o">:=</span>
-<span class="n">f.self_trans_symm</span>
+    <span class="n">f.trans</span> <span class="n">f.symm</span> <span class="bp">=</span> <span class="n">MulEquiv.refl</span> <span class="n">G</span> <span class="o">:=</span>
+  <span class="n">f.self_trans_symm</span>
 </pre></div>
 </div>
 <p>One can use <code class="docutils literal notranslate"><span class="pre">MulEquiv.ofBijective</span></code> to build an isomorphism from a bijective morphism.
 Doing so makes the inverse function noncomputable.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable</span> <span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">H</span><span class="o">]</span>
-      <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Function.Bijective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+    <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Function.Bijective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">G</span> <span class="bp">&#8771;*</span> <span class="n">H</span> <span class="o">:=</span>
   <span class="n">MulEquiv.ofBijective</span> <span class="n">f</span> <span class="n">h</span>
 </pre></div>
 </div>
-</section>
-<section id="subgroups">
-<h3><span class="section-number">8.1.3. </span>Subgroups<a class="headerlink" href="#subgroups" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="subgroups">
+<h3><span class="section-number">8.1.3. </span>Subgroups<a class="headerlink" href="#subgroups" title="Permalink to this headline">&#61633;</a></h3>
 <p>Just as group morphisms are bundled, a subgroup of <code class="docutils literal notranslate"><span class="pre">G</span></code> is also a bundled structure consisting of
 a set in <code class="docutils literal notranslate"><span class="pre">G</span></code> with the relevant closure properties.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8712;</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span>
-  <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">&#8712;</span> <span class="n">H</span> <span class="o">:=</span>
-<span class="n">H.mul_mem</span> <span class="n">hx</span> <span class="n">hy</span>
+    <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">&#8712;</span> <span class="n">H</span> <span class="o">:=</span>
+  <span class="n">H.mul_mem</span> <span class="n">hx</span> <span class="n">hy</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span>
-  <span class="n">x</span><span class="bp">&#8315;&#185;</span> <span class="bp">&#8712;</span> <span class="n">H</span> <span class="o">:=</span>
-<span class="n">H.inv_mem</span> <span class="n">hx</span>
+    <span class="n">x</span><span class="bp">&#8315;&#185;</span> <span class="bp">&#8712;</span> <span class="n">H</span> <span class="o">:=</span>
+  <span class="n">H.inv_mem</span> <span class="n">hx</span>
 </pre></div>
 </div>
 <p>In the example above, it is important to understand that <code class="docutils literal notranslate"><span class="pre">Subgroup</span> <span class="pre">G</span></code> is the type of subgroups
@@ -281,18 +279,18 @@ So the above example can be restated more explicitly as:</p>
 <code class="docutils literal notranslate"><span class="pre">IsSubgroup</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">G</span> <span class="pre">&#8594;</span> <span class="pre">Prop</span></code> is that one can easily endow <code class="docutils literal notranslate"><span class="pre">Subgroup</span> <span class="pre">G</span></code> with additional structure.
 Importantly, it has the structure of a complete lattice structure with respect to
 inclusion. For instance, instead of having a lemma stating that an intersection of
-two subgroups of <code class="docutils literal notranslate"><span class="pre">G</span></code> if again a subgroup, we
-have use the lattice operation <code class="docutils literal notranslate"><span class="pre">&#8851;</span></code> to construct the intersection. We can then apply arbitrary
+two subgroups of <code class="docutils literal notranslate"><span class="pre">G</span></code> is again a subgroup, we
+have used the lattice operation <code class="docutils literal notranslate"><span class="pre">&#8851;</span></code> to construct the intersection. We can then apply arbitrary
 lemmas about lattices to the construction.</p>
 <p>Let us check that the set underlying the infimum of two subgroups is indeed, by definition,
 their intersection.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="n">H&#39;</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span>
-  <span class="o">((</span><span class="n">H</span> <span class="bp">&#8851;</span> <span class="n">H&#39;</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">G</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">G</span><span class="o">)</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">H&#39;</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+    <span class="o">((</span><span class="n">H</span> <span class="bp">&#8851;</span> <span class="n">H&#39;</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">G</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">G</span><span class="o">)</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">H&#39;</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
 </pre></div>
 </div>
 <p>It may look strange to have a different notation for what amounts to the intersection of the
 underlying sets, but the correspondence does not carry over to the supremum operation and set
-union, since a union of subgroup is not a subgroup.
+union, since a union of subgroups is not, in general, a subgroup.
 Instead one needs to use the subgroup generated by the union, which is done
 using <code class="docutils literal notranslate"><span class="pre">Subgroup.closure</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="n">H&#39;</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span>
@@ -331,7 +329,7 @@ by an element of the ambient group.</p>
 group morphisms. The naming convention in Mathlib is to call those operations <code class="docutils literal notranslate"><span class="pre">map</span></code>
 and <code class="docutils literal notranslate"><span class="pre">comap</span></code>.
 These are not the common mathematical terms, but they have the advantage of being
-shorter than &#8220;pushforward&#8221; and  &#8220;direct image.&#8221;&#8221;</p>
+shorter than &#8220;pushforward&#8221; and &#8220;direct image.&#8221;</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">Group</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">G&#39;</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">H</span> <span class="o">:=</span>
   <span class="n">Subgroup.map</span> <span class="n">f</span> <span class="n">G&#39;</span>
 
@@ -361,23 +359,23 @@ from these exercises.</p>
 
 <span class="kn">open</span> <span class="n">Subgroup</span>
 
-<span class="kd">example</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">hST</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">&#8804;</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="n">comap</span> <span class="n">&#966;</span> <span class="n">S</span> <span class="bp">&#8804;</span> <span class="n">comap</span> <span class="n">&#966;</span> <span class="n">T</span> <span class="o">:=</span><span class="kd">by</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">hST</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">&#8804;</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="n">comap</span> <span class="n">&#966;</span> <span class="n">S</span> <span class="bp">&#8804;</span> <span class="n">comap</span> <span class="n">&#966;</span> <span class="n">T</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
-<span class="kd">example</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hST</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">&#8804;</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="n">map</span> <span class="n">&#966;</span> <span class="n">S</span> <span class="bp">&#8804;</span> <span class="n">map</span> <span class="n">&#966;</span> <span class="n">T</span> <span class="o">:=</span><span class="kd">by</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">hST</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">&#8804;</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="n">map</span> <span class="n">&#966;</span> <span class="n">S</span> <span class="bp">&#8804;</span> <span class="n">map</span> <span class="n">&#966;</span> <span class="n">T</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
 <span class="kd">variable</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">K</span><span class="o">]</span>
 
 <span class="c1">-- Remember you can use the `ext` tactic to prove an equality of subgroups.</span>
 <span class="kd">example</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">&#968;</span> <span class="o">:</span> <span class="n">H</span> <span class="bp">&#8594;*</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span>
-  <span class="n">comap</span> <span class="o">(</span><span class="n">&#968;.comp</span> <span class="n">&#966;</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">comap</span> <span class="n">&#966;</span> <span class="o">(</span><span class="n">comap</span> <span class="n">&#968;</span> <span class="n">U</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">comap</span> <span class="o">(</span><span class="n">&#968;.comp</span> <span class="n">&#966;</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">comap</span> <span class="n">&#966;</span> <span class="o">(</span><span class="n">comap</span> <span class="n">&#968;</span> <span class="n">U</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
 <span class="c1">-- Pushing a subgroup along one homomorphism and then another is equal to</span>
-<span class="c1">--  pushing it forward along the composite of the homomorphisms.</span>
+<span class="c1">-- pushing it forward along the composite of the homomorphisms.</span>
 <span class="kd">example</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">&#968;</span> <span class="o">:</span> <span class="n">H</span> <span class="bp">&#8594;*</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span>
-  <span class="n">map</span> <span class="o">(</span><span class="n">&#968;.comp</span> <span class="n">&#966;</span><span class="o">)</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">map</span> <span class="n">&#968;</span> <span class="o">(</span><span class="n">S.map</span> <span class="n">&#966;</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">map</span> <span class="o">(</span><span class="n">&#968;.comp</span> <span class="n">&#966;</span><span class="o">)</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">map</span> <span class="n">&#968;</span> <span class="o">(</span><span class="n">S.map</span> <span class="n">&#966;</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 
 <span class="kd">end</span> <span class="n">exercises</span>
@@ -386,9 +384,9 @@ from these exercises.</p>
 <p>Let us finish this introduction to subgroups in Mathlib with two very classical results.
 Lagrange theorem states the cardinality of a subgroup of a finite group divides the cardinality of
 the group. Sylow&#8217;s first theorem is a famous partial converse to Lagrange&#8217;s theorem.</p>
-<p>Since this corner of Mathlib is partly set up to allow computation, we need to tell
-Lean to use nonconstructive logic, using the following <code class="docutils literal notranslate"><span class="pre">attribute</span></code> command.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">attribute</span> <span class="o">[</span><span class="kn">local</span> <span class="kd">instance</span> <span class="mi">10</span><span class="o">]</span> <span class="n">setFintype</span> <span class="n">Classical.propDecidable</span>
+<p>While this corner of Mathlib is partly set up to allow computation, we can tell
+Lean to use nonconstructive logic anyway using the following <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">scoped</span></code> command.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">scoped</span> <span class="n">Classical</span>
 
 <span class="kn">open</span> <span class="n">Fintype</span>
 
@@ -403,7 +401,7 @@ Lean to use nonconstructive logic, using the following <code class="docutils lit
 </pre></div>
 </div>
 <p>The next two exercises derive a corollary of Lagrange&#8217;s lemma. (This is also already in Mathlib,
-so do not use <cite>exact?</cite> too quickly.)</p>
+so do not use <code class="docutils literal notranslate"><span class="pre">exact?</span></code> too quickly.)</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">lemma</span> <span class="n">eq_bot_iff_card</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">H</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">}</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">H</span><span class="o">]</span> <span class="o">:</span>
     <span class="n">H</span> <span class="bp">=</span> <span class="bp">&#8869;</span> <span class="bp">&#8596;</span> <span class="n">card</span> <span class="n">H</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="k">suffices</span> <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">H</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">&#8596;</span> <span class="bp">&#8707;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">H</span><span class="o">,</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">H</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">x</span> <span class="kd">by</span>
@@ -413,13 +411,13 @@ so do not use <cite>exact?</cite> too quickly.)</p>
 <span class="k">#check</span> <span class="n">card_dvd_of_le</span>
 
 <span class="kd">lemma</span> <span class="n">inf_bot_of_coprime</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="n">K</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">H</span><span class="o">]</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">K</span><span class="o">]</span>
-    <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">card</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="n">Coprime</span> <span class="o">(</span><span class="n">card</span> <span class="n">K</span><span class="o">))</span>  <span class="o">:</span> <span class="n">H</span> <span class="bp">&#8851;</span> <span class="n">K</span> <span class="bp">=</span> <span class="bp">&#8869;</span> <span class="o">:=</span> <span class="kd">by</span>
-    <span class="gr">sorry</span>
+    <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">card</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="n">Coprime</span> <span class="o">(</span><span class="n">card</span> <span class="n">K</span><span class="o">))</span> <span class="o">:</span> <span class="n">H</span> <span class="bp">&#8851;</span> <span class="n">K</span> <span class="bp">=</span> <span class="bp">&#8869;</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
 </pre></div>
 </div>
-</section>
-<section id="concrete-groups">
-<h3><span class="section-number">8.1.4. </span>Concrete groups<a class="headerlink" href="#concrete-groups" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="concrete-groups">
+<h3><span class="section-number">8.1.4. </span>Concrete groups<a class="headerlink" href="#concrete-groups" title="Permalink to this headline">&#61633;</a></h3>
 <p>One can also manipulate concrete groups in Mathlib, although this is typically more complicated
 than working with the abstract theory.
 For instance, given any type <code class="docutils literal notranslate"><span class="pre">X</span></code>, the group of permutations of <code class="docutils literal notranslate"><span class="pre">X</span></code> is <code class="docutils literal notranslate"><span class="pre">Equiv.Perm</span> <span class="pre">X</span></code>.
@@ -429,7 +427,7 @@ generated by cycles if <code class="docutils literal notranslate"><span class="p
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Equiv</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Finite</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">Subgroup.closure</span> <span class="o">{</span><span class="n">&#963;</span> <span class="o">:</span> <span class="n">Perm</span> <span class="n">X</span> <span class="bp">|</span> <span class="n">Perm.IsCycle</span> <span class="n">&#963;</span><span class="o">}</span> <span class="bp">=</span> <span class="bp">&#8868;</span> <span class="o">:=</span>
-<span class="n">Perm.closure_isCycle</span>
+  <span class="n">Perm.closure_isCycle</span>
 </pre></div>
 </div>
 <p>One can be fully concrete and compute actual products of cycles. Below we use the <code class="docutils literal notranslate"><span class="pre">#simp</span></code> command,
@@ -493,9 +491,9 @@ to <code class="docutils literal notranslate"><span class="pre">PresentedGroup.t
 <span class="kd">end</span> <span class="n">FreeGroup</span>
 </pre></div>
 </div>
-</section>
-<section id="group-actions">
-<h3><span class="section-number">8.1.5. </span>Group actions<a class="headerlink" href="#group-actions" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="group-actions">
+<h3><span class="section-number">8.1.5. </span>Group actions<a class="headerlink" href="#group-actions" title="Permalink to this headline">&#61633;</a></h3>
 <p>One important way that group theory interacts with the rest of mathematics is through
 the use of group actions.
 An action of a group <code class="docutils literal notranslate"><span class="pre">G</span></code> on some type <code class="docutils literal notranslate"><span class="pre">X</span></code> is nothing more than a morphism from <code class="docutils literal notranslate"><span class="pre">G</span></code> to
@@ -510,28 +508,28 @@ a point <code class="docutils literal notranslate"><span class="pre">x</span></c
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable</span> <span class="kn">section</span> <span class="n">GroupActions</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">MulAction</span> <span class="n">G</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">g</span> <span class="n">g&#39;</span><span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
-  <span class="n">g</span> <span class="bp">&#8226;</span> <span class="o">(</span><span class="n">g&#39;</span> <span class="bp">&#8226;</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">&#8226;</span> <span class="n">x</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">mul_smul</span> <span class="n">g</span> <span class="n">g&#39;</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+    <span class="n">g</span> <span class="bp">&#8226;</span> <span class="o">(</span><span class="n">g&#39;</span> <span class="bp">&#8226;</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">&#8226;</span> <span class="n">x</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">mul_smul</span> <span class="n">g</span> <span class="n">g&#39;</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
 </pre></div>
 </div>
 <p>There is also a version for additive group called <code class="docutils literal notranslate"><span class="pre">AddAction</span></code>, where the action is denoted by
 <code class="docutils literal notranslate"><span class="pre">+&#7525;</span></code>. This is used for instance in the definition of affine spaces.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">AddGroup</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">AddAction</span> <span class="n">G</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">g</span> <span class="n">g&#39;</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
-  <span class="n">g</span> <span class="bp">+&#7525;</span> <span class="o">(</span><span class="n">g&#39;</span> <span class="bp">+&#7525;</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="bp">+</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">+&#7525;</span> <span class="n">x</span> <span class="o">:=</span>
-<span class="o">(</span><span class="n">add_vadd</span> <span class="n">g</span> <span class="n">g&#39;</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+    <span class="n">g</span> <span class="bp">+&#7525;</span> <span class="o">(</span><span class="n">g&#39;</span> <span class="bp">+&#7525;</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="bp">+</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="bp">+&#7525;</span> <span class="n">x</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">add_vadd</span> <span class="n">g</span> <span class="n">g&#39;</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
 </pre></div>
 </div>
 <p>The underlying group morphism is called <code class="docutils literal notranslate"><span class="pre">MulAction.toPermHom</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">MulAction</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">MulAction</span> <span class="n">G</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">Equiv.Perm</span> <span class="n">X</span> <span class="o">:=</span>
-<span class="n">toPermHom</span> <span class="n">G</span> <span class="n">X</span>
+  <span class="n">toPermHom</span> <span class="n">G</span> <span class="n">X</span>
 </pre></div>
 </div>
 <p>As an illustration let us see how to define the Cayley isomorphism embedding of any group <code class="docutils literal notranslate"><span class="pre">G</span></code> into
 a permutation group, namely <code class="docutils literal notranslate"><span class="pre">Perm</span> <span class="pre">G</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">CayleyIsoMorphism</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8771;*</span> <span class="o">(</span><span class="n">toPermHom</span> <span class="n">G</span> <span class="n">G</span><span class="o">)</span><span class="bp">.</span><span class="n">range</span> <span class="o">:=</span>
-<span class="n">Equiv.Perm.subgroupOfMulAction</span> <span class="n">G</span> <span class="n">G</span>
+  <span class="n">Equiv.Perm.subgroupOfMulAction</span> <span class="n">G</span> <span class="n">G</span>
 </pre></div>
 </div>
 <p>Note that nothing before the above definition required having a group rather than a monoid (or any
@@ -579,7 +577,7 @@ conjugation, using our definition of <code class="docutils literal notranslate">
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span>
 
 <span class="kd">lemma</span> <span class="n">conjugate_one</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">conjugate</span> <span class="mi">1</span> <span class="n">H</span> <span class="bp">=</span> <span class="n">H</span> <span class="o">:=</span> <span class="kd">by</span>
-    <span class="gr">sorry</span>
+  <span class="gr">sorry</span>
 
 <span class="kd">instance</span> <span class="o">:</span> <span class="n">MulAction</span> <span class="n">G</span> <span class="o">(</span><span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="n">where</span>
   <span class="n">smul</span> <span class="o">:=</span> <span class="n">conjugate</span>
@@ -591,33 +589,33 @@ conjugation, using our definition of <code class="docutils literal notranslate">
 <span class="kd">end</span> <span class="n">GroupActions</span>
 </pre></div>
 </div>
-</section>
-<section id="quotient-groups">
-<span id="id1"></span><h3><span class="section-number">8.1.6. </span>Quotient groups<a class="headerlink" href="#quotient-groups" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="quotient-groups">
+<span id="id1"></span><h3><span class="section-number">8.1.6. </span>Quotient groups<a class="headerlink" href="#quotient-groups" title="Permalink to this headline">&#61633;</a></h3>
 <p>In the above discussion of subgroups acting on groups, we saw the quotient <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">&#10744;</span> <span class="pre">H</span></code> appear.
 In general this is only a type. It can be endowed with a group structure such that the quotient
 map is a group morphism if and only if <code class="docutils literal notranslate"><span class="pre">H</span></code> is a normal subgroup (and this group structure is
 then unique).</p>
-<p>The normality assumption is a type class <code class="docutils literal notranslate"><span class="pre">Subgroup.Normal</span></code> so that type class inference can use to
-derive the group structure on the quotient.</p>
+<p>The normality assumption is a type class <code class="docutils literal notranslate"><span class="pre">Subgroup.Normal</span></code> so that type class inference can use it
+to derive the group structure on the quotient.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable</span> <span class="kn">section</span> <span class="n">QuotientGroup</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="n">H.Normal</span><span class="o">]</span> <span class="o">:</span> <span class="n">Group</span> <span class="o">(</span><span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">H</span><span class="o">)</span> <span class="o">:=</span> <span class="n">inferInstance</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="n">H.Normal</span><span class="o">]</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">H</span> <span class="o">:=</span>
-<span class="n">QuotientGroup.mk&#39;</span> <span class="n">H</span>
+  <span class="n">QuotientGroup.mk&#39;</span> <span class="n">H</span>
 </pre></div>
 </div>
 <p>The universal property of quotient groups is accessed through <code class="docutils literal notranslate"><span class="pre">QuotientGroup.lift</span></code>:
 a group morphism <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> descends to <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">&#10744;</span> <span class="pre">N</span></code> as soon as its kernel contains <code class="docutils literal notranslate"><span class="pre">N</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="n">N.Normal</span><span class="o">]</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
-  <span class="o">[</span><span class="n">Group</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">&#8804;</span> <span class="n">MonoidHom.ker</span> <span class="n">&#966;</span><span class="o">)</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">N</span> <span class="bp">&#8594;*</span> <span class="n">M</span> <span class="o">:=</span>
-<span class="n">QuotientGroup.lift</span> <span class="n">N</span> <span class="n">&#966;</span> <span class="n">h</span>
+    <span class="o">[</span><span class="n">Group</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">&#8804;</span> <span class="n">MonoidHom.ker</span> <span class="n">&#966;</span><span class="o">)</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">N</span> <span class="bp">&#8594;*</span> <span class="n">M</span> <span class="o">:=</span>
+  <span class="n">QuotientGroup.lift</span> <span class="n">N</span> <span class="n">&#966;</span> <span class="n">h</span>
 </pre></div>
 </div>
 <p>The fact that the target group is called <code class="docutils literal notranslate"><span class="pre">M</span></code> is the above snippet is a clue that having a
 monoid structure on <code class="docutils literal notranslate"><span class="pre">M</span></code> would be enough.</p>
-<p>An important special case is when <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">ker</span> <span class="pre">&#966;</span></code> In that case the descended morphism is
+<p>An important special case is when <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">ker</span> <span class="pre">&#966;</span></code>. In that case the descended morphism is
 injective and we get a group isomorphism onto its image. This result is often called
 the first isomorphism theorem.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">&#966;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8594;*</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span>
@@ -643,7 +641,7 @@ involve an existential quantifier.</p>
 is not enough to make the corresponding quotients equal. However the universal properties does give
 an isomorphism in this case.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">}</span> <span class="o">[</span><span class="n">M.Normal</span><span class="o">]</span>
-  <span class="o">[</span><span class="n">N.Normal</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">=</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">M</span> <span class="bp">&#8771;*</span> <span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">QuotientGroup.quotientMulEquivOfEq</span>  <span class="n">h</span>
+    <span class="o">[</span><span class="n">N.Normal</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">=</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">M</span> <span class="bp">&#8771;*</span> <span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">QuotientGroup.quotientMulEquivOfEq</span> <span class="n">h</span>
 </pre></div>
 </div>
 <p>As a final series of exercises for this section, we will prove that if <code class="docutils literal notranslate"><span class="pre">H</span></code> and <code class="docutils literal notranslate"><span class="pre">K</span></code> are disjoint
@@ -653,7 +651,7 @@ then <code class="docutils literal notranslate"><span class="pre">G</span></code
 <p>We start with playing a bit with Lagrange&#8217;s lemma, without assuming the subgroups are normal
 or disjoint.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span>
-<span class="kd">variable</span>  <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">H</span> <span class="n">K</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">}</span>
+<span class="kd">variable</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Group</span> <span class="n">G</span><span class="o">]</span> <span class="o">{</span><span class="n">H</span> <span class="n">K</span> <span class="o">:</span> <span class="n">Subgroup</span> <span class="n">G</span><span class="o">}</span>
 
 <span class="kn">open</span> <span class="n">MonoidHom</span>
 
@@ -662,7 +660,7 @@ or disjoint.</p>
 <span class="k">#check</span> <span class="n">Subgroup.index_mul_card</span>
 <span class="k">#check</span> <span class="n">Nat.eq_of_mul_eq_mul_right</span>
 
-<span class="kd">lemma</span> <span class="n">aux_card_eq</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">card</span> <span class="n">G</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">H</span> <span class="bp">*</span> <span class="n">card</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="n">card</span> <span class="o">(</span><span class="n">G</span><span class="bp">&#10744;</span><span class="n">H</span><span class="o">)</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">K</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">lemma</span> <span class="n">aux_card_eq</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">card</span> <span class="n">G</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">H</span> <span class="bp">*</span> <span class="n">card</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="n">card</span> <span class="o">(</span><span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">H</span><span class="o">)</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">K</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
@@ -675,14 +673,14 @@ condition. Now we construct the first building block of the desired isomorphism.
 <span class="k">#check</span> <span class="n">restrict</span>
 <span class="k">#check</span> <span class="n">ker_restrict</span>
 
-<span class="kd">def</span> <span class="n">iso&#8321;</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Disjoint</span> <span class="n">H</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">card</span> <span class="n">G</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">H</span> <span class="bp">*</span> <span class="n">card</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">&#8771;*</span> <span class="n">G</span><span class="bp">&#10744;</span><span class="n">H</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">def</span> <span class="n">iso&#8321;</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Disjoint</span> <span class="n">H</span> <span class="n">K</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">card</span> <span class="n">G</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">H</span> <span class="bp">*</span> <span class="n">card</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">&#8771;*</span> <span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">H</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
 <p>Now we can define our second building block.
 We will need <code class="docutils literal notranslate"><span class="pre">MonoidHom.prod</span></code>, which builds a morphism from <code class="docutils literal notranslate"><span class="pre">G&#8320;</span></code> to <code class="docutils literal notranslate"><span class="pre">G&#8321;</span> <span class="pre">&#215;</span> <span class="pre">G&#8322;</span></code> out of
 morphisms from <code class="docutils literal notranslate"><span class="pre">G&#8320;</span></code> to <code class="docutils literal notranslate"><span class="pre">G&#8321;</span></code> and <code class="docutils literal notranslate"><span class="pre">G&#8322;</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">iso&#8322;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8771;*</span> <span class="o">(</span><span class="n">G</span><span class="bp">&#10744;</span><span class="n">K</span><span class="o">)</span> <span class="bp">&#215;</span> <span class="o">(</span><span class="n">G</span><span class="bp">&#10744;</span><span class="n">H</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">iso&#8322;</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">&#8771;*</span> <span class="o">(</span><span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">K</span><span class="o">)</span> <span class="bp">&#215;</span> <span class="o">(</span><span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">H</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
@@ -693,32 +691,32 @@ morphisms from <code class="docutils literal notranslate"><span class="pre">G&#8
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="rings">
-<span id="id2"></span><h2><span class="section-number">8.2. </span>Rings<a class="headerlink" href="#rings" title="Permalink to this heading">&#61633;</a></h2>
-<section id="rings-their-units-morphisms-and-subrings">
-<span id="index-4"></span><h3><span class="section-number">8.2.1. </span>Rings, their units, morphisms and subrings<a class="headerlink" href="#rings-their-units-morphisms-and-subrings" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+</div>
+<div class="section" id="rings">
+<span id="id2"></span><h2><span class="section-number">8.2. </span>Rings<a class="headerlink" href="#rings" title="Permalink to this headline">&#61633;</a></h2>
+<div class="section" id="rings-their-units-morphisms-and-subrings">
+<span id="index-4"></span><h3><span class="section-number">8.2.1. </span>Rings, their units, morphisms and subrings<a class="headerlink" href="#rings-their-units-morphisms-and-subrings" title="Permalink to this headline">&#61633;</a></h3>
 <p>The type of ring structures on a type <code class="docutils literal notranslate"><span class="pre">R</span></code> is <code class="docutils literal notranslate"><span class="pre">Ring</span> <span class="pre">R</span></code>. The variant where multiplication is
 assumed to be commutative is <code class="docutils literal notranslate"><span class="pre">CommRing</span> <span class="pre">R</span></code>. We have already seen that the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic will
 prove any equality that follows from the axioms of a commutative ring.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span><span class="bp">*</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
 </pre></div>
 </div>
-<p>More exotic variants do not require that the addition on <code class="docutils literal notranslate"><span class="pre">R</span></code>  forms a group but only an additive
+<p>More exotic variants do not require that the addition on <code class="docutils literal notranslate"><span class="pre">R</span></code> forms a group but only an additive
 monoid. The corresponding type classes are <code class="docutils literal notranslate"><span class="pre">Semiring</span> <span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">CommSemiring</span> <span class="pre">R</span></code>.
 The type of natural numbers is an important instance of <code class="docutils literal notranslate"><span class="pre">CommSemiring</span> <span class="pre">R</span></code>, as is any type
 of functions taking values in the natural numbers.
 Another important example is the type of ideals in a ring, which will be discussed below.
 The name of the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic is doubly misleading, since it assumes commutativity but works
 in semirings as well. In other words, it applies to any <code class="docutils literal notranslate"><span class="pre">CommSemiring</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span><span class="bp">*</span><span class="n">x</span><span class="bp">*</span><span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">ring</span>
 </pre></div>
 </div>
 <p>There are also versions of the ring and semiring classes that do not assume the existence of a
 multiplicative unit or
 the associativity of multiplication. We will not discuss those here.</p>
-<p>Some concepts that are traditionally taught in an introduction to  ring theory are actually about
+<p>Some concepts that are traditionally taught in an introduction to ring theory are actually about
 the underlying multiplicative monoid.
 A prominent example is the definition of the units of a ring. Every (multiplicative) monoid <code class="docutils literal notranslate"><span class="pre">M</span></code>
 has a predicate <code class="docutils literal notranslate"><span class="pre">IsUnit</span> <span class="pre">:</span> <span class="pre">M</span> <span class="pre">&#8594;</span> <span class="pre">Prop</span></code> asserting existence of a two-sided inverse, a
@@ -731,7 +729,7 @@ In the commutative case, one also has <code class="docutils literal notranslate"
 which builds <code class="docutils literal notranslate"><span class="pre">x</span></code> seen as unit.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="bp">&#739;</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">&#8744;</span> <span class="n">x</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="o">:=</span> <span class="n">Int.units_eq_one_or</span> <span class="n">x</span>
 
-<span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="bp">&#739;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span><span class="bp">*</span><span class="n">x</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">Units.mul_inv</span> <span class="n">x</span>
+<span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="bp">&#739;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">&#8315;&#185;</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">Units.mul_inv</span> <span class="n">x</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">Group</span> <span class="n">M</span><span class="bp">&#739;</span> <span class="o">:=</span> <span class="n">inferInstance</span>
 </pre></div>
@@ -745,7 +743,7 @@ with notation <code class="docutils literal notranslate"><span class="pre">R</sp
   <span class="n">Units.map</span> <span class="n">f</span>
 </pre></div>
 </div>
-<p>The isormophism variant is <code class="docutils literal notranslate"><span class="pre">RingEquiv</span></code>, with notation <code class="docutils literal notranslate"><span class="pre">&#8771;+*</span></code>.</p>
+<p>The isomorphism variant is <code class="docutils literal notranslate"><span class="pre">RingEquiv</span></code>, with notation <code class="docutils literal notranslate"><span class="pre">&#8771;+*</span></code>.</p>
 <p>As with submonoids and subgroups, there is a <code class="docutils literal notranslate"><span class="pre">Subring</span> <span class="pre">R</span></code> type for subrings of a ring <code class="docutils literal notranslate"><span class="pre">R</span></code>,
 but this type is a lot less useful than the type of subgroups since one cannot quotient a ring by
 a subring.</p>
@@ -753,9 +751,9 @@ a subring.</p>
 </pre></div>
 </div>
 <p>Also notice that <code class="docutils literal notranslate"><span class="pre">RingHom.range</span></code> produces a subring.</p>
-</section>
-<section id="ideals-and-quotients">
-<h3><span class="section-number">8.2.2. </span>Ideals and quotients<a class="headerlink" href="#ideals-and-quotients" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="ideals-and-quotients">
+<h3><span class="section-number">8.2.2. </span>Ideals and quotients<a class="headerlink" href="#ideals-and-quotients" title="Permalink to this headline">&#61633;</a></h3>
 <p>For historical reasons, Mathlib only has a theory of ideals for commutative rings.
 (The ring library was originally developed to make quick progress toward the foundations of modern
 algebraic geometry.) So in this section we will work with commutative (semi)rings.
@@ -765,7 +763,7 @@ safely ignored since most (but not all) relevant lemmas are restated in the spec
 ideals. But anonymous projection notation won&#8217;t always work as expected. For instance,
 one cannot replace <code class="docutils literal notranslate"><span class="pre">Ideal.Quotient.mk</span> <span class="pre">I</span></code> by <code class="docutils literal notranslate"><span class="pre">I.Quotient.mk</span></code> in the snippet below because
 the parser immediately replaces <code class="docutils literal notranslate"><span class="pre">Ideal</span> <span class="pre">R</span></code> with <code class="docutils literal notranslate"><span class="pre">Submodule</span> <span class="pre">R</span> <span class="pre">R</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">Ideal</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">&#8594;+*</span> <span class="n">R</span><span class="bp">&#10744;</span><span class="n">I</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">Ideal</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">&#8594;+*</span> <span class="n">R</span> <span class="bp">&#10744;</span> <span class="n">I</span> <span class="o">:=</span>
   <span class="n">Ideal.Quotient.mk</span> <span class="n">I</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="n">Ideal</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span>
@@ -827,7 +825,7 @@ your font, those can be pretty hard to distinguish.</p>
   <span class="n">Ideal.quotientInfRingEquivPiQuotient</span> <span class="n">f</span> <span class="n">hf</span>
 </pre></div>
 </div>
-<p>The elementary version of the Chinese remainder theorem, a statement about <code class="docutils literal notranslate"><span class="pre">Zmod</span></code>, can be easily
+<p>The elementary version of the Chinese remainder theorem, a statement about <code class="docutils literal notranslate"><span class="pre">ZMod</span></code>, can be easily
 deduced from the previous one:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">BigOperators</span> <span class="n">PiNotation</span>
 
@@ -881,7 +879,7 @@ of our <code class="docutils literal notranslate"><span class="pre">chineseMap</
 </div>
 <p>We take the opportunity to use induction on <code class="docutils literal notranslate"><span class="pre">Finset</span></code>. Relevant lemmas on <code class="docutils literal notranslate"><span class="pre">Finset</span></code> are given
 below.
-Remember that the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic work for semirings and that the ideals of a ring form a semiring.</p>
+Remember that the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic works for semirings and that the ideals of a ring form a semiring.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Finset.mem_insert_of_mem</span>
 <span class="k">#check</span> <span class="n">Finset.mem_insert_self</span>
 
@@ -896,10 +894,10 @@ Remember that the <code class="docutils literal notranslate"><span class="pre">r
       <span class="n">rw</span> <span class="o">[</span><span class="n">Finset.iInf_insert</span><span class="o">,</span> <span class="n">inf_comm</span><span class="o">,</span> <span class="n">one_eq_top</span><span class="o">,</span> <span class="n">eq_top_iff</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">one_eq_top</span><span class="o">]</span>
       <span class="n">set</span> <span class="n">K</span> <span class="o">:=</span> <span class="bp">&#10757;</span> <span class="n">j</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">J</span> <span class="n">j</span>
       <span class="k">calc</span>
-        <span class="mi">1</span> <span class="bp">=</span> <span class="n">I</span> <span class="bp">+</span> <span class="n">K</span>            <span class="o">:=</span> <span class="gr">sorry</span>
-        <span class="n">_</span> <span class="bp">=</span> <span class="n">I</span> <span class="bp">+</span> <span class="n">K</span><span class="bp">*</span><span class="o">(</span><span class="n">I</span> <span class="bp">+</span> <span class="n">J</span> <span class="n">i</span><span class="o">)</span>  <span class="o">:=</span> <span class="gr">sorry</span>
-        <span class="n">_</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span><span class="bp">+</span><span class="n">K</span><span class="o">)</span><span class="bp">*</span><span class="n">I</span> <span class="bp">+</span> <span class="n">K</span><span class="bp">*</span><span class="n">J</span> <span class="n">i</span>  <span class="o">:=</span> <span class="gr">sorry</span>
-        <span class="n">_</span> <span class="bp">&#8804;</span> <span class="n">I</span> <span class="bp">+</span> <span class="n">K</span> <span class="bp">&#8851;</span> <span class="n">J</span> <span class="n">i</span>      <span class="o">:=</span> <span class="gr">sorry</span>
+        <span class="mi">1</span> <span class="bp">=</span> <span class="n">I</span> <span class="bp">+</span> <span class="n">K</span>                  <span class="o">:=</span> <span class="gr">sorry</span>
+        <span class="n">_</span> <span class="bp">=</span> <span class="n">I</span> <span class="bp">+</span> <span class="n">K</span> <span class="bp">*</span> <span class="o">(</span><span class="n">I</span> <span class="bp">+</span> <span class="n">J</span> <span class="n">i</span><span class="o">)</span>      <span class="o">:=</span> <span class="gr">sorry</span>
+        <span class="n">_</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">K</span><span class="o">)</span> <span class="bp">*</span> <span class="n">I</span> <span class="bp">+</span> <span class="n">K</span> <span class="bp">*</span> <span class="n">J</span> <span class="n">i</span>  <span class="o">:=</span> <span class="gr">sorry</span>
+        <span class="n">_</span> <span class="bp">&#8804;</span> <span class="n">I</span> <span class="bp">+</span> <span class="n">K</span> <span class="bp">&#8851;</span> <span class="n">J</span> <span class="n">i</span>            <span class="o">:=</span> <span class="gr">sorry</span>
 </pre></div>
 </div>
 <p>We can now prove surjectivity of the map appearing in the Chinese remainder theorem.</p>
@@ -914,25 +912,25 @@ Remember that the <code class="docutils literal notranslate"><span class="pre">r
       <span class="gr">sorry</span>
     <span class="gr">sorry</span>
   <span class="n">choose</span> <span class="n">e</span> <span class="n">he</span> <span class="n">using</span> <span class="n">key</span>
-  <span class="n">use</span> <span class="n">mk</span> <span class="n">_</span> <span class="o">(</span><span class="bp">&#8721;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="bp">*</span><span class="n">e</span> <span class="n">i</span><span class="o">)</span>
+  <span class="n">use</span> <span class="n">mk</span> <span class="n">_</span> <span class="o">(</span><span class="bp">&#8721;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">e</span> <span class="n">i</span><span class="o">)</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
 <p>Now all the pieces come together in the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable</span> <span class="kd">def</span> <span class="n">chineseIso</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">&#953;</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">Ideal</span> <span class="n">R</span><span class="o">)</span>
-    <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="bp">&#8800;</span> <span class="n">j</span> <span class="bp">&#8594;</span> <span class="n">IsCoprime</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">j</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">R</span> <span class="bp">&#10744;</span> <span class="bp">&#10757;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8771;+*</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">R</span> <span class="bp">&#10744;</span> <span class="n">f</span> <span class="n">i</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="bp">&#8800;</span> <span class="n">j</span> <span class="bp">&#8594;</span> <span class="n">IsCoprime</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">j</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">R</span> <span class="bp">&#10744;</span> <span class="bp">&#10757;</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8771;+*</span> <span class="bp">&#928;</span> <span class="n">i</span><span class="o">,</span> <span class="n">R</span> <span class="bp">&#10744;</span> <span class="n">f</span> <span class="n">i</span> <span class="o">:=</span>
   <span class="o">{</span> <span class="n">Equiv.ofBijective</span> <span class="n">_</span> <span class="o">&#10216;</span><span class="n">chineseMap_inj</span> <span class="n">f</span><span class="o">,</span> <span class="n">chineseMap_surj</span> <span class="n">hf</span><span class="o">&#10217;,</span>
     <span class="n">chineseMap</span> <span class="n">f</span> <span class="k">with</span> <span class="o">}</span>
 </pre></div>
 </div>
-</section>
-<section id="algebras-and-polynomials">
-<h3><span class="section-number">8.2.3. </span>Algebras and polynomials<a class="headerlink" href="#algebras-and-polynomials" title="Permalink to this heading">&#61633;</a></h3>
-<p>Given a commutative (semi)ring <code class="docutils literal notranslate"><span class="pre">R</span></code>, an <em>algebra over ``R``</em> is a semiring <code class="docutils literal notranslate"><span class="pre">A</span></code> equipped
+</div>
+<div class="section" id="algebras-and-polynomials">
+<h3><span class="section-number">8.2.3. </span>Algebras and polynomials<a class="headerlink" href="#algebras-and-polynomials" title="Permalink to this headline">&#61633;</a></h3>
+<p>Given a commutative (semi)ring <code class="docutils literal notranslate"><span class="pre">R</span></code>, an <em>algebra over</em> <code class="docutils literal notranslate"><span class="pre">R</span></code> is a semiring <code class="docutils literal notranslate"><span class="pre">A</span></code> equipped
 with a ring morphism whose image commutes with every element of <code class="docutils literal notranslate"><span class="pre">A</span></code>. This is encoded as
 a type class <code class="docutils literal notranslate"><span class="pre">Algebra</span> <span class="pre">R</span> <span class="pre">A</span></code>.
 The morphism from <code class="docutils literal notranslate"><span class="pre">R</span></code> to <code class="docutils literal notranslate"><span class="pre">A</span></code> is called the structure map and is denoted
-<code class="docutils literal notranslate"><span class="pre">algebraMap</span> <span class="pre">R</span> <span class="pre">A</span> <span class="pre">:</span> <span class="pre">R</span> <span class="pre">&#8594;*+</span> <span class="pre">A</span></code> in Lean.
+<code class="docutils literal notranslate"><span class="pre">algebraMap</span> <span class="pre">R</span> <span class="pre">A</span> <span class="pre">:</span> <span class="pre">R</span> <span class="pre">&#8594;+*</span> <span class="pre">A</span></code> in Lean.
 Multiplication of <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">:</span> <span class="pre">A</span></code> by <code class="docutils literal notranslate"><span class="pre">algebraMap</span> <span class="pre">R</span> <span class="pre">A</span> <span class="pre">r</span></code> for some <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">:</span> <span class="pre">R</span></code> is called the scalar
 multiplication of <code class="docutils literal notranslate"><span class="pre">a</span></code> by <code class="docutils literal notranslate"><span class="pre">r</span></code> and denoted by <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">&#8226;</span> <span class="pre">a</span></code>.
 Note that this notion of algebra is sometimes called an <em>associative unital algebra</em> to emphasize the
@@ -973,15 +971,15 @@ algebra can be inferred from our use of <code class="docutils literal notranslat
 <p>Because <code class="docutils literal notranslate"><span class="pre">C</span></code> is a ring morphism from <code class="docutils literal notranslate"><span class="pre">R</span></code> to <code class="docutils literal notranslate"><span class="pre">R[X]</span></code>, we can use all ring morphisms lemmas
 such as <code class="docutils literal notranslate"><span class="pre">map_zero</span></code>, <code class="docutils literal notranslate"><span class="pre">map_one</span></code>, <code class="docutils literal notranslate"><span class="pre">map_mul</span></code>, and <code class="docutils literal notranslate"><span class="pre">map_pow</span></code> before computing in the ring
 <code class="docutils literal notranslate"><span class="pre">R[X]</span></code>. For example:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">+</span> <span class="n">C</span> <span class="n">r</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">r</span><span class="o">)</span> <span class="bp">=</span> <span class="n">X</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">C</span> <span class="o">(</span><span class="n">r</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">+</span> <span class="n">C</span> <span class="n">r</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">r</span><span class="o">)</span> <span class="bp">=</span> <span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">-</span> <span class="n">C</span> <span class="o">(</span><span class="n">r</span> <span class="bp">^</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">C.map_pow</span><span class="o">]</span>
   <span class="n">ring</span>
 </pre></div>
 </div>
 <p>You can access coefficients using <code class="docutils literal notranslate"><span class="pre">Polynomial.coeff</span></code></p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">](</span><span class="n">r</span><span class="o">:</span><span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">C</span> <span class="n">r</span><span class="o">)</span><span class="bp">.</span><span class="n">coeff</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span><span class="o">:</span><span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">C</span> <span class="n">r</span><span class="o">)</span><span class="bp">.</span><span class="n">coeff</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
 
-<span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span><span class="bp">*</span><span class="n">X</span> <span class="bp">+</span> <span class="n">C</span> <span class="mi">3</span> <span class="o">:</span> <span class="n">R</span><span class="o">[</span><span class="n">X</span><span class="o">])</span><span class="bp">.</span><span class="n">coeff</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+<span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">X</span> <span class="bp">+</span> <span class="n">C</span> <span class="mi">3</span> <span class="o">:</span> <span class="n">R</span><span class="o">[</span><span class="n">X</span><span class="o">])</span><span class="bp">.</span><span class="n">coeff</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
 </pre></div>
 </div>
 <p>Defining the degree of a polynomial is always tricky because of the special case of the zero
@@ -1020,7 +1018,7 @@ using <code class="docutils literal notranslate"><span class="pre">Polynomial.ev
 <span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">r</span><span class="o">)</span><span class="bp">.</span><span class="n">eval</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
 </pre></div>
 </div>
-<p>In particular, there is a predicate, <code class="docutils literal notranslate"><span class="pre">IsRoot</span></code>, that hold of elements <code class="docutils literal notranslate"><span class="pre">r</span></code> in <code class="docutils literal notranslate"><span class="pre">R</span></code> where a
+<p>In particular, there is a predicate, <code class="docutils literal notranslate"><span class="pre">IsRoot</span></code>, that holds for elements <code class="docutils literal notranslate"><span class="pre">r</span></code> in <code class="docutils literal notranslate"><span class="pre">R</span></code> where a
 polynomial vanishes.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">R</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">IsRoot</span> <span class="n">P</span> <span class="n">r</span> <span class="bp">&#8596;</span> <span class="n">P.eval</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">Iff.rfl</span>
 </pre></div>
@@ -1036,19 +1034,19 @@ since otherwise the definition does not have good properties.</p>
   <span class="n">roots_X_sub_C</span> <span class="n">r</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">CommRing</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">IsDomain</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">):</span>
-    <span class="o">((</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">r</span><span class="o">)</span><span class="bp">^</span><span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">roots</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">&#8226;</span> <span class="o">{</span><span class="n">r</span><span class="o">}</span> <span class="o">:=</span>
+    <span class="o">((</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">r</span><span class="o">)</span> <span class="bp">^</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">roots</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">&#8226;</span> <span class="o">{</span><span class="n">r</span><span class="o">}</span> <span class="o">:=</span>
   <span class="kd">by</span> <span class="n">simp</span>
 </pre></div>
 </div>
-<p>Both <cite>Polynomial.eval</cite> and <cite>Polynomial.roots</cite> consider only the coefficients ring. They do not
-allow us to say that <code class="docutils literal notranslate"><span class="pre">X^2</span> <span class="pre">-</span> <span class="pre">2</span> <span class="pre">:</span> <span class="pre">&#8474;[X]</span></code> has a root in <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> or that <code class="docutils literal notranslate"><span class="pre">X^2</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">:</span> <span class="pre">&#8477;[X]</span></code> has a root in
+<p>Both <code class="docutils literal notranslate"><span class="pre">Polynomial.eval</span></code> and <code class="docutils literal notranslate"><span class="pre">Polynomial.roots</span></code> consider only the coefficients ring. They do not
+allow us to say that <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">^</span> <span class="pre">2</span> <span class="pre">-</span> <span class="pre">2</span> <span class="pre">:</span> <span class="pre">&#8474;[X]</span></code> has a root in <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> or that <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">^</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">:</span> <span class="pre">&#8477;[X]</span></code> has a root in
 <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code>. For this, we need <code class="docutils literal notranslate"><span class="pre">Polynomial.aeval</span></code>, which will evaluate <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">:</span> <span class="pre">R[X]</span></code> in any <code class="docutils literal notranslate"><span class="pre">R</span></code>-algebra.
 More precisely, given a semiring <code class="docutils literal notranslate"><span class="pre">A</span></code> and an instance of <code class="docutils literal notranslate"><span class="pre">Algebra</span> <span class="pre">R</span> <span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">Polynomial.aeval</span></code> sends
 every element of <code class="docutils literal notranslate"><span class="pre">a</span></code> along the <code class="docutils literal notranslate"><span class="pre">R</span></code>-algebra morphism of evaluation at <code class="docutils literal notranslate"><span class="pre">a</span></code>. Since <code class="docutils literal notranslate"><span class="pre">AlgHom</span></code>
 has a coercion to functions, one can apply it to a polynomial.
 But <code class="docutils literal notranslate"><span class="pre">aeval</span></code> does not have a polynomial as an argument, so one cannot use dot notation like in
 <code class="docutils literal notranslate"><span class="pre">P.eval</span></code> above.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">aeval</span> <span class="n">Complex.I</span> <span class="o">(</span><span class="n">X</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">aeval</span> <span class="n">Complex.I</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
 </pre></div>
 </div>
 <p>The function corresponding to <code class="docutils literal notranslate"><span class="pre">roots</span></code> in this context is <code class="docutils literal notranslate"><span class="pre">aroots</span></code> which takes a polynomial
@@ -1056,7 +1054,7 @@ and then an algebra and outputs a multiset (with the same caveat about the zero 
 for <code class="docutils literal notranslate"><span class="pre">roots</span></code>).</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Complex</span> <span class="n">Polynomial</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="n">aroots</span> <span class="o">(</span><span class="n">X</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="n">&#8450;</span> <span class="bp">=</span> <span class="o">{</span><span class="n">Complex.I</span><span class="o">,</span> <span class="bp">-</span><span class="n">I</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">aroots</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="n">&#8450;</span> <span class="bp">=</span> <span class="o">{</span><span class="n">Complex.I</span><span class="o">,</span> <span class="bp">-</span><span class="n">I</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="k">suffices</span> <span class="n">roots</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8450;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="bp">=</span> <span class="o">{</span><span class="n">I</span><span class="o">,</span> <span class="bp">-</span><span class="n">I</span><span class="o">}</span> <span class="kd">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">aroots_def</span><span class="o">]</span>
   <span class="k">have</span> <span class="n">factored</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8450;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span> <span class="bp">=</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">I</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="o">(</span><span class="bp">-</span><span class="n">I</span><span class="o">))</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="n">rw</span> <span class="o">[</span><span class="n">C_neg</span><span class="o">]</span>
@@ -1078,7 +1076,7 @@ since it does not assume the existence of a <code class="docutils literal notran
 you would expect.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">Complex.ofReal</span> <span class="o">:</span> <span class="n">&#8477;</span> <span class="bp">&#8594;+*</span> <span class="n">&#8450;</span><span class="o">)</span>
 
-<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span><span class="bp">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span><span class="bp">.</span><span class="n">eval&#8322;</span> <span class="n">Complex.ofReal</span> <span class="n">Complex.I</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">[</span><span class="n">X</span><span class="o">])</span><span class="bp">.</span><span class="n">eval&#8322;</span> <span class="n">Complex.ofReal</span> <span class="n">Complex.I</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
 </pre></div>
 </div>
 <p>Let us end by mentioning multivariate polynomials briefly. Given a commutative semiring <code class="docutils literal notranslate"><span class="pre">R</span></code>,
@@ -1101,9 +1099,9 @@ determined by the number of arguments and some type <code class="docutils litera
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">MvPolynomial.eval</span> <span class="bp">!</span><span class="o">[</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">]</span> <span class="n">circleEquation</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">circleEquation</span><span class="o">]</span>
 </pre></div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

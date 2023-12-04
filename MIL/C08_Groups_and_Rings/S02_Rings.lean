@@ -7,13 +7,13 @@ import MIL.Common
 
 noncomputable section
 
-example {R : Type*} [CommRing R] (x y : R) : (x + y)^2 = x^2 + y^2 + 2*x*y := by ring
+example {R : Type*} [CommRing R] (x y : R) : (x + y) ^ 2 = x ^ 2 + y ^ 2 + 2 * x * y := by ring
 
-example (x y : ℕ) : (x + y)^2 = x^2 + y^2 + 2*x*y := by ring
+example (x y : ℕ) : (x + y) ^ 2 = x ^ 2 + y ^ 2 + 2 * x * y := by ring
 
 example (x : ℤˣ) : x = 1 ∨ x = -1 := Int.units_eq_one_or x
 
-example {M : Type*} [Monoid M] (x : Mˣ) : (x : M)*x⁻¹ = 1 := Units.mul_inv x
+example {M : Type*} [Monoid M] (x : Mˣ) : (x : M) * x⁻¹ = 1 := Units.mul_inv x
 
 example {M : Type*} [Monoid M] : Group Mˣ := inferInstance
 
@@ -25,7 +25,7 @@ example {R S : Type*} [Ring R] [Ring S] (f : R →+* S) : Rˣ →* Sˣ :=
 
 example {R : Type*} [Ring R] (S : Subring R) : Ring S := inferInstance
 
-example {R : Type*} [CommRing R] (I : Ideal R) : R →+* R⧸I :=
+example {R : Type*} [CommRing R] (I : Ideal R) : R →+* R ⧸ I :=
   Ideal.Quotient.mk I
 
 example {R : Type*} [CommRing R] {a : R} {I : Ideal R} :
@@ -118,10 +118,10 @@ theorem isCoprime_Inf {I : Ideal R} {J : ι → Ideal R} {s : Finset ι}
       rw [Finset.iInf_insert, inf_comm, one_eq_top, eq_top_iff, ← one_eq_top]
       set K := ⨅ j ∈ s, J j
       calc
-        1 = I + K            := sorry
-        _ = I + K*(I + J i)  := sorry
-        _ = (1+K)*I + K*J i  := sorry
-        _ ≤ I + K ⊓ J i      := sorry
+        1 = I + K                  := sorry
+        _ = I + K * (I + J i)      := sorry
+        _ = (1 + K) * I + K * J i  := sorry
+        _ ≤ I + K ⊓ J i            := sorry
 lemma chineseMap_surj [Fintype ι] {I : ι → Ideal R}
     (hI : ∀ i j, i ≠ j → IsCoprime (I i) (I j)) : Surjective (chineseMap I) := by
   classical
@@ -133,11 +133,11 @@ lemma chineseMap_surj [Fintype ι] {I : ι → Ideal R}
       sorry
     sorry
   choose e he using key
-  use mk _ (∑ i, f i*e i)
+  use mk _ (∑ i, f i * e i)
   sorry
 
 noncomputable def chineseIso [Fintype ι] (f : ι → Ideal R)
-    (hf : ∀ i j, i ≠ j → IsCoprime (f i) (f j)) : (R ⧸ ⨅ i, f i) ≃+* ∀ i, R ⧸ f i :=
+    (hf : ∀ i j, i ≠ j → IsCoprime (f i) (f j)) : (R ⧸ ⨅ i, f i) ≃+* Π i, R ⧸ f i :=
   { Equiv.ofBijective _ ⟨chineseMap_inj f, chineseMap_surj hf⟩,
     chineseMap f with }
 
@@ -158,13 +158,13 @@ example {R : Type*} [CommRing R] : R[X] := X
 
 example {R : Type*} [CommRing R] (r : R) := X - C r
 
-example {R : Type*} [CommRing R] (r : R) : (X + C r) * (X - C r) = X^2 - C (r ^ 2) := by
+example {R : Type*} [CommRing R] (r : R) : (X + C r) * (X - C r) = X ^ 2 - C (r ^ 2) := by
   rw [C.map_pow]
   ring
 
-example {R : Type*} [CommRing R](r:R) : (C r).coeff 0 = r := by simp
+example {R : Type*} [CommRing R] (r:R) : (C r).coeff 0 = r := by simp
 
-example {R : Type*} [CommRing R] : (X^2 + 2*X + C 3 : R[X]).coeff 1 = 2 := by simp
+example {R : Type*} [CommRing R] : (X ^ 2 + 2 * X + C 3 : R[X]).coeff 1 = 2 := by simp
 
 example {R : Type*} [Semiring R] [NoZeroDivisors R] {p q : R[X]} :
     degree (p * q) = degree p + degree q :=
@@ -188,14 +188,14 @@ example {R : Type*} [CommRing R] [IsDomain R] (r : R) : (X - C r).roots = {r} :=
   roots_X_sub_C r
 
 example {R : Type*} [CommRing R] [IsDomain R] (r : R) (n : ℕ):
-    ((X - C r)^n).roots = n • {r} :=
+    ((X - C r) ^ n).roots = n • {r} :=
   by simp
 
-example : aeval Complex.I (X^2 + 1 : ℝ[X]) = 0 := by simp
+example : aeval Complex.I (X ^ 2 + 1 : ℝ[X]) = 0 := by simp
 
 open Complex Polynomial
 
-example : aroots (X^2 + 1 : ℝ[X]) ℂ = {Complex.I, -I} := by
+example : aroots (X ^ 2 + 1 : ℝ[X]) ℂ = {Complex.I, -I} := by
   suffices roots (X ^ 2 + 1 : ℂ[X]) = {I, -I} by simpa [aroots_def]
   have factored : (X ^ 2 + 1 : ℂ[X]) = (X - C I) * (X - C (-I)) := by
     rw [C_neg]
@@ -212,7 +212,7 @@ example : IsAlgClosed ℂ := inferInstance
 
 #check (Complex.ofReal : ℝ →+* ℂ)
 
-example : (X^2 + 1 : ℝ[X]).eval₂ Complex.ofReal Complex.I = 0 := by simp
+example : (X ^ 2 + 1 : ℝ[X]).eval₂ Complex.ofReal Complex.I = 0 := by simp
 
 open MvPolynomial
 

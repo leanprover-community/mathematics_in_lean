@@ -44,10 +44,10 @@ theorem isCoprime_Inf {I : Ideal R} {J : ι → Ideal R} {s : Finset ι}
       rw [Finset.iInf_insert, inf_comm, one_eq_top, eq_top_iff, ← one_eq_top]
       set K := ⨅ j ∈ s, J j
       calc
-        1 = I + K            := (hs fun j hj ↦ hf j (Finset.mem_insert_of_mem hj)).symm
-        _ = I + K*(I + J i)  := by rw [hf i (Finset.mem_insert_self i s), mul_one]
-        _ = (1+K)*I + K*J i  := by ring
-        _ ≤ I + K ⊓ J i      := by gcongr ; apply mul_le_left ; apply mul_le_inf
+        1 = I + K                  := (hs fun j hj ↦ hf j (Finset.mem_insert_of_mem hj)).symm
+        _ = I + K * (I + J i)      := by rw [hf i (Finset.mem_insert_self i s), mul_one]
+        _ = (1 + K) * I + K * J i  := by ring
+        _ ≤ I + K ⊓ J i            := by gcongr ; apply mul_le_left ; apply mul_le_inf
 
 
 lemma chineseMap_surj [Fintype ι] {I : ι → Ideal R}
@@ -67,7 +67,7 @@ lemma chineseMap_surj [Fintype ι] {I : ι → Ideal R}
       rfl
     · exact fun j hj ↦ eq_zero_iff_mem.mpr (he j hj)
   choose e he using key
-  use mk _ (∑ i, f i*e i)
+  use mk _ (∑ i, f i * e i)
   ext i
   rw [chineseMap_mk', map_sum, Fintype.sum_eq_single i]
   · simp [(he i).1, hf]
@@ -75,7 +75,7 @@ lemma chineseMap_surj [Fintype ι] {I : ι → Ideal R}
     simp [(he j).2 i hj.symm]
 
 noncomputable def chineseIso [Fintype ι] (f : ι → Ideal R)
-    (hf : ∀ i j, i ≠ j → IsCoprime (f i) (f j)) : (R ⧸ ⨅ i, f i) ≃+* ∀ i, R ⧸ f i :=
+    (hf : ∀ i j, i ≠ j → IsCoprime (f i) (f j)) : (R ⧸ ⨅ i, f i) ≃+* Π i, R ⧸ f i :=
   { Equiv.ofBijective _ ⟨chineseMap_inj f, chineseMap_surj hf⟩,
     chineseMap f with }
 

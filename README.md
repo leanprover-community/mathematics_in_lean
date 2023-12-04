@@ -40,7 +40,7 @@ At that point, you can open the textbook in a side panel in VS Code as follows:
 
 1. Type `ctrl-shift-P` (`command-shift-P` in macOS).
 
-2. Type `Lean 4: Open Documentation View` in the bar that appears, and then
+2. Type `Lean 4: Docview: Open Docview` in the bar that appears, and then
   press return. (You can press return to select it as soon as it is highlighted
   in the menu.)
 

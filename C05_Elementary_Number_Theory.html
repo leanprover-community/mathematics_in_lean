@@ -738,7 +738,7 @@ Remember that you can hover over it to see its documentation.</p>
   <span class="n">interval_cases</span> <span class="n">m</span> <span class="bp">&lt;;&gt;</span> <span class="n">contradiction</span>
 </pre></div>
 </div>
-<p>Recall that the semicolon after <code class="docutils literal notranslate"><span class="pre">interval_cases</span> <span class="pre">m</span></code> means
+<p id="index-0">Recall that the semicolon after <code class="docutils literal notranslate"><span class="pre">interval_cases</span> <span class="pre">m</span></code> means
 that the next tactic is applied to each of the cases that it generates.
 Yet another option is to use the tactic, <code class="docutils literal notranslate"><span class="pre">decide</span></code>, which tries
 to find a decision procedure to solve the problem.
@@ -1048,7 +1048,7 @@ that result from the application of <code class="docutils literal notranslate"><
   <span class="k">have</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">Nat.mod_lt</span> <span class="n">m</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">)</span>
   <span class="n">interval_cases</span> <span class="n">hm</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hm</span><span class="o">]</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">Nat.mod_lt</span> <span class="n">n</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">)</span>
-  <span class="n">interval_cases</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hn</span><span class="o">]</span>
+  <span class="n">interval_cases</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hn</span><span class="o">]</span> <span class="bp">;</span> <span class="n">decide</span>
 
 <span class="kd">theorem</span> <span class="n">two_le_of_mod_4_eq_3</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">two_le</span> <span class="bp">&lt;;&gt;</span>

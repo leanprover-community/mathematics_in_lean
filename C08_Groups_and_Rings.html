@@ -485,6 +485,7 @@ to <code class="docutils literal notranslate"><span class="pre">PresentedGroup.t
     <span class="bp">&#8704;</span> <span class="n">r</span> <span class="bp">&#8712;</span> <span class="o">({</span><span class="bp">.</span><span class="n">of</span> <span class="o">()</span> <span class="bp">^</span> <span class="mi">3</span><span class="o">}</span> <span class="o">:</span> <span class="n">Set</span> <span class="o">(</span><span class="n">FreeGroup</span> <span class="n">Unit</span><span class="o">)),</span> <span class="n">FreeGroup.lift</span> <span class="n">myMap</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rintro</span> <span class="n">_</span> <span class="n">rfl</span>
   <span class="n">simp</span>
+  <span class="n">decide</span>
 
 <span class="kd">def</span> <span class="n">myNewMorphism</span> <span class="o">:</span> <span class="n">myGroup</span> <span class="bp">&#8594;*</span> <span class="n">Perm</span> <span class="o">(</span><span class="n">Fin</span> <span class="mi">5</span><span class="o">)</span> <span class="o">:=</span> <span class="n">PresentedGroup.toGroup</span> <span class="n">compat_myMap</span>
 

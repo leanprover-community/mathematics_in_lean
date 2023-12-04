@@ -150,7 +150,7 @@ theorem mod_4_eq_3_or_mod_4_eq_3 {m n : ℕ} (h : m * n % 4 = 3) : m % 4 = 3 ∨
   have : m % 4 < 4 := Nat.mod_lt m (by norm_num)
   interval_cases hm : m % 4 <;> simp [hm]
   have : n % 4 < 4 := Nat.mod_lt n (by norm_num)
-  interval_cases hn : n % 4 <;> simp [hn]
+  interval_cases hn : n % 4 <;> simp [hn] ; decide
 
 theorem two_le_of_mod_4_eq_3 {n : ℕ} (h : n % 4 = 3) : 2 ≤ n := by
   apply two_le <;>

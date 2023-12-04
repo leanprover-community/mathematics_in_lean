@@ -191,6 +191,7 @@ lemma compat_myMap :
     ∀ r ∈ ({.of () ^ 3} : Set (FreeGroup Unit)), FreeGroup.lift myMap r = 1 := by
   rintro _ rfl
   simp
+  decide
 
 def myNewMorphism : myGroup →* Perm (Fin 5) := PresentedGroup.toGroup compat_myMap
 

@@ -115,7 +115,7 @@ example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X}
 
 #check HasBasis.tendsto_right_iff
 
-example [TopologicalSpace X] [TopologicalSpace.FirstCountableTopology X]
+example [TopologicalSpace X] [FirstCountableTopology X]
       {s : Set X} {a : X} :
     a ∈ closure s ↔ ∃ u : ℕ → X, (∀ n, u n ∈ s) ∧ Tendsto u atTop (𝓝 a) :=
   mem_closure_iff_seq_limit
@@ -129,7 +129,7 @@ example {s : Set X} :
     IsCompact s ↔ ∀ (F : Filter X) [NeBot F], F ≤ 𝓟 s → ∃ a ∈ s, ClusterPt a F :=
   Iff.rfl
 
-example [TopologicalSpace.FirstCountableTopology X] {s : Set X} {u : ℕ → X} (hs : IsCompact s)
+example [FirstCountableTopology X] {s : Set X} {u : ℕ → X} (hs : IsCompact s)
     (hu : ∀ n, u n ∈ s) : ∃ a ∈ s, ∃ φ : ℕ → ℕ, StrictMono φ ∧ Tendsto (u ∘ φ) atTop (𝓝 a) :=
   hs.tendsto_subseq hu
 

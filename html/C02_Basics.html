@@ -937,17 +937,13 @@ can also finish the job.</p>
 </div>
 <p>Mathlib tends to put spaces around binary operations like <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">^</span></code>,
 but in this example, the more compressed format increases readability.
-There are a number of things worth noticing.
+There are a couple of things worth noticing.
 First, an expression <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#8805;</span> <span class="pre">t</span></code> is definitionally equivalent to <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&#8804;</span> <span class="pre">s</span></code>.
 In principle, this means one should be able to use them interchangeably.
 But some of Lean&#8217;s automation does not recognize the equivalence,
 so Mathlib tends to favor <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code> over <code class="docutils literal notranslate"><span class="pre">&#8805;</span></code>.
-Second, we have used the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic extensively.
+And second, we have used the <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic extensively.
 It is a real timesaver!
-Finally, notice that in the second line of the
-second <code class="docutils literal notranslate"><span class="pre">calc</span></code> proof,
-instead of writing <code class="docutils literal notranslate"><span class="pre">by</span> <span class="pre">exact</span> <span class="pre">add_le_add</span> <span class="pre">(le_refl</span> <span class="pre">_)</span> <span class="pre">h</span></code>,
-we can simply write the proof term <code class="docutils literal notranslate"><span class="pre">add_le_add</span> <span class="pre">(le_refl</span> <span class="pre">_)</span> <span class="pre">h</span></code>.</p>
 <p>In fact, the only cleverness in the proof above is figuring
 out the hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code>.
 Once we have it, the second calculation involves only

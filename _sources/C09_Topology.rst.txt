@@ -12,8 +12,8 @@ The notion of a *limit* is also fundamental.
 We may say that the limit of a function :math:`f(x)` is a value :math:`b`
 as :math:`x` approaches a value :math:`a`,
 or that :math:`f(x)` *converges to* :math:`b` as :math:`x` approaches :math:`a`.
-Equivalently, we may say that a :math:`f(x)` approaches :math:`a` as :math:`x`
-approaches a value :math:`b`, or that it *tends to* :math:`b`
+Equivalently, we may say that a :math:`f(x)` approaches :math:`b` as :math:`x`
+approaches a value :math:`a`, or that it *tends to* :math:`b`
 as :math:`x` tends to :math:`a`.
 We have already begun to consider such notions in :numref:`sequences_and_convergence`.
 

@@ -9,7 +9,7 @@ or as a
 The book is designed to be read as you
 work through examples and exercises,
 using a copy of this repository on your computer.
-Alternatively, you can use Gitpod to run Lean and VS Code in the cloud.
+Alternatively, you can use Gitpod or GitHub Codespaces to run Lean and VS Code in the cloud.
 
 This version of *Mathematics in Lean* is designed for [Lean 4](https://leanprover.github.io/) and
 [Mathlib](https://github.com/leanprover-community/mathlib4).
@@ -53,10 +53,16 @@ followed by `lake exe cache get` inside the `mathematics_in_lean` folder.
 which is why we suggested making a copy.)
 
 
-## To use this repository with Gitpod
+## To use this repository with Gitpod or GitHub Codespaces
 
 If you have a Gitpod account or are willing to sign up for one,
 just point your browser to [https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean](https://gitpod.io/#/https://github.com/leanprover-community/mathematics_in_lean).
+
+Alternatively,
+[fork this repository on GitHub](https://github.com/leanprover-community/mathematics_in_lean/fork)
+to create a copy of it in your own GitHub account.
+Then use the green "Code" button and create a new "Codespace" on main.
+
 This creates a virtual machine in the cloud,
 and installs Lean and Mathlib.
 It then presents you with a VS Code window, running in a virtual
@@ -66,13 +72,23 @@ in step 5 in the last section.
 You can update the repository by opening a terminal in the browser
 and typing `git pull` followed by `lake exe cache get` as above.
 
-Gitpod gives you 50 free hours every month.
-When you are done working, choose `Stop workspace` from the menu on the left.
-The workspace should also stop automatically
-30 minutes after the last interaction or 3 minutes after closing the tab.
+Either service gives you a limited number of free hours every month.
+When you are done working:
 
-To restart a previous workspace, go to [https://gitpod.io/workspaces/](https://gitpod.io/workspaces/).
-If you change the filter from Active to All, you will see all your recent workspaces. You can pin a workspace to keep it on the list of active ones.
+- Gitpod: choose `Stop workspace` from the menu on the left.
+- GitHub Codespaces: press `Ctrl/Cmd+Shift+P` on your keyboard and type
+   `stop current codespace`
+
+If you forget, don't worry: the virutal machine will stop itself after a certain
+amount of time of inactivity.
+
+To restart a previous workspace:
+
+- Gitpod: go to <https://gitpod.io/workspaces/>.
+   If you change the filter from Active to All, you will see all your recent workspaces.
+   You can pin a workspace to keep it on the list of active ones.
+- GitHub Codespaces: visit <https://github.com/codespaces> and reopen your codespace
+  for your fork of this repository.
 
 ## Contributing
 

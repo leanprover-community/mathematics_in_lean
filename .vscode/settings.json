@@ -18,6 +18,8 @@
         "mathematics_in_lean.pdf": true,
         "MIL.lean": true,
         "README.md":true,
+	".lake": true,
+	".devcontainer": true
     },
     "editor.minimap.enabled": false,
     "editor.acceptSuggestionOnEnter": "off",

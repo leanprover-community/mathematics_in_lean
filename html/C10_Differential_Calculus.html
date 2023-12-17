@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>10. Differential Calculus &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +15,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -92,8 +90,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="differential-calculus"></span><section id="index-0">
-<span id="id1"></span><h1><span class="section-number">10. </span>Differential Calculus<a class="headerlink" href="#index-0" title="Permalink to this heading">&#61633;</a></h1>
+  <span class="target" id="differential-calculus"></span><div class="section" id="index-0">
+<span id="id1"></span><h1><span class="section-number">10. </span>Differential Calculus<a class="headerlink" href="#index-0" title="Permalink to this headline">&#61633;</a></h1>
 <p>We now consider the formalization of notions from <em>analysis</em>,
 starting with differentiation in this chapter
 and turning integration and measure theory in the next.
@@ -102,8 +100,8 @@ setting of functions from the real numbers to the real numbers,
 which is familiar from any introductory calculus class.
 In <a class="reference internal" href="#normed-spaces"><span class="std std-numref">Section 10.2</span></a>, we then consider the notion of a derivative in
 a much broader setting.</p>
-<section id="elementary-differential-calculus">
-<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">10.1. </span>Elementary Differential Calculus<a class="headerlink" href="#elementary-differential-calculus" title="Permalink to this heading">&#61633;</a></h2>
+<div class="section" id="elementary-differential-calculus">
+<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">10.1. </span>Elementary Differential Calculus<a class="headerlink" href="#elementary-differential-calculus" title="Permalink to this headline">&#61633;</a></h2>
 <p>Let <code class="docutils literal notranslate"><span class="pre">f</span></code> be a function from the reals to the reals. There is a difference
 between talking about the derivative of <code class="docutils literal notranslate"><span class="pre">f</span></code> at a single point and
 talking about the derivative function.
@@ -176,11 +174,11 @@ seems even weirder.</p>
 <span class="kd">example</span> <span class="o">:</span> <span class="n">deriv</span> <span class="n">sin</span> <span class="n">&#960;</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
 </pre></div>
 </div>
-</section>
-<section id="differential-calculus-in-normed-spaces">
-<span id="normed-spaces"></span><span id="index-2"></span><h2><span class="section-number">10.2. </span>Differential Calculus in Normed Spaces<a class="headerlink" href="#differential-calculus-in-normed-spaces" title="Permalink to this heading">&#61633;</a></h2>
-<section id="id3">
-<h3><span class="section-number">10.2.1. </span>Normed spaces<a class="headerlink" href="#id3" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="differential-calculus-in-normed-spaces">
+<span id="normed-spaces"></span><span id="index-2"></span><h2><span class="section-number">10.2. </span>Differential Calculus in Normed Spaces<a class="headerlink" href="#differential-calculus-in-normed-spaces" title="Permalink to this headline">&#61633;</a></h2>
+<div class="section" id="id3">
+<h3><span class="section-number">10.2.1. </span>Normed spaces<a class="headerlink" href="#id3" title="Permalink to this headline">&#61633;</a></h3>
 <p>Differentiation can be generalized beyond <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> using the notion of a
 <em>normed vector space</em>, which encapsulates both direction and distance.
 We start with the notion of a <em>normed group</em>, which as an additive commutative
@@ -243,9 +241,9 @@ complete as long as the field itself is complete.</p>
   <span class="n">FiniteDimensional.complete</span> <span class="bp">&#120156;</span> <span class="n">E</span>
 </pre></div>
 </div>
-</section>
-<section id="continuous-linear-maps">
-<h3><span class="section-number">10.2.2. </span>Continuous linear maps<a class="headerlink" href="#continuous-linear-maps" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="continuous-linear-maps">
+<h3><span class="section-number">10.2.2. </span>Continuous linear maps<a class="headerlink" href="#continuous-linear-maps" title="Permalink to this headline">&#61633;</a></h3>
 <p>We now turn to the morphisms in the category of normed spaces, namely,
 continuous linear maps.
 In Mathlib, the type of <code class="docutils literal notranslate"><span class="pre">&#120156;</span></code>-linear continuous maps between normed spaces
@@ -325,9 +323,9 @@ Minor ingredients include <code class="docutils literal notranslate"><span class
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</section>
-<section id="asymptotic-comparisons">
-<h3><span class="section-number">10.2.3. </span>Asymptotic comparisons<a class="headerlink" href="#asymptotic-comparisons" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="asymptotic-comparisons">
+<h3><span class="section-number">10.2.3. </span>Asymptotic comparisons<a class="headerlink" href="#asymptotic-comparisons" title="Permalink to this headline">&#61633;</a></h3>
 <p>Defining differentiability also requires asymptotic comparisons.
 Mathlib has an extensive library covering the big O and little o relations,
 whose definitions are shown below.
@@ -353,9 +351,9 @@ Here we will only use little o to define differentiability.</p>
   <span class="n">Iff.rfl</span>
 </pre></div>
 </div>
-</section>
-<section id="differentiability">
-<h3><span class="section-number">10.2.4. </span>Differentiability<a class="headerlink" href="#differentiability" title="Permalink to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="differentiability">
+<h3><span class="section-number">10.2.4. </span>Differentiability<a class="headerlink" href="#differentiability" title="Permalink to this headline">&#61633;</a></h3>
 <p>We are now ready to discuss differentiable functions between normed spaces.
 In analogy the elementary one-dimensional,
 Mathlib defines a predicate <code class="docutils literal notranslate"><span class="pre">HasFDerivAt</span></code> and a function <code class="docutils literal notranslate"><span class="pre">fderiv</span></code>.
@@ -438,9 +436,9 @@ For example, you may want to use one-sided derivatives in the
 one-dimensional setting. The means to do so are found in Mathlib in a more
 general context;
 see <code class="docutils literal notranslate"><span class="pre">HasFDerivWithinAt</span></code> or the even more general <code class="docutils literal notranslate"><span class="pre">HasFDerivAtFilter</span></code>.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

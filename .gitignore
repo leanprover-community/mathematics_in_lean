@@ -1,5 +1,6 @@
 /.vscode
 /build
 /lake-packages
+.lake
 /.cache
 .DS_Store

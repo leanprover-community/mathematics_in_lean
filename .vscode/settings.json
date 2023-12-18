@@ -19,7 +19,8 @@
         "MIL.lean": true,
         "README.md":true,
 	".lake": true,
-	".devcontainer": true
+	".devcontainer": true,
+	".github": true
     },
     "editor.minimap.enabled": false,
     "editor.acceptSuggestionOnEnter": "off",

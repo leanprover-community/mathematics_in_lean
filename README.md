@@ -74,8 +74,8 @@ You can update the repository by opening a terminal in the browser
 and typing `git pull` followed by `lake exe cache get` as above.
 
 Codespaces offers a certain number of free hours per month. When you are done working,
-press `Ctrl/Cmd+Shift+P` on your keyboard, start typing `stop codespace`, and then
-select `Codespaces: Stop Codespace` from the list of options.
+press `Ctrl/Cmd+Shift+P` on your keyboard, start typing `stop current codespace`, and then
+select `Codespaces: Stop Current Codespace` from the list of options.
 If you forget, don't worry: the virtual machine will stop itself after a certain
 amount of time of inactivity.
 

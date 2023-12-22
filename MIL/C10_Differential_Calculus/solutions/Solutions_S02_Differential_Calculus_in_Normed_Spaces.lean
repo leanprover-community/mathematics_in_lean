@@ -1,8 +1,8 @@
 import MIL.Common
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 import Mathlib.Analysis.NormedSpace.FiniteDimension
-import Mathlib.Analysis.Calculus.Inverse
-import Mathlib.Analysis.Calculus.ContDiff.Basic
+import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
+import Mathlib.Analysis.Calculus.ContDiff.IsROrC
 import Mathlib.Analysis.Calculus.FDeriv.Prod
 
 

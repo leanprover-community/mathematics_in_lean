@@ -1,8 +1,8 @@
 import MIL.Common
 import Mathlib.Analysis.NormedSpace.BanachSteinhaus
 import Mathlib.Analysis.NormedSpace.FiniteDimension
-import Mathlib.Analysis.Calculus.Inverse
-import Mathlib.Analysis.Calculus.ContDiff.Basic
+import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
+import Mathlib.Analysis.Calculus.ContDiff.IsROrC
 import Mathlib.Analysis.Calculus.FDeriv.Prod
 
 
@@ -139,7 +139,7 @@ variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type*} [NormedAddCom
 
 example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) :
     HasFDerivAt f f' x₀ ↔ (fun x ↦ f x - f x₀ - f' (x - x₀)) =o[𝓝 x₀] fun x ↦ x - x₀ :=
-  Iff.rfl
+  hasFDerivAtFilter_iff_isLittleO ..
 
 example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) (hff' : HasFDerivAt f f' x₀) : fderiv 𝕜 f x₀ = f' :=
   hff'.fderiv

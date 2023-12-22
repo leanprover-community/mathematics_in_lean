@@ -96,7 +96,7 @@ class Inv₁ (α : Type) where
 @[inherit_doc]
 postfix:max "⁻¹" => Inv₁.inv
 
-class Group₁ (G : Type) extends Monoid₁ G, Inv G where
+class Group₁ (G : Type) extends Monoid₁ G, Inv₁ G where
   inv_dia : ∀ a : G, a⁻¹ ⋄ a = 𝟙
 
 

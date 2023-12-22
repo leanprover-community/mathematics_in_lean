@@ -23,8 +23,7 @@ example (h₀ : d ≤ e) : c + exp (a + d) ≤ c + exp (a + e) := by
 
 example (h : a ≤ b) : log (1 + exp a) ≤ log (1 + exp b) := by
   have h₀ : 0 < 1 + exp a := by linarith [exp_pos a]
-  have h₁ : 0 < 1 + exp b := by linarith [exp_pos b]
-  apply (log_le_log h₀ h₁).mpr
+  apply log_le_log h₀
   apply add_le_add_left (exp_le_exp.mpr h)
 
 -- SOLUTION.

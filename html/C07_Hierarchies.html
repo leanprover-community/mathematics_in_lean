@@ -136,7 +136,7 @@ Let us make sure the first version is indeed usable without any explicit argumen
 </div>
 <p>Remark: in the above example, the argument <code class="docutils literal notranslate"><span class="pre">One&#8321;</span> <span class="pre">&#945;</span></code> is marked as instance-implicit,
 which is a bit silly since this affects only <em>uses</em> of the declaration and declaration created by
-the <code class="docutils literal notranslate"><span class="pre">example</span></code> command cannot be used. However it allows to avoid giving a name to that
+the <code class="docutils literal notranslate"><span class="pre">example</span></code> command cannot be used. However it allows us to avoid giving a name to that
 argument and, more importantly, it starts installing the good habit of marking <code class="docutils literal notranslate"><span class="pre">One&#8321;</span> <span class="pre">&#945;</span></code>
 arguments as instance-implicit.</p>
 <p>Another remark is that all this will work only when Lean knows what is <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>. In the above
@@ -277,7 +277,7 @@ we define a new data-carrying class, and then give it some notation.</p>
 <span class="kd">@[inherit_doc]</span>
 <span class="kd">postfix</span><span class="o">:</span><span class="n">max</span> <span class="s2">&quot;&#8315;&#185;&quot;</span> <span class="bp">=&gt;</span> <span class="n">Inv&#8321;.inv</span>
 
-<span class="kd">class</span> <span class="n">Group&#8321;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Monoid&#8321;</span> <span class="n">G</span><span class="o">,</span> <span class="n">Inv</span> <span class="n">G</span> <span class="n">where</span>
+<span class="kd">class</span> <span class="n">Group&#8321;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kd">extends</span> <span class="n">Monoid&#8321;</span> <span class="n">G</span><span class="o">,</span> <span class="n">Inv&#8321;</span> <span class="n">G</span> <span class="n">where</span>
   <span class="n">inv_dia</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">a</span><span class="bp">&#8315;&#185;</span> <span class="bp">&#8900;</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">&#120793;</span>
 </pre></div>
 </div>
@@ -727,7 +727,7 @@ function instance yet. Let us try to do it now.</p>
   <span class="n">coe</span> <span class="o">:=</span> <span class="n">MonoidHomClass&#8321;.toFun</span>
 </pre></div>
 </div>
-<p>Making the an instance would be bad. When faced with something like <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span></code> where the type of <code class="docutils literal notranslate"><span class="pre">f</span></code>
+<p>Making this an instance would be bad. When faced with something like <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span></code> where the type of <code class="docutils literal notranslate"><span class="pre">f</span></code>
 is not a function type, Lean will try to find a <code class="docutils literal notranslate"><span class="pre">CoeFun</span></code> instance to coerce <code class="docutils literal notranslate"><span class="pre">f</span></code> into a function.
 The above function has type:
 <code class="docutils literal notranslate"><span class="pre">{M</span> <span class="pre">N</span> <span class="pre">F</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">&#8594;</span> <span class="pre">[Monoid</span> <span class="pre">M]</span> <span class="pre">&#8594;</span> <span class="pre">[Monoid</span> <span class="pre">N]</span> <span class="pre">&#8594;</span> <span class="pre">[MonoidHomClass&#8321;</span> <span class="pre">F</span> <span class="pre">M</span> <span class="pre">N]</span> <span class="pre">&#8594;</span> <span class="pre">CoeFun</span> <span class="pre">F</span> <span class="pre">(fun</span> <span class="pre">x</span> <span class="pre">&#8614;</span> <span class="pre">M</span> <span class="pre">&#8594;</span> <span class="pre">N)</span></code>
@@ -785,7 +785,7 @@ procedure won&#8217;t be looking for functions, it will be looking for either
 <code class="docutils literal notranslate"><span class="pre">MonoidHom&#8321;</span></code> or <code class="docutils literal notranslate"><span class="pre">RingHom&#8321;</span></code>.</p>
 <p>One remaining issue with our approach is the presence of repetitive code around the <code class="docutils literal notranslate"><span class="pre">toFun</span></code>
 field and the corresponding <code class="docutils literal notranslate"><span class="pre">CoeFun</span></code> instance and <code class="docutils literal notranslate"><span class="pre">coe</span></code> attribute. It would also be better
-to record that this pattern is used only for function with extra properties, meaning that the
+to record that this pattern is used only for functions with extra properties, meaning that the
 coercion to functions should be injective. So Mathlib adds one more layer of abstraction with
 the base class <code class="docutils literal notranslate"><span class="pre">FunLike</span></code>. Let us redefine our <code class="docutils literal notranslate"><span class="pre">MonoidHomClass</span></code> on top of this base layer.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="n">MonoidHomClass&#8323;</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="n">outParam</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">Monoid</span> <span class="n">N</span><span class="o">]</span> <span class="kd">extends</span>
@@ -836,7 +836,7 @@ definitions below.</p>
 <span id="section-hierarchies-subobjects"></span><h2><span class="section-number">7.3. </span>Sub-objects<a class="headerlink" href="#sub-objects" title="Permalink to this headline">&#61633;</a></h2>
 <p>After defining some algebraic structure and its morphisms, the next step is to consider sets
 that inherit this algebraic structure, for instance subgroups or subrings.
-This largely overlaps our previous topic. Indeed a set in <code class="docutils literal notranslate"><span class="pre">X</span></code> is implemented as a function from
+This largely overlaps with our previous topic. Indeed a set in <code class="docutils literal notranslate"><span class="pre">X</span></code> is implemented as a function from
 <code class="docutils literal notranslate"><span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">Prop</span></code> so sub-objects are function satisfying a certain predicate.
 Hence we can reuse of lot of the ideas that led to the <code class="docutils literal notranslate"><span class="pre">FunLike</span></code> class and its descendants.
 We won&#8217;t reuse <code class="docutils literal notranslate"><span class="pre">FunLike</span></code> itself because this would break the abstraction barrier from <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">X</span></code>

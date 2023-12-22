@@ -33,7 +33,7 @@ theorem sb_right_inv {x : α} (hx : x ∉ sbSet f g) : g (invFun g x) = x := by
     sorry
   sorry
 
-theorem sb_injective (hf : Injective f) (hg : Injective g) : Injective (sbFun f g) := by
+theorem sb_injective (hf : Injective f) : Injective (sbFun f g) := by
   set A := sbSet f g with A_def
   set h := sbFun f g with h_def
   intro x₁ x₂
@@ -83,7 +83,7 @@ end
 
 theorem schroeder_bernstein {f : α → β} {g : β → α} (hf : Injective f) (hg : Injective g) :
     ∃ h : α → β, Bijective h :=
-  ⟨sbFun f g, sb_injective f g hf hg, sb_surjective f g hf hg⟩
+  ⟨sbFun f g, sb_injective f g hf, sb_surjective f g hf hg⟩
 
 -- Auxiliary information
 section

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4. Sets and Functions &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +15,6 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -87,8 +85,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="sets-and-functions">
-<span id="id1"></span><h1><span class="section-number">4. </span>Sets and Functions<a class="headerlink" href="#sets-and-functions" title="Permalink to this heading">&#61633;</a></h1>
+  <div class="section" id="sets-and-functions">
+<span id="id1"></span><h1><span class="section-number">4. </span>Sets and Functions<a class="headerlink" href="#sets-and-functions" title="Permalink to this headline">&#61633;</a></h1>
 <p>The vocabulary of sets, relations, and functions provides a uniform
 language for carrying out constructions in all the branches of
 mathematics.
@@ -120,8 +118,8 @@ such as a set of natural numbers or a set of functions
 from real numbers to real numbers.
 The distinction between types and sets takes some getting used to,
 but this chapter will take you through the essentials.</p>
-<section id="sets">
-<span id="id2"></span><h2><span class="section-number">4.1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this heading">&#61633;</a></h2>
+<div class="section" id="sets">
+<span id="id2"></span><h2><span class="section-number">4.1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">&#61633;</a></h2>
 <p id="index-0">If <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is any type, the type <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">&#945;</span></code> consists of sets
 of elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
 This type supports the usual set-theoretic operations and relations.
@@ -557,9 +555,9 @@ and intersection.</p>
 </div>
 <p>In the library, these identities are called
 <code class="docutils literal notranslate"><span class="pre">sUnion_eq_biUnion</span></code> and <code class="docutils literal notranslate"><span class="pre">sInter_eq_biInter</span></code>.</p>
-</section>
-<section id="functions">
-<span id="id3"></span><h2><span class="section-number">4.2. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">&#61633;</a></h2>
+</div>
+<div class="section" id="functions">
+<span id="id3"></span><h2><span class="section-number">4.2. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">&#61633;</a></h2>
 <p>If <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">&#8594;</span> <span class="pre">&#946;</span></code> is a function and  <code class="docutils literal notranslate"><span class="pre">p</span></code> is a set of
 elements of type <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>,
 the library defines <code class="docutils literal notranslate"><span class="pre">preimage</span> <span class="pre">f</span> <span class="pre">p</span></code>, written <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">p</span></code>,
@@ -863,9 +861,9 @@ and then fill in the two lines that are missing.</p>
   <span class="n">contradiction</span>
 </pre></div>
 </div>
-</section>
-<section id="the-schroder-bernstein-theorem">
-<span id="the-schroeder-bernstein-theorem"></span><h2><span class="section-number">4.3. </span>The Schr&#246;der-Bernstein Theorem<a class="headerlink" href="#the-schroder-bernstein-theorem" title="Permalink to this heading">&#61633;</a></h2>
+</div>
+<div class="section" id="the-schroder-bernstein-theorem">
+<span id="the-schroeder-bernstein-theorem"></span><h2><span class="section-number">4.3. </span>The Schr&#246;der-Bernstein Theorem<a class="headerlink" href="#the-schroder-bernstein-theorem" title="Permalink to this headline">&#61633;</a></h2>
 <p>We close this chapter with an elementary but nontrivial theorem of set theory.
 Let <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> be sets.
 (In our formalization, they will actually be types.)
@@ -975,13 +973,13 @@ and a right inverse if <code class="docutils literal notranslate"><span class="p
   <span class="bp">&#8899;</span> <span class="n">n</span><span class="o">,</span> <span class="n">sbAux</span> <span class="n">f</span> <span class="n">g</span> <span class="n">n</span>
 </pre></div>
 </div>
-<p>The definition <code class="docutils literal notranslate"><span class="pre">sb_aux</span></code> is an example of a <em>recursive definition</em>,
+<p>The definition <code class="docutils literal notranslate"><span class="pre">sbAux</span></code> is an example of a <em>recursive definition</em>,
 which we will explain in the next chapter.
 It defines a sequence of sets</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}S_0 &amp;= \alpha &#8726; g(\beta) \\
 S_{n+1} &amp;= g(f(S_n)).\end{split}\]</div>
-<p>The definition <code class="docutils literal notranslate"><span class="pre">sb_set</span></code> corresponds to the set
+<p>The definition <code class="docutils literal notranslate"><span class="pre">sbSet</span></code> corresponds to the set
 <span class="math notranslate nohighlight">\(A = \bigcup_{n \in \mathbb{N}} S_n\)</span> in our proof sketch.
 The function <span class="math notranslate nohighlight">\(h\)</span> described above is now defined as follows:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">sbFun</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="o">:=</span>
@@ -1002,7 +1000,7 @@ such that <code class="docutils literal notranslate"><span class="pre">g</span> 
 <p>Step through the proof below, make sure you understand what is going on,
 and fill in the remaining parts.
 You will need to use <code class="docutils literal notranslate"><span class="pre">invFun_eq</span></code> at the end.
-Notice that rewriting with <code class="docutils literal notranslate"><span class="pre">sb_aux</span></code> here replaces <code class="docutils literal notranslate"><span class="pre">sb_aux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
+Notice that rewriting with <code class="docutils literal notranslate"><span class="pre">sbAux</span></code> here replaces <code class="docutils literal notranslate"><span class="pre">sbAux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
 with the right-hand side of the corresponding defining equation.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_right_inv</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8713;</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span> <span class="o">(</span><span class="n">invFun</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">g</span> <span class="bp">&#39;&#39;</span> <span class="n">univ</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -1037,7 +1035,7 @@ Applying <span class="math notranslate nohighlight">\(g\)</span> to both sides y
 <p>Once again, we encourage you to step through the following proof
 to see how the argument plays out in Lean.
 See if you can finish off the proof using <code class="docutils literal notranslate"><span class="pre">sb_right_inv</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_injective</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">Injective</span> <span class="o">(</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_injective</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">Injective</span> <span class="o">(</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">set</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">A_def</span>
   <span class="n">set</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">h_def</span>
   <span class="n">intro</span> <span class="n">x&#8321;</span> <span class="n">x&#8322;</span>
@@ -1067,7 +1065,7 @@ See if you can finish off the proof using <code class="docutils literal notransl
 </div>
 <p>The proof introduces some new tactics.
 To start with, notice the <code class="docutils literal notranslate"><span class="pre">set</span></code> tactic, which introduces abbreviations
-<code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code> for <code class="docutils literal notranslate"><span class="pre">sb_set</span> <span class="pre">f</span> <span class="pre">g</span></code> and <code class="docutils literal notranslate"><span class="pre">sb_fun</span> <span class="pre">f</span> <span class="pre">g</span></code> respectively.
+<code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">h</span></code> for <code class="docutils literal notranslate"><span class="pre">sbSet</span> <span class="pre">f</span> <span class="pre">g</span></code> and <code class="docutils literal notranslate"><span class="pre">sb_fun</span> <span class="pre">f</span> <span class="pre">g</span></code> respectively.
 We name the corresponding defining equations <code class="docutils literal notranslate"><span class="pre">A_def</span></code> and <code class="docutils literal notranslate"><span class="pre">h_def</span></code>.
 The abbreviations are definitional, which is to say, Lean will sometimes
 unfold them automatically when needed.
@@ -1092,10 +1090,10 @@ In the case where <span class="math notranslate nohighlight">\(g(y)\)</span> is 
 we immediately have <span class="math notranslate nohighlight">\(h(g(y))= y\)</span>, and we are done.</p>
 <p>Once again, we encourage you to step through the proof and fill in
 the missing parts.
-The tactic <code class="docutils literal notranslate"><span class="pre">cases</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">n</span></code> splits on the cases <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sb_aux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
-and <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sb_aux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">n.succ</span></code>.
-In both cases, calling the simplifier with <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">[sb_aux]</span></code>
-applies the corresponding defining equation of <code class="docutils literal notranslate"><span class="pre">sb_aux</span></code>.</p>
+The tactic <code class="docutils literal notranslate"><span class="pre">cases</span> <span class="pre">n</span> <span class="pre">with</span> <span class="pre">n</span></code> splits on the cases <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sbAux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">0</span></code>
+and <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">y</span> <span class="pre">&#8712;</span> <span class="pre">sbAux</span> <span class="pre">f</span> <span class="pre">g</span> <span class="pre">n.succ</span></code>.
+In both cases, calling the simplifier with <code class="docutils literal notranslate"><span class="pre">simp</span> <span class="pre">[sbAux]</span></code>
+applies the corresponding defining equation of <code class="docutils literal notranslate"><span class="pre">sbAux</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">sb_surjective</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">Surjective</span> <span class="o">(</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">set</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">sbSet</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">A_def</span>
   <span class="n">set</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span> <span class="k">with</span> <span class="n">h_def</span>
@@ -1121,11 +1119,11 @@ and the proof uses the fact that <code class="docutils literal notranslate"><spa
 <code class="docutils literal notranslate"><span class="pre">Injective</span> <span class="pre">h</span> <span class="pre">&#8743;</span> <span class="pre">Surjective</span> <span class="pre">h</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">schroeder_bernstein</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">}</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">Injective</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span>
     <span class="bp">&#8707;</span> <span class="n">h</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">,</span> <span class="n">Bijective</span> <span class="n">h</span> <span class="o">:=</span>
-  <span class="o">&#10216;</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">sb_injective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span><span class="o">,</span> <span class="n">sb_surjective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span><span class="o">&#10217;</span>
+  <span class="o">&#10216;</span><span class="n">sbFun</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">sb_injective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span><span class="o">,</span> <span class="n">sb_surjective</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hf</span> <span class="n">hg</span><span class="o">&#10217;</span>
 </pre></div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

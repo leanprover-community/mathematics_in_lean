@@ -8,6 +8,8 @@ variable (x y z : α)
 #check x ≤ y
 #check (le_refl x : x ≤ x)
 #check (le_trans : x ≤ y → y ≤ z → x ≤ z)
+#check (le_antisymm : x ≤ y → y ≤ x → x = y)
+
 
 #check x < y
 #check (lt_irrefl x : ¬x < x)

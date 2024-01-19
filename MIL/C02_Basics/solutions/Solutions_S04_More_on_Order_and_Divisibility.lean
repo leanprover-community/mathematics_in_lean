@@ -12,7 +12,7 @@ variable (a b c d : ℝ)
 
 example : max a b = max b a := by
   apply le_antisymm
-  repeat'
+  repeat
     apply max_le
     apply le_max_right
     apply le_max_left
@@ -84,7 +84,7 @@ example : x ∣ y * x * z := by
   apply dvd_mul_left
 
 example : x ∣ x ^ 2 := by
-   apply dvd_mul_left
+  apply dvd_mul_left
 
 example (h : x ∣ w) : x ∣ y * (x * z) + x ^ 2 + w ^ 2 := by
   apply dvd_add

@@ -24,9 +24,6 @@ example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u := by
   intro x xsu
   exact ⟨h xsu.1, xsu.2⟩
 
-theorem foo (h : s ⊆ t) : s ∩ u ⊆ t ∩ u :=
-  fun x ⟨xs, xu⟩ ↦ ⟨h xs, xu⟩
-
 example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u :=
   fun x ⟨xs, xu⟩ ↦ ⟨h xs, xu⟩
 

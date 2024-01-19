@@ -63,7 +63,7 @@ example : x ∣ y * x * z := by
   apply dvd_mul_left
 
 example : x ∣ x ^ 2 := by
-   apply dvd_mul_left
+  apply dvd_mul_left
 
 example (h : x ∣ w) : x ∣ y * (x * z) + x ^ 2 + w ^ 2 := by
   sorry

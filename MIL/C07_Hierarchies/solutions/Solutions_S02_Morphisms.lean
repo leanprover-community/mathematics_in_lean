@@ -85,7 +85,7 @@ map_inv_of_inv f h
 
 
 class MonoidHomClass₃ (F : Type) (M N : outParam Type) [Monoid M] [Monoid N] extends
-    FunLike F M (fun _ ↦ N) where
+    DFunLike F M (fun _ ↦ N) where
   map_one : ∀ f : F, f 1 = 1
   map_mul : ∀ (f : F) g g', f (g * g') = f g * f g'
 
@@ -106,7 +106,7 @@ structure OrderPresMonoidHom (M N : Type) [Monoid M] [LE M] [Monoid N] [LE N] ex
 MonoidHom₁ M N, OrderPresHom M N
 
 class OrderPresHomClass (F : Type) (α β : outParam Type) [LE α] [LE β]
-extends FunLike F α (fun _ ↦ β) where
+extends DFunLike F α (fun _ ↦ β) where
   le_of_le : ∀ (f : F) a a', a ≤ a' → f a ≤ f a'
 
 instance (α β : Type) [LE α] [LE β] : OrderPresHomClass (OrderPresHom α β) α β where

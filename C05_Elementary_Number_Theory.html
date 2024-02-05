@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>5. Elementary Number Theory &mdash; Mathematics in Lean 0.1 documentation</title>
@@ -13,11 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -76,8 +80,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">5. </span>Elementary Number Theory</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>Elementary Number Theory</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C05_Elementary_Number_Theory.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -88,14 +92,14 @@
            <div itemprop="articleBody">
              
   <section id="elementary-number-theory">
-<span id="number-theory"></span><h1><span class="section-number">5. </span>Elementary Number Theory<a class="headerlink" href="#elementary-number-theory" title="Permalink to this heading">&#61633;</a></h1>
+<span id="number-theory"></span><h1><span class="section-number">5. </span>Elementary Number Theory<a class="headerlink" href="#elementary-number-theory" title="Link to this heading">&#61633;</a></h1>
 <p>In this chapter, we show you how to formalize some elementary
 results in number theory.
 As we deal with more substantive mathematical content,
 the proofs will get longer and more involved,
 building on the skills you have already mastered.</p>
 <section id="irrational-roots">
-<span id="section-irrational-roots"></span><h2><span class="section-number">5.1. </span>Irrational Roots<a class="headerlink" href="#irrational-roots" title="Permalink to this heading">&#61633;</a></h2>
+<span id="section-irrational-roots"></span><h2><span class="section-number">5.1. </span>Irrational Roots<a class="headerlink" href="#irrational-roots" title="Link to this heading">&#61633;</a></h2>
 <p>Let&#8217;s start with a fact known to the ancient Greeks, namely,
 that the square root of 2 is irrational.
 If we suppose otherwise,
@@ -396,7 +400,7 @@ In the next chapter, we will begin to develop the means to
 appreciate the way that Lean supports this sort of generality.</p>
 </section>
 <section id="induction-and-recursion">
-<span id="section-induction-and-recursion"></span><h2><span class="section-number">5.2. </span>Induction and Recursion<a class="headerlink" href="#induction-and-recursion" title="Permalink to this heading">&#61633;</a></h2>
+<span id="section-induction-and-recursion"></span><h2><span class="section-number">5.2. </span>Induction and Recursion<a class="headerlink" href="#induction-and-recursion" title="Link to this heading">&#61633;</a></h2>
 <p>The set of natural numbers <span class="math notranslate nohighlight">\(\mathbb{N} = \{ 0, 1, 2, \ldots \}\)</span>
 is not only fundamentally important in its own right,
 but also a plays a central role in the construction of new mathematical objects.
@@ -701,7 +705,7 @@ The function <code class="docutils literal notranslate"><span class="pre">pred</
 </div>
 </section>
 <section id="infinitely-many-primes">
-<span id="section-infinitely-many-primes"></span><h2><span class="section-number">5.3. </span>Infinitely Many Primes<a class="headerlink" href="#infinitely-many-primes" title="Permalink to this heading">&#61633;</a></h2>
+<span id="section-infinitely-many-primes"></span><h2><span class="section-number">5.3. </span>Infinitely Many Primes<a class="headerlink" href="#infinitely-many-primes" title="Link to this heading">&#61633;</a></h2>
 <p>Let us continue our exploration of induction and recursion with another
 mathematical standard: a proof that there are infinitely many primes.
 One way to formulate this is as the statement that
@@ -767,7 +771,7 @@ that every natural number <span class="math notranslate nohighlight">\(n\)</span
 by showing that for every number <span class="math notranslate nohighlight">\(n\)</span>, if <span class="math notranslate nohighlight">\(P\)</span> holds
 of all values less than <span class="math notranslate nohighlight">\(n\)</span>, it holds at <span class="math notranslate nohighlight">\(n\)</span> as well.
 In Lean, this principle is called <code class="docutils literal notranslate"><span class="pre">Nat.strong_induction_on</span></code>,
-and we can use the <code class="docutils literal notranslate"><span class="pre">with</span></code> keyword to tell the induction tactic
+and we can use the <code class="docutils literal notranslate"><span class="pre">using</span></code> keyword to tell the induction tactic
 to use it.
 Notice that when we do that, there is no base case; it is subsumed
 by the general induction step.</p>
@@ -1050,7 +1054,7 @@ that result from the application of <code class="docutils literal notranslate"><
   <span class="k">have</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">Nat.mod_lt</span> <span class="n">m</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">)</span>
   <span class="n">interval_cases</span> <span class="n">hm</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hm</span><span class="o">]</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">Nat.mod_lt</span> <span class="n">n</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">)</span>
-  <span class="n">interval_cases</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hn</span><span class="o">]</span> <span class="bp">;</span> <span class="n">decide</span>
+  <span class="n">interval_cases</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hn</span><span class="o">]</span>
 
 <span class="kd">theorem</span> <span class="n">two_le_of_mod_4_eq_3</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">two_le</span> <span class="bp">&lt;;&gt;</span>

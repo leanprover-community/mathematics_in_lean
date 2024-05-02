@@ -514,7 +514,8 @@ function.
 It turns out to be easier to start with a proof by cases,
 so that the remainder of the proof starts with the case
 <span class="math notranslate nohighlight">\(n = 1\)</span>.
-See if you can complete the argument with a proof by induction.</p>
+See if you can complete the argument with a proof by induction using <code class="docutils literal notranslate"><span class="pre">pow_succ</span></code>
+or <code class="docutils literal notranslate"><span class="pre">pow_succ'</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">pow_two_le_fac</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">^</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="n">fac</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rcases</span> <span class="n">n</span> <span class="k">with</span> <span class="n">_</span> <span class="bp">|</span> <span class="n">n</span>
   <span class="bp">&#183;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">fac</span><span class="o">]</span>
@@ -613,7 +614,7 @@ because calculations with division generally have side conditions.
   <span class="n">symm</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">Nat.div_eq_of_eq_mul_right</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">2</span><span class="o">)</span>
   <span class="n">induction&#39;</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span>
   <span class="bp">&#183;</span> <span class="n">simp</span>
-  <span class="n">rw</span> <span class="o">[</span><span class="n">Finset.sum_range_succ</span><span class="o">,</span> <span class="n">mul_add</span> <span class="mi">2</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">ih</span><span class="o">,</span> <span class="n">Nat.succ_eq_add_one</span><span class="o">]</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">Finset.sum_range_succ</span><span class="o">,</span> <span class="n">mul_add</span> <span class="mi">2</span><span class="o">,</span> <span class="bp">&#8592;</span> <span class="n">ih</span><span class="o">]</span>
   <span class="n">ring</span>
 </pre></div>
 </div>
@@ -1042,19 +1043,18 @@ the facts about this function that we will need to use below.
 The first named theorem is another illustration of reasoning by
 a small number of cases.
 In the second named theorem, remember that the semicolon means that
-the subsequent tactic block is applied to both of the goals
-that result from the application of <code class="docutils literal notranslate"><span class="pre">two_le</span></code>.</p>
+the subsequent tactic block is applied to all the goals created by the
+preceding tactic.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="mi">4</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">Nat.add_mul_mod_self_left</span><span class="o">]</span>
-  <span class="n">norm_num</span>
 
 <span class="kd">theorem</span> <span class="n">mod_4_eq_3_or_mod_4_eq_3</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span> <span class="bp">&#8744;</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">revert</span> <span class="n">h</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">Nat.mul_mod</span><span class="o">]</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">Nat.mod_lt</span> <span class="n">m</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">)</span>
-  <span class="n">interval_cases</span> <span class="n">hm</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hm</span><span class="o">]</span>
+  <span class="n">interval_cases</span> <span class="n">m</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">-</span><span class="n">Nat.mul_mod_mod</span><span class="o">]</span>
   <span class="k">have</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">Nat.mod_lt</span> <span class="n">n</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">)</span>
-  <span class="n">interval_cases</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hn</span><span class="o">]</span>
+  <span class="n">interval_cases</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span>
 
 <span class="kd">theorem</span> <span class="n">two_le_of_mod_4_eq_3</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">%</span> <span class="mi">4</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">&#8804;</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">two_le</span> <span class="bp">&lt;;&gt;</span>

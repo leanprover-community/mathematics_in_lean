@@ -12,7 +12,7 @@ theorem pow_two_le_fac (n : ℕ) : 2 ^ (n - 1) ≤ fac n := by
   induction' n with n ih
   · simp [fac]
   simp at *
-  rw [pow_succ, fac]
+  rw [pow_succ', fac]
   apply Nat.mul_le_mul _ ih
   repeat' apply Nat.succ_le_succ
   apply zero_le
@@ -29,7 +29,7 @@ theorem sum_sqr (n : ℕ) : ∑ i in range (n + 1), i ^ 2 = n * (n + 1) * (2 * n
   apply Nat.div_eq_of_eq_mul_right (by norm_num : 0 < 6)
   induction' n with n ih
   · simp
-  rw [Finset.sum_range_succ, mul_add 6, ← ih, Nat.succ_eq_add_one]
+  rw [Finset.sum_range_succ, mul_add 6, ← ih]
   ring
 
 end

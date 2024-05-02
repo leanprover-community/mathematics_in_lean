@@ -64,7 +64,6 @@ lemma chineseMap_surj [Fintype ι] {I : ι → Ideal R}
     replace he : ∀ j, j ≠ i → e ∈ I j := by simpa using he
     refine ⟨e, ?_, ?_⟩
     · simp [eq_sub_of_add_eq' hue, map_sub, eq_zero_iff_mem.mpr hu]
-      rfl
     · exact fun j hj ↦ eq_zero_iff_mem.mpr (he j hj)
   choose e he using key
   use mk _ (∑ i, f i * e i)

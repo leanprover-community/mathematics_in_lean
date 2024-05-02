@@ -1044,7 +1044,7 @@ See if you can finish off the proof using <code class="docutils literal notransl
     <span class="bp">&#183;</span> <span class="n">symm</span>
       <span class="n">apply</span> <span class="n">this</span> <span class="n">hxeq.symm</span> <span class="n">xA.symm</span> <span class="o">(</span><span class="n">xA.resolve_left</span> <span class="n">x&#8321;A</span><span class="o">)</span>
     <span class="k">have</span> <span class="n">x&#8322;A</span> <span class="o">:</span> <span class="n">x&#8322;</span> <span class="bp">&#8712;</span> <span class="n">A</span> <span class="o">:=</span> <span class="kd">by</span>
-      <span class="n">apply</span> <span class="n">not_imp_self.mp</span>
+      <span class="n">apply</span> <span class="n">_root_.not_imp_self.mp</span>
       <span class="n">intro</span> <span class="o">(</span><span class="n">x&#8322;nA</span> <span class="o">:</span> <span class="n">x&#8322;</span> <span class="bp">&#8713;</span> <span class="n">A</span><span class="o">)</span>
       <span class="n">rw</span> <span class="o">[</span><span class="n">if_pos</span> <span class="n">x&#8321;A</span><span class="o">,</span> <span class="n">if_neg</span> <span class="n">x&#8322;nA</span><span class="o">]</span> <span class="n">at</span> <span class="n">hxeq</span>
       <span class="n">rw</span> <span class="o">[</span><span class="n">A_def</span><span class="o">,</span> <span class="n">sbSet</span><span class="o">,</span> <span class="n">mem_iUnion</span><span class="o">]</span> <span class="n">at</span> <span class="n">x&#8321;A</span>

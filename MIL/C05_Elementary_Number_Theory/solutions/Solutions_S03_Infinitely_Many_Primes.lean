@@ -1,5 +1,5 @@
 import Mathlib.Data.Nat.Prime
-import Mathlib.Algebra.BigOperators.Order
+import Mathlib.Algebra.BigOperators.Basic
 import MIL.Common
 
 open BigOperators
@@ -148,9 +148,9 @@ theorem mod_4_eq_3_or_mod_4_eq_3 {m n : ℕ} (h : m * n % 4 = 3) : m % 4 = 3 ∨
   revert h
   rw [Nat.mul_mod]
   have : m % 4 < 4 := Nat.mod_lt m (by norm_num)
-  interval_cases hm : m % 4 <;> simp [hm]
+  interval_cases m % 4 <;> simp [-Nat.mul_mod_mod]
   have : n % 4 < 4 := Nat.mod_lt n (by norm_num)
-  interval_cases hn : n % 4 <;> simp [hn]
+  interval_cases n % 4 <;> simp
 
 theorem two_le_of_mod_4_eq_3 {n : ℕ} (h : n % 4 = 3) : 2 ≤ n := by
   apply two_le <;>
@@ -206,7 +206,6 @@ theorem primes_mod_4_eq_3_infinite : ∀ n, ∃ p > n, Nat.Prime p ∧ p % 4 = 3
   rcases this with ⟨s, hs⟩
   have h₁ : ((4 * ∏ i in erase s 3, i) + 3) % 4 = 3 := by
     rw [add_comm, Nat.add_mul_mod_self_left]
-    norm_num
   rcases exists_prime_factor_mod_4_eq_3 h₁ with ⟨p, pp, pdvd, p4eq⟩
   have ps : p ∈ s := by
     rw [← hs p]

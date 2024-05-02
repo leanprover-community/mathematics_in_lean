@@ -62,12 +62,12 @@ open Function
 example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
   intro x
   use x / c
-  dsimp; rw [mul_div_cancel' _ h]
+  dsimp; rw [mul_div_cancel₀ _ h]
 
 example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
   intro x
   use x / c
-  field_simp [h] ; ring
+  field_simp
 
 end
 

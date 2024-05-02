@@ -23,7 +23,7 @@ example {f g : α → E} (hf : Integrable f μ) (hg : Integrable g μ) :
   integral_add hf hg
 
 example {s : Set α} (c : E) : ∫ x in s, c ∂μ = (μ s).toReal • c :=
-  set_integral_const c
+  setIntegral_const c
 
 open Filter
 

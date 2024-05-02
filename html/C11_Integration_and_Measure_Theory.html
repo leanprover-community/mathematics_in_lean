@@ -235,7 +235,7 @@ For any <code class="docutils literal notranslate"><span class="pre">s</span> <s
 In that case, their integrals are equal to zero by definition, as is <code class="docutils literal notranslate"><span class="pre">(&#956;</span> <span class="pre">s).toReal</span></code>.
 So in all cases we have the following lemma.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span> <span class="n">&#945;</span><span class="o">}</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#8747;</span> <span class="n">x</span> <span class="k">in</span> <span class="n">s</span><span class="o">,</span> <span class="n">c</span> <span class="bp">&#8706;</span><span class="n">&#956;</span> <span class="bp">=</span> <span class="o">(</span><span class="n">&#956;</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">toReal</span> <span class="bp">&#8226;</span> <span class="n">c</span> <span class="o">:=</span>
-  <span class="n">set_integral_const</span> <span class="n">c</span>
+  <span class="n">setIntegral_const</span> <span class="n">c</span>
 </pre></div>
 </div>
 <p>We now quickly explain how to access the most important theorems in integration theory, starting

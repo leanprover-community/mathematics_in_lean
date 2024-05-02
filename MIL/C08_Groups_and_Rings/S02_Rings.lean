@@ -70,7 +70,7 @@ example {R : Type*} [CommRing R] {ι : Type*} [Fintype ι] (f : ι → Ideal R)
 open BigOperators PiNotation
 
 example {ι : Type*} [Fintype ι] (a : ι → ℕ) (coprime : ∀ i j, i ≠ j → (a i).Coprime (a j)) :
-    ZMod (∏ i, a i) ≃+* ∀ i, ZMod (a i) :=
+    ZMod (∏ i, a i) ≃+* Π i, ZMod (a i) :=
   ZMod.prodEquivPi a coprime
 
 section

@@ -152,14 +152,14 @@ example {X : Type*} [MetricSpace X] [CompactSpace X] {Y : Type*} [MetricSpace Y]
   · use 1, by norm_num
     intro x y _
     have : (x, y) ∉ K := by simp [hK]
-    simpa using this
+    simpa [K] using this
   · rcases K_cpct.exists_forall_le hK continuous_dist.continuousOn with ⟨⟨x₀, x₁⟩, xx_in, H⟩
     use dist x₀ x₁
     constructor
     · change _ < _
       rw [dist_pos]
       intro h
-      have : ε ≤ 0 := by simpa [*] using xx_in
+      have : ε ≤ 0 := by simpa [K, φ, *] using xx_in
       linarith
     · intro x x'
       contrapose!

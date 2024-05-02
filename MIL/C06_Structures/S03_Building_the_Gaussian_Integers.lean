@@ -1,4 +1,3 @@
-import Mathlib.Data.Int.Basic
 import Mathlib.Algebra.EuclideanDomain.Basic
 import Mathlib.RingTheory.PrincipalIdealDomain
 import MIL.Common
@@ -87,6 +86,8 @@ instance instCommRing : CommRing gaussInt where
   add := (· + ·)
   neg x := -x
   mul := (· * ·)
+  nsmul := nsmulRec
+  zsmul := zsmulRec
   add_assoc := by
     intros
     ext <;> simp <;> ring
@@ -120,8 +121,12 @@ instance instCommRing : CommRing gaussInt where
   mul_comm := by
     intros
     ext <;> simp <;> ring
-  zero_mul := sorry
-  mul_zero := sorry
+  zero_mul := by
+    intros
+    ext <;> simp
+  mul_zero := by
+    intros
+    ext <;> simp
 
 @[simp]
 theorem sub_re (x y : gaussInt) : (x - y).re = x.re - y.re :=
@@ -258,7 +263,7 @@ instance : EuclideanDomain gaussInt :=
     quotient := (· / ·)
     remainder := (· % ·)
     quotient_mul_add_remainder_eq :=
-      fun x y ↦ by simp only; rw [mod_def, add_comm, sub_add_cancel]
+      fun x y ↦ by simp only; rw [mod_def, add_comm] ; ring
     quotient_zero := fun x ↦ by
       simp [div_def, norm, Int.div']
       rfl

@@ -479,7 +479,7 @@ it will help to consider some examples.</p>
 <ol class="arabic simple">
 <li><p>A <em>partially ordered set</em> consists of a set <span class="math notranslate nohighlight">\(P\)</span> and
 a binary relation <span class="math notranslate nohighlight">\(\le\)</span> on <span class="math notranslate nohighlight">\(P\)</span> that is transitive
-and antireflexive.</p></li>
+and reflexive.</p></li>
 <li><p>A <em>group</em> consists of a set <span class="math notranslate nohighlight">\(G\)</span> with an associative
 binary operation, an identity element
 <span class="math notranslate nohighlight">\(1\)</span>, and a function <span class="math notranslate nohighlight">\(g \mapsto g^{-1}\)</span> that returns
@@ -1146,17 +1146,23 @@ that appears in VS Code, and then ask Lean to fill in a skeleton for the
 structure definition, you will see a scary number of entries.
 Jumping to the definition of the structure, however, shows that many of the
 fields have default definitions that Lean will fill in for you automatically.
-The essential ones appear in the definition below. In each case, the relevant
+The essential ones appear in the definition below.
+A special case are <code class="docutils literal notranslate"><span class="pre">nsmul</span></code> and <code class="docutils literal notranslate"><span class="pre">zsmul</span></code> which should be ignored for now
+and will be explained in the next chapter.
+In each case, the relevant
 identity is proved by unfolding definitions, using the <code class="docutils literal notranslate"><span class="pre">ext</span></code> tactic
 to reduce the identities to their real and imaginary components,
 simplifying, and, if necessary, carrying out the relevant ring calculation in
-the integers.</p>
+the integers. Note that we could easily avoid repeating all this code, but
+this is not the topic of the current discussion.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">instCommRing</span> <span class="o">:</span> <span class="n">CommRing</span> <span class="n">gaussInt</span> <span class="n">where</span>
   <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span>
   <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span>
   <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">+</span> <span class="bp">&#183;</span><span class="o">)</span>
   <span class="n">neg</span> <span class="n">x</span> <span class="o">:=</span> <span class="bp">-</span><span class="n">x</span>
   <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">*</span> <span class="bp">&#183;</span><span class="o">)</span>
+  <span class="n">nsmul</span> <span class="o">:=</span> <span class="n">nsmulRec</span>
+  <span class="n">zsmul</span> <span class="o">:=</span> <span class="n">zsmulRec</span>
   <span class="n">add_assoc</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="n">intros</span>
     <span class="n">ext</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="bp">&lt;;&gt;</span> <span class="n">ring</span>
@@ -1190,8 +1196,12 @@ the integers.</p>
   <span class="n">mul_comm</span> <span class="o">:=</span> <span class="kd">by</span>
     <span class="n">intros</span>
     <span class="n">ext</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span> <span class="bp">&lt;;&gt;</span> <span class="n">ring</span>
-  <span class="n">zero_mul</span> <span class="o">:=</span> <span class="gr">sorry</span>
-  <span class="n">mul_zero</span> <span class="o">:=</span> <span class="gr">sorry</span>
+  <span class="n">zero_mul</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">intros</span>
+    <span class="n">ext</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span>
+  <span class="n">mul_zero</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">intros</span>
+    <span class="n">ext</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span>
 </pre></div>
 </div>
 <p>Lean&#8217;s library defines the class of <em>nontrivial</em> types to be types with at
@@ -1268,7 +1278,7 @@ numbers, carry out the division</p>
   \frac{ac + bd}{c^2 + d^2} + \frac{bc -ad}{c^2+d^2} i.\]</div>
 <p>The real and imaginary parts might not be integers, but we can round
 them to the nearest integers <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span>. We can then express the
-right-hand size as <span class="math notranslate nohighlight">\((u + vi) + (u' + v'i)\)</span>, where
+right-hand side as <span class="math notranslate nohighlight">\((u + vi) + (u' + v'i)\)</span>, where
 <span class="math notranslate nohighlight">\(u' + v'i\)</span> is the part left over. Note that we have
 <span class="math notranslate nohighlight">\(|u'| \le 1/2\)</span> and <span class="math notranslate nohighlight">\(|v'| \le 1/2\)</span>, and hence</p>
 <div class="math notranslate nohighlight">
@@ -1419,7 +1429,7 @@ less than the norm of <code class="docutils literal notranslate"><span class="pr
 respectively.
 Calculating, we have</p>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">%</span> <span class="pre">y)</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span> <span class="pre">*</span> <span class="pre">y)</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y</span> <span class="pre">-</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">(y</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">j)</span></code></p>
+<div><p><code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">%</span> <span class="pre">y)</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span> <span class="pre">*</span> <span class="pre">y)</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y</span> <span class="pre">-</span> <span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span> <span class="pre">*</span> <span class="pre">(y</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y)</span></code></p>
 </div></blockquote>
 <p>The real and imaginary parts of the right-hand side are exactly <code class="docutils literal notranslate"><span class="pre">mod'</span> <span class="pre">(x</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y).re</span> <span class="pre">(norm</span> <span class="pre">y)</span></code> and <code class="docutils literal notranslate"><span class="pre">mod'</span> <span class="pre">(x</span> <span class="pre">*</span> <span class="pre">conj</span> <span class="pre">y).im</span> <span class="pre">(norm</span> <span class="pre">y)</span></code>.
 By the properties of <code class="docutils literal notranslate"><span class="pre">div'</span></code> and <code class="docutils literal notranslate"><span class="pre">mod'</span></code>,
@@ -1500,7 +1510,7 @@ and in that case, the required properties are the theorems
     <span class="n">quotient</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">/</span> <span class="bp">&#183;</span><span class="o">)</span>
     <span class="n">remainder</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">%</span> <span class="bp">&#183;</span><span class="o">)</span>
     <span class="n">quotient_mul_add_remainder_eq</span> <span class="o">:=</span>
-      <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mod_def</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">sub_add_cancel</span><span class="o">]</span>
+      <span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="kd">by</span> <span class="n">simp</span> <span class="n">only</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mod_def</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span> <span class="bp">;</span> <span class="n">ring</span>
     <span class="n">quotient_zero</span> <span class="o">:=</span> <span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="kd">by</span>
       <span class="n">simp</span> <span class="o">[</span><span class="n">div_def</span><span class="o">,</span> <span class="n">norm</span><span class="o">,</span> <span class="n">Int.div&#39;</span><span class="o">]</span>
       <span class="n">rfl</span>

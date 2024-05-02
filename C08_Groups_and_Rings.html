@@ -667,6 +667,9 @@ or disjoint.</p>
 <span class="k">#check</span> <span class="n">Subgroup.index_mul_card</span>
 <span class="k">#check</span> <span class="n">Nat.eq_of_mul_eq_mul_right</span>
 
+<span class="c1">-- The following line is working around a Lean bug that will be fixed very soon.</span>
+<span class="kn">attribute</span> <span class="o">[</span><span class="bp">-</span><span class="kd">instance</span><span class="o">]</span> <span class="n">Subtype.instInhabited</span>
+
 <span class="kd">lemma</span> <span class="n">aux_card_eq</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">card</span> <span class="n">G</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">H</span> <span class="bp">*</span> <span class="n">card</span> <span class="n">K</span><span class="o">)</span> <span class="o">:</span> <span class="n">card</span> <span class="o">(</span><span class="n">G</span> <span class="bp">&#10744;</span> <span class="n">H</span><span class="o">)</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">K</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
@@ -838,7 +841,7 @@ deduced from the previous one:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">BigOperators</span> <span class="n">PiNotation</span>
 
 <span class="kd">example</span> <span class="o">{</span><span class="n">&#953;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">&#953;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#953;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">coprime</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="bp">&#8800;</span> <span class="n">j</span> <span class="bp">&#8594;</span> <span class="o">(</span><span class="n">a</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">Coprime</span> <span class="o">(</span><span class="n">a</span> <span class="n">j</span><span class="o">))</span> <span class="o">:</span>
-    <span class="n">ZMod</span> <span class="o">(</span><span class="bp">&#8719;</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8771;+*</span> <span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">ZMod</span> <span class="o">(</span><span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="n">ZMod</span> <span class="o">(</span><span class="bp">&#8719;</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="bp">&#8771;+*</span> <span class="bp">&#928;</span> <span class="n">i</span><span class="o">,</span> <span class="n">ZMod</span> <span class="o">(</span><span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">ZMod.prodEquivPi</span> <span class="n">a</span> <span class="n">coprime</span>
 </pre></div>
 </div>

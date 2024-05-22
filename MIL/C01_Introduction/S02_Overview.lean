@@ -1,4 +1,3 @@
-import Mathlib.Data.Nat.Parity
 import MIL.Common
 
 open Nat

@@ -1204,7 +1204,7 @@ letters like <code class="docutils literal notranslate"><span class="pre">&#945;
 (entered as <code class="docutils literal notranslate"><span class="pre">\a</span></code>, <code class="docutils literal notranslate"><span class="pre">\b</span></code>, and <code class="docutils literal notranslate"><span class="pre">\g</span></code>)
 for arbitrary types.
 The library often uses letters like <code class="docutils literal notranslate"><span class="pre">R</span></code> and <code class="docutils literal notranslate"><span class="pre">G</span></code>
-for the carries of algebraic structures like rings and groups,
+for the carriers of algebraic structures like rings and groups,
 respectively,
 but in general Greek letters are used for types,
 especially when there is little or no structure
@@ -1216,7 +1216,7 @@ Saying that <code class="docutils literal notranslate"><span class="pre">x</span
 is equivalent to saying that it is less-than-or-equal to <code class="docutils literal notranslate"><span class="pre">y</span></code>
 and not equal to <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span>
-<span class="k">#check</span> <span class="o">(</span><span class="n">lt_irrefl</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">&#172;</span><span class="n">x</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">#check</span> <span class="o">(</span><span class="n">lt_irrefl</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">&#172;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&lt;</span> <span class="n">x</span><span class="o">))</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">lt_trans</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">lt_of_le_of_lt</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&lt;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>
 <span class="k">#check</span> <span class="o">(</span><span class="n">lt_of_lt_of_le</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8594;</span> <span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">z</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="o">)</span>

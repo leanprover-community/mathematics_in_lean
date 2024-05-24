@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>9. Topology &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -13,11 +12,10 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2709fde1"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,15 +29,11 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="index.html" class="icon icon-home">
-            Mathematics in Lean
+            <a href="index.html" class="icon icon-home"> Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -92,8 +86,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">9. </span>Topology</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">9. </span>Topology</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C09_Topology.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -103,8 +97,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="index-0">
-<span id="topology"></span><span id="id1"></span><h1><span class="section-number">9. </span>Topology<a class="headerlink" href="#index-0" title="Link to this heading">&#61633;</a></h1>
+  <span class="target" id="topology"></span><div class="section" id="index-0">
+<span id="id1"></span><h1><span class="section-number">9. </span>Topology<a class="headerlink" href="#index-0" title="Permalink to this headline">&#61633;</a></h1>
 <p>Calculus is based on the concept of a function, which is used to model
 quantities that depend on one another.
 For example, it is common to study quantities that change over time.
@@ -171,8 +165,8 @@ and simply note that the rest can be proved &#8220;in the same way.&#8221;
 Formalizing mathematics requires making the relevant notion of &#8220;sameness&#8221;
 fully explicit, and that is exactly what Bourbaki&#8217;s theory of filters
 manages to do.</p>
-<section id="filters">
-<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">9.1. </span>Filters<a class="headerlink" href="#filters" title="Link to this heading">&#61633;</a></h2>
+<div class="section" id="filters">
+<span id="index-1"></span><span id="id2"></span><h2><span class="section-number">9.1. </span>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">&#61633;</a></h2>
 <p>A <em>filter</em> on a type <code class="docutils literal notranslate"><span class="pre">X</span></code> is a collection of sets of <code class="docutils literal notranslate"><span class="pre">X</span></code> that satisfies three
 conditions that we will spell out below. The notion
 supports two related ideas:</p>
@@ -524,9 +518,9 @@ by definition, the assumption <code class="docutils literal notranslate"><span c
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</section>
-<section id="metric-spaces">
-<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">9.2. </span>Metric spaces<a class="headerlink" href="#metric-spaces" title="Link to this heading">&#61633;</a></h2>
+</div>
+<div class="section" id="metric-spaces">
+<span id="index-2"></span><span id="id3"></span><h2><span class="section-number">9.2. </span>Metric spaces<a class="headerlink" href="#metric-spaces" title="Permalink to this headline">&#61633;</a></h2>
 <p>Examples in the previous section focus on sequences of real numbers. In this section we will go up a bit in generality and focus on
 metric spaces. A metric space is a type <code class="docutils literal notranslate"><span class="pre">X</span></code> equipped with a distance function <code class="docutils literal notranslate"><span class="pre">dist</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code> which is a generalization of
 the function <code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">x</span> <span class="pre">y</span> <span class="pre">&#8614;</span> <span class="pre">|x</span> <span class="pre">-</span> <span class="pre">y|</span></code> from the case where <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">&#8477;</span></code>.</p>
@@ -544,8 +538,8 @@ the function <code class="docutils literal notranslate"><span class="pre">fun</s
 They are called <code class="docutils literal notranslate"><span class="pre">EMetricSpace</span></code>, <code class="docutils literal notranslate"><span class="pre">PseudoMetricSpace</span></code> and <code class="docutils literal notranslate"><span class="pre">PseudoEMetricSpace</span></code> respectively (here &#8220;e&#8221; stands for &#8220;extended&#8221;).</p>
 <p>Note that our journey from <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> to metric spaces jumped over the special case of normed spaces that also require linear algebra and
 will be explained as part of the calculus chapter.</p>
-<section id="convergence-and-continuity">
-<h3><span class="section-number">9.2.1. </span>Convergence and continuity<a class="headerlink" href="#convergence-and-continuity" title="Link to this heading">&#61633;</a></h3>
+<div class="section" id="convergence-and-continuity">
+<h3><span class="section-number">9.2.1. </span>Convergence and continuity<a class="headerlink" href="#convergence-and-continuity" title="Permalink to this headline">&#61633;</a></h3>
 <p>Using distance functions, we can already define convergent sequences and continuous functions between metric spaces.
 They are actually defined in a more general setting covered in the next section,
 but we have lemmas recasting the definition in terms of distances.</p>
@@ -632,9 +626,9 @@ and get our final proof, now bordering obfuscation.</p>
   <span class="n">Metric.continuousAt_iff</span>
 </pre></div>
 </div>
-</section>
-<section id="balls-open-sets-and-closed-sets">
-<h3><span class="section-number">9.2.2. </span>Balls, open sets and closed sets<a class="headerlink" href="#balls-open-sets-and-closed-sets" title="Link to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="balls-open-sets-and-closed-sets">
+<h3><span class="section-number">9.2.2. </span>Balls, open sets and closed sets<a class="headerlink" href="#balls-open-sets-and-closed-sets" title="Permalink to this headline">&#61633;</a></h3>
 <p>Once we have a distance function, the most important geometric definitions are (open) balls and closed balls.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">)</span>
 
@@ -689,9 +683,9 @@ argument so we can invoke <code class="docutils literal notranslate"><span class
   <span class="n">Metric.nhds_basis_closedBall.mem_iff</span>
 </pre></div>
 </div>
-</section>
-<section id="compactness">
-<h3><span class="section-number">9.2.3. </span>Compactness<a class="headerlink" href="#compactness" title="Link to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="compactness">
+<h3><span class="section-number">9.2.3. </span>Compactness<a class="headerlink" href="#compactness" title="Permalink to this headline">&#61633;</a></h3>
 <p>Compactness is an important topological notion. It distinguishes subsets of a metric space
 that enjoy the same kind of properties as segments in reals compared to other intervals:</p>
 <ul class="simple">
@@ -732,9 +726,9 @@ are deduced from more general versions, some of which will be discussed in later
 </pre></div>
 </div>
 <p>In a compact metric space any closed set is compact, this is <code class="docutils literal notranslate"><span class="pre">IsClosed.isCompact</span></code>.</p>
-</section>
-<section id="uniformly-continuous-functions">
-<h3><span class="section-number">9.2.4. </span>Uniformly continuous functions<a class="headerlink" href="#uniformly-continuous-functions" title="Link to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="uniformly-continuous-functions">
+<h3><span class="section-number">9.2.4. </span>Uniformly continuous functions<a class="headerlink" href="#uniformly-continuous-functions" title="Permalink to this headline">&#61633;</a></h3>
 <p>We now turn to uniformity notions on metric spaces : uniformly continuous functions, Cauchy sequences and completeness.
 Again those are defined in a more general context but we have lemmas in the metric name space to access their elementary definitions.
 We start with uniform continuity.</p>
@@ -763,9 +757,9 @@ of the distance function on <code class="docutils literal notranslate"><span cla
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</section>
-<section id="completeness">
-<h3><span class="section-number">9.2.5. </span>Completeness<a class="headerlink" href="#completeness" title="Link to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="completeness">
+<h3><span class="section-number">9.2.5. </span>Completeness<a class="headerlink" href="#completeness" title="Permalink to this headline">&#61633;</a></h3>
 <p>A Cauchy sequence in a metric space is a sequence whose terms get closer and closer to each other.
 There are a couple of equivalent ways to state that idea.
 In particular converging sequences are Cauchy. The converse is true only in so-called <em>complete</em>
@@ -854,12 +848,12 @@ define something inductively in the middle of a proof using <code class="docutil
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="topological-spaces">
-<span id="index-4"></span><span id="id4"></span><h2><span class="section-number">9.3. </span>Topological spaces<a class="headerlink" href="#topological-spaces" title="Link to this heading">&#61633;</a></h2>
-<section id="fundamentals">
-<h3><span class="section-number">9.3.1. </span>Fundamentals<a class="headerlink" href="#fundamentals" title="Link to this heading">&#61633;</a></h3>
+</div>
+</div>
+<div class="section" id="topological-spaces">
+<span id="index-4"></span><span id="id4"></span><h2><span class="section-number">9.3. </span>Topological spaces<a class="headerlink" href="#topological-spaces" title="Permalink to this headline">&#61633;</a></h2>
+<div class="section" id="fundamentals">
+<h3><span class="section-number">9.3.1. </span>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this headline">&#61633;</a></h3>
 <p>We now go up in generality and introduce topological spaces. We will review the two main ways to define
 topological spaces and then explain how the category of topological spaces is much better behaved than
 the category of metric spaces. Note that we won&#8217;t be using Mathlib category theory here, only having
@@ -1047,9 +1041,9 @@ Let us explore that constraint &#8220;on paper&#8221; using notation <span class
 </div>
 <p>This ends our tour of how Mathlib thinks that topological spaces fix defects of the theory of metric spaces
 by being a more functorial theory and having a complete lattice structure for any fixed type.</p>
-</section>
-<section id="separation-and-countability">
-<h3><span class="section-number">9.3.2. </span>Separation and countability<a class="headerlink" href="#separation-and-countability" title="Link to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="separation-and-countability">
+<h3><span class="section-number">9.3.2. </span>Separation and countability<a class="headerlink" href="#separation-and-countability" title="Permalink to this headline">&#61633;</a></h3>
 <p>We saw that the category of topological spaces have very nice properties. The price to pay for
 this is existence of rather pathological topological spaces.
 There are a number of assumptions you can make on a topological space to ensure its behavior
@@ -1136,9 +1130,9 @@ of sets can be understood using sequences.</p>
   <span class="n">mem_closure_iff_seq_limit</span>
 </pre></div>
 </div>
-</section>
-<section id="id5">
-<h3><span class="section-number">9.3.3. </span>Compactness<a class="headerlink" href="#id5" title="Link to this heading">&#61633;</a></h3>
+</div>
+<div class="section" id="id5">
+<h3><span class="section-number">9.3.3. </span>Compactness<a class="headerlink" href="#id5" title="Permalink to this headline">&#61633;</a></h3>
 <p>Let us now discuss how compactness is defined for topological spaces. As usual there are several ways
 to think about it and Mathlib goes for the filter version.</p>
 <p>We first need to define cluster points of filters. Given a filter <code class="docutils literal notranslate"><span class="pre">F</span></code> on a topological space <code class="docutils literal notranslate"><span class="pre">X</span></code>,
@@ -1194,9 +1188,9 @@ cover <code class="docutils literal notranslate"><span class="pre">s</span></cod
   <span class="n">hs.elim_finite_subcover</span> <span class="n">U</span> <span class="n">hUo</span> <span class="n">hsU</span>
 </pre></div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

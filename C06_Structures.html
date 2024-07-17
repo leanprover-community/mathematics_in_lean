@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>6. Structures &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -12,10 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -29,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -74,8 +80,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">6. </span>Structures</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>Structures</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C06_Structures.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -85,8 +91,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="structures">
-<span id="id1"></span><h1><span class="section-number">6. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this headline">&#61633;</a></h1>
+  <section id="structures">
+<span id="id1"></span><h1><span class="section-number">6. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this heading">&#61633;</a></h1>
 <p>Modern mathematics makes essential use of algebraic
 structures,
 which encapsulate patterns that can be instantiated in
@@ -105,8 +111,8 @@ It will also show you how to define and use
 algebraic structures on your own.</p>
 <p>For more technical detail, you can consult <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>,
 and a paper by Anne Baanen, <a class="reference external" href="https://arxiv.org/abs/2202.01629">Use and abuse of instance parameters in the Lean mathematical library</a>.</p>
-<div class="section" id="defining-structures">
-<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Permalink to this headline">&#61633;</a></h2>
+<section id="defining-structures">
+<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Permalink to this heading">&#61633;</a></h2>
 <p>In the broadest sense of the term, a <em>structure</em> is a specification
 of a collection of data, possibly with constraints that the
 data is required to satisfy.
@@ -465,9 +471,9 @@ as long as we redefine the old accessors in terms of the new definition.
 Moreover, as we are about to see, Lean provides support for
 weaving structures together into a rich, interconnected hierarchy,
 and for managing the interactions between them.</p>
-</div>
-<div class="section" id="algebraic-structures">
-<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="algebraic-structures">
+<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>
 <p>To clarify what we mean by the phrase <em>algebraic structure</em>,
 it will help to consider some examples.</p>
 <ol class="arabic simple">
@@ -1014,9 +1020,9 @@ because it configures automation that invisibly governs the interpretation of
 the expressions we type.
 When used wisely, however, class inference is a powerful tool.
 It is what makes algebraic reasoning possible in Lean.</p>
-</div>
-<div class="section" id="building-the-gaussian-integers">
-<span id="section-building-the-gaussian-integers"></span><h2><span class="section-number">6.3. </span>Building the Gaussian Integers<a class="headerlink" href="#building-the-gaussian-integers" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="building-the-gaussian-integers">
+<span id="section-building-the-gaussian-integers"></span><h2><span class="section-number">6.3. </span>Building the Gaussian Integers<a class="headerlink" href="#building-the-gaussian-integers" title="Permalink to this heading">&#61633;</a></h2>
 <p>We will now illustrate the use of the algebraic hierarchy in Lean by
 building an important mathematical object, the <em>Gaussian integers</em>,
 and showing that it is a Euclidean domain. In other words, according to
@@ -1029,7 +1035,7 @@ here is to define them as a data type in their own right. We do this by
 representing a Gaussian integer as a pair of integers, which we think of as the
 <em>real</em> and <em>imaginary</em> parts.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
-<span class="kd">structure</span> <span class="n">gaussInt</span> <span class="n">where</span>
+<span class="kd">structure</span> <span class="n">GaussInt</span> <span class="n">where</span>
   <span class="n">re</span> <span class="o">:</span> <span class="n">&#8484;</span>
   <span class="n">im</span> <span class="o">:</span> <span class="n">&#8484;</span>
 </pre></div>
@@ -1043,19 +1049,19 @@ be a square root of <span class="math notranslate nohighlight">\(-1\)</span>. Th
 \[\begin{split}(a + bi) (c + di) &amp; = ac + bci + adi + bd i^2 \\
   &amp; = (ac - bd) + (bc + ad)i.\end{split}\]</div>
 <p>This explains the definition of <code class="docutils literal notranslate"><span class="pre">Mul</span></code> below.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Zero</span> <span class="n">gaussInt</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Zero</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;&#10216;</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;&#10217;</span>
 
-<span class="kd">instance</span> <span class="o">:</span> <span class="n">One</span> <span class="n">gaussInt</span> <span class="o">:=</span>
+<span class="kd">instance</span> <span class="o">:</span> <span class="n">One</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;&#10216;</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;&#10217;</span>
 
-<span class="kd">instance</span> <span class="o">:</span> <span class="n">Add</span> <span class="n">gaussInt</span> <span class="o">:=</span>
+<span class="kd">instance</span> <span class="o">:</span> <span class="n">Add</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">+</span> <span class="n">y.re</span><span class="o">,</span> <span class="n">x.im</span> <span class="bp">+</span> <span class="n">y.im</span><span class="o">&#10217;&#10217;</span>
 
-<span class="kd">instance</span> <span class="o">:</span> <span class="n">Neg</span> <span class="n">gaussInt</span> <span class="o">:=</span>
+<span class="kd">instance</span> <span class="o">:</span> <span class="n">Neg</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="bp">-</span><span class="n">x.re</span><span class="o">,</span> <span class="bp">-</span><span class="n">x.im</span><span class="o">&#10217;&#10217;</span>
 
-<span class="kd">instance</span> <span class="o">:</span> <span class="n">Mul</span> <span class="n">gaussInt</span> <span class="o">:=</span>
+<span class="kd">instance</span> <span class="o">:</span> <span class="n">Mul</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">-</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">,</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span><span class="o">&#10217;&#10217;</span>
 </pre></div>
 </div>
@@ -1068,19 +1074,19 @@ files associated with this chapter, these definitions are made in the
 <code class="docutils literal notranslate"><span class="pre">GaussInt.zero</span></code> and the like and assigning the notation to those.
 It is often useful to have an explicit name for the definitions, for example,
 to use with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and <code class="docutils literal notranslate"><span class="pre">rewrite</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">zero_def</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">zero_def</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">theorem</span> <span class="n">one_def</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">one_def</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">&#10217;</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">theorem</span> <span class="n">add_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">+</span> <span class="n">y.re</span><span class="o">,</span> <span class="n">x.im</span> <span class="bp">+</span> <span class="n">y.im</span><span class="o">&#10217;</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">add_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">+</span> <span class="n">y.re</span><span class="o">,</span> <span class="n">x.im</span> <span class="bp">+</span> <span class="n">y.im</span><span class="o">&#10217;</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">theorem</span> <span class="n">neg_def</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="bp">-</span><span class="n">x</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="bp">-</span><span class="n">x.re</span><span class="o">,</span> <span class="bp">-</span><span class="n">x.im</span><span class="o">&#10217;</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">neg_def</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="bp">-</span><span class="n">x</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="bp">-</span><span class="n">x.re</span><span class="o">,</span> <span class="bp">-</span><span class="n">x.im</span><span class="o">&#10217;</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">theorem</span> <span class="n">mul_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span>
+<span class="kd">theorem</span> <span class="n">mul_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">-</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span><span class="o">,</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span><span class="o">&#10217;</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 </pre></div>
@@ -1088,54 +1094,54 @@ to use with <code class="docutils literal notranslate"><span class="pre">simp</s
 <p>It is also useful to name the rules that compute the real and imaginary
 parts, and to declare them to the simplifier.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">zero_re</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">zero_re</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">zero_im</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">zero_im</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">one_re</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">one_re</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">one_im</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">one_im</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">add_re</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">+</span> <span class="n">y.re</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">add_re</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">+</span> <span class="n">y.re</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">add_im</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">x.im</span> <span class="bp">+</span> <span class="n">y.im</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">add_im</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">x.im</span> <span class="bp">+</span> <span class="n">y.im</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">neg_re</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.re</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">neg_re</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.re</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">neg_im</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.im</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">neg_im</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.im</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">mul_re</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">-</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">mul_re</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">-</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">mul_im</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">mul_im</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 </pre></div>
 </div>
 <p>It is now surprisingly easy to show that the Gaussian integers are an instance
 of a commutative ring. We are putting the structure concept to good use.
-Each particular Gaussian integer is an instance of the <code class="docutils literal notranslate"><span class="pre">gaussInt</span></code> structure,
-whereas the type <code class="docutils literal notranslate"><span class="pre">gaussInt</span></code> itself, together with the relevant operations, is an
+Each particular Gaussian integer is an instance of the <code class="docutils literal notranslate"><span class="pre">GaussInt</span></code> structure,
+whereas the type <code class="docutils literal notranslate"><span class="pre">GaussInt</span></code> itself, together with the relevant operations, is an
 instance of the <code class="docutils literal notranslate"><span class="pre">CommRing</span></code> structure. The <code class="docutils literal notranslate"><span class="pre">CommRing</span></code> structure, in turn,
 extends the notational structures <code class="docutils literal notranslate"><span class="pre">Zero</span></code>, <code class="docutils literal notranslate"><span class="pre">One</span></code>, <code class="docutils literal notranslate"><span class="pre">Add</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Neg</span></code>, and <code class="docutils literal notranslate"><span class="pre">Mul</span></code>.</p>
-<p>If you type <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">:</span> <span class="pre">CommRing</span> <span class="pre">gaussInt</span> <span class="pre">:=</span> <span class="pre">_</span></code>, click on the light bulb
+<p>If you type <code class="docutils literal notranslate"><span class="pre">instance</span> <span class="pre">:</span> <span class="pre">CommRing</span> <span class="pre">GaussInt</span> <span class="pre">:=</span> <span class="pre">_</span></code>, click on the light bulb
 that appears in VS Code, and then ask Lean to fill in a skeleton for the
 structure definition, you will see a scary number of entries.
 Jumping to the definition of the structure, however, shows that many of the
@@ -1149,7 +1155,7 @@ to reduce the identities to their real and imaginary components,
 simplifying, and, if necessary, carrying out the relevant ring calculation in
 the integers. Note that we could easily avoid repeating all this code, but
 this is not the topic of the current discussion.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">instCommRing</span> <span class="o">:</span> <span class="n">CommRing</span> <span class="n">gaussInt</span> <span class="n">where</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="n">instCommRing</span> <span class="o">:</span> <span class="n">CommRing</span> <span class="n">GaussInt</span> <span class="n">where</span>
   <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span>
   <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span>
   <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">+</span> <span class="bp">&#183;</span><span class="o">)</span>
@@ -1202,9 +1208,9 @@ this is not the topic of the current discussion.</p>
 least two distinct elements. In the context of a ring, this is equivalent
 to saying that the zero is not equal to the one. Since some common theorems
 depend on that fact, we may as well establish it now.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Nontrivial</span> <span class="n">gaussInt</span> <span class="o">:=</span> <span class="kd">by</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Nontrivial</span> <span class="n">GaussInt</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">use</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span>
-  <span class="n">rw</span> <span class="o">[</span><span class="n">Ne</span><span class="o">,</span> <span class="n">gaussInt.ext_iff</span><span class="o">]</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">Ne</span><span class="o">,</span> <span class="n">GaussInt.ext_iff</span><span class="o">]</span>
   <span class="n">simp</span>
 </pre></div>
 </div>
@@ -1262,7 +1268,7 @@ the norm defined by <span class="math notranslate nohighlight">\(N(a + bi) = (a 
 The Gaussian integer <span class="math notranslate nohighlight">\(a - bi\)</span> is called the <em>conjugate</em> of <span class="math notranslate nohighlight">\(a + bi\)</span>.
 It is not hard to check that for any complex numbers <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>,
 we have <span class="math notranslate nohighlight">\(N(xy) = N(x)N(y)\)</span>.</p>
-<p>To see that this definition of the norm makes the complex numbers a Euclidean
+<p>To see that this definition of the norm makes the Gaussian integers a Euclidean
 domain, only the first property is challenging. Suppose
 we want to write <span class="math notranslate nohighlight">\(a + bi = (c + di) q + r\)</span> for suitable <span class="math notranslate nohighlight">\(q\)</span>
 and <span class="math notranslate nohighlight">\(r\)</span>. Treating <span class="math notranslate nohighlight">\(a + bi\)</span> and <span class="math notranslate nohighlight">\(c + di\)</span> are complex
@@ -1353,37 +1359,37 @@ that this holds in any ordered ring.</p>
 </pre></div>
 </div>
 <p>We will put all the remaining definitions and theorems in this section
-in the <code class="docutils literal notranslate"><span class="pre">gaussInt</span></code> namespace.
+in the <code class="docutils literal notranslate"><span class="pre">GaussInt</span></code> namespace.
 First, we define the <code class="docutils literal notranslate"><span class="pre">norm</span></code> function and ask you to establish
 some of its properties.
 The proofs are all short.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">x.re</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">^</span> <span class="mi">2</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">norm_nonneg</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">norm</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">theorem</span> <span class="n">norm_nonneg</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">norm</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
-<span class="kd">theorem</span> <span class="n">norm_eq_zero</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">norm</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">theorem</span> <span class="n">norm_eq_zero</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">norm</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
-<span class="kd">theorem</span> <span class="n">norm_pos</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">norm</span> <span class="n">x</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">theorem</span> <span class="n">norm_pos</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">norm</span> <span class="n">x</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
-<span class="kd">theorem</span> <span class="n">norm_mul</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">norm</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">norm</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
+<span class="kd">theorem</span> <span class="n">norm_mul</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">norm</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">norm</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
 <p>Next we define the conjugate function:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">conj</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">gaussInt</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">conj</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="n">x.re</span><span class="o">,</span> <span class="bp">-</span><span class="n">x.im</span><span class="o">&#10217;</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">conj_re</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">conj</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">conj_re</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">conj</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
 <span class="kd">@[simp]</span>
-<span class="kd">theorem</span> <span class="n">conj_im</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">conj</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.im</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">conj_im</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">conj</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.im</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">theorem</span> <span class="n">norm_conj</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">norm</span> <span class="o">(</span><span class="n">conj</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">norm</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">norm</span><span class="o">]</span>
+<span class="kd">theorem</span> <span class="n">norm_conj</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">norm</span> <span class="o">(</span><span class="n">conj</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">norm</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">norm</span><span class="o">]</span>
 </pre></div>
 </div>
 <p>Finally, we define division for the Gaussian integers
@@ -1396,7 +1402,7 @@ then the real and imaginary parts of <code class="docutils literal notranslate">
 <p>respectively. Here the numerators are the real and imaginary parts of
 <span class="math notranslate nohighlight">\((a + bi) (c - di)\)</span>, and the denominators are both equal to the norm
 of <span class="math notranslate nohighlight">\(c + di\)</span>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Div</span> <span class="n">gaussInt</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Div</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="o">&#10216;</span><span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">),</span> <span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">)&#10217;&#10217;</span>
 </pre></div>
 </div>
@@ -1404,14 +1410,14 @@ of <span class="math notranslate nohighlight">\(c + di\)</span>.</p>
 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">(x</span> <span class="pre">/</span> <span class="pre">y)</span> <span class="pre">*</span> <span class="pre">y</span></code>. As above, we record the definitions in the
 theorems <code class="docutils literal notranslate"><span class="pre">div_def</span></code> and
 <code class="docutils literal notranslate"><span class="pre">mod_def</span></code> so that we can use them with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and <code class="docutils literal notranslate"><span class="pre">rewrite</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Mod</span> <span class="n">gaussInt</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">Mod</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)&#10217;</span>
 
-<span class="kd">theorem</span> <span class="n">div_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span>
+<span class="kd">theorem</span> <span class="n">div_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span>
     <span class="n">x</span> <span class="bp">/</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">),</span> <span class="n">Int.div&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">)&#10217;</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">theorem</span> <span class="n">mod_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">%</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="kd">theorem</span> <span class="n">mod_def</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">%</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">-</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 </pre></div>
 </div>
@@ -1440,7 +1446,7 @@ So we have</p>
 as required.</p>
 <p>This messy calculation is carried out in the next proof. We encourage you
 to step through the details and see if you can find a nicer argument.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">norm_mod_lt</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">}</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">norm_mod_lt</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">}</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
     <span class="o">(</span><span class="n">x</span> <span class="bp">%</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">norm</span> <span class="bp">&lt;</span> <span class="n">y.norm</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="k">have</span> <span class="n">norm_y_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">norm</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">norm_pos</span><span class="o">]</span>
   <span class="k">have</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">%</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">&#10216;</span><span class="n">Int.mod&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">),</span> <span class="n">Int.mod&#39;</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">conj</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="o">(</span><span class="n">norm</span> <span class="n">y</span><span class="o">)&#10217;</span>
@@ -1467,10 +1473,10 @@ numbers, and we obtain that by composing <code class="docutils literal notransla
 The first of the next two lemmas establishes that mapping the norm to the
 natural numbers and back to the integers does not change the value.
 The second one re-expresses the fact that the norm is decreasing.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">coe_natAbs_norm</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x.norm.natAbs</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x.norm</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">coe_natAbs_norm</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x.norm.natAbs</span> <span class="o">:</span> <span class="n">&#8484;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x.norm</span> <span class="o">:=</span>
   <span class="n">Int.natAbs_of_nonneg</span> <span class="o">(</span><span class="n">norm_nonneg</span> <span class="n">_</span><span class="o">)</span>
 
-<span class="kd">theorem</span> <span class="n">natAbs_norm_mod_lt</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+<span class="kd">theorem</span> <span class="n">natAbs_norm_mod_lt</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
     <span class="o">(</span><span class="n">x</span> <span class="bp">%</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">norm.natAbs</span> <span class="bp">&lt;</span> <span class="n">y.norm.natAbs</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">Int.ofNat_lt.1</span>
   <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">Int.coe_natAbs</span><span class="o">,</span> <span class="n">abs_of_nonneg</span><span class="o">,</span> <span class="n">norm_nonneg</span><span class="o">]</span>
@@ -1479,7 +1485,7 @@ The second one re-expresses the fact that the norm is decreasing.</p>
 </div>
 <p>We also need to establish the second key property of the norm function
 on a Euclidean domain.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">not_norm_mul_left_lt_norm</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">}</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">not_norm_mul_left_lt_norm</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">}</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
     <span class="bp">&#172;</span><span class="o">(</span><span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">))</span><span class="bp">.</span><span class="n">natAbs</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">norm</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">natAbs</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">apply</span> <span class="n">not_lt_of_ge</span>
   <span class="n">rw</span> <span class="o">[</span><span class="n">norm_mul</span><span class="o">,</span> <span class="n">Int.natAbs_mul</span><span class="o">]</span>
@@ -1499,8 +1505,8 @@ Comparing the values of a norm function that returns natural numbers is
 just one instance of such a measure,
 and in that case, the required properties are the theorems
 <code class="docutils literal notranslate"><span class="pre">natAbs_norm_mod_lt</span></code> and <code class="docutils literal notranslate"><span class="pre">not_norm_mul_left_lt_norm</span></code>.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">EuclideanDomain</span> <span class="n">gaussInt</span> <span class="o">:=</span>
-  <span class="o">{</span> <span class="n">gaussInt.instCommRing</span> <span class="k">with</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span> <span class="o">:</span> <span class="n">EuclideanDomain</span> <span class="n">GaussInt</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">GaussInt.instCommRing</span> <span class="k">with</span>
     <span class="n">quotient</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">/</span> <span class="bp">&#183;</span><span class="o">)</span>
     <span class="n">remainder</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#183;</span> <span class="bp">%</span> <span class="bp">&#183;</span><span class="o">)</span>
     <span class="n">quotient_mul_add_remainder_eq</span> <span class="o">:=</span>
@@ -1516,12 +1522,12 @@ and in that case, the required properties are the theorems
 </div>
 <p>An immediate payoff is that we now know that, in the Gaussian integers,
 the notions of being prime and being irreducible coincide.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">gaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">Irreducible</span> <span class="n">x</span> <span class="bp">&#8596;</span> <span class="n">Prime</span> <span class="n">x</span> <span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">Irreducible</span> <span class="n">x</span> <span class="bp">&#8596;</span> <span class="n">Prime</span> <span class="n">x</span> <span class="o">:=</span>
   <span class="n">PrincipalIdealRing.irreducible_iff_prime</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

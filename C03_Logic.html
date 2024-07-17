@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3. Logic &mdash; Mathematics in Lean 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -12,10 +13,11 @@
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -29,11 +31,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,8 +83,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">3. </span>Logic</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>Logic</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C03_Logic.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -88,8 +94,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="logic">
-<span id="id1"></span><h1><span class="section-number">3. </span>Logic<a class="headerlink" href="#logic" title="Permalink to this headline">&#61633;</a></h1>
+  <section id="logic">
+<span id="id1"></span><h1><span class="section-number">3. </span>Logic<a class="headerlink" href="#logic" title="Permalink to this heading">&#61633;</a></h1>
 <p>In the last chapter, we dealt with equations, inequalities,
 and basic mathematical statements like
 &#8220;<span class="math notranslate nohighlight">\(x\)</span> divides <span class="math notranslate nohighlight">\(y\)</span>.&#8221;
@@ -99,8 +105,8 @@ using logical terms like &#8220;and,&#8221; &#8220;or,&#8221; &#8220;not,&#8221;
 &#8220;if &#8230; then,&#8221; &#8220;every,&#8221; and &#8220;some.&#8221;
 In this chapter, we show you how to work with statements
 that are built up in this way.</p>
-<div class="section" id="implication-and-the-universal-quantifier">
-<span id="id2"></span><h2><span class="section-number">3.1. </span>Implication and the Universal Quantifier<a class="headerlink" href="#implication-and-the-universal-quantifier" title="Permalink to this headline">&#61633;</a></h2>
+<section id="implication-and-the-universal-quantifier">
+<span id="id2"></span><h2><span class="section-number">3.1. </span>Implication and the Universal Quantifier<a class="headerlink" href="#implication-and-the-universal-quantifier" title="Permalink to this heading">&#61633;</a></h2>
 <p>Consider the statement after the <code class="docutils literal notranslate"><span class="pre">#check</span></code>:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="bp">&#8594;</span> <span class="bp">|</span><span class="n">x</span><span class="bp">|</span> <span class="bp">=</span> <span class="n">x</span>
 </pre></div>
@@ -488,9 +494,9 @@ a lemma name.</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-existential-quantifier">
-<span id="id3"></span><h2><span class="section-number">3.2. </span>The Existential Quantifier<a class="headerlink" href="#the-existential-quantifier" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="the-existential-quantifier">
+<span id="id3"></span><h2><span class="section-number">3.2. </span>The Existential Quantifier<a class="headerlink" href="#the-existential-quantifier" title="Permalink to this heading">&#61633;</a></h2>
 <p>The existential quantifier, which can be entered as <code class="docutils literal notranslate"><span class="pre">\ex</span></code> in VS Code,
 is used to represent the phrase &#8220;there exists.&#8221;
 The formal expression <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">&#8477;,</span> <span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">x</span> <span class="pre">&#8743;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">3</span></code> in Lean says
@@ -677,7 +683,7 @@ what we are doing here is what computer scientists call &#8220;pattern matching.
 Notice that the third proof begins by <code class="docutils literal notranslate"><span class="pre">by</span></code>, after which the tactic version
 of <code class="docutils literal notranslate"><span class="pre">match</span></code> expects a tactic proof on the right side of the arrow.
 The last example is a proof term: there are no tactics in sight.</p>
-<p>For the rest of this book, we will stick to <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, <code class="docutils literal notranslate"><span class="pre">rintros</span></code>, and <code class="docutils literal notranslate"><span class="pre">obtain</span></code>,
+<p>For the rest of this book, we will stick to <code class="docutils literal notranslate"><span class="pre">rcases</span></code>, <code class="docutils literal notranslate"><span class="pre">rintro</span></code>, and <code class="docutils literal notranslate"><span class="pre">obtain</span></code>,
 as the preferred ways of using an existential quantifier.
 But it can&#8217;t hurt to see the alternative syntax, especially if there is
 a chance you will find yourself in the company of computer scientists.</p>
@@ -809,9 +815,9 @@ the composition of surjective functions is surjective.</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="negation">
-<span id="id4"></span><h2><span class="section-number">3.3. </span>Negation<a class="headerlink" href="#negation" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="negation">
+<span id="id4"></span><h2><span class="section-number">3.3. </span>Negation<a class="headerlink" href="#negation" title="Permalink to this heading">&#61633;</a></h2>
 <p>The symbol <code class="docutils literal notranslate"><span class="pre">&#172;</span></code> is meant to express negation,
 so <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">y</span></code> says that <code class="docutils literal notranslate"><span class="pre">x</span></code> is not less than <code class="docutils literal notranslate"><span class="pre">y</span></code>,
 <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code> (or, equivalently, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8800;</span> <span class="pre">y</span></code>) says that
@@ -862,7 +868,7 @@ which says that a function has an upper bound.</p>
 </div>
 <p>Remember that it is often convenient to use <code class="docutils literal notranslate"><span class="pre">linarith</span></code>
 when a goal follows from linear equations and
-inequalities that in the context.</p>
+inequalities that are in the context.</p>
 <p>See if you can prove these in a similar way:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#172;</span><span class="n">FnHasLb</span> <span class="n">f</span> <span class="o">:=</span>
   <span class="gr">sorry</span>
@@ -1074,9 +1080,9 @@ Finally, the <code class="docutils literal notranslate"><span class="pre">contra
 by finding a contradiction in the hypotheses,
 such as a pair of the form <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">P</span></code> and <code class="docutils literal notranslate"><span class="pre">h'</span> <span class="pre">:</span> <span class="pre">&#172;</span> <span class="pre">P</span></code>.
 Of course, in this example, <code class="docutils literal notranslate"><span class="pre">linarith</span></code> also works.</p>
-</div>
-<div class="section" id="conjunction-and-iff">
-<span id="conjunction-and-biimplication"></span><h2><span class="section-number">3.4. </span>Conjunction and Iff<a class="headerlink" href="#conjunction-and-iff" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="conjunction-and-iff">
+<span id="conjunction-and-biimplication"></span><h2><span class="section-number">3.4. </span>Conjunction and Iff<a class="headerlink" href="#conjunction-and-iff" title="Permalink to this heading">&#61633;</a></h2>
 <p id="index-18">You have already seen that the conjunction symbol, <code class="docutils literal notranslate"><span class="pre">&#8743;</span></code>,
 is used to express &#8220;and.&#8221;
 The <code class="docutils literal notranslate"><span class="pre">constructor</span></code> tactic allows you to prove a statement of
@@ -1215,7 +1221,7 @@ You have already seen that you can write <code class="docutils literal notransla
 or <code class="docutils literal notranslate"><span class="pre">h.1</span></code> and <code class="docutils literal notranslate"><span class="pre">h.2</span></code> for the two directions of <code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">:</span> <span class="pre">A</span> <span class="pre">&#8596;</span> <span class="pre">B</span></code>.
 You can also use <code class="docutils literal notranslate"><span class="pre">cases</span></code> and friends.
 To prove an if-and-only-if statement,
-you can uses <code class="docutils literal notranslate"><span class="pre">constructor</span></code> or angle brackets,
+you can use <code class="docutils literal notranslate"><span class="pre">constructor</span></code> or angle brackets,
 just as you would if you were proving a conjunction.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&#8804;</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="bp">&#172;</span><span class="n">y</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">&#8800;</span> <span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="n">constructor</span>
@@ -1333,9 +1339,9 @@ to be instantiated to different values.</p>
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="disjunction">
-<span id="id5"></span><h2><span class="section-number">3.5. </span>Disjunction<a class="headerlink" href="#disjunction" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="disjunction">
+<span id="id5"></span><h2><span class="section-number">3.5. </span>Disjunction<a class="headerlink" href="#disjunction" title="Permalink to this heading">&#61633;</a></h2>
 <p id="index-21">The canonical way to prove a disjunction <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#8744;</span> <span class="pre">B</span></code> is to prove
 <code class="docutils literal notranslate"><span class="pre">A</span></code> or to prove <code class="docutils literal notranslate"><span class="pre">B</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">left</span></code> tactic chooses <code class="docutils literal notranslate"><span class="pre">A</span></code>,
@@ -1421,7 +1427,7 @@ that is introduced closer to where it is used.</p>
 </pre></div>
 </div>
 <p>The names <code class="docutils literal notranslate"><span class="pre">inl</span></code> and <code class="docutils literal notranslate"><span class="pre">inr</span></code> are short for &#8220;intro left&#8221; and &#8220;intro right,&#8221;
-respectively. Using <code class="docutils literal notranslate"><span class="pre">case</span></code> has the advantage is that you can prove the
+respectively. Using <code class="docutils literal notranslate"><span class="pre">case</span></code> has the advantage that you can prove the
 cases in either order; Lean uses the tag to find the relevant goal.
 If you don&#8217;t care about that, you can use <code class="docutils literal notranslate"><span class="pre">next</span></code>, or <code class="docutils literal notranslate"><span class="pre">match</span></code>,
 or even a pattern-matching <code class="docutils literal notranslate"><span class="pre">have</span></code>.</p>
@@ -1434,7 +1440,6 @@ or even a pattern-matching <code class="docutils literal notranslate"><span clas
     <span class="n">rw</span> <span class="o">[</span><span class="n">abs_of_neg</span> <span class="n">h</span><span class="o">]</span>
     <span class="n">intro</span> <span class="n">h</span><span class="bp">;</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span>
 
-
 <span class="kd">example</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="bp">|</span><span class="n">y</span><span class="bp">|</span> <span class="bp">&#8594;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">&#8744;</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="bp">-</span><span class="n">y</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="k">match</span> <span class="n">le_or_gt</span> <span class="mi">0</span> <span class="n">y</span> <span class="k">with</span>
     <span class="bp">|</span> <span class="n">Or.inl</span> <span class="n">h</span> <span class="bp">=&gt;</span>
@@ -1445,11 +1450,11 @@ or even a pattern-matching <code class="docutils literal notranslate"><span clas
       <span class="n">intro</span> <span class="n">h</span><span class="bp">;</span> <span class="n">right</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span>
 </pre></div>
 </div>
-<p>In the case of the <code class="docutils literal notranslate"><span class="pre">match</span></code>, we need to use the full names
+<p>In the case of <code class="docutils literal notranslate"><span class="pre">match</span></code>, we need to use the full names
 <code class="docutils literal notranslate"><span class="pre">Or.inl</span></code> and <code class="docutils literal notranslate"><span class="pre">Or.inr</span></code> of the canonical ways to prove a disjunction.
 In this textbook, we will generally use <code class="docutils literal notranslate"><span class="pre">rcases</span></code> to split on the
 cases of a disjunction.</p>
-<p>Try proving the triangle inequality using the two
+<p>Try proving the triangle inequality using the
 first two theorems in the next snippet.
 They are given the same names they have in Mathlib.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">namespace</span> <span class="n">MyAbs</span>
@@ -1576,9 +1581,9 @@ using <code class="docutils literal notranslate"><span class="pre">by_cases</spa
   <span class="gr">sorry</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="sequences-and-convergence">
-<span id="id6"></span><h2><span class="section-number">3.6. </span>Sequences and Convergence<a class="headerlink" href="#sequences-and-convergence" title="Permalink to this headline">&#61633;</a></h2>
+</section>
+<section id="sequences-and-convergence">
+<span id="id6"></span><h2><span class="section-number">3.6. </span>Sequences and Convergence<a class="headerlink" href="#sequences-and-convergence" title="Permalink to this heading">&#61633;</a></h2>
 <p>We now have enough skills at our disposal to do some real mathematics.
 In Lean, we can represent a sequence <span class="math notranslate nohighlight">\(s_0, s_1, s_2, \ldots\)</span> of
 real numbers as a function <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">:</span> <span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code>.
@@ -1813,8 +1818,8 @@ for dealing with convergence in vastly more general terms,
 not only abstracting away particular features of the domain
 and codomain,
 but also abstracting over different types of convergence.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

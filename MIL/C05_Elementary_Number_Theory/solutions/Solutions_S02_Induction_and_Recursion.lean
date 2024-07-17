@@ -1,5 +1,4 @@
 import Mathlib.Data.Nat.GCD.Basic
-import Mathlib.Algebra.BigOperators.Basic
 import MIL.Common
 
 def fac : ℕ → ℕ

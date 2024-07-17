@@ -46,7 +46,6 @@ example : x < |y| → x < y ∨ x < -y := by
     rw [abs_of_neg h]
     intro h; right; exact h
 
-
 example : x < |y| → x < y ∨ x < -y := by
   match le_or_gt 0 y with
     | Or.inl h =>

@@ -108,7 +108,7 @@ variable (m n : ℕ)
 
 example : Nat.gcd m n = Nat.gcd n m := by
   apply Nat.dvd_antisymm
-  repeat'
+  repeat
     apply Nat.dvd_gcd
     apply Nat.gcd_dvd_right
     apply Nat.gcd_dvd_left

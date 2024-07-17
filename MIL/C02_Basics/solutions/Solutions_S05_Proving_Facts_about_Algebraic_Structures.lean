@@ -7,7 +7,7 @@ variable (x y z : α)
 
 example : x ⊓ y = y ⊓ x := by
   apply le_antisymm
-  repeat'
+  repeat
     apply le_inf
     · apply inf_le_right
     apply inf_le_left
@@ -15,27 +15,27 @@ example : x ⊓ y = y ⊓ x := by
 example : x ⊓ y ⊓ z = x ⊓ (y ⊓ z) := by
   apply le_antisymm
   · apply le_inf
-    · apply le_trans
+    · trans x ⊓ y
       apply inf_le_left
       apply inf_le_left
     apply le_inf
-    · apply le_trans
+    · trans x ⊓ y
       apply inf_le_left
       apply inf_le_right
     apply inf_le_right
   apply le_inf
   · apply le_inf
     · apply inf_le_left
-    apply le_trans
+    trans y ⊓ z
     apply inf_le_right
     apply inf_le_left
-  apply le_trans
+  trans y ⊓ z
   apply inf_le_right
   apply inf_le_right
 
 example : x ⊔ y = y ⊔ x := by
   apply le_antisymm
-  repeat'
+  repeat
     apply sup_le
     · apply le_sup_right
     apply le_sup_left
@@ -45,19 +45,19 @@ example : x ⊔ y ⊔ z = x ⊔ (y ⊔ z) := by
   · apply sup_le
     · apply sup_le
       apply le_sup_left
-      · apply le_trans
-        apply @le_sup_left _ _ y z
+      · trans y ⊔ z
+        apply le_sup_left
         apply le_sup_right
-    apply le_trans
-    apply @le_sup_right _ _ y z
+    trans y ⊔ z
+    apply le_sup_right
     apply le_sup_right
   apply sup_le
-  · apply le_trans
-    apply @le_sup_left _ _ x y
+  · trans x ⊔ y
+    apply le_sup_left
     apply le_sup_left
   apply sup_le
-  · apply le_trans
-    apply @le_sup_right _ _ x y
+  · trans x ⊔ y
+    apply le_sup_right
     apply le_sup_left
   apply le_sup_right
 

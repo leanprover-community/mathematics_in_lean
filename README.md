@@ -36,15 +36,9 @@ Do the following:
    You can call the copy `my_files` or whatever you want and use it to create
    your own Lean files as well.
 
-At that point, you can open the textbook in a side panel in VS Code as follows:
-
-1. Type `ctrl-shift-P` (`command-shift-P` in macOS).
-
-2. Type `Lean 4: Docview: Open Docview` in the bar that appears, and then
-  press return. (You can press return to select it as soon as it is highlighted
-  in the menu.)
-
-3. In the window that opens, click on `Open documentation of current project`.
+At that point, you can open the textbook in a web browser 
+at [https://leanprover-community.github.io/mathematics_in_lean/](https://leanprover-community.github.io/mathematics_in_lean/)
+and start reading and doing the exercises in VS Code.
 
 The textbook and this repository are still a work in progress.
 You can update the repository by typing `git pull`

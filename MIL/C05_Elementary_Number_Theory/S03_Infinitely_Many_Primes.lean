@@ -9,7 +9,7 @@ theorem two_le {m : ℕ} (h0 : m ≠ 0) (h1 : m ≠ 1) : 2 ≤ m := by
   cases m; contradiction
   case succ m =>
     cases m; contradiction
-    repeat' apply Nat.succ_le_succ
+    repeat apply Nat.succ_le_succ
     apply zero_le
 
 example {m : ℕ} (h0 : m ≠ 0) (h1 : m ≠ 1) : 2 ≤ m := by
@@ -118,7 +118,7 @@ example (s : Finset ℕ) (x : ℕ) : x ∈ s.filter Nat.Prime ↔ x ∈ s ∧ x.
 theorem primes_infinite' : ∀ s : Finset Nat, ∃ p, Nat.Prime p ∧ p ∉ s := by
   intro s
   by_contra h
-  push_neg  at h
+  push_neg at h
   set s' := s.filter Nat.Prime with s'_def
   have mem_s' : ∀ {n : ℕ}, n ∈ s' ↔ n.Prime := by
     intro n
@@ -178,7 +178,7 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
   · use n
   induction' n using Nat.strong_induction_on with n ih
   rw [Nat.prime_def_lt] at np
-  push_neg  at np
+  push_neg at np
   rcases np (two_le_of_mod_4_eq_3 h) with ⟨m, mltn, mdvdn, mne1⟩
   have mge2 : 2 ≤ m := by
     apply two_le _ mne1
@@ -201,7 +201,7 @@ example (m n : ℕ) (s : Finset ℕ) (h : m ∈ erase s n) : m ≠ n ∧ m ∈ s
 
 theorem primes_mod_4_eq_3_infinite : ∀ n, ∃ p > n, Nat.Prime p ∧ p % 4 = 3 := by
   by_contra h
-  push_neg  at h
+  push_neg at h
   rcases h with ⟨n, hn⟩
   have : ∃ s : Finset Nat, ∀ p : ℕ, p.Prime ∧ p % 4 = 3 ↔ p ∈ s := by
     apply ex_finset_of_bounded

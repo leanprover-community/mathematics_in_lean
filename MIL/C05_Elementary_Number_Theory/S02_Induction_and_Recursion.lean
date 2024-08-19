@@ -85,8 +85,8 @@ example (f : ℕ → ℕ) (n : ℕ) : ∏ x in range n.succ, f x = (∏ x in ran
 
 example (n : ℕ) : fac n = ∏ i in range n, (i + 1) := by
   induction' n with n ih
-  · rw [fac, prod_range_zero]
-  rw [fac, ih, prod_range_succ, mul_comm]
+  · simp [fac, prod_range_zero]
+  simp [fac, ih, prod_range_succ, mul_comm]
 
 example (a b c d e f : ℕ) : a * (b * c * f * (d * e)) = d * (a * f * e) * (c * b) := by
   simp [mul_assoc, mul_comm, mul_left_comm]
@@ -102,7 +102,7 @@ theorem sum_sqr (n : ℕ) : ∑ i in range (n + 1), i ^ 2 = n * (n + 1) * (2 * n
   sorry
 end
 
-inductive MyNat
+inductive MyNat where
   | zero : MyNat
   | succ : MyNat → MyNat
 

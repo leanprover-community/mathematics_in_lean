@@ -69,10 +69,10 @@ example {m n : ℕ} (coprime_mn : m.Coprime n) : m ^ 2 ≠ 2 * n ^ 2 := by
 
 example {m n p : ℕ} (coprime_mn : m.Coprime n) (prime_p : p.Prime) : m ^ 2 ≠ p * n ^ 2 := by
   sorry
-#check Nat.factors
-#check Nat.prime_of_mem_factors
-#check Nat.prod_factors
-#check Nat.factors_unique
+#check Nat.primeFactorsList
+#check Nat.prime_of_mem_primeFactorsList
+#check Nat.prod_primeFactorsList
+#check Nat.primeFactorsList_unique
 
 theorem factorization_mul' {m n : ℕ} (mnez : m ≠ 0) (nnez : n ≠ 0) (p : ℕ) :
     (m * n).factorization p = m.factorization p + n.factorization p := by

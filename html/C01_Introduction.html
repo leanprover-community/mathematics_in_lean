@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1. Introduction &mdash; Mathematics in Lean 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
+
+  
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -90,9 +92,9 @@
            <div itemprop="articleBody">
              
   <section id="introduction">
-<span id="id1"></span><h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">&#61633;</a></h1>
 <section id="getting-started">
-<h2><span class="section-number">1.1. </span>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading">&#61633;</a></h2>
+<h2><span class="section-number">1.1. </span>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">&#61633;</a></h2>
 <p>The goal of this book is to teach you to formalize mathematics using the
 Lean 4 interactive proof assistant.
 It assumes that you know some mathematics, but it does not require much.
@@ -140,10 +142,10 @@ your own Lean files as well.</p></li>
 <p>At that point, you can open the textbook in a side panel in VS Code as follows:</p>
 <ol class="arabic simple">
 <li><p>Type <code class="docutils literal notranslate"><span class="pre">ctrl-shift-P</span></code> (<code class="docutils literal notranslate"><span class="pre">command-shift-P</span></code> in macOS).</p></li>
-<li><p>Type <code class="docutils literal notranslate"><span class="pre">Lean</span> <span class="pre">4:</span> <span class="pre">Open</span> <span class="pre">Documentation</span> <span class="pre">View</span></code> in the bar that appears, and then
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">Lean</span> <span class="pre">4:</span> <span class="pre">Docs:</span> <span class="pre">Show</span> <span class="pre">Documentation</span> <span class="pre">Resources</span></code> in the bar that appears, and then
 press return. (You can press return to select it as soon as it is highlighted
 in the menu.)</p></li>
-<li><p>In the window that opens, click on <code class="docutils literal notranslate"><span class="pre">Open</span> <span class="pre">documentation</span> <span class="pre">of</span> <span class="pre">current</span> <span class="pre">project</span></code>.</p></li>
+<li><p>In the window that opens, click on <code class="docutils literal notranslate"><span class="pre">Mathematics</span> <span class="pre">in</span> <span class="pre">Lean</span></code>.</p></li>
 </ol>
 <p>Alternatively, you can run Lean and VS Code in the cloud,
 using <a class="reference external" href="https://gitpod.io/">Gitpod</a>.
@@ -179,7 +181,7 @@ You can always compare your solutions to the ones in the <code class="docutils l
 folder associated with each section.</p>
 </section>
 <section id="overview">
-<h2><span class="section-number">1.2. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">&#61633;</a></h2>
+<h2><span class="section-number">1.2. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">&#61633;</a></h2>
 <p>Put simply, Lean is a tool for building complex expressions in a formal language
 known as <em>dependent type theory</em>.</p>
 <p id="index-0">Every expression has a <em>type</em>, and you can use the <cite>#check</cite> command to
@@ -342,15 +344,16 @@ Your life may never be the same.</p>
 infrastructure for running this tutorial in VS Code,
 and to Scott Morrison and Mario Carneiro for help porting it from Lean 4.
 We are also grateful for help and corrections from
-Takeshi Abe, Julian Berman, Alex Best,
-Bulwi Cha, Bryan Gin-ge Chen, Steven Clontz, Mauricio Collaris, Johan Commelin, Mark Czubin,
-Alexandru Duca, Denis Gorbachev, Winston de Greef,
-Mathieu Guay-Paquet, Julian K&#252;lshammer,
+Takeshi Abe, Julian Berman, Alex Best, Thomas Browning,
+Bulwi Cha, Hanson Char, Bryan Gin-ge Chen, Steven Clontz, Mauricio Collaris, Johan Commelin, Mark Czubin,
+Alexandru Duca, Pierpaolo Frasa, Denis Gorbachev, Winston de Greef, Marc Huisinga,
+Mathieu Guay-Paquet, Julian K&#252;lshammer, Victor Liu, Jimmy Lu,
 Martin C. Martin,
-Giovanni Mascellani, Isaiah Mindich, Hunter Monroe, Pietro Monticone, Oliver Nash,
-Bartosz Piotrowski, Nicolas Rolland, Keith Rush, Guilherme Silva,
-Pedro S&#225;nchez Terraf,
-Floris van Doorn, and Eric Wieser.
+Giovanni Mascellani, John McDowell, Isaiah Mindich, Hunter Monroe, Pietro Monticone,
+Oliver Nash, Emanuelle Natale, Pim Otte,
+Bartosz Piotrowski, Nicolas Rolland, Keith Rush, Yannick Seurin, Guilherme Silva,
+Pedro S&#225;nchez Terraf, Matthew Toohey,
+Floris van Doorn, Eric Wieser, and others.
 Our work has been partially supported by the Hoskinson Center for
 Formal Mathematics.</p>
 </section>

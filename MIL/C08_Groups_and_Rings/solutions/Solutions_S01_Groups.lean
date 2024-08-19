@@ -71,10 +71,10 @@ open scoped Classical
 
 open Subgroup
 
-lemma eq_bot_iff_card {G : Type*} [Group G] {H : Subgroup G} [Fintype H] :
+lemma eq_bot_iff_card {G : Type*} [Group G] {H : Subgroup G} :
     H = ⊥ ↔ Nat.card H = 1 := by
   suffices (∀ x ∈ H, x = 1) ↔ ∃ x ∈ H, ∀ a ∈ H, a = x by
-    simpa [eq_bot_iff_forall, Nat.card_eq_one_iff_exists, -Nat.card_eq_fintype_card]
+    simpa [eq_bot_iff_forall, Nat.card_eq_one_iff_exists]
   constructor
   · intro h
     use 1, H.one_mem
@@ -82,7 +82,7 @@ lemma eq_bot_iff_card {G : Type*} [Group G] {H : Subgroup G} [Fintype H] :
     calc x = y := hy' x hx
     _      = 1 := (hy' 1 H.one_mem).symm
 
-lemma inf_bot_of_coprime {G : Type*} [Group G] (H K : Subgroup G) [Fintype H] [Fintype K]
+lemma inf_bot_of_coprime {G : Type*} [Group G] (H K : Subgroup G)
     (h : (Nat.card H).Coprime (Nat.card K)) : H ⊓ K = ⊥ := by
   have D₁ : Nat.card (H ⊓ K : Subgroup G) ∣ Nat.card H := card_dvd_of_le inf_le_left
   have D₂ : Nat.card (H ⊓ K : Subgroup G) ∣ Nat.card K := card_dvd_of_le inf_le_right
@@ -127,7 +127,7 @@ open MonoidHom
 #check Subgroup.index_mul_card
 #check Nat.eq_of_mul_eq_mul_right
 
-lemma aux_card_eq [Fintype G] (h' : Nat.card G = Nat.card H * Nat.card K) :
+lemma aux_card_eq [Finite G] (h' : Nat.card G = Nat.card H * Nat.card K) :
     Nat.card (G ⧸ H) = Nat.card K := by
   have := calc
     Nat.card (G ⧸ H) * Nat.card H = Nat.card G := by rw [← H.index_eq_card, H.index_mul_card]

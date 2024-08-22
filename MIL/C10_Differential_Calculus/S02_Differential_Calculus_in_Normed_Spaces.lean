@@ -73,10 +73,10 @@ example (f : E →L[𝕜] F) (a : 𝕜) (x : E) : f (a • x) = a • f x :=
 variable (f : E →L[𝕜] F)
 
 example (x : E) : ‖f x‖ ≤ ‖f‖ * ‖x‖ :=
-  f.le_op_norm x
+  f.le_opNorm x
 
 example {M : ℝ} (hMp : 0 ≤ M) (hM : ∀ x, ‖f x‖ ≤ M * ‖x‖) : ‖f‖ ≤ M :=
-  f.op_norm_le_bound hMp hM
+  f.opNorm_le_bound hMp hM
 
 end
 

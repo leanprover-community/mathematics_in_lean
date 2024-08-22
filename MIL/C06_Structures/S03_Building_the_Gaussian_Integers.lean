@@ -246,7 +246,7 @@ theorem coe_natAbs_norm (x : GaussInt) : (x.norm.natAbs : ℤ) = x.norm :=
 theorem natAbs_norm_mod_lt (x y : GaussInt) (hy : y ≠ 0) :
     (x % y).norm.natAbs < y.norm.natAbs := by
   apply Int.ofNat_lt.1
-  simp only [Int.coe_natAbs, abs_of_nonneg, norm_nonneg]
+  simp only [Int.natCast_natAbs, abs_of_nonneg, norm_nonneg]
   apply norm_mod_lt x hy
 
 theorem not_norm_mul_left_lt_norm (x : GaussInt) {y : GaussInt} (hy : y ≠ 0) :
@@ -273,6 +273,6 @@ instance : EuclideanDomain GaussInt :=
     mul_left_not_lt := not_norm_mul_left_lt_norm }
 
 example (x : GaussInt) : Irreducible x ↔ Prime x :=
-  PrincipalIdealRing.irreducible_iff_prime
+  irreducible_iff_prime
 
 end GaussInt

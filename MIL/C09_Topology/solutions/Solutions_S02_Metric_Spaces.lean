@@ -94,7 +94,7 @@ example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n,
   rw [Metric.mem_closure_iff]
   intro ε ε_pos
   rcases hu ε ε_pos with ⟨N, hN⟩
-  refine' ⟨u N, hs _, _⟩
+  refine ⟨u N, hs _, ?_⟩
   rw [dist_comm]
   exact hN N le_rfl
 
@@ -288,7 +288,7 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
     rw [dist_comm] at xy
     obtain ⟨r, rpos, hr⟩ : ∃ r > 0, closedBall y r ⊆ f n :=
       nhds_basis_closedBall.mem_iff.1 (isOpen_iff_mem_nhds.1 (ho n) y ys)
-    refine' ⟨y, min (min (δ / 2) r) (B (n + 1)), _, _, fun z hz ↦ ⟨_, _⟩⟩
+    refine ⟨y, min (min (δ / 2) r) (B (n + 1)), ?_, ?_, fun z hz ↦ ⟨?_, ?_⟩⟩
     show 0 < min (min (δ / 2) r) (B (n + 1))
     exact lt_min (lt_min (half_pos δpos) rpos) (Bpos (n + 1))
     show min (min (δ / 2) r) (B (n + 1)) ≤ B (n + 1)
@@ -309,7 +309,7 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
           _ ≤ r := (min_le_left _ _).trans (min_le_right _ _)
           )
   choose! center radius Hpos HB Hball using this
-  refine' fun x ↦ (mem_closure_iff_nhds_basis nhds_basis_closedBall).2 fun ε εpos ↦ _
+  refine fun x ↦ (mem_closure_iff_nhds_basis nhds_basis_closedBall).2 fun ε εpos ↦ ?_
   /- `ε` is positive. We have to find a point in the ball of radius `ε` around `x` belonging to all
     `f n`. For this, we construct inductively a sequence `F n = (c n, r n)` such that the closed ball
     `closedBall (c n) (r n)` is included in the previous ball and in `f n`, and such that
@@ -351,13 +351,13 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
   use y
   have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by
     intro n
-    refine' Nat.le_induction _ fun m hnm h ↦ _
+    refine Nat.le_induction ?_ fun m hnm h ↦ ?_
     · exact Subset.rfl
     · exact (incl m).trans (Set.inter_subset_left.trans h)
   have yball : ∀ n, y ∈ closedBall (c n) (r n) := by
     intro n
-    refine' isClosed_ball.mem_of_tendsto ylim _
-    refine' (Filter.eventually_ge_atTop n).mono fun m hm ↦ _
+    refine isClosed_ball.mem_of_tendsto ylim ?_
+    refine (Filter.eventually_ge_atTop n).mono fun m hm ↦ ?_
     exact I n m hm (mem_closedBall_self (rpos _).le)
   constructor
   · suffices ∀ n, y ∈ f n by rwa [Set.mem_iInter]

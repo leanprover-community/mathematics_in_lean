@@ -55,28 +55,28 @@ example : f ⁻¹' (u ∪ v) = f ⁻¹' u ∪ f ⁻¹' v := by
 example : f '' (s ∩ t) ⊆ f '' s ∩ f '' t := by
   rintro y ⟨x, ⟨xs, xt⟩, rfl⟩
   constructor
-  . use x, xs
-  . use x, xt
+  · use x, xs
+  · use x, xt
 
 example (h : Injective f) : f '' s ∩ f '' t ⊆ f '' (s ∩ t) := by
   rintro y ⟨⟨x₁, x₁s, rfl⟩, ⟨x₂, x₂t, fx₂eq⟩⟩
   use x₁
   constructor
-  . use x₁s
+  · use x₁s
     rw [← h fx₂eq]
     exact x₂t
-  . rfl
+  · rfl
 
 example : f '' s \ f '' t ⊆ f '' (s \ t) := by
   rintro y ⟨⟨x₁, x₁s, rfl⟩, h⟩
   use x₁
   constructor
-  . constructor
-    . exact x₁s
-    . intro h'
+  · constructor
+    · exact x₁s
+    · intro h'
       apply h
       use x₁, h'
-  . rfl
+  · rfl
 
 example : f ⁻¹' u \ f ⁻¹' v ⊆ f ⁻¹' (u \ v) :=
   fun x ↦ id

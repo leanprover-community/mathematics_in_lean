@@ -47,7 +47,7 @@ theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
   have : 2 ≤ Nat.factorial (n + 1) + 1 := by
     sorry
   rcases exists_prime_factor this with ⟨p, pp, pdvd⟩
-  refine' ⟨p, _, pp⟩
+  refine ⟨p, ?_, pp⟩
   show p > n
   by_contra ple
   push_neg  at ple

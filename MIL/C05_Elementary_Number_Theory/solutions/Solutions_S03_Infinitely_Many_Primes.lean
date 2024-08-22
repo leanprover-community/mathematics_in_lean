@@ -36,7 +36,7 @@ theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
     apply Nat.succ_le_succ
     exact Nat.succ_le_of_lt (Nat.factorial_pos _)
   rcases exists_prime_factor this with ⟨p, pp, pdvd⟩
-  refine' ⟨p, _, pp⟩
+  refine ⟨p, ?_, pp⟩
   show p > n
   by_contra ple
   push_neg  at ple

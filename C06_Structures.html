@@ -1481,7 +1481,7 @@ The second one re-expresses the fact that the norm is decreasing.</p>
 <span class="kd">theorem</span><span class="w"> </span><span class="n">natAbs_norm_mod_lt</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">GaussInt</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hy</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">&#8800;</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
 <span class="w">    </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="bp">%</span><span class="w"> </span><span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">norm.natAbs</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">y.norm.natAbs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">apply</span><span class="w"> </span><span class="n">Int.ofNat_lt</span><span class="bp">.</span><span class="mi">1</span>
-<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">Int.coe_natAbs</span><span class="o">,</span><span class="w"> </span><span class="n">abs_of_nonneg</span><span class="o">,</span><span class="w"> </span><span class="n">norm_nonneg</span><span class="o">]</span>
+<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">Int.natCast_natAbs</span><span class="o">,</span><span class="w"> </span><span class="n">abs_of_nonneg</span><span class="o">,</span><span class="w"> </span><span class="n">norm_nonneg</span><span class="o">]</span>
 <span class="w">  </span><span class="n">apply</span><span class="w"> </span><span class="n">norm_mod_lt</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">hy</span>
 </pre></div>
 </div>
@@ -1525,7 +1525,7 @@ and in that case, the required properties are the theorems
 <p>An immediate payoff is that we now know that, in the Gaussian integers,
 the notions of being prime and being irreducible coincide.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">GaussInt</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Irreducible</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8596;</span><span class="w"> </span><span class="n">Prime</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span>
-<span class="w">  </span><span class="n">PrincipalIdealRing.irreducible_iff_prime</span>
+<span class="w">  </span><span class="n">irreducible_iff_prime</span>
 </pre></div>
 </div>
 </section>

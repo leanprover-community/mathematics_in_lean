@@ -91,7 +91,7 @@ class MonoidHomClass₃ (F : Type) (M N : outParam Type) [Monoid M] [Monoid N] e
 
 instance (M N : Type) [Monoid M] [Monoid N] : MonoidHomClass₃ (MonoidHom₁ M N) M N where
   coe := MonoidHom₁.toFun
-  coe_injective' := MonoidHom₁.ext
+  coe_injective' _ _ := MonoidHom₁.ext
   map_one := MonoidHom₁.map_one
   map_mul := MonoidHom₁.map_mul
 
@@ -111,19 +111,19 @@ extends DFunLike F α (fun _ ↦ β) where
 
 instance (α β : Type) [LE α] [LE β] : OrderPresHomClass (OrderPresHom α β) α β where
   coe := OrderPresHom.toFun
-  coe_injective' := OrderPresHom.ext
+  coe_injective' _ _ := OrderPresHom.ext
   le_of_le := OrderPresHom.le_of_le
 
 instance (α β : Type) [LE α] [Monoid α] [LE β] [Monoid β] :
     OrderPresHomClass (OrderPresMonoidHom α β) α β where
   coe := fun f ↦ f.toOrderPresHom.toFun
-  coe_injective' := OrderPresMonoidHom.ext
+  coe_injective' _ _ := OrderPresMonoidHom.ext
   le_of_le := fun f ↦ f.toOrderPresHom.le_of_le
 
 instance (α β : Type) [LE α] [Monoid α] [LE β] [Monoid β] :
     MonoidHomClass₃ (OrderPresMonoidHom α β) α β
 where
   coe := fun f ↦ f.toOrderPresHom.toFun
-  coe_injective' := OrderPresMonoidHom.ext
+  coe_injective' _ _ := OrderPresMonoidHom.ext
   map_one := fun f ↦ f.toMonoidHom₁.map_one
   map_mul := fun f ↦ f.toMonoidHom₁.map_mul

@@ -1,5 +1,5 @@
 import MIL.Common
-import Mathlib.GroupTheory.QuotientGroup
+import Mathlib.GroupTheory.QuotientGroup.Basic
 
 set_option autoImplicit true
 
@@ -16,7 +16,7 @@ structure Submonoid₁ (M : Type) [Monoid M] where
 /-- Submonoids in `M` can be seen as sets in `M`. -/
 instance [Monoid M] : SetLike (Submonoid₁ M) M where
   coe := Submonoid₁.carrier
-  coe_injective' := Submonoid₁.ext
+  coe_injective' _ _ := Submonoid₁.ext
 
 
 
@@ -61,12 +61,12 @@ structure Subgroup₁ (G : Type) [Group G] extends Submonoid₁ G where
 /-- Subgroups in `M` can be seen as sets in `M`. -/
 instance [Group G] : SetLike (Subgroup₁ G) G where
   coe := fun H ↦ H.toSubmonoid₁.carrier
-  coe_injective' := Subgroup₁.ext
+  coe_injective' _ _ := Subgroup₁.ext
 
 instance [Group G] (H : Subgroup₁ G) : Group H :=
 { SubMonoid₁Monoid H.toSubmonoid₁ with
   inv := fun x ↦ ⟨x⁻¹, H.inv_mem x.property⟩
-  mul_left_inv := fun x ↦ SetCoe.ext (mul_left_inv (x : G)) }
+  inv_mul_cancel := fun x ↦ SetCoe.ext (inv_mul_cancel (x : G)) }
 
 class SubgroupClass₁ (S : Type) (G : Type) [Group G] [SetLike S G]
     extends SubmonoidClass₁ S G  : Prop where

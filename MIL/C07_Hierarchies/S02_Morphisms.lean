@@ -91,7 +91,7 @@ class MonoidHomClass₃ (F : Type) (M N : outParam Type) [Monoid M] [Monoid N] e
 
 instance (M N : Type) [Monoid M] [Monoid N] : MonoidHomClass₃ (MonoidHom₁ M N) M N where
   coe := MonoidHom₁.toFun
-  coe_injective' := MonoidHom₁.ext
+  coe_injective' _ _ := MonoidHom₁.ext
   map_one := MonoidHom₁.map_one
   map_mul := MonoidHom₁.map_mul
 

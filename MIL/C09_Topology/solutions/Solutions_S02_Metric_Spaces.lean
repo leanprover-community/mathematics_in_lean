@@ -153,7 +153,7 @@ example {X : Type*} [MetricSpace X] [CompactSpace X] {Y : Type*} [MetricSpace Y]
     intro x y _
     have : (x, y) ∉ K := by simp [hK]
     simpa [K] using this
-  · rcases K_cpct.exists_forall_le hK continuous_dist.continuousOn with ⟨⟨x₀, x₁⟩, xx_in, H⟩
+  · rcases K_cpct.exists_isMinOn hK continuous_dist.continuousOn with ⟨⟨x₀, x₁⟩, xx_in, H⟩
     use dist x₀ x₁
     constructor
     · change _ < _
@@ -163,8 +163,8 @@ example {X : Type*} [MetricSpace X] [CompactSpace X] {Y : Type*} [MetricSpace Y]
       linarith
     · intro x x'
       contrapose!
-      intro hxx'
-      exact H (x, x') hxx'
+      intro (hxx' : (x, x') ∈ K)
+      exact H hxx'
 
 example (u : ℕ → X) :
     CauchySeq u ↔ ∀ ε > 0, ∃ N : ℕ, ∀ m ≥ N, ∀ n ≥ N, dist (u m) (u n) < ε :=

@@ -105,7 +105,7 @@ def odds : Set ℕ :=
 example : evens ∪ odds = univ := by
   rw [evens, odds]
   ext n
-  simp
+  simp [-Nat.not_even_iff_odd]
   apply Classical.em
 
 example (x : ℕ) (h : x ∈ (∅ : Set ℕ)) : False :=

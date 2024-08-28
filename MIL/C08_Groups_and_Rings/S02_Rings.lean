@@ -198,8 +198,9 @@ open Complex Polynomial
 example : aroots (X ^ 2 + 1 : ℝ[X]) ℂ = {Complex.I, -I} := by
   suffices roots (X ^ 2 + 1 : ℂ[X]) = {I, -I} by simpa [aroots_def]
   have factored : (X ^ 2 + 1 : ℂ[X]) = (X - C I) * (X - C (-I)) := by
+    have key : (C I * C I : ℂ[X]) = -1 := by simp [← C_mul]
     rw [C_neg]
-    linear_combination show (C I * C I : ℂ[X]) = -1 by simp [← C_mul]
+    linear_combination key
   have p_ne_zero : (X - C I) * (X - C (-I)) ≠ 0 := by
     intro H
     apply_fun eval 0 at H

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
+<html class="writer-html5" lang="en">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -17,9 +17,9 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2709fde1"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e031e9a9"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -94,7 +94,7 @@
            <div itemprop="articleBody">
              
   <section id="sets-and-functions">
-<span id="id1"></span><h1><span class="section-number">4. </span>Sets and Functions<a class="headerlink" href="#sets-and-functions" title="Link to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">4. </span>Sets and Functions<a class="headerlink" href="#sets-and-functions" title="Permalink to this heading">&#61633;</a></h1>
 <p>The vocabulary of sets, relations, and functions provides a uniform
 language for carrying out constructions in all the branches of
 mathematics.
@@ -127,7 +127,7 @@ from real numbers to real numbers.
 The distinction between types and sets takes some getting used to,
 but this chapter will take you through the essentials.</p>
 <section id="sets">
-<span id="id2"></span><h2><span class="section-number">4.1. </span>Sets<a class="headerlink" href="#sets" title="Link to this heading">&#61633;</a></h2>
+<span id="id2"></span><h2><span class="section-number">4.1. </span>Sets<a class="headerlink" href="#sets" title="Permalink to this heading">&#61633;</a></h2>
 <p id="index-0">If <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is any type, the type <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">&#945;</span></code> consists of sets
 of elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
 This type supports the usual set-theoretic operations and relations.
@@ -338,12 +338,15 @@ So we can turn the property of being even into the set of even numbers:</p>
 <span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">evens</span><span class="w"> </span><span class="bp">&#8746;</span><span class="w"> </span><span class="n">odds</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">univ</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">evens</span><span class="o">,</span><span class="w"> </span><span class="n">odds</span><span class="o">]</span>
 <span class="w">  </span><span class="n">ext</span><span class="w"> </span><span class="n">n</span>
-<span class="w">  </span><span class="n">simp</span>
+<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="bp">-</span><span class="n">Nat.not_even_iff_odd</span><span class="o">]</span>
 <span class="w">  </span><span class="n">apply</span><span class="w"> </span><span class="n">Classical.em</span>
 </pre></div>
 </div>
 <p>You should step through this proof and make sure
 you understand what is going on.
+Note we tell the simplifier to <em>not</em> use the lemma
+<code class="docutils literal notranslate"><span class="pre">Nat.not_even_iff</span></code> because we want to keep
+<code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">Even</span> <span class="pre">n</span></code> in our goal.
 Try deleting the line <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[evens,</span> <span class="pre">odds]</span></code>
 and confirm that the proof still works.</p>
 <p>In fact, set-builder notation is used to define</p>
@@ -371,7 +374,7 @@ Use <code class="docutils literal notranslate"><span class="pre">intro</span> <s
 and use the simplifier to reduce the
 set-theoretic constructions to logic.
 We also recommend using the theorems
-<code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_two_or_odd</span></code> and <code class="docutils literal notranslate"><span class="pre">Nat.even_iff</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">Nat.Prime.eq_two_or_odd</span></code> and <code class="docutils literal notranslate"><span class="pre">Nat.odd_iff</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="n">Nat.Prime</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="bp">&#8745;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="bp">&#8838;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="bp">&#172;</span><span class="n">Even</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="gr">sorry</span>
 </pre></div>
@@ -556,7 +559,7 @@ and intersection.</p>
 <code class="docutils literal notranslate"><span class="pre">sUnion_eq_biUnion</span></code> and <code class="docutils literal notranslate"><span class="pre">sInter_eq_biInter</span></code>.</p>
 </section>
 <section id="functions">
-<span id="id3"></span><h2><span class="section-number">4.2. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading">&#61633;</a></h2>
+<span id="id3"></span><h2><span class="section-number">4.2. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">&#61633;</a></h2>
 <p>If <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">&#8594;</span> <span class="pre">&#946;</span></code> is a function and  <code class="docutils literal notranslate"><span class="pre">p</span></code> is a set of
 elements of type <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>,
 the library defines <code class="docutils literal notranslate"><span class="pre">preimage</span> <span class="pre">f</span> <span class="pre">p</span></code>, written <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">p</span></code>,
@@ -864,7 +867,7 @@ and then fill in the two lines that are missing.</p>
 </div>
 </section>
 <section id="the-schroder-bernstein-theorem">
-<span id="the-schroeder-bernstein-theorem"></span><h2><span class="section-number">4.3. </span>The Schr&#246;der-Bernstein Theorem<a class="headerlink" href="#the-schroder-bernstein-theorem" title="Link to this heading">&#61633;</a></h2>
+<span id="the-schroeder-bernstein-theorem"></span><h2><span class="section-number">4.3. </span>The Schr&#246;der-Bernstein Theorem<a class="headerlink" href="#the-schroder-bernstein-theorem" title="Permalink to this heading">&#61633;</a></h2>
 <p>We close this chapter with an elementary but nontrivial theorem of set theory.
 Let <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> be sets.
 (In our formalization, they will actually be types.)

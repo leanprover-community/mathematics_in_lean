@@ -80,7 +80,7 @@ example {s : Set X} : IsClosed s ↔ IsOpen (sᶜ) :=
 
 example {s : Set X} (hs : IsClosed s) {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a))
     (hus : ∀ n, u n ∈ s) : a ∈ s :=
-  hs.mem_of_tendsto hu (eventually_of_forall hus)
+  hs.mem_of_tendsto hu (Eventually.of_forall hus)
 
 example {s : Set X} : a ∈ closure s ↔ ∀ ε > 0, ∃ b ∈ s, a ∈ Metric.ball b ε :=
   Metric.mem_closure_iff

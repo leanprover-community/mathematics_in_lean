@@ -80,7 +80,7 @@ example (u v : ℕ → ℝ) (h : u =ᶠ[atTop] v) (x₀ : ℝ) :
     Tendsto u atTop (𝓝 x₀) ↔ Tendsto v atTop (𝓝 x₀) :=
   tendsto_congr' h
 
-#check eventually_of_forall
+#check Eventually.of_forall
 #check Eventually.mono
 #check Eventually.and
 

@@ -18,7 +18,7 @@ example {M N : Type*} [AddMonoid M] [AddMonoid N] (f : M →+ N) : f 0 = 0 :=
 example {M N P : Type*} [AddMonoid M] [AddMonoid N] [AddMonoid P]
     (f : M →+ N) (g : N →+ P) : M →+ P := g.comp f
 
-example {G : Type*} [Group G] (x : G) : x * x⁻¹ = 1 := mul_inv_self x
+example {G : Type*} [Group G] (x : G) : x * x⁻¹ = 1 := mul_inv_cancel x
 
 example {G : Type*} [Group G] (x y z : G) : x * (y * z) * (x * z)⁻¹ * (x * y * x⁻¹)⁻¹ = 1 := by
   group

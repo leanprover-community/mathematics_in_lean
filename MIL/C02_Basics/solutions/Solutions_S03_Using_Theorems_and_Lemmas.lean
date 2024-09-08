@@ -53,8 +53,8 @@ example : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
   have h : (0 : ℝ) < 2 := by norm_num
   apply abs_le'.mpr
   constructor
-  · rw [le_div_iff h]
+  · rw [le_div_iff₀ h]
     apply fact1
-  rw [le_div_iff h]
+  rw [le_div_iff₀ h]
   apply fact2
 

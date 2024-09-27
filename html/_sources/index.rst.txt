@@ -14,9 +14,10 @@ Mathematics in Lean
    C06_Structures
    C07_Hierarchies
    C08_Groups_and_Rings
-   C09_Topology
-   C10_Differential_Calculus
-   C11_Integration_and_Measure_Theory
+   C09_Linear_Algebra
+   C10_Topology
+   C11_Differential_Calculus
+   C12_Integration_and_Measure_Theory
 
 .. toctree::
    :hidden:

@@ -261,4 +261,3 @@ example : Cardinal.lift.{v, u} (.mk ι) = Cardinal.lift.{u, v} (.mk ι') :=
 example [FiniteDimensional K V] :
     (FiniteDimensional.finrank K V : Cardinal) = Module.rank K V :=
   finrank_eq_rank K V
-

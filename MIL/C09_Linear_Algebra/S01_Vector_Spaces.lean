@@ -153,4 +153,3 @@ example [Fintype ι] : (⨁ i, V i) ≃ₗ[K] (Π i, V i) :=
   linearEquivFunOnFintype K ι V
 
 end families
-

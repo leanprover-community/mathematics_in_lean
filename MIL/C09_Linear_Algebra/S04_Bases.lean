@@ -200,27 +200,27 @@ example [Fintype ι] (B' : Basis ι K V) (φ : End K V) :
 end
 
 section
-#check (FiniteDimensional.finrank K V : ℕ)
+#check (Module.finrank K V : ℕ)
 
 -- `Fin n → K` is the archetypical space with dimension `n` over `K`.
-example (n : ℕ) : FiniteDimensional.finrank K (Fin n → K) = n :=
-  FiniteDimensional.finrank_fin_fun K
+example (n : ℕ) : Module.finrank K (Fin n → K) = n :=
+  Module.finrank_fin_fun K
 
 -- Seen as a vector space over itself, `ℂ` has dimension one.
-example : FiniteDimensional.finrank ℂ ℂ = 1 :=
-  FiniteDimensional.finrank_self ℂ
+example : Module.finrank ℂ ℂ = 1 :=
+  Module.finrank_self ℂ
 
 -- But as a real vector space it has dimension two.
-example : FiniteDimensional.finrank ℝ ℂ = 2 :=
+example : Module.finrank ℝ ℂ = 2 :=
   Complex.finrank_real_complex
 
 
-example [FiniteDimensional K V] : 0 < FiniteDimensional.finrank K V ↔ Nontrivial V  :=
-  FiniteDimensional.finrank_pos_iff
+example [FiniteDimensional K V] : 0 < Module.finrank K V ↔ Nontrivial V  :=
+  Module.finrank_pos_iff
 
 
-example [FiniteDimensional K V] (h : 0 < FiniteDimensional.finrank K V) : Nontrivial V := by
-  apply (FiniteDimensional.finrank_pos_iff (R := K)).1
+example [FiniteDimensional K V] (h : 0 < Module.finrank K V) : Nontrivial V := by
+  apply (Module.finrank_pos_iff (R := K)).1
   exact h
 
 variable {ι : Type*} (B : Basis ι K V)
@@ -234,7 +234,7 @@ end
 section
 variable (E F : Submodule K V) [FiniteDimensional K V]
 
-open FiniteDimensional
+open Module
 
 example : finrank K (E ⊔ F : Submodule K V) + finrank K (E ⊓ F : Submodule K V) =
     finrank K E + finrank K F :=
@@ -259,5 +259,5 @@ example : Cardinal.lift.{v, u} (.mk ι) = Cardinal.lift.{u, v} (.mk ι') :=
   mk_eq_mk_of_basis B B'
 
 example [FiniteDimensional K V] :
-    (FiniteDimensional.finrank K V : Cardinal) = Module.rank K V :=
-  finrank_eq_rank K V
+    (Module.finrank K V : Cardinal) = Module.rank K V :=
+  Module.finrank_eq_rank K V

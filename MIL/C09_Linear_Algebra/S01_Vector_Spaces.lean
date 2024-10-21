@@ -18,15 +18,6 @@ example (a b : K) (u : V) : (a + b) • u = a • u + b • u :=
 example (a b : K) (u : V) : a • b • u = b • a • u :=
   smul_comm a b u
 
-def mkVectorSpace {K X : Type*} [Field K] [AddCommGroup X] (ρ : K →+* AddMonoid.End X) : Module K X where
-  smul a x := ρ a x
-  one_smul x := show ρ 1 x = x by simp
-  mul_smul a b x := show ρ (a * b) _ = _ by rw [map_mul]; rfl
-  smul_zero x := map_zero ..
-  smul_add a x y := map_add ..
-  add_smul a b x := show ρ (a + b) _ = _ by rw [map_add]; rfl
-  zero_smul x := show ρ 0 _ = _ by simp
-
 example {R M : Type*} [CommSemiring R] [AddCommMonoid M] [Module R M] :
     Module (Ideal R) (Submodule R M) :=
   inferInstance

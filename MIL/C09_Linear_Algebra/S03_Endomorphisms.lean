@@ -42,11 +42,8 @@ example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) : ker (aeval φ P) ⊓ k
 example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) :
     ker (aeval φ P) ⊔ ker (aeval φ Q) = ker (aeval φ (P*Q)) := by
   sorry
-example (a : K) : algebraMap K (End K V) a = a • LinearMap.id := rfl
-
-example (φ : End K V) (a : K) :
-    φ.eigenspace a = LinearMap.ker (φ - algebraMap K (End K V) a) :=
-  rfl
+example (φ : End K V) (a : K) : φ.eigenspace a = LinearMap.ker (φ - a • 1) :=
+  End.eigenspace_def
 
 
 

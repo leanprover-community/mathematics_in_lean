@@ -1,4 +1,4 @@
-import Mathlib.RingTheory.Ideal.QuotientOperations
+import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Localization.Basic
 import Mathlib.RingTheory.DedekindDomain.Ideal
 import Mathlib.Analysis.Complex.Polynomial.Basic
@@ -211,9 +211,9 @@ example : aroots (X ^ 2 + 1 : ℝ[X]) ℂ = {Complex.I, -I} := by
 -- Mathlib knows about D'Alembert-Gauss theorem: ``ℂ`` is algebraically closed.
 example : IsAlgClosed ℂ := inferInstance
 
-#check (Complex.ofReal : ℝ →+* ℂ)
+#check (Complex.ofRealHom : ℝ →+* ℂ)
 
-example : (X ^ 2 + 1 : ℝ[X]).eval₂ Complex.ofReal Complex.I = 0 := by simp
+example : (X ^ 2 + 1 : ℝ[X]).eval₂ Complex.ofRealHom Complex.I = 0 := by simp
 
 open MvPolynomial
 

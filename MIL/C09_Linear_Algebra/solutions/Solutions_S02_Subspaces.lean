@@ -21,19 +21,24 @@ def preimage {W : Type*} [AddCommGroup W] [Module K W] (φ : V →ₗ[K] W) (H :
     rw [Set.mem_preimage, map_smul]
     exact H.smul_mem a hv
 
-  · rintro x (hx|hx)
-    · use x, hx, 0, T.zero_mem
+  | mem x h =>
+      rcases h with (hx|hx)
+      · use x, hx, 0, T.zero_mem
+        module
+      · use 0, S.zero_mem, x, hx
+        module
+  | zero =>
+      use 0, S.zero_mem, 0, T.zero_mem
       module
-    · use 0, S.zero_mem, x, hx
+  | add x y hx hy hx' hy' =>
+      rcases hx' with ⟨s, hs, t, ht, rfl⟩
+      rcases hy' with ⟨s', hs', t', ht', rfl⟩
+      use s + s', S.add_mem hs hs', t + t', T.add_mem ht ht'
       module
-  · use 0, S.zero_mem, 0, T.zero_mem
-    module
-  · rintro - - ⟨s, hs, t, ht, rfl⟩ ⟨s', hs', t', ht', rfl⟩
-    use s + s', S.add_mem hs hs', t + t', T.add_mem ht ht'
-    module
-  · rintro a - ⟨s, hs, t, ht, rfl⟩
-    use a • s, S.smul_mem a hs, a • t, T.smul_mem a ht
-    module
+  | smul a x hx hx' =>
+      rcases hx' with ⟨s, hs, t, ht, rfl⟩
+      use a • s, S.smul_mem a hs, a • t, T.smul_mem a ht
+      module
 
   constructor
   · intro h x hx

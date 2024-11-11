@@ -100,11 +100,15 @@ example : GaloisInsertion (Submodule.span K) ((↑) : Submodule K V → Set V) :
 example {S T : Submodule K V} {x : V} (h : x ∈ S ⊔ T) :
     ∃ s ∈ S, ∃ t ∈ T, x = s + t  := by
   rw [← S.span_eq, ← T.span_eq, ← Submodule.span_union] at h
-  apply Submodule.span_induction h (p := fun x ↦ ∃ s ∈ S, ∃ t ∈ T, x = s + t)
-  · sorry
-  · sorry
-  · sorry
-  · sorry
+  induction h using Submodule.span_induction with
+  | mem y h =>
+      sorry
+  | zero =>
+      sorry
+  | add x y hx hy hx' hy' =>
+      sorry
+  | smul a x hx hx' =>
+      sorry
 
 section
 

@@ -50,7 +50,7 @@ theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
   refine ⟨p, ?_, pp⟩
   show p > n
   by_contra ple
-  push_neg  at ple
+  push_neg at ple
   have : p ∣ Nat.factorial (n + 1) := by
     sorry
   have : p ∣ 1 := by

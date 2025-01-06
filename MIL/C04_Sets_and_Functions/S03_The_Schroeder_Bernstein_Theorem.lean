@@ -57,7 +57,7 @@ theorem sb_injective (hf : Injective f) : Injective (sbFun f g) := by
       simp [sbAux]
       exact ⟨x₁, hn, x₂eq.symm⟩
     sorry
-  push_neg  at xA
+  push_neg at xA
   sorry
 
 theorem sb_surjective (hg : Injective g) : Surjective (sbFun f g) := by

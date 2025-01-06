@@ -59,7 +59,7 @@ theorem sb_injective (hf : Injective f) : Injective (sbFun f g) := by
       exact ⟨x₁, hn, x₂eq.symm⟩
     rw [if_pos x₁A, if_pos x₂A] at hxeq
     exact hf hxeq
-  push_neg  at xA
+  push_neg at xA
   rw [if_neg xA.1, if_neg xA.2] at hxeq
   rw [← sb_right_inv f g xA.1, hxeq, sb_right_inv f g xA.2]
 

@@ -337,7 +337,6 @@ instance : AddMonoid₄ ℤ where
     by rw [Int.add_mul, Int.add_comm, Int.one_mul]
 
 example (n : ℕ) (m : ℤ) : SMul.smul (self := mySMul) n m = n * m := rfl
-
 class LT₁ (α : Type) where
   /-- The Less-Than relation -/
   lt : α → α → Prop

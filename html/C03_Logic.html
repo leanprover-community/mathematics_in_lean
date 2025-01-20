@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3. Logic &mdash; Mathematics in Lean 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -80,8 +83,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">3. </span>Logic</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>Logic</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C03_Logic.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -92,7 +95,7 @@
            <div itemprop="articleBody">
              
   <section id="logic">
-<span id="id1"></span><h1><span class="section-number">3. </span>Logic<a class="headerlink" href="#logic" title="Permalink to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">3. </span>Logic<a class="headerlink" href="#logic" title="Link to this heading">&#61633;</a></h1>
 <p>In the last chapter, we dealt with equations, inequalities,
 and basic mathematical statements like
 &#8220;<span class="math notranslate nohighlight">\(x\)</span> divides <span class="math notranslate nohighlight">\(y\)</span>.&#8221;
@@ -103,7 +106,7 @@ using logical terms like &#8220;and,&#8221; &#8220;or,&#8221; &#8220;not,&#8221;
 In this chapter, we show you how to work with statements
 that are built up in this way.</p>
 <section id="implication-and-the-universal-quantifier">
-<span id="id2"></span><h2><span class="section-number">3.1. </span>Implication and the Universal Quantifier<a class="headerlink" href="#implication-and-the-universal-quantifier" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id2"></span><h2><span class="section-number">3.1. </span>Implication and the Universal Quantifier<a class="headerlink" href="#implication-and-the-universal-quantifier" title="Link to this heading">&#61633;</a></h2>
 <p>Consider the statement after the <code class="docutils literal notranslate"><span class="pre">#check</span></code>:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">x</span> <span class="bp">&#8594;</span> <span class="bp">|</span><span class="n">x</span><span class="bp">|</span> <span class="bp">=</span> <span class="n">x</span>
 </pre></div>
@@ -493,7 +496,7 @@ a lemma name.</p>
 </div>
 </section>
 <section id="the-existential-quantifier">
-<span id="id3"></span><h2><span class="section-number">3.2. </span>The Existential Quantifier<a class="headerlink" href="#the-existential-quantifier" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id3"></span><h2><span class="section-number">3.2. </span>The Existential Quantifier<a class="headerlink" href="#the-existential-quantifier" title="Link to this heading">&#61633;</a></h2>
 <p>The existential quantifier, which can be entered as <code class="docutils literal notranslate"><span class="pre">\ex</span></code> in VS Code,
 is used to represent the phrase &#8220;there exists.&#8221;
 The formal expression <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">x</span> <span class="pre">:</span> <span class="pre">&#8477;,</span> <span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">x</span> <span class="pre">&#8743;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">3</span></code> in Lean says
@@ -814,7 +817,7 @@ the composition of surjective functions is surjective.</p>
 </div>
 </section>
 <section id="negation">
-<span id="id4"></span><h2><span class="section-number">3.3. </span>Negation<a class="headerlink" href="#negation" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id4"></span><h2><span class="section-number">3.3. </span>Negation<a class="headerlink" href="#negation" title="Link to this heading">&#61633;</a></h2>
 <p>The symbol <code class="docutils literal notranslate"><span class="pre">&#172;</span></code> is meant to express negation,
 so <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">y</span></code> says that <code class="docutils literal notranslate"><span class="pre">x</span></code> is not less than <code class="docutils literal notranslate"><span class="pre">y</span></code>,
 <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">y</span></code> (or, equivalently, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&#8800;</span> <span class="pre">y</span></code>) says that
@@ -1079,7 +1082,7 @@ such as a pair of the form <code class="docutils literal notranslate"><span clas
 Of course, in this example, <code class="docutils literal notranslate"><span class="pre">linarith</span></code> also works.</p>
 </section>
 <section id="conjunction-and-iff">
-<span id="conjunction-and-biimplication"></span><h2><span class="section-number">3.4. </span>Conjunction and Iff<a class="headerlink" href="#conjunction-and-iff" title="Permalink to this heading">&#61633;</a></h2>
+<span id="conjunction-and-biimplication"></span><h2><span class="section-number">3.4. </span>Conjunction and Iff<a class="headerlink" href="#conjunction-and-iff" title="Link to this heading">&#61633;</a></h2>
 <p id="index-18">You have already seen that the conjunction symbol, <code class="docutils literal notranslate"><span class="pre">&#8743;</span></code>,
 is used to express &#8220;and.&#8221;
 The <code class="docutils literal notranslate"><span class="pre">constructor</span></code> tactic allows you to prove a statement of
@@ -1338,7 +1341,7 @@ to be instantiated to different values.</p>
 </div>
 </section>
 <section id="disjunction">
-<span id="id5"></span><h2><span class="section-number">3.5. </span>Disjunction<a class="headerlink" href="#disjunction" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id5"></span><h2><span class="section-number">3.5. </span>Disjunction<a class="headerlink" href="#disjunction" title="Link to this heading">&#61633;</a></h2>
 <p id="index-21">The canonical way to prove a disjunction <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&#8744;</span> <span class="pre">B</span></code> is to prove
 <code class="docutils literal notranslate"><span class="pre">A</span></code> or to prove <code class="docutils literal notranslate"><span class="pre">B</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">left</span></code> tactic chooses <code class="docutils literal notranslate"><span class="pre">A</span></code>,
@@ -1580,7 +1583,7 @@ using <code class="docutils literal notranslate"><span class="pre">by_cases</spa
 </div>
 </section>
 <section id="sequences-and-convergence">
-<span id="id6"></span><h2><span class="section-number">3.6. </span>Sequences and Convergence<a class="headerlink" href="#sequences-and-convergence" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id6"></span><h2><span class="section-number">3.6. </span>Sequences and Convergence<a class="headerlink" href="#sequences-and-convergence" title="Link to this heading">&#61633;</a></h2>
 <p>We now have enough skills at our disposal to do some real mathematics.
 In Lean, we can represent a sequence <span class="math notranslate nohighlight">\(s_0, s_1, s_2, \ldots\)</span> of
 real numbers as a function <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">:</span> <span class="pre">&#8469;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code>.

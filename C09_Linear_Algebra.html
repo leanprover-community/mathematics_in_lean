@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>9. Linear algebra &mdash; Mathematics in Lean 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,8 +98,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">9. </span>Linear algebra</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9. </span>Linear algebra</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C09_Linear_Algebra.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -107,11 +110,11 @@
            <div itemprop="articleBody">
              
   <section id="linear-algebra">
-<span id="id1"></span><h1><span class="section-number">9. </span>Linear algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">9. </span>Linear algebra<a class="headerlink" href="#linear-algebra" title="Link to this heading">&#61633;</a></h1>
 <section id="vector-spaces-and-linear-maps">
-<h2><span class="section-number">9.1. </span>Vector spaces and linear maps<a class="headerlink" href="#vector-spaces-and-linear-maps" title="Permalink to this heading">&#61633;</a></h2>
+<h2><span class="section-number">9.1. </span>Vector spaces and linear maps<a class="headerlink" href="#vector-spaces-and-linear-maps" title="Link to this heading">&#61633;</a></h2>
 <section id="vector-spaces">
-<h3><span class="section-number">9.1.1. </span>Vector spaces<a class="headerlink" href="#vector-spaces" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.1.1. </span>Vector spaces<a class="headerlink" href="#vector-spaces" title="Link to this heading">&#61633;</a></h3>
 <p id="index-0">We will start directly abstract linear algebra, taking place in a vector space over any field.
 However you can find information about matrices in
 <a class="reference internal" href="#matrices"><span class="std std-numref">Section 9.4.1</span></a> which does not logically depend on this abstract theory.
@@ -163,7 +166,7 @@ a lot of algebraic rules about ideals acting on submodules:</p>
 </div>
 </section>
 <section id="linear-maps">
-<h3><span class="section-number">9.1.2. </span>Linear maps<a class="headerlink" href="#linear-maps" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.1.2. </span>Linear maps<a class="headerlink" href="#linear-maps" title="Link to this heading">&#61633;</a></h3>
 <p id="index-1">Next we need linear maps. Like group morphisms, linear maps in Mathlib are bundled maps, i.e. packages
 made of a map and proofs of its linearity properties.
 Those bundled maps are converted to ordinary functions when applied.
@@ -260,7 +263,7 @@ Doing so makes the inverse function noncomputable.</p>
 refers to <code class="docutils literal notranslate"><span class="pre">LinearEquiv.ofBijective</span></code> (without needing to open any namespace).</p>
 </section>
 <section id="sums-and-products-of-vector-spaces">
-<h3><span class="section-number">9.1.3. </span>Sums and products of vector spaces<a class="headerlink" href="#sums-and-products-of-vector-spaces" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.1.3. </span>Sums and products of vector spaces<a class="headerlink" href="#sums-and-products-of-vector-spaces" title="Link to this heading">&#61633;</a></h3>
 <p>We can build new vector spaces out of old ones using direct sums and direct
 products.
 Let us start with two vectors spaces. In this case there is no difference between sum and product,
@@ -364,9 +367,9 @@ indexing type (this is somehow an implementation accident).</p>
 </section>
 </section>
 <section id="subspaces-and-quotients">
-<span id="index-2"></span><h2><span class="section-number">9.2. </span>Subspaces and quotients<a class="headerlink" href="#subspaces-and-quotients" title="Permalink to this heading">&#61633;</a></h2>
+<span id="index-2"></span><h2><span class="section-number">9.2. </span>Subspaces and quotients<a class="headerlink" href="#subspaces-and-quotients" title="Link to this heading">&#61633;</a></h2>
 <section id="subspaces">
-<h3><span class="section-number">9.2.1. </span>Subspaces<a class="headerlink" href="#subspaces" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.2.1. </span>Subspaces<a class="headerlink" href="#subspaces" title="Link to this heading">&#61633;</a></h3>
 <p>Just as linear maps are bundled, a linear subspace of <code class="docutils literal notranslate"><span class="pre">V</span></code> is also a bundled structure consisting of
 a set in <code class="docutils literal notranslate"><span class="pre">V</span></code>, called the carrier of the subspace, with the relevant closure properties.
 Again the word module appears instead of vector space because of the more general context that
@@ -441,7 +444,7 @@ So the above example can be restated more explicitly as:</p>
 </div>
 </section>
 <section id="complete-lattice-structure-and-internal-direct-sums">
-<h3><span class="section-number">9.2.2. </span>Complete lattice structure and internal direct sums<a class="headerlink" href="#complete-lattice-structure-and-internal-direct-sums" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.2.2. </span>Complete lattice structure and internal direct sums<a class="headerlink" href="#complete-lattice-structure-and-internal-direct-sums" title="Link to this heading">&#61633;</a></h3>
 <p>An important benefit of having a type <code class="docutils literal notranslate"><span class="pre">Submodule</span> <span class="pre">K</span> <span class="pre">V</span></code> instead of a predicate
 <code class="docutils literal notranslate"><span class="pre">IsSubmodule</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">V</span> <span class="pre">&#8594;</span> <span class="pre">Prop</span></code> is that one can easily endow <code class="docutils literal notranslate"><span class="pre">Submodule</span> <span class="pre">K</span> <span class="pre">V</span></code> with additional structure.
 Importantly, it has the structure of a complete lattice structure with respect to
@@ -516,7 +519,7 @@ In the case of general families of subspaces we use <code class="docutils litera
 </div>
 </section>
 <section id="subspace-spanned-by-a-set">
-<h3><span class="section-number">9.2.3. </span>Subspace spanned by a set<a class="headerlink" href="#subspace-spanned-by-a-set" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.2.3. </span>Subspace spanned by a set<a class="headerlink" href="#subspace-spanned-by-a-set" title="Link to this heading">&#61633;</a></h3>
 <p>In addition to building subspaces out of existing subspaces, we can build them out
 of any set <code class="docutils literal notranslate"><span class="pre">s</span></code> using <code class="docutils literal notranslate"><span class="pre">Submodule.span</span> <span class="pre">K</span> <span class="pre">s</span></code> which builds the smallest subspace
 containing <code class="docutils literal notranslate"><span class="pre">s</span></code>.
@@ -554,7 +557,7 @@ the axioms relating the various algebraic operations on <code class="docutils li
 </div>
 </section>
 <section id="pushing-and-pulling-subspaces">
-<h3><span class="section-number">9.2.4. </span>Pushing and pulling subspaces<a class="headerlink" href="#pushing-and-pulling-subspaces" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.2.4. </span>Pushing and pulling subspaces<a class="headerlink" href="#pushing-and-pulling-subspaces" title="Link to this heading">&#61633;</a></h3>
 <p>As promised earlier, we now describe how to push and pull subspaces by linear maps.
 As usual in Mathlib, the first operation is called <code class="docutils literal notranslate"><span class="pre">map</span></code> and the second one is called
 <code class="docutils literal notranslate"><span class="pre">comap</span></code>.</p>
@@ -606,7 +609,7 @@ One can use the following lemmas but this is not required since they are true by
 </div>
 </section>
 <section id="quotient-spaces">
-<h3><span class="section-number">9.2.5. </span>Quotient spaces<a class="headerlink" href="#quotient-spaces" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.2.5. </span>Quotient spaces<a class="headerlink" href="#quotient-spaces" title="Link to this heading">&#61633;</a></h3>
 <p>Quotient vector spaces use the general quotient notation (typed with <code class="docutils literal notranslate"><span class="pre">\quot</span></code>, not the ordinary
 <code class="docutils literal notranslate"><span class="pre">/</span></code>).
 The projection onto a quotient space is <code class="docutils literal notranslate"><span class="pre">Submodule.mkQ</span></code> and the universal property is
@@ -645,7 +648,7 @@ Mathlib knows a slightly more precise version as <code class="docutils literal n
 </section>
 </section>
 <section id="endomorphisms">
-<h2><span class="section-number">9.3. </span>Endomorphisms<a class="headerlink" href="#endomorphisms" title="Permalink to this heading">&#61633;</a></h2>
+<h2><span class="section-number">9.3. </span>Endomorphisms<a class="headerlink" href="#endomorphisms" title="Link to this heading">&#61633;</a></h2>
 <p>An important special case of linear maps are endomorphisms: linear maps from a vector space to itself.
 They are interesting because they form a <code class="docutils literal notranslate"><span class="pre">K</span></code>-algebra. In particular we can evaluate polynomials
 with coefficients in <code class="docutils literal notranslate"><span class="pre">K</span></code> on them, and they can have eigenvalues and eigenvectors.</p>
@@ -727,9 +730,9 @@ predicate is <code class="docutils literal notranslate"><span class="pre">End.Ha
 </div>
 </section>
 <section id="matrices-bases-and-dimension">
-<span id="matrices-bases-dimension"></span><h2><span class="section-number">9.4. </span>Matrices, bases and dimension<a class="headerlink" href="#matrices-bases-and-dimension" title="Permalink to this heading">&#61633;</a></h2>
+<span id="matrices-bases-dimension"></span><h2><span class="section-number">9.4. </span>Matrices, bases and dimension<a class="headerlink" href="#matrices-bases-and-dimension" title="Link to this heading">&#61633;</a></h2>
 <section id="matrices">
-<span id="id2"></span><h3><span class="section-number">9.4.1. </span>Matrices<a class="headerlink" href="#matrices" title="Permalink to this heading">&#61633;</a></h3>
+<span id="id2"></span><h3><span class="section-number">9.4.1. </span>Matrices<a class="headerlink" href="#matrices" title="Link to this heading">&#61633;</a></h3>
 <p id="index-3">Before introducing bases for abstract vector spaces, we go back to the much more elementary setup
 of linear algebra in <span class="math notranslate nohighlight">\(K^n\)</span> for some field <span class="math notranslate nohighlight">\(K\)</span>.
 Here the main objects are vectors and matrices.
@@ -892,7 +895,7 @@ and matrices.&#8239;This equivalence is secretly defined using <code class="docu
 </div>
 </section>
 <section id="bases">
-<h3><span class="section-number">9.4.2. </span>Bases<a class="headerlink" href="#bases" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.4.2. </span>Bases<a class="headerlink" href="#bases" title="Link to this heading">&#61633;</a></h3>
 <p>We now want to discuss bases of vector spaces. Informally there are many ways to define this notion.
 One can use a universal property.
 One can say a basis is a family of vectors that is linearly independent and spanning.
@@ -1098,7 +1101,7 @@ shouldn&#8217;t use it too soon, but rather use the provided lemmas.</p>
 </div>
 </section>
 <section id="dimension">
-<h3><span class="section-number">9.4.3. </span>Dimension<a class="headerlink" href="#dimension" title="Permalink to this heading">&#61633;</a></h3>
+<h3><span class="section-number">9.4.3. </span>Dimension<a class="headerlink" href="#dimension" title="Link to this heading">&#61633;</a></h3>
 <p>Returning to the case of a single vector space, bases are also useful to define the concept of
 dimension.
 Here again, there is the elementary case of finite-dimensional vector spaces.

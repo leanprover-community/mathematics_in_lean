@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>6. Structures &mdash; Mathematics in Lean 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,8 +80,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">6. </span>Structures</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>Structures</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C06_Structures.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -89,7 +92,7 @@
            <div itemprop="articleBody">
              
   <section id="structures">
-<span id="id1"></span><h1><span class="section-number">6. </span>Structures<a class="headerlink" href="#structures" title="Permalink to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">6. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading">&#61633;</a></h1>
 <p>Modern mathematics makes essential use of algebraic
 structures,
 which encapsulate patterns that can be instantiated in
@@ -109,14 +112,14 @@ algebraic structures on your own.</p>
 <p>For more technical detail, you can consult <a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean/">Theorem Proving in Lean</a>,
 and a paper by Anne Baanen, <a class="reference external" href="https://arxiv.org/abs/2202.01629">Use and abuse of instance parameters in the Lean mathematical library</a>.</p>
 <section id="defining-structures">
-<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Permalink to this heading">&#61633;</a></h2>
+<span id="section-structures"></span><h2><span class="section-number">6.1. </span>Defining structures<a class="headerlink" href="#defining-structures" title="Link to this heading">&#61633;</a></h2>
 <p>In the broadest sense of the term, a <em>structure</em> is a specification
 of a collection of data, possibly with constraints that the
 data is required to satisfy.
 An <em>instance</em> of the structure is a particular bundle of data satisfying
 the constraints. For example, we can specify that a point is
 a tuple of three real numbers:</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[</span><span class="n">ext</span><span class="kd">]</span>
 <span class="kd">structure</span> <span class="n">Point</span> <span class="n">where</span>
   <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span>
   <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span>
@@ -470,7 +473,7 @@ weaving structures together into a rich, interconnected hierarchy,
 and for managing the interactions between them.</p>
 </section>
 <section id="algebraic-structures">
-<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>
+<span id="section-algebraic-structures"></span><h2><span class="section-number">6.2. </span>Algebraic Structures<a class="headerlink" href="#algebraic-structures" title="Link to this heading">&#61633;</a></h2>
 <p>To clarify what we mean by the phrase <em>algebraic structure</em>,
 it will help to consider some examples.</p>
 <ol class="arabic simple">
@@ -736,7 +739,7 @@ and define the <code class="docutils literal notranslate"><span class="pre">AddG
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span> <span class="n">AddGroup&#8321;</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="n">where</span>
   <span class="o">(</span><span class="n">add</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span>
   <span class="c1">-- fill in the rest</span>
-<span class="kd">@[ext]</span>
+<span class="kd">@[</span><span class="n">ext</span><span class="kd">]</span>
 <span class="kd">structure</span> <span class="n">Point</span> <span class="n">where</span>
   <span class="n">x</span> <span class="o">:</span> <span class="n">&#8477;</span>
   <span class="n">y</span> <span class="o">:</span> <span class="n">&#8477;</span>
@@ -1019,7 +1022,7 @@ When used wisely, however, class inference is a powerful tool.
 It is what makes algebraic reasoning possible in Lean.</p>
 </section>
 <section id="building-the-gaussian-integers">
-<span id="section-building-the-gaussian-integers"></span><h2><span class="section-number">6.3. </span>Building the Gaussian Integers<a class="headerlink" href="#building-the-gaussian-integers" title="Permalink to this heading">&#61633;</a></h2>
+<span id="section-building-the-gaussian-integers"></span><h2><span class="section-number">6.3. </span>Building the Gaussian Integers<a class="headerlink" href="#building-the-gaussian-integers" title="Link to this heading">&#61633;</a></h2>
 <p>We will now illustrate the use of the algebraic hierarchy in Lean by
 building an important mathematical object, the <em>Gaussian integers</em>,
 and showing that it is a Euclidean domain. In other words, according to
@@ -1031,7 +1034,7 @@ But rather than define them as a subset of the complex numbers, our goal
 here is to define them as a data type in their own right. We do this by
 representing a Gaussian integer as a pair of integers, which we think of as the
 <em>real</em> and <em>imaginary</em> parts.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[ext]</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[</span><span class="n">ext</span><span class="kd">]</span>
 <span class="kd">structure</span> <span class="n">GaussInt</span> <span class="n">where</span>
   <span class="n">re</span> <span class="o">:</span> <span class="n">&#8484;</span>
   <span class="n">im</span> <span class="o">:</span> <span class="n">&#8484;</span>
@@ -1090,43 +1093,43 @@ to use with <code class="docutils literal notranslate"><span class="pre">simp</s
 </div>
 <p>It is also useful to name the rules that compute the real and imaginary
 parts, and to declare them to the simplifier.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[simp]</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">zero_re</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">zero_im</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">one_re</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">one_im</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">add_re</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">+</span> <span class="n">y.re</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">add_im</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">x.im</span> <span class="bp">+</span> <span class="n">y.im</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">neg_re</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.re</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">neg_im</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.im</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">mul_re</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="bp">-</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">mul_im</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="bp">*</span> <span class="n">y.im</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">*</span> <span class="n">y.re</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 </pre></div>
@@ -1217,7 +1220,7 @@ function <span class="math notranslate nohighlight">\(N : R \to \mathbb{N}\)</sp
 <ul class="simple">
 <li><p>For every <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b \ne 0\)</span> in <span class="math notranslate nohighlight">\(R\)</span>, there are
 <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(r\)</span> in <span class="math notranslate nohighlight">\(R\)</span> such that <span class="math notranslate nohighlight">\(a = bq + r\)</span> and
-either <span class="math notranslate nohighlight">\(r = 0\)</span> or <cite>N(r) &lt; N(b)</cite>.</p></li>
+either <span class="math notranslate nohighlight">\(r = 0\)</span> or <span class="math notranslate nohighlight">\(N(r) &lt; N(b)\)</span>.</p></li>
 <li><p>For every <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b \ne 0\)</span>, <span class="math notranslate nohighlight">\(N(a) \le N(ab)\)</span>.</p></li>
 </ul>
 <p>The ring of integers <span class="math notranslate nohighlight">\(\Bbb{Z}\)</span> with <span class="math notranslate nohighlight">\(N(a) = |a|\)</span> is an
@@ -1257,7 +1260,7 @@ implies that every irreducible element is prime.
 The axioms for a Euclidean domain imply that one can write any nonzero element
 as a finite product of irreducible elements. They also imply that one can use
 the Euclidean algorithm to find a greatest common divisor of any two
-nonzero elements <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, i.e.~an element that is divisible by any
+nonzero elements <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, i.e. an element that is divisible by any
 other common divisor. This, in turn, implies that factorization
 into irreducible elements is unique up to multiplication by units.</p>
 <p>We now show that the Gaussian integers are a Euclidean domain with
@@ -1301,7 +1304,7 @@ See the file <a class="reference external" href="https://github.com/leanprover-c
 <p>Here we will instead carry out an argument that stays in the integers.
 This illustrates a choice one commonly faces when formalizing mathematics.
 Given an argument that requires concepts or machinery that is not already
-in the library, one has two choices: either formalize the concepts or machinery
+in the library, one has two choices: either formalize the concepts and machinery
 needed, or adapt the argument to make use of concepts and machinery you
 already have.
 The first choice is generally a good investment of time when the results
@@ -1362,7 +1365,7 @@ The proofs are all short.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">norm</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:=</span>
   <span class="n">x.re</span> <span class="bp">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="n">x.im</span> <span class="bp">^</span> <span class="mi">2</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">norm_nonneg</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&#8804;</span> <span class="n">norm</span> <span class="n">x</span> <span class="o">:=</span> <span class="kd">by</span>
   <span class="gr">sorry</span>
 <span class="kd">theorem</span> <span class="n">norm_eq_zero</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">norm</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">&#8596;</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
@@ -1377,11 +1380,11 @@ The proofs are all short.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">conj</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="n">GaussInt</span> <span class="o">:=</span>
   <span class="o">&#10216;</span><span class="n">x.re</span><span class="o">,</span> <span class="bp">-</span><span class="n">x.im</span><span class="o">&#10217;</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">conj_re</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">conj</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">x.re</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 
-<span class="kd">@[simp]</span>
+<span class="kd">@[</span><span class="n">simp</span><span class="kd">]</span>
 <span class="kd">theorem</span> <span class="n">conj_im</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">GaussInt</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">conj</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">x.im</span> <span class="o">:=</span>
   <span class="n">rfl</span>
 

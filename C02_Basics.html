@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2. Basics &mdash; Mathematics in Lean 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=2709fde1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -31,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Mathematics in Lean
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -79,8 +82,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li><span class="section-number">2. </span>Basics</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>Basics</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/C02_Basics.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -91,13 +94,13 @@
            <div itemprop="articleBody">
              
   <section id="basics">
-<span id="id1"></span><h1><span class="section-number">2. </span>Basics<a class="headerlink" href="#basics" title="Permalink to this heading">&#61633;</a></h1>
+<span id="id1"></span><h1><span class="section-number">2. </span>Basics<a class="headerlink" href="#basics" title="Link to this heading">&#61633;</a></h1>
 <p>This chapter is designed to introduce you to the nuts and
 bolts of mathematical reasoning in Lean: calculating,
 applying lemmas and theorems,
 and reasoning about generic structures.</p>
 <section id="calculating">
-<h2><span class="section-number">2.1. </span>Calculating<a class="headerlink" href="#calculating" title="Permalink to this heading">&#61633;</a></h2>
+<h2><span class="section-number">2.1. </span>Calculating<a class="headerlink" href="#calculating" title="Link to this heading">&#61633;</a></h2>
 <p>We generally learn to carry out mathematical calculations
 without thinking of them as proofs.
 But when we justify each step in a calculation,
@@ -388,7 +391,7 @@ occurrence of <code class="docutils literal notranslate"><span class="pre">a</sp
 </div>
 </section>
 <section id="proving-identities-in-algebraic-structures">
-<span id="id2"></span><h2><span class="section-number">2.2. </span>Proving Identities in Algebraic Structures<a class="headerlink" href="#proving-identities-in-algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id2"></span><h2><span class="section-number">2.2. </span>Proving Identities in Algebraic Structures<a class="headerlink" href="#proving-identities-in-algebraic-structures" title="Link to this heading">&#61633;</a></h2>
 <p id="index-7">Mathematically, a ring consists of a collection of objects,
 <span class="math notranslate nohighlight">\(R\)</span>, operations <span class="math notranslate nohighlight">\(+\)</span> <span class="math notranslate nohighlight">\(\times\)</span>, and constants <span class="math notranslate nohighlight">\(0\)</span>
 and <span class="math notranslate nohighlight">\(1\)</span>, and an operation <span class="math notranslate nohighlight">\(x \mapsto -x\)</span> such that:</p>
@@ -708,7 +711,7 @@ but also for the convenience of using a shorter name for the
 tactic that deals with commutative rings, since it is used more often.</p>
 </section>
 <section id="using-theorems-and-lemmas">
-<span id="id3"></span><h2><span class="section-number">2.3. </span>Using Theorems and Lemmas<a class="headerlink" href="#using-theorems-and-lemmas" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id3"></span><h2><span class="section-number">2.3. </span>Using Theorems and Lemmas<a class="headerlink" href="#using-theorems-and-lemmas" title="Link to this heading">&#61633;</a></h2>
 <p id="index-16">Rewriting is great for proving equations,
 but what about other sorts of theorems?
 For example, how can we prove an inequality,
@@ -975,7 +978,7 @@ to two goals; see <a class="reference internal" href="C03_Logic.html#conjunction
 You are well on your way to becoming a master formalizer.</p>
 </section>
 <section id="more-examples-using-apply-and-rw">
-<span id="more-on-order-and-divisibility"></span><h2><span class="section-number">2.4. </span>More examples using apply and rw<a class="headerlink" href="#more-examples-using-apply-and-rw" title="Permalink to this heading">&#61633;</a></h2>
+<span id="more-on-order-and-divisibility"></span><h2><span class="section-number">2.4. </span>More examples using apply and rw<a class="headerlink" href="#more-examples-using-apply-and-rw" title="Link to this heading">&#61633;</a></h2>
 <p id="index-21">The <code class="docutils literal notranslate"><span class="pre">min</span></code> function on the real numbers is uniquely characterized
 by the following three facts:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">min_le_left</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">min</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">&#8804;</span> <span class="n">a</span><span class="o">)</span>
@@ -1176,7 +1179,7 @@ You can use <code class="docutils literal notranslate"><span class="pre">_root_.
 either one will work.</p>
 </section>
 <section id="proving-facts-about-algebraic-structures">
-<span id="id4"></span><h2><span class="section-number">2.5. </span>Proving Facts about Algebraic Structures<a class="headerlink" href="#proving-facts-about-algebraic-structures" title="Permalink to this heading">&#61633;</a></h2>
+<span id="id4"></span><h2><span class="section-number">2.5. </span>Proving Facts about Algebraic Structures<a class="headerlink" href="#proving-facts-about-algebraic-structures" title="Link to this heading">&#61633;</a></h2>
 <p id="index-27">In <a class="reference internal" href="#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a>,
 we saw that many common identities governing the real numbers hold
 in more general classes of algebraic structures,

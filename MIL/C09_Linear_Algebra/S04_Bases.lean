@@ -8,13 +8,13 @@ import MIL.Common
 section matrices
 
 -- Adding vectors
-#eval !![1, 2] + !![3, 4]  -- !![4, 6]
+#eval ![1, 2] + ![3, 4]  -- ![4, 6]
 
 -- Adding matrices
 #eval !![1, 2; 3, 4] + !![3, 4; 5, 6]  -- !![4, 6; 8, 10]
 
 -- Multiplying matrices
-#eval !![1, 2; 3, 4] * !![3, 4; 5, 6]  -- !![4, 6; 8, 10]
+#eval !![1, 2; 3, 4] * !![3, 4; 5, 6]  -- !![13, 16; 29, 36]
 
 open Matrix
 

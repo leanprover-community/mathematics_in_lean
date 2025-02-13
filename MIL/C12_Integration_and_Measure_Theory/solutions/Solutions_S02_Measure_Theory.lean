@@ -13,6 +13,6 @@ variable {α : Type*} [MeasurableSpace α]
 
 variable {ι : Type*} [Encodable ι]
 
-open MeasureTheory
+open MeasureTheory Function
 variable {μ : Measure α}
 

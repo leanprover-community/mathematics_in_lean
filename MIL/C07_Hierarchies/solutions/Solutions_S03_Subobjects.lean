@@ -81,7 +81,7 @@ instance [Group G] : SubgroupClass₁ (Subgroup₁ G) G :=
   inv_mem := Subgroup₁.inv_mem }
 
 
-instance [Monoid M] : Inf (Submonoid₁ M) :=
+instance [Monoid M] : Min (Submonoid₁ M) :=
   ⟨fun S₁ S₂ ↦
     { carrier := S₁ ∩ S₂
       one_mem := ⟨S₁.one_mem, S₂.one_mem⟩

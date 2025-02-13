@@ -147,14 +147,14 @@ example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) (hff' : HasFDerivAt f f' 
 example (n : ℕ) (f : E → F) : E → E[×n]→L[𝕜] F :=
   iteratedFDeriv 𝕜 n f
 
-example (n : WithTop ℕ) {f : E → F} :
+example (n : ℕ∞) {f : E → F} :
     ContDiff 𝕜 n f ↔
       (∀ m : ℕ, (m : WithTop ℕ) ≤ n → Continuous fun x ↦ iteratedFDeriv 𝕜 m f x) ∧
         ∀ m : ℕ, (m : WithTop ℕ) < n → Differentiable 𝕜 fun x ↦ iteratedFDeriv 𝕜 m f x :=
   contDiff_iff_continuous_differentiable
 
 example {𝕂 : Type*} [RCLike 𝕂] {E : Type*} [NormedAddCommGroup E] [NormedSpace 𝕂 E] {F : Type*}
-    [NormedAddCommGroup F] [NormedSpace 𝕂 F] {f : E → F} {x : E} {n : WithTop ℕ}
+    [NormedAddCommGroup F] [NormedSpace 𝕂 F] {f : E → F} {x : E} {n : WithTop ℕ∞}
     (hf : ContDiffAt 𝕂 n f x) (hn : 1 ≤ n) : HasStrictFDerivAt f (fderiv 𝕂 f x) x :=
   hf.hasStrictFDerivAt hn
 

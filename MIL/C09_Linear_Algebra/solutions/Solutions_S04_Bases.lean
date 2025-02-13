@@ -1,6 +1,7 @@
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.LinearAlgebra.Eigenspace.Minpoly
 import Mathlib.LinearAlgebra.Charpoly.Basic
+import Mathlib.Data.Complex.FiniteDimensional
 
 import MIL.Common
 

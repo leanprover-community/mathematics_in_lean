@@ -137,8 +137,6 @@ class AddMonoid₃ (α : Type) extends AddSemigroup₃ α, AddZeroClass α
 @[to_additive AddMonoid₃]
 class Monoid₃ (α : Type) extends Semigroup₃ α, MulOneClass α
 
-attribute [to_additive existing] Monoid₃.toMulOneClass
-
 export Semigroup₃ (mul_assoc₃)
 export AddSemigroup₃ (add_assoc₃)
 

@@ -1,5 +1,5 @@
 import MIL.Common
-import Mathlib.Topology.Instances.Real
+import Mathlib.Topology.Instances.Real.Defs
 
 set_option autoImplicit true
 

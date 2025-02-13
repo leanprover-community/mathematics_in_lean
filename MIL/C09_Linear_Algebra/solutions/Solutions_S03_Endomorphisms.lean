@@ -5,6 +5,33 @@ import Mathlib.LinearAlgebra.Charpoly.Basic
 import MIL.Common
 
 
+
+
+variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
+
+variable {W : Type*} [AddCommGroup W] [Module K W]
+
+
+open Polynomial Module LinearMap
+
+example (φ ψ : End K V) : φ * ψ = φ ∘ₗ ψ :=
+  LinearMap.mul_eq_comp φ ψ -- `rfl` would also work
+
+-- evaluating `P` on `φ`
+example (P : K[X]) (φ : End K V) : V →ₗ[K] V :=
+  aeval φ P
+
+-- evaluating `X` on `φ` gives back `φ`
+example (φ : End K V) : aeval φ (X : K[X]) = φ :=
+  aeval_X φ
+
+
+
+#check Submodule.eq_bot_iff
+#check Submodule.mem_inf
+#check LinearMap.mem_ker
+
+example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) : ker (aeval φ P) ⊓ ker (aeval φ Q) = ⊥ := by
   rw [Submodule.eq_bot_iff]
   rintro x hx
   rw [Submodule.mem_inf, mem_ker, mem_ker] at hx

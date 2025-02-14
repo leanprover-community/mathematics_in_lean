@@ -78,10 +78,11 @@ theorem sb_surjective (hg : Injective g) : Surjective (sbFun f g) := by
     have : x ∈ A := by
       rw [A_def, sbSet, mem_iUnion]
       exact ⟨n, xmem⟩
-    simp only [h_def, sbFun, if_pos this, ← A_def]
-    exact hg hx
+    rw [h_def, sbFun, if_pos this]
+    apply hg hx
+
   use g y
-  simp only [h_def, sbFun, ← A_def, if_neg gyA]
+  rw [h_def, sbFun, if_neg gyA]
   apply leftInverse_invFun hg
 
 end

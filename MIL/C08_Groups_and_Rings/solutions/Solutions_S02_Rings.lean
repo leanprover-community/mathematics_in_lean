@@ -1,8 +1,8 @@
-import Mathlib.RingTheory.Ideal.QuotientOperations
+import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Localization.Basic
 import Mathlib.RingTheory.DedekindDomain.Ideal
-import Mathlib.Analysis.Complex.Polynomial
-import Mathlib.Data.ZMod.Quotient
+import Mathlib.Analysis.Complex.Polynomial.Basic
+import Mathlib.Data.ZMod.QuotientRing
 import MIL.Common
 
 noncomputable section

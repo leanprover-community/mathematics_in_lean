@@ -1,6 +1,6 @@
 import MIL.Common
-import Mathlib.Topology.Instances.Real
-import Mathlib.Analysis.NormedSpace.BanachSteinhaus
+import Mathlib.Topology.Instances.Real.Defs
+import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
 
 open Set Filter Topology
 
@@ -56,7 +56,7 @@ example {α : Type*} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
     (H : ∀ a : α, ∀ p : α → Prop, (∀ᶠ x in n a, p x) → ∀ᶠ y in n a, ∀ᶠ x in n y, p x) :
     ∀ a, ∀ s ∈ n a, ∃ t ∈ n a, t ⊆ s ∧ ∀ a' ∈ t, s ∈ n a' := by
   intro a s s_in
-  refine' ⟨{ y | s ∈ n y }, H a (fun x ↦ x ∈ s) s_in, _, by tauto⟩
+  refine ⟨{ y | s ∈ n y }, H a (fun x ↦ x ∈ s) s_in, ?_, by tauto⟩
   rintro y (hy : s ∈ n y)
   exact H₀ y hy
 
@@ -172,7 +172,7 @@ example [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {s : Set X} (hs :
     rwa [map_eq, inf_of_le_right F_le]
   have Hle : 𝓟 s ⊓ comap f F ≤ 𝓟 s := inf_le_left
   rcases hs Hle with ⟨x, x_in, hx⟩
-  refine' ⟨f x, mem_image_of_mem f x_in, _⟩
+  refine ⟨f x, mem_image_of_mem f x_in, ?_⟩
   apply hx.map hf.continuousAt
   rw [Tendsto, map_eq]
   exact inf_le_right

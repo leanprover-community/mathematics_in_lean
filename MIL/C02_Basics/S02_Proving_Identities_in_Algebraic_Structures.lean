@@ -8,7 +8,7 @@ variable (R : Type*) [Ring R]
 #check (add_assoc : ∀ a b c : R, a + b + c = a + (b + c))
 #check (add_comm : ∀ a b : R, a + b = b + a)
 #check (zero_add : ∀ a : R, 0 + a = a)
-#check (add_left_neg : ∀ a : R, -a + a = 0)
+#check (neg_add_cancel : ∀ a : R, -a + a = 0)
 #check (mul_assoc : ∀ a b c : R, a * b * c = a * (b * c))
 #check (mul_one : ∀ a : R, a * 1 = a)
 #check (one_mul : ∀ a : R, 1 * a = a)
@@ -38,7 +38,7 @@ variable {R : Type*} [Ring R]
 
 theorem add_zero (a : R) : a + 0 = a := by rw [add_comm, zero_add]
 
-theorem add_right_neg (a : R) : a + -a = 0 := by rw [add_comm, add_left_neg]
+theorem add_right_neg (a : R) : a + -a = 0 := by rw [add_comm, neg_add_cancel]
 
 #check MyRing.add_zero
 #check add_zero
@@ -49,7 +49,7 @@ namespace MyRing
 variable {R : Type*} [Ring R]
 
 theorem neg_add_cancel_left (a b : R) : -a + (a + b) = b := by
-  rw [← add_assoc, add_left_neg, zero_add]
+  rw [← add_assoc, neg_add_cancel, zero_add]
 
 -- Prove these:
 theorem add_neg_cancel_right (a b : R) : a + b + -b = a := by
@@ -118,7 +118,7 @@ variable (A : Type*) [AddGroup A]
 
 #check (add_assoc : ∀ a b c : A, a + b + c = a + (b + c))
 #check (zero_add : ∀ a : A, 0 + a = a)
-#check (add_left_neg : ∀ a : A, -a + a = 0)
+#check (neg_add_cancel : ∀ a : A, -a + a = 0)
 
 end
 
@@ -127,11 +127,11 @@ variable {G : Type*} [Group G]
 
 #check (mul_assoc : ∀ a b c : G, a * b * c = a * (b * c))
 #check (one_mul : ∀ a : G, 1 * a = a)
-#check (mul_left_inv : ∀ a : G, a⁻¹ * a = 1)
+#check (inv_mul_cancel : ∀ a : G, a⁻¹ * a = 1)
 
 namespace MyGroup
 
-theorem mul_right_inv (a : G) : a * a⁻¹ = 1 := by
+theorem mul_inv_cancel (a : G) : a * a⁻¹ = 1 := by
   sorry
 
 theorem mul_one (a : G) : a * 1 = a := by

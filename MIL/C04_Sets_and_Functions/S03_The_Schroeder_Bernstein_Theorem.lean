@@ -57,7 +57,7 @@ theorem sb_injective (hf : Injective f) : Injective (sbFun f g) := by
       simp [sbAux]
       exact ⟨x₁, hn, x₂eq.symm⟩
     sorry
-  push_neg  at xA
+  push_neg at xA
   sorry
 
 theorem sb_surjective (hg : Injective g) : Surjective (sbFun f g) := by
@@ -75,8 +75,9 @@ theorem sb_surjective (hg : Injective g) : Surjective (sbFun f g) := by
     have : x ∈ A := by
       rw [A_def, sbSet, mem_iUnion]
       exact ⟨n, xmem⟩
-    simp only [h_def, sbFun, if_pos this]
-    exact hg hx
+    rw [h_def, sbFun, if_pos this]
+    apply hg hx
+
   sorry
 
 end

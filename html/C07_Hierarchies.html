@@ -125,9 +125,9 @@ more details about what the <code class="docutils literal notranslate"><span cla
 First, the <code class="docutils literal notranslate"><span class="pre">class</span></code> command above defines a structure <code class="docutils literal notranslate"><span class="pre">One&#8321;</span></code> with parameter <code class="docutils literal notranslate"><span class="pre">&#945;</span> <span class="pre">:</span> <span class="pre">Type</span></code> and
 a single field <code class="docutils literal notranslate"><span class="pre">one</span></code>. It also mark this structure as a class so that arguments of type
 <code class="docutils literal notranslate"><span class="pre">One&#8321;</span> <span class="pre">&#945;</span></code> for some type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> will be inferrable using the instance resolution procedure,
-as long as they are marked as instance-implicit, ie appear between square brackets.
+as long as they are marked as instance-implicit, i.e. appear between square brackets.
 Those two effects could also have been achieved using the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command with <code class="docutils literal notranslate"><span class="pre">class</span></code>
-attribute, ie writing <code class="docutils literal notranslate"><span class="pre">&#64;[class]</span> <span class="pre">structure</span></code> instance of <code class="docutils literal notranslate"><span class="pre">class</span></code>. But the class command also
+attribute, i.e. writing <code class="docutils literal notranslate"><span class="pre">&#64;[class]</span> <span class="pre">structure</span></code> instance of <code class="docutils literal notranslate"><span class="pre">class</span></code>. But the class command also
 ensures that <code class="docutils literal notranslate"><span class="pre">One&#8321;</span> <span class="pre">&#945;</span></code> appears as an instance-implicit argument in its own fields. Compare:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span><span class="w"> </span><span class="n">One&#8321;.one</span><span class="w"> </span><span class="c1">-- One&#8321;.one {&#945; : Type} [self : One&#8321; &#945;] : &#945;</span>
 
@@ -346,8 +346,6 @@ used the <code class="docutils literal notranslate"><span class="pre">whatsnew</
 <span class="kd">@[</span><span class="n">to_additive</span><span class="w"> </span><span class="n">AddMonoid&#8323;</span><span class="kd">]</span>
 <span class="kd">class</span><span class="w"> </span><span class="n">Monoid&#8323;</span><span class="w"> </span><span class="o">(</span><span class="n">&#945;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Semigroup&#8323;</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">MulOneClass</span><span class="w"> </span><span class="n">&#945;</span>
 
-<span class="kn">attribute</span><span class="w"> </span><span class="o">[</span><span class="n">to_additive</span><span class="w"> </span><span class="n">existing</span><span class="o">]</span><span class="w"> </span><span class="n">Monoid&#8323;.toMulOneClass</span>
-
 <span class="kn">export</span><span class="w"> </span><span class="n">Semigroup&#8323;</span><span class="w"> </span><span class="o">(</span><span class="n">mul_assoc&#8323;</span><span class="o">)</span>
 <span class="kn">export</span><span class="w"> </span><span class="n">AddSemigroup&#8323;</span><span class="w"> </span><span class="o">(</span><span class="n">add_assoc&#8323;</span><span class="o">)</span>
 
@@ -564,7 +562,7 @@ which one using:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="bp">#</span><span class="n">synth</span><span class="w"> </span><span class="n">Module&#8321;</span><span class="w"> </span><span class="n">&#8484;</span><span class="w"> </span><span class="n">&#8484;</span><span class="w"> </span><span class="c1">-- abGrpModule &#8484;</span>
 </pre></div>
 </div>
-<p>But in a more indirect context it can happen that Lean infers the one and then gets confused.
+<p>But in a more indirect context it can happen that Lean infers the other one and then gets confused.
 This situation is known as a bad diamond. This has nothing to do with the diamond operation
 we used above, it refers to the way one can draw the paths from <code class="docutils literal notranslate"><span class="pre">&#8484;</span></code> to its <code class="docutils literal notranslate"><span class="pre">Module&#8321;</span> <span class="pre">&#8484;</span></code>
 going through either <code class="docutils literal notranslate"><span class="pre">AddCommGroup&#8323;</span> <span class="pre">&#8484;</span></code> or <code class="docutils literal notranslate"><span class="pre">Ring&#8323;</span> <span class="pre">&#8484;</span></code>.</p>
@@ -573,13 +571,13 @@ in Mathlib, and also in this chapter. Already at the very beginning we saw one c
 from <code class="docutils literal notranslate"><span class="pre">Monoid&#8321;</span> <span class="pre">&#945;</span></code> to <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code> through either <code class="docutils literal notranslate"><span class="pre">Semigroup&#8321;</span> <span class="pre">&#945;</span></code> or <code class="docutils literal notranslate"><span class="pre">DiaOneClass&#8321;</span> <span class="pre">&#945;</span></code> and
 thanks to the work done by the <code class="docutils literal notranslate"><span class="pre">class</span></code> command, the resulting two <code class="docutils literal notranslate"><span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code> instances
 are definitionally equal. In particular a diamond having a <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued class at the bottom
-cannot be bad since any too proofs of the same statement are definitionally equal.</p>
+cannot be bad since any two proofs of the same statement are definitionally equal.</p>
 <p>But the diamond we created with modules is definitely bad. The offending piece is the <code class="docutils literal notranslate"><span class="pre">smul</span></code>
 field which is data, not a proof, and we have two constructions that are not definitionally equal.
 The robust way of fixing this issue is to make sure that going from a rich structure to a
 poor structure is always done by forgetting data, not by defining data. This well-known pattern
-as been named &#8220;forgetful inheritance&#8221; and extensively discussed in
-<a class="reference external" href="https://inria.hal.science/hal-02463336">https://inria.hal.science/hal-02463336</a>.</p>
+has been named &#8220;forgetful inheritance&#8221; and extensively discussed in
+<a class="reference external" href="https://inria.hal.science/hal-02463336v2">https://inria.hal.science/hal-02463336v2</a>.</p>
 <p>In our concrete case, we can modify the definition of <code class="docutils literal notranslate"><span class="pre">AddMonoid&#8323;</span></code> to include a <code class="docutils literal notranslate"><span class="pre">nsmul</span></code> data
 field and some <code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued fields ensuring this operation is provably the one we constructed
 above. Those fields are given default values using <code class="docutils literal notranslate"><span class="pre">:=</span></code> after their type in the definition below.
@@ -634,8 +632,7 @@ hierarchy, but all principles have been explained above.</p>
 <p>As an exercise, you can come back to the order relation hierarchy you built above and try
 to incorporate a type class <code class="docutils literal notranslate"><span class="pre">LT&#8321;</span></code> carrying the Less-Than notation <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> and make sure
 that every preorder comes with a <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> which has a default value built from <code class="docutils literal notranslate"><span class="pre">&#8804;&#8321;</span></code> and a
-<code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued field asserting the natural relation between those two comparison operators.
--/</p>
+<code class="docutils literal notranslate"><span class="pre">Prop</span></code>-valued field asserting the natural relation between those two comparison operators.</p>
 </section>
 <section id="morphisms">
 <span id="section-hierarchies-morphisms"></span><h2><span class="section-number">7.2. </span>Morphisms<a class="headerlink" href="#morphisms" title="Link to this heading">&#61633;</a></h2>
@@ -672,7 +669,7 @@ is really a function that happens to be continuous. This is one reason why Mathl
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Continuous</span><span class="w"> </span><span class="o">(</span><span class="n">id</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">continuous_id</span>
 </pre></div>
 </div>
-<p>We still have bundles continuous functions, which are convenient for instance to put a topology
+<p>We still have bundles of continuous functions, which are convenient for instance to put a topology
 on a space of continuous functions, but they are not the primary tool to work with continuity.</p>
 <p>By contrast, morphisms between monoids (or other algebraic structures) are bundled as in:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">@[</span><span class="n">ext</span><span class="kd">]</span>
@@ -805,7 +802,7 @@ Let us redefine our <code class="docutils literal notranslate"><span class="pre"
 
 <span class="kd">instance</span><span class="w"> </span><span class="o">(</span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MonoidHomClass&#8323;</span><span class="w"> </span><span class="o">(</span><span class="n">MonoidHom&#8321;</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="o">)</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">where</span>
 <span class="w">  </span><span class="n">coe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.toFun</span>
-<span class="w">  </span><span class="n">coe_injective&#39;</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.ext</span>
+<span class="w">  </span><span class="n">coe_injective&#39;</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.ext</span>
 <span class="w">  </span><span class="n">map_one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.map_one</span>
 <span class="w">  </span><span class="n">map_mul</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.map_mul</span>
 </pre></div>
@@ -865,7 +862,7 @@ coercion and <code class="docutils literal notranslate"><span class="pre">Member
 <span class="sd">/-- Submonoids in `M` can be seen as sets in `M`. -/</span>
 <span class="kd">instance</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">SetLike</span><span class="w"> </span><span class="o">(</span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">where</span>
 <span class="w">  </span><span class="n">coe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Submonoid&#8321;.carrier</span>
-<span class="w">  </span><span class="n">coe_injective&#39;</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Submonoid&#8321;.ext</span>
+<span class="w">  </span><span class="n">coe_injective&#39;</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Submonoid&#8321;.ext</span>
 </pre></div>
 </div>
 <p>Equipped with the above <code class="docutils literal notranslate"><span class="pre">SetLike</span></code> instance, we can already state naturally that
@@ -922,7 +919,7 @@ and a <code class="docutils literal notranslate"><span class="pre">SubmonoidClas
 always form a complete lattice, and this structure is used a lot. For instance you may look for
 the lemma saying that an intersection of submonoids is a submonoid. But this won&#8217;t be a lemma,
 this will be an infimum construction. Let us do the case of two submonoids.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Inf</span><span class="w"> </span><span class="o">(</span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Min</span><span class="w"> </span><span class="o">(</span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="o">&#10216;</span><span class="k">fun</span><span class="w"> </span><span class="n">S&#8321;</span><span class="w"> </span><span class="n">S&#8322;</span><span class="w"> </span><span class="bp">&#8614;</span>
 <span class="w">    </span><span class="o">{</span><span class="w"> </span><span class="n">carrier</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">S&#8321;</span><span class="w"> </span><span class="bp">&#8745;</span><span class="w"> </span><span class="n">S&#8322;</span>
 <span class="w">      </span><span class="n">one_mem</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&#10216;</span><span class="n">S&#8321;.one_mem</span><span class="o">,</span><span class="w"> </span><span class="n">S&#8322;.one_mem</span><span class="o">&#10217;</span>

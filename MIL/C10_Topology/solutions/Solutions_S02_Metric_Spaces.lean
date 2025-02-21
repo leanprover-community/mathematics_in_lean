@@ -1,6 +1,6 @@
 import MIL.Common
-import Mathlib.Topology.Instances.Real
-import Mathlib.Analysis.NormedSpace.BanachSteinhaus
+import Mathlib.Topology.Instances.Real.Defs
+import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
 
 open Set Filter
 open Topology Filter
@@ -80,7 +80,7 @@ example {s : Set X} : IsClosed s ↔ IsOpen (sᶜ) :=
 
 example {s : Set X} (hs : IsClosed s) {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a))
     (hus : ∀ n, u n ∈ s) : a ∈ s :=
-  hs.mem_of_tendsto hu (eventually_of_forall hus)
+  hs.mem_of_tendsto hu (Eventually.of_forall hus)
 
 example {s : Set X} : a ∈ closure s ↔ ∀ ε > 0, ∃ b ∈ s, a ∈ Metric.ball b ε :=
   Metric.mem_closure_iff
@@ -94,7 +94,7 @@ example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n,
   rw [Metric.mem_closure_iff]
   intro ε ε_pos
   rcases hu ε ε_pos with ⟨N, hN⟩
-  refine' ⟨u N, hs _, _⟩
+  refine ⟨u N, hs _, ?_⟩
   rw [dist_comm]
   exact hN N le_rfl
 
@@ -114,12 +114,12 @@ example {s : Set X} (hs : IsCompact s) {u : ℕ → X} (hu : ∀ n, u n ∈ s) :
 example {s : Set X} (hs : IsCompact s) (hs' : s.Nonempty) {f : X → ℝ}
       (hfs : ContinuousOn f s) :
     ∃ x ∈ s, ∀ y ∈ s, f x ≤ f y :=
-  hs.exists_forall_le hs' hfs
+  hs.exists_isMinOn hs' hfs
 
 example {s : Set X} (hs : IsCompact s) (hs' : s.Nonempty) {f : X → ℝ}
       (hfs : ContinuousOn f s) :
     ∃ x ∈ s, ∀ y ∈ s, f y ≤ f x :=
-  hs.exists_forall_ge hs' hfs
+  hs.exists_isMaxOn hs' hfs
 
 example {s : Set X} (hs : IsCompact s) : IsClosed s :=
   hs.isClosed
@@ -153,7 +153,7 @@ example {X : Type*} [MetricSpace X] [CompactSpace X] {Y : Type*} [MetricSpace Y]
     intro x y _
     have : (x, y) ∉ K := by simp [hK]
     simpa [K] using this
-  · rcases K_cpct.exists_forall_le hK continuous_dist.continuousOn with ⟨⟨x₀, x₁⟩, xx_in, H⟩
+  · rcases K_cpct.exists_isMinOn hK continuous_dist.continuousOn with ⟨⟨x₀, x₁⟩, xx_in, H⟩
     use dist x₀ x₁
     constructor
     · change _ < _
@@ -163,8 +163,8 @@ example {X : Type*} [MetricSpace X] [CompactSpace X] {Y : Type*} [MetricSpace Y]
       linarith
     · intro x x'
       contrapose!
-      intro hxx'
-      exact H (x, x') hxx'
+      intro (hxx' : (x, x') ∈ K)
+      exact H hxx'
 
 example (u : ℕ → X) :
     CauchySeq u ↔ ∀ ε > 0, ∃ N : ℕ, ∀ m ≥ N, ∀ n ≥ N, dist (u m) (u n) < ε :=
@@ -207,7 +207,7 @@ example {u : ℕ → X} (hu : ∀ n : ℕ, dist (u n) (u (n + 1)) ≤ (1 / 2) ^ 
       rw [← zero_mul (2 : ℝ)]
       apply Tendsto.mul
       simp_rw [← one_div_pow (2 : ℝ)]
-      apply tendsto_pow_atTop_nhds_0_of_lt_1 <;> linarith
+      apply tendsto_pow_atTop_nhds_zero_of_lt_one <;> linarith
       exact tendsto_const_nhds
     rcases(atTop_basis.tendsto_iff (nhds_basis_Ioo_pos (0 : ℝ))).mp this ε ε_pos with ⟨N, _, hN⟩
     exact ⟨N, by simpa using (hN N left_mem_Ici).2⟩
@@ -288,7 +288,7 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
     rw [dist_comm] at xy
     obtain ⟨r, rpos, hr⟩ : ∃ r > 0, closedBall y r ⊆ f n :=
       nhds_basis_closedBall.mem_iff.1 (isOpen_iff_mem_nhds.1 (ho n) y ys)
-    refine' ⟨y, min (min (δ / 2) r) (B (n + 1)), _, _, fun z hz ↦ ⟨_, _⟩⟩
+    refine ⟨y, min (min (δ / 2) r) (B (n + 1)), ?_, ?_, fun z hz ↦ ⟨?_, ?_⟩⟩
     show 0 < min (min (δ / 2) r) (B (n + 1))
     exact lt_min (lt_min (half_pos δpos) rpos) (Bpos (n + 1))
     show min (min (δ / 2) r) (B (n + 1)) ≤ B (n + 1)
@@ -309,7 +309,7 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
           _ ≤ r := (min_le_left _ _).trans (min_le_right _ _)
           )
   choose! center radius Hpos HB Hball using this
-  refine' fun x ↦ (mem_closure_iff_nhds_basis nhds_basis_closedBall).2 fun ε εpos ↦ _
+  refine fun x ↦ (mem_closure_iff_nhds_basis nhds_basis_closedBall).2 fun ε εpos ↦ ?_
   /- `ε` is positive. We have to find a point in the ball of radius `ε` around `x` belonging to all
     `f n`. For this, we construct inductively a sequence `F n = (c n, r n)` such that the closed ball
     `closedBall (c n) (r n)` is included in the previous ball and in `f n`, and such that
@@ -351,13 +351,13 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
   use y
   have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by
     intro n
-    refine' Nat.le_induction _ fun m hnm h ↦ _
+    refine Nat.le_induction ?_ fun m hnm h ↦ ?_
     · exact Subset.rfl
     · exact (incl m).trans (Set.inter_subset_left.trans h)
   have yball : ∀ n, y ∈ closedBall (c n) (r n) := by
     intro n
-    refine' isClosed_ball.mem_of_tendsto ylim _
-    refine' (Filter.eventually_ge_atTop n).mono fun m hm ↦ _
+    refine isClosed_ball.mem_of_tendsto ylim ?_
+    refine (Filter.eventually_ge_atTop n).mono fun m hm ↦ ?_
     exact I n m hm (mem_closedBall_self (rpos _).le)
   constructor
   · suffices ∀ n, y ∈ f n by rwa [Set.mem_iInter]

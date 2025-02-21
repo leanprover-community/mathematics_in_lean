@@ -1,6 +1,6 @@
 import MIL.Common
-import Mathlib.Topology.Instances.Real
-import Mathlib.Analysis.NormedSpace.BanachSteinhaus
+import Mathlib.Topology.Instances.Real.Defs
+import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
 
 open Set Filter Topology
 

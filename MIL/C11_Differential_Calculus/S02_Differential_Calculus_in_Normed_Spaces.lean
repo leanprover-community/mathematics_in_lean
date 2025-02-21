@@ -1,6 +1,6 @@
 import MIL.Common
-import Mathlib.Analysis.NormedSpace.BanachSteinhaus
-import Mathlib.Analysis.NormedSpace.FiniteDimension
+import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
+import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.Analysis.Calculus.InverseFunctionTheorem.FDeriv
 import Mathlib.Analysis.Calculus.ContDiff.RCLike
 import Mathlib.Analysis.Calculus.FDeriv.Prod
@@ -73,10 +73,10 @@ example (f : E →L[𝕜] F) (a : 𝕜) (x : E) : f (a • x) = a • f x :=
 variable (f : E →L[𝕜] F)
 
 example (x : E) : ‖f x‖ ≤ ‖f‖ * ‖x‖ :=
-  f.le_op_norm x
+  f.le_opNorm x
 
 example {M : ℝ} (hMp : 0 ≤ M) (hM : ∀ x, ‖f x‖ ≤ M * ‖x‖) : ‖f‖ ≤ M :=
-  f.op_norm_le_bound hMp hM
+  f.opNorm_le_bound hMp hM
 
 end
 
@@ -106,7 +106,7 @@ example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, �
   have real_norm_le : ∀ z ∈ ball x ε, ∀ (i : ι), ‖g i z‖ ≤ m
   sorry
   have εk_pos : 0 < ε / ‖k‖ := sorry
-  refine' ⟨(m + m : ℕ) / (ε / ‖k‖), fun i ↦ ContinuousLinearMap.opNorm_le_of_shell ε_pos _ hk _⟩
+  refine ⟨(m + m : ℕ) / (ε / ‖k‖), fun i ↦ ContinuousLinearMap.opNorm_le_of_shell ε_pos ?_ hk ?_⟩
   sorry
   sorry
 
@@ -147,14 +147,14 @@ example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) (hff' : HasFDerivAt f f' 
 example (n : ℕ) (f : E → F) : E → E[×n]→L[𝕜] F :=
   iteratedFDeriv 𝕜 n f
 
-example (n : WithTop ℕ) {f : E → F} :
+example (n : ℕ∞) {f : E → F} :
     ContDiff 𝕜 n f ↔
       (∀ m : ℕ, (m : WithTop ℕ) ≤ n → Continuous fun x ↦ iteratedFDeriv 𝕜 m f x) ∧
         ∀ m : ℕ, (m : WithTop ℕ) < n → Differentiable 𝕜 fun x ↦ iteratedFDeriv 𝕜 m f x :=
   contDiff_iff_continuous_differentiable
 
 example {𝕂 : Type*} [RCLike 𝕂] {E : Type*} [NormedAddCommGroup E] [NormedSpace 𝕂 E] {F : Type*}
-    [NormedAddCommGroup F] [NormedSpace 𝕂 F] {f : E → F} {x : E} {n : WithTop ℕ}
+    [NormedAddCommGroup F] [NormedSpace 𝕂 F] {f : E → F} {x : E} {n : WithTop ℕ∞}
     (hf : ContDiffAt 𝕂 n f x) (hn : 1 ≤ n) : HasStrictFDerivAt f (fderiv 𝕂 f x) x :=
   hf.hasStrictFDerivAt hn
 

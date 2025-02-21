@@ -36,7 +36,7 @@ Do the following:
    You can call the copy `my_files` or whatever you want and use it to create
    your own Lean files as well.
 
-At that point, you can open the textbook in a web browser 
+At that point, you can open the textbook in a web browser
 at [https://leanprover-community.github.io/mathematics_in_lean/](https://leanprover-community.github.io/mathematics_in_lean/)
 and start reading and doing the exercises in VS Code.
 

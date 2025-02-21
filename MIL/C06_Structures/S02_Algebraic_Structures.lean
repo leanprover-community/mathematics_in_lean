@@ -10,7 +10,7 @@ structure Group₁ (α : Type*) where
   mul_assoc : ∀ x y z : α, mul (mul x y) z = mul x (mul y z)
   mul_one : ∀ x : α, mul x one = x
   one_mul : ∀ x : α, mul one x = x
-  mul_left_inv : ∀ x : α, mul (inv x) x = one
+  inv_mul_cancel : ∀ x : α, mul (inv x) x = one
 
 structure Group₁Cat where
   α : Type*
@@ -51,7 +51,7 @@ def permGroup {α : Type*} : Group₁ (Equiv.Perm α)
   mul_assoc f g h := (Equiv.trans_assoc _ _ _).symm
   one_mul := Equiv.trans_refl
   mul_one := Equiv.refl_trans
-  mul_left_inv := Equiv.self_trans_symm
+  inv_mul_cancel := Equiv.self_trans_symm
 
 structure AddGroup₁ (α : Type*) where
   (add : α → α → α)
@@ -84,7 +84,7 @@ variable {α : Type*} (f g : Equiv.Perm α) (n : ℕ)
 -- group power, defined for any group
 #check g ^ n
 
-example : f * g * g⁻¹ = f := by rw [mul_assoc, mul_right_inv, mul_one]
+example : f * g * g⁻¹ = f := by rw [mul_assoc, mul_inv_cancel, mul_one]
 
 example : f * g * g⁻¹ = f :=
   mul_inv_cancel_right f g
@@ -101,7 +101,7 @@ class Group₂ (α : Type*) where
   mul_assoc : ∀ x y z : α, mul (mul x y) z = mul x (mul y z)
   mul_one : ∀ x : α, mul x one = x
   one_mul : ∀ x : α, mul one x = x
-  mul_left_inv : ∀ x : α, mul (inv x) x = one
+  inv_mul_cancel : ∀ x : α, mul (inv x) x = one
 
 instance {α : Type*} : Group₂ (Equiv.Perm α) where
   mul f g := Equiv.trans g f
@@ -110,7 +110,7 @@ instance {α : Type*} : Group₂ (Equiv.Perm α) where
   mul_assoc f g h := (Equiv.trans_assoc _ _ _).symm
   one_mul := Equiv.trans_refl
   mul_one := Equiv.refl_trans
-  mul_left_inv := Equiv.self_trans_symm
+  inv_mul_cancel := Equiv.self_trans_symm
 
 #check Group₂.mul
 

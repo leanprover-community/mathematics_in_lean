@@ -1,5 +1,5 @@
 import MIL.Common
-import Mathlib.Analysis.NormedSpace.FiniteDimension
+import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.Analysis.Convolution
 import Mathlib.MeasureTheory.Function.Jacobian
 import Mathlib.MeasureTheory.Integral.Bochner
@@ -13,6 +13,6 @@ variable {α : Type*} [MeasurableSpace α]
 
 variable {ι : Type*} [Encodable ι]
 
-open MeasureTheory
+open MeasureTheory Function
 variable {μ : Measure α}
 

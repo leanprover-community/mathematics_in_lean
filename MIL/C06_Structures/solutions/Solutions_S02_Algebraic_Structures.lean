@@ -10,7 +10,7 @@ structure AddGroup₁ (α : Type*) where
   add_assoc : ∀ x y z : α, add (add x y) z = add x (add y z)
   add_zero : ∀ x : α, add x zero = x
   zero_add : ∀ x : α, add x zero = x
-  add_left_neg : ∀ x : α, add (neg x) x = zero
+  neg_add_cancel : ∀ x : α, add (neg x) x = zero
 
 @[ext]
 structure Point where
@@ -36,7 +36,7 @@ def addGroupPoint : AddGroup₁ Point where
   add_assoc := by simp [Point.add, add_assoc]
   add_zero := by simp [Point.add, Point.zero]
   zero_add := by simp [Point.add, Point.zero]
-  add_left_neg := by simp [Point.add, Point.neg, Point.zero]
+  neg_add_cancel := by simp [Point.add, Point.neg, Point.zero]
 
 end Point
 
@@ -47,7 +47,7 @@ class AddGroup₂ (α : Type*) where
   add_assoc : ∀ x y z : α, add (add x y) z = add x (add y z)
   add_zero : ∀ x : α, add x zero = x
   zero_add : ∀ x : α, add x zero = x
-  add_left_neg : ∀ x : α, add (neg x) x = zero
+  neg_add_cancel : ∀ x : α, add (neg x) x = zero
 
 instance hasAddAddGroup₂ {α : Type*} [AddGroup₂ α] : Add α :=
   ⟨AddGroup₂.add⟩
@@ -65,7 +65,7 @@ instance : AddGroup₂ Point where
   add_assoc := by simp [Point.add, add_assoc]
   add_zero := by simp [Point.add, Point.zero]
   zero_add := by simp [Point.add, Point.zero]
-  add_left_neg := by simp [Point.add, Point.neg, Point.zero]
+  neg_add_cancel := by simp [Point.add, Point.neg, Point.zero]
 
 section
 variable (x y : Point)

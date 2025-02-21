@@ -1,5 +1,5 @@
 import MIL.Common
-import Mathlib.Topology.Instances.Real.Defs
+import Mathlib.Topology.Instances.Real
 
 open Set Filter Topology
 
@@ -80,7 +80,7 @@ example (u v : ℕ → ℝ) (h : u =ᶠ[atTop] v) (x₀ : ℝ) :
     Tendsto u atTop (𝓝 x₀) ↔ Tendsto v atTop (𝓝 x₀) :=
   tendsto_congr' h
 
-#check Eventually.of_forall
+#check eventually_of_forall
 #check Eventually.mono
 #check Eventually.and
 

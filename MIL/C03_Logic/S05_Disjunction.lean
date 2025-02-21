@@ -25,7 +25,7 @@ example : x < |y| → x < y ∨ x < -y := by
   rcases le_or_gt 0 y with h | h
   · rw [abs_of_nonneg h]
     intro h; left; exact h
-  · rw [abs_of_neg h]
+  . rw [abs_of_neg h]
     intro h; right; exact h
 
 example : x < |y| → x < y ∨ x < -y := by
@@ -81,13 +81,13 @@ example {x : ℝ} (h : x ≠ 0) : x < 0 ∨ x > 0 := by
   · left
     exact xlt
   · contradiction
-  · right; exact xgt
+  . right; exact xgt
 
 example {m n k : ℕ} (h : m ∣ n ∨ m ∣ k) : m ∣ n * k := by
   rcases h with ⟨a, rfl⟩ | ⟨b, rfl⟩
   · rw [mul_assoc]
     apply dvd_mul_right
-  · rw [mul_comm, mul_assoc]
+  . rw [mul_comm, mul_assoc]
     apply dvd_mul_right
 
 example {z : ℝ} (h : ∃ x y, z = x ^ 2 + y ^ 2 ∨ z = x ^ 2 + y ^ 2 + 1) : z ≥ 0 := by
@@ -115,7 +115,7 @@ example (P : Prop) : ¬¬P → P := by
   intro h
   cases em P
   · assumption
-  · contradiction
+  . contradiction
 
 example (P : Prop) : ¬¬P → P := by
   intro h

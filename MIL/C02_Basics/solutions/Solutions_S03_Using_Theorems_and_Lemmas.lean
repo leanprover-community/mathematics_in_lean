@@ -35,26 +35,26 @@ example (h : a ≤ b) : c - exp b ≤ c - exp a := by
 example (h : a ≤ b) : c - exp b ≤ c - exp a := by
   linarith [exp_le_exp.mpr h]
 
-theorem fact1 : a*b*2 ≤ a^2 + b^2 := by
-  have h : 0 ≤ a^2 - 2*a*b + b^2
+theorem fact1 : a * b * 2 ≤ a ^ 2 + b ^ 2 := by
+  have h : 0 ≤ a ^ 2 - 2 * a * b + b ^ 2
   calc
-    a^2 - 2*a*b + b^2 = (a - b)^2 := by ring
+    a ^ 2 - 2 * a * b + b ^ 2 = (a - b) ^ 2 := by ring
     _ ≥ 0 := by apply pow_two_nonneg
   linarith
 
-theorem fact2 : -(a*b)*2 ≤ a^2 + b^2 := by
-  have h : 0 ≤ a^2 + 2*a*b + b^2
+theorem fact2 : -(a * b) * 2 ≤ a ^ 2 + b ^ 2 := by
+  have h : 0 ≤ a ^ 2 + 2 * a * b + b ^ 2
   calc
-    a^2 + 2*a*b + b^2 = (a + b)^2 := by ring
+    a ^ 2 + 2 * a * b + b ^ 2 = (a + b) ^ 2 := by ring
     _ ≥ 0 := by apply pow_two_nonneg
   linarith
 
-example : |a*b| ≤ (a^2 + b^2)/2 := by
+example : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
   have h : (0 : ℝ) < 2 := by norm_num
   apply abs_le'.mpr
   constructor
-  · rw [le_div_iff₀ h]
+  · rw [le_div_iff h]
     apply fact1
-  rw [le_div_iff₀ h]
+  rw [le_div_iff h]
   apply fact2
 

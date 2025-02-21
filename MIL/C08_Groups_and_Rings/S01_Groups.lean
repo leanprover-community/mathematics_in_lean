@@ -18,7 +18,7 @@ example {M N : Type*} [AddMonoid M] [AddMonoid N] (f : M →+ N) : f 0 = 0 :=
 example {M N P : Type*} [AddMonoid M] [AddMonoid N] [AddMonoid P]
     (f : M →+ N) (g : N →+ P) : M →+ P := g.comp f
 
-example {G : Type*} [Group G] (x : G) : x * x⁻¹ = 1 := mul_inv_cancel x
+example {G : Type*} [Group G] (x : G) : x * x⁻¹ = 1 := mul_inv_self x
 
 example {G : Type*} [Group G] (x y z : G) : x * (y * z) * (x * z)⁻¹ * (x * y * x⁻¹)⁻¹ = 1 := by
   group
@@ -145,19 +145,19 @@ example {G : Type*} [Group G] (G' : Subgroup G) : Nat.card G' ∣ Nat.card G :=
 
 open Subgroup
 
-example {G : Type*} [Group G] [Finite G] (p : ℕ) {n : ℕ} [Fact p.Prime]
+example {G : Type*} [Group G] [Fintype G] (p : ℕ) {n : ℕ} [Fact p.Prime]
     (hdvd : p ^ n ∣ Nat.card G) : ∃ K : Subgroup G, Nat.card K = p ^ n :=
   Sylow.exists_subgroup_card_pow_prime p hdvd
 
-lemma eq_bot_iff_card {G : Type*} [Group G] {H : Subgroup G} :
+lemma eq_bot_iff_card {G : Type*} [Group G] {H : Subgroup G} [Fintype H] :
     H = ⊥ ↔ Nat.card H = 1 := by
   suffices (∀ x ∈ H, x = 1) ↔ ∃ x ∈ H, ∀ a ∈ H, a = x by
-    simpa [eq_bot_iff_forall, Nat.card_eq_one_iff_exists]
+    simpa [eq_bot_iff_forall, Nat.card_eq_one_iff_exists, -Nat.card_eq_fintype_card]
   sorry
 
 #check card_dvd_of_le
 
-lemma inf_bot_of_coprime {G : Type*} [Group G] (H K : Subgroup G)
+lemma inf_bot_of_coprime {G : Type*} [Group G] (H K : Subgroup G) [Fintype H] [Fintype K]
     (h : (Nat.card H).Coprime (Nat.card K)) : H ⊓ K = ⊥ := by
   sorry
 open Equiv
@@ -272,7 +272,7 @@ open MonoidHom
 #check Subgroup.index_mul_card
 #check Nat.eq_of_mul_eq_mul_right
 
-lemma aux_card_eq [Finite G] (h' : Nat.card G = Nat.card H * Nat.card K) :
+lemma aux_card_eq [Fintype G] (h' : Nat.card G = Nat.card H * Nat.card K) :
     Nat.card (G ⧸ H) = Nat.card K := by
   sorry
 variable [H.Normal] [K.Normal] [Fintype G] (h : Disjoint H K)

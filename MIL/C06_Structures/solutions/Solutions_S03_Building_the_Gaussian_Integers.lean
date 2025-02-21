@@ -97,7 +97,7 @@ instance instCommRing : CommRing GaussInt where
   add_zero := by
     intro
     ext <;> simp
-  neg_add_cancel := by
+  add_left_neg := by
     intro
     ext <;> simp
   add_comm := by
@@ -162,6 +162,7 @@ theorem abs_mod'_le (a b : ℤ) (h : 0 < b) : |mod' a b| ≤ b / 2 := by
   have := Int.emod_lt_of_pos (a + b / 2) h
   have := Int.ediv_add_emod b 2
   have := Int.emod_lt_of_pos b zero_lt_two
+  revert this; intro this -- FIXME, this should not be needed
   linarith
 
 theorem mod'_eq (a b : ℤ) : mod' a b = a - b * div' a b := by linarith [div'_add_mod' a b]
@@ -259,8 +260,8 @@ theorem coe_natAbs_norm (x : GaussInt) : (x.norm.natAbs : ℤ) = x.norm :=
 theorem natAbs_norm_mod_lt (x y : GaussInt) (hy : y ≠ 0) :
     (x % y).norm.natAbs < y.norm.natAbs := by
   apply Int.ofNat_lt.1
-  simp only [Int.natCast_natAbs, abs_of_nonneg, norm_nonneg]
-  exact norm_mod_lt x hy
+  simp only [Int.coe_natAbs, abs_of_nonneg, norm_nonneg]
+  apply norm_mod_lt x hy
 
 theorem not_norm_mul_left_lt_norm (x : GaussInt) {y : GaussInt} (hy : y ≠ 0) :
     ¬(norm (x * y)).natAbs < (norm x).natAbs := by
@@ -286,6 +287,6 @@ instance : EuclideanDomain GaussInt :=
     mul_left_not_lt := not_norm_mul_left_lt_norm }
 
 example (x : GaussInt) : Irreducible x ↔ Prime x :=
-  irreducible_iff_prime
+  PrincipalIdealRing.irreducible_iff_prime
 
 end GaussInt

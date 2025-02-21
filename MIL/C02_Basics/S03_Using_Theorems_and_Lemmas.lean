@@ -21,7 +21,7 @@ end
 example (x y z : ℝ) (h₀ : x ≤ y) (h₁ : y ≤ z) : x ≤ z := by
   apply le_trans
   · apply h₀
-  · apply h₁
+  . apply h₁
 
 example (x y z : ℝ) (h₀ : x ≤ y) (h₁ : y ≤ z) : x ≤ z := by
   apply le_trans h₀
@@ -102,25 +102,25 @@ example : 0 ≤ a ^ 2 := by
 example (h : a ≤ b) : c - exp b ≤ c - exp a := by
   sorry
 
-example : 2*a*b ≤ a^2 + b^2 := by
-  have h : 0 ≤ a^2 - 2*a*b + b^2
+example : 2 * a * b ≤ a ^ 2 + b ^ 2 := by
+  have h : 0 ≤ a ^ 2 - 2 * a * b + b ^ 2
   calc
-    a^2 - 2*a*b + b^2 = (a - b)^2 := by ring
+    a ^ 2 - 2 * a * b + b ^ 2 = (a - b) ^ 2 := by ring
     _ ≥ 0 := by apply pow_two_nonneg
 
   calc
-    2*a*b = 2*a*b + 0 := by ring
-    _ ≤ 2*a*b + (a^2 - 2*a*b + b^2) := add_le_add (le_refl _) h
-    _ = a^2 + b^2 := by ring
+    2 * a * b = 2 * a * b + 0 := by ring
+    _ ≤ 2 * a * b + (a ^ 2 - 2 * a * b + b ^ 2) := add_le_add (le_refl _) h
+    _ = a ^ 2 + b ^ 2 := by ring
 
-example : 2*a*b ≤ a^2 + b^2 := by
-  have h : 0 ≤ a^2 - 2*a*b + b^2
+example : 2 * a * b ≤ a ^ 2 + b ^ 2 := by
+  have h : 0 ≤ a ^ 2 - 2 * a * b + b ^ 2
   calc
-    a^2 - 2*a*b + b^2 = (a - b)^2 := by ring
+    a ^ 2 - 2 * a * b + b ^ 2 = (a - b) ^ 2 := by ring
     _ ≥ 0 := by apply pow_two_nonneg
   linarith
 
-example : |a*b| ≤ (a^2 + b^2)/2 := by
+example : |a * b| ≤ (a ^ 2 + b ^ 2) / 2 := by
   sorry
 
 #check abs_le'.mpr

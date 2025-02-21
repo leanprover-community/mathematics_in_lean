@@ -5,7 +5,5 @@ import Mathlib.Analysis.Convolution
 
 open Set Filter
 
-open Topology Filter
-
 noncomputable section
 

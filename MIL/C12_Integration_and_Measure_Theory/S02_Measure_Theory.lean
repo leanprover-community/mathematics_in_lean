@@ -1,5 +1,5 @@
 import MIL.Common
-import Mathlib.Analysis.Normed.Module.FiniteDimension
+import Mathlib.Analysis.NormedSpace.FiniteDimension
 import Mathlib.Analysis.Convolution
 import Mathlib.MeasureTheory.Function.Jacobian
 import Mathlib.MeasureTheory.Integral.Bochner
@@ -32,7 +32,7 @@ example {f : ι → Set α} (h : ∀ b, MeasurableSet (f b)) : MeasurableSet (�
 example {f : ι → Set α} (h : ∀ b, MeasurableSet (f b)) : MeasurableSet (⋂ b, f b) :=
   MeasurableSet.iInter h
 
-open MeasureTheory Function
+open MeasureTheory
 variable {μ : Measure α}
 
 example (s : Set α) : μ s = ⨅ (t : Set α) (_ : s ⊆ t) (_ : MeasurableSet t), μ t :=

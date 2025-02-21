@@ -174,7 +174,7 @@ mentioning the objects.</p>
 <p>At this stage, you also know that if you use
 the <code class="docutils literal notranslate"><span class="pre">apply</span></code> tactic to apply <code class="docutils literal notranslate"><span class="pre">my_lemma</span></code>
 to a goal of the form <code class="docutils literal notranslate"><span class="pre">|a</span> <span class="pre">*</span> <span class="pre">b|</span> <span class="pre">&lt;</span> <span class="pre">&#948;</span></code>,
-you are left with new goals that require you to  prove
+you are left with new goals that require you to prove
 each of the hypotheses.</p>
 <p id="index-0">To prove a statement like this, use the <code class="docutils literal notranslate"><span class="pre">intro</span></code> tactic.
 Take a look at what it does in this example:</p>
@@ -1397,7 +1397,7 @@ to use the name <code class="docutils literal notranslate"><span class="pre">h</
 <span class="w">  </span><span class="n">rcases</span><span class="w"> </span><span class="n">le_or_gt</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="n">h</span>
 <span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">abs_of_nonneg</span><span class="w"> </span><span class="n">h</span><span class="o">]</span>
 <span class="w">    </span><span class="n">intro</span><span class="w"> </span><span class="n">h</span><span class="bp">;</span><span class="w"> </span><span class="n">left</span><span class="bp">;</span><span class="w"> </span><span class="n">exact</span><span class="w"> </span><span class="n">h</span>
-<span class="w">  </span><span class="bp">.</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">abs_of_neg</span><span class="w"> </span><span class="n">h</span><span class="o">]</span>
+<span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">abs_of_neg</span><span class="w"> </span><span class="n">h</span><span class="o">]</span>
 <span class="w">    </span><span class="n">intro</span><span class="w"> </span><span class="n">h</span><span class="bp">;</span><span class="w"> </span><span class="n">right</span><span class="bp">;</span><span class="w"> </span><span class="n">exact</span><span class="w"> </span><span class="n">h</span>
 </pre></div>
 </div>
@@ -1490,7 +1490,7 @@ the patterns for each new goal are separated by a vertical bar.</p>
 <span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">left</span>
 <span class="w">    </span><span class="n">exact</span><span class="w"> </span><span class="n">xlt</span>
 <span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">contradiction</span>
-<span class="w">  </span><span class="bp">.</span><span class="w"> </span><span class="n">right</span><span class="bp">;</span><span class="w"> </span><span class="n">exact</span><span class="w"> </span><span class="n">xgt</span>
+<span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">right</span><span class="bp">;</span><span class="w"> </span><span class="n">exact</span><span class="w"> </span><span class="n">xgt</span>
 </pre></div>
 </div>
 <p>You can still nest patterns and use the <code class="docutils literal notranslate"><span class="pre">rfl</span></code> keyword
@@ -1499,7 +1499,7 @@ to substitute equations:</p>
 <span class="w">  </span><span class="n">rcases</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="o">&#10216;</span><span class="n">a</span><span class="o">,</span><span class="w"> </span><span class="n">rfl</span><span class="o">&#10217;</span><span class="w"> </span><span class="bp">|</span><span class="w"> </span><span class="o">&#10216;</span><span class="n">b</span><span class="o">,</span><span class="w"> </span><span class="n">rfl</span><span class="o">&#10217;</span>
 <span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_assoc</span><span class="o">]</span>
 <span class="w">    </span><span class="n">apply</span><span class="w"> </span><span class="n">dvd_mul_right</span>
-<span class="w">  </span><span class="bp">.</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">,</span><span class="w"> </span><span class="n">mul_assoc</span><span class="o">]</span>
+<span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_comm</span><span class="o">,</span><span class="w"> </span><span class="n">mul_assoc</span><span class="o">]</span>
 <span class="w">    </span><span class="n">apply</span><span class="w"> </span><span class="n">dvd_mul_right</span>
 </pre></div>
 </div>
@@ -1560,7 +1560,7 @@ The name <code class="docutils literal notranslate"><span class="pre">em</span><
 <span class="w">  </span><span class="n">intro</span><span class="w"> </span><span class="n">h</span>
 <span class="w">  </span><span class="n">cases</span><span class="w"> </span><span class="n">em</span><span class="w"> </span><span class="n">P</span>
 <span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">assumption</span>
-<span class="w">  </span><span class="bp">.</span><span class="w"> </span><span class="n">contradiction</span>
+<span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">contradiction</span>
 </pre></div>
 </div>
 <p id="index-23">Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">by_cases</span></code> tactic.</p>

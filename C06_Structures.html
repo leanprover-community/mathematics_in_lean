@@ -234,7 +234,7 @@ same; the only difference is that we use anonymous constructor notation
 in the second.
 Although it is sometimes convenient to define functions this way, and structural eta-reduction makes
 this alternative definitionally equivalent, it can make things less convenient in later proofs.
-In particular, <cite>rw [addAlt]</cite> leaves us with a messier goal view containing a <cite>match</cite> statement.</p>
+In particular, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[addAlt]</span></code> leaves us with a messier goal view containing a <code class="docutils literal notranslate"><span class="pre">match</span></code> statement.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span><span class="w"> </span><span class="n">addAlt</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">Point</span>
 <span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">Point.mk</span><span class="w"> </span><span class="n">x&#8321;</span><span class="w"> </span><span class="n">y&#8321;</span><span class="w"> </span><span class="n">z&#8321;</span><span class="o">,</span><span class="w"> </span><span class="n">Point.mk</span><span class="w"> </span><span class="n">x&#8322;</span><span class="w"> </span><span class="n">y&#8322;</span><span class="w"> </span><span class="n">z&#8322;</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="o">&#10216;</span><span class="n">x&#8321;</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">x&#8322;</span><span class="o">,</span><span class="w"> </span><span class="n">y&#8321;</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">y&#8322;</span><span class="o">,</span><span class="w"> </span><span class="n">z&#8321;</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">z&#8322;</span><span class="o">&#10217;</span>
 
@@ -377,8 +377,8 @@ how to sum over it.</p>
 <p>As an exercise, see if you can define the weighted average of
 two points in the standard <span class="math notranslate nohighlight">\(n\)</span>-simplex.
 You can use <code class="docutils literal notranslate"><span class="pre">Finset.sum_add_distrib</span></code>
-and <code class="docutils literal notranslate"><span class="pre">Finset.mul_sum</span></code> to manipulate the relevant sums.
-We have seen that structures can be used to bundle together data
+and <code class="docutils literal notranslate"><span class="pre">Finset.mul_sum</span></code> to manipulate the relevant sums.</p>
+<p>We have seen that structures can be used to bundle together data
 and properties.
 Interestingly, they can also be used to bundle together properties
 without the data.
@@ -601,14 +601,14 @@ as follows.</p>
 <span class="w">  </span><span class="n">mul_assoc</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="o">(</span><span class="n">mul</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="o">)</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">(</span><span class="n">mul</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="o">)</span>
 <span class="w">  </span><span class="n">mul_one</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">x</span>
 <span class="w">  </span><span class="n">one_mul</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">x</span>
-<span class="w">  </span><span class="n">mul_left_inv</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="o">(</span><span class="n">inv</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">one</span>
+<span class="w">  </span><span class="n">inv_mul_cancel</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="o">(</span><span class="n">inv</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">one</span>
 </pre></div>
 </div>
-<p>Notice that the type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is a <em>parameter</em> in the definition of <code class="docutils literal notranslate"><span class="pre">group&#8321;</span></code>.
+<p>Notice that the type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is a <em>parameter</em> in the definition of <code class="docutils literal notranslate"><span class="pre">Group&#8321;</span></code>.
 So you should think of an object <code class="docutils literal notranslate"><span class="pre">struc</span> <span class="pre">:</span> <span class="pre">Group&#8321;</span> <span class="pre">&#945;</span></code> as being
 a group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
 We saw in <a class="reference internal" href="C02_Basics.html#proving-identities-in-algebraic-structures"><span class="std std-numref">Section 2.2</span></a>
-that the counterpart <code class="docutils literal notranslate"><span class="pre">mul_right_inv</span></code> to <code class="docutils literal notranslate"><span class="pre">mul_left_inv</span></code>
+that the counterpart <code class="docutils literal notranslate"><span class="pre">mul_inv_cancel</span></code> to <code class="docutils literal notranslate"><span class="pre">inv_mul_cancel</span></code>
 follows from the other group axioms, so there is no need
 to add it to the definition.</p>
 <p>This definition of a group is similar to the definition of <code class="docutils literal notranslate"><span class="pre">Group</span></code> in
@@ -705,7 +705,7 @@ composition of the bijections. Here we define this group:</p>
 <span class="w">  </span><span class="n">mul_assoc</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">(</span><span class="n">Equiv.trans_assoc</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
 <span class="w">  </span><span class="n">one_mul</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.trans_refl</span>
 <span class="w">  </span><span class="n">mul_one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.refl_trans</span>
-<span class="w">  </span><span class="n">mul_left_inv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.self_trans_symm</span>
+<span class="w">  </span><span class="n">inv_mul_cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.self_trans_symm</span>
 </pre></div>
 </div>
 <p>In fact, Mathlib defines exactly this <code class="docutils literal notranslate"><span class="pre">Group</span></code> structure on <code class="docutils literal notranslate"><span class="pre">Equiv.Perm</span> <span class="pre">&#945;</span></code>
@@ -719,7 +719,7 @@ independent of structure.
 For example, we can consider groups <span class="math notranslate nohighlight">\((G_1, \cdot, 1, \cdot^{-1})\)</span>,
 <span class="math notranslate nohighlight">\((G_2, \circ, e, i(\cdot))\)</span>, and <span class="math notranslate nohighlight">\((G_3, +, 0, -)\)</span>.
 In the first case, we write the binary operation as <span class="math notranslate nohighlight">\(\cdot\)</span>,
-the identity at <span class="math notranslate nohighlight">\(1\)</span>, and the inverse function as <span class="math notranslate nohighlight">\(x \mapsto x^{-1}\)</span>.
+the identity as <span class="math notranslate nohighlight">\(1\)</span>, and the inverse function as <span class="math notranslate nohighlight">\(x \mapsto x^{-1}\)</span>.
 In the second and third cases, we use the notational alternatives shown.
 When we formalize the notion of a group in Lean, however,
 the notation is more tightly linked to the structure.
@@ -781,7 +781,7 @@ definitions, and theorems for <code class="docutils literal notranslate"><span c
 <span class="c1">-- group power, defined for any group</span>
 <span class="k">#check</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="n">n</span>
 
-<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">g</span><span class="bp">&#8315;&#185;</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_assoc</span><span class="o">,</span><span class="w"> </span><span class="n">mul_right_inv</span><span class="o">,</span><span class="w"> </span><span class="n">mul_one</span><span class="o">]</span>
+<span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">g</span><span class="bp">&#8315;&#185;</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_assoc</span><span class="o">,</span><span class="w"> </span><span class="n">mul_inv_cancel</span><span class="o">,</span><span class="w"> </span><span class="n">mul_one</span><span class="o">]</span>
 
 <span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">g</span><span class="bp">&#8315;&#185;</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">mul_inv_cancel_right</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span>
@@ -858,7 +858,7 @@ without troubling us with the details.</p>
 <span class="w">  </span><span class="n">mul_assoc</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="o">(</span><span class="n">mul</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="o">)</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">(</span><span class="n">mul</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">z</span><span class="o">)</span>
 <span class="w">  </span><span class="n">mul_one</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">x</span>
 <span class="w">  </span><span class="n">one_mul</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">x</span>
-<span class="w">  </span><span class="n">mul_left_inv</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="o">(</span><span class="n">inv</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">one</span>
+<span class="w">  </span><span class="n">inv_mul_cancel</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">,</span><span class="w"> </span><span class="n">mul</span><span class="w"> </span><span class="o">(</span><span class="n">inv</span><span class="w"> </span><span class="n">x</span><span class="o">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">one</span>
 
 <span class="kd">instance</span><span class="w"> </span><span class="o">{</span><span class="n">&#945;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Group&#8322;</span><span class="w"> </span><span class="o">(</span><span class="n">Equiv.Perm</span><span class="w"> </span><span class="n">&#945;</span><span class="o">)</span><span class="w"> </span><span class="n">where</span>
 <span class="w">  </span><span class="n">mul</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.trans</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">f</span>
@@ -867,7 +867,7 @@ without troubling us with the details.</p>
 <span class="w">  </span><span class="n">mul_assoc</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">(</span><span class="n">Equiv.trans_assoc</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
 <span class="w">  </span><span class="n">one_mul</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.trans_refl</span>
 <span class="w">  </span><span class="n">mul_one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.refl_trans</span>
-<span class="w">  </span><span class="n">mul_left_inv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.self_trans_symm</span>
+<span class="w">  </span><span class="n">inv_mul_cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.self_trans_symm</span>
 </pre></div>
 </div>
 <p>The following illustrates their use.</p>
@@ -1175,7 +1175,7 @@ this is not the topic of the current discussion.</p>
 <span class="w">  </span><span class="n">add_zero</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">    </span><span class="n">intro</span>
 <span class="w">    </span><span class="n">ext</span><span class="w"> </span><span class="bp">&lt;;&gt;</span><span class="w"> </span><span class="n">simp</span>
-<span class="w">  </span><span class="n">add_left_neg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="w">  </span><span class="n">neg_add_cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">    </span><span class="n">intro</span>
 <span class="w">    </span><span class="n">ext</span><span class="w"> </span><span class="bp">&lt;;&gt;</span><span class="w"> </span><span class="n">simp</span>
 <span class="w">  </span><span class="n">add_comm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
@@ -1223,7 +1223,7 @@ function <span class="math notranslate nohighlight">\(N : R \to \mathbb{N}\)</sp
 <ul class="simple">
 <li><p>For every <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b \ne 0\)</span> in <span class="math notranslate nohighlight">\(R\)</span>, there are
 <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(r\)</span> in <span class="math notranslate nohighlight">\(R\)</span> such that <span class="math notranslate nohighlight">\(a = bq + r\)</span> and
-either <span class="math notranslate nohighlight">\(r = 0\)</span> or <cite>N(r) &lt; N(b)</cite>.</p></li>
+either <span class="math notranslate nohighlight">\(r = 0\)</span> or <span class="math notranslate nohighlight">\(N(r) &lt; N(b)\)</span>.</p></li>
 <li><p>For every <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b \ne 0\)</span>, <span class="math notranslate nohighlight">\(N(a) \le N(ab)\)</span>.</p></li>
 </ul>
 <p>The ring of integers <span class="math notranslate nohighlight">\(\Bbb{Z}\)</span> with <span class="math notranslate nohighlight">\(N(a) = |a|\)</span> is an
@@ -1263,7 +1263,7 @@ implies that every irreducible element is prime.
 The axioms for a Euclidean domain imply that one can write any nonzero element
 as a finite product of irreducible elements. They also imply that one can use
 the Euclidean algorithm to find a greatest common divisor of any two
-nonzero elements <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, i.e.~an element that is divisible by any
+nonzero elements <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, i.e. an element that is divisible by any
 other common divisor. This, in turn, implies that factorization
 into irreducible elements is unique up to multiplication by units.</p>
 <p>We now show that the Gaussian integers are a Euclidean domain with
@@ -1274,7 +1274,7 @@ we have <span class="math notranslate nohighlight">\(N(xy) = N(x)N(y)\)</span>.<
 <p>To see that this definition of the norm makes the Gaussian integers a Euclidean
 domain, only the first property is challenging. Suppose
 we want to write <span class="math notranslate nohighlight">\(a + bi = (c + di) q + r\)</span> for suitable <span class="math notranslate nohighlight">\(q\)</span>
-and <span class="math notranslate nohighlight">\(r\)</span>. Treating <span class="math notranslate nohighlight">\(a + bi\)</span> and <span class="math notranslate nohighlight">\(c + di\)</span> are complex
+and <span class="math notranslate nohighlight">\(r\)</span>. Treating <span class="math notranslate nohighlight">\(a + bi\)</span> and <span class="math notranslate nohighlight">\(c + di\)</span> as complex
 numbers, carry out the division</p>
 <div class="math notranslate nohighlight">
 \[\frac{a + bi}{c + di} = \frac{(a + bi)(c - di)}{(c + di)(c-di)} =
@@ -1305,9 +1305,9 @@ where the Gaussian integers themselves are constructed as a special case
 of a ring of <em>quadratic integers</em>.
 See the file <a class="reference external" href="https://github.com/leanprover-community/mathlib4/blob/master/Mathlib/NumberTheory/Zsqrtd/GaussianInt.lean">GaussianInt.lean</a>.</p>
 <p>Here we will instead carry out an argument that stays in the integers.
-This illustrates an choice one commonly faces when formalizing mathematics.
+This illustrates a choice one commonly faces when formalizing mathematics.
 Given an argument that requires concepts or machinery that is not already
-in the library, one has two choices: either formalizes the concepts or machinery
+in the library, one has two choices: either formalize the concepts and machinery
 needed, or adapt the argument to make use of concepts and machinery you
 already have.
 The first choice is generally a good investment of time when the results
@@ -1344,7 +1344,6 @@ from the remainder.</p>
 <span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Int.emod_lt_of_pos</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="n">h</span>
 <span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Int.ediv_add_emod</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="mi">2</span>
 <span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Int.emod_lt_of_pos</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">zero_lt_two</span>
-<span class="w">  </span><span class="n">revert</span><span class="w"> </span><span class="n">this</span><span class="bp">;</span><span class="w"> </span><span class="n">intro</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="c1">-- FIXME, this should not be needed</span>
 <span class="w">  </span><span class="n">linarith</span>
 </pre></div>
 </div>
@@ -1482,8 +1481,8 @@ The second one re-expresses the fact that the norm is decreasing.</p>
 <span class="kd">theorem</span><span class="w"> </span><span class="n">natAbs_norm_mod_lt</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">GaussInt</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hy</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">&#8800;</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
 <span class="w">    </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="bp">%</span><span class="w"> </span><span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">norm.natAbs</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">y.norm.natAbs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">apply</span><span class="w"> </span><span class="n">Int.ofNat_lt</span><span class="bp">.</span><span class="mi">1</span>
-<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">Int.coe_natAbs</span><span class="o">,</span><span class="w"> </span><span class="n">abs_of_nonneg</span><span class="o">,</span><span class="w"> </span><span class="n">norm_nonneg</span><span class="o">]</span>
-<span class="w">  </span><span class="n">apply</span><span class="w"> </span><span class="n">norm_mod_lt</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">hy</span>
+<span class="w">  </span><span class="n">simp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">Int.natCast_natAbs</span><span class="o">,</span><span class="w"> </span><span class="n">abs_of_nonneg</span><span class="o">,</span><span class="w"> </span><span class="n">norm_nonneg</span><span class="o">]</span>
+<span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="n">norm_mod_lt</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">hy</span>
 </pre></div>
 </div>
 <p>We also need to establish the second key property of the norm function
@@ -1526,7 +1525,7 @@ and in that case, the required properties are the theorems
 <p>An immediate payoff is that we now know that, in the Gaussian integers,
 the notions of being prime and being irreducible coincide.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">GaussInt</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Irreducible</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8596;</span><span class="w"> </span><span class="n">Prime</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span>
-<span class="w">  </span><span class="n">PrincipalIdealRing.irreducible_iff_prime</span>
+<span class="w">  </span><span class="n">irreducible_iff_prime</span>
 </pre></div>
 </div>
 </section>

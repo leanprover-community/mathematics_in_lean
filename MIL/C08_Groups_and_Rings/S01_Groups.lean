@@ -283,7 +283,7 @@ variable [H.Normal] [K.Normal] [Fintype G] (h : Disjoint H K)
 #check restrict
 #check ker_restrict
 
-def iso₁ [Fintype G] (h : Disjoint H K) (h' : Nat.card G = Nat.card H * Nat.card K) : K ≃* G ⧸ H := by
+def iso₁ : K ≃* G ⧸ H := by
   sorry
 def iso₂ : G ≃* (G ⧸ K) × (G ⧸ H) := by
   sorry

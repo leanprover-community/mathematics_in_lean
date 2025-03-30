@@ -143,7 +143,7 @@ variable [H.Normal] [K.Normal] [Fintype G] (h : Disjoint H K)
 #check restrict
 #check ker_restrict
 
-def iso₁ [Fintype G] (h : Disjoint H K) (h' : Nat.card G = Nat.card H * Nat.card K) : K ≃* G ⧸ H := by
+def iso₁ : K ≃* G ⧸ H := by
   apply MulEquiv.ofBijective ((QuotientGroup.mk' H).restrict K)
   rw [Nat.bijective_iff_injective_and_card]
   constructor

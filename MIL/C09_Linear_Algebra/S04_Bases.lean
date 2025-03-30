@@ -141,6 +141,7 @@ example : Finsupp.linearCombination K B (B.repr v) = v :=
   B.linearCombination_repr v
 variable (f : ι → V) in
 #check (Finsupp.linearCombination K f : (ι →₀ K) →ₗ[K] V)
+
 section
 
 variable {W : Type*} [AddCommGroup W] [Module K W]

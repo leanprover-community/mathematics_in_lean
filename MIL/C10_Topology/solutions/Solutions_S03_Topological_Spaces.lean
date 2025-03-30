@@ -49,11 +49,6 @@ example {P : X → Prop} {x : X} (h : ∀ᶠ y in 𝓝 x, P y) : ∀ᶠ y in �
 
 example {α : Type*} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
     (H : ∀ a : α, ∀ p : α → Prop, (∀ᶠ x in n a, p x) → ∀ᶠ y in n a, ∀ᶠ x in n y, p x) :
-    ∀ a, ∀ s ∈ n a, ∃ t ∈ n a, t ⊆ s ∧ ∀ a' ∈ t, s ∈ n a' :=
-  sorry
-
-example {α : Type*} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
-    (H : ∀ a : α, ∀ p : α → Prop, (∀ᶠ x in n a, p x) → ∀ᶠ y in n a, ∀ᶠ x in n y, p x) :
     ∀ a, ∀ s ∈ n a, ∃ t ∈ n a, t ⊆ s ∧ ∀ a' ∈ t, s ∈ n a' := by
   intro a s s_in
   refine ⟨{ y | s ∈ n y }, H a (fun x ↦ x ∈ s) s_in, ?_, by tauto⟩
@@ -62,7 +57,6 @@ example {α : Type*} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
 
 end
 
--- BOTH.
 variable {X Y : Type*}
 
 example (f : X → Y) : TopologicalSpace X → TopologicalSpace Y :=

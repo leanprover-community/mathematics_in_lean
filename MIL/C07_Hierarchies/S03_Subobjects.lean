@@ -78,7 +78,7 @@ instance [CommMonoid M] : HasQuotient M (Submonoid M) where
 def QuotientMonoid.mk [CommMonoid M] (N : Submonoid M) : M → M ⧸ N := Quotient.mk N.Setoid
 
 instance [CommMonoid M] (N : Submonoid M) : Monoid (M ⧸ N) where
-  mul := Quotient.map₂' (· * ·) (by
+  mul := Quotient.map₂ (· * ·) (by
       sorry
         )
   mul_assoc := by

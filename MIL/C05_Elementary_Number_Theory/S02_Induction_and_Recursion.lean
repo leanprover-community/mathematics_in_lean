@@ -59,31 +59,31 @@ variable {α : Type*} (s : Finset ℕ) (f : ℕ → ℕ) (n : ℕ)
 open BigOperators
 open Finset
 
-example : s.sum f = ∑ x in s, f x :=
+example : s.sum f = ∑ x ∈ s, f x :=
   rfl
 
-example : s.prod f = ∏ x in s, f x :=
+example : s.prod f = ∏ x ∈ s, f x :=
   rfl
 
-example : (range n).sum f = ∑ x in range n, f x :=
+example : (range n).sum f = ∑ x ∈ range n, f x :=
   rfl
 
-example : (range n).prod f = ∏ x in range n, f x :=
+example : (range n).prod f = ∏ x ∈ range n, f x :=
   rfl
 
-example (f : ℕ → ℕ) : ∑ x in range 0, f x = 0 :=
+example (f : ℕ → ℕ) : ∑ x ∈ range 0, f x = 0 :=
   Finset.sum_range_zero f
 
-example (f : ℕ → ℕ) (n : ℕ) : ∑ x in range n.succ, f x = ∑ x in range n, f x + f n :=
+example (f : ℕ → ℕ) (n : ℕ) : ∑ x ∈ range n.succ, f x = ∑ x ∈ range n, f x + f n :=
   Finset.sum_range_succ f n
 
-example (f : ℕ → ℕ) : ∏ x in range 0, f x = 1 :=
+example (f : ℕ → ℕ) : ∏ x ∈ range 0, f x = 1 :=
   Finset.prod_range_zero f
 
-example (f : ℕ → ℕ) (n : ℕ) : ∏ x in range n.succ, f x = (∏ x in range n, f x) * f n :=
+example (f : ℕ → ℕ) (n : ℕ) : ∏ x ∈ range n.succ, f x = (∏ x ∈ range n, f x) * f n :=
   Finset.prod_range_succ f n
 
-example (n : ℕ) : fac n = ∏ i in range n, (i + 1) := by
+example (n : ℕ) : fac n = ∏ i ∈ range n, (i + 1) := by
   induction' n with n ih
   · simp [fac, prod_range_zero]
   simp [fac, ih, prod_range_succ, mul_comm]
@@ -91,14 +91,14 @@ example (n : ℕ) : fac n = ∏ i in range n, (i + 1) := by
 example (a b c d e f : ℕ) : a * (b * c * f * (d * e)) = d * (a * f * e) * (c * b) := by
   simp [mul_assoc, mul_comm, mul_left_comm]
 
-theorem sum_id (n : ℕ) : ∑ i in range (n + 1), i = n * (n + 1) / 2 := by
+theorem sum_id (n : ℕ) : ∑ i ∈ range (n + 1), i = n * (n + 1) / 2 := by
   symm; apply Nat.div_eq_of_eq_mul_right (by norm_num : 0 < 2)
   induction' n with n ih
   · simp
   rw [Finset.sum_range_succ, mul_add 2, ← ih]
   ring
 
-theorem sum_sqr (n : ℕ) : ∑ i in range (n + 1), i ^ 2 = n * (n + 1) * (2 * n + 1) / 6 := by
+theorem sum_sqr (n : ℕ) : ∑ i ∈ range (n + 1), i ^ 2 = n * (n + 1) * (2 * n + 1) / 6 := by
   sorry
 end
 

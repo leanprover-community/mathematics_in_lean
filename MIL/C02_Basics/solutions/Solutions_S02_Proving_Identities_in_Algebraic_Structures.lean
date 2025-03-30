@@ -6,7 +6,7 @@ namespace MyRing
 variable {R : Type*} [Ring R]
 
 theorem add_neg_cancel_right (a b : R) : a + b + -b = a := by
-  rw [add_assoc, add_right_neg, add_zero]
+  rw [add_assoc, add_neg_cancel, add_zero]
 
 theorem add_left_cancel {a b c : R} (h : a + b = a + c) : b = c := by
   rw [← neg_add_cancel_left a b, h, neg_add_cancel_left]
@@ -40,7 +40,7 @@ namespace MyRing
 variable {R : Type*} [Ring R]
 
 theorem self_sub (a : R) : a - a = 0 := by
-  rw [sub_eq_add_neg, add_right_neg]
+  rw [sub_eq_add_neg, add_neg_cancel]
 
 theorem one_add_one_eq_two : 1 + 1 = (2 : R) := by
   norm_num

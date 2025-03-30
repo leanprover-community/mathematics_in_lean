@@ -95,7 +95,7 @@ example : (r \ s) \ t = r \ (s ∪ t) := by
 
 end
 
-example (s : Finset ℕ) (n : ℕ) (h : n ∈ s) : n ∣ ∏ i in s, i :=
+example (s : Finset ℕ) (n : ℕ) (h : n ∈ s) : n ∣ ∏ i ∈ s, i :=
   Finset.dvd_prod_of_mem _ h
 
 theorem _root_.Nat.Prime.eq_of_dvd_of_prime {p q : ℕ}
@@ -104,7 +104,7 @@ theorem _root_.Nat.Prime.eq_of_dvd_of_prime {p q : ℕ}
   sorry
 
 theorem mem_of_dvd_prod_primes {s : Finset ℕ} {p : ℕ} (prime_p : p.Prime) :
-    (∀ n ∈ s, Nat.Prime n) → (p ∣ ∏ n in s, n) → p ∈ s := by
+    (∀ n ∈ s, Nat.Prime n) → (p ∣ ∏ n ∈ s, n) → p ∈ s := by
   intro h₀ h₁
   induction' s using Finset.induction_on with a s ans ih
   · simp at h₁
@@ -124,10 +124,10 @@ theorem primes_infinite' : ∀ s : Finset Nat, ∃ p, Nat.Prime p ∧ p ∉ s :=
     intro n
     simp [s'_def]
     apply h
-  have : 2 ≤ (∏ i in s', i) + 1 := by
+  have : 2 ≤ (∏ i ∈ s', i) + 1 := by
     sorry
   rcases exists_prime_factor this with ⟨p, pp, pdvd⟩
-  have : p ∣ ∏ i in s', i := by
+  have : p ∣ ∏ i ∈ s', i := by
     sorry
   have : p ∣ 1 := by
     convert Nat.dvd_sub' pdvd this
@@ -210,14 +210,14 @@ theorem primes_mod_4_eq_3_infinite : ∀ n, ∃ p > n, Nat.Prime p ∧ p % 4 = 3
     rcases hn with ⟨p, ⟨pp, p4⟩, pltn⟩
     exact ⟨p, pltn, pp, p4⟩
   rcases this with ⟨s, hs⟩
-  have h₁ : ((4 * ∏ i in erase s 3, i) + 3) % 4 = 3 := by
+  have h₁ : ((4 * ∏ i ∈ erase s 3, i) + 3) % 4 = 3 := by
     sorry
   rcases exists_prime_factor_mod_4_eq_3 h₁ with ⟨p, pp, pdvd, p4eq⟩
   have ps : p ∈ s := by
     sorry
   have pne3 : p ≠ 3 := by
     sorry
-  have : p ∣ 4 * ∏ i in erase s 3, i := by
+  have : p ∣ 4 * ∏ i ∈ erase s 3, i := by
     sorry
   have : p ∣ 3 := by
     sorry

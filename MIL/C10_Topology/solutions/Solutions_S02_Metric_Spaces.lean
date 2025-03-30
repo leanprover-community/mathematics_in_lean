@@ -192,9 +192,9 @@ theorem cauchySeq_of_le_geometric_two' {u : ℕ → X}
   obtain ⟨k, rfl : n = N + k⟩ := le_iff_exists_add.mp hn
   calc
     dist (u (N + k)) (u N) = dist (u (N + 0)) (u (N + k)) := sorry
-    _ ≤ ∑ i in range k, dist (u (N + i)) (u (N + (i + 1))) := sorry
-    _ ≤ ∑ i in range k, (1 / 2 : ℝ) ^ (N + i) := sorry
-    _ = 1 / 2 ^ N * ∑ i in range k, (1 / 2 : ℝ) ^ i := sorry
+    _ ≤ ∑ i  ∈ range k, dist (u (N + i)) (u (N + (i + 1))) := sorry
+    _ ≤ ∑ i  ∈ range k, (1 / 2 : ℝ) ^ (N + i) := sorry
+    _ = 1 / 2 ^ N * ∑ i  ∈ range k, (1 / 2 : ℝ) ^ i := sorry
     _ ≤ 1 / 2 ^ N * 2 := sorry
     _ < ε := sorry
 
@@ -216,10 +216,10 @@ example {u : ℕ → X} (hu : ∀ n : ℕ, dist (u n) (u (n + 1)) ≤ (1 / 2) ^ 
   obtain ⟨k, rfl : n = N + k⟩ := le_iff_exists_add.mp hn
   calc
     dist (u (N + k)) (u N) = dist (u (N + 0)) (u (N + k)) := by rw [dist_comm, add_zero]
-    _ ≤ ∑ i in range k, dist (u (N + i)) (u (N + (i + 1))) :=
+    _ ≤ ∑ i  ∈ range k, dist (u (N + i)) (u (N + (i + 1))) :=
       (dist_le_range_sum_dist (fun i ↦ u (N + i)) k)
-    _ ≤ ∑ i in range k, (1 / 2 : ℝ) ^ (N + i) := (sum_le_sum fun i _ ↦ hu <| N + i)
-    _ = 1 / 2 ^ N * ∑ i in range k, (1 / 2 : ℝ) ^ i := by simp_rw [← one_div_pow, pow_add, ← mul_sum]
+    _ ≤ ∑ i  ∈ range k, (1 / 2 : ℝ) ^ (N + i) := (sum_le_sum fun i _ ↦ hu <| N + i)
+    _ = 1 / 2 ^ N * ∑ i  ∈ range k, (1 / 2 : ℝ) ^ i := by simp_rw [← one_div_pow, pow_add, ← mul_sum]
     _ ≤ 1 / 2 ^ N * 2 :=
       (mul_le_mul_of_nonneg_left (sum_geometric_two_le _)
         (one_div_nonneg.mpr (pow_nonneg (zero_le_two : (0 : ℝ) ≤ 2) _)))
@@ -356,7 +356,7 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
     · exact (incl m).trans (Set.inter_subset_left.trans h)
   have yball : ∀ n, y ∈ closedBall (c n) (r n) := by
     intro n
-    refine isClosed_ball.mem_of_tendsto ylim ?_
+    refine isClosed_closedBall.mem_of_tendsto ylim ?_
     refine (Filter.eventually_ge_atTop n).mono fun m hm ↦ ?_
     exact I n m hm (mem_closedBall_self (rpos _).le)
   constructor

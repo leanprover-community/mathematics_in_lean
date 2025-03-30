@@ -1017,11 +1017,6 @@ is interesting in itself. It is not a bare function from <code class="docutils l
 <span class="k">#check</span><span class="w"> </span><span class="o">(</span><span class="n">Finsupp.linearCombination</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">&#953;</span><span class="w"> </span><span class="bp">&#8594;&#8320;</span><span class="w"> </span><span class="n">K</span><span class="o">)</span><span class="w"> </span><span class="bp">&#8594;&#8343;</span><span class="o">[</span><span class="n">K</span><span class="o">]</span><span class="w"> </span><span class="n">V</span><span class="o">)</span>
 </pre></div>
 </div>
-<p>The above subtlety also explains why dot notation cannot be used to write
-<code class="docutils literal notranslate"><span class="pre">c.linearCombination</span> <span class="pre">K</span> <span class="pre">f</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Finsupp.linearCombination</span> <span class="pre">K</span> <span class="pre">f</span> <span class="pre">c</span></code>.
-Indeed <code class="docutils literal notranslate"><span class="pre">Finsupp.linearCombination</span></code> does not take <code class="docutils literal notranslate"><span class="pre">c</span></code> as an argument,
-<code class="docutils literal notranslate"><span class="pre">Finsupp.linearCombination</span> <span class="pre">K</span> <span class="pre">f</span></code> is coerced to a function type and then this function
-takes <code class="docutils literal notranslate"><span class="pre">c</span></code> as an argument.</p>
 <p>Returning to the mathematical discussion, it is important to understand that the
 representation of vectors in a basis is less useful in formalized
 mathematics than you may think.

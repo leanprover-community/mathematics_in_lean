@@ -49,10 +49,8 @@ example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Contin
   hf.fst'.dist hf.snd'
 
 example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 2 + x) :=
-  sorry
-
-example {f : ℝ → X} (hf : Continuous f) : Continuous fun x : ℝ ↦ f (x ^ 2 + x) :=
   hf.comp <| (continuous_pow 2).add continuous_id
+
 
 example {X Y : Type*} [MetricSpace X] [MetricSpace Y] (f : X → Y) (a : X) :
     ContinuousAt f a ↔ ∀ ε > 0, ∃ δ > 0, ∀ {x}, dist x a < δ → dist (f x) (f a) < ε :=
@@ -86,10 +84,7 @@ example {s : Set X} : a ∈ closure s ↔ ∀ ε > 0, ∃ b ∈ s, a ∈ Metric.
   Metric.mem_closure_iff
 
 example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n, u n ∈ s) :
-    a ∈ closure s :=
-  sorry
-
-example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n, u n ∈ s) : a ∈ closure s := by
+    a ∈ closure s := by
   rw [Metric.tendsto_atTop] at hu
   rw [Metric.mem_closure_iff]
   intro ε ε_pos
@@ -97,6 +92,7 @@ example {u : ℕ → X} (hu : Tendsto u atTop (𝓝 a)) {s : Set X} (hs : ∀ n,
   refine ⟨u N, hs _, ?_⟩
   rw [dist_comm]
   exact hN N le_rfl
+
 
 example {x : X} {s : Set X} : s ∈ 𝓝 x ↔ ∃ ε > 0, Metric.ball x ε ⊆ s :=
   Metric.nhds_basis_ball.mem_iff
@@ -136,10 +132,6 @@ example {X : Type*} [MetricSpace X] {Y : Type*} [MetricSpace Y] {f : X → Y} :
 
 example {X : Type*} [MetricSpace X] [CompactSpace X]
       {Y : Type*} [MetricSpace Y] {f : X → Y}
-    (hf : Continuous f) : UniformContinuous f :=
-  sorry
-
-example {X : Type*} [MetricSpace X] [CompactSpace X] {Y : Type*} [MetricSpace Y] {f : X → Y}
     (hf : Continuous f) : UniformContinuous f := by
   rw [Metric.uniformContinuous_iff]
   intro ε ε_pos
@@ -166,6 +158,7 @@ example {X : Type*} [MetricSpace X] [CompactSpace X] {Y : Type*} [MetricSpace Y]
       intro (hxx' : (x, x') ∈ K)
       exact H hxx'
 
+
 example (u : ℕ → X) :
     CauchySeq u ↔ ∀ ε > 0, ∃ N : ℕ, ∀ m ≥ N, ∀ n ≥ N, dist (u m) (u n) < ε :=
   Metric.cauchySeq_iff
@@ -181,23 +174,6 @@ example [CompleteSpace X] (u : ℕ → X) (hu : CauchySeq u) :
 open BigOperators
 
 open Finset
-
-theorem cauchySeq_of_le_geometric_two' {u : ℕ → X}
-    (hu : ∀ n : ℕ, dist (u n) (u (n + 1)) ≤ (1 / 2) ^ n) : CauchySeq u := by
-  rw [Metric.cauchySeq_iff']
-  intro ε ε_pos
-  obtain ⟨N, hN⟩ : ∃ N : ℕ, 1 / 2 ^ N * 2 < ε := by sorry
-  use N
-  intro n hn
-  obtain ⟨k, rfl : n = N + k⟩ := le_iff_exists_add.mp hn
-  calc
-    dist (u (N + k)) (u N) = dist (u (N + 0)) (u (N + k)) := sorry
-    _ ≤ ∑ i  ∈ range k, dist (u (N + i)) (u (N + (i + 1))) := sorry
-    _ ≤ ∑ i  ∈ range k, (1 / 2 : ℝ) ^ (N + i) := sorry
-    _ = 1 / 2 ^ N * ∑ i  ∈ range k, (1 / 2 : ℝ) ^ i := sorry
-    _ ≤ 1 / 2 ^ N * 2 := sorry
-    _ < ε := sorry
-
 
 example {u : ℕ → X} (hu : ∀ n : ℕ, dist (u n) (u (n + 1)) ≤ (1 / 2) ^ n) : CauchySeq u := by
   rw [Metric.cauchySeq_iff']
@@ -231,50 +207,7 @@ open Metric
 example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : ∀ n, Dense (f n)) :
     Dense (⋂ n, f n) := by
   let B : ℕ → ℝ := fun n ↦ (1 / 2) ^ n
-  have Bpos : ∀ n, 0 < B n
-  sorry
-  /- Translate the density assumption into two functions `center` and `radius` associating
-    to any n, x, δ, δpos a center and a positive radius such that
-    `closedBall center radius` is included both in `f n` and in `closedBall x δ`.
-    We can also require `radius ≤ (1/2)^(n+1)`, to ensure we get a Cauchy sequence later. -/
-  have :
-    ∀ (n : ℕ) (x : X),
-      ∀ δ > 0, ∃ y : X, ∃ r > 0, r ≤ B (n + 1) ∧ closedBall y r ⊆ closedBall x δ ∩ f n :=
-    by sorry
-  choose! center radius Hpos HB Hball using this
-  intro x
-  rw [mem_closure_iff_nhds_basis nhds_basis_closedBall]
-  intro ε εpos
-  /- `ε` is positive. We have to find a point in the ball of radius `ε` around `x`
-    belonging to all `f n`. For this, we construct inductively a sequence
-    `F n = (c n, r n)` such that the closed ball `closedBall (c n) (r n)` is included
-    in the previous ball and in `f n`, and such that `r n` is small enough to ensure
-    that `c n` is a Cauchy sequence. Then `c n` converges to a limit which belongs
-    to all the `f n`. -/
-  let F : ℕ → X × ℝ := fun n ↦
-    Nat.recOn n (Prod.mk x (min ε (B 0)))
-      fun n p ↦ Prod.mk (center n p.1 p.2) (radius n p.1 p.2)
-  let c : ℕ → X := fun n ↦ (F n).1
-  let r : ℕ → ℝ := fun n ↦ (F n).2
-  have rpos : ∀ n, 0 < r n := by sorry
-  have rB : ∀ n, r n ≤ B n := by sorry
-  have incl : ∀ n, closedBall (c (n + 1)) (r (n + 1)) ⊆ closedBall (c n) (r n) ∩ f n := by
-    sorry
-  have cdist : ∀ n, dist (c n) (c (n + 1)) ≤ B n := by sorry
-  have : CauchySeq c := cauchySeq_of_le_geometric_two' cdist
-  -- as the sequence `c n` is Cauchy in a complete space, it converges to a limit `y`.
-  rcases cauchySeq_tendsto_of_complete this with ⟨y, ylim⟩
-  -- this point `y` will be the desired point. We will check that it belongs to all
-  -- `f n` and to `ball x ε`.
-  use y
-  have I : ∀ n, ∀ m ≥ n, closedBall (c m) (r m) ⊆ closedBall (c n) (r n) := by sorry
-  have yball : ∀ n, y ∈ closedBall (c n) (r n) := by sorry
-  sorry
-
-example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : ∀ n, Dense (f n)) :
-    Dense (⋂ n, f n) := by
-  let B : ℕ → ℝ := fun n ↦ (1 / 2) ^ n
-  have Bpos : ∀ n, 0 < B n := fun n ↦ pow_pos sorry n
+  have Bpos : ∀ n, 0 < B n := fun n ↦ pow_pos (by linarith) n
   /- Translate the density assumption into two functions `center` and `radius` associating
     to any n, x, δ, δpos a center and a positive radius such that
     `closedBall center radius` is included both in `f n` and in `closedBall x δ`.
@@ -368,5 +301,3 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
   calc
     dist y x ≤ r 0 := yball 0
     _ ≤ ε := min_le_left _ _
-
-

@@ -44,14 +44,14 @@ theorem exists_prime_factor {n : Nat} (h : 2 ≤ n) : ∃ p : Nat, p.Prime ∧ p
 
 theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
   intro n
-  have : 2 ≤ Nat.factorial (n + 1) + 1 := by
+  have : 2 ≤ Nat.factorial n + 1 := by
     sorry
   rcases exists_prime_factor this with ⟨p, pp, pdvd⟩
   refine ⟨p, ?_, pp⟩
   show p > n
   by_contra ple
   push_neg at ple
-  have : p ∣ Nat.factorial (n + 1) := by
+  have : p ∣ Nat.factorial n := by
     sorry
   have : p ∣ 1 := by
     sorry

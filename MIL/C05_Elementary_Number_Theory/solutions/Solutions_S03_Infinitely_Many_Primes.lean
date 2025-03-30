@@ -32,7 +32,7 @@ theorem exists_prime_factor {n : Nat} (h : 2 ≤ n) : ∃ p : Nat, p.Prime ∧ p
 
 theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
   intro n
-  have : 2 ≤ Nat.factorial (n + 1) + 1 := by
+  have : 2 ≤ Nat.factorial n + 1 := by
     apply Nat.succ_le_succ
     exact Nat.succ_le_of_lt (Nat.factorial_pos _)
   rcases exists_prime_factor this with ⟨p, pp, pdvd⟩
@@ -40,7 +40,7 @@ theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
   show p > n
   by_contra ple
   push_neg at ple
-  have : p ∣ Nat.factorial (n + 1) := by
+  have : p ∣ Nat.factorial n := by
     apply Nat.dvd_factorial
     apply pp.pos
     linarith

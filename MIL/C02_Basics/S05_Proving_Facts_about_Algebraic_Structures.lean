@@ -78,7 +78,7 @@ example (h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b
 end
 
 section
-variable {R : Type*} [StrictOrderedRing R]
+variable {R : Type*} [Ring R] [PartialOrder R] [IsStrictOrderedRing R]
 variable (a b c : R)
 
 #check (add_le_add_left : a ≤ b → ∀ c, c + a ≤ c + b)

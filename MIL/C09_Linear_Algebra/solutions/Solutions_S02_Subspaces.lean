@@ -20,7 +20,6 @@ def preimage {W : Type*} [AddCommGroup W] [Module K W] (φ : V →ₗ[K] W) (H :
     Submodule K V where
   carrier := φ ⁻¹' H
   zero_mem' := by
-    dsimp
     rw [Set.mem_preimage, map_zero]
     exact H.zero_mem
   add_mem' := by
@@ -28,7 +27,6 @@ def preimage {W : Type*} [AddCommGroup W] [Module K W] (φ : V →ₗ[K] W) (H :
     rw [Set.mem_preimage, map_add]
     apply H.add_mem <;> assumption
   smul_mem' := by
-    dsimp
     rintro a v hv
     rw [Set.mem_preimage, map_smul]
     exact H.smul_mem a hv

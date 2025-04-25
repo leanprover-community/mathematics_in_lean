@@ -426,12 +426,10 @@ discussed above about <code class="docutils literal notranslate"><span class="pr
 <span class="w">    </span><span class="n">Submodule</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">where</span>
 <span class="w">  </span><span class="n">carrier</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">&#966;</span><span class="w"> </span><span class="bp">&#8315;&#185;&#39;</span><span class="w"> </span><span class="n">H</span>
 <span class="w">  </span><span class="n">zero_mem&#39;</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
-<span class="w">    </span><span class="n">dsimp</span>
 <span class="w">    </span><span class="gr">sorry</span>
 <span class="w">  </span><span class="n">add_mem&#39;</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">    </span><span class="gr">sorry</span>
 <span class="w">  </span><span class="n">smul_mem&#39;</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
-<span class="w">    </span><span class="n">dsimp</span>
 <span class="w">    </span><span class="gr">sorry</span>
 </pre></div>
 </div>
@@ -781,13 +779,13 @@ Those notations are scoped in the <code class="docutils literal notranslate"><sp
 </pre></div>
 </div>
 <p>In order to generate matrices with identical rows or columns specified by a vector, we
-use <code class="docutils literal notranslate"><span class="pre">Matrix.row</span></code> and <code class="docutils literal notranslate"><span class="pre">Matrix.column</span></code>, with arguments the type indexing the
+use <code class="docutils literal notranslate"><span class="pre">Matrix.replicateRow</span></code> and <code class="docutils literal notranslate"><span class="pre">Matrix.replicateCol</span></code>, with arguments the type indexing the
 rows or columns and the vector.
 For instance one can get single row or single column matrixes (more precisely matrices whose rows
 or columns are indexed by <code class="docutils literal notranslate"><span class="pre">Fin</span> <span class="pre">1</span></code>).</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#eval</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">(</span><span class="n">Fin</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="c1">-- !![1, 2]</span>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#eval</span><span class="w"> </span><span class="n">replicateRow</span><span class="w"> </span><span class="o">(</span><span class="n">Fin</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="c1">-- !![1, 2]</span>
 
-<span class="k">#eval</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">(</span><span class="n">Fin</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="c1">-- !![1; 2]</span>
+<span class="k">#eval</span><span class="w"> </span><span class="n">replicateCol</span><span class="w"> </span><span class="o">(</span><span class="n">Fin</span><span class="w"> </span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="bp">!</span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="c1">-- !![1; 2]</span>
 </pre></div>
 </div>
 <p>Other familiar operations include the vector dot product, matrix transpose, and,

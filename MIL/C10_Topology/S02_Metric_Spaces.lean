@@ -1,5 +1,5 @@
 import MIL.Common
-import Mathlib.Topology.Instances.Real.Defs
+import Mathlib.Topology.Instances.Real.Lemmas
 import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
 
 open Set Filter

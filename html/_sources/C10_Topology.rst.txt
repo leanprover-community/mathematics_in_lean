@@ -12,7 +12,7 @@ The notion of a *limit* is also fundamental.
 We may say that the limit of a function :math:`f(x)` is a value :math:`b`
 as :math:`x` approaches a value :math:`a`,
 or that :math:`f(x)` *converges to* :math:`b` as :math:`x` approaches :math:`a`.
-Equivalently, we may say that a :math:`f(x)` approaches :math:`b` as :math:`x`
+Equivalently, we may say that :math:`f(x)` approaches :math:`b` as :math:`x`
 approaches a value :math:`a`, or that it *tends to* :math:`b`
 as :math:`x` tends to :math:`a`.
 We have already begun to consider such notions in :numref:`sequences_and_convergence`.
@@ -22,7 +22,7 @@ Having covered the essentials of formalization in Chapters :numref:`%s <basics>`
 to :numref:`%s <structures>`,
 in this chapter, we will explain how topological notions are formalized in Mathlib.
 Not only do topological abstractions apply in much greater generality,
-but that also, somewhat paradoxically, make it easier to reason about limits
+but they also, somewhat paradoxically, make it easier to reason about limits
 and continuity in concrete instances.
 
 Topological notions build on quite a few layers of mathematical structure.
@@ -35,7 +35,7 @@ intermediate notion called a *uniform space*.
 
 Whereas previous chapters relied on mathematical notions that were likely
 familiar to you,
-the notion of a filter less well known,
+the notion of a filter is less well known,
 even to many working mathematicians.
 The notion is essential, however, for formalizing mathematics effectively.
 Let us explain why.

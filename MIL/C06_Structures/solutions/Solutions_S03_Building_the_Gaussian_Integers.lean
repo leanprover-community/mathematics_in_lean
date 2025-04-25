@@ -168,15 +168,15 @@ theorem mod'_eq (a b : ℤ) : mod' a b = a - b * div' a b := by linarith [div'_a
 
 end Int
 
-private theorem aux {α : Type*} [LinearOrderedRing α] {x y : α} (h : x ^ 2 + y ^ 2 = 0) : x = 0 :=
+private theorem aux {α : Type*} [Ring α] [LinearOrder α] [IsStrictOrderedRing α] {x y : α} (h : x ^ 2 + y ^ 2 = 0) : x = 0 :=
   haveI h' : x ^ 2 = 0 := by
     apply le_antisymm _ (sq_nonneg x)
     rw [← h]
     apply le_add_of_nonneg_right (sq_nonneg y)
   pow_eq_zero h'
 
-theorem sq_add_sq_eq_zero {α : Type*} [LinearOrderedRing α] (x y : α) :
-    x ^ 2 + y ^ 2 = 0 ↔ x = 0 ∧ y = 0 := by
+theorem sq_add_sq_eq_zero {α : Type*} [Ring α] [LinearOrder α] [IsStrictOrderedRing α]
+    (x y : α) : x ^ 2 + y ^ 2 = 0 ↔ x = 0 ∧ y = 0 := by
   constructor
   · intro h
     constructor
@@ -276,7 +276,7 @@ instance : EuclideanDomain GaussInt :=
     quotient := (· / ·)
     remainder := (· % ·)
     quotient_mul_add_remainder_eq :=
-      fun x y ↦ by simp only; rw [mod_def, add_comm] ; ring
+      fun x y ↦ by rw [mod_def, add_comm] ; ring
     quotient_zero := fun x ↦ by
       simp [div_def, norm, Int.div']
       rfl

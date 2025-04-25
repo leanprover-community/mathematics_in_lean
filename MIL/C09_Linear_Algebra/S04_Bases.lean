@@ -27,9 +27,9 @@ open Matrix
 
 -- matrices acting on vectors on the right
 #eval  ![1, 1, 1] ᵥ* !![1, 2; 3, 4; 5, 6] -- ![9, 12]
-#eval row (Fin 1) ![1, 2] -- !![1, 2]
+#eval replicateRow (Fin 1) ![1, 2] -- !![1, 2]
 
-#eval col (Fin 1) ![1, 2] -- !![1; 2]
+#eval replicateCol (Fin 1) ![1, 2] -- !![1; 2]
 
 -- vector dot product
 #eval ![1, 2] ⬝ᵥ ![3, 4] -- `11`

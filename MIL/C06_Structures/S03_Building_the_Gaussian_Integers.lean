@@ -150,7 +150,7 @@ example (a b : ℤ) : b ≠ 0 → 0 ≤ a % b :=
   Int.emod_nonneg a
 
 example (a b : ℤ) : b ≠ 0 → a % b < |b| :=
-  Int.emod_lt a
+  Int.emod_lt_abs a
 
 namespace Int
 
@@ -177,8 +177,8 @@ theorem mod'_eq (a b : ℤ) : mod' a b = a - b * div' a b := by linarith [div'_a
 
 end Int
 
-theorem sq_add_sq_eq_zero {α : Type*} [LinearOrderedRing α] (x y : α) :
-    x ^ 2 + y ^ 2 = 0 ↔ x = 0 ∧ y = 0 := by
+theorem sq_add_sq_eq_zero {α : Type*} [Ring α] [LinearOrder α] [IsStrictOrderedRing α]
+    (x y : α) : x ^ 2 + y ^ 2 = 0 ↔ x = 0 ∧ y = 0 := by
   sorry
 namespace GaussInt
 
@@ -262,7 +262,7 @@ instance : EuclideanDomain GaussInt :=
     quotient := (· / ·)
     remainder := (· % ·)
     quotient_mul_add_remainder_eq :=
-      fun x y ↦ by simp only; rw [mod_def, add_comm] ; ring
+      fun x y ↦ by rw [mod_def, add_comm] ; ring
     quotient_zero := fun x ↦ by
       simp [div_def, norm, Int.div']
       rfl

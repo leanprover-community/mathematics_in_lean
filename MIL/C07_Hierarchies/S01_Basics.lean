@@ -37,13 +37,20 @@ class Dia₁ (α : Type) where
 infixl:70 " ⋄ "   => Dia₁.dia
 
 
-class Semigroup₁ (α : Type) where
+class Semigroup₀ (α : Type) where
   toDia₁ : Dia₁ α
   /-- Diamond is associative -/
   dia_assoc : ∀ a b c : α, a ⋄ b ⋄ c = a ⋄ (b ⋄ c)
 
 
-attribute [instance] Semigroup₁.toDia₁
+attribute [instance] Semigroup₀.toDia₁
+
+example {α : Type} [Semigroup₀ α] (a b : α) : α := a ⋄ b
+
+
+class Semigroup₁ (α : Type) extends toDia₁ : Dia₁ α where
+  /-- Diamond is associative -/
+  dia_assoc : ∀ a b c : α, a ⋄ b ⋄ c = a ⋄ (b ⋄ c)
 
 example {α : Type} [Semigroup₁ α] (a b : α) : α := a ⋄ b
 
@@ -51,8 +58,6 @@ example {α : Type} [Semigroup₁ α] (a b : α) : α := a ⋄ b
 class Semigroup₂ (α : Type) extends Dia₁ α where
   /-- Diamond is associative -/
   dia_assoc : ∀ a b c : α, a ⋄ b ⋄ c = a ⋄ (b ⋄ c)
-
-example {α : Type} [Semigroup₂ α] (a b : α) : α := a ⋄ b
 
 class DiaOneClass₁ (α : Type) extends One₁ α, Dia₁ α where
   /-- One is a left neutral element for diamond. -/
@@ -123,12 +128,12 @@ lemma dia_inv [Group₁ G] (a : G) : a ⋄ a⁻¹ = 𝟙 :=
 
 
 class AddSemigroup₃ (α : Type) extends Add α where
-/-- Addition is associative -/
+  /-- Addition is associative -/
   add_assoc₃ : ∀ a b c : α, a + b + c = a + (b + c)
 
 @[to_additive AddSemigroup₃]
 class Semigroup₃ (α : Type) extends Mul α where
-/-- Multiplication is associative -/
+  /-- Multiplication is associative -/
   mul_assoc₃ : ∀ a b c : α, a * b * c = a * (b * c)
 
 class AddMonoid₃ (α : Type) extends AddSemigroup₃ α, AddZeroClass α
@@ -201,8 +206,7 @@ class Ring₃ (R : Type) extends AddGroup₃ R, Monoid₃ R, MulZeroClass R wher
   right_distrib : ∀ a b c : R, (a + b) * c = a * c + b * c
 
 instance {R : Type} [Ring₃ R] : AddCommGroup₃ R :=
-{ Ring₃.toAddGroup₃ with
-  add_comm := by
+{ add_comm := by
     sorry }
 
 instance : Ring₃ ℤ where
@@ -259,7 +263,7 @@ instance selfModule (R : Type) [Ring₃ R] : Module₁ R R where
   add_smul := Ring₃.right_distrib
   smul_add := Ring₃.left_distrib
 
-def nsmul₁ [Zero M] [Add M] : ℕ → M → M
+def nsmul₁ {M : Type*} [Zero M] [Add M] : ℕ → M → M
   | 0, _ => 0
   | n + 1, a => a + nsmul₁ n a
 

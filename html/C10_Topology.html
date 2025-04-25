@@ -115,7 +115,7 @@ The notion of a <em>limit</em> is also fundamental.
 We may say that the limit of a function <span class="math notranslate nohighlight">\(f(x)\)</span> is a value <span class="math notranslate nohighlight">\(b\)</span>
 as <span class="math notranslate nohighlight">\(x\)</span> approaches a value <span class="math notranslate nohighlight">\(a\)</span>,
 or that <span class="math notranslate nohighlight">\(f(x)\)</span> <em>converges to</em> <span class="math notranslate nohighlight">\(b\)</span> as <span class="math notranslate nohighlight">\(x\)</span> approaches <span class="math notranslate nohighlight">\(a\)</span>.
-Equivalently, we may say that a <span class="math notranslate nohighlight">\(f(x)\)</span> approaches <span class="math notranslate nohighlight">\(b\)</span> as <span class="math notranslate nohighlight">\(x\)</span>
+Equivalently, we may say that <span class="math notranslate nohighlight">\(f(x)\)</span> approaches <span class="math notranslate nohighlight">\(b\)</span> as <span class="math notranslate nohighlight">\(x\)</span>
 approaches a value <span class="math notranslate nohighlight">\(a\)</span>, or that it <em>tends to</em> <span class="math notranslate nohighlight">\(b\)</span>
 as <span class="math notranslate nohighlight">\(x\)</span> tends to <span class="math notranslate nohighlight">\(a\)</span>.
 We have already begun to consider such notions in <a class="reference internal" href="C03_Logic.html#sequences-and-convergence"><span class="std std-numref">Section 3.6</span></a>.</p>
@@ -124,7 +124,7 @@ Having covered the essentials of formalization in Chapters <a class="reference i
 to <a class="reference internal" href="C06_Structures.html#structures"><span class="std std-numref">6</span></a>,
 in this chapter, we will explain how topological notions are formalized in Mathlib.
 Not only do topological abstractions apply in much greater generality,
-but that also, somewhat paradoxically, make it easier to reason about limits
+but they also, somewhat paradoxically, make it easier to reason about limits
 and continuity in concrete instances.</p>
 <p>Topological notions build on quite a few layers of mathematical structure.
 The first layer is naive set theory,
@@ -135,7 +135,7 @@ the theories of <em>topological spaces</em>, <em>metric spaces</em>, and a sligh
 intermediate notion called a <em>uniform space</em>.</p>
 <p>Whereas previous chapters relied on mathematical notions that were likely
 familiar to you,
-the notion of a filter less well known,
+the notion of a filter is less well known,
 even to many working mathematicians.
 The notion is essential, however, for formalizing mathematics effectively.
 Let us explain why.
@@ -239,8 +239,8 @@ For the purpose of demonstration, we ask you to take this opportunity to work ou
 In the real numbers, a neighborhood of <code class="docutils literal notranslate"><span class="pre">x</span></code> is a set containing an open interval
 <span class="math notranslate nohighlight">\((x_0 - \varepsilon, x_0 + \varepsilon)\)</span>,
 defined in Mathlib as <code class="docutils literal notranslate"><span class="pre">Ioo</span> <span class="pre">(x&#8320;</span> <span class="pre">-</span> <span class="pre">&#949;)</span> <span class="pre">(x&#8320;</span> <span class="pre">+</span> <span class="pre">&#949;)</span></code>.
-(This is notion of a neighborhood is only a special case of a more general construction in Mathlib.)</p>
-<p>With these examples, we can already define what is means for a function <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Y</span></code>
+(This notion of a neighborhood is only a special case of a more general construction in Mathlib.)</p>
+<p>With these examples, we can already define what it means for a function <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Y</span></code>
 to converge to some <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">:</span> <span class="pre">Filter</span> <span class="pre">Y</span></code> along some <code class="docutils literal notranslate"><span class="pre">F</span> <span class="pre">:</span> <span class="pre">Filter</span> <span class="pre">X</span></code>,
 as follows:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span><span class="w"> </span><span class="n">Tendsto&#8321;</span><span class="w"> </span><span class="o">{</span><span class="n">X</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">Y</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">F</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="n">X</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="n">Y</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
@@ -260,7 +260,7 @@ hide the quantifier <code class="docutils literal notranslate"><span class="pre"
 The first ingredient is the <em>pushforward</em> operation <span class="math notranslate nohighlight">\(f_*\)</span> associated to any map <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">Y</span></code>,
 denoted <code class="docutils literal notranslate"><span class="pre">Filter.map</span> <span class="pre">f</span></code> in Mathlib. Given a filter <code class="docutils literal notranslate"><span class="pre">F</span></code> on <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">Filter.map</span> <span class="pre">f</span> <span class="pre">F</span> <span class="pre">:</span> <span class="pre">Filter</span> <span class="pre">Y</span></code> is defined so that
 <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">Filter.map</span> <span class="pre">f</span> <span class="pre">F</span> <span class="pre">&#8596;</span> <span class="pre">f</span> <span class="pre">&#8315;&#185;'</span> <span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">F</span></code> holds definitionally.
-In this examples file we&#8217;ve opened the <code class="docutils literal notranslate"><span class="pre">Filter</span></code> namespace so that
+In the example file we&#8217;ve opened the <code class="docutils literal notranslate"><span class="pre">Filter</span></code> namespace so that
 <code class="docutils literal notranslate"><span class="pre">Filter.map</span></code> can be written as <code class="docutils literal notranslate"><span class="pre">map</span></code>. This means that we can rewrite the definition of <code class="docutils literal notranslate"><span class="pre">Tendsto</span></code> using
 the order relation on <code class="docutils literal notranslate"><span class="pre">Filter</span> <span class="pre">Y</span></code>, which is reversed inclusion of the set of members.
 In other words, given <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">H</span> <span class="pre">:</span> <span class="pre">Filter</span> <span class="pre">Y</span></code>, we have <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">&#8804;</span> <span class="pre">H</span> <span class="pre">&#8596;</span> <span class="pre">&#8704;</span> <span class="pre">V</span> <span class="pre">:</span> <span class="pre">Set</span> <span class="pre">Y,</span> <span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">H</span> <span class="pre">&#8594;</span> <span class="pre">V</span> <span class="pre">&#8712;</span> <span class="pre">G</span></code>.</p>
@@ -696,14 +696,14 @@ argument so we can invoke <code class="docutils literal notranslate"><span class
 <section id="compactness">
 <h3><span class="section-number">10.2.3. </span>Compactness<a class="headerlink" href="#compactness" title="Link to this heading">&#61633;</a></h3>
 <p>Compactness is an important topological notion. It distinguishes subsets of a metric space
-that enjoy the same kind of properties as segments in reals compared to other intervals:</p>
+that enjoy the same kind of properties as segments in the reals compared to other intervals:</p>
 <ul class="simple">
-<li><p>Any sequence taking value in a compact set has a subsequence that converges in this set</p></li>
+<li><p>Any sequence with values in a compact set has a subsequence that converges in this set.</p></li>
 <li><p>Any continuous function on a nonempty compact set with values in real numbers is bounded and
-achieves its bounds somewhere (this is called the extreme values theorem).</p></li>
+attains its bounds somewhere (this is called the extreme value theorem).</p></li>
 <li><p>Compact sets are closed sets.</p></li>
 </ul>
-<p>Let us first check that the unit interval in reals is indeed a compact set, and then check the above
+<p>Let us first check that the unit interval in the reals is indeed a compact set, and then check the above
 claims for compact sets in general metric spaces. In the second statement we only
 need continuity on the given set so we will use <code class="docutils literal notranslate"><span class="pre">ContinuousOn</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Continuous</span></code>, and
 we will give separate statements for the minimum and the maximum. Of course all these results
@@ -917,7 +917,7 @@ or <code class="docutils literal notranslate"><span class="pre">Tendsto</span> <
 </div>
 <p>One can also spell it using both neighborhoods seen as ordinary sets and a neighborhood filter
 seen as a generalized set: &#8220;for any neighborhood <code class="docutils literal notranslate"><span class="pre">U</span></code> of <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">x</span></code>, all points close to <code class="docutils literal notranslate"><span class="pre">x</span></code>
-are sent to <code class="docutils literal notranslate"><span class="pre">U</span></code>&#8221;. Note that the proof is again <code class="docutils literal notranslate"><span class="pre">iff.rfl</span></code>, this point of view is definitionally
+are sent to <code class="docutils literal notranslate"><span class="pre">U</span></code>&#8221;. Note that the proof is again <code class="docutils literal notranslate"><span class="pre">Iff.rfl</span></code>, this point of view is definitionally
 equivalent to the previous one.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">Y</span><span class="o">}</span><span class="w"> </span><span class="o">{</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">X</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">ContinuousAt</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8596;</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="bp">&#8712;</span><span class="w"> </span><span class="n">&#120029;</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="o">),</span><span class="w"> </span><span class="bp">&#8704;&#7584;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">&#120029;</span><span class="w"> </span><span class="n">x</span><span class="o">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8712;</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">Iff.rfl</span>
@@ -971,7 +971,7 @@ already discussed that metric spaces contain a lot of geometrical information th
 equivalently, it can be pulled back by an injective map. But that&#8217;s pretty much everything.
 They cannot be pulled back by general map or pushed forward, even by surjective maps.</p>
 <p>In particular there is no sensible distance to put on a quotient of a metric space or on an uncountable
-products of metric spaces. Consider for instance the type <code class="docutils literal notranslate"><span class="pre">&#8477;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code>, seen as
+product of metric spaces. Consider for instance the type <code class="docutils literal notranslate"><span class="pre">&#8477;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code>, seen as
 a product of copies of <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> indexed by <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>. We would like to say that pointwise convergence of
 sequences of functions is a respectable notion of convergence. But there is no distance on
 <code class="docutils literal notranslate"><span class="pre">&#8477;</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span></code> that gives this notion of convergence. Relatedly, there is no distance ensuring that

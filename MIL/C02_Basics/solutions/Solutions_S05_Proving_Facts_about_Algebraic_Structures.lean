@@ -102,7 +102,7 @@ example (h : ∀ x y z : α, x ⊔ y ⊓ z = (x ⊔ y) ⊓ (x ⊔ z)) : a ⊓ (b
 end
 
 section
-variable {R : Type*} [StrictOrderedRing R]
+variable {R : Type*} [Ring R] [PartialOrder R] [IsStrictOrderedRing R]
 variable (a b c : R)
 
 theorem aux1 (h : a ≤ b) : 0 ≤ b - a := by

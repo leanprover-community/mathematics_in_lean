@@ -35,12 +35,10 @@ def preimage {W : Type*} [AddCommGroup W] [Module K W] (φ : V →ₗ[K] W) (H :
     Submodule K V where
   carrier := φ ⁻¹' H
   zero_mem' := by
-    dsimp
     sorry
   add_mem' := by
     sorry
   smul_mem' := by
-    dsimp
     sorry
 
 example (U : Submodule K V) : Module K U := inferInstance

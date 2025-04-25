@@ -76,7 +76,7 @@ example (hfa : FnUb f a) (hgb : FnUb g b) (nng : FnLb g 0) (nna : 0 ≤ a) :
 end
 
 section
-variable {α : Type*} {R : Type*} [OrderedCancelAddCommMonoid R]
+variable {α : Type*} {R : Type*} [AddCommMonoid R] [PartialOrder R] [IsOrderedCancelAddMonoid R]
 
 #check add_le_add
 

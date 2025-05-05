@@ -45,7 +45,7 @@ theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
     apply pp.pos
     linarith
   have : p ∣ 1 := by
-    convert Nat.dvd_sub' pdvd this
+    convert Nat.dvd_sub pdvd this
     simp
   show False
   have := Nat.le_of_dvd zero_lt_one this
@@ -120,7 +120,7 @@ theorem primes_infinite' : ∀ s : Finset Nat, ∃ p, Nat.Prime p ∧ p ∉ s :=
     rw [mem_s']
     apply pp
   have : p ∣ 1 := by
-    convert Nat.dvd_sub' pdvd this
+    convert Nat.dvd_sub pdvd this
     simp
   show False
   have := Nat.le_of_dvd zero_lt_one this
@@ -226,7 +226,7 @@ theorem primes_mod_4_eq_3_infinite : ∀ n, ∃ p > n, Nat.Prime p ∧ p % 4 = 3
     simp
     constructor <;> assumption
   have : p ∣ 3 := by
-    convert Nat.dvd_sub' pdvd this
+    convert Nat.dvd_sub pdvd this
     simp
   have : p = 3 := by
     apply pp.eq_of_dvd_of_prime Nat.prime_three this

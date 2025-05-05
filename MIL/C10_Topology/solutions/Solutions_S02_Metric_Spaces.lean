@@ -32,7 +32,7 @@ example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Contin
 
 example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
     Continuous fun p : X × X ↦ dist (f p.1) (f p.2) :=
-  continuous_dist.comp ((hf.comp continuous_fst).prod_mk (hf.comp continuous_snd))
+  continuous_dist.comp ((hf.comp continuous_fst).prodMk (hf.comp continuous_snd))
 
 example {X Y : Type*} [MetricSpace X] [MetricSpace Y] {f : X → Y} (hf : Continuous f) :
     Continuous fun p : X × X ↦ dist (f p.1) (f p.2) := by

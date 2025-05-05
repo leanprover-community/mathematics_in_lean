@@ -99,6 +99,6 @@ example {m n k r : ℕ} (nnz : n ≠ 0) (pow_eq : m ^ k = r * n ^ k) {p : ℕ} :
   have : r.succ.factorization p = k * m.factorization p - k * n.factorization p := by
     rw [← eq1, pow_eq, eq2, add_comm, Nat.add_sub_cancel]
   rw [this]
-  apply Nat.dvd_sub' <;>
+  apply Nat.dvd_sub <;>
   apply Nat.dvd_mul_right
 

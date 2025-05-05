@@ -130,7 +130,7 @@ theorem primes_infinite' : ∀ s : Finset Nat, ∃ p, Nat.Prime p ∧ p ∉ s :=
   have : p ∣ ∏ i ∈ s', i := by
     sorry
   have : p ∣ 1 := by
-    convert Nat.dvd_sub' pdvd this
+    convert Nat.dvd_sub pdvd this
     simp
   show False
   sorry

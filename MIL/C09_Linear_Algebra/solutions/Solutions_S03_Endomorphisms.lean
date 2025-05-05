@@ -12,10 +12,10 @@ variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 variable {W : Type*} [AddCommGroup W] [Module K W]
 
 
-open Polynomial Module LinearMap
+open Polynomial Module LinearMap End
 
 example (φ ψ : End K V) : φ * ψ = φ ∘ₗ ψ :=
-  LinearMap.mul_eq_comp φ ψ -- `rfl` would also work
+  End.mul_eq_comp φ ψ -- `rfl` would also work
 
 -- evaluating `P` on `φ`
 example (P : K[X]) (φ : End K V) : V →ₗ[K] V :=
@@ -41,7 +41,7 @@ example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) : ker (aeval φ P) ⊓ k
 
 #check Submodule.add_mem_sup
 #check map_mul
-#check LinearMap.mul_apply
+#check End.mul_apply
 #check LinearMap.ker_le_ker_comp
 
 example (P Q : K[X]) (h : IsCoprime P Q) (φ : End K V) :

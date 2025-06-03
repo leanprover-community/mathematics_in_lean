@@ -4,23 +4,19 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mathematics in Lean &mdash; Mathematics in Lean 0.1 documentation</title>
+  <title>Mathematics in Lean &mdash; Mathematics in Lean v4.19.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=2709fde1"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/documentation_options.js?v=7048e04d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -52,13 +48,14 @@
 <li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Linear_Algebra.html">10. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Differential_Calculus.html">12. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
@@ -124,47 +121,54 @@
 <li class="toctree-l2"><a class="reference internal" href="C05_Elementary_Number_Theory.html#irrational-roots">5.1. Irrational Roots</a></li>
 <li class="toctree-l2"><a class="reference internal" href="C05_Elementary_Number_Theory.html#induction-and-recursion">5.2. Induction and Recursion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="C05_Elementary_Number_Theory.html#infinitely-many-primes">5.3. Infinitely Many Primes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C05_Elementary_Number_Theory.html#more-induction">5.4. More Induction</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C06_Structures.html">6. Structures</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C06_Structures.html#defining-structures">6.1. Defining structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C06_Structures.html#algebraic-structures">6.2. Algebraic Structures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C06_Structures.html#building-the-gaussian-integers">6.3. Building the Gaussian Integers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C06_Discrete_Mathematics.html">6. Discrete Mathematics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C06_Discrete_Mathematics.html#finsets-and-fintypes">6.1. Finsets and Fintypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C06_Discrete_Mathematics.html#counting-arguments">6.2. Counting Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C06_Discrete_Mathematics.html#inductively-defined-types">6.3. Inductively Defined Types</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C07_Hierarchies.html">7. Hierarchies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C07_Hierarchies.html#basics">7.1. Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C07_Hierarchies.html#morphisms">7.2. Morphisms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C07_Hierarchies.html#sub-objects">7.3. Sub-objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C07_Structures.html#defining-structures">7.1. Defining structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C07_Structures.html#algebraic-structures">7.2. Algebraic Structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C07_Structures.html#building-the-gaussian-integers">7.3. Building the Gaussian Integers</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C08_Groups_and_Rings.html">8. Groups and Rings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C08_Groups_and_Rings.html#monoids-and-groups">8.1. Monoids and Groups</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C08_Groups_and_Rings.html#rings">8.2. Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C08_Hierarchies.html#basics">8.1. Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C08_Hierarchies.html#morphisms">8.2. Morphisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C08_Hierarchies.html#sub-objects">8.3. Sub-objects</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C09_Linear_Algebra.html">9. Linear algebra</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C09_Linear_Algebra.html#vector-spaces-and-linear-maps">9.1. Vector spaces and linear maps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C09_Linear_Algebra.html#subspaces-and-quotients">9.2. Subspaces and quotients</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C09_Linear_Algebra.html#endomorphisms">9.3. Endomorphisms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C09_Linear_Algebra.html#matrices-bases-and-dimension">9.4. Matrices, bases and dimension</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C09_Groups_and_Rings.html#monoids-and-groups">9.1. Monoids and Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C09_Groups_and_Rings.html#rings">9.2. Rings</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C10_Topology.html">10. Topology</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C10_Topology.html#filters">10.1. Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C10_Topology.html#metric-spaces">10.2. Metric spaces</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C10_Topology.html#topological-spaces">10.3. Topological spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Linear_Algebra.html">10. Linear algebra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C10_Linear_Algebra.html#vector-spaces-and-linear-maps">10.1. Vector spaces and linear maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C10_Linear_Algebra.html#subspaces-and-quotients">10.2. Subspaces and quotients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C10_Linear_Algebra.html#endomorphisms">10.3. Endomorphisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C10_Linear_Algebra.html#matrices-bases-and-dimension">10.4. Matrices, bases and dimension</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C11_Differential_Calculus.html">11. Differential Calculus</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C11_Differential_Calculus.html#elementary-differential-calculus">11.1. Elementary Differential Calculus</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C11_Differential_Calculus.html#differential-calculus-in-normed-spaces">11.2. Differential Calculus in Normed Spaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C11_Topology.html#filters">11.1. Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C11_Topology.html#metric-spaces">11.2. Metric spaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C11_Topology.html#topological-spaces">11.3. Topological spaces</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html">12. Integration and Measure Theory</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html#elementary-integration">12.1. Elementary Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html#measure-theory">12.2. Measure Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="C12_Integration_and_Measure_Theory.html#integration">12.3. Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Differential_Calculus.html">12. Differential Calculus</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C12_Differential_Calculus.html#elementary-differential-calculus">12.1. Elementary Differential Calculus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C12_Differential_Calculus.html#differential-calculus-in-normed-spaces">12.2. Differential Calculus in Normed Spaces</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html#elementary-integration">13.1. Elementary Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html#measure-theory">13.2. Measure Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html#integration">13.3. Integration</a></li>
 </ul>
 </li>
 </ul>
@@ -183,7 +187,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, Jeremy Avigad, Patrick Massot.</p>
+    <p>&#169; Copyright 2020-2025, Jeremy Avigad, Patrick Massot.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

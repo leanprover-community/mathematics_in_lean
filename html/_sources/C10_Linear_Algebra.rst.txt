@@ -1,0 +1,10 @@
+.. _linear_algebra:
+
+Linear algebra
+==============
+
+
+.. include:: C10_Linear_Algebra/S01_Vector_Spaces.inc
+.. include:: C10_Linear_Algebra/S02_Subspaces.inc
+.. include:: C10_Linear_Algebra/S03_Endomorphisms.inc
+.. include:: C10_Linear_Algebra/S04_Bases.inc

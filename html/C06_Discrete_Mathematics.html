@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6. Discrete Mathematics &mdash; Mathematics in Lean v4.19.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=86f27845" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+        <script src="_static/jquery.js?v=8dae8fb0"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=7048e04d"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Structures" href="C07_Structures.html" />
+    <link rel="prev" title="5. Elementary Number Theory" href="C05_Elementary_Number_Theory.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Mathematics in Lean
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="C01_Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C02_Basics.html">2. Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C03_Logic.html">3. Logic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C04_Sets_and_Functions.html">4. Sets and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C05_Elementary_Number_Theory.html">5. Elementary Number Theory</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Discrete Mathematics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#finsets-and-fintypes">6.1. Finsets and Fintypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#counting-arguments">6.2. Counting Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inductively-defined-types">6.3. Inductively Defined Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="C07_Structures.html">7. Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C08_Hierarchies.html">8. Hierarchies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C09_Groups_and_Rings.html">9. Groups and Rings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C10_Linear_Algebra.html">10. Linear algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C11_Topology.html">11. Topology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C12_Differential_Calculus.html">12. Differential Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="C13_Integration_and_Measure_Theory.html">13. Integration and Measure Theory</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Mathematics in Lean</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">6. </span>Discrete Mathematics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/C06_Discrete_Mathematics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="discrete-mathematics">
+<span id="id1"></span><h1><span class="section-number">6. </span>Discrete Mathematics<a class="headerlink" href="#discrete-mathematics" title="Link to this heading">&#61633;</a></h1>
+<p><em>Discrete Mathematics</em> is the study of finite sets, objects, and structures.
+We can count the elements of a finite set, and we can compute finite sums or products over its
+elements, we can compute maximums and minimums, and so on.
+We can also study objects that are generated by finitely many applications of
+certain generating functions, we can define functions by structural recursion,
+and prove theorems by structural induction.
+This chapters describes parts of Mathlib that support these activities.</p>
+<section id="finsets-and-fintypes">
+<span id="id2"></span><h2><span class="section-number">6.1. </span>Finsets and Fintypes<a class="headerlink" href="#finsets-and-fintypes" title="Link to this heading">&#61633;</a></h2>
+<p>Dealing with finite sets and types in Mathlib can be confusing, because the library offers
+multiple ways of handling them. In this section we will discuss the most common ones.</p>
+<p>We have already come across the type <code class="docutils literal notranslate"><span class="pre">Finset</span></code> in <a class="reference internal" href="C05_Elementary_Number_Theory.html#section-induction-and-recursion"><span class="std std-numref">Section 5.2</span></a>
+and <a class="reference internal" href="C05_Elementary_Number_Theory.html#section-infinitely-many-primes"><span class="std std-numref">Section 5.3</span></a>.
+As the name suggests, an element of type <code class="docutils literal notranslate"><span class="pre">Finset</span> <span class="pre">&#945;</span></code> is a finite set of elements of type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+We will call these &#8220;finsets.&#8221;
+The <code class="docutils literal notranslate"><span class="pre">Finset</span></code> data type is designed to have a computational interpretation,
+and many basic operations on <code class="docutils literal notranslate"><span class="pre">Finset</span> <span class="pre">&#945;</span></code> assume that <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> has decidable equality,
+which guarantees that there is an algorithm for testing whether <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">:</span> <span class="pre">&#945;</span></code> is an element
+of a finset <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span>
+<span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">DecidableEq</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#945;</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span>
+<span class="k">#check</span> <span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span>
+
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>If you remove the declaration <code class="docutils literal notranslate"><span class="pre">[DecidableEq</span> <span class="pre">&#945;]</span></code>, Lean will complain on the line
+<code class="docutils literal notranslate"><span class="pre">#check</span> <span class="pre">s</span> <span class="pre">&#8745;</span> <span class="pre">t</span></code> because it cannot compute the intersection.
+All of the data types that you should expect to be able to compute with
+have decidable equality, however,
+and if you work classically by opening the <code class="docutils literal notranslate"><span class="pre">Classical</span></code> namespace and
+declaring <code class="docutils literal notranslate"><span class="pre">noncomputable</span> <span class="pre">section</span></code>, you can reason about finsets of elements of any type
+at all.</p>
+<p>Finsets support most of the set-theoretic operations that sets do:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Finset</span>
+
+<span class="kd">variable</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="n">a</span> <span class="bp">&#8745;</span> <span class="n">b</span>
+<span class="k">#check</span> <span class="n">a</span> <span class="bp">&#8746;</span> <span class="n">b</span>
+<span class="k">#check</span> <span class="n">a</span> <span class="bp">\</span> <span class="n">b</span>
+<span class="k">#check</span> <span class="o">(</span><span class="bp">&#8709;</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8746;</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&#8745;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&#8746;</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&#8745;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mem_inter</span><span class="o">,</span> <span class="n">mem_union</span><span class="o">]</span><span class="bp">;</span> <span class="n">tauto</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8745;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&#8746;</span> <span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&#8745;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&#8746;</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&#8745;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">inter_union_distrib_left</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Note that we have opened the <code class="docutils literal notranslate"><span class="pre">Finset</span></code> namespace,
+where theorems specific to finsets are found.
+If you step through the last example below, you will see applying <code class="docutils literal notranslate"><span class="pre">ext</span></code>
+followed by <code class="docutils literal notranslate"><span class="pre">simp</span></code> reduces the identity to a problem
+in propositional logic.
+As an exercise, you can try proving some of set identities from
+<a class="reference internal" href="C04_Sets_and_Functions.html#sets-and-functions"><span class="std std-numref">Chapter 4</span></a>, transported to finsets.</p>
+<p>You have already seen the notation <code class="docutils literal notranslate"><span class="pre">Finset.range</span> <span class="pre">n</span></code> for the
+finite set of natural numbers <span class="math notranslate nohighlight">\(\{ 0, 1, \ldots, n-1 \}\)</span>.
+<code class="docutils literal notranslate"><span class="pre">Finset</span></code> also allows you to define finite sets by enumerating
+the elements:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">({</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">5</span><span class="o">}</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">Nat</span><span class="o">)</span>
+
+<span class="kd">def</span> <span class="n">example1</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span> <span class="o">:=</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span>
+</pre></div>
+</div>
+<p>There are various ways to get Lean to recognize that order of elements and
+duplicates do not matter in a set presented in this way.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">({</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">decide</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">({</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">decide</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">({</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">}</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="mi">0</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">Finset.pair_comm</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">:</span> <span class="o">({</span><span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">}</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">:</span> <span class="o">({</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span><span class="o">}</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">i</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">or_comm</span><span class="o">,</span> <span class="n">or_assoc</span><span class="o">,</span> <span class="n">or_left_comm</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">:</span> <span class="o">({</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span><span class="o">}</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">ext</span> <span class="n">i</span><span class="bp">;</span> <span class="n">simp</span><span class="bp">;</span> <span class="n">tauto</span>
+</pre></div>
+</div>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">insert</span></code> to add a single element to a Finset, and <code class="docutils literal notranslate"><span class="pre">Finset.erase</span></code>
+to delete a single element.
+Note that <code class="docutils literal notranslate"><span class="pre">erase</span></code> is in the <code class="docutils literal notranslate"><span class="pre">Finset</span></code> namespace, but <code class="docutils literal notranslate"><span class="pre">insert</span></code> is in the root
+namespace.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8713;</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span> <span class="bp">|&gt;.</span><span class="n">erase</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+  <span class="n">Finset.erase_insert</span> <span class="n">h</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">insert</span> <span class="n">a</span> <span class="o">(</span><span class="n">s.erase</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+  <span class="n">Finset.insert_erase</span> <span class="n">h</span>
+</pre></div>
+</div>
+<p>In fact, <code class="docutils literal notranslate"><span class="pre">{0,</span> <span class="pre">1,</span> <span class="pre">2}</span></code> is just notation for <code class="docutils literal notranslate"><span class="pre">insert</span> <span class="pre">0</span> <span class="pre">(insert</span> <span class="pre">1</span> <span class="pre">(singleton</span> <span class="pre">2))</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">set_option</span> <span class="n">pp.notation</span> <span class="n">false</span> <span class="k">in</span>
+<span class="k">#check</span> <span class="o">({</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Given a finset <code class="docutils literal notranslate"><span class="pre">s</span></code> and a predicate <code class="docutils literal notranslate"><span class="pre">P</span></code>, we can use set-builder notation <code class="docutils literal notranslate"><span class="pre">{x</span> <span class="pre">&#8712;</span> <span class="pre">s</span> <span class="pre">|</span> <span class="pre">P</span> <span class="pre">x}</span></code> to
+define the set of elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> that satisfy <code class="docutils literal notranslate"><span class="pre">P</span></code>.
+This is notation for <code class="docutils literal notranslate"><span class="pre">Finset.filter</span> <span class="pre">P</span> <span class="pre">s</span></code>, which can also be written <code class="docutils literal notranslate"><span class="pre">s.filter</span> <span class="pre">P</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="o">{</span><span class="n">m</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span> <span class="bp">|</span> <span class="n">Even</span> <span class="n">m</span><span class="o">}</span> <span class="bp">=</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">filter</span> <span class="n">Even</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="o">{</span><span class="n">m</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span> <span class="bp">|</span> <span class="n">Even</span> <span class="n">m</span> <span class="bp">&#8743;</span> <span class="n">m</span> <span class="bp">&#8800;</span> <span class="mi">3</span><span class="o">}</span> <span class="bp">=</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">m</span> <span class="bp">&#8614;</span> <span class="n">Even</span> <span class="n">m</span> <span class="bp">&#8743;</span> <span class="n">m</span> <span class="bp">&#8800;</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">{</span><span class="n">m</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="mi">10</span> <span class="bp">|</span> <span class="n">Even</span> <span class="n">m</span><span class="o">}</span> <span class="bp">=</span> <span class="o">{</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">8</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">decide</span>
+</pre></div>
+</div>
+<p>Mathlib knows that the image of a finset under a function is a finset.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="o">(</span><span class="n">range</span> <span class="mi">5</span><span class="o">)</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">range</span> <span class="mi">5</span><span class="o">)</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="mi">10</span> <span class="bp">|</span> <span class="n">Even</span> <span class="n">x</span><span class="o">}</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">decide</span>
+</pre></div>
+</div>
+<p>Lean also knows that the cartesian product <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#215;&#738;</span> <span class="pre">t</span></code> of two finsets is a finset,
+and that the powerset of a finset is a finset. (Note that the notation <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&#215;&#738;</span> <span class="pre">t</span></code>
+also works for sets.)</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">s</span> <span class="bp">&#215;&#738;</span> <span class="n">t</span>
+<span class="k">#check</span> <span class="n">s.powerset</span>
+</pre></div>
+</div>
+<p>Defining operations on finsets in terms of their elements is tricky, because any such definition
+has to be independent of the order in which the elements are presented.
+Of course, you can always define functions by composing existing operations.
+Another thing you can do is use <code class="docutils literal notranslate"><span class="pre">Finset.fold</span></code> to fold a binary operation over the
+elements, provided that the operation is associative and commutative,
+since these properties guarantee that the result is independent of the order that
+the operation is applied. Finite sums, products, and unions are defined in that way.
+In the last example below, <code class="docutils literal notranslate"><span class="pre">biUnion</span></code> stands for &#8220;bounded indexed union.&#8221;
+With conventional mathematical notation, the expression would be written
+<span class="math notranslate nohighlight">\(\bigcup_{i &#8712; s} g(i)\)</span>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Finset.fold</span>
+
+<span class="kd">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">Int</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">&#8593;</span><span class="n">n</span><span class="o">)</span><span class="bp">^</span><span class="mi">2</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">range</span> <span class="mi">5</span><span class="o">)</span><span class="bp">.</span><span class="n">fold</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Int</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="mi">0</span> <span class="n">f</span>
+<span class="k">#eval</span> <span class="o">(</span><span class="n">range</span> <span class="mi">5</span><span class="o">)</span><span class="bp">.</span><span class="n">fold</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Int</span> <span class="bp">&#8614;</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="mi">0</span> <span class="n">f</span>
+
+<span class="k">#check</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="mi">5</span><span class="o">,</span> <span class="n">i</span><span class="bp">^</span><span class="mi">2</span>
+<span class="k">#check</span> <span class="bp">&#8719;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="mi">5</span><span class="o">,</span> <span class="n">i</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="kd">variable</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Nat</span> <span class="bp">&#8594;</span> <span class="n">Finset</span> <span class="n">Int</span><span class="o">)</span>
+
+<span class="k">#check</span> <span class="o">(</span><span class="n">range</span> <span class="mi">5</span><span class="o">)</span><span class="bp">.</span><span class="n">biUnion</span> <span class="n">g</span>
+</pre></div>
+</div>
+<p>There is a natural principle of induction on finsets: to prove that every finset
+has a property, show that the empty set has the property and that the property is
+preserved when we add one new element to a finset. (The <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> symbol in
+<code class="docutils literal notranslate"><span class="pre">&#64;insert</span></code> is needed in the induction step of the next example to give names to the
+parameters <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">s</span></code> because they have been marked implicit. )</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Finset.induction</span>
+
+<span class="kd">example</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">DecidableEq</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span><span class="o">)</span>  <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&#8800;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">&#8719;</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">&#8800;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">induction</span> <span class="n">s</span> <span class="n">using</span> <span class="n">Finset.induction_on</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">empty</span> <span class="bp">=&gt;</span> <span class="n">simp</span>
+  <span class="bp">|</span> <span class="bp">@</span><span class="n">insert</span> <span class="n">a</span> <span class="n">s</span> <span class="n">anins</span> <span class="n">ih</span> <span class="bp">=&gt;</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">prod_insert</span> <span class="n">anins</span><span class="o">]</span>
+    <span class="n">apply</span> <span class="n">mul_ne_zero</span>
+    <span class="bp">&#183;</span> <span class="n">apply</span> <span class="n">h</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">mem_insert_self</span>
+    <span class="n">apply</span> <span class="n">ih</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">xs</span>
+    <span class="n">exact</span> <span class="n">h</span> <span class="n">x</span> <span class="o">(</span><span class="n">mem_insert_of_mem</span> <span class="n">xs</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">s</span></code> is a finset, <code class="docutils literal notranslate"><span class="pre">Finset.Nonempty</span> <span class="pre">s</span></code> is defined to be <code class="docutils literal notranslate"><span class="pre">&#8707;</span> <span class="pre">x,</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">s</span></code>.
+You can use classical choice to pick an element of a nonempty finset. Similarly,
+the library defines <code class="docutils literal notranslate"><span class="pre">Finset.toList</span> <span class="pre">s</span></code> which uses choice to pick the elements of
+<code class="docutils literal notranslate"><span class="pre">s</span></code> in some order.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">noncomputable</span> <span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s.Nonempty</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="o">:=</span> <span class="n">Classical.choose</span> <span class="n">h</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s.Nonempty</span><span class="o">)</span> <span class="o">:</span> <span class="n">Classical.choose</span> <span class="n">h</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">Classical.choose_spec</span> <span class="n">h</span>
+
+<span class="kd">noncomputable</span> <span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#8469;</span> <span class="o">:=</span> <span class="n">s.toList</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s.toList</span> <span class="bp">&#8596;</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">mem_toList</span>
+</pre></div>
+</div>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">Finset.min</span></code> and <code class="docutils literal notranslate"><span class="pre">Finset.max</span></code> to choose the minimum or maximum element
+of a finset of elements of a linear order, and similarly you can use <code class="docutils literal notranslate"><span class="pre">Finset.inf</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Finset.sup</span></code> with finsets of elements of a lattice, but there is a catch.
+What should the minimum element of an empty finset be?
+You can check that the primed versions of the functions below add a precondition
+that the finset is nonempty.
+The non-primed versions <code class="docutils literal notranslate"><span class="pre">Finset.min</span></code> and <code class="docutils literal notranslate"><span class="pre">Finset.max</span></code>
+add a top or bottom element, respectively, to the output type, to handle the case where the
+finset is empty.
+The non-primed versions <code class="docutils literal notranslate"><span class="pre">Finset.inf</span></code> and <code class="docutils literal notranslate"><span class="pre">Finset.sup</span></code> assume that
+the lattice comes equipped with a top or bottom element, respectively.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Finset.min</span>
+<span class="k">#check</span> <span class="n">Finset.min&#39;</span>
+<span class="k">#check</span> <span class="n">Finset.max</span>
+<span class="k">#check</span> <span class="n">Finset.max&#39;</span>
+<span class="k">#check</span> <span class="n">Finset.inf</span>
+<span class="k">#check</span> <span class="n">Finset.inf&#39;</span>
+<span class="k">#check</span> <span class="n">Finset.sup</span>
+<span class="k">#check</span> <span class="n">Finset.sup&#39;</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Finset.Nonempty</span> <span class="o">{</span><span class="mi">2</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">}</span> <span class="o">:=</span> <span class="o">&#10216;</span><span class="mi">6</span><span class="o">,</span> <span class="kd">by</span> <span class="n">trivial</span><span class="o">&#10217;</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Finset.min&#39;</span> <span class="o">{</span><span class="mi">2</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">7</span><span class="o">}</span> <span class="o">&#10216;</span><span class="mi">6</span><span class="o">,</span> <span class="kd">by</span> <span class="n">trivial</span><span class="o">&#10217;</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">trivial</span>
+</pre></div>
+</div>
+<p>Every finset <code class="docutils literal notranslate"><span class="pre">s</span></code> has a finite cardinality, <code class="docutils literal notranslate"><span class="pre">Finset.card</span> <span class="pre">s</span></code>, which can be written <code class="docutils literal notranslate"><span class="pre">#s</span></code>
+when the <code class="docutils literal notranslate"><span class="pre">Finset</span></code> namespace is open.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Finset.card</span>
+
+<span class="k">#eval</span> <span class="o">(</span><span class="n">range</span> <span class="mi">5</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">s.card</span> <span class="bp">=</span> <span class="bp">#</span><span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rfl</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">s.card</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">card_eq_sum_ones</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">s.card</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">i</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+<p>The next section is all about reasoning about cardinality.</p>
+<p>When formalizing mathematics, one often has to make a decision as to whether to express
+one&#8217;s definitions and theorems in terms of sets or types.
+Using types often simplifies notation and proofs, but working
+with subsets of a type can be more flexible.
+The type-based analogue of a finset is a <em>fintype</em>, that is, a type <code class="docutils literal notranslate"><span class="pre">Fintype</span> <span class="pre">&#945;</span></code> for some
+<code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+By definition, a fintype is just a data type that comes equipped with a finset <code class="docutils literal notranslate"><span class="pre">univ</span></code> that
+contains all its elements.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">&#945;</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">x</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">Finset.univ</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">mem_univ</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Fintype.card</span> <span class="pre">&#945;</span></code> is equal to the cardinality of the corresponding finset.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">Fintype.card</span> <span class="n">&#945;</span> <span class="bp">=</span> <span class="o">(</span><span class="n">Finset.univ</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#945;</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>We have already seen a prototypical example of a fintype, namely, the types <code class="docutils literal notranslate"><span class="pre">Fin</span> <span class="pre">n</span></code> for
+each <code class="docutils literal notranslate"><span class="pre">n</span></code>.
+Lean recognizes that the fintypes are closed under operations like the product operation.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">:</span> <span class="n">Fintype.card</span> <span class="o">(</span><span class="n">Fin</span> <span class="mi">5</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">5</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Fintype.card</span> <span class="o">((</span><span class="n">Fin</span> <span class="mi">5</span><span class="o">)</span> <span class="bp">&#215;</span> <span class="o">(</span><span class="n">Fin</span> <span class="mi">3</span><span class="o">))</span> <span class="bp">=</span> <span class="mi">15</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+<p>Any element <code class="docutils literal notranslate"><span class="pre">s</span></code> of <code class="docutils literal notranslate"><span class="pre">Finset</span> <span class="pre">&#945;</span></code> can be coercied to a type <code class="docutils literal notranslate"><span class="pre">(&#8593;s</span> <span class="pre">:</span> <span class="pre">Finset</span> <span class="pre">&#945;)</span></code>, namely,
+the subtype of elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> that are contained in <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">&#8593;</span><span class="n">s</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">}</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="n">Fintype.card</span> <span class="bp">&#8593;</span><span class="n">s</span> <span class="bp">=</span> <span class="n">s.card</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+<p>Lean and Mathlib use <em>type class inference</em> to track the additional structure on fintypes,
+namely, the universal finset that contains all the elements.
+In other words, you can think of a fintype as an algebraic structure equipped with that
+extra data.
+<a class="reference internal" href="C07_Structures.html#structures"><span class="std std-numref">Chapter 7</span></a> explains how this works.</p>
+</section>
+<section id="counting-arguments">
+<span id="id3"></span><h2><span class="section-number">6.2. </span>Counting Arguments<a class="headerlink" href="#counting-arguments" title="Link to this heading">&#61633;</a></h2>
+<p>The art of counting things is a central part of combinatorics.
+Mathlib contains several basic identities for counting elements of finsets:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Finset</span>
+
+<span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">DecidableEq</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">DecidableEq</span> <span class="n">&#946;</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">s</span> <span class="bp">&#215;&#738;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">#</span><span class="n">s</span> <span class="bp">*</span> <span class="bp">#</span><span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">card_product</span><span class="o">]</span>
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">s</span> <span class="bp">&#215;&#738;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">#</span><span class="n">s</span> <span class="bp">*</span> <span class="bp">#</span><span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">#</span><span class="n">s</span> <span class="bp">+</span> <span class="bp">#</span><span class="n">t</span> <span class="bp">-</span> <span class="bp">#</span><span class="o">(</span><span class="n">s</span> <span class="bp">&#8745;</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">card_union</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Disjoint</span> <span class="n">s</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">#</span><span class="n">s</span> <span class="bp">+</span> <span class="bp">#</span><span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">card_union_of_disjoint</span> <span class="n">h</span><span class="o">]</span>
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Disjoint</span> <span class="n">s</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">s</span> <span class="bp">&#8746;</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">#</span><span class="n">s</span> <span class="bp">+</span> <span class="bp">#</span><span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Function.Injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">s.image</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">#</span><span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">card_image_of_injective</span> <span class="n">_</span> <span class="n">h</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Set.InjOn</span> <span class="n">f</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">s.image</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">#</span><span class="n">s</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">card_image_of_injOn</span> <span class="n">h</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Opening the <code class="docutils literal notranslate"><span class="pre">Finset</span></code> namespace allows us to use the notation <code class="docutils literal notranslate"><span class="pre">#s</span></code> for <code class="docutils literal notranslate"><span class="pre">s.card</span></code>, as well as
+to use the shortened names <cite>card_union</cite> and so on.</p>
+<p>Mathlib can also count elements of fintypes:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Fintype</span>
+
+<span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">&#945;</span><span class="o">]</span> <span class="o">[</span><span class="n">Fintype</span> <span class="n">&#946;</span><span class="o">]</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">card</span> <span class="o">(</span><span class="n">&#945;</span> <span class="bp">&#215;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">&#945;</span> <span class="bp">*</span> <span class="n">card</span> <span class="n">&#946;</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">card</span> <span class="o">(</span><span class="n">&#945;</span> <span class="bp">&#8853;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">card</span> <span class="n">&#945;</span> <span class="bp">+</span> <span class="n">card</span> <span class="n">&#946;</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">card</span> <span class="o">(</span><span class="n">Fin</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="n">&#945;</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">card</span> <span class="n">&#945;</span><span class="o">)</span><span class="bp">^</span><span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+
+<span class="kd">variable</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">{</span><span class="n">&#947;</span> <span class="o">:</span> <span class="n">Fin</span> <span class="n">n</span> <span class="bp">&#8594;</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="bp">&#8704;</span> <span class="n">i</span><span class="o">,</span> <span class="n">Fintype</span> <span class="o">(</span><span class="n">&#947;</span> <span class="n">i</span><span class="o">)]</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">card</span> <span class="o">((</span><span class="n">i</span> <span class="o">:</span> <span class="n">Fin</span> <span class="n">n</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="n">&#947;</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8719;</span> <span class="n">i</span><span class="o">,</span> <span class="n">card</span> <span class="o">(</span><span class="n">&#947;</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+
+<span class="kd">example</span> <span class="o">:</span> <span class="n">card</span> <span class="o">(</span><span class="bp">&#931;</span> <span class="n">i</span><span class="o">,</span> <span class="n">&#947;</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">i</span><span class="o">,</span> <span class="n">card</span> <span class="o">(</span><span class="n">&#947;</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">Fintype</span></code> namespace is not open, we have to use <code class="docutils literal notranslate"><span class="pre">Fintype.card</span></code> instead of <cite>card</cite>.</p>
+<p>The following is an example of calculating the cardinality of a finset, namely, the union of
+<cite>range n</cite> with a copy of range <cite>n</cite> that has been shifted by more than <cite>n</cite>.
+The calculation requires showing the the two sets in the union are disjoint;
+the first line of the proof yields the side condition
+<code class="docutils literal notranslate"><span class="pre">Disjoint</span> <span class="pre">(range</span> <span class="pre">n)</span> <span class="pre">(image</span> <span class="pre">(fun</span> <span class="pre">i</span> <span class="pre">&#8614;</span> <span class="pre">m</span> <span class="pre">+</span> <span class="pre">i)</span> <span class="pre">(range</span> <span class="pre">n))</span></code>, which is established at the end of the
+proof.
+The <code class="docutils literal notranslate"><span class="pre">Disjoint</span></code> predicate is too general to be directly useful to us, but the theorem
+<code class="docutils literal notranslate"><span class="pre">disjoint_iff_ne</span></code> puts it in a form we can use.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="k">#check</span> <span class="n">Disjoint</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&#8805;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">card</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span> <span class="bp">&#8746;</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="k">fun</span> <span class="n">i</span> <span class="bp">&#8614;</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">i</span><span class="o">))</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">card_union_of_disjoint</span><span class="o">,</span> <span class="n">card_range</span><span class="o">,</span> <span class="n">card_image_of_injective</span><span class="o">,</span> <span class="n">card_range</span><span class="o">]</span><span class="bp">;</span> <span class="n">omega</span>
+  <span class="bp">.</span> <span class="n">apply</span> <span class="n">add_right_injective</span>
+  <span class="bp">.</span> <span class="n">simp</span> <span class="o">[</span><span class="n">disjoint_iff_ne</span><span class="o">]</span><span class="bp">;</span> <span class="n">omega</span>
+</pre></div>
+</div>
+<p>Throughout this section, <code class="docutils literal notranslate"><span class="pre">omega</span></code> will be a workhorse for us, for dealing with arithmetic
+calculations and inequalities.</p>
+<p>Here is a more interesting example. Consider the subset of
+<span class="math notranslate nohighlight">\(\{0, \ldots, n\} \times \{0, \ldots, n\}\)</span> consisting
+of pairs <span class="math notranslate nohighlight">\((i, j)\)</span> such that <span class="math notranslate nohighlight">\(i &lt; j\)</span>. If you think of these as lattice points in the coordinate
+plane, they constitute an upper triangle of the square with corners <span class="math notranslate nohighlight">\((0, 0)\)</span> and
+<span class="math notranslate nohighlight">\((n, n)\)</span>, not
+including the diagonal. The cardinality of the full square is <span class="math notranslate nohighlight">\((n + 1)^2\)</span>, and removing the size of
+the diagonal and halving the result shows us that the cardinality of the triangle is
+<span class="math notranslate nohighlight">\(n (n + 1) / 2\)</span>.</p>
+<p>Alternatively, we note that the rows of the triangle have sizes <span class="math notranslate nohighlight">\(0, 1, \ldots, n\)</span>, so the
+cardinality is the sum of the first <span class="math notranslate nohighlight">\(n\)</span> natural numbers. The first <code class="docutils literal notranslate"><span class="pre">have</span></code> of the proof
+below describes the triangle as the union of the rows, where row <span class="math notranslate nohighlight">\(j\)</span> consists of
+the numbers <span class="math notranslate nohighlight">\(0, 1, ..., j - 1\)</span> paired with <span class="math notranslate nohighlight">\(j\)</span>.
+In the proof below, the notation <code class="docutils literal notranslate"><span class="pre">(.,</span> <span class="pre">j)</span></code> abbreviates the function
+<code class="docutils literal notranslate"><span class="pre">fun</span> <span class="pre">i</span> <span class="pre">&#8614;</span> <span class="pre">(i,</span> <span class="pre">j)</span></code>. The rest of the proof is just a calculation with finset cardinalities.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">triangle</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">Finset</span> <span class="o">(</span><span class="n">&#8469;</span> <span class="bp">&#215;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">&#215;&#738;</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">|</span> <span class="n">p.1</span> <span class="bp">&lt;</span> <span class="n">p.2</span><span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">triangle</span> <span class="n">n</span> <span class="bp">=</span> <span class="o">(</span><span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span><span class="bp">.</span><span class="n">biUnion</span> <span class="o">(</span><span class="k">fun</span> <span class="n">j</span> <span class="bp">&#8614;</span> <span class="o">(</span><span class="n">range</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">.</span><span class="o">,</span> <span class="n">j</span><span class="o">))</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">ext</span> <span class="n">p</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">triangle</span><span class="o">,</span> <span class="n">mem_filter</span><span class="o">,</span> <span class="n">mem_product</span><span class="o">,</span> <span class="n">mem_range</span><span class="o">,</span> <span class="n">mem_biUnion</span><span class="o">,</span> <span class="n">mem_image</span><span class="o">]</span>
+    <span class="n">constructor</span>
+    <span class="bp">.</span> <span class="n">rintro</span> <span class="o">&#10216;&#10216;</span><span class="n">hp1</span><span class="o">,</span> <span class="n">hp2</span><span class="o">&#10217;,</span> <span class="n">hp3</span><span class="o">&#10217;</span>
+      <span class="n">use</span> <span class="n">p.2</span><span class="o">,</span> <span class="n">hp2</span><span class="o">,</span> <span class="n">p.1</span><span class="o">,</span> <span class="n">hp3</span>
+    <span class="bp">.</span> <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">p1</span><span class="o">,</span> <span class="n">hp1</span><span class="o">,</span> <span class="n">p2</span><span class="o">,</span> <span class="n">hp2</span><span class="o">,</span> <span class="n">rfl</span><span class="o">&#10217;</span>
+      <span class="n">omega</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">this</span><span class="o">,</span> <span class="n">card_biUnion</span><span class="o">]</span><span class="bp">;</span> <span class="n">swap</span>
+  <span class="bp">&#183;</span> <span class="c1">-- take care of disjointness first</span>
+    <span class="n">intro</span> <span class="n">x</span> <span class="n">_</span> <span class="n">y</span> <span class="n">_</span> <span class="n">xney</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">disjoint_iff_ne</span><span class="o">,</span> <span class="n">xney</span><span class="o">]</span>
+  <span class="c1">-- continue the calculation</span>
+  <span class="n">transitivity</span> <span class="o">(</span><span class="bp">&#8721;</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span> <span class="n">i</span><span class="o">)</span>
+  <span class="bp">&#183;</span> <span class="n">congr</span><span class="bp">;</span> <span class="n">ext</span> <span class="n">i</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">card_image_of_injective</span><span class="o">,</span> <span class="n">card_range</span><span class="o">]</span>
+    <span class="n">intros</span> <span class="n">i1</span> <span class="n">i2</span><span class="bp">;</span> <span class="n">simp</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">sum_range_id</span><span class="o">]</span><span class="bp">;</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>The following variation on the proof does the calculation with fintypes instead of finsets.
+The type <code class="docutils literal notranslate"><span class="pre">&#945;</span> <span class="pre">&#8771;</span> <span class="pre">&#946;</span></code> is the type of equivalences between <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>, consisting of a map
+in the forward direction, the map in the backward direction, and proofs that these two are
+inverse to one another. The first <code class="docutils literal notranslate"><span class="pre">have</span></code> in the proof shows that <code class="docutils literal notranslate"><span class="pre">triangle</span> <span class="pre">n</span></code> is equivalent to
+the disjoint union of <code class="docutils literal notranslate"><span class="pre">Fin</span> <span class="pre">i</span></code> as <code class="docutils literal notranslate"><span class="pre">i</span></code> ranges over <code class="docutils literal notranslate"><span class="pre">Fin</span> <span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1)</span></code>. Interestingly, the forward
+function and the reverse function are constructed with tactics, rather than written explicitly.
+Since they do nothing more than move data and information around, <code class="docutils literal notranslate"><span class="pre">rfl</span></code> establishes that they
+are inverses.</p>
+<p>After that, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[&#8592;Fintype.card_coe]</span></code> rewrites <code class="docutils literal notranslate"><span class="pre">#(triangle</span> <span class="pre">n)</span></code> as the cardinality of the subtype
+<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">x</span> <span class="pre">//</span> <span class="pre">x</span> <span class="pre">&#8712;</span> <span class="pre">triangle</span> <span class="pre">n</span> <span class="pre">}</span></code>, and the rest of the proof is a calculation.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">triangle</span> <span class="n">n</span> <span class="bp">&#8771;</span> <span class="bp">&#931;</span> <span class="n">i</span> <span class="o">:</span> <span class="n">Fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">Fin</span> <span class="n">i.val</span> <span class="o">:=</span>
+    <span class="o">{</span> <span class="n">toFun</span> <span class="o">:=</span> <span class="kd">by</span>
+        <span class="n">rintro</span> <span class="o">&#10216;&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">&#10217;,</span> <span class="n">hp</span><span class="o">&#10217;</span>
+        <span class="n">simp</span> <span class="o">[</span><span class="n">triangle</span><span class="o">]</span> <span class="n">at</span> <span class="n">hp</span>
+        <span class="n">exact</span> <span class="o">&#10216;&#10216;</span><span class="n">j</span><span class="o">,</span> <span class="n">hp.1.2</span><span class="o">&#10217;,</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">hp.2</span><span class="o">&#10217;&#10217;</span>
+      <span class="n">invFun</span> <span class="o">:=</span> <span class="kd">by</span>
+        <span class="n">rintro</span> <span class="o">&#10216;</span><span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">&#10217;</span>
+        <span class="n">use</span> <span class="o">&#10216;</span><span class="n">j</span><span class="o">,</span> <span class="n">i</span><span class="o">&#10217;</span>
+        <span class="n">simp</span> <span class="o">[</span><span class="n">triangle</span><span class="o">]</span>
+        <span class="n">exact</span> <span class="n">j.isLt.trans</span> <span class="n">i.isLt</span>
+      <span class="n">left_inv</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">intro</span> <span class="n">i</span><span class="bp">;</span> <span class="n">rfl</span>
+      <span class="n">right_inv</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">intro</span> <span class="n">i</span><span class="bp">;</span> <span class="n">rfl</span> <span class="o">}</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="bp">&#8592;</span><span class="n">Fintype.card_coe</span><span class="o">]</span>
+  <span class="n">trans</span><span class="bp">;</span> <span class="n">apply</span> <span class="o">(</span><span class="n">Fintype.card_congr</span> <span class="n">this</span><span class="o">)</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">Fintype.card_sigma</span><span class="o">,</span> <span class="n">sum_fin_eq_sum_range</span><span class="o">]</span>
+  <span class="n">convert</span> <span class="n">Finset.sum_range_id</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="n">simp_all</span>
+</pre></div>
+</div>
+<p>Here is yet another approach. The first line of the proof below reduces the problem to showing
+<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">#(triangle</span> <span class="pre">n)</span> <span class="pre">=</span> <span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1)</span> <span class="pre">*</span> <span class="pre">n</span></code>. We can do that by showing that two copies of the triangle
+exactly fill the rectangle <code class="docutils literal notranslate"><span class="pre">range</span> <span class="pre">n</span> <span class="pre">&#215;&#738;</span> <span class="pre">range</span> <span class="pre">(n</span> <span class="pre">+</span> <span class="pre">1)</span></code>.
+As an exercise, see if you can fill in the steps of the calculation.
+In the solutions, we rely on <code class="docutils literal notranslate"><span class="pre">omega</span></code>
+extensively in the second-to-last step, but we unfortunately have to do a fair amount of
+work by hand.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">apply</span> <span class="n">Nat.eq_div_of_mul_eq_right</span> <span class="o">(</span><span class="kd">by</span> <span class="n">norm_num</span><span class="o">)</span>
+  <span class="k">let</span> <span class="n">turn</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#215;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#215;</span> <span class="n">&#8469;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">p.1</span><span class="o">,</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">p.2</span><span class="o">)</span>
+  <span class="k">calc</span> <span class="mi">2</span> <span class="bp">*</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span><span class="o">)</span>
+      <span class="bp">=</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+          <span class="gr">sorry</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span> <span class="bp">|&gt;.</span><span class="n">image</span> <span class="n">turn</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+          <span class="gr">sorry</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="bp">#</span><span class="o">(</span><span class="n">range</span> <span class="n">n</span> <span class="bp">&#215;&#738;</span> <span class="n">range</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:=</span> <span class="kd">by</span>
+          <span class="gr">sorry</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="o">:=</span> <span class="kd">by</span>
+          <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>You can convince yourself that we get the same triangle, shifted down, if we replace <code class="docutils literal notranslate"><span class="pre">n</span></code> by
+<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code>
+and replace <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> by <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code> in the definition of <code class="docutils literal notranslate"><span class="pre">triangle</span></code>.
+The exercise below asks you to use this fact to show that the two triangles have the same size.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">triangle&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="n">Finset</span> <span class="o">(</span><span class="n">&#8469;</span> <span class="bp">&#215;</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">p</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span> <span class="bp">&#215;&#738;</span> <span class="n">range</span> <span class="n">n</span> <span class="bp">|</span> <span class="n">p.1</span> <span class="bp">&#8804;</span> <span class="n">p.2</span><span class="o">}</span>
+
+<span class="kd">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle&#39;</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">#</span><span class="o">(</span><span class="n">triangle</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Let us close this section with an example and an exercise from a <a class="reference external" href="https://www.youtube.com/watch?v=_cJctOIXWE4&amp;list=PLlF-CfQhukNn7xEbfL38eLgkveyk9_myQ&amp;index=8&amp;t=2737s&amp;ab_channel=leanprovercommunity">tutorial</a>
+on combinatorics given by Bhavik Mehta at <em>Lean for the Curious Mathematician</em> in 2023.
+Suppose we have a bipartite graph with vertex sets <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code>, such that for every <code class="docutils literal notranslate"><span class="pre">a</span></code> in
+<code class="docutils literal notranslate"><span class="pre">s</span></code>, there are at least three edges leaving <code class="docutils literal notranslate"><span class="pre">a</span></code>, and for every <code class="docutils literal notranslate"><span class="pre">b</span></code> in <code class="docutils literal notranslate"><span class="pre">t</span></code>, there is at most
+one edge entering <code class="docutils literal notranslate"><span class="pre">b</span></code>. Then the total number of edges in the graph is at least three times the
+cardinality of <code class="docutils literal notranslate"><span class="pre">s</span></code> and at most the cardinality of <code class="docutils literal notranslate"><span class="pre">t</span></code>, from which is follows that three times the cardinality of <code class="docutils literal notranslate"><span class="pre">s</span></code> is at most the cardinality of <code class="docutils literal notranslate"><span class="pre">t</span></code>.
+The following theorem implements this argument, where we use the relation <code class="docutils literal notranslate"><span class="pre">r</span></code> to represent
+the edges of the graph. The proof is an elegant calculation.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">open</span> <span class="n">Classical</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">Nat</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">Nat</span><span class="o">)</span>
+
+<span class="kd">theorem</span> <span class="n">doubleCounting</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#946;</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="kt">Prop</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">h_left</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="mi">3</span> <span class="bp">&#8804;</span> <span class="bp">#</span><span class="o">{</span><span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">t</span> <span class="bp">|</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span><span class="o">})</span>
+    <span class="o">(</span><span class="n">h_right</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">t</span><span class="o">,</span> <span class="bp">#</span><span class="o">{</span><span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">|</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span><span class="o">}</span> <span class="bp">&#8804;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="mi">3</span> <span class="bp">*</span> <span class="bp">#</span><span class="o">(</span><span class="n">s</span><span class="o">)</span> <span class="bp">&#8804;</span> <span class="bp">#</span><span class="o">(</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">calc</span> <span class="mi">3</span> <span class="bp">*</span> <span class="bp">#</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+      <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="mi">3</span>                               <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">sum_const_nat</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">]</span>
+    <span class="n">_</span> <span class="bp">&#8804;</span> <span class="bp">&#8721;</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">#</span><span class="o">({</span><span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">t</span> <span class="bp">|</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span><span class="o">})</span>              <span class="o">:=</span> <span class="n">sum_le_sum</span> <span class="n">h_left</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="bp">&#8721;</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">t</span><span class="o">,</span> <span class="k">if</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">t</span><span class="o">,</span> <span class="bp">&#8721;</span> <span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span><span class="o">,</span> <span class="k">if</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sum_comm</span>
+    <span class="n">_</span> <span class="bp">=</span> <span class="bp">&#8721;</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">t</span><span class="o">,</span> <span class="bp">#</span><span class="o">({</span><span class="n">a</span> <span class="bp">&#8712;</span> <span class="n">s</span> <span class="bp">|</span> <span class="n">r</span> <span class="n">a</span> <span class="n">b</span><span class="o">})</span>              <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+    <span class="n">_</span> <span class="bp">&#8804;</span> <span class="bp">&#8721;</span> <span class="n">b</span> <span class="bp">&#8712;</span> <span class="n">t</span><span class="o">,</span> <span class="mi">1</span>                               <span class="o">:=</span> <span class="n">sum_le_sum</span> <span class="n">h_right</span>
+    <span class="n">_</span> <span class="bp">&#8804;</span> <span class="bp">#</span><span class="o">(</span><span class="n">t</span><span class="o">)</span>                                     <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+</pre></div>
+</div>
+<p>The following exercise is also taken from Mehta&#8217;s tutorial. Suppose <code class="docutils literal notranslate"><span class="pre">A</span></code> is a subset of
+<code class="docutils literal notranslate"><span class="pre">range</span> <span class="pre">(2</span> <span class="pre">*</span> <span class="pre">n)</span></code> with <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">+</span> <span class="pre">1</span></code> elements.
+It&#8217;s easy to see that <code class="docutils literal notranslate"><span class="pre">A</span></code> must contain two
+consecutive integers, and hence two elements that are coprime.
+If you watch the tutorial, you will see that a good deal of effort was spent in
+establishing the following fact, which is now proved automatically by <code class="docutils literal notranslate"><span class="pre">omega</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&#8800;</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">h&#39;</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">&#8744;</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">omega</span>
+</pre></div>
+</div>
+<p>The solution to Mehta&#8217;s exercise uses the pigeonhole principle, in the form
+<code class="docutils literal notranslate"><span class="pre">exists_lt_card_fiber_of_mul_lt_card_of_maps_to</span></code>, to show that there are two distinct elements
+<code class="docutils literal notranslate"><span class="pre">m</span></code> and <code class="docutils literal notranslate"><span class="pre">k</span></code> in <code class="docutils literal notranslate"><span class="pre">A</span></code> such that <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">/</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">k</span> <span class="pre">/</span> <span class="pre">2</span></code>.
+See if you can complete the justification of that fact and then use it to finish the proof.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">Finset</span> <span class="n">&#8469;</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="bp">#</span><span class="o">(</span><span class="n">A</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">hA&#39;</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">&#8838;</span> <span class="n">range</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span><span class="o">))</span> <span class="o">:</span>
+    <span class="bp">&#8707;</span> <span class="n">m</span> <span class="bp">&#8712;</span> <span class="n">A</span><span class="o">,</span> <span class="bp">&#8707;</span> <span class="n">k</span> <span class="bp">&#8712;</span> <span class="n">A</span><span class="o">,</span> <span class="n">Nat.Coprime</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">&#8707;</span> <span class="n">t</span> <span class="bp">&#8712;</span> <span class="n">range</span> <span class="n">n</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">&lt;</span> <span class="bp">#</span><span class="o">({</span><span class="n">u</span> <span class="bp">&#8712;</span> <span class="n">A</span> <span class="bp">|</span> <span class="n">u</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">t</span><span class="o">})</span> <span class="o">:=</span> <span class="kd">by</span>
+    <span class="n">apply</span> <span class="n">exists_lt_card_fiber_of_mul_lt_card_of_maps_to</span>
+    <span class="bp">&#183;</span> <span class="gr">sorry</span>
+    <span class="bp">&#183;</span> <span class="gr">sorry</span>
+  <span class="n">rcases</span> <span class="n">this</span> <span class="k">with</span> <span class="o">&#10216;</span><span class="n">t</span><span class="o">,</span> <span class="n">ht</span><span class="o">,</span> <span class="n">ht&#39;</span><span class="o">&#10217;</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">one_lt_card</span><span class="o">,</span> <span class="n">mem_filter</span><span class="o">]</span> <span class="n">at</span> <span class="n">ht&#39;</span>
+  <span class="gr">sorry</span>
+</pre></div>
+</div>
+</section>
+<section id="inductively-defined-types">
+<span id="id4"></span><h2><span class="section-number">6.3. </span>Inductively Defined Types<a class="headerlink" href="#inductively-defined-types" title="Link to this heading">&#61633;</a></h2>
+<p>Lean&#8217;s foundation allows us to define inductive types, that is, data types whose instances
+are generated from the bottom up.
+For example, the data type <code class="docutils literal notranslate"><span class="pre">List</span> <span class="pre">&#945;</span></code> of lists of elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> is generated by starting
+with the empty list, <code class="docutils literal notranslate"><span class="pre">nil</span></code>, and successively adding elements to the front the list.
+Below we will define a type of binary trees, <code class="docutils literal notranslate"><span class="pre">BinTree</span></code>, whose elements are generated by
+starting with the empty tree and building new trees by attaching a new node to two existing trees.</p>
+<p>In Lean, one can define inductive types whose objects are infinite, like countably branching
+well-founded trees.
+Finite inductive definitions are commonly used in discrete mathematics, however,
+especially in those branches of discrete mathematics that are relevant to computer science.
+Lean provides not only the means to define such types, but also principles of induction and
+definition by recursion. For example, the data type <code class="docutils literal notranslate"><span class="pre">List</span> <span class="pre">&#945;</span></code> is defined inductively:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">namespace</span> <span class="n">MyListSpace</span>
+
+<span class="kd">inductive</span> <span class="n">List</span> <span class="o">(</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="n">where</span>
+  <span class="bp">|</span> <span class="n">nil</span>  <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span>
+  <span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">List</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">List</span> <span class="n">&#945;</span>
+
+<span class="kd">end</span> <span class="n">MyListSpace</span>
+</pre></div>
+</div>
+<p>The inductive definition says that every element of <code class="docutils literal notranslate"><span class="pre">List</span> <span class="pre">&#945;</span></code> is either <code class="docutils literal notranslate"><span class="pre">nil</span></code>, the empty list,
+or <code class="docutils literal notranslate"><span class="pre">cons</span> <span class="pre">a</span> <span class="pre">as</span></code>, where <code class="docutils literal notranslate"><span class="pre">a</span></code> is an element of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">as</span></code> is a list of elements of <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>.
+The constructors are properly named <code class="docutils literal notranslate"><span class="pre">List.nil</span></code> and <code class="docutils literal notranslate"><span class="pre">List.cons</span></code>, but you can use the shorter
+notation with the <code class="docutils literal notranslate"><span class="pre">List</span></code> namespace is open.
+When the <code class="docutils literal notranslate"><span class="pre">List</span></code> namespace is <em>not</em> open, you can write <code class="docutils literal notranslate"><span class="pre">.nil</span></code> and <code class="docutils literal notranslate"><span class="pre">.cons</span> <span class="pre">a</span> <span class="pre">as</span></code> anywhere
+that <code class="docutils literal notranslate"><span class="pre">Lean</span></code> expects a list, and Lean will automatically insert the <code class="docutils literal notranslate"><span class="pre">List</span></code> qualifier.
+Throughout this section, we will put temporary definitions in separate namespaces like
+<code class="docutils literal notranslate"><span class="pre">MyListSpace</span></code> to avoid conflicts with the standard library. Outside the temporary namespace,
+we revert to using the standard library definitions.</p>
+<p>Lean defines the notation <code class="docutils literal notranslate"><span class="pre">[]</span></code> for <code class="docutils literal notranslate"><span class="pre">nil</span></code> and <code class="docutils literal notranslate"><span class="pre">::</span></code> for <code class="docutils literal notranslate"><span class="pre">cons</span></code>, and you can write
+<code class="docutils literal notranslate"><span class="pre">[a,</span> <span class="pre">b,</span> <span class="pre">c]</span></code> for <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">::</span> <span class="pre">b</span> <span class="pre">::</span> <span class="pre">c</span> <span class="pre">::</span> <span class="pre">[]</span></code>. The append and map functions are defined
+recursively as follows:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">append</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">List</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">List</span> <span class="n">&#945;</span>
+  <span class="bp">|</span> <span class="o">[],</span>      <span class="n">bs</span> <span class="bp">=&gt;</span> <span class="n">bs</span>
+  <span class="bp">|</span> <span class="n">a</span> <span class="o">::</span> <span class="n">as</span><span class="o">,</span> <span class="n">bs</span> <span class="bp">=&gt;</span> <span class="n">a</span> <span class="o">::</span> <span class="o">(</span><span class="n">append</span> <span class="n">as</span> <span class="n">bs</span><span class="o">)</span>
+
+<span class="kd">def</span> <span class="n">map</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">List</span> <span class="n">&#946;</span>
+  <span class="bp">|</span> <span class="o">[]</span>      <span class="bp">=&gt;</span> <span class="o">[]</span>
+  <span class="bp">|</span> <span class="n">a</span> <span class="o">::</span> <span class="n">as</span> <span class="bp">=&gt;</span> <span class="n">f</span> <span class="n">a</span> <span class="o">::</span> <span class="n">map</span> <span class="n">f</span> <span class="n">as</span>
+
+<span class="k">#eval</span> <span class="n">append</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">]</span> <span class="o">[</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">]</span>
+<span class="k">#eval</span> <span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span> <span class="bp">=&gt;</span> <span class="n">n</span><span class="bp">^</span><span class="mi">2</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Notice that there is a base case and a recursive case.
+In each case, the two defining clauses hold definitionally:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">nil_append</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">as</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">append</span> <span class="o">[]</span> <span class="n">as</span> <span class="bp">=</span> <span class="n">as</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">theorem</span> <span class="n">cons_append</span> <span class="o">{</span><span class="n">&#945;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">as</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">bs</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">append</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">as</span><span class="o">)</span> <span class="n">bs</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">::</span> <span class="o">(</span><span class="n">append</span> <span class="n">as</span> <span class="n">bs</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">theorem</span> <span class="n">map_nil</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">:</span> <span class="n">map</span> <span class="n">f</span> <span class="o">[]</span> <span class="bp">=</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kd">theorem</span> <span class="n">map_cons</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">(</span><span class="n">as</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span> <span class="o">::</span> <span class="n">as</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span> <span class="o">::</span> <span class="n">map</span> <span class="n">f</span> <span class="n">as</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>The functions <code class="docutils literal notranslate"><span class="pre">append</span></code> and <code class="docutils literal notranslate"><span class="pre">map</span></code> are defined in the standard library, and <code class="docutils literal notranslate"><span class="pre">append</span> <span class="pre">as</span> <span class="pre">bs</span></code>
+can be written as <code class="docutils literal notranslate"><span class="pre">as</span> <span class="pre">++</span> <span class="pre">bs</span></code>.</p>
+<p>Lean allows you to write proofs by induction following the structure of the definition.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span> <span class="o">{</span><span class="n">&#945;</span> <span class="n">&#946;</span> <span class="n">&#947;</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">as</span> <span class="n">bs</span> <span class="n">cs</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">)</span>
+<span class="kd">variable</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">&#945;</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">List</span>
+
+<span class="kd">theorem</span> <span class="n">append_nil</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">as</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">as</span> <span class="bp">++</span> <span class="o">[]</span> <span class="bp">=</span> <span class="n">as</span>
+  <span class="bp">|</span> <span class="o">[]</span> <span class="bp">=&gt;</span> <span class="n">rfl</span>
+  <span class="bp">|</span> <span class="n">a</span> <span class="o">::</span> <span class="n">as</span> <span class="bp">=&gt;</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">cons_append</span><span class="o">,</span> <span class="n">append_nil</span> <span class="n">as</span><span class="o">]</span>
+
+<span class="kd">theorem</span> <span class="n">map_map</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">&#946;</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">&#946;</span> <span class="bp">&#8594;</span> <span class="n">&#947;</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">&#8704;</span> <span class="n">as</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">,</span> <span class="n">map</span> <span class="n">g</span> <span class="o">(</span><span class="n">map</span> <span class="n">f</span> <span class="n">as</span><span class="o">)</span> <span class="bp">=</span> <span class="n">map</span> <span class="o">(</span><span class="n">g</span> <span class="bp">&#8728;</span> <span class="n">f</span><span class="o">)</span> <span class="n">as</span>
+  <span class="bp">|</span> <span class="o">[]</span> <span class="bp">=&gt;</span> <span class="n">rfl</span>
+  <span class="bp">|</span> <span class="n">a</span> <span class="o">::</span> <span class="n">as</span> <span class="bp">=&gt;</span> <span class="kd">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">map_cons</span><span class="o">,</span> <span class="n">map_cons</span><span class="o">,</span> <span class="n">map_cons</span><span class="o">,</span> <span class="n">map_map</span> <span class="n">f</span> <span class="n">g</span> <span class="n">as</span><span class="o">]</span><span class="bp">;</span> <span class="n">rfl</span>
+</pre></div>
+</div>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">induction'</span></code> tactic.</p>
+<p>Of course, these theorems are already in the standard library. As an exercise,
+try defining a function <code class="docutils literal notranslate"><span class="pre">reverse</span></code> in the <code class="docutils literal notranslate"><span class="pre">MyListSpace3</span></code> namespace (to avoid
+conflicting with the standard <code class="docutils literal notranslate"><span class="pre">List.reverse</span></code>) that reverses a list.
+You can use <code class="docutils literal notranslate"><span class="pre">#eval</span> <span class="pre">reverse</span> <span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5]</span></code> to test it out.
+The most straightforward definition of
+<code class="docutils literal notranslate"><span class="pre">reverse</span></code> requires quadratic time, but don&#8217;t worry about that.
+You can jump to the definition of <code class="docutils literal notranslate"><span class="pre">List.reverse</span></code> in the standard library to see a
+linear-time implementation.
+Try proving <code class="docutils literal notranslate"><span class="pre">reverse</span> <span class="pre">(as</span> <span class="pre">++</span> <span class="pre">bs)</span> <span class="pre">=</span> <span class="pre">reverse</span> <span class="pre">bs</span> <span class="pre">++</span> <span class="pre">reverse</span> <span class="pre">as</span></code> and
+<code class="docutils literal notranslate"><span class="pre">reverse</span> <span class="pre">(reverse</span> <span class="pre">as)</span> <span class="pre">=</span> <span class="pre">as</span></code>.
+You can use <code class="docutils literal notranslate"><span class="pre">cons_append</span></code> and <code class="docutils literal notranslate"><span class="pre">append_assoc</span></code>, but you
+You may need to come up with auxiliary lemmas and prove them.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">reverse</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span> <span class="bp">&#8594;</span> <span class="n">List</span> <span class="n">&#945;</span> <span class="o">:=</span> <span class="gr">sorry</span>
+
+<span class="kd">theorem</span> <span class="n">reverse_append</span> <span class="o">(</span><span class="n">as</span> <span class="n">bs</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">as</span> <span class="bp">++</span> <span class="n">bs</span><span class="o">)</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="n">bs</span> <span class="bp">++</span> <span class="n">reverse</span> <span class="n">as</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="gr">sorry</span>
+
+<span class="kd">theorem</span> <span class="n">reverse_reverse</span> <span class="o">(</span><span class="n">as</span> <span class="o">:</span> <span class="n">List</span> <span class="n">&#945;</span><span class="o">)</span> <span class="o">:</span> <span class="n">reverse</span> <span class="o">(</span><span class="n">reverse</span> <span class="n">as</span><span class="o">)</span> <span class="bp">=</span> <span class="n">as</span> <span class="o">:=</span> <span class="kd">by</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>For another example, consider the following inductive definition of binary trees together with
+functions to compute the size and depth of a binary tree.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">inductive</span> <span class="n">BinTree</span> <span class="n">where</span>
+  <span class="bp">|</span> <span class="n">empty</span> <span class="o">:</span> <span class="n">BinTree</span>
+  <span class="bp">|</span> <span class="n">node</span>  <span class="o">:</span> <span class="n">BinTree</span> <span class="bp">&#8594;</span> <span class="n">BinTree</span> <span class="bp">&#8594;</span> <span class="n">BinTree</span>
+
+<span class="kn">namespace</span> <span class="n">BinTree</span>
+
+<span class="kd">def</span> <span class="n">size</span> <span class="o">:</span> <span class="n">BinTree</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+  <span class="bp">|</span> <span class="n">empty</span>    <span class="bp">=&gt;</span> <span class="mi">0</span>
+  <span class="bp">|</span> <span class="n">node</span> <span class="n">l</span> <span class="n">r</span> <span class="bp">=&gt;</span> <span class="n">size</span> <span class="n">l</span> <span class="bp">+</span> <span class="n">size</span> <span class="n">r</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="kd">def</span> <span class="n">depth</span> <span class="o">:</span> <span class="n">BinTree</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span>
+  <span class="bp">|</span> <span class="n">empty</span>    <span class="bp">=&gt;</span> <span class="mi">0</span>
+  <span class="bp">|</span> <span class="n">node</span> <span class="n">l</span> <span class="n">r</span> <span class="bp">=&gt;</span> <span class="n">max</span> <span class="o">(</span><span class="n">depth</span> <span class="n">l</span><span class="o">)</span> <span class="o">(</span><span class="n">depth</span> <span class="n">r</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>It is convenient to count the empty binary tree as a binary tree of size 0 and depth 0.
+In the literature, this data type is sometimes called the <em>extended binary trees</em>.
+Including the empty tree means, for example, that we can define the tree
+<code class="docutils literal notranslate"><span class="pre">node</span> <span class="pre">empty</span> <span class="pre">(node</span> <span class="pre">empty</span> <span class="pre">empty)</span></code> consisting of a root node, and empty left subtree,
+and a right subtree consisting of a single node.</p>
+<p>Here is an important inequality relating the size and the depth:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">size_le</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">t</span> <span class="o">:</span> <span class="n">BinTree</span><span class="o">,</span> <span class="n">size</span> <span class="n">t</span> <span class="bp">&#8804;</span> <span class="mi">2</span><span class="bp">^</span><span class="n">depth</span> <span class="n">t</span> <span class="bp">-</span> <span class="mi">1</span>
+  <span class="bp">|</span> <span class="n">empty</span>    <span class="bp">=&gt;</span> <span class="n">Nat.zero_le</span> <span class="n">_</span>
+  <span class="bp">|</span> <span class="n">node</span> <span class="n">l</span> <span class="n">r</span> <span class="bp">=&gt;</span> <span class="kd">by</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">depth</span><span class="o">,</span> <span class="n">size</span><span class="o">]</span>
+    <span class="k">calc</span> <span class="n">l.size</span> <span class="bp">+</span> <span class="n">r.size</span> <span class="bp">+</span> <span class="mi">1</span>
+      <span class="bp">&#8804;</span> <span class="o">(</span><span class="mi">2</span><span class="bp">^</span><span class="n">l.depth</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">2</span><span class="bp">^</span><span class="n">r.depth</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+          <span class="n">gcongr</span> <span class="bp">&lt;;&gt;</span> <span class="n">apply</span> <span class="n">size_le</span>
+    <span class="n">_</span> <span class="bp">&#8804;</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">^</span> <span class="n">max</span> <span class="n">l.depth</span> <span class="n">r.depth</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">^</span> <span class="n">max</span> <span class="n">l.depth</span> <span class="n">r.depth</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+          <span class="n">gcongr</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp</span>
+    <span class="n">_</span> <span class="bp">&#8804;</span> <span class="mi">2</span> <span class="bp">^</span> <span class="o">(</span><span class="n">max</span> <span class="n">l.depth</span> <span class="n">r.depth</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span> <span class="kd">by</span>
+          <span class="k">have</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">2</span> <span class="bp">^</span> <span class="n">max</span> <span class="n">l.depth</span> <span class="n">r.depth</span> <span class="o">:=</span> <span class="kd">by</span> <span class="n">simp</span>
+          <span class="n">omega</span>
+</pre></div>
+</div>
+<p>Try proving the following inequality, which is somewhat easier.
+Remember, if you do a proof by induction as in the previous theorem,
+you have to delete the <code class="docutils literal notranslate"><span class="pre">:=</span> <span class="pre">by</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">depth_le_size</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">t</span> <span class="o">:</span> <span class="n">BinTree</span><span class="o">,</span> <span class="n">depth</span> <span class="n">t</span> <span class="bp">&#8804;</span> <span class="n">size</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Also define the <code class="docutils literal notranslate"><span class="pre">flip</span></code> operation on binary trees, which recursively swaps the
+left and right subtrees.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">flip</span> <span class="o">:</span> <span class="n">BinTree</span> <span class="bp">&#8594;</span> <span class="n">BinTree</span> <span class="o">:=</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>If you did it right, the proof of the following should be <cite>rfl</cite>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="o">:</span> <span class="n">flip</span>  <span class="o">(</span><span class="n">node</span> <span class="o">(</span><span class="n">node</span> <span class="n">empty</span> <span class="o">(</span><span class="n">node</span> <span class="n">empty</span> <span class="n">empty</span><span class="o">))</span> <span class="o">(</span><span class="n">node</span> <span class="n">empty</span> <span class="n">empty</span><span class="o">))</span> <span class="bp">=</span>
+    <span class="n">node</span> <span class="o">(</span><span class="n">node</span> <span class="n">empty</span> <span class="n">empty</span><span class="o">)</span> <span class="o">(</span><span class="n">node</span> <span class="o">(</span><span class="n">node</span> <span class="n">empty</span> <span class="n">empty</span><span class="o">)</span> <span class="n">empty</span><span class="o">)</span> <span class="o">:=</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>Prove the following:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">size_flip</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">t</span><span class="o">,</span> <span class="n">size</span> <span class="o">(</span><span class="n">flip</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="n">size</span> <span class="n">t</span> <span class="o">:=</span> <span class="kd">by</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>We close this section with some formal logic.
+The following is an inductive definition of propositional formulas.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">inductive</span> <span class="n">PropForm</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">where</span>
+  <span class="bp">|</span> <span class="n">var</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span>           <span class="o">:</span> <span class="n">PropForm</span>
+  <span class="bp">|</span> <span class="n">fls</span>                   <span class="o">:</span> <span class="n">PropForm</span>
+  <span class="bp">|</span> <span class="n">conj</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">)</span> <span class="o">:</span> <span class="n">PropForm</span>
+  <span class="bp">|</span> <span class="n">disj</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">)</span> <span class="o">:</span> <span class="n">PropForm</span>
+  <span class="bp">|</span> <span class="n">impl</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">)</span> <span class="o">:</span> <span class="n">PropForm</span>
+</pre></div>
+</div>
+<p>Every propositional formula is either a variable <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">n</span></code>, the constant false
+<code class="docutils literal notranslate"><span class="pre">fls</span></code>, or a compound formula of the form <code class="docutils literal notranslate"><span class="pre">conj</span> <span class="pre">A</span> <span class="pre">B</span></code>, <code class="docutils literal notranslate"><span class="pre">disj</span> <span class="pre">A</span> <span class="pre">B</span></code>, or <code class="docutils literal notranslate"><span class="pre">impl</span> <span class="pre">A</span> <span class="pre">B</span></code>.
+With ordinary mathematical notation, these are commonly written <span class="math notranslate nohighlight">\(p_n\)</span>, <span class="math notranslate nohighlight">\(\bot\)</span>, <span class="math notranslate nohighlight">\(A \wedge B\)</span>,
+<span class="math notranslate nohighlight">\(A \vee B\)</span>, and <span class="math notranslate nohighlight">\(A \to B\)</span>, respectively.
+The other propositional connectives can be defined in terms of these; for example, we can
+define <span class="math notranslate nohighlight">\(\neg A\)</span> as <span class="math notranslate nohighlight">\(A \to \bot\)</span> and <span class="math notranslate nohighlight">\(A \leftrightarrow B\)</span> as
+<span class="math notranslate nohighlight">\((A \to B) \wedge (B \to A)\)</span>.</p>
+<p>Having defined the data type of propositional formulas, we define what it means to evaluate a
+propositional formula with respect to an
+assignment <code class="docutils literal notranslate"><span class="pre">v</span></code> of Boolean truth values to the variables.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">eval</span> <span class="o">:</span> <span class="n">PropForm</span> <span class="bp">&#8594;</span> <span class="o">(</span><span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">Bool</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="n">Bool</span>
+  <span class="bp">|</span> <span class="n">var</span> <span class="n">n</span><span class="o">,</span>    <span class="n">v</span> <span class="bp">=&gt;</span> <span class="n">v</span> <span class="n">n</span>
+  <span class="bp">|</span> <span class="n">fls</span><span class="o">,</span>      <span class="n">_</span> <span class="bp">=&gt;</span> <span class="n">false</span>
+  <span class="bp">|</span> <span class="n">conj</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">v</span> <span class="bp">=&gt;</span> <span class="n">A.eval</span> <span class="n">v</span> <span class="bp">&amp;&amp;</span> <span class="n">B.eval</span> <span class="n">v</span>
+  <span class="bp">|</span> <span class="n">disj</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">v</span> <span class="bp">=&gt;</span> <span class="n">A.eval</span> <span class="n">v</span> <span class="bp">||</span> <span class="n">B.eval</span> <span class="n">v</span>
+  <span class="bp">|</span> <span class="n">impl</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">v</span> <span class="bp">=&gt;</span> <span class="bp">!</span> <span class="n">A.eval</span> <span class="n">v</span> <span class="bp">||</span> <span class="n">B.eval</span> <span class="n">v</span>
+</pre></div>
+</div>
+<p>The next definition specifies the set of variables occurring in a formula, and the subsequent
+theorem shows that evaluating a formula on two truth assignments that agree on its variables
+yields that same value.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">vars</span> <span class="o">:</span> <span class="n">PropForm</span> <span class="bp">&#8594;</span> <span class="n">Finset</span> <span class="n">&#8469;</span>
+  <span class="bp">|</span> <span class="n">var</span> <span class="n">n</span>    <span class="bp">=&gt;</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span>
+  <span class="bp">|</span> <span class="n">fls</span>      <span class="bp">=&gt;</span> <span class="bp">&#8709;</span>
+  <span class="bp">|</span> <span class="n">conj</span> <span class="n">A</span> <span class="n">B</span> <span class="bp">=&gt;</span> <span class="n">A.vars</span> <span class="bp">&#8746;</span> <span class="n">B.vars</span>
+  <span class="bp">|</span> <span class="n">disj</span> <span class="n">A</span> <span class="n">B</span> <span class="bp">=&gt;</span> <span class="n">A.vars</span> <span class="bp">&#8746;</span> <span class="n">B.vars</span>
+  <span class="bp">|</span> <span class="n">impl</span> <span class="n">A</span> <span class="n">B</span> <span class="bp">=&gt;</span> <span class="n">A.vars</span> <span class="bp">&#8746;</span> <span class="n">B.vars</span>
+
+<span class="kd">theorem</span> <span class="n">eval_eq_eval</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">)</span> <span class="o">(</span><span class="n">v1</span> <span class="n">v2</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">Bool</span><span class="o">),</span>
+    <span class="o">(</span><span class="bp">&#8704;</span> <span class="n">n</span> <span class="bp">&#8712;</span> <span class="n">A.vars</span><span class="o">,</span> <span class="n">v1</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">v2</span> <span class="n">n</span><span class="o">)</span> <span class="bp">&#8594;</span> <span class="n">A.eval</span> <span class="n">v1</span> <span class="bp">=</span> <span class="n">A.eval</span> <span class="n">v2</span>
+  <span class="bp">|</span> <span class="n">var</span> <span class="n">n</span><span class="o">,</span> <span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="o">,</span> <span class="n">h</span>    <span class="bp">=&gt;</span> <span class="kd">by</span> <span class="n">simp_all</span> <span class="o">[</span><span class="n">vars</span><span class="o">,</span> <span class="n">eval</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span>
+  <span class="bp">|</span> <span class="n">fls</span><span class="o">,</span> <span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="o">,</span> <span class="n">h</span>      <span class="bp">=&gt;</span> <span class="kd">by</span> <span class="n">simp_all</span> <span class="o">[</span><span class="n">eval</span><span class="o">]</span>
+  <span class="bp">|</span> <span class="n">conj</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="o">,</span> <span class="n">h</span> <span class="bp">=&gt;</span> <span class="kd">by</span>
+      <span class="n">simp_all</span> <span class="o">[</span><span class="n">vars</span><span class="o">,</span> <span class="n">eval</span><span class="o">,</span> <span class="n">eval_eq_eval</span> <span class="n">A</span> <span class="n">v1</span> <span class="n">v2</span><span class="o">,</span> <span class="n">eval_eq_eval</span> <span class="n">B</span> <span class="n">v1</span> <span class="n">v2</span><span class="o">]</span>
+  <span class="bp">|</span> <span class="n">disj</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="o">,</span> <span class="n">h</span> <span class="bp">=&gt;</span> <span class="kd">by</span>
+      <span class="n">simp_all</span> <span class="o">[</span><span class="n">vars</span><span class="o">,</span> <span class="n">eval</span><span class="o">,</span> <span class="n">eval_eq_eval</span> <span class="n">A</span> <span class="n">v1</span> <span class="n">v2</span><span class="o">,</span> <span class="n">eval_eq_eval</span> <span class="n">B</span> <span class="n">v1</span> <span class="n">v2</span><span class="o">]</span>
+  <span class="bp">|</span> <span class="n">impl</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="o">,</span> <span class="n">h</span> <span class="bp">=&gt;</span> <span class="kd">by</span>
+      <span class="n">simp_all</span> <span class="o">[</span><span class="n">vars</span><span class="o">,</span> <span class="n">eval</span><span class="o">,</span> <span class="n">eval_eq_eval</span> <span class="n">A</span> <span class="n">v1</span> <span class="n">v2</span><span class="o">,</span> <span class="n">eval_eq_eval</span> <span class="n">B</span> <span class="n">v1</span> <span class="n">v2</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>Noticing the repetition, we can be clever about the use of automation.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">eval_eq_eval&#39;</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">)</span> <span class="o">(</span><span class="n">v1</span> <span class="n">v2</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">Bool</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="n">n</span> <span class="bp">&#8712;</span> <span class="n">A.vars</span><span class="o">,</span> <span class="n">v1</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">v2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">A.eval</span> <span class="n">v1</span> <span class="bp">=</span> <span class="n">A.eval</span> <span class="n">v2</span> <span class="o">:=</span> <span class="kd">by</span>
+  <span class="n">cases</span> <span class="n">A</span> <span class="bp">&lt;;&gt;</span> <span class="n">simp_all</span> <span class="o">[</span><span class="n">eval</span><span class="o">,</span> <span class="n">vars</span><span class="o">,</span> <span class="k">fun</span> <span class="n">A</span> <span class="bp">=&gt;</span> <span class="n">eval_eq_eval&#39;</span> <span class="n">A</span> <span class="n">v1</span> <span class="n">v2</span><span class="o">]</span>
+</pre></div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">subst</span> <span class="pre">A</span> <span class="pre">m</span> <span class="pre">C</span></code> describes the result of substituting the formula <code class="docutils literal notranslate"><span class="pre">C</span></code> for every
+occurrence of the variable <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">m</span></code> in the formula <code class="docutils literal notranslate"><span class="pre">A</span></code>.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span> <span class="n">subst</span> <span class="o">:</span> <span class="n">PropForm</span> <span class="bp">&#8594;</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">PropForm</span> <span class="bp">&#8594;</span> <span class="n">PropForm</span>
+  <span class="bp">|</span> <span class="n">var</span> <span class="n">n</span><span class="o">,</span>    <span class="n">m</span><span class="o">,</span> <span class="n">C</span> <span class="bp">=&gt;</span> <span class="k">if</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="k">then</span> <span class="n">C</span> <span class="k">else</span> <span class="n">var</span> <span class="n">n</span>
+  <span class="bp">|</span> <span class="n">fls</span><span class="o">,</span>      <span class="n">_</span><span class="o">,</span> <span class="n">_</span> <span class="bp">=&gt;</span> <span class="n">fls</span>
+  <span class="bp">|</span> <span class="n">conj</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">C</span> <span class="bp">=&gt;</span> <span class="n">conj</span> <span class="o">(</span><span class="n">A.subst</span> <span class="n">m</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">B.subst</span> <span class="n">m</span> <span class="n">C</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">disj</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">C</span> <span class="bp">=&gt;</span> <span class="n">disj</span> <span class="o">(</span><span class="n">A.subst</span> <span class="n">m</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">B.subst</span> <span class="n">m</span> <span class="n">C</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">impl</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">C</span> <span class="bp">=&gt;</span> <span class="n">impl</span> <span class="o">(</span><span class="n">A.subst</span> <span class="n">m</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">B.subst</span> <span class="n">m</span> <span class="n">C</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>As an example, show that substituting for a variable that does not occur in a formula
+has no effect:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">subst_eq_of_not_mem_vars</span> <span class="o">:</span>
+    <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">),</span> <span class="n">n</span> <span class="bp">&#8713;</span> <span class="n">A.vars</span> <span class="bp">&#8594;</span> <span class="n">A.subst</span> <span class="n">n</span> <span class="n">C</span> <span class="bp">=</span> <span class="n">A</span> <span class="o">:=</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+<p>The following theorem says something more subtle and interesting: evaluating
+<code class="docutils literal notranslate"><span class="pre">A.subst</span> <span class="pre">n</span> <span class="pre">C</span></code> on a truth assignment <code class="docutils literal notranslate"><span class="pre">v</span></code> is the same as evaluating
+<code class="docutils literal notranslate"><span class="pre">A</span></code> on a truth assignment that assigns the value of <code class="docutils literal notranslate"><span class="pre">C</span></code> to <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">n</span></code>.
+See if you can prove it.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span> <span class="n">subst_eval_eq</span> <span class="o">:</span> <span class="bp">&#8704;</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">&#8469;</span><span class="o">)</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">PropForm</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">&#8469;</span> <span class="bp">&#8594;</span> <span class="n">Bool</span><span class="o">),</span>
+  <span class="o">(</span><span class="n">A.subst</span> <span class="n">n</span> <span class="n">C</span><span class="o">)</span><span class="bp">.</span><span class="n">eval</span> <span class="n">v</span> <span class="bp">=</span> <span class="n">A.eval</span> <span class="o">(</span><span class="k">fun</span> <span class="n">m</span> <span class="bp">=&gt;</span> <span class="k">if</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="k">then</span> <span class="n">C.eval</span> <span class="n">v</span> <span class="k">else</span> <span class="n">v</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span> <span class="gr">sorry</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="C05_Elementary_Number_Theory.html" class="btn btn-neutral float-left" title="5. Elementary Number Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="C07_Structures.html" class="btn btn-neutral float-right" title="7. Structures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, Jeremy Avigad, Patrick Massot.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

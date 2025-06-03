@@ -18,5 +18,5 @@ decisions behind the way the topics are treated.
 So making sense of some of the examples may require reviewing the background from
 :numref:`Chapter %s <hierarchies>`.
 
-.. include:: C08_Groups_and_Rings/S01_Groups.inc
-.. include:: C08_Groups_and_Rings/S02_Rings.inc
+.. include:: C09_Groups_and_Rings/S01_Groups.inc
+.. include:: C09_Groups_and_Rings/S02_Rings.inc

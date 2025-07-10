@@ -61,7 +61,7 @@ example (n : ℕ) : #(triangle n) = (n + 1) * n / 2 := by
     intro x _ y _ xney
     simp [disjoint_iff_ne, xney]
   -- continue the calculation
-  transitivity (∑ i in range (n+1), i)
+  transitivity (∑ i ∈ range (n + 1), i)
   · congr; ext i
     rw [card_image_of_injective, card_range]
     intros i1 i2; simp

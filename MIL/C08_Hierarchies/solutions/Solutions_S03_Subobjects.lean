@@ -68,8 +68,8 @@ instance [Group G] (H : Subgroup₁ G) : Group H :=
   inv := fun x ↦ ⟨x⁻¹, H.inv_mem x.property⟩
   inv_mul_cancel := fun x ↦ SetCoe.ext (inv_mul_cancel (x : G)) }
 
-class SubgroupClass₁ (S : Type) (G : Type) [Group G] [SetLike S G]
-    extends SubmonoidClass₁ S G  : Prop where
+class SubgroupClass₁ (S : Type) (G : Type) [Group G] [SetLike S G] : Prop
+    extends SubmonoidClass₁ S G where
   inv_mem : ∀ (s : S) {a : G}, a ∈ s → a⁻¹ ∈ s
 
 instance [Group G] : SubmonoidClass₁ (Subgroup₁ G) G where

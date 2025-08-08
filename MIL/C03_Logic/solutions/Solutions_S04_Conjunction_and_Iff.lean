@@ -56,7 +56,7 @@ variable {α : Type*} [PartialOrder α]
 variable (a b : α)
 
 example : a < b ↔ a ≤ b ∧ a ≠ b := by
-  rw [lt_iff_le_not_le]
+  rw [lt_iff_le_not_ge]
   constructor
   · rintro ⟨h0, h1⟩
     constructor
@@ -78,12 +78,12 @@ variable {α : Type*} [Preorder α]
 variable (a b c : α)
 
 example : ¬a < a := by
-  rw [lt_iff_le_not_le]
+  rw [lt_iff_le_not_ge]
   rintro ⟨h0, h1⟩
   exact h1 h0
 
 example : a < b → b < c → a < c := by
-  simp only [lt_iff_le_not_le]
+  simp only [lt_iff_le_not_ge]
   rintro ⟨h0, h1⟩ ⟨h2, h3⟩
   constructor
   · apply le_trans h0 h2

@@ -105,9 +105,7 @@ section
 open Set Real
 
 example : InjOn log { x | x > 0 } := by
-  intro x xpos y ypos
-  intro e
-  -- log x = log y
+  intro x xpos y ypos e
   calc
     x = exp (log x) := by rw [exp_log xpos]
     _ = exp (log y) := by rw [e]

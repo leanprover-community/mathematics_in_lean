@@ -71,13 +71,13 @@ example (n : ℕ) : #(triangle n) = (n + 1) * n / 2 := by
   have : triangle n ≃ Σ i : Fin (n + 1), Fin i.val :=
     { toFun := by
         rintro ⟨⟨i, j⟩, hp⟩
-        simp [triangle] at hp
-        exact ⟨⟨j, hp.1.2⟩, ⟨i, hp.2⟩⟩
+        have : (i ≤ n ∧ j ≤ n) ∧ i < j := by simpa [triangle] using hp
+        exact ⟨⟨j, by linarith⟩, ⟨i, by linarith⟩⟩
       invFun := by
         rintro ⟨i, j⟩
         use ⟨j, i⟩
-        simp [triangle]
-        exact j.isLt.trans i.isLt
+        suffices j ≤ n ∧ i ≤ n by simpa [triangle]
+        constructor <;> linarith [i.2, j.2]
       left_inv := by intro i; rfl
       right_inv := by intro i; rfl }
   rw [←Fintype.card_coe]
@@ -105,7 +105,7 @@ example (n : ℕ) : #(triangle' n) = #(triangle n) := by sorry
 
 section
 open Classical
-variable (s t : Finset Nat) (a b : Nat)
+variable (s t : Finset ℕ) (a b : ℕ)
 
 theorem doubleCounting {α β : Type*} (s : Finset α) (t : Finset β)
     (r : α → β → Prop)
@@ -113,7 +113,7 @@ theorem doubleCounting {α β : Type*} (s : Finset α) (t : Finset β)
     (h_right : ∀ b ∈ t, #{a ∈ s | r a b} ≤ 1) :
     3 * #(s) ≤ #(t) := by
   calc 3 * #(s)
-      = ∑ a ∈ s, 3                               := by simp [sum_const_nat, mul_comm]
+      = ∑ a ∈ s, 3                               := by simp [mul_comm]
     _ ≤ ∑ a ∈ s, #({b ∈ t | r a b})              := sum_le_sum h_left
     _ = ∑ a ∈ s, ∑ b ∈ t, if r a b then 1 else 0 := by simp
     _ = ∑ b ∈ t, ∑ a ∈ s, if r a b then 1 else 0 := sum_comm

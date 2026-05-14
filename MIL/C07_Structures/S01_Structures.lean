@@ -23,9 +23,12 @@ def myPoint1 : Point where
   z := 4
 
 def myPoint2 : Point :=
+  { x := 2, y := -1, z := 4 }
+
+def myPoint3 : Point :=
   ⟨2, -1, 4⟩
 
-def myPoint3 :=
+def myPoint4 :=
   Point.mk 2 (-1) 4
 
 structure Point' where build ::
@@ -153,7 +156,7 @@ def midpoint (n : ℕ) (a b : StandardSimplex n) : StandardSimplex n
   sum_eq_one := by
     simp [div_eq_mul_inv, ← Finset.sum_mul, Finset.sum_add_distrib,
       a.sum_eq_one, b.sum_eq_one]
-    field_simp
+    norm_num
 
 end StandardSimplex
 

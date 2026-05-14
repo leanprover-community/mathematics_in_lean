@@ -4,7 +4,7 @@ import Mathlib.LinearAlgebra.Charpoly.Basic
 
 import MIL.Common
 
-
+section
 variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 
 example (U : Submodule K V) {x y : V} (hx : x ∈ U) (hy : y ∈ U) :
@@ -14,7 +14,9 @@ example (U : Submodule K V) {x y : V} (hx : x ∈ U) (hy : y ∈ U) :
 example (U : Submodule K V) {x : V} (hx : x ∈ U) (a : K) :
     a • x ∈ U :=
   U.smul_mem a hx
+end
 
+variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 
 def preimage {W : Type*} [AddCommGroup W] [Module K W] (φ : V →ₗ[K] W) (H : Submodule K W) :
     Submodule K V where

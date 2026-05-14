@@ -10,9 +10,9 @@ example (h₀ : a ≤ b) (h₁ : b < c) (h₂ : c ≤ d) (h₃ : d < e) : a < e 
   exact lt_of_le_of_lt h₂ h₃
 
 example (h₀ : d ≤ e) : c + exp (a + d) ≤ c + exp (a + e) := by
-  apply add_le_add_left
+  apply add_le_add_right
   rw [exp_le_exp]
-  apply add_le_add_left h₀
+  apply add_le_add_right h₀
 
 -- an alternative using `linarith`.
 example (h₀ : d ≤ e) : c + exp (a + d) ≤ c + exp (a + e) := by
@@ -24,7 +24,7 @@ example (h₀ : d ≤ e) : c + exp (a + d) ≤ c + exp (a + e) := by
 example (h : a ≤ b) : log (1 + exp a) ≤ log (1 + exp b) := by
   have h₀ : 0 < 1 + exp a := by linarith [exp_pos a]
   apply log_le_log h₀
-  apply add_le_add_left (exp_le_exp.mpr h)
+  apply add_le_add_right (exp_le_exp.mpr h)
 
 -- SOLUTION.
 example (h : a ≤ b) : c - exp b ≤ c - exp a := by

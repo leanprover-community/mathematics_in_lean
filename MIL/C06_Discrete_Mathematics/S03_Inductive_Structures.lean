@@ -131,7 +131,7 @@ def vars : PropForm → Finset ℕ
 
 theorem eval_eq_eval : ∀ (A : PropForm) (v1 v2 : ℕ → Bool),
     (∀ n ∈ A.vars, v1 n = v2 n) → A.eval v1 = A.eval v2
-  | var n, v1, v2, h    => by simp_all [vars, eval, h]
+  | var n, v1, v2, h    => by simp_all [vars, eval]
   | fls, v1, v2, h      => by simp_all [eval]
   | conj A B, v1, v2, h => by
       simp_all [vars, eval, eval_eq_eval A v1 v2, eval_eq_eval B v1 v2]

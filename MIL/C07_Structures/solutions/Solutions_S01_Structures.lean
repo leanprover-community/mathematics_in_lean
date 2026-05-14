@@ -79,7 +79,7 @@ def midpoint (n : ℕ) (a b : StandardSimplex n) : StandardSimplex n
   sum_eq_one := by
     simp [div_eq_mul_inv, ← Finset.sum_mul, Finset.sum_add_distrib,
       a.sum_eq_one, b.sum_eq_one]
-    field_simp
+    norm_num
 
 end StandardSimplex
 

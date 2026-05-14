@@ -46,7 +46,7 @@ theorem aux : min a b + c ≤ min (a + c) (b + c) := by
   sorry
 example : min a b + c = min (a + c) (b + c) := by
   sorry
-#check (abs_add : ∀ a b : ℝ, |a + b| ≤ |a| + |b|)
+#check (abs_add_le : ∀ a b : ℝ, |a + b| ≤ |a| + |b|)
 
 example : |a| - |b| ≤ |a - b| :=
   sorry

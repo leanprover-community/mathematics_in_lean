@@ -9,7 +9,7 @@ theorem my_lemma4 :
   calc
     |x * y| = |x| * |y| := by apply abs_mul
     _ ≤ |x| * ε := by apply mul_le_mul; linarith; linarith; apply abs_nonneg; apply abs_nonneg;
-    _ < 1 * ε := by rw [mul_lt_mul_right epos]; linarith
+    _ < 1 * ε := by apply mul_lt_mul_of_pos_right _ epos; linarith
     _ = ε := by apply one_mul
 
 def FnUb (f : ℝ → ℝ) (a : ℝ) : Prop :=
@@ -53,7 +53,7 @@ example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x ↦ c * f x
   apply mf aleb
 
 example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x ↦ c * f x :=
-  fun a b aleb ↦ mul_le_mul_of_nonneg_left (mf aleb) nnc
+  fun _a _b aleb ↦ mul_le_mul_of_nonneg_left (mf aleb) nnc
 
 example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) := by
   intro a b aleb
@@ -62,7 +62,7 @@ example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) := by
   apply aleb
 
 example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) :=
-  fun a b aleb ↦ mf (mg aleb)
+  fun _a _b aleb ↦ mf (mg aleb)
 
 def FnEven (f : ℝ → ℝ) : Prop :=
   ∀ x, f x = f (-x)
@@ -100,7 +100,7 @@ example : r ⊆ s → s ⊆ t → r ⊆ t := by
   apply xr
 
 theorem Subset.trans : r ⊆ s → s ⊆ t → r ⊆ t :=
-  fun rsubs ssubt x xr ↦ ssubt (rsubs xr)
+  fun rsubs ssubt _x xr ↦ ssubt (rsubs xr)
 
 end
 

@@ -23,7 +23,7 @@ example : s \ (t ∪ u) ⊆ (s \ t) \ u := by
 
 example : s ∩ t = t ∩ s :=
     Subset.antisymm
-    (fun x ⟨xs, xt⟩ ↦ ⟨xt, xs⟩) fun x ⟨xt, xs⟩ ↦ ⟨xs, xt⟩
+    (fun _x ⟨xs, xt⟩ ↦ ⟨xt, xs⟩) fun _x ⟨xt, xs⟩ ↦ ⟨xs, xt⟩
 
 example : s ∩ (s ∪ t) = s := by
   ext x; constructor

@@ -1,6 +1,5 @@
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.DedekindDomain.Ideal
 import Mathlib.Analysis.Complex.Polynomial.Basic
 import Mathlib.Data.ZMod.QuotientRing
 import MIL.Common

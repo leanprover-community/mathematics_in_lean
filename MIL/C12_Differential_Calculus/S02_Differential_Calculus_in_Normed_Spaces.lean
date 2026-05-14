@@ -156,7 +156,7 @@ example (n : ℕ∞) {f : E → F} :
 example {𝕂 : Type*} [RCLike 𝕂] {E : Type*} [NormedAddCommGroup E] [NormedSpace 𝕂 E] {F : Type*}
     [NormedAddCommGroup F] [NormedSpace 𝕂 F] {f : E → F} {x : E} {n : WithTop ℕ∞}
     (hf : ContDiffAt 𝕂 n f x) (hn : 1 ≤ n) : HasStrictFDerivAt f (fderiv 𝕂 f x) x :=
-  hf.hasStrictFDerivAt hn
+  hf.hasStrictFDerivAt (zero_lt_one.trans_le hn).ne'
 
 section LocalInverse
 variable [CompleteSpace E] {f : E → F} {f' : E ≃L[𝕜] F} {a : E}

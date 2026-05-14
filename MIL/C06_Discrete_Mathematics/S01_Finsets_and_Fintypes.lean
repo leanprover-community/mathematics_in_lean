@@ -39,7 +39,7 @@ example : ({0, 1} : Finset ℕ) = {1, 0} := by rw [Finset.pair_comm]
 example (x : Nat) : ({x, x} : Finset ℕ) = {x} := by simp
 
 example (x y z : Nat) : ({x, y, z, y, z, x} : Finset ℕ) = {x, y, z} := by
-  ext i; simp [or_comm, or_assoc, or_left_comm]
+  ext i; simp [or_comm, or_left_comm]
 
 example (x y z : Nat) : ({x, y, z, y, z, x} : Finset ℕ) = {x, y, z} := by
   ext i; simp; tauto
@@ -126,9 +126,9 @@ example : Finset.min' {2, 6, 7} ⟨6, by trivial⟩ = 2 := by trivial
 
 example (s : Finset ℕ) : s.card = #s := by rfl
 
-example (s : Finset ℕ) : s.card = ∑ i ∈ s, 1 := by rw [card_eq_sum_ones]
+example (s : Finset ℕ) : s.card = ∑ _i ∈ s, 1 := by rw [card_eq_sum_ones]
 
-example (s : Finset ℕ) : s.card = ∑ i ∈ s, 1 := by simp
+example (s : Finset ℕ) : s.card = ∑ _i ∈ s, 1 := by simp
 
 section
 variable {α : Type*} [Fintype α]

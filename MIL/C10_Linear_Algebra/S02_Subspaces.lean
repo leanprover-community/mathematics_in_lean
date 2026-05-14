@@ -4,7 +4,7 @@ import Mathlib.LinearAlgebra.Charpoly.Basic
 
 import MIL.Common
 
-
+section
 variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 
 example (U : Submodule K V) {x y : V} (hx : x ∈ U) (hy : y ∈ U) :
@@ -14,7 +14,7 @@ example (U : Submodule K V) {x y : V} (hx : x ∈ U) (hy : y ∈ U) :
 example (U : Submodule K V) {x : V} (hx : x ∈ U) (a : K) :
     a • x ∈ U :=
   U.smul_mem a hx
-
+end
 
 noncomputable example : Submodule ℝ ℂ where
   carrier := Set.range ((↑) : ℝ → ℂ)
@@ -30,6 +30,8 @@ noncomputable example : Submodule ℝ ℂ where
     use c*a
     simp
 
+
+variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 
 def preimage {W : Type*} [AddCommGroup W] [Module K W] (φ : V →ₗ[K] W) (H : Submodule K W) :
     Submodule K V where
@@ -79,7 +81,7 @@ example {ι : Type*} [DecidableEq ι] (U : ι → Submodule K V) (h : DirectSum.
   (h.submodule_iSupIndep.pairwiseDisjoint hij).eq_bot
 
 -- Those conditions characterize direct sums.
-#check DirectSum.isInternal_submodule_iff_independent_and_iSup_eq_top
+#check DirectSum.isInternal_submodule_iff_iSupIndep_and_iSup_eq_top
 
 -- The relation with external direct sums: if a family of subspaces is
 -- in internal direct sum then the map from their external direct sum into `V`

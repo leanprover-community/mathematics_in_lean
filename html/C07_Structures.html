@@ -146,15 +146,18 @@ Lean provides multiple ways of doing that.</p>
 <span class="w">  </span><span class="n">z</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">4</span>
 
 <span class="kd">def</span><span class="w"> </span><span class="n">myPoint2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="o">:=</span>
+<span class="w">  </span><span class="o">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">-</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">}</span>
+
+<span class="kd">def</span><span class="w"> </span><span class="n">myPoint3</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="o">&#10216;</span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="bp">-</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="o">&#10217;</span>
 
-<span class="kd">def</span><span class="w"> </span><span class="n">myPoint3</span><span class="w"> </span><span class="o">:=</span>
+<span class="kd">def</span><span class="w"> </span><span class="n">myPoint4</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">Point.mk</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="mi">4</span>
 </pre></div>
 </div>
 <p>In the first example, the fields of the structure are named
 explicitly.
-The function <code class="docutils literal notranslate"><span class="pre">Point.mk</span></code> referred to in the definition of <code class="docutils literal notranslate"><span class="pre">myPoint3</span></code>
+The function <code class="docutils literal notranslate"><span class="pre">Point.mk</span></code> referred to in the definition of <code class="docutils literal notranslate"><span class="pre">myPoint4</span></code>
 is known as the <em>constructor</em> for the <code class="docutils literal notranslate"><span class="pre">Point</span></code> structure, because
 it serves to construct elements.
 You can specify a different name if you want, like <code class="docutils literal notranslate"><span class="pre">build</span></code>.</p>
@@ -368,7 +371,7 @@ how to sum over it.</p>
 <span class="w">  </span><span class="n">sum_eq_one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">    </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="n">div_eq_mul_inv</span><span class="o">,</span><span class="w"> </span><span class="bp">&#8592;</span><span class="w"> </span><span class="n">Finset.sum_mul</span><span class="o">,</span><span class="w"> </span><span class="n">Finset.sum_add_distrib</span><span class="o">,</span>
 <span class="w">      </span><span class="n">a.sum_eq_one</span><span class="o">,</span><span class="w"> </span><span class="n">b.sum_eq_one</span><span class="o">]</span>
-<span class="w">    </span><span class="n">field_simp</span>
+<span class="w">    </span><span class="n">norm_num</span>
 
 <span class="kd">end</span><span class="w"> </span><span class="n">StandardSimplex</span>
 </pre></div>
@@ -480,8 +483,8 @@ and for managing the interactions between them.</p>
 it will help to consider some examples.</p>
 <ol class="arabic simple">
 <li><p>A <em>partially ordered set</em> consists of a set <span class="math notranslate nohighlight">\(P\)</span> and
-a binary relation <span class="math notranslate nohighlight">\(\le\)</span> on <span class="math notranslate nohighlight">\(P\)</span> that is transitive
-and reflexive.</p></li>
+a binary relation <span class="math notranslate nohighlight">\(\le\)</span> on <span class="math notranslate nohighlight">\(P\)</span> that is transitive,
+reflexive and antisymmetric.</p></li>
 <li><p>A <em>group</em> consists of a set <span class="math notranslate nohighlight">\(G\)</span> with an associative
 binary operation, an identity element
 <span class="math notranslate nohighlight">\(1\)</span>, and a function <span class="math notranslate nohighlight">\(g \mapsto g^{-1}\)</span> that returns
@@ -527,7 +530,7 @@ For example, when we say &#8220;let <span class="math notranslate nohighlight">\
 the structure and its carrier.
 Not every algebraic structure is associated with a single carrier set in this way.
 For example, a <em>bipartite graph</em> involves a relation between two sets,
-as does a <em>Galois connection</em>,
+as does a <em>Galois connection</em>.
 A <em>category</em> also involves two sets of interest, commonly called the <em>objects</em>
 and the <em>morphisms</em>.</p>
 <p>The examples indicate some of the things that a proof assistant has to do
@@ -591,7 +594,7 @@ An algebraic structure is a specification of a bundle of data satisfying
 some axiomatic hypotheses, and we saw in <a class="reference internal" href="#section-structures"><span class="std std-numref">Section 7.1</span></a> that
 this is exactly what the <code class="docutils literal notranslate"><span class="pre">structure</span></code> command is designed to accommodate.
 It&#8217;s a marriage made in heaven!</p>
-<p>Given a data type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, we can define the group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>
+<p>Given a data type <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>, we can define a group structure on <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>
 as follows.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">structure</span><span class="w"> </span><span class="n">Group&#8321;</span><span class="w"> </span><span class="o">(</span><span class="n">&#945;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">)</span><span class="w"> </span><span class="n">where</span>
 <span class="w">  </span><span class="n">mul</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#945;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#945;</span>
@@ -685,7 +688,7 @@ and have Lean insert it for us.</p>
 <span class="w">  </span><span class="n">rfl</span>
 </pre></div>
 </div>
-<p>Mathlib also defines the type <code class="docutils literal notranslate"><span class="pre">perm</span> <span class="pre">&#945;</span></code> of equivalences between
+<p>Mathlib also defines the type <code class="docutils literal notranslate"><span class="pre">Perm</span> <span class="pre">&#945;</span></code> of equivalences between
 <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and itself.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">&#945;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Equiv.Perm</span><span class="w"> </span><span class="n">&#945;</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="n">&#945;</span><span class="w"> </span><span class="bp">&#8771;</span><span class="w"> </span><span class="n">&#945;</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">rfl</span>
@@ -701,7 +704,7 @@ composition of the bijections. Here we define this group:</p>
 <span class="w">  </span><span class="n">mul</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.trans</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">f</span>
 <span class="w">  </span><span class="n">one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.refl</span><span class="w"> </span><span class="n">&#945;</span>
 <span class="w">  </span><span class="n">inv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.symm</span>
-<span class="w">  </span><span class="n">mul_assoc</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">(</span><span class="n">Equiv.trans_assoc</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+<span class="w">  </span><span class="n">mul_assoc</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">(</span><span class="n">Equiv.trans_assoc</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
 <span class="w">  </span><span class="n">one_mul</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.trans_refl</span>
 <span class="w">  </span><span class="n">mul_one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.refl_trans</span>
 <span class="w">  </span><span class="n">inv_mul_cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.self_trans_symm</span>
@@ -834,7 +837,7 @@ we generally do not need to refer to them explicitly,
 Lean allows us to write <code class="docutils literal notranslate"><span class="pre">[Group</span> <span class="pre">G]</span></code> and leave the name anonymous.
 You have probably already noticed that Lean chooses names like <code class="docutils literal notranslate"><span class="pre">_inst_1</span></code>
 automatically.
-When we use the anonymous square-bracket annotation with the <code class="docutils literal notranslate"><span class="pre">variables</span></code> command,
+When we use the anonymous square-bracket annotation with the <code class="docutils literal notranslate"><span class="pre">variable</span></code> command,
 then as long as the variables are still in scope,
 Lean automatically adds the argument <code class="docutils literal notranslate"><span class="pre">[Group</span> <span class="pre">G]</span></code> to any definition or
 theorem that mentions <code class="docutils literal notranslate"><span class="pre">G</span></code>.</p>
@@ -863,7 +866,7 @@ without troubling us with the details.</p>
 <span class="w">  </span><span class="n">mul</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.trans</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">f</span>
 <span class="w">  </span><span class="n">one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.refl</span><span class="w"> </span><span class="n">&#945;</span>
 <span class="w">  </span><span class="n">inv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.symm</span>
-<span class="w">  </span><span class="n">mul_assoc</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">(</span><span class="n">Equiv.trans_assoc</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+<span class="w">  </span><span class="n">mul_assoc</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">(</span><span class="n">Equiv.trans_assoc</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
 <span class="w">  </span><span class="n">one_mul</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.trans_refl</span>
 <span class="w">  </span><span class="n">mul_one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.refl_trans</span>
 <span class="w">  </span><span class="n">inv_mul_cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Equiv.self_trans_symm</span>
@@ -991,7 +994,7 @@ instance of another, using the <code class="docutils literal notranslate"><span 
 This is how Mathlib specifies that, for example,
 every commutative ring is a ring.
 You can find more information in <a class="reference internal" href="C08_Hierarchies.html#hierarchies"><span class="std std-numref">Section 8</span></a> and in a
-<a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean4/type_classes.html#managing-type-class-inference">section on class inference</a> in <em>Theorem Proving in Lean</em>.</p>
+<a class="reference external" href="https://leanprover.github.io/theorem_proving_in_lean4/Type-Classes/#managing-type-class-inference">section on class inference</a> in <em>Theorem Proving in Lean</em>.</p>
 <p>In general, it is a bad idea to specify a value of
 <code class="docutils literal notranslate"><span class="pre">*</span></code> for an instance of an algebraic structure that already has
 the notation defined.
@@ -1230,7 +1233,7 @@ result of integer division of <span class="math notranslate nohighlight">\(a\)</
 to be the remainder. These functions are defined in Lean so that the
 satisfy the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8484;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">%</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span>
-<span class="w">  </span><span class="n">Eq.symm</span><span class="w"> </span><span class="o">(</span><span class="n">Int.ediv_add_emod</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="o">)</span>
+<span class="w">  </span><span class="n">Eq.symm</span><span class="w"> </span><span class="o">(</span><span class="n">Int.mul_ediv_add_emod</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="o">)</span>
 
 <span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8484;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&#8800;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">%</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">Int.emod_nonneg</span><span class="w"> </span><span class="n">a</span>
@@ -1313,13 +1316,14 @@ Pragmatically speaking, however, sometimes seeking a more elementary proof
 is more efficient.</p>
 <p>The usual quotient-remainder theorem for the integers says that for
 every <span class="math notranslate nohighlight">\(a\)</span> and nonzero <span class="math notranslate nohighlight">\(b\)</span>, there are <span class="math notranslate nohighlight">\(q\)</span> and <span class="math notranslate nohighlight">\(r\)</span>
-such that <span class="math notranslate nohighlight">\(a = b q + r\)</span> and <span class="math notranslate nohighlight">\(0 \le r &lt; b\)</span>.
+such that <span class="math notranslate nohighlight">\(a = b q + r\)</span> and <span class="math notranslate nohighlight">\(0 \le r &lt; |b|\)</span>.
 Here we will make use of the following variation, which says that there
 are <span class="math notranslate nohighlight">\(q'\)</span> and <span class="math notranslate nohighlight">\(r'\)</span> such that
-<span class="math notranslate nohighlight">\(a = b q' + r'\)</span> and <span class="math notranslate nohighlight">\(|r'| \le b/2\)</span>.
+<span class="math notranslate nohighlight">\(a = b q' + r'\)</span> and <span class="math notranslate nohighlight">\(|r'| \le |b|/2\)</span>.
 You can check that if the value of <span class="math notranslate nohighlight">\(r\)</span> in the first statement
-satisfies <span class="math notranslate nohighlight">\(r \le b/2\)</span>, we can take <span class="math notranslate nohighlight">\(q' = q\)</span> and <span class="math notranslate nohighlight">\(r' = r\)</span>,
-and otherwise we can take <span class="math notranslate nohighlight">\(q' = q + 1\)</span> and <span class="math notranslate nohighlight">\(r' = r - b\)</span>.
+satisfies <span class="math notranslate nohighlight">\(r \le |b|/2\)</span>, we can take <span class="math notranslate nohighlight">\(q' = q\)</span> and <span class="math notranslate nohighlight">\(r' = r\)</span>,
+and otherwise we can take <span class="math notranslate nohighlight">\(q' = q + 1\)</span> and <span class="math notranslate nohighlight">\(r' = r - b\)</span>
+(for <span class="math notranslate nohighlight">\(b\)</span> positive; otherwise mutatis mutandis).
 We are grateful to Heather Macbeth for suggesting the following more
 elegant approach, which avoids definition by cases.
 We simply add <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">/</span> <span class="pre">2</span></code> to <code class="docutils literal notranslate"><span class="pre">a</span></code> before dividing and then subtract it
@@ -1332,14 +1336,14 @@ from the remainder.</p>
 
 <span class="kd">theorem</span><span class="w"> </span><span class="n">div&#39;_add_mod&#39;</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8484;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">div&#39;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">mod&#39;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">div&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">mod&#39;</span><span class="o">]</span>
-<span class="w">  </span><span class="n">linarith</span><span class="w"> </span><span class="o">[</span><span class="n">Int.ediv_add_emod</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="n">b</span><span class="o">]</span>
+<span class="w">  </span><span class="n">linarith</span><span class="w"> </span><span class="o">[</span><span class="n">Int.mul_ediv_add_emod</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="n">b</span><span class="o">]</span>
 
 <span class="kd">theorem</span><span class="w"> </span><span class="n">abs_mod&#39;_le</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8484;</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">|</span><span class="n">mod&#39;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="bp">|</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mod&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">abs_le</span><span class="o">]</span>
 <span class="w">  </span><span class="n">constructor</span>
 <span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">linarith</span><span class="w"> </span><span class="o">[</span><span class="n">Int.emod_nonneg</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="n">h.ne&#39;</span><span class="o">]</span>
 <span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Int.emod_lt_of_pos</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="n">h</span>
-<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Int.ediv_add_emod</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Int.mul_ediv_add_emod</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="mi">2</span>
 <span class="w">  </span><span class="k">have</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Int.emod_lt_of_pos</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">zero_lt_two</span>
 <span class="w">  </span><span class="n">linarith</span>
 </pre></div>
@@ -1405,7 +1409,7 @@ of <span class="math notranslate nohighlight">\(c + di\)</span>.</p>
 <span class="w">  </span><span class="o">&#10216;</span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">&#8614;</span><span class="w"> </span><span class="o">&#10216;</span><span class="n">Int.div&#39;</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">conj</span><span class="w"> </span><span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">re</span><span class="w"> </span><span class="o">(</span><span class="n">norm</span><span class="w"> </span><span class="n">y</span><span class="o">),</span><span class="w"> </span><span class="n">Int.div&#39;</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">conj</span><span class="w"> </span><span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">im</span><span class="w"> </span><span class="o">(</span><span class="n">norm</span><span class="w"> </span><span class="n">y</span><span class="o">)&#10217;&#10217;</span>
 </pre></div>
 </div>
-<p>Having defined <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span></code>, We define <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span></code> to be the remainder,
+<p>Having defined <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">/</span> <span class="pre">y</span></code>, we define <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">%</span> <span class="pre">y</span></code> to be the remainder,
 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-</span> <span class="pre">(x</span> <span class="pre">/</span> <span class="pre">y)</span> <span class="pre">*</span> <span class="pre">y</span></code>. As above, we record the definitions in the
 theorems <code class="docutils literal notranslate"><span class="pre">div_def</span></code> and
 <code class="docutils literal notranslate"><span class="pre">mod_def</span></code> so that we can use them with <code class="docutils literal notranslate"><span class="pre">simp</span></code> and <code class="docutils literal notranslate"><span class="pre">rw</span></code>.</p>

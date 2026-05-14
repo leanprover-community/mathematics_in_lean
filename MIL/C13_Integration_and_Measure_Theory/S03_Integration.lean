@@ -22,7 +22,7 @@ example {f g : α → E} (hf : Integrable f μ) (hg : Integrable g μ) :
     ∫ a, f a + g a ∂μ = ∫ a, f a ∂μ + ∫ a, g a ∂μ :=
   integral_add hf hg
 
-example {s : Set α} (c : E) : ∫ x in s, c ∂μ = (μ s).toReal • c :=
+example {s : Set α} (c : E) : ∫ _ in s, c ∂μ = (μ s).toReal • c :=
   setIntegral_const c
 
 open Filter

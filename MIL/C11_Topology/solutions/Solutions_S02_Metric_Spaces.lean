@@ -187,7 +187,7 @@ theorem cauchySeq_of_le_geometric_two' {u : ℕ → X}
       apply tendsto_pow_atTop_nhds_zero_of_lt_one <;> linarith
       exact tendsto_const_nhds
     rcases(atTop_basis.tendsto_iff (nhds_basis_Ioo_pos (0 : ℝ))).mp this ε ε_pos with ⟨N, _, hN⟩
-    exact ⟨N, by simpa using (hN N left_mem_Ici).2⟩
+    exact ⟨N, by simpa using (hN N self_mem_Ici).2⟩
   use N
   intro n hn
   obtain ⟨k, rfl : n = N + k⟩ := le_iff_exists_add.mp hn
@@ -232,7 +232,7 @@ example [CompleteSpace X] (f : ℕ → Set X) (ho : ∀ n, IsOpen (f n)) (hd : �
       calc
         dist z x ≤ dist z y + dist y x := dist_triangle _ _ _
         _ ≤ min (min (δ / 2) r) (B (n + 1)) + δ / 2 := (add_le_add hz xy.le)
-        _ ≤ δ / 2 + δ / 2 := (add_le_add_right ((min_le_left _ _).trans (min_le_left _ _)) _)
+        _ ≤ δ / 2 + δ / 2 := (add_le_add_left ((min_le_left _ _).trans (min_le_left _ _)) _)
         _ = δ := add_halves δ
 
     show z ∈ f n

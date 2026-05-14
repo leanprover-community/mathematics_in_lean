@@ -1,13 +1,15 @@
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.LinearAlgebra.Eigenspace.Minpoly
 import Mathlib.LinearAlgebra.Charpoly.Basic
-import Mathlib.Data.Complex.FiniteDimensional
+import Mathlib.LinearAlgebra.Complex.FiniteDimensional
 
 import MIL.Common
 
 variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 
 section
+
+open Module
 
 variable {ι : Type*} (B : Basis ι K V) (v : V) (i : ι)
 

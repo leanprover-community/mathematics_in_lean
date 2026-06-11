@@ -86,13 +86,29 @@ def conjugate {G : Type*} [Group G] (x : G) (H : Subgroup G) : Subgroup G where
   carrier := {a : G | ∃ h, h ∈ H ∧ a = x * h * x⁻¹}
   one_mem' := by
     dsimp
-    sorry
+    use (1:G)
+    constructor
+    · exact Subgroup.one_mem H
+    rw [mul_one, mul_inv_cancel]
   inv_mem' := by
     dsimp
-    sorry
+    rintro g ⟨ h ,hH, conj ⟩
+    use h⁻¹
+    constructor
+    · exact H.inv_mem hH
+    · have ginv : g * ( x * h⁻¹ * x⁻¹) = 1 := by simp only [conj, conj_mul, mul_inv_cancel, mul_one]
+      exact DivisionMonoid.inv_eq_of_mul g (x * h⁻¹ * x⁻¹) ginv
+
   mul_mem' := by
     dsimp
-    sorry
+    rintro a b ⟨ h, hH, conj ⟩ ⟨h', h'H, conj' ⟩
+    use h * h'
+    constructor
+    · exact H.mul_mem hH h'H
+    · rw [conj, conj']
+      calc (x * h * x⁻¹) * (x * h' * x⁻¹) = ((x *( h * (x⁻¹ * x)) * h') * x⁻¹) := by simp only [mul_assoc]
+      _ = x * h * h' * x⁻¹ := by simp only [inv_mul_cancel, mul_inv_cancel, mul_one, one_mul]
+      _= x * (h * h') * x⁻¹ := by simp only [mul_assoc]
 
 example {G H : Type*} [Group G] [Group H] (G' : Subgroup G) (f : G →* H) : Subgroup H :=
   Subgroup.map f G'
@@ -100,8 +116,8 @@ example {G H : Type*} [Group G] [Group H] (G' : Subgroup G) (f : G →* H) : Sub
 example {G H : Type*} [Group G] [Group H] (H' : Subgroup H) (f : G →* H) : Subgroup G :=
   Subgroup.comap f H'
 
-#check Subgroup.mem_map
-#check Subgroup.mem_comap
+#check Subgroup.mem_map -- image/ pushforward of a subgroup
+#check Subgroup.mem_comap --preimage/ direct image
 
 example {G H : Type*} [Group G] [Group H] (f : G →* H) (g : G) :
     g ∈ MonoidHom.ker f ↔ f g = 1 :=
@@ -117,23 +133,57 @@ variable {G H : Type*} [Group G] [Group H]
 open Subgroup
 
 example (φ : G →* H) (S T : Subgroup H) (hST : S ≤ T) : comap φ S ≤ comap φ T := by
-  sorry
+  rintro g gcomaps
+  rw [T.mem_comap]
+  rw [mem_comap] at gcomaps
+  apply hST
+  assumption
+
 
 example (φ : G →* H) (S T : Subgroup G) (hST : S ≤ T) : map φ S ≤ map φ T := by
-  sorry
+  intro h hmaps
+  rw [T.mem_map]
+  rw [mem_map] at hmaps
+  rcases hmaps with ⟨x, xs, rfl⟩
+  exact ⟨x, hST xs, rfl⟩
 
 variable {K : Type*} [Group K]
 
 -- Remember you can use the `ext` tactic to prove an equality of subgroups.
 example (φ : G →* H) (ψ : H →* K) (U : Subgroup K) :
     comap (ψ.comp φ) U = comap φ (comap ψ U) := by
-  sorry
+  ext g
+  have heq :ψ (φ g) =( ψ.comp φ) g := rfl
+  constructor
+  · rw [mem_comap, mem_comap]
+    rintro compg
+    show ψ (φ g) ∈ U
+    assumption
+  · simp only [mem_comap, heq]
+    rintro compg
+    assumption
+
+-- simp only + aux lemmas = awesome
+example (φ : G →* H) (ψ : H →* K) (U : Subgroup K) :
+    comap (ψ.comp φ) U = comap φ (comap ψ U) := by
+  ext g
+  have heq :ψ (φ g) =( ψ.comp φ) g := rfl
+  simp only [mem_comap, heq]
 
 -- Pushing a subgroup along one homomorphism and then another is equal to
 -- pushing it forward along the composite of the homomorphisms.
 example (φ : G →* H) (ψ : H →* K) (S : Subgroup G) :
     map (ψ.comp φ) S = map ψ (S.map φ) := by
-  sorry
+  ext g
+  simp only [mem_map]
+  dsimp
+  constructor
+  · rintro ⟨ x, xs, rfl⟩
+    exact ⟨ φ x, ⟨x, xs, rfl ⟩, rfl ⟩
+    /-use φ x
+    constructor
+    · exact ⟨ x, xs, rfl ⟩
+    · rfl-/
 
 end exercises
 

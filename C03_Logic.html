@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3. Logic &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,9 +16,9 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -282,7 +282,7 @@ more general.
 The definitions make sense for functions between any two types
 for which there is a notion of order on the codomain.
 Checking the type of the theorem <code class="docutils literal notranslate"><span class="pre">add_le_add</span></code> shows that it holds
-of any structure that is an &#8220;ordered additive commutative monoid&#8221;;
+of any monoid structure that respects the relevant order;
 the details of what that means don&#8217;t matter now,
 but it is worth knowing that the natural numbers, integers, rationals,
 and real numbers are all instances.
@@ -791,8 +791,8 @@ Notice that this statement includes both a universal
 and an existential quantifier, which explains
 why the next example makes use of both <code class="docutils literal notranslate"><span class="pre">intro</span></code> and <code class="docutils literal notranslate"><span class="pre">use</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Surjective</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8614;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
-<span class="w">  </span><span class="n">intro</span><span class="w"> </span><span class="n">x</span>
-<span class="w">  </span><span class="n">use</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">c</span>
+<span class="w">  </span><span class="n">intro</span><span class="w"> </span><span class="n">y</span>
+<span class="w">  </span><span class="n">use</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">c</span>
 <span class="w">  </span><span class="n">dsimp</span><span class="bp">;</span><span class="w"> </span><span class="n">ring</span>
 </pre></div>
 </div>
@@ -1332,7 +1332,7 @@ then <code class="docutils literal notranslate"><span class="pre">a</span> <span
 </pre></div>
 </div>
 <p id="index-20">Beyond logical operations, you do not need
-anything more than <code class="docutils literal notranslate"><span class="pre">le_refl</span></code>, <code class="docutils literal notranslate"><span class="pre">le_trans</span></code>
+anything more than <code class="docutils literal notranslate"><span class="pre">le_refl</span></code>, <code class="docutils literal notranslate"><span class="pre">le_trans</span></code>,
 and <code class="docutils literal notranslate"><span class="pre">le_antisymm</span></code>.
 Show that even in the case where <code class="docutils literal notranslate"><span class="pre">&#8804;</span></code>
 is only assumed to be a preorder,
@@ -1480,7 +1480,7 @@ They are given the same names they have in Mathlib.</p>
 <span class="kd">theorem</span><span class="w"> </span><span class="n">le_abs_self</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="bp">|</span><span class="n">x</span><span class="bp">|</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="gr">sorry</span>
 
-<span class="kd">theorem</span><span class="w"> </span><span class="n">neg_le_abs_self</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">-</span><span class="n">x</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="bp">|</span><span class="n">x</span><span class="bp">|</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
+<span class="kd">theorem</span><span class="w"> </span><span class="n">neg_le_abs</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">-</span><span class="n">x</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="bp">|</span><span class="n">x</span><span class="bp">|</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="gr">sorry</span>
 
 <span class="kd">theorem</span><span class="w"> </span><span class="n">abs_add_le</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">|</span><span class="n">x</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">y</span><span class="bp">|</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="bp">|</span><span class="n">x</span><span class="bp">|</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="bp">|</span><span class="n">y</span><span class="bp">|</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>

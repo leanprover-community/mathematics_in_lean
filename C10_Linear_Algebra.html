@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>10. Linear algebra &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,9 +16,9 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -164,6 +164,32 @@ a lot of algebraic rules about ideals acting on submodules:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">R</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">CommSemiring</span><span class="w"> </span><span class="n">R</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">AddCommMonoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">Module</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">:</span>
 <span class="w">    </span><span class="n">Module</span><span class="w"> </span><span class="o">(</span><span class="n">Ideal</span><span class="w"> </span><span class="n">R</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">Submodule</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">inferInstance</span>
+</pre></div>
+</div>
+<p>To say that <code class="docutils literal notranslate"><span class="pre">M</span></code> is a module over the ring <code class="docutils literal notranslate"><span class="pre">R</span></code>, we write:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span>
+<span class="kd">variable</span><span class="w"> </span><span class="o">{</span><span class="n">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Ring</span><span class="w"> </span><span class="n">R</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">M</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">AddCommGroup</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">Module</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="n">M</span><span class="o">]</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>If we compare this to declaring a vector space, we see two differences. Apart from renaming the variables, the only change is to replace the <code class="docutils literal notranslate"><span class="pre">Field</span> <span class="pre">K</span></code> hypothesis with a <code class="docutils literal notranslate"><span class="pre">Ring</span> <span class="pre">R</span></code> hypothesis.</p>
+<p>To say that <code class="docutils literal notranslate"><span class="pre">M</span></code> is a semi-module over the semi-ring <code class="docutils literal notranslate"><span class="pre">R</span></code>, we replace the <code class="docutils literal notranslate"><span class="pre">Ring</span> <span class="pre">R</span></code> hypothesis with a <code class="docutils literal notranslate"><span class="pre">Semiring</span> <span class="pre">R</span></code> hypothesis, and also replace <code class="docutils literal notranslate"><span class="pre">AddCommGroup</span> <span class="pre">M</span></code> with <code class="docutils literal notranslate"><span class="pre">AddCommMonoid</span> <span class="pre">M</span></code>, reflecting the fact that semi-modules do not have negation:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span>
+<span class="kd">variable</span><span class="w"> </span><span class="o">{</span><span class="n">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Semiring</span><span class="w"> </span><span class="n">R</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">M</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">AddCommMonoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">Module</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="n">M</span><span class="o">]</span>
+<span class="kd">end</span>
+</pre></div>
+</div>
+<p>Lean <strong>cannot</strong> automatically infer that <code class="docutils literal notranslate"><span class="pre">M</span></code> has negation if <code class="docutils literal notranslate"><span class="pre">R</span></code> has,
+because a priori it cannot guess the correct <code class="docutils literal notranslate"><span class="pre">R</span></code> given an arbitrary <code class="docutils literal notranslate"><span class="pre">M</span></code>.
+So if we declare <code class="docutils literal notranslate"><span class="pre">R</span></code> to be a ring and <code class="docutils literal notranslate"><span class="pre">M</span></code> to be a module over <code class="docutils literal notranslate"><span class="pre">R</span></code>,
+then we have to either declare <code class="docutils literal notranslate"><span class="pre">M</span></code> to be an <code class="docutils literal notranslate"><span class="pre">AddCommGroup</span></code>, or add the instance to the context
+manually:</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Ring</span><span class="w"> </span><span class="n">R</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">M</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">AddCommMonoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">Module</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">:=</span>
+<span class="w">  </span><span class="c1">-- Make sure to use `letI` (instead of `haveI` or `let`) to make it easier to</span>
+<span class="w">  </span><span class="c1">-- identify the existing additive structure from the `AddCommMonoid M` hypothesis</span>
+<span class="w">  </span><span class="c1">-- with the new one introduced in the line below.</span>
+<span class="w">  </span><span class="n">letI</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">AddCommGroup</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Module.addCommMonoidToAddCommGroup</span><span class="w"> </span><span class="n">R</span>
+<span class="w">  </span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">x</span>
 </pre></div>
 </div>
 </section>
@@ -741,8 +767,8 @@ predicate is <code class="docutils literal notranslate"><span class="pre">End.Ha
 of linear algebra in <span class="math notranslate nohighlight">\(K^n\)</span> for some field <span class="math notranslate nohighlight">\(K\)</span>.
 Here the main objects are vectors and matrices.
 For concrete vectors, one can use the <code class="docutils literal notranslate"><span class="pre">![&#8230;]</span></code> notation, where components are separated by commas.
-For concrete matrices we can use the <code class="docutils literal notranslate"><span class="pre">!![&#8230;]</span></code> notation, lines are separated by semi-colons
-and components of lines are separated by commas.
+For concrete matrices we can use the <code class="docutils literal notranslate"><span class="pre">!![&#8230;]</span></code> notation, rows are separated by semicolons
+and elements of the rows are separated by commas.
 When entries have a computable type such as <code class="docutils literal notranslate"><span class="pre">&#8469;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#8474;</span></code>, we can use
 the <code class="docutils literal notranslate"><span class="pre">eval</span></code> command to play with basic operations.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">section</span><span class="w"> </span><span class="n">matrices</span>
@@ -858,7 +884,7 @@ some <code class="docutils literal notranslate"><span class="pre">n</span></code
 But sometimes it is more convenient to index matrices using arbitrary finite types.
 For instance the adjacency matrix of a finite graph has rows and columns naturally indexed by
 the vertices of the graph.</p>
-<p>In fact when simply wants to define matrices without defining any operation on them,
+<p>In fact, when one simply wants to define matrices without defining any operation on them,
 finiteness of the indexing types are not even needed, and coefficients can have any type,
 without any algebraic structure.
 So Mathlib simply defines <code class="docutils literal notranslate"><span class="pre">Matrix</span> <span class="pre">m</span> <span class="pre">n</span> <span class="pre">&#945;</span></code> to be <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">&#8594;</span> <span class="pre">n</span> <span class="pre">&#8594;</span> <span class="pre">&#945;</span></code> for any types <code class="docutils literal notranslate"><span class="pre">m</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">&#945;</span></code>,
@@ -910,10 +936,10 @@ the base field <code class="docutils literal notranslate"><span class="pre">K</s
 <p>This isomorphism version is actually the one that Mathlib uses as a definition under the hood, and
 other characterizations are proven from it.
 One must be slightly careful with the &#8220;power of <code class="docutils literal notranslate"><span class="pre">K</span></code>&#8221; idea in the case of infinite bases.
-Indeed only finite linear combinations make sense in this algebraic context. So what we need
+Indeed, only finite linear combinations make sense in this algebraic context. So what we need
 as a reference vector space is not a direct product of copies of <code class="docutils literal notranslate"><span class="pre">K</span></code> but a direct sum.
-We could use <code class="docutils literal notranslate"><span class="pre">&#10753;</span> <span class="pre">i</span> <span class="pre">:</span> <span class="pre">&#953;,</span> <span class="pre">K</span></code> for some type <code class="docutils literal notranslate"><span class="pre">&#953;</span></code> indexing the basis
-But we rather use the more specialized spelling <code class="docutils literal notranslate"><span class="pre">&#953;</span> <span class="pre">&#8594;&#8320;</span> <span class="pre">K</span></code> which means
+We could use <code class="docutils literal notranslate"><span class="pre">&#10753;</span> <span class="pre">i</span> <span class="pre">:</span> <span class="pre">&#953;,</span> <span class="pre">K</span></code> for some type <code class="docutils literal notranslate"><span class="pre">&#953;</span></code> indexing the basis,
+but instead we use the more specialized spelling <code class="docutils literal notranslate"><span class="pre">&#953;</span> <span class="pre">&#8594;&#8320;</span> <span class="pre">K</span></code>, which means
 &#8220;functions from <code class="docutils literal notranslate"><span class="pre">&#953;</span></code> to <code class="docutils literal notranslate"><span class="pre">K</span></code> with finite support&#8221;, i.e. functions which vanish outside a finite set
 in <code class="docutils literal notranslate"><span class="pre">&#953;</span></code> (this finite set is not fixed, it depends on the function).
 Evaluating such a function coming from a basis <code class="docutils literal notranslate"><span class="pre">B</span></code> at a vector <code class="docutils literal notranslate"><span class="pre">v</span></code> and
@@ -963,7 +989,7 @@ below refers to the useless information <code class="docutils literal notranslat
 function evaluated on any vector is the identity isomorphism. It is called
 <code class="docutils literal notranslate"><span class="pre">Finsupp.basisSingleOne</span></code> where <code class="docutils literal notranslate"><span class="pre">Finsupp</span></code> means function with finite support and
 <code class="docutils literal notranslate"><span class="pre">basisSingleOne</span></code> refers to the fact that basis vectors are functions which
-vanish expect for a single input value. More precisely the basis vector indexed by <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">:</span> <span class="pre">&#953;</span></code>
+vanish except for a single input value. More precisely the basis vector indexed by <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">:</span> <span class="pre">&#953;</span></code>
 is <code class="docutils literal notranslate"><span class="pre">Finsupp.single</span> <span class="pre">i</span> <span class="pre">1</span></code> which is the finitely supported function taking value <code class="docutils literal notranslate"><span class="pre">1</span></code> at <code class="docutils literal notranslate"><span class="pre">i</span></code>
 and <code class="docutils literal notranslate"><span class="pre">0</span></code> everywhere else.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">variable</span><span class="w"> </span><span class="o">[</span><span class="n">DecidableEq</span><span class="w"> </span><span class="n">&#953;</span><span class="o">]</span>

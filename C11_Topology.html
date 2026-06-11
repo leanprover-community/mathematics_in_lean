@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>11. Topology &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,9 +16,9 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -563,8 +563,9 @@ but we have lemmas recasting the definition in terms of distances.</p>
 </div>
 <p id="index-3">A <em>lot</em> of lemmas have some continuity assumptions, so we end up proving a lot of continuity results and there
 is a <code class="docutils literal notranslate"><span class="pre">continuity</span></code> tactic devoted to this task. Let&#8217;s prove a continuity statement that will be needed
-in an exercise below. Notice that Lean knows how to treat a product of two metric spaces as a metric space, so
-it makes sense to consider continuous functions from <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">&#215;</span> <span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>.
+in an exercise below. Notice that Lean knows how to treat a product of two metric spaces as a metric space;
+it chooses the sup norm, so <code class="docutils literal notranslate"><span class="pre">dist</span> <span class="pre">(x&#8321;,</span> <span class="pre">y&#8321;)</span> <span class="pre">(x&#8322;,</span> <span class="pre">y&#8322;)</span> <span class="pre">=</span> <span class="pre">max</span> <span class="pre">(dist</span> <span class="pre">x&#8321;</span> <span class="pre">x&#8322;)</span> <span class="pre">(dist</span> <span class="pre">y&#8321;</span> <span class="pre">y&#8322;)</span></code> holds by
+reflexivity. As a result, it makes sense to consider continuous functions from <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">&#215;</span> <span class="pre">X</span></code> to <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code>.
 In particular the (uncurried version of the) distance function is such a function.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">X</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">MetricSpace</span><span class="w"> </span><span class="n">X</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">MetricSpace</span><span class="w"> </span><span class="n">Y</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">Y</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">hf</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Continuous</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="w"> </span><span class="o">:</span>
 <span class="w">    </span><span class="n">Continuous</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="bp">&#215;</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="bp">&#8614;</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">continuity</span>
@@ -611,8 +612,7 @@ proof term, as can be seen from the following two new proofs of the above statem
 </pre></div>
 </div>
 <p>Note that, without the elaboration issue coming from composition, another way to compress
-our proof would be to use <code class="docutils literal notranslate"><span class="pre">Continuous.prod_map</span></code> which is sometimes useful and gives
-as an alternate proof term <code class="docutils literal notranslate"><span class="pre">continuous_dist.comp</span> <span class="pre">(hf.prod_map</span> <span class="pre">hf)</span></code> which even shorter to type.</p>
+our proof would be to use <code class="docutils literal notranslate"><span class="pre">Continuous.prod_map</span></code> which is sometimes useful and gives</p>
 <p>Since it is sad to decide between a version which is better for elaboration and a version which is shorter
 to type, let us wrap this discussion with a last bit of compression offered
 by <code class="docutils literal notranslate"><span class="pre">Continuous.fst'</span></code> which allows to compress <code class="docutils literal notranslate"><span class="pre">hf.comp</span> <span class="pre">continuous_fst</span></code> to <code class="docutils literal notranslate"><span class="pre">hf.fst'</span></code> (and the same with <code class="docutils literal notranslate"><span class="pre">snd</span></code>)
@@ -754,7 +754,8 @@ a compact metric space to a metric space.
 We fix <code class="docutils literal notranslate"><span class="pre">&#949;</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> and start looking for some <code class="docutils literal notranslate"><span class="pre">&#948;</span></code>.</p>
 <p>Let <code class="docutils literal notranslate"><span class="pre">&#966;</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#215;</span> <span class="pre">X</span> <span class="pre">&#8594;</span> <span class="pre">&#8477;</span> <span class="pre">:=</span> <span class="pre">fun</span> <span class="pre">p</span> <span class="pre">&#8614;</span> <span class="pre">dist</span> <span class="pre">(f</span> <span class="pre">p.1)</span> <span class="pre">(f</span> <span class="pre">p.2)</span></code> and let <code class="docutils literal notranslate"><span class="pre">K</span> <span class="pre">:=</span> <span class="pre">{</span> <span class="pre">p</span> <span class="pre">:</span> <span class="pre">X</span> <span class="pre">&#215;</span> <span class="pre">X</span> <span class="pre">|</span> <span class="pre">&#949;</span> <span class="pre">&#8804;</span> <span class="pre">&#966;</span> <span class="pre">p</span> <span class="pre">}</span></code>.
 Observe <code class="docutils literal notranslate"><span class="pre">&#966;</span></code> is continuous since <code class="docutils literal notranslate"><span class="pre">f</span></code> and distance are continuous.
-And <code class="docutils literal notranslate"><span class="pre">K</span></code> is clearly closed (use <code class="docutils literal notranslate"><span class="pre">isClosed_le</span></code>) hence compact since <code class="docutils literal notranslate"><span class="pre">X</span></code> is compact.</p>
+And <code class="docutils literal notranslate"><span class="pre">K</span></code> is clearly closed (use <code class="docutils literal notranslate"><span class="pre">isClosed_le</span></code>) hence compact since <code class="docutils literal notranslate"><span class="pre">X</span></code> is compact and
+Lean knows that the product of compact spaces is compact.</p>
 <p>Then we discuss two possibilities using <code class="docutils literal notranslate"><span class="pre">eq_empty_or_nonempty</span></code>.
 If <code class="docutils literal notranslate"><span class="pre">K</span></code> is empty then we are clearly done (we can set <code class="docutils literal notranslate"><span class="pre">&#948;</span> <span class="pre">=</span> <span class="pre">1</span></code> for instance).
 So let&#8217;s assume <code class="docutils literal notranslate"><span class="pre">K</span></code> is not empty, and use the extreme value theorem to choose <code class="docutils literal notranslate"><span class="pre">(x&#8320;,</span> <span class="pre">x&#8321;)</span></code> attaining the infimum
@@ -995,7 +996,7 @@ As usual, pushing forward is covariant and pulling back is contravariant, see <c
 On paper we will use notations <span class="math notranslate nohighlight">\(f_*T\)</span> for <code class="docutils literal notranslate"><span class="pre">TopologicalSpace.coinduced</span> <span class="pre">f</span> <span class="pre">T</span></code> and
 <span class="math notranslate nohighlight">\(f^*T\)</span> for <code class="docutils literal notranslate"><span class="pre">TopologicalSpace.induced</span> <span class="pre">f</span> <span class="pre">T</span></code>.</p>
 <p>Then the next big piece is a complete lattice structure on <code class="docutils literal notranslate"><span class="pre">TopologicalSpace</span> <span class="pre">X</span></code>
-for any given structure. If you think of topologies as being primarily the data of open sets then you expect
+for any given <code class="docutils literal notranslate"><span class="pre">X</span></code>. If you think of topologies as being primarily the data of open sets then you expect
 the order relation on <code class="docutils literal notranslate"><span class="pre">TopologicalSpace</span> <span class="pre">X</span></code> to come from <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">(Set</span> <span class="pre">X)</span></code>, i.e. you expect <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">&#8804;</span> <span class="pre">t'</span></code>
 if a set <code class="docutils literal notranslate"><span class="pre">u</span></code> is open for <code class="docutils literal notranslate"><span class="pre">t'</span></code> as soon as it is open for <code class="docutils literal notranslate"><span class="pre">t</span></code>. However we already know that Mathlib focuses
 on neighborhoods more than open sets so, for any <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">X</span></code> we want the map from topological spaces to neighborhoods

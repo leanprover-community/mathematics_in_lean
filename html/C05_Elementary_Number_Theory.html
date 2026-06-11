@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>5. Elementary Number Theory &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,9 +16,9 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -337,7 +337,7 @@ proved by the simplifier.
 So the proof is carried out in cases.
 The line <code class="docutils literal notranslate"><span class="pre">rcases</span> <span class="pre">r</span> <span class="pre">with</span> <span class="pre">_</span> <span class="pre">|</span> <span class="pre">r</span></code> replaces the goal with two versions:
 one in which <code class="docutils literal notranslate"><span class="pre">r</span></code> is replaced by <code class="docutils literal notranslate"><span class="pre">0</span></code>,
-and the other in which <code class="docutils literal notranslate"><span class="pre">r</span></code> is replaces by <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">+</span> <span class="pre">1</span></code>.
+and the other in which <code class="docutils literal notranslate"><span class="pre">r</span></code> is replaced by <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">+</span> <span class="pre">1</span></code>.
 In the second case, we can use the theorem <code class="docutils literal notranslate"><span class="pre">r.succ_ne_zero</span></code>, which
 establishes <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">&#8800;</span> <span class="pre">0</span></code> (<code class="docutils literal notranslate"><span class="pre">succ</span></code> stands for successor).</p>
 <p>Notice also that the line that begins <code class="docutils literal notranslate"><span class="pre">have</span> <span class="pre">:</span> <span class="pre">npow_nz</span></code> provides a
@@ -345,7 +345,7 @@ short proof-term proof of <code class="docutils literal notranslate"><span class
 To understand how it works, try replacing it with a tactic proof,
 and then think about how the tactics describe the proof term.</p>
 <p>See if you can fill in the missing parts of the proof below.
-At the very end, you can use <code class="docutils literal notranslate"><span class="pre">Nat.dvd_sub'</span></code> and <code class="docutils literal notranslate"><span class="pre">Nat.dvd_mul_right</span></code>
+At the very end, you can use <code class="docutils literal notranslate"><span class="pre">Nat.dvd_sub</span></code> and <code class="docutils literal notranslate"><span class="pre">Nat.dvd_mul_right</span></code>
 to finish it off.</p>
 <p>Note that this example does not assume that <code class="docutils literal notranslate"><span class="pre">p</span></code> is prime, but the
 conclusion is trivial when <code class="docutils literal notranslate"><span class="pre">p</span></code> is not prime since <code class="docutils literal notranslate"><span class="pre">r.factorization</span> <span class="pre">p</span></code>
@@ -1233,7 +1233,7 @@ of <cite>phi</cite> and <cite>phi&#8217;</cite> and the inductively assumed <cit
 <span class="kd">theorem</span><span class="w"> </span><span class="n">fib_eq</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">fib</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="o">(</span><span class="n">phi</span><span class="bp">^</span><span class="n">n</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">phi&#39;</span><span class="bp">^</span><span class="n">n</span><span class="o">)</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="bp">&#8730;</span><span class="mi">5</span>
 <span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="bp">=&gt;</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">simp</span>
 <span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="bp">=&gt;</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">unfold</span><span class="w"> </span><span class="n">fib</span><span class="bp">;</span><span class="w"> </span><span class="n">grind</span><span class="w"> </span><span class="o">[</span><span class="n">phi</span><span class="o">,</span><span class="w"> </span><span class="n">phi&#39;</span><span class="o">]</span>
-<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">unfold</span><span class="w"> </span><span class="n">fib</span><span class="bp">;</span><span class="w"> </span><span class="n">simp</span><span class="bp">;</span><span class="w"> </span><span class="n">grind</span><span class="w"> </span><span class="o">[</span><span class="n">fib_eq</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">fib_eq</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span><span class="w"> </span><span class="n">phi</span><span class="o">,</span><span class="w"> </span><span class="n">phi&#39;</span><span class="o">]</span>
+<span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">unfold</span><span class="w"> </span><span class="n">fib</span><span class="bp">;</span><span class="w"> </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="n">fib_eq</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">fib_eq</span><span class="w"> </span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span><span class="w"> </span><span class="n">phi</span><span class="o">,</span><span class="w"> </span><span class="n">phi&#39;</span><span class="o">]</span><span class="bp">;</span><span class="w"> </span><span class="n">grind</span>
 
 <span class="kd">end</span>
 </pre></div>

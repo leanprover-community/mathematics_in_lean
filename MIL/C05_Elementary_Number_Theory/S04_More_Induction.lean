@@ -58,7 +58,7 @@ def phi' : ℝ := (1 - √5) / 2
 theorem fib_eq : ∀ n, fib n = (phi^n - phi'^n) / √5
   | 0   => by simp
   | 1   => by unfold fib; grind [phi, phi']
-  | n+2 => by unfold fib; simp; grind [fib_eq n, fib_eq (n+1), phi, phi']
+  | n+2 => by unfold fib; simp [fib_eq n, fib_eq (n+1), phi, phi']; grind
 
 end
 

@@ -15,7 +15,7 @@ theorem le_abs_self (x : ℝ) : x ≤ |x| := by
   · rw [abs_of_neg h]
     linarith
 
-theorem neg_le_abs_self (x : ℝ) : -x ≤ |x| := by
+theorem neg_le_abs (x : ℝ) : -x ≤ |x| := by
   rcases le_or_gt 0 x with h | h
   · rw [abs_of_nonneg h]
     linarith
@@ -26,7 +26,7 @@ theorem abs_add_le (x y : ℝ) : |x + y| ≤ |x| + |y| := by
   · rw [abs_of_nonneg h]
     linarith [le_abs_self x, le_abs_self y]
   · rw [abs_of_neg h]
-    linarith [neg_le_abs_self x, neg_le_abs_self y]
+    linarith [neg_le_abs x, neg_le_abs y]
 
 theorem lt_abs : x < |y| ↔ x < y ∨ x < -y := by
   rcases le_or_gt 0 y with h | h

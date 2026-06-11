@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8. Hierarchies &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,8 +16,8 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -629,7 +629,7 @@ the <code class="docutils literal notranslate"><span class="pre">&#8226;</span><
 </div>
 <p>This story then continues with incorporating a <code class="docutils literal notranslate"><span class="pre">zsmul</span></code> field into the definition of groups
 and similar tricks. You are now ready to read the definition of monoids, groups, rings and modules
-in Mathlib. There are more complicated than what we have seen here, because they are part of a huge
+in Mathlib. They are more complicated than what we have seen here, because they are part of a huge
 hierarchy, but all principles have been explained above.</p>
 <p>As an exercise, you can come back to the order relation hierarchy you built above and try
 to incorporate a type class <code class="docutils literal notranslate"><span class="pre">LT&#8321;</span></code> carrying the Less-Than notation <code class="docutils literal notranslate"><span class="pre">&lt;&#8321;</span></code> and make sure
@@ -869,7 +869,7 @@ coercion and <code class="docutils literal notranslate"><span class="pre">Member
 </div>
 <p>Equipped with the above <code class="docutils literal notranslate"><span class="pre">SetLike</span></code> instance, we can already state naturally that
 a submonoid <code class="docutils literal notranslate"><span class="pre">N</span></code> contains <code class="docutils literal notranslate"><span class="pre">1</span></code> without using <code class="docutils literal notranslate"><span class="pre">N.carrier</span></code>.
-We can also silently treat <code class="docutils literal notranslate"><span class="pre">N</span></code> as a set in <code class="docutils literal notranslate"><span class="pre">M</span></code> as take its direct image under a map.</p>
+We can also silently treat <code class="docutils literal notranslate"><span class="pre">N</span></code> as a set in <code class="docutils literal notranslate"><span class="pre">M</span></code> and take its direct image under a map.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">N</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">&#8712;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">N.one_mem</span>
 
 <span class="kd">example</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">N</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">&#945;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#945;</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="bp">&#39;&#39;</span><span class="w"> </span><span class="n">N</span>

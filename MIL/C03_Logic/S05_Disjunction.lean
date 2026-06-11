@@ -60,7 +60,7 @@ namespace MyAbs
 theorem le_abs_self (x : ℝ) : x ≤ |x| := by
   sorry
 
-theorem neg_le_abs_self (x : ℝ) : -x ≤ |x| := by
+theorem neg_le_abs (x : ℝ) : -x ≤ |x| := by
   sorry
 
 theorem abs_add_le (x y : ℝ) : |x + y| ≤ |x| + |y| := by

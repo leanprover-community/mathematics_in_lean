@@ -98,7 +98,7 @@ example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, �
   have hU : (⋃ n : ℕ, e n) = univ
   sorry
   /- apply the Baire category theorem to conclude that for some `m : ℕ`,
-       `e m` contains some `x` -/
+       the interior of `e m` contains some `x` -/
   obtain ⟨m, x, hx⟩ : ∃ m, ∃ x, x ∈ interior (e m) := sorry
   obtain ⟨ε, ε_pos, hε⟩ : ∃ ε > 0, ball x ε ⊆ interior (e m) := sorry
   obtain ⟨k, hk⟩ : ∃ k : 𝕜, 1 < ‖k‖ := sorry
@@ -139,7 +139,7 @@ variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type*} [NormedAddCom
 
 example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) :
     HasFDerivAt f f' x₀ ↔ (fun x ↦ f x - f x₀ - f' (x - x₀)) =o[𝓝 x₀] fun x ↦ x - x₀ :=
-  hasFDerivAtFilter_iff_isLittleO ..
+  hasFDerivAt_iff_isLittleO
 
 example (f : E → F) (f' : E →L[𝕜] F) (x₀ : E) (hff' : HasFDerivAt f f' x₀) : fderiv 𝕜 f x₀ = f' :=
   hff'.fderiv
@@ -172,8 +172,7 @@ example (hf : HasStrictFDerivAt f (f' : E →L[𝕜] F) a) :
     ∀ᶠ x in 𝓝 (f a), f (hf.localInverse f f' a x) = x :=
   hf.eventually_right_inverse
 
-example {f : E → F} {f' : E ≃L[𝕜] F} {a : E}
-  (hf : HasStrictFDerivAt f (f' : E →L[𝕜] F) a) :
+example (hf : HasStrictFDerivAt f (f' : E →L[𝕜] F) a) :
     HasStrictFDerivAt (HasStrictFDerivAt.localInverse f f' a hf) (f'.symm : F →L[𝕜] E) (f a) :=
   HasStrictFDerivAt.to_localInverse hf
 

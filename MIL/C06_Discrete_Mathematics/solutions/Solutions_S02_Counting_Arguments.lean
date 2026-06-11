@@ -43,7 +43,7 @@ example (n : ℕ) : #(triangle' n) = #(triangle n) := by
     simp [triangle, triangle', f]
     constructor
     . intro h
-      use p1, p2 - 1
+      use p2 - 1
       omega
     . simp; omega
   rw [this, card_image_of_injOn]

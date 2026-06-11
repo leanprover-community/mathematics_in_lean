@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>7. Structures &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,9 +16,9 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -647,7 +647,7 @@ since the representation combines most, but not all, of the components
 into one structure. It is common in Mathlib
 to use capital roman letters like <code class="docutils literal notranslate"><span class="pre">G</span></code> for a type
 when it is used as the carrier type for a group.</p>
-<p>Let&#8217;s construct a group, which is to say, an element of the <code class="docutils literal notranslate"><span class="pre">Group&#8321;</span></code> type.
+<p>Let&#8217;s construct a group by defining an element of the <code class="docutils literal notranslate"><span class="pre">Group&#8321;</span></code> type.
 For any pair of types <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>, Mathlib defines the type <code class="docutils literal notranslate"><span class="pre">Equiv</span> <span class="pre">&#945;</span> <span class="pre">&#946;</span></code>
 of <em>equivalences</em> between <code class="docutils literal notranslate"><span class="pre">&#945;</span></code> and <code class="docutils literal notranslate"><span class="pre">&#946;</span></code>.
 Mathlib also defines the suggestive notation <code class="docutils literal notranslate"><span class="pre">&#945;</span> <span class="pre">&#8771;</span> <span class="pre">&#946;</span></code> for this type.
@@ -1230,8 +1230,9 @@ either <span class="math notranslate nohighlight">\(r = 0\)</span> or <span clas
 archetypal example of a Euclidean domain.
 In that case, we can take <span class="math notranslate nohighlight">\(q\)</span> to be the
 result of integer division of <span class="math notranslate nohighlight">\(a\)</span> by <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(r\)</span>
-to be the remainder. These functions are defined in Lean so that the
-satisfy the following:</p>
+to be the remainder. Note that when <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are integers, <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">/</span> <span class="pre">b</span></code> denotes
+integer division in Lean, and <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">%</span> <span class="pre">b</span></code> denotes the remainder. These are defined so
+as to satisfly the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8484;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">/</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">%</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">Eq.symm</span><span class="w"> </span><span class="o">(</span><span class="n">Int.mul_ediv_add_emod</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="o">)</span>
 

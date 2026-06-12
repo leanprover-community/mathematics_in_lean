@@ -103,7 +103,7 @@ def Submonoid.Setoid [CommMonoid M] (N : Submonoid M) : Setoid M  where
   }
 
 instance [CommMonoid M] : HasQuotient M (Submonoid M) where
-  quotient' := fun N ↦ Quotient N.Setoid
+  Quotient := fun N ↦ Quotient N.Setoid
 
 def QuotientMonoid.mk [CommMonoid M] (N : Submonoid M) : M → M ⧸ N := Quotient.mk N.Setoid
 
@@ -119,9 +119,8 @@ instance [CommMonoid M] (N : Submonoid M) : Monoid (M ⧸ N) where
     apply Quotient.sound
     dsimp only
     rw [mul_assoc]
-    apply @Setoid.refl M N.Setoid
   one := QuotientMonoid.mk N 1
   one_mul := by
-    rintro ⟨a⟩ ; apply Quotient.sound ; dsimp only ; rw [one_mul] ; apply @Setoid.refl M N.Setoid
+    rintro ⟨a⟩ ; apply Quotient.sound ; dsimp only ; rw [one_mul]
   mul_one := by
-    rintro ⟨a⟩ ; apply Quotient.sound ; dsimp only ; rw [mul_one] ; apply @Setoid.refl M N.Setoid
+    rintro ⟨a⟩ ; apply Quotient.sound ; dsimp only ; rw [mul_one]

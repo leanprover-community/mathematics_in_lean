@@ -140,8 +140,7 @@ theorem ex_finset_of_bounded (Q : ℕ → Prop) [DecidablePred Q] :
   rintro ⟨n, hn⟩
   use (range (n + 1)).filter Q
   intro k
-  simp [Nat.lt_succ_iff]
-  exact hn k
+  simpa using hn k
 
 theorem mod_4_eq_3_or_mod_4_eq_3 {m n : ℕ} (h : m * n % 4 = 3) : m % 4 = 3 ∨ n % 4 = 3 := by
   revert h
@@ -160,7 +159,7 @@ theorem two_le_of_mod_4_eq_3 {n : ℕ} (h : n % 4 = 3) : 2 ≤ n := by
 theorem aux {m n : ℕ} (h₀ : m ∣ n) (h₁ : 2 ≤ m) (h₂ : m < n) : n / m ∣ n ∧ n / m < n := by
   constructor
   · exact Nat.div_dvd_of_dvd h₀
-  exact Nat.div_lt_self (lt_of_le_of_lt (zero_le _) h₂) h₁
+  exact Nat.div_lt_self (lt_of_le_of_lt zero_le h₂) h₁
 
 theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
     ∃ p : Nat, p.Prime ∧ p ∣ n ∧ p % 4 = 3 := by

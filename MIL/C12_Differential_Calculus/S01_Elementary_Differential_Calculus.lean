@@ -2,6 +2,7 @@ import MIL.Common
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 import Mathlib.Analysis.Calculus.Deriv.Pow
 import Mathlib.Analysis.Calculus.MeanValue
+import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 open Set Filter
 open Topology Filter Classical Real
@@ -26,8 +27,9 @@ example {f g : ℝ → ℝ} {x : ℝ} (hf : DifferentiableAt ℝ f x) (hg : Diff
     deriv (f + g) x = deriv f x + deriv g x :=
   deriv_add hf hg
 
-example {f : ℝ → ℝ} {a : ℝ} (h : IsLocalMin f a) : deriv f a = 0 :=
-  h.deriv_eq_zero
+example {f : ℝ → ℝ} {a : ℝ} (h : IsLocalMin f a) : deriv f a = 0 := by
+  exact?
+  --h.deriv_eq_zero
 
 open Set
 

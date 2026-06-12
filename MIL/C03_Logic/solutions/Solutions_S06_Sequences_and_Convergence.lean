@@ -6,7 +6,7 @@ namespace C03S06
 def ConvergesTo (s : ℕ → ℝ) (a : ℝ) :=
   ∀ ε > 0, ∃ N, ∀ n ≥ N, |s n - a| < ε
 
-theorem convergesTo_const (a : ℝ) : ConvergesTo (fun x : ℕ ↦ a) a := by
+theorem convergesTo_const (a : ℝ) : ConvergesTo (fun _x : ℕ ↦ a) a := by
   intro ε εpos
   use 0
   intro n nge
@@ -29,7 +29,7 @@ theorem convergesTo_add {s t : ℕ → ℝ} {a b : ℝ}
     |s n + t n - (a + b)| = |s n - a + (t n - b)| := by
       congr
       ring
-    _ ≤ |s n - a| + |t n - b| := (abs_add _ _)
+    _ ≤ |s n - a| + |t n - b| := (abs_add_le _ _)
     _ < ε / 2 + ε / 2 := (add_lt_add (hs n ngeNs) (ht n ngeNt))
     _ = ε := by norm_num
 
@@ -62,7 +62,7 @@ theorem exists_abs_le_of_convergesTo {s : ℕ → ℝ} {a : ℝ} (cs : Converges
     |s n| = |s n - a + a| := by
       congr
       abel
-    _ ≤ |s n - a| + |a| := (abs_add _ _)
+    _ ≤ |s n - a| + |a| := (abs_add_le _ _)
     _ < |a| + 1 := by linarith [h n ngt]
 
 theorem aux {s t : ℕ → ℝ} {a : ℝ} (cs : ConvergesTo s a) (ct : ConvergesTo t 0) :
@@ -122,7 +122,7 @@ theorem convergesTo_unique {s : ℕ → ℝ} {a b : ℝ}
     |a - b| = |(-(s N - a)) + (s N - b)| := by
       congr
       ring
-    _ ≤ |(-(s N - a))| + |s N - b| := (abs_add _ _)
+    _ ≤ |(-(s N - a))| + |s N - b| := (abs_add_le _ _)
     _ = |s N - a| + |s N - b| := by rw [abs_neg]
     _ < ε + ε := (add_lt_add absa absb)
     _ = |a - b| := by norm_num [ε]

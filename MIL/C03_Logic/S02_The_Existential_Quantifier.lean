@@ -138,8 +138,8 @@ section
 open Function
 
 example {c : ℝ} : Surjective fun x ↦ x + c := by
-  intro x
-  use x - c
+  intro y
+  use y - c
   dsimp; ring
 
 example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by

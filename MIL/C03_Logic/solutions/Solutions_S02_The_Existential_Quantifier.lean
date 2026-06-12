@@ -60,13 +60,13 @@ section
 open Function
 
 example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
-  intro x
-  use x / c
+  intro y
+  use y / c
   dsimp; rw [mul_div_cancel₀ _ h]
 
 example {c : ℝ} (h : c ≠ 0) : Surjective fun x ↦ c * x := by
-  intro x
-  use x / c
+  intro y
+  use y / c
   field_simp
 
 end

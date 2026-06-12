@@ -40,9 +40,9 @@ example : min (min a b) c = min a (min b c) := by
 
 theorem aux : min a b + c ≤ min (a + c) (b + c) := by
   apply le_min
-  · apply add_le_add_right
+  · apply add_le_add_left
     apply min_le_left
-  apply add_le_add_right
+  apply add_le_add_left
   apply min_le_right
 
 example : min a b + c = min (a + c) (b + c) := by
@@ -50,7 +50,7 @@ example : min a b + c = min (a + c) (b + c) := by
   · apply aux
   have h : min (a + c) (b + c) = min (a + c) (b + c) - c + c := by rw [sub_add_cancel]
   rw [h]
-  apply add_le_add_right
+  apply add_le_add_left
   rw [sub_eq_add_neg]
   apply le_trans
   apply aux
@@ -61,13 +61,13 @@ example : |a| - |b| ≤ |a - b| :=
     |a| - |b| = |a - b + b| - |b| := by rw [sub_add_cancel]
     _ ≤ |a - b| + |b| - |b| := by
       apply sub_le_sub_right
-      apply abs_add
+      apply abs_add_le
     _ ≤ |a - b| := by rw [add_sub_cancel_right]
 
 
 -- alternatively
 example : |a| - |b| ≤ |a - b| := by
-  have h := abs_add (a - b) b
+  have h := abs_add_le (a - b) b
   rw [sub_add_cancel] at h
   linarith
 

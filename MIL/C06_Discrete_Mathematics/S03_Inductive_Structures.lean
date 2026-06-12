@@ -12,7 +12,7 @@ namespace MyListSpace2
 
 def append {α : Type*} : List α → List α → List α
   | [],      bs => bs
-  | a :: as, bs => a :: (append as bs)
+  | a :: as, bs => a :: append as bs
 
 def map {α β : Type*} (f : α → β) : List α → List β
   | []      => []
@@ -24,7 +24,7 @@ def map {α β : Type*} (f : α → β) : List α → List β
 theorem nil_append {α : Type*} (as : List α) : append [] as = as := rfl
 
 theorem cons_append {α : Type*} (a : α) (as : List α) (bs : List α) :
-    append (a :: as) bs = a :: (append as bs) := rfl
+    append (a :: as) bs = a :: append as bs := rfl
 
 theorem map_nil {α β : Type*} (f : α → β) : map f [] = [] := rfl
 
@@ -131,7 +131,7 @@ def vars : PropForm → Finset ℕ
 
 theorem eval_eq_eval : ∀ (A : PropForm) (v1 v2 : ℕ → Bool),
     (∀ n ∈ A.vars, v1 n = v2 n) → A.eval v1 = A.eval v2
-  | var n, v1, v2, h    => by simp_all [vars, eval, h]
+  | var n, v1, v2, h    => by simp_all [vars, eval]
   | fls, v1, v2, h      => by simp_all [eval]
   | conj A B, v1, v2, h => by
       simp_all [vars, eval, eval_eq_eval A v1 v2, eval_eq_eval B v1 v2]

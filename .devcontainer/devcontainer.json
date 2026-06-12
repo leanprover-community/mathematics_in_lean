@@ -7,6 +7,11 @@
 
   "onCreateCommand": "echo \"Downloading the Lean 4 mathematical library...\" && lake exe cache get! && lake build +MIL.Common && echo \"Finished setup! Open a file using the Explorer in the top-left of your screen.\"",
 
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "16gb"
+  },
+
   "customizations": {
     "vscode" : {
       "extensions" : [ "leanprover.lean4" ]

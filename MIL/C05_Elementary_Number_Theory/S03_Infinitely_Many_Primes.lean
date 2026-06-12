@@ -148,8 +148,7 @@ theorem ex_finset_of_bounded (Q : ℕ → Prop) [DecidablePred Q] :
   rintro ⟨n, hn⟩
   use (range (n + 1)).filter Q
   intro k
-  simp [Nat.lt_succ_iff]
-  exact hn k
+  simpa using hn k
 
 example : 27 % 4 = 3 := by norm_num
 

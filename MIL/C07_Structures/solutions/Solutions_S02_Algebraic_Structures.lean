@@ -9,7 +9,7 @@ structure AddGroup₁ (α : Type*) where
   neg : α → α
   add_assoc : ∀ x y z : α, add (add x y) z = add x (add y z)
   add_zero : ∀ x : α, add x zero = x
-  zero_add : ∀ x : α, add x zero = x
+  zero_add : ∀ x : α, add zero x = x
   neg_add_cancel : ∀ x : α, add (neg x) x = zero
 
 @[ext]

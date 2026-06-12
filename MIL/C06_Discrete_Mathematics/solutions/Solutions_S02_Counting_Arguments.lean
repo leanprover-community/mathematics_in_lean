@@ -43,11 +43,11 @@ example (n : ℕ) : #(triangle' n) = #(triangle n) := by
     simp [triangle, triangle', f]
     constructor
     . intro h
-      use p1, p2 - 1
+      use p2 - 1
       omega
     . simp; omega
   rw [this, card_image_of_injOn]
-  rintro ⟨p1, p2⟩ hp ⟨q1, q2⟩ hq; simp [f] at *
+  rintro ⟨p1, p2⟩ hp ⟨q1, q2⟩ hq; simp [f]
 
 example {n : ℕ} (A : Finset ℕ)
     (hA : #(A) = n + 1)
@@ -63,7 +63,6 @@ example {n : ℕ} (A : Finset ℕ)
   rcases this with ⟨t, ht, ht'⟩
   simp only [one_lt_card, mem_filter] at ht'
   rcases ht' with ⟨m, ⟨hm, hm'⟩, k, ⟨hk, hk'⟩, hmk⟩
+  use m, hm, k, hk
   have : m = k + 1 ∨ k = m + 1 := by omega
-  rcases this with rfl | rfl
-  . use k, hk, k+1, hm; simp
-  . use m, hm, m+1, hk; simp
+  rcases this with h | h <;> simp [h]

@@ -105,7 +105,7 @@ example {m n k r : ℕ} (nnz : n ≠ 0) (pow_eq : m ^ k = r * n ^ k) {p : ℕ} :
     k ∣ r.factorization p := by
   rcases r with _ | r
   · simp
-  have npow_nz : n ^ k ≠ 0 := fun npowz ↦ nnz (pow_eq_zero npowz)
+  have npow_nz : n ^ k ≠ 0 := fun npowz ↦ nnz (eq_zero_of_pow_eq_zero npowz)
   have eq1 : (m ^ k).factorization p = k * m.factorization p := by
     sorry
   have eq2 : ((r + 1) * n ^ k).factorization p =

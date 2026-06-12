@@ -15,11 +15,11 @@ example (a b : ℝ) : |a| = |a - b + b| := by
   ring
 
 example {a : ℝ} (h : 1 < a) : a < a * a := by
-  convert (mul_lt_mul_right _).2 h
+  convert (mul_lt_mul_iff_left₀ _).2 h
   · rw [one_mul]
   exact lt_trans zero_lt_one h
 
-theorem convergesTo_const (a : ℝ) : ConvergesTo (fun x : ℕ ↦ a) a := by
+theorem convergesTo_const (a : ℝ) : ConvergesTo (fun _x : ℕ ↦ a) a := by
   intro ε εpos
   use 0
   intro n nge

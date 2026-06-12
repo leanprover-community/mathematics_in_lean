@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>9. Groups and Rings &mdash; Mathematics in Lean v4.19.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,9 +16,9 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -137,7 +137,7 @@ rings. But there are also a number of natural examples; for instance, the set of
 equipped with addition forms a monoid.</p>
 <p>From a practical point of view, you can mostly ignore monoids when using Mathlib. But you need
 to know they exist when you are looking for a lemma by browsing Mathlib files. Otherwise, you
-might end up looking for a statement in the group theory files when it is actually in the found
+might end up looking for a statement in the group theory files when it is actually found
 with monoids because it does not require elements to be invertible.</p>
 <p>The type of monoid structures on a type <code class="docutils literal notranslate"><span class="pre">M</span></code> is written <code class="docutils literal notranslate"><span class="pre">Monoid</span> <span class="pre">M</span></code>.
 The function <code class="docutils literal notranslate"><span class="pre">Monoid</span></code> is a type class so it will almost always appear as an instance implicit
@@ -535,7 +535,8 @@ a point <code class="docutils literal notranslate"><span class="pre">x</span></c
 </pre></div>
 </div>
 <p>As an illustration let us see how to define the Cayley isomorphism embedding of any group <code class="docutils literal notranslate"><span class="pre">G</span></code> into
-a permutation group, namely <code class="docutils literal notranslate"><span class="pre">Perm</span> <span class="pre">G</span></code>.</p>
+a permutation group, namely <code class="docutils literal notranslate"><span class="pre">Perm</span> <span class="pre">G</span></code>. To instantiate <code class="docutils literal notranslate"><span class="pre">[MulAction</span> <span class="pre">G</span> <span class="pre">G]</span></code>, Lean finds
+the standard group action given by left multiplication, which is what we want.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span><span class="w"> </span><span class="n">CayleyIsoMorphism</span><span class="w"> </span><span class="o">(</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">Group</span><span class="w"> </span><span class="n">G</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="bp">&#8771;*</span><span class="w"> </span><span class="o">(</span><span class="n">toPermHom</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="n">G</span><span class="o">)</span><span class="bp">.</span><span class="n">range</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">Equiv.Perm.subgroupOfMulAction</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="n">G</span>
 </pre></div>
@@ -646,8 +647,8 @@ involve an existential quantifier.</p>
 </div>
 <p>One subtle point to keep in mind is that the type <code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">&#10744;</span> <span class="pre">N</span></code> really depends on <code class="docutils literal notranslate"><span class="pre">N</span></code>
 (up to definitional equality), so having a proof that two normal subgroups <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">M</span></code> are equal
-is not enough to make the corresponding quotients equal. However the universal properties does give
-an isomorphism in this case.</p>
+is not enough to make the corresponding quotient types definitionally equal.
+However, the universal properties do give an isomorphism in this case.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">G</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Group</span><span class="w"> </span><span class="n">G</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Subgroup</span><span class="w"> </span><span class="n">G</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">M.Normal</span><span class="o">]</span>
 <span class="w">    </span><span class="o">[</span><span class="n">N.Normal</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">N</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="bp">&#10744;</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="bp">&#8771;*</span><span class="w"> </span><span class="n">G</span><span class="w"> </span><span class="bp">&#10744;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">QuotientGroup.quotientMulEquivOfEq</span><span class="w"> </span><span class="n">h</span>
 </pre></div>
@@ -822,8 +823,8 @@ quotient rings.</p>
 </div>
 <p>One subtle point is that the type <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">&#10744;</span> <span class="pre">I</span></code> really depends on <code class="docutils literal notranslate"><span class="pre">I</span></code>
 (up to definitional equality), so having a proof that two ideals <code class="docutils literal notranslate"><span class="pre">I</span></code> and <code class="docutils literal notranslate"><span class="pre">J</span></code> are equal is not
-enough to make the corresponding quotients equal. However, the universal properties do provide
-an isomorphism in this case.</p>
+enough to make the corresponding quotient types definitionally equal.
+However, the universal properties do provide an isomorphism in this case.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">R</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="bp">*</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">CommRing</span><span class="w"> </span><span class="n">R</span><span class="o">]</span><span class="w"> </span><span class="o">{</span><span class="n">I</span><span class="w"> </span><span class="n">J</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Ideal</span><span class="w"> </span><span class="n">R</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">J</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="bp">&#10744;</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="bp">&#8771;+*</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="bp">&#10744;</span><span class="w"> </span><span class="n">J</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="n">Ideal.quotEquivOfEq</span><span class="w"> </span><span class="n">h</span>
 </pre></div>
@@ -938,8 +939,8 @@ Remember that the <code class="docutils literal notranslate"><span class="pre">r
 <section id="algebras-and-polynomials">
 <h3><span class="section-number">9.2.3. </span>Algebras and polynomials<a class="headerlink" href="#algebras-and-polynomials" title="Link to this heading">&#61633;</a></h3>
 <p>Given a commutative (semi)ring <code class="docutils literal notranslate"><span class="pre">R</span></code>, an <em>algebra over</em> <code class="docutils literal notranslate"><span class="pre">R</span></code> is a semiring <code class="docutils literal notranslate"><span class="pre">A</span></code> equipped
-with a ring morphism whose image commutes with every element of <code class="docutils literal notranslate"><span class="pre">A</span></code>. This is encoded as
-a type class <code class="docutils literal notranslate"><span class="pre">Algebra</span> <span class="pre">R</span> <span class="pre">A</span></code>.
+with a ring morphism from <code class="docutils literal notranslate"><span class="pre">R</span></code> to <code class="docutils literal notranslate"><span class="pre">A</span></code> whose image commutes with every element of <code class="docutils literal notranslate"><span class="pre">A</span></code>.
+This is encoded as a type class <code class="docutils literal notranslate"><span class="pre">Algebra</span> <span class="pre">R</span> <span class="pre">A</span></code>.
 The morphism from <code class="docutils literal notranslate"><span class="pre">R</span></code> to <code class="docutils literal notranslate"><span class="pre">A</span></code> is called the structure map and is denoted
 <code class="docutils literal notranslate"><span class="pre">algebraMap</span> <span class="pre">R</span> <span class="pre">A</span> <span class="pre">:</span> <span class="pre">R</span> <span class="pre">&#8594;+*</span> <span class="pre">A</span></code> in Lean.
 Multiplication of <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">:</span> <span class="pre">A</span></code> by <code class="docutils literal notranslate"><span class="pre">algebraMap</span> <span class="pre">R</span> <span class="pre">A</span> <span class="pre">r</span></code> for some <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">:</span> <span class="pre">R</span></code> is called the scalar
@@ -1049,11 +1050,11 @@ since otherwise the definition does not have good properties.</p>
 <span class="w">  </span><span class="kd">by</span><span class="w"> </span><span class="n">simp</span>
 </pre></div>
 </div>
-<p>Both <code class="docutils literal notranslate"><span class="pre">Polynomial.eval</span></code> and <code class="docutils literal notranslate"><span class="pre">Polynomial.roots</span></code> consider only the coefficients ring. They do not
+<p>Both <code class="docutils literal notranslate"><span class="pre">Polynomial.eval</span></code> and <code class="docutils literal notranslate"><span class="pre">Polynomial.roots</span></code> consider only the coefficient ring. They do not
 allow us to say that <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">^</span> <span class="pre">2</span> <span class="pre">-</span> <span class="pre">2</span> <span class="pre">:</span> <span class="pre">&#8474;[X]</span></code> has a root in <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> or that <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">^</span> <span class="pre">2</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">:</span> <span class="pre">&#8477;[X]</span></code> has a root in
 <code class="docutils literal notranslate"><span class="pre">&#8450;</span></code>. For this, we need <code class="docutils literal notranslate"><span class="pre">Polynomial.aeval</span></code>, which will evaluate <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">:</span> <span class="pre">R[X]</span></code> in any <code class="docutils literal notranslate"><span class="pre">R</span></code>-algebra.
 More precisely, given a semiring <code class="docutils literal notranslate"><span class="pre">A</span></code> and an instance of <code class="docutils literal notranslate"><span class="pre">Algebra</span> <span class="pre">R</span> <span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">Polynomial.aeval</span></code> sends
-every element of <code class="docutils literal notranslate"><span class="pre">a</span></code> along the <code class="docutils literal notranslate"><span class="pre">R</span></code>-algebra morphism of evaluation at <code class="docutils literal notranslate"><span class="pre">a</span></code>. Since <code class="docutils literal notranslate"><span class="pre">AlgHom</span></code>
+every element <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">:</span> <span class="pre">A</span></code> to the <code class="docutils literal notranslate"><span class="pre">R</span></code>-algebra morphism <code class="docutils literal notranslate"><span class="pre">R[X]</span> <span class="pre">&#8594;</span> <span class="pre">A</span></code> that evaluates <code class="docutils literal notranslate"><span class="pre">X</span></code> at <code class="docutils literal notranslate"><span class="pre">a</span></code>. Since <code class="docutils literal notranslate"><span class="pre">AlgHom</span></code>
 has a coercion to functions, one can apply it to a polynomial.
 But <code class="docutils literal notranslate"><span class="pre">aeval</span></code> does not have a polynomial as an argument, so one cannot use dot notation like in
 <code class="docutils literal notranslate"><span class="pre">P.eval</span></code> above.</p>

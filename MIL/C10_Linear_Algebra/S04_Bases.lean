@@ -1,7 +1,7 @@
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.LinearAlgebra.Eigenspace.Minpoly
 import Mathlib.LinearAlgebra.Charpoly.Basic
-import Mathlib.Data.Complex.FiniteDimensional
+import Mathlib.LinearAlgebra.Complex.FiniteDimensional
 
 import MIL.Common
 
@@ -89,6 +89,8 @@ end matrices
 variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 
 section
+
+open Module
 
 variable {ι : Type*} (B : Basis ι K V) (v : V) (i : ι)
 
@@ -202,6 +204,7 @@ example [Fintype ι] (B' : Basis ι K V) (φ : End K V) :
 end
 
 section
+
 #check (Module.finrank K V : ℕ)
 
 -- `Fin n → K` is the archetypical space with dimension `n` over `K`.
@@ -225,9 +228,9 @@ example [FiniteDimensional K V] (h : 0 < Module.finrank K V) : Nontrivial V := b
   apply (Module.finrank_pos_iff (R := K)).1
   exact h
 
-variable {ι : Type*} (B : Basis ι K V)
+variable {ι : Type*} (B : Module.Basis ι K V)
 
-example [Finite ι] : FiniteDimensional K V := FiniteDimensional.of_fintype_basis B
+example [Finite ι] : FiniteDimensional K V := Module.Basis.finiteDimensional_of_finite B
 
 example [FiniteDimensional K V] : Finite ι :=
   (FiniteDimensional.fintypeBasisIndex B).finite
@@ -254,8 +257,8 @@ end
 
 universe u v -- `u` and `v` will denote universe levels
 
-variable {ι : Type u} (B : Basis ι K V)
-         {ι' : Type v} (B' : Basis ι' K V)
+variable {ι : Type u} (B : Module.Basis ι K V)
+         {ι' : Type v} (B' : Module.Basis ι' K V)
 
 example : Cardinal.lift.{v, u} (.mk ι) = Cardinal.lift.{u, v} (.mk ι') :=
   mk_eq_mk_of_basis B B'

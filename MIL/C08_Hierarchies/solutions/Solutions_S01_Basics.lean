@@ -182,7 +182,7 @@ lemma inv_eq_of_mul [Group₃ G] {a b : G} (h : a * b = 1) : a⁻¹ = b :=
 
 
 @[to_additive (attr := simp)]
-lemma Group₃.mul_inv {G : Type} [Group₃ G] {a : G} : a * a⁻¹ = 1 := by
+lemma Group₃.mul_inv {G : Type} [Group₃ G] (a : G) : a * a⁻¹ = 1 := by
   rw [← inv_mul a⁻¹, inv_eq_of_mul (inv_mul a)]
 
 @[to_additive]

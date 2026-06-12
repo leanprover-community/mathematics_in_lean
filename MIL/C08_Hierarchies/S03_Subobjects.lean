@@ -73,7 +73,7 @@ def Submonoid.Setoid [CommMonoid M] (N : Submonoid M) : Setoid M  where
   }
 
 instance [CommMonoid M] : HasQuotient M (Submonoid M) where
-  quotient' := fun N ↦ Quotient N.Setoid
+  Quotient := fun N ↦ Quotient N.Setoid
 
 def QuotientMonoid.mk [CommMonoid M] (N : Submonoid M) : M → M ⧸ N := Quotient.mk N.Setoid
 

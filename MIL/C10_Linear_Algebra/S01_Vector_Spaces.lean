@@ -22,6 +22,25 @@ example {R M : Type*} [CommSemiring R] [AddCommMonoid M] [Module R M] :
     Module (Ideal R) (Submodule R M) :=
   inferInstance
 
+section
+variable {R : Type*} [Ring R] {M : Type*} [AddCommGroup M] [Module R M]
+end
+
+
+
+section
+variable {R : Type*} [Semiring R] {M : Type*} [AddCommMonoid M] [Module R M]
+end
+
+
+
+example {R : Type*} [Ring R] {M : Type*} [AddCommMonoid M] [Module R M] : M → M :=
+  -- Make sure to use `letI` (instead of `haveI` or `let`) to make it easier to
+  -- identify the existing additive structure from the `AddCommMonoid M` hypothesis
+  -- with the new one introduced in the line below.
+  letI : AddCommGroup M := Module.addCommMonoidToAddCommGroup R
+  fun x => - x
+
 
 
 variable {W : Type*} [AddCommGroup W] [Module K W]

@@ -9,7 +9,7 @@ or as a
 The book is designed to be read as you
 work through examples and exercises,
 using a copy of this repository on your computer.
-Alternatively, you can use Github Codespaces or Gitpod to run Lean and VS Code in the cloud.
+Alternatively, you can use GitHub Codespaces or Gitpod to run Lean and VS Code in the cloud.
 
 This version of *Mathematics in Lean* is designed for [Lean 4](https://leanprover.github.io/) and
 [Mathlib](https://github.com/leanprover-community/mathlib4).
@@ -45,11 +45,11 @@ followed by `lake exe cache get` inside the `mathematics_in_lean` folder.
 which is why we suggested making a copy.)
 
 
-## To use this repository with Github Codespaces
+## To use this repository with GitHub Codespaces
 
-If you have trouble installing Lean, you can use Lean directly in your browser using Github
+If you have trouble installing Lean, you can use Lean directly in your browser using GitHub
 Codespaces.
-This requires a Github account. If you are signed in to Github, click here:
+This requires a GitHub account. If you are signed in to GitHub, click here:
 
 <a href='https://codespaces.new/leanprover-community/mathematics_in_lean' target="_blank" rel="noreferrer noopener"><img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'></a>
 

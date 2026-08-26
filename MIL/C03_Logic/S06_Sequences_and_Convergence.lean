@@ -16,6 +16,7 @@ example (a b : ℝ) : |a| = |a - b + b| := by
 
 example {a : ℝ} (h : 1 < a) : a < a * a := by
   convert (mul_lt_mul_iff_left₀ _).2 h
+  · rfl
   · rw [one_mul]
   exact lt_trans zero_lt_one h
 

@@ -16,7 +16,7 @@ structure Submonoid₁ (M : Type) [Monoid M] where
 /-- Submonoids in `M` can be seen as sets in `M`. -/
 instance [Monoid M] : SetLike (Submonoid₁ M) M where
   coe := Submonoid₁.carrier
-  coe_injective' _ _ := Submonoid₁.ext
+  coe_injective _ _ := Submonoid₁.ext
 
 
 

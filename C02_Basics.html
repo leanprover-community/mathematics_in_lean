@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2. Basics &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,9 +16,9 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -129,10 +129,13 @@ notational conventions and leave out parentheses when Lean does as well.</p>
 <span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">mul_assoc</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">c</span><span class="o">]</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">import</span></code> lines at the beginning of the associated examples file
+<p>The <code class="docutils literal notranslate"><span class="pre">module</span></code> and <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">import</span></code> lines at the beginning of the associated examples file
 import the theory of the real numbers from Mathlib, as well as useful automation.
-For the sake of brevity,
-we generally suppress information like this in the textbook.</p>
+More precisely, the <code class="docutils literal notranslate"><span class="pre">module</span></code> line tells Lean to import from Mathlib only those definitions and
+theorems that are marked as public, and the keyword <code class="docutils literal notranslate"><span class="pre">public</span></code> tells Lean to keep them public in any
+file that imports this one. You can ignore these details for now; the most important thing to know
+is that the &#8220;import&#8221; commands tell Lean what parts of Mathlib you want to use.
+For the sake of brevity, we generally suppress information like this in the textbook.</p>
 <p>You are welcome to make changes to see what happens.
 You can type the <code class="docutils literal notranslate"><span class="pre">&#8477;</span></code> character as <code class="docutils literal notranslate"><span class="pre">\R</span></code> or <code class="docutils literal notranslate"><span class="pre">\real</span></code>
 in VS Code.
@@ -331,7 +334,7 @@ and a more structured <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 <p>The following exercise is a little more challenging.
-You can use the theorems listed underneath.</p>
+You can use the theorems listed underneath (you won&#8217;t need all of them).</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="bp">-</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="gr">sorry</span>
 
@@ -340,7 +343,10 @@ You can use the theorems listed underneath.</p>
 <span class="k">#check</span><span class="w"> </span><span class="n">add_mul</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span>
 <span class="k">#check</span><span class="w"> </span><span class="n">add_sub</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span>
 <span class="k">#check</span><span class="w"> </span><span class="n">sub_sub</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">sub_add</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">c</span>
 <span class="k">#check</span><span class="w"> </span><span class="n">add_zero</span><span class="w"> </span><span class="n">a</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">sub_zero</span><span class="w"> </span><span class="n">a</span>
+<span class="k">#check</span><span class="w"> </span><span class="n">sub_self</span><span class="w"> </span><span class="n">a</span>
 </pre></div>
 </div>
 <p id="index-4">We can also perform rewriting in an assumption in the context.
@@ -375,7 +381,7 @@ purely from the ring axioms, without using any local assumption.</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ring</span></code> tactic is imported indirectly when we
-import <code class="docutils literal notranslate"><span class="pre">Mathlib.Data.Real.Basic</span></code>,
+public import <code class="docutils literal notranslate"><span class="pre">Mathlib.Data.Real.Basic</span></code>,
 but we will see in the next section that it can be used
 for calculations on structures other than the real numbers.
 It can be imported explicitly with the command
@@ -599,7 +605,8 @@ so the following theorem also requires some work.</p>
 <p>By now, you should also be able to replace each <code class="docutils literal notranslate"><span class="pre">sorry</span></code> in the next
 exercise with a proof,
 still using only facts about rings that we have
-established in this section along with the axiom <code class="docutils literal notranslate"><span class="pre">eq_symm</span></code>.</p>
+established in this section along with the lemma <code class="docutils literal notranslate"><span class="pre">Eq.symm</span></code> stating that
+<cite>a = b</cite> implies <cite>b = a</cite>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span><span class="w"> </span><span class="n">neg_eq_of_add_eq_zero</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">R</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="mi">0</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">-</span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="gr">sorry</span>
 
@@ -837,7 +844,6 @@ inequalities on the real numbers.</p>
 <span class="k">#check</span><span class="w"> </span><span class="o">(</span><span class="n">add_pos</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="o">)</span>
 <span class="k">#check</span><span class="w"> </span><span class="o">(</span><span class="n">add_pos_of_pos_of_nonneg</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">b</span><span class="o">)</span>
 <span class="k">#check</span><span class="w"> </span><span class="o">(</span><span class="n">exp_pos</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">a</span><span class="o">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">exp</span><span class="w"> </span><span class="n">a</span><span class="o">)</span>
-<span class="k">#check</span><span class="w"> </span><span class="n">add_le_add_right</span>
 </pre></div>
 </div>
 <p>Some of the theorems, <code class="docutils literal notranslate"><span class="pre">exp_le_exp</span></code>, <code class="docutils literal notranslate"><span class="pre">exp_lt_exp</span></code>
@@ -894,10 +900,10 @@ There are a number of strategies you can use:</p>
 <a class="reference external" href="https://github.com/leanprover-community/mathlib4">GitHub repository</a>.</p></li>
 <li><p>You can use the API documentation on the Mathlib
 <a class="reference external" href="https://leanprover-community.github.io/mathlib4_docs/">web pages</a>.</p></li>
-<li><p>You can use <cite>Loogle &lt;https://loogle.lean-lang.org&gt;</cite>
+<li><p>You can use <a class="reference external" href="https://loogle.lean-lang.org">Loogle</a>
 to search Lean and Mathlib definitions and theorems by patterns.</p></li>
 <li><p>You can rely on Mathlib naming conventions and Ctrl-space completion in
-the editor to guess a theorem name (or Cmd-space on a Mac keyboard).
+the editor to guess a theorem name.
 In Lean, a theorem named <code class="docutils literal notranslate"><span class="pre">A_of_B_of_C</span></code> establishes
 something of the form <code class="docutils literal notranslate"><span class="pre">A</span></code> from hypotheses of the form <code class="docutils literal notranslate"><span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code>,
 where <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code>, and <code class="docutils literal notranslate"><span class="pre">C</span></code>

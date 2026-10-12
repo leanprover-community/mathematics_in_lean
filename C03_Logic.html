@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3. Logic &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,9 +16,9 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -210,9 +210,9 @@ introduce variables and hypotheses after the proof begins.</p>
 </div>
 <p>Finish the proof using the theorems
 <code class="docutils literal notranslate"><span class="pre">abs_mul</span></code>, <code class="docutils literal notranslate"><span class="pre">mul_le_mul</span></code>, <code class="docutils literal notranslate"><span class="pre">abs_nonneg</span></code>,
-<code class="docutils literal notranslate"><span class="pre">mul_lt_mul_of_pos_right</span> <span class="pre">``,</span> <span class="pre">and</span> <span class="pre">``one_mul</span></code>.
+<code class="docutils literal notranslate"><span class="pre">mul_lt_mul_of_pos_right</span></code>, and <code class="docutils literal notranslate"><span class="pre">one_mul</span></code>.
 Remember that you can find theorems like these using
-Ctrl-space completion (or Cmd-space completion on a Mac).
+Ctrl-space completion.
 Remember also that you can use <code class="docutils literal notranslate"><span class="pre">.mp</span></code> and <code class="docutils literal notranslate"><span class="pre">.mpr</span></code>
 or <code class="docutils literal notranslate"><span class="pre">.1</span></code> and <code class="docutils literal notranslate"><span class="pre">.2</span></code> to extract the two directions
 of an if-and-only-if statement.</p>
@@ -1007,17 +1007,18 @@ a negation in front,
 and it is a common mathematical pattern to replace such
 statements with equivalent forms in which the negation
 has been pushed inward.
-To facilitate this, Mathlib offers a <code class="docutils literal notranslate"><span class="pre">push_neg</span></code> tactic,
-which restates the goal in this way (this includes
-simplifying <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">&#172;A</span></code> to <code class="docutils literal notranslate"><span class="pre">A</span></code>).
-The command <code class="docutils literal notranslate"><span class="pre">push_neg</span> <span class="pre">at</span> <span class="pre">h</span></code> restates the hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code>.</p>
+To facilitate this, Mathlib offers a <code class="docutils literal notranslate"><span class="pre">push</span></code> tactic
+that can push an application using registered lemmas.
+In our case we will use <cite>push Not</cite> to restate negations
+(this includes simplifying <code class="docutils literal notranslate"><span class="pre">&#172;</span> <span class="pre">&#172;A</span></code> to <code class="docutils literal notranslate"><span class="pre">A</span></code>).
+The command <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">Not</span> <span class="pre">at</span> <span class="pre">h</span></code> restates the hypothesis <code class="docutils literal notranslate"><span class="pre">h</span></code>.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;&#8704;</span><span class="w"> </span><span class="n">a</span><span class="o">,</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">x</span><span class="o">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="n">a</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">FnHasUb</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
-<span class="w">  </span><span class="n">push_neg</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">h</span>
+<span class="w">  </span><span class="n">push</span><span class="w"> </span><span class="n">Not</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">h</span>
 <span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="n">h</span>
 
 <span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="n">FnHasUb</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">a</span><span class="o">,</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">x</span><span class="o">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">dsimp</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="o">[</span><span class="n">FnHasUb</span><span class="o">,</span><span class="w"> </span><span class="n">FnUb</span><span class="o">]</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">h</span>
-<span class="w">  </span><span class="n">push_neg</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">h</span>
+<span class="w">  </span><span class="n">push</span><span class="w"> </span><span class="n">Not</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">h</span>
 <span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="n">h</span>
 </pre></div>
 </div>
@@ -1028,10 +1029,10 @@ to expand <code class="docutils literal notranslate"><span class="pre">FnUb</spa
 because it appears in the scope of a quantifier.)
 You can verify that in the examples above
 with <code class="docutils literal notranslate"><span class="pre">&#172;&#8707;</span> <span class="pre">x,</span> <span class="pre">P</span> <span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">&#172;&#8704;</span> <span class="pre">x,</span> <span class="pre">P</span> <span class="pre">x</span></code>,
-the <code class="docutils literal notranslate"><span class="pre">push_neg</span></code> tactic does the expected thing.
+the <code class="docutils literal notranslate"><span class="pre">push</span></code> tactic does the expected thing.
 Without even knowing how to use the conjunction
 symbol,
-you should be able to use <code class="docutils literal notranslate"><span class="pre">push_neg</span></code>
+you should be able to use <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">Not</span></code>
 to prove the following:</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="n">Monotone</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="gr">sorry</span>
@@ -1044,7 +1045,7 @@ hypothesis <code class="docutils literal notranslate"><span class="pre">h</span>
 <code class="docutils literal notranslate"><span class="pre">contrapose</span> <span class="pre">h</span></code> leaves you with a goal of proving
 <code class="docutils literal notranslate"><span class="pre">&#172;A</span></code> from hypothesis <code class="docutils literal notranslate"><span class="pre">&#172;B</span></code>.
 Using <code class="docutils literal notranslate"><span class="pre">contrapose!</span></code> instead of <code class="docutils literal notranslate"><span class="pre">contrapose</span></code>
-applies <code class="docutils literal notranslate"><span class="pre">push_neg</span></code> to the goal and the relevant
+applies <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">Not</span></code> to the goal and the relevant
 hypothesis as well.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="n">FnHasUb</span><span class="w"> </span><span class="n">f</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">a</span><span class="o">,</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">x</span><span class="o">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">contrapose</span><span class="bp">!</span><span class="w"> </span><span class="n">h</span>
@@ -1299,12 +1300,12 @@ to replace an expression of the form <code class="docutils literal notranslate">
 </div>
 <p>See if you can use <code class="docutils literal notranslate"><span class="pre">rw</span></code> with the theorem below
 to provide a short proof that negation is not a
-nondecreasing function. (Note that <code class="docutils literal notranslate"><span class="pre">push_neg</span></code> won&#8217;t
+nondecreasing function. (Note that <code class="docutils literal notranslate"><span class="pre">push</span> <span class="pre">Not</span></code> won&#8217;t
 unfold definitions for you, so the <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[Monotone]</span></code> in
 the proof of the theorem is needed.)</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">theorem</span><span class="w"> </span><span class="n">not_monotone_iff</span><span class="w"> </span><span class="o">{</span><span class="n">f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="n">Monotone</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="bp">&#8596;</span><span class="w"> </span><span class="bp">&#8707;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">y</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="bp">&#8743;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&gt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">Monotone</span><span class="o">]</span>
-<span class="w">  </span><span class="n">push_neg</span>
+<span class="w">  </span><span class="n">push</span><span class="w"> </span><span class="n">Not</span>
 <span class="w">  </span><span class="n">rfl</span>
 
 <span class="kd">example</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="bp">&#172;</span><span class="n">Monotone</span><span class="w"> </span><span class="k">fun</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="w"> </span><span class="bp">&#8614;</span><span class="w"> </span><span class="bp">-</span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
@@ -1661,9 +1662,11 @@ so that it has that form.
 Instead, the <code class="docutils literal notranslate"><span class="pre">convert</span></code> tactic lets us apply the theorem
 as it is,
 and leaves us with the task of proving the equations that
-are needed to make the goal match.</p>
+are needed to make the goal match.
+The <cite>convert!</cite> variant more aggressively unfold definitions when
+trying to solve the resulting goals.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#8477;</span><span class="o">}</span><span class="w"> </span><span class="o">(</span><span class="n">h</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
-<span class="w">  </span><span class="n">convert</span><span class="w"> </span><span class="o">(</span><span class="n">mul_lt_mul_iff_left&#8320;</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="w"> </span><span class="n">h</span>
+<span class="w">  </span><span class="n">convert</span><span class="bp">!</span><span class="w"> </span><span class="o">(</span><span class="n">mul_lt_mul_iff_left&#8320;</span><span class="w"> </span><span class="n">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="w"> </span><span class="n">h</span>
 <span class="w">  </span><span class="bp">&#183;</span><span class="w"> </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">one_mul</span><span class="o">]</span>
 <span class="w">  </span><span class="n">exact</span><span class="w"> </span><span class="n">lt_trans</span><span class="w"> </span><span class="n">zero_lt_one</span><span class="w"> </span><span class="n">h</span>
 </pre></div>

@@ -1,6 +1,7 @@
-import MIL.Common
-import Mathlib.Data.Real.Basic
-import Mathlib.Data.Nat.Prime.Basic
+module
+public import MIL.Common
+public import Mathlib.Data.Real.Basic
+public import Mathlib.Data.Nat.Prime.Basic
 
 namespace C03S04
 
@@ -126,7 +127,7 @@ end
 
 theorem not_monotone_iff {f : ℝ → ℝ} : ¬Monotone f ↔ ∃ x y, x ≤ y ∧ f x > f y := by
   rw [Monotone]
-  push_neg
+  push Not
   rfl
 
 example : ¬Monotone fun x : ℝ ↦ -x := by

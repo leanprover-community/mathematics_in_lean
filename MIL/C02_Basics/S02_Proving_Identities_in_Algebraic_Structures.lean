@@ -1,6 +1,7 @@
-import Mathlib.Algebra.Ring.Defs
-import Mathlib.Data.Real.Basic
-import MIL.Common
+module
+public import Mathlib.Algebra.Ring.Defs
+public import Mathlib.Data.Real.Basic
+public import MIL.Common
 
 section
 variable (R : Type*) [Ring R]

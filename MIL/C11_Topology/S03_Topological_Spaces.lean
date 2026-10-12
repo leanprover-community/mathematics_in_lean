@@ -1,6 +1,7 @@
-import MIL.Common
-import Mathlib.Topology.Instances.Real.Lemmas
-import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
+module
+public import MIL.Common
+public import Mathlib.Topology.Instances.Real.Lemmas
+public import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
 
 open Set Filter Topology
 
@@ -137,7 +138,7 @@ example {x : X} {F : Filter X} {G : Filter Y} (H : ClusterPt x F) {f : X → Y}
     (hfx : ContinuousAt f x) (hf : Tendsto f F G) : ClusterPt (f x) G :=
   ClusterPt.map H hfx hf
 
-example [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
+example {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
     IsCompact (f '' s) := by
   intro F F_ne F_le
   have map_eq : map f (𝓟 s ⊓ comap f F) = 𝓟 (f '' s) ⊓ F := by sorry

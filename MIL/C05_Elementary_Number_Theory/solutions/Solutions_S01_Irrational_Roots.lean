@@ -1,6 +1,7 @@
-import MIL.Common
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.Data.Nat.Prime.Basic
+module
+public import MIL.Common
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Data.Nat.Prime.Basic
 
 theorem even_of_even_sqr {m : ℕ} (h : 2 ∣ m ^ 2) : 2 ∣ m := by
   rw [pow_two, Nat.prime_two.dvd_mul] at h

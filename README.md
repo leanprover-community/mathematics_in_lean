@@ -11,7 +11,7 @@ work through examples and exercises,
 using a copy of this repository on your computer.
 Alternatively, you can use Github Codespaces or Gitpod to run Lean and VS Code in the cloud.
 
-This version of *Mathematics in Lean* is designed for [Lean 4](https://leanprover.github.io/) and
+This version of *Mathematics in Lean* is designed for [Lean 4](https://lean-lang.org/) and
 [Mathlib](https://github.com/leanprover-community/mathlib4).
 For the Lean 3 version, see [https://github.com/leanprover-community/mathematics_in_lean3](https://github.com/leanprover-community/mathematics_in_lean3).
 

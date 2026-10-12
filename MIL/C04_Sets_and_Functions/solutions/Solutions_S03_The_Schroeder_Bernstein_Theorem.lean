@@ -1,6 +1,7 @@
-import Mathlib.Data.Set.Lattice
-import Mathlib.Data.Set.Function
-import MIL.Common
+module
+public import Mathlib.Data.Set.Lattice
+public import Mathlib.Data.Set.Function
+public import MIL.Common
 
 open Set
 open Function
@@ -27,7 +28,7 @@ theorem sb_right_inv {x : α} (hx : x ∉ sbSet f g) : g (invFun g x) = x := by
     contrapose! hx
     rw [sbSet, mem_iUnion]
     use 0
-    rw [sbAux, mem_diff]
+    rw [sbAux, mem_sdiff]
     exact ⟨mem_univ _, hx⟩
   have : ∃ y, g y = x := by
     simp at this
@@ -58,7 +59,7 @@ theorem sb_injective (hf : Injective f) : Injective (sbFun f g) := by
       exact ⟨x₁, hn, x₂eq.symm⟩
     rw [if_pos x₁A, if_pos x₂A] at hxeq
     exact hf hxeq
-  push_neg at xA
+  push Not at xA
   rw [if_neg xA.1, if_neg xA.2] at hxeq
   rw [← sb_right_inv f g xA.1, hxeq, sb_right_inv f g xA.2]
 

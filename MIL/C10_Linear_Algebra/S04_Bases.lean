@@ -1,9 +1,10 @@
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.LinearAlgebra.Eigenspace.Minpoly
-import Mathlib.LinearAlgebra.Charpoly.Basic
-import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+module
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.LinearAlgebra.Eigenspace.Minpoly
+public import Mathlib.LinearAlgebra.Charpoly.Basic
+public import Mathlib.LinearAlgebra.Complex.FiniteDimensional
 
-import MIL.Common
+public import MIL.Common
 
 
 section matrices
@@ -162,7 +163,7 @@ example (φ ψ : V →ₗ[K] W) (h : ∀ i, φ (B i) = ψ (B i)) : φ = ψ :=
 
 
 
-variable {ι' : Type*} (B' : Basis ι' K W) [Fintype ι] [DecidableEq ι] [Fintype ι'] [DecidableEq ι']
+variable {ι' : Type*} (B' : Basis ι' K W) [Fintype ι] [Fintype ι'] [DecidableEq ι']
 
 open LinearMap
 

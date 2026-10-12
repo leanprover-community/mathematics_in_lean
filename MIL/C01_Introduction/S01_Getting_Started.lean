@@ -1,2 +1,3 @@
+module
 #eval "Hello, World!"
 

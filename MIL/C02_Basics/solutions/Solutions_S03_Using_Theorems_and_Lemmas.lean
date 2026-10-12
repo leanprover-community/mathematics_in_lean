@@ -1,5 +1,6 @@
-import Mathlib.Analysis.SpecialFunctions.Log.Basic
-import MIL.Common
+module
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import MIL.Common
 
 variable (a b c d e : ℝ)
 open Real
@@ -26,7 +27,6 @@ example (h : a ≤ b) : log (1 + exp a) ≤ log (1 + exp b) := by
   apply log_le_log h₀
   apply add_le_add_right (exp_le_exp.mpr h)
 
--- SOLUTION.
 example (h : a ≤ b) : c - exp b ≤ c - exp a := by
   apply sub_le_sub_left
   exact exp_le_exp.mpr h

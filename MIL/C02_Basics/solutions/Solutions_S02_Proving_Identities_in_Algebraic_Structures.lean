@@ -1,6 +1,7 @@
-import Mathlib.Algebra.Ring.Defs
-import Mathlib.Data.Real.Basic
-import MIL.Common
+module
+public import Mathlib.Algebra.Ring.Defs
+public import Mathlib.Data.Real.Basic
+public import MIL.Common
 
 namespace MyRing
 variable {R : Type*} [Ring R]
@@ -22,7 +23,7 @@ theorem neg_eq_of_add_eq_zero {a b : R} (h : a + b = 0) : -a = b := by
   rw [← neg_add_cancel_left a b, h, add_zero]
 
 theorem eq_neg_of_add_eq_zero {a b : R} (h : a + b = 0) : a = -b := by
-  symm
+  apply Eq.symm
   apply neg_eq_of_add_eq_zero
   rw [add_comm, h]
 

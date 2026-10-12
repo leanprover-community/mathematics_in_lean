@@ -1,9 +1,10 @@
-import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.LinearAlgebra.Eigenspace.Minpoly
-import Mathlib.LinearAlgebra.Charpoly.Basic
-import Mathlib.LinearAlgebra.Complex.FiniteDimensional
+module
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.LinearAlgebra.Eigenspace.Minpoly
+public import Mathlib.LinearAlgebra.Charpoly.Basic
+public import Mathlib.LinearAlgebra.Complex.FiniteDimensional
 
-import MIL.Common
+public import MIL.Common
 
 variable {K : Type*} [Field K] {V : Type*} [AddCommGroup V] [Module K V]
 
@@ -41,7 +42,7 @@ example (i : ι) : B.constr K u (B i) = u i :=
 
 
 
-variable {ι' : Type*} (B' : Basis ι' K W) [Fintype ι] [DecidableEq ι] [Fintype ι'] [DecidableEq ι']
+variable {ι' : Type*} (B' : Basis ι' K W) [Fintype ι] [Fintype ι'] [DecidableEq ι']
 
 open LinearMap
 

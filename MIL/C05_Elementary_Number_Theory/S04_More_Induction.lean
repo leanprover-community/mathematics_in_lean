@@ -1,6 +1,7 @@
-import MIL.Common
-import Mathlib.Analysis.Calculus.Taylor
-import Mathlib.Data.Nat.GCD.Basic
+module
+public import MIL.Common
+public import Mathlib.Analysis.Calculus.Taylor
+public import Mathlib.Data.Nat.GCD.Basic
 
 namespace more_induction
 

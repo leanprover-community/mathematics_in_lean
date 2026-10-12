@@ -1,5 +1,6 @@
-import Mathlib.Data.Nat.GCD.Basic
-import MIL.Common
+module
+public import Mathlib.Data.Nat.GCD.Basic
+public import MIL.Common
 
 example (n : Nat) : n.succ ≠ Nat.zero :=
   Nat.succ_ne_zero n

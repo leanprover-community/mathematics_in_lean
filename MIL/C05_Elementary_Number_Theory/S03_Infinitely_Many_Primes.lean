@@ -1,5 +1,6 @@
-import Mathlib.Data.Nat.Prime.Basic
-import MIL.Common
+module
+public import Mathlib.Data.Nat.Prime.Basic
+public import MIL.Common
 
 open BigOperators
 
@@ -14,12 +15,12 @@ theorem two_le {m : ℕ} (h0 : m ≠ 0) (h1 : m ≠ 1) : 2 ≤ m := by
 
 example {m : ℕ} (h0 : m ≠ 0) (h1 : m ≠ 1) : 2 ≤ m := by
   by_contra h
-  push_neg at h
+  push Not at h
   interval_cases m <;> contradiction
 
 example {m : ℕ} (h0 : m ≠ 0) (h1 : m ≠ 1) : 2 ≤ m := by
   by_contra h
-  push_neg at h
+  push Not at h
   revert h0 h1
   revert h m
   decide
@@ -29,7 +30,7 @@ theorem exists_prime_factor {n : Nat} (h : 2 ≤ n) : ∃ p : Nat, p.Prime ∧ p
   · use n, np
   induction' n using Nat.strong_induction_on with n ih
   rw [Nat.prime_def_lt] at np
-  push_neg at np
+  push Not at np
   rcases np h with ⟨m, mltn, mdvdn, mne1⟩
   have : m ≠ 0 := by
     intro mz
@@ -50,7 +51,7 @@ theorem primes_infinite : ∀ n, ∃ p > n, Nat.Prime p := by
   refine ⟨p, ?_, pp⟩
   show p > n
   by_contra ple
-  push_neg at ple
+  push Not at ple
   have : p ∣ Nat.factorial n := by
     sorry
   have : p ∣ 1 := by
@@ -118,7 +119,7 @@ example (s : Finset ℕ) (x : ℕ) : x ∈ s.filter Nat.Prime ↔ x ∈ s ∧ x.
 theorem primes_infinite' : ∀ s : Finset Nat, ∃ p, Nat.Prime p ∧ p ∉ s := by
   intro s
   by_contra h
-  push_neg at h
+  push Not at h
   set s' := s.filter Nat.Prime with s'_def
   have mem_s' : ∀ {n : ℕ}, n ∈ s' ↔ n.Prime := by
     intro n
@@ -177,7 +178,7 @@ theorem exists_prime_factor_mod_4_eq_3 {n : Nat} (h : n % 4 = 3) :
   · use n
   induction' n using Nat.strong_induction_on with n ih
   rw [Nat.prime_def_lt] at np
-  push_neg at np
+  push Not at np
   rcases np (two_le_of_mod_4_eq_3 h) with ⟨m, mltn, mdvdn, mne1⟩
   have mge2 : 2 ≤ m := by
     apply two_le _ mne1
@@ -200,7 +201,7 @@ example (m n : ℕ) (s : Finset ℕ) (h : m ∈ erase s n) : m ≠ n ∧ m ∈ s
 
 theorem primes_mod_4_eq_3_infinite : ∀ n, ∃ p > n, Nat.Prime p ∧ p % 4 = 3 := by
   by_contra h
-  push_neg at h
+  push Not at h
   rcases h with ⟨n, hn⟩
   have : ∃ s : Finset Nat, ∀ p : ℕ, p.Prime ∧ p % 4 = 3 ↔ p ∈ s := by
     apply ex_finset_of_bounded

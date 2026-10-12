@@ -1,5 +1,6 @@
-import MIL.Common
-import Mathlib.Data.Real.Basic
+module
+public import MIL.Common
+public import Mathlib.Data.Real.Basic
 
 namespace C06S02
 
@@ -46,7 +47,7 @@ class AddGroup₂ (α : Type*) where
   neg : α → α
   add_assoc : ∀ x y z : α, add (add x y) z = add x (add y z)
   add_zero : ∀ x : α, add x zero = x
-  zero_add : ∀ x : α, add x zero = x
+  zero_add : ∀ x : α, add zero x = x
   neg_add_cancel : ∀ x : α, add (neg x) x = zero
 
 instance hasAddAddGroup₂ {α : Type*} [AddGroup₂ α] : Add α :=

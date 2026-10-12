@@ -1,6 +1,7 @@
-import MIL.Common
-import Mathlib.Topology.Instances.Real.Lemmas
-import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
+module
+public import MIL.Common
+public import Mathlib.Topology.Instances.Real.Lemmas
+public import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
 
 open Set Filter Topology
 
@@ -107,7 +108,8 @@ theorem aux {X Y A : Type*} [TopologicalSpace X] {c : A → X}
       {f : A → Y} {x : X} {F : Filter Y}
       (h : Tendsto f (comap c (𝓝 x)) F) {V' : Set Y} (V'_in : V' ∈ F) :
     ∃ V ∈ 𝓝 x, IsOpen V ∧ c ⁻¹' V ⊆ f ⁻¹' V' := by
-  simpa [and_assoc] using ((nhds_basis_opens' x).comap c).tendsto_left_iff.mp h V' V'_in
+  obtain ⟨V, ⟨V_mem, V_op⟩, hV⟩ := ((nhds_basis_opens' x).comap c).tendsto_left_iff.mp h V' V'_in
+  exact ⟨V, V_mem, V_op, hV⟩
 
 example [TopologicalSpace X] [TopologicalSpace Y] [T3Space Y] {A : Set X}
     (hA : ∀ x, x ∈ closure A) {f : A → Y} (f_cont : Continuous f)
@@ -157,7 +159,7 @@ example {x : X} {F : Filter X} {G : Filter Y} (H : ClusterPt x F) {f : X → Y}
     (hfx : ContinuousAt f x) (hf : Tendsto f F G) : ClusterPt (f x) G :=
   ClusterPt.map H hfx hf
 
-example [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
+example {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
     IsCompact (f '' s) := by
   intro F F_ne F_le
   have map_eq : map f (𝓟 s ⊓ comap f F) = 𝓟 (f '' s) ⊓ F := by rw [Filter.push_pull, map_principal]

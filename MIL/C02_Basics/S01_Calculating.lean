@@ -1,5 +1,6 @@
-import MIL.Common
-import Mathlib.Data.Real.Basic
+module
+public import MIL.Common
+public import Mathlib.Data.Real.Basic
 -- An example.
 example (a b c : ℝ) : a * b * c = b * (a * c) := by
   rw [mul_comm a b]
@@ -107,9 +108,10 @@ example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
 #check add_mul a b c
 #check add_sub a b c
 #check sub_sub a b c
+#check sub_add a b c
 #check add_zero a
-
-end
+#check sub_zero a
+#check sub_self a
 
 -- Examples.
 

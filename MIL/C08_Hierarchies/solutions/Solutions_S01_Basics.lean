@@ -1,7 +1,9 @@
-import MIL.Common
-import Mathlib.Algebra.BigOperators.Ring.List
-import Mathlib.Data.Real.Basic
+module
+public import MIL.Common
+public import Mathlib.Algebra.BigOperators.Ring.List
+public import Mathlib.Data.Real.Basic
 
+public section
 set_option autoImplicit true
 
 
@@ -43,7 +45,7 @@ class Semigroup₀ (α : Type) where
   dia_assoc : ∀ a b c : α, a ⋄ b ⋄ c = a ⋄ (b ⋄ c)
 
 
-attribute [instance] Semigroup₀.toDia₁
+attribute [reducible, instance] Semigroup₀.toDia₁
 
 example {α : Type} [Semigroup₀ α] (a b : α) : α := a ⋄ b
 

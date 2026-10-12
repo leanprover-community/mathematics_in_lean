@@ -1,5 +1,6 @@
-import MIL.Common
-import Mathlib.Data.Real.Basic
+module
+public import MIL.Common
+public import Mathlib.Data.Real.Basic
 
 namespace C03S03
 
@@ -99,12 +100,12 @@ example (h : ¬FnHasUb f) : ∀ a, ∃ x, f x > a := by
   sorry
 
 example (h : ¬∀ a, ∃ x, f x > a) : FnHasUb f := by
-  push_neg at h
+  push Not at h
   exact h
 
 example (h : ¬FnHasUb f) : ∀ a, ∃ x, f x > a := by
   dsimp only [FnHasUb, FnUb] at h
-  push_neg at h
+  push Not at h
   exact h
 
 example (h : ¬Monotone f) : ∃ x y, x ≤ y ∧ f y < f x := by

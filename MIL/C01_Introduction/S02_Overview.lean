@@ -1,4 +1,5 @@
-import MIL.Common
+module
+public import MIL.Common
 
 open Nat
 

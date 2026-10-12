@@ -1,6 +1,7 @@
-import MIL.Common
-import Mathlib.Topology.Instances.Real.Lemmas
-import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
+module
+public import MIL.Common
+public import Mathlib.Topology.Instances.Real.Lemmas
+public import Mathlib.Analysis.Normed.Operator.BanachSteinhaus
 
 open Set Filter
 open Topology Filter

@@ -1,9 +1,10 @@
-import MIL.Common
-import Mathlib.Algebra.BigOperators.Ring.List
-import Mathlib.Data.Real.Basic
+module
+public import MIL.Common
+public import Mathlib.Algebra.BigOperators.Ring.List
+public import Mathlib.Data.Real.Basic
 
 namespace C06S01
-noncomputable section
+@[expose] public noncomputable section
 
 @[ext]
 structure Point where

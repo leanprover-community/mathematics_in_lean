@@ -1,5 +1,6 @@
-import MIL.Common
-import Mathlib.Data.Real.Basic
+module
+public import MIL.Common
+public import Mathlib.Data.Real.Basic
 
 namespace C03S06
 
@@ -15,7 +16,7 @@ example (a b : ℝ) : |a| = |a - b + b| := by
   ring
 
 example {a : ℝ} (h : 1 < a) : a < a * a := by
-  convert (mul_lt_mul_iff_left₀ _).2 h
+  convert! (mul_lt_mul_iff_left₀ _).2 h
   · rw [one_mul]
   exact lt_trans zero_lt_one h
 

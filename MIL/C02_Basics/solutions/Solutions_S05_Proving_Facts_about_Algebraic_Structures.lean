@@ -1,5 +1,6 @@
-import MIL.Common
-import Mathlib.Topology.MetricSpace.Basic
+module
+public import MIL.Common
+public import Mathlib.Topology.MetricSpace.Basic
 
 section
 variable {α : Type*} [Lattice α]

@@ -7,8 +7,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8. Hierarchies &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
@@ -16,8 +16,8 @@
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7048e04d"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -193,10 +193,11 @@ For now, we define it by hand as a structure with two fields, a <code class="doc
 <p>Note that while stating <cite>dia_assoc</cite>, the previously defined field <cite>toDia&#8321;</cite> is in the local
 context hence can be used when Lean searches for an instance of <cite>Dia&#8321; &#945;</cite> to make sense
 of <cite>a &#8900; b</cite>. However this <cite>toDia&#8321;</cite> field does not become part of the type class instances database.
-Hence doing <code class="docutils literal notranslate"><span class="pre">example</span> <span class="pre">{&#945;</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">[Semigroup&#8321;</span> <span class="pre">&#945;]</span> <span class="pre">(a</span> <span class="pre">b</span> <span class="pre">:</span> <span class="pre">&#945;)</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">:=</span> <span class="pre">a</span> <span class="pre">&#8900;</span> <span class="pre">b</span></code> would fail with
+Hence doing <code class="docutils literal notranslate"><span class="pre">example</span> <span class="pre">{&#945;</span> <span class="pre">:</span> <span class="pre">Type}</span> <span class="pre">[Semigroup&#8320;</span> <span class="pre">&#945;]</span> <span class="pre">(a</span> <span class="pre">b</span> <span class="pre">:</span> <span class="pre">&#945;)</span> <span class="pre">:</span> <span class="pre">&#945;</span> <span class="pre">:=</span> <span class="pre">a</span> <span class="pre">&#8900;</span> <span class="pre">b</span></code> would fail with
 error message <code class="docutils literal notranslate"><span class="pre">failed</span> <span class="pre">to</span> <span class="pre">synthesize</span> <span class="pre">instance</span> <span class="pre">Dia&#8321;</span> <span class="pre">&#945;</span></code>.</p>
-<p>We can fix this by adding the <code class="docutils literal notranslate"><span class="pre">instance</span></code> attribute later.</p>
-<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">attribute</span><span class="w"> </span><span class="o">[</span><span class="kd">instance</span><span class="o">]</span><span class="w"> </span><span class="n">Semigroup&#8320;.toDia&#8321;</span>
+<p>We can fix this by adding the <code class="docutils literal notranslate"><span class="pre">instance</span></code> attribute later (do not pay attention to the <cite>reducible</cite>
+attribute, it won&#8217;t be needed once we explain a better way to do this in the next paragraph).</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">attribute</span><span class="w"> </span><span class="o">[</span><span class="n">reducible</span><span class="o">,</span><span class="w"> </span><span class="kd">instance</span><span class="o">]</span><span class="w"> </span><span class="n">Semigroup&#8320;.toDia&#8321;</span>
 
 <span class="kd">example</span><span class="w"> </span><span class="o">{</span><span class="n">&#945;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">}</span><span class="w"> </span><span class="o">[</span><span class="n">Semigroup&#8320;</span><span class="w"> </span><span class="n">&#945;</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">&#945;</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">&#8900;</span><span class="w"> </span><span class="n">b</span>
 </pre></div>
@@ -730,7 +731,8 @@ morphisms and ring morphisms and use it to state every lemma. In the definition 
 </pre></div>
 </div>
 <p>However there is a problem with the above implementation. We haven&#8217;t registered a coercion to
-function instance yet. Let us try to do it now.</p>
+function instance yet. Let us try to do it now (ignoring the warning from Lean telling us something
+is dangerous here, since we know we are indeed doing something bad).</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span><span class="w"> </span><span class="n">badInst</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">MonoidHomClass&#8321;</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">CoeFun</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">(</span><span class="k">fun</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="bp">&#8614;</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">N</span><span class="o">)</span><span class="w"> </span><span class="n">where</span>
 <span class="w">  </span><span class="n">coe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHomClass&#8321;.toFun</span>
 </pre></div>
@@ -804,7 +806,7 @@ Let us redefine our <code class="docutils literal notranslate"><span class="pre"
 
 <span class="kd">instance</span><span class="w"> </span><span class="o">(</span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kt">Type</span><span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">N</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MonoidHomClass&#8323;</span><span class="w"> </span><span class="o">(</span><span class="n">MonoidHom&#8321;</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="o">)</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="n">where</span>
 <span class="w">  </span><span class="n">coe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.toFun</span>
-<span class="w">  </span><span class="n">coe_injective&#39;</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.ext</span>
+<span class="w">  </span><span class="n">coe_injective</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.ext</span>
 <span class="w">  </span><span class="n">map_one</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.map_one</span>
 <span class="w">  </span><span class="n">map_mul</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MonoidHom&#8321;.map_mul</span>
 </pre></div>
@@ -864,7 +866,7 @@ coercion and <code class="docutils literal notranslate"><span class="pre">Member
 <span class="sd">/-- Submonoids in `M` can be seen as sets in `M`. -/</span>
 <span class="kd">instance</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">SetLike</span><span class="w"> </span><span class="o">(</span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="n">where</span>
 <span class="w">  </span><span class="n">coe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Submonoid&#8321;.carrier</span>
-<span class="w">  </span><span class="n">coe_injective&#39;</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Submonoid&#8321;.ext</span>
+<span class="w">  </span><span class="n">coe_injective</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Submonoid&#8321;.ext</span>
 </pre></div>
 </div>
 <p>Equipped with the above <code class="docutils literal notranslate"><span class="pre">SetLike</span></code> instance, we can already state naturally that

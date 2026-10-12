@@ -1,8 +1,9 @@
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.Analysis.Complex.Polynomial.Basic
-import Mathlib.Data.ZMod.QuotientRing
-import MIL.Common
+module
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.Data.ZMod.QuotientRing
+public import MIL.Common
 
 noncomputable section
 
@@ -12,13 +13,13 @@ section
 variable {ι R : Type*} [CommRing R]
 open Ideal Quotient Function
 
-#check Pi.ringHom
+#check RingHom.pi
 #check ker_Pi_Quotient_mk
 
 /-- The homomorphism from ``R ⧸ ⨅ i, I i`` to ``Π i, R ⧸ I i`` featured in the Chinese
   Remainder Theorem. -/
 def chineseMap (I : ι → Ideal R) : (R ⧸ ⨅ i, I i) →+* Π i, R ⧸ I i :=
-  Ideal.Quotient.lift (⨅ i, I i) (Pi.ringHom fun i : ι ↦ Ideal.Quotient.mk (I i))
+  Ideal.Quotient.lift (⨅ i, I i) (RingHom.pi fun i : ι ↦ Ideal.Quotient.mk (I i))
     (by simp [← RingHom.mem_ker, ker_Pi_Quotient_mk])
 
 lemma chineseMap_mk (I : ι → Ideal R) (x : R) :

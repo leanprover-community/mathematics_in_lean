@@ -1,5 +1,6 @@
-import MIL.Common
-import Mathlib.Data.Real.Basic
+module
+public import MIL.Common
+public import Mathlib.Data.Real.Basic
 
 namespace C03S03
 
@@ -104,7 +105,7 @@ example (h : ¬FnHasUb f) : ∀ a, ∃ x, f x > a := by
 
 example (h : ¬Monotone f) : ∃ x y, x ≤ y ∧ f y < f x := by
   rw [Monotone] at h
-  push_neg at h
+  push Not at h
   exact h
 
 end

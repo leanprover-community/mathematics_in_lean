@@ -1,6 +1,7 @@
-import Mathlib.Algebra.EuclideanDomain.Basic
-import Mathlib.RingTheory.PrincipalIdealDomain
-import MIL.Common
+module
+public import Mathlib.Algebra.EuclideanDomain.Basic
+public import Mathlib.RingTheory.PrincipalIdealDomain
+public import MIL.Common
 
 @[ext]
 structure GaussInt where

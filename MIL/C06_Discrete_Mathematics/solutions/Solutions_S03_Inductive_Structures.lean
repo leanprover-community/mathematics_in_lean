@@ -1,4 +1,5 @@
-import Mathlib.Tactic
+module
+public import Mathlib.Tactic
 
 namespace MyListSpace3
 

@@ -1,6 +1,7 @@
-import Mathlib.Data.Fintype.BigOperators
-import Mathlib.Combinatorics.Pigeonhole
-import Mathlib.Tactic
+module
+public import Mathlib.Data.Fintype.BigOperators
+public import Mathlib.Combinatorics.Pigeonhole
+public import Mathlib.Tactic
 
 open Finset
 

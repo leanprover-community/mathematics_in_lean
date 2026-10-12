@@ -1,5 +1,6 @@
-import MIL.Common
-import Mathlib.Topology.Instances.Real.Lemmas
+module
+public import MIL.Common
+public import Mathlib.Topology.Instances.Real.Lemmas
 
 open Set Filter Topology
 

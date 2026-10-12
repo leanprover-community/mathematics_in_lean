@@ -1,9 +1,10 @@
-import MIL.Common
-import Mathlib.Analysis.Normed.Module.FiniteDimension
-import Mathlib.Analysis.Convolution
-import Mathlib.MeasureTheory.Function.Jacobian
-import Mathlib.MeasureTheory.Integral.Bochner.Basic
-import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
+module
+public import MIL.Common
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.Analysis.Convolution
+public import Mathlib.MeasureTheory.Function.Jacobian
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
 open Set Filter
 

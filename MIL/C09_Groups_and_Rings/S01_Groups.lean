@@ -283,8 +283,8 @@ variable [H.Normal] [K.Normal] [Fintype G] (h : Disjoint H K)
 
 #check Nat.bijective_iff_injective_and_card
 #check ker_eq_bot_iff
-#check restrict
-#check ker_restrict
+#check domRestrict
+#check ker_domRestrict
 
 def iso₁ : K ≃* G ⧸ H := by
   sorry

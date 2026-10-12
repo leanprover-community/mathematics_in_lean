@@ -145,7 +145,6 @@ example {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
   have Hne : (𝓟 s ⊓ comap f F).NeBot := by sorry
   have Hle : 𝓟 s ⊓ comap f F ≤ 𝓟 s := inf_le_left
   sorry
-
 example {ι : Type*} {s : Set X} (hs : IsCompact s) (U : ι → Set X) (hUo : ∀ i, IsOpen (U i))
     (hsU : s ⊆ ⋃ i, U i) : ∃ t : Finset ι, s ⊆ ⋃ i ∈ t, U i :=
   hs.elim_finite_subcover U hUo hsU

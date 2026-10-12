@@ -20,13 +20,8 @@ variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type*} [NormedAddCom
 
 open Metric
 
-example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, ∃ C, ∀ i, ‖g i x‖ ≤ C) :
-    ∃ C', ∀ i, ‖g i‖ ≤ C' := by
-  -- sequence of subsets consisting of those `x : E` with norms `‖g i x‖` bounded by `n`
-  let e : ℕ → Set E := fun n ↦ ⋂ i : ι, { x : E | ‖g i x‖ ≤ n }
-  -- each of these sets is closed
-  have hc : ∀ n : ℕ, IsClosed (e n) := fun i ↦
-    isClosed_iInter fun i ↦ isClosed_le (g i).cont.norm continuous_const
+    intro i
+    exact isClosed_iInter fun i ↦ isClosed_le (g i).cont.norm continuous_const
   -- the union is the entire space; this is where we use `h`
   have hU : (⋃ n : ℕ, e n) = univ := by
     refine eq_univ_of_forall fun x ↦ ?_
@@ -58,7 +53,6 @@ example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, �
       (le_mul_of_one_le_right (Nat.cast_nonneg _)
         ((one_le_div <| div_pos ε_pos (zero_lt_one.trans hk)).2 le_y))
     _ = (m + m : ℕ) / (ε / ‖k‖) * ‖y‖ := (mul_comm_div _ _ _).symm
-
 
 end
 

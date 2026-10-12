@@ -1,7 +1,7 @@
 module
 public import MIL.Common
 public import Mathlib.Algebra.BigOperators.Ring.List
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 
 public section
 set_option autoImplicit true
@@ -147,7 +147,7 @@ class Monoid₃ (α : Type) extends Semigroup₃ α, MulOneClass α
 export Semigroup₃ (mul_assoc₃)
 export AddSemigroup₃ (add_assoc₃)
 
-whatsnew in
+#whats_new in
 @[to_additive]
 lemma left_inv_eq_right_inv' {M : Type} [Monoid₃ M] {a b c : M} (hba : b * a = 1) (hac : a * c = 1) : b = c := by
   rw [← one_mul c, ← hba, mul_assoc₃, hac, mul_one b]

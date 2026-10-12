@@ -47,7 +47,7 @@ theorem isCoprime_Inf {I : Ideal R} {J : ι → Ideal R} {s : Finset ι}
         1 = I + K                  := (hs fun j hj ↦ hf j (Finset.mem_insert_of_mem hj)).symm
         _ = I + K * (I + J i)      := by rw [hf i (Finset.mem_insert_self i s), mul_one]
         _ = (1 + K) * I + K * J i  := by ring
-        _ ≤ I + K ⊓ J i            := by gcongr ; apply mul_le_left ; apply mul_le_inf
+        _ ≤ I + K ⊓ J i            := by gcongr ; apply mul_le_right ; apply mul_le_inf
 
 
 lemma chineseMap_surj [Fintype ι] {I : ι → Ideal R}

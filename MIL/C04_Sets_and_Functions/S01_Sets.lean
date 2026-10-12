@@ -1,5 +1,4 @@
 module
-public import Mathlib.Data.Set.Lattice
 public import Mathlib.Data.Nat.Prime.Basic
 public import MIL.Common
 
@@ -11,7 +10,7 @@ open Set
 example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u := by
   rw [subset_def, inter_def, inter_def]
   rw [subset_def] at h
-  simp only [mem_setOf]
+  simp only [mem_ofPred]
   rintro x ⟨xs, xu⟩
   exact ⟨h _ xs, xu⟩
 

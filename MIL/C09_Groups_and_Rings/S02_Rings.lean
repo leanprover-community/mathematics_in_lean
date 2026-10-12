@@ -48,9 +48,9 @@ example : I + J = I ⊔ J := rfl
 example {x : R} : x ∈ I + J ↔ ∃ a ∈ I, ∃ b ∈ J, a + b = x := by
   simp [Submodule.mem_sup]
 
-example : I * J ≤ J := Ideal.mul_le_left
+example : I * J ≤ J := Ideal.mul_le_right
 
-example : I * J ≤ I := Ideal.mul_le_right
+example : I * J ≤ I := Ideal.mul_le_left
 
 example : I * J ≤ I ⊓ J := Ideal.mul_le_inf
 

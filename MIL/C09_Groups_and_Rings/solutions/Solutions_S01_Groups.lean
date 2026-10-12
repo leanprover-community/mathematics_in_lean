@@ -143,14 +143,14 @@ variable [H.Normal] [K.Normal] [Fintype G] (h : Disjoint H K)
 
 #check Nat.bijective_iff_injective_and_card
 #check ker_eq_bot_iff
-#check restrict
-#check ker_restrict
+#check domRestrict
+#check ker_domRestrict
 
 def iso₁ : K ≃* G ⧸ H := by
-  apply MulEquiv.ofBijective ((QuotientGroup.mk' H).restrict K)
+  apply MulEquiv.ofBijective ((QuotientGroup.mk' H).domRestrict K)
   rw [Nat.bijective_iff_injective_and_card]
   constructor
-  · rw [← ker_eq_bot_iff, (QuotientGroup.mk' H).ker_restrict K]
+  · rw [← ker_eq_bot_iff, (QuotientGroup.mk' H).ker_domRestrict K]
     simp [h]
   · symm
     exact aux_card_eq h'

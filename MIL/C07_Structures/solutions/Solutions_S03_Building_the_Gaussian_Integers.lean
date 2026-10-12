@@ -176,7 +176,7 @@ private theorem aux {α : Type*} [Ring α] [LinearOrder α] [IsStrictOrderedRing
     apply le_add_of_nonneg_right (sq_nonneg y)
   eq_zero_of_pow_eq_zero h'
 
-theorem sq_add_sq_eq_zero {α : Type*} [Ring α] [LinearOrder α] [IsStrictOrderedRing α]
+theorem square_add_sq_eq_zero {α : Type*} [Ring α] [LinearOrder α] [IsStrictOrderedRing α]
     (x y : α) : x ^ 2 + y ^ 2 = 0 ↔ x = 0 ∧ y = 0 := by
   constructor
   · intro h
@@ -198,7 +198,7 @@ theorem norm_nonneg (x : GaussInt) : 0 ≤ norm x := by
   apply sq_nonneg
 
 theorem norm_eq_zero (x : GaussInt) : norm x = 0 ↔ x = 0 := by
-  rw [norm, sq_add_sq_eq_zero, GaussInt.ext_iff]
+  rw [norm, square_add_sq_eq_zero, GaussInt.ext_iff]
   rfl
 
 theorem norm_pos (x : GaussInt) : 0 < norm x ↔ x ≠ 0 := by

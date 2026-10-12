@@ -1,6 +1,6 @@
 module
 public import MIL.Common
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 
 set_option autoImplicit true
 

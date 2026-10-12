@@ -1,7 +1,7 @@
 module
 public import MIL.Common
 public import Mathlib.Algebra.BigOperators.Ring.List
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 
 namespace C06S01
 @[expose] public noncomputable section

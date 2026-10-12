@@ -1,6 +1,6 @@
 module
 public import MIL.Common
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 
 namespace C06S02
 
@@ -164,7 +164,7 @@ variable {α : Type*} (f g : Equiv.Perm α)
 
 #check f * 1 * g⁻¹
 
-def foo : f * 1 * g⁻¹ = g.symm.trans ((Equiv.refl α).trans f) :=
+lemma foo : f * 1 * g⁻¹ = g.symm.trans ((Equiv.refl α).trans f) :=
   rfl
 
 end

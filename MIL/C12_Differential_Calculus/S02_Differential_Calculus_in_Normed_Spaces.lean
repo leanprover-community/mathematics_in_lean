@@ -93,11 +93,11 @@ example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, �
   -- sequence of subsets consisting of those `x : E` with norms `‖g i x‖` bounded by `n`
   let e : ℕ → Set E := fun n ↦ ⋂ i : ι, { x : E | ‖g i x‖ ≤ n }
   -- each of these sets is closed
-  have hc : ∀ n : ℕ, IsClosed (e n)
-  sorry
+  have hc : ∀ n : ℕ, IsClosed (e n) := by
+    sorry
   -- the union is the entire space; this is where we use `h`
-  have hU : (⋃ n : ℕ, e n) = univ
-  sorry
+  have hU : (⋃ n : ℕ, e n) = univ := by
+    sorry
   /- apply the Baire category theorem to conclude that for some `m : ℕ`,
        the interior of `e m` contains some `x` -/
   obtain ⟨m, x, hx⟩ : ∃ m, ∃ x, x ∈ interior (e m) := sorry
@@ -110,7 +110,6 @@ example {ι : Type*} [CompleteSpace E] {g : ι → E →L[𝕜] F} (h : ∀ x, �
   refine ⟨(m + m : ℕ) / (ε / ‖k‖), fun i ↦ ContinuousLinearMap.opNorm_le_of_shell ε_pos ?_ hk ?_⟩
   sorry
   sorry
-
 end
 
 open Asymptotics

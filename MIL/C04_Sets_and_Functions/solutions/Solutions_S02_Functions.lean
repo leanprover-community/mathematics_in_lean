@@ -1,6 +1,5 @@
 module
 public import MIL.Common
-public import Mathlib.Data.Set.Lattice
 public import Mathlib.Data.Set.Function
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
@@ -198,7 +197,7 @@ def inverse (f : α → β) : β → α := fun y : β ↦
   if h : ∃ x, f x = y then Classical.choose h else default
 
 theorem inverse_spec {f : α → β} (y : β) (h : ∃ x, f x = y) : f (inverse f y) = y := by
-  rw [inverse, dif_pos h]
+  rw [inverse, dite_eq_left h]
   exact Classical.choose_spec h
 
 variable (f : α → β)

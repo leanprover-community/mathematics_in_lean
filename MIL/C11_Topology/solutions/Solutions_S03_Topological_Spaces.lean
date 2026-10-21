@@ -159,6 +159,16 @@ example {x : X} {F : Filter X} {G : Filter Y} (H : ClusterPt x F) {f : X → Y}
     (hfx : ContinuousAt f x) (hf : Tendsto f F G) : ClusterPt (f x) G :=
   ClusterPt.map H hfx hf
 
+example {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
+    IsCompact (f '' s) := by
+  intro F F_ne F_le
+  have map_eq : map f (𝓟 s ⊓ comap f F) = 𝓟 (f '' s) ⊓ F := by
+    rw [Filter.push_pull, map_principal]
+  have Hne : (𝓟 s ⊓ comap f F).NeBot := by
+    apply NeBot.of_map
+    rw [map_eq, inf_of_le_right F_le]
+    exact F_ne
+  have Hle : 𝓟 s ⊓ comap f F ≤ 𝓟 s := inf_le_left
   rcases hs Hle with ⟨x, x_in, hx⟩
   refine ⟨f x, mem_image_of_mem f x_in, ?_⟩
   apply hx.map hf.continuousAt

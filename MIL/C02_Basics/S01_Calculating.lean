@@ -99,6 +99,7 @@ variable (a b c d : ℝ)
 
 example : (a + b) * (c + d) = a * c + a * d + b * c + b * d := by
   sorry
+-- EXAMPLES.
 
 example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
   sorry
@@ -113,12 +114,11 @@ example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
 #check sub_zero a
 #check sub_self a
 
--- Examples.
 
 section
 variable (a b c d : ℝ)
 
-example (a b c d : ℝ) (hyp : c = d * a + b) (hyp' : b = a * d) : c = 2 * a * d := by
+example (hyp : c = d * a + b) (hyp' : b = a * d) : c = 2 * a * d := by
   rw [hyp'] at hyp
   rw [mul_comm d a] at hyp
   rw [← two_mul (a * d)] at hyp

@@ -141,8 +141,10 @@ example {x : X} {F : Filter X} {G : Filter Y} (H : ClusterPt x F) {f : X → Y}
 example {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
     IsCompact (f '' s) := by
   intro F F_ne F_le
-  have map_eq : map f (𝓟 s ⊓ comap f F) = 𝓟 (f '' s) ⊓ F := by sorry
-  have Hne : (𝓟 s ⊓ comap f F).NeBot := by sorry
+  have map_eq : map f (𝓟 s ⊓ comap f F) = 𝓟 (f '' s) ⊓ F := by
+    sorry
+  have Hne : (𝓟 s ⊓ comap f F).NeBot := by
+    sorry
   have Hle : 𝓟 s ⊓ comap f F ≤ 𝓟 s := inf_le_left
   sorry
 example {ι : Type*} {s : Set X} (hs : IsCompact s) (U : ι → Set X) (hUo : ∀ i, IsOpen (U i))

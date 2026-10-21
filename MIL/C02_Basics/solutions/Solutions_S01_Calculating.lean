@@ -31,6 +31,10 @@ example (a b c d : ℝ) (hyp : c = b * a - d) (hyp' : d = a * b) : c = 0 := by
   rw [mul_comm]
   rw [sub_self]
 
+-- Try these. For the second, use the theorems listed underneath.
+section
+variable (a b c d : ℝ)
+
 
 example : (a + b) * (c + d) = a * c + a * d + b * c + b * d := by
   rw [add_mul, mul_add, mul_add, ← add_assoc]

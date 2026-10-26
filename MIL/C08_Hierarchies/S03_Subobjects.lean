@@ -29,6 +29,11 @@ example [Monoid M] (N : Submonoid₁ M) (α : Type) (f : M → α) := f '' N
 example [Monoid M] (N : Submonoid₁ M) (x : N) : (x : M) ∈ N := x.property
 
 
+instance [Monoid M] : PartialOrder (Submonoid₁ M) := .ofSetLike (Submonoid₁ M) M
+
+example [Monoid M] (N P : Submonoid₁ M) : N ≤ P ↔ ∀ x, x ∈ N → x ∈ P := SetLike.le_def
+
+
 instance SubMonoid₁Monoid [Monoid M] (N : Submonoid₁ M) : Monoid N where
   mul := fun x y ↦ ⟨x*y, N.mul_mem x.property y.property⟩
   mul_assoc := fun x y z ↦ SetCoe.ext (mul_assoc (x : M) y z)

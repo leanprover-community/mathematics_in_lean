@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -5,21 +7,17 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>8. Hierarchies &mdash; Mathematics in Lean v4.19.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
 
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=7048e04d"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=7048e04d"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -884,6 +882,14 @@ a parameter <code class="docutils literal notranslate"><span class="pre">(x</spa
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">example</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">N</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">N</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="bp">&#8712;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">x.property</span>
 </pre></div>
 </div>
+<p>We still need to tell Lean we want to equip <code class="docutils literal notranslate"><span class="pre">Submonoid&#8321;</span> <span class="pre">M</span></code> with the order relation coming
+from <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">M</span></code>. This is done using the following instance. Then the example shows that the
+partial order we defined is the expected one.</p>
+<div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">PartialOrder</span><span class="w"> </span><span class="o">(</span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">.</span><span class="n">ofSetLike</span><span class="w"> </span><span class="o">(</span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="n">M</span>
+
+<span class="kd">example</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">(</span><span class="n">N</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="bp">&#8804;</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="bp">&#8596;</span><span class="w"> </span><span class="bp">&#8704;</span><span class="w"> </span><span class="n">x</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8712;</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="bp">&#8712;</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SetLike.le_def</span>
+</pre></div>
+</div>
 <p>Using this coercion to <code class="docutils literal notranslate"><span class="pre">Type</span></code> we can also tackle the task of equipping a submonoid with a
 monoid structure. We will use the coercion from the type associated to <code class="docutils literal notranslate"><span class="pre">N</span></code> as above, and the
 lemma <code class="docutils literal notranslate"><span class="pre">SetCoe.ext</span></code> asserting this coercion is injective. Both are provided by the <code class="docutils literal notranslate"><span class="pre">SetLike</span></code>
@@ -924,7 +930,8 @@ and a <code class="docutils literal notranslate"><span class="pre">SubmonoidClas
 <p>Another very important thing to know about subobjects of a given algebraic object in Mathlib
 always form a complete lattice, and this structure is used a lot. For instance you may look for
 the lemma saying that an intersection of submonoids is a submonoid. But this won&#8217;t be a lemma,
-this will be an infimum construction. Let us do the case of two submonoids.</p>
+this will be an infimum construction. Let us do the case of two submonoids. Beware that the relevant
+class is called <code class="docutils literal notranslate"><span class="pre">Min</span></code>, even in our example where the order is not total.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">instance</span><span class="w"> </span><span class="o">[</span><span class="n">Monoid</span><span class="w"> </span><span class="n">M</span><span class="o">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Min</span><span class="w"> </span><span class="o">(</span><span class="n">Submonoid&#8321;</span><span class="w"> </span><span class="n">M</span><span class="o">)</span><span class="w"> </span><span class="o">:=</span>
 <span class="w">  </span><span class="o">&#10216;</span><span class="k">fun</span><span class="w"> </span><span class="n">S&#8321;</span><span class="w"> </span><span class="n">S&#8322;</span><span class="w"> </span><span class="bp">&#8614;</span>
 <span class="w">    </span><span class="o">{</span><span class="w"> </span><span class="n">carrier</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">S&#8321;</span><span class="w"> </span><span class="bp">&#8745;</span><span class="w"> </span><span class="n">S&#8322;</span>

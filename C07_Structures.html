@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7. Structures &mdash; Mathematics in Lean v4.19.0 documentation</title>
+  <title>7. Structures &mdash; Mathematics in Lean v4.34.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0731ccc3" />
@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=7048e04d"></script>
+      <script src="_static/documentation_options.js?v=007da34f"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -135,7 +135,7 @@ when their components are equal, a property known as <em>extensionality</em>.</p
 
 <span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Point</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hx</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a.x</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b.x</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hy</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a.y</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b.y</span><span class="o">)</span><span class="w"> </span><span class="o">(</span><span class="n">hz</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a.z</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b.z</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">ext</span>
-<span class="w">  </span><span class="n">repeat&#39;</span><span class="w"> </span><span class="n">assumption</span>
+<span class="w">  </span><span class="n">repeat</span><span class="w"> </span><span class="n">assumption</span>
 </pre></div>
 </div>
 <p>We can then define particular instances of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> structure.
@@ -216,7 +216,7 @@ theorem like <code class="docutils literal notranslate"><span class="pre">add_co
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kn">protected</span><span class="w"> </span><span class="kd">theorem</span><span class="w"> </span><span class="n">add_comm</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Point</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">add</span><span class="o">,</span><span class="w"> </span><span class="n">add</span><span class="o">]</span>
 <span class="w">  </span><span class="n">ext</span><span class="w"> </span><span class="bp">&lt;;&gt;</span><span class="w"> </span><span class="n">dsimp</span>
-<span class="w">  </span><span class="n">repeat&#39;</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="n">add_comm</span>
+<span class="w">  </span><span class="n">repeat</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="n">add_comm</span>
 
 <span class="kd">example</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Point</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span><span class="w"> </span><span class="n">simp</span><span class="w"> </span><span class="o">[</span><span class="n">add</span><span class="o">,</span><span class="w"> </span><span class="n">add_comm</span><span class="o">]</span>
 </pre></div>
@@ -233,10 +233,7 @@ in a manner similar to the way we defined recursive functions in
 <a class="reference internal" href="C05_Elementary_Number_Theory.html#section-induction-and-recursion"><span class="std std-numref">Section 5.2</span></a>.
 The definitions <code class="docutils literal notranslate"><span class="pre">addAlt</span></code> and <code class="docutils literal notranslate"><span class="pre">addAlt'</span></code> below are essentially the
 same; the only difference is that we use anonymous constructor notation
-in the second.
-Although it is sometimes convenient to define functions this way, and structural eta-reduction makes
-this alternative definitionally equivalent, it can make things less convenient in later proofs.
-In particular, <code class="docutils literal notranslate"><span class="pre">rw</span> <span class="pre">[addAlt]</span></code> leaves us with a messier goal view containing a <code class="docutils literal notranslate"><span class="pre">match</span></code> statement.</p>
+in the second.</p>
 <div class="highlight-lean notranslate"><div class="highlight"><pre><span></span><span class="kd">def</span><span class="w"> </span><span class="n">addAlt</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="bp">&#8594;</span><span class="w"> </span><span class="n">Point</span>
 <span class="w">  </span><span class="bp">|</span><span class="w"> </span><span class="n">Point.mk</span><span class="w"> </span><span class="n">x&#8321;</span><span class="w"> </span><span class="n">y&#8321;</span><span class="w"> </span><span class="n">z&#8321;</span><span class="o">,</span><span class="w"> </span><span class="n">Point.mk</span><span class="w"> </span><span class="n">x&#8322;</span><span class="w"> </span><span class="n">y&#8322;</span><span class="w"> </span><span class="n">z&#8322;</span><span class="w"> </span><span class="bp">=&gt;</span><span class="w"> </span><span class="o">&#10216;</span><span class="n">x&#8321;</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">x&#8322;</span><span class="o">,</span><span class="w"> </span><span class="n">y&#8321;</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">y&#8322;</span><span class="o">,</span><span class="w"> </span><span class="n">z&#8321;</span><span class="w"> </span><span class="bp">+</span><span class="w"> </span><span class="n">z&#8322;</span><span class="o">&#10217;</span>
 
@@ -248,9 +245,9 @@ In particular, <code class="docutils literal notranslate"><span class="pre">rw</
 
 <span class="kd">theorem</span><span class="w"> </span><span class="n">addAlt_comm</span><span class="w"> </span><span class="o">(</span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Point</span><span class="o">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">addAlt</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="bp">=</span><span class="w"> </span><span class="n">addAlt</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">by</span>
 <span class="w">  </span><span class="n">rw</span><span class="w"> </span><span class="o">[</span><span class="n">addAlt</span><span class="o">,</span><span class="w"> </span><span class="n">addAlt</span><span class="o">]</span>
-<span class="w">  </span><span class="c1">-- the same proof still works, but the goal view here is harder to read</span>
+<span class="w">  </span><span class="c1">-- the same proof still works</span>
 <span class="w">  </span><span class="n">ext</span><span class="w"> </span><span class="bp">&lt;;&gt;</span><span class="w"> </span><span class="n">dsimp</span>
-<span class="w">  </span><span class="n">repeat&#39;</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="n">add_comm</span>
+<span class="w">  </span><span class="n">repeat</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="n">add_comm</span>
 </pre></div>
 </div>
 <p>Mathematical constructions often involve taking apart bundled information and

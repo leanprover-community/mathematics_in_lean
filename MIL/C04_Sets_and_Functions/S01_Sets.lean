@@ -6,6 +6,12 @@ section
 variable {α : Type*}
 variable (s t u : Set α)
 open Set
+/-set builder notation is a lambda expression in disguise!
+-/
+#check { x | s x }
+#check λ x => s x
+example : { x | s x } = (λ x => s x) := rfl
+example : (s · ) = (λ x => s x) := rfl
 
 example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u := by
   rw [subset_def, inter_def, inter_def]
@@ -15,7 +21,8 @@ example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u := by
   exact ⟨h _ xs, xu⟩
 
 example (h : s ⊆ t) : s ∩ u ⊆ t ∩ u := by
-  simp only [subset_def, mem_inter_iff] at *
+  simp only [subset_def, mem_inter_iff--inter_def
+  ] at *
   rintro x ⟨xs, xu⟩
   exact ⟨h _ xs, xu⟩
 
@@ -42,9 +49,22 @@ example : s ∩ (t ∪ u) ⊆ s ∩ t ∪ s ∩ u := by
   rintro x ⟨xs, xt | xu⟩
   · left; exact ⟨xs, xt⟩
   · right; exact ⟨xs, xu⟩
-
+/-
+* `{x | p x}` is elaborated as `Set.setOf fun x ↦ p x`
+* `{x : α | p x}` is elaborated as `Set.setOf fun x : α ↦ p x`
+* `{binder x | p x}`, where `x` is bound by the `binder` binder, is elaborated as
+  `{x | binder x ∧ p x}`. The typical example is `{x ∈ s | p x}`, which is elaborated as
+  `{x | x ∈ s ∧ p x}`. The possible binders are
+  -/
+#check s ∩ t
+#check setOf
 example : s ∩ t ∪ s ∩ u ⊆ s ∩ (t ∪ u) := by
-  sorry
+  rintro x hstsu
+  rcases hstsu with xst | xsu
+  · exact ⟨ xst.1, .inl xst.2 ⟩ -- notation for union is same as ∨
+  · exact ⟨ xsu.1, .inr xsu.2 ⟩
+--read x∈ s ∩ t as (x ∈ s) ∧ (x ∈ t)
+
 example : (s \ t) \ u ⊆ s \ (t ∪ u) := by
   intro x xstu
   have xs : x ∈ s := xstu.1.1
@@ -64,7 +84,15 @@ example : (s \ t) \ u ⊆ s \ (t ∪ u) := by
   rintro (xt | xu) <;> contradiction
 
 example : s \ (t ∪ u) ⊆ (s \ t) \ u := by
-  sorry
+  rintro x ⟨xs, xntu⟩
+  constructor
+  · constructor
+    · exact xs
+    · exact xntu ∘ .inl
+  · exact xntu ∘ .inr
+
+#check Set α -- is defined as α → Prop
+-- to show two functions are equal, use ext
 example : s ∩ t = t ∩ s := by
   ext x
   simp only [mem_inter_iff]
@@ -83,15 +111,37 @@ example : s ∩ t = t ∩ s := by
   · rintro x ⟨xt, xs⟩; exact ⟨xs, xt⟩
 
 example : s ∩ t = t ∩ s :=
-    Subset.antisymm sorry sorry
+  Subset.antisymm
+    (λ x ⟨xs, xt⟩ => ⟨xt, xs⟩)
+    (λ x ⟨xt, xs⟩ => ⟨xs, xt⟩)
+
 example : s ∩ (s ∪ t) = s := by
-  sorry
+  ext x
+  constructor
+  case mp => intro ⟨xs, _⟩; exact xs
+  case mpr =>
+    intro xs
+    exact ⟨xs, .inl xs⟩
+
 
 example : s ∪ s ∩ t = s := by
   sorry
 
 example : s \ t ∪ t = s ∪ t := by
-  sorry
+  ext x
+  constructor
+  case mp =>
+    rintro (⟨xs, xnt⟩ | xt)
+    case inl => exact .inl xs
+    case inr => exact .inr xt
+  case mpr =>
+    rintro ( xs | xt )
+    -- I think you need em for this one
+    · rcases (Classical.em (x ∈ t)) with xt | xnt
+      · right; assumption
+      · exact .inl ⟨xs, xnt ⟩
+    · exact .inr xt
+
 
 example : s \ t ∪ t \ s = (s ∪ t) \ (s ∩ t) := by
   sorry
@@ -114,8 +164,17 @@ example (x : ℕ) (h : x ∈ (∅ : Set ℕ)) : False :=
 example (x : ℕ) : x ∈ (univ : Set ℕ) :=
   trivial
 
-example : { n | Nat.Prime n } ∩ { n | n > 2 } ⊆ { n | ¬Even n } := by
-  sorry
+theorem prime_gt_2_not_even : { n | Nat.Prime n } ∩ { n | n > 2 } ⊆ { n | ¬Even n } := by
+  rintro n ⟨ hp, hn2⟩ he--⟨e, he⟩
+  simp only [mem_setOf] at * -- unfold n ∈ { n | P n}
+  have he' :n %2 =0 := by exact Nat.even_iff.mp he
+  have : n ≠ 2 := Nat.ne_of_gt hn2
+  --have : (Dvd.dvd 2 n) := ⟨ e, he'⟩
+  rcases Nat.Prime.eq_two_or_odd hp with h2 | hodd
+  · contradiction
+  · rw [he'] at hodd; contradiction
+  --rw [Nat.odd_iff]
+
 
 #print Prime
 
@@ -151,10 +210,22 @@ section
 variable (ssubt : s ⊆ t)
 
 example (h₀ : ∀ x ∈ t, ¬Even x) (h₁ : ∀ x ∈ t, Prime x) : ∀ x ∈ s, ¬Even x ∧ Prime x := by
-  sorry
+  rintro x xs
+  constructor
+  · apply h₀
+    exact ssubt xs
+  · apply h₁
+    exact ssubt xs
+
+-- not sure what the issue is here
+example (h₀ : ∀ x ∈ t, ¬Even x) (h₁ : ∀ x ∈ t, Prime x) : ∀ x ∈ s, ¬Even x ∧ Prime x :=
+  λ x xs =>
+    ⟨ h₀ (ssubt xs), h₁ (ssubt xs)⟩
 
 example (h : ∃ x ∈ s, ¬Even x ∧ Prime x) : ∃ x ∈ t, Prime x := by
-  sorry
+  rcases h with ⟨ x, xs, hne, hp⟩
+  use x
+  exact ⟨ ssubt xs , hp ⟩
 
 end
 
@@ -175,6 +246,13 @@ example : (s ∩ ⋃ i, A i) = ⋃ i, A i ∩ s := by
     exact ⟨i, xAi, xs⟩
   rintro ⟨i, xAi, xs⟩
   exact ⟨xs, ⟨i, xAi⟩⟩
+/-
+theorem mem_iUnion {x : α} {s : ι → Set α} : (x ∈ ⋃ i, s i) ↔ ∃ i, x ∈ s i
+-/
+#check ⋃ (i:I), A i -- is a function α → Prop
+/-(x ∈ ⋃ i, s i)
+-- this is evaluation at x:α
+-/
 
 example : (⋂ i, A i ∩ B i) = (⋂ i, A i) ∩ ⋂ i, B i := by
   ext x
@@ -193,7 +271,28 @@ example : (⋂ i, A i ∩ B i) = (⋂ i, A i) ∩ ⋂ i, B i := by
 
 
 example : (s ∪ ⋂ i, A i) = ⋂ i, A i ∪ s := by
-  sorry
+  ext x
+  simp only [mem_inter_iff, mem_iInter]
+  constructor
+  case mp =>
+    rintro (xs | xa) i
+    · right; assumption
+    · left
+      apply xa
+      exact mem_range_self i
+
+  case mpr =>
+    rintro h
+    by_cases xs : x ∈ s
+    · left; assumption
+    · right
+      simp only [ mem_iInter]
+      intro i
+      --have hu: x ∈ A i ∪ s := h i
+      rcases (h i) with (ha | hs)
+      · assumption
+      · contradiction
+
 
 def primes : Set ℕ :=
   { x | Nat.Prime x }
@@ -214,7 +313,11 @@ example : (⋂ p ∈ primes, { x | ¬p ∣ x }) ⊆ { x | x = 1 } := by
   apply Nat.exists_prime_and_dvd
 
 example : (⋃ p ∈ primes, { x | x ≤ p }) = univ := by
-  sorry
+  apply eq_univ_of_forall
+  intro x
+  simp only [mem_iUnion₂]
+  let ⟨ p, ⟨hxp, hpp⟩⟩ := Nat.exists_infinite_primes x
+  exact ⟨ p, hpp, hxp ⟩ -- pretty damn cool
 
 end
 
@@ -235,4 +338,3 @@ example : ⋂₀ s = ⋂ t ∈ s, t := by
   rfl
 
 end
-

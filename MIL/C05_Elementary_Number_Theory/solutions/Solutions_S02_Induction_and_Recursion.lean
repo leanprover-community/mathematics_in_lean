@@ -14,7 +14,7 @@ theorem pow_two_le_fac (n : ℕ) : 2 ^ (n - 1) ≤ fac n := by
   simp at *
   rw [pow_succ', fac]
   apply Nat.mul_le_mul _ ih
-  repeat' apply Nat.succ_le_succ
+  repeat apply Nat.succ_le_succ
   apply zero_le
 
 section

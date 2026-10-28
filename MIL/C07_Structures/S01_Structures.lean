@@ -16,7 +16,7 @@ structure Point where
 
 example (a b : Point) (hx : a.x = b.x) (hy : a.y = b.y) (hz : a.z = b.z) : a = b := by
   ext
-  repeat' assumption
+  repeat assumption
 
 def myPoint1 : Point where
   x := 2
@@ -62,7 +62,7 @@ namespace Point
 protected theorem add_comm (a b : Point) : add a b = add b a := by
   rw [add, add]
   ext <;> dsimp
-  repeat' apply add_comm
+  repeat apply add_comm
 
 example (a b : Point) : add a b = add b a := by simp [add, add_comm]
 
@@ -80,9 +80,9 @@ theorem addAlt_x (a b : Point) : (a.addAlt b).x = a.x + b.x := by
 
 theorem addAlt_comm (a b : Point) : addAlt a b = addAlt b a := by
   rw [addAlt, addAlt]
-  -- the same proof still works, but the goal view here is harder to read
+  -- the same proof still works
   ext <;> dsimp
-  repeat' apply add_comm
+  repeat apply add_comm
 
 protected theorem add_assoc (a b c : Point) : (a.add b).add c = a.add (b.add c) := by
   sorry
